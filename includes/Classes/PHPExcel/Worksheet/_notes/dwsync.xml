@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="BaseDrawing.php" server="supremecenter20.com//scorecard/prototype/" local="129298461036608000" remote="129507286200000000" />
+<file name="CellIterator.php" server="supremecenter20.com//scorecard/prototype/" local="129298461026488000" remote="129507286200000000" />
+<file name="ColumnDimension.php" server="supremecenter20.com//scorecard/prototype/" local="129298461024428000" remote="129507286200000000" />
+<file name="Drawing.php" server="supremecenter20.com//scorecard/prototype/" local="129298461012028000" remote="129507286200000000" />
+<file name="HeaderFooter.php" server="supremecenter20.com//scorecard/prototype/" local="129298461034598000" remote="129507286200000000" />
+<file name="HeaderFooterDrawing.php" server="supremecenter20.com//scorecard/prototype/" local="129298461032978000" remote="129507286200000000" />
+<file name="MemoryDrawing.php" server="supremecenter20.com//scorecard/prototype/" local="129298461030788000" remote="129507286200000000" />
+<file name="PageMargins.php" server="supremecenter20.com//scorecard/prototype/" local="129298461015608000" remote="129507286200000000" />
+<file name="PageSetup.php" server="supremecenter20.com//scorecard/prototype/" local="129298461008448000" remote="129507286200000000" />
+<file name="Protection.php" server="supremecenter20.com//scorecard/prototype/" local="129298461038508000" remote="129507286200000000" />
+<file name="Row.php" server="supremecenter20.com//scorecard/prototype/" local="129298461027258000" remote="129507286200000000" />
+<file name="RowDimension.php" server="supremecenter20.com//scorecard/prototype/" local="129298461029628000" remote="129507286200000000" />
+<file name="RowIterator.php" server="supremecenter20.com//scorecard/prototype/" local="129298461025368000" remote="129507286200000000" />
+<file name="SheetView.php" server="supremecenter20.com//scorecard/prototype/" local="129298461039148000" remote="129507286200000000" />
+<file name="BaseDrawing.php" server="inst.net//scorecard/" local="129298461036608000" remote="129744449400000000" />
+<file name="CellIterator.php" server="inst.net//scorecard/" local="129298461026488000" remote="129744449400000000" />
+<file name="ColumnDimension.php" server="inst.net//scorecard/" local="129298461024428000" remote="129744449400000000" />
+<file name="Drawing.php" server="inst.net//scorecard/" local="129298461012028000" remote="129744449400000000" />
+<file name="HeaderFooter.php" server="inst.net//scorecard/" local="129298461034598000" remote="129744449400000000" />
+<file name="HeaderFooterDrawing.php" server="inst.net//scorecard/" local="129298461032978000" remote="129744449400000000" />
+<file name="MemoryDrawing.php" server="inst.net//scorecard/" local="129298461030788000" remote="129744449400000000" />
+<file name="PageMargins.php" server="inst.net//scorecard/" local="129298461015608000" remote="129744449400000000" />
+<file name="PageSetup.php" server="inst.net//scorecard/" local="129298461008448000" remote="129744449400000000" />
+<file name="Protection.php" server="inst.net//scorecard/" local="129298461038508000" remote="129744449400000000" />
+<file name="Row.php" server="inst.net//scorecard/" local="129298461027258000" remote="129744449400000000" />
+<file name="RowDimension.php" server="inst.net//scorecard/" local="129298461029628000" remote="129744449400000000" />
+<file name="RowIterator.php" server="inst.net//scorecard/" local="129298461025368000" remote="129744449400000000" />
+<file name="SheetView.php" server="inst.net//scorecard/" local="129298461039148000" remote="129744449400000000" />
+</dwsync>

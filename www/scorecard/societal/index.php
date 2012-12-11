@@ -10,6 +10,10 @@ class SocietalForm extends InstituteForm {
 	protected $dtgPArray;
 	protected $dlgAssociateSphere;
 	public    $dlgAssociateGiant;
+	protected $imgSpheres;
+	protected $imgSpheresInvolvement;
+	protected $imgGiants;
+	protected $imgGiantsInvolvement;
 	protected $lblDebug;
 
 	protected function Form_Run() {
@@ -31,6 +35,7 @@ class SocietalForm extends InstituteForm {
 			$dtgP->AddColumn(new QDataGridColumn('Societal Ills Being Addressed', '<?= $_FORM->RenderGiants($_ITEM, $_CONTROL) ?>', 'HtmlEntities=false', 'Width=20px' ));
 			$dtgP->AddColumn(new QDataGridColumn('Spheres Or Sectors', '<?= $_FORM->RenderSpheres($_ITEM, $_CONTROL) ?>', 'HtmlEntities=false', 'Width=20px' ));
 			$dtgP->CellPadding = 5;
+			$dtgP->GridLines = QGridLines::Both;
 
 			$objConditions = QQ::All();
 			$objClauses = array();					
@@ -52,6 +57,23 @@ class SocietalForm extends InstituteForm {
 	        $objStyle->BackColor = '#003366'; 	      
 			
 			$this->dtgPArray[] = $dtgP;
+			
+			$this->imgSpheres = new QLabel($this);
+			$this->imgSpheres->CssClass = 'societalImage';
+			$this->imgSpheres->HtmlEntities = false;
+			$this->imgSpheres->Text = '<img src=\'/inst/scorecard/societal/spheresImg.php/'.$this->objScorecard->Id.'\' />';
+			$this->imgSpheresInvolvement = new QLabel($this);
+			$this->imgSpheresInvolvement->CssClass = 'societalImage';
+			$this->imgSpheresInvolvement->HtmlEntities = false;
+			$this->imgSpheresInvolvement->Text = '<img src=\'/inst/scorecard/societal/spheresInvolvementImg.php/'.$this->objScorecard->Id.'\' />';
+			$this->imgGiants = new QLabel($this);
+			$this->imgGiants->CssClass = 'societalImage';
+			$this->imgGiants->HtmlEntities = false;
+			$this->imgGiants->Text = '<img src=\'/inst/scorecard/societal/giantsImg.php/'.$this->objScorecard->Id.'\' />';
+			$this->imgGiantsInvolvement = new QLabel($this);
+			$this->imgGiantsInvolvement->CssClass = 'societalImage';
+			$this->imgGiantsInvolvement->HtmlEntities = false;	
+			$this->imgGiantsInvolvement->Text= '<img src=\'/inst/scorecard/societal/giantsInvolvementImg.php/'.$this->objScorecard->Id.'\' />';		
 		}
 		
 		// Define the AssociateSphere Dialog. passing in the Method Callback for whenever the dialog is Closed
@@ -62,6 +84,8 @@ class SocietalForm extends InstituteForm {
         $this->dlgAssociateGiant = new DlgAssociateGiant('btnAssociateGiant_Close', $this);
         $this->dlgAssociateGiant->Visible = false;
         $this->dlgAssociateGiant->Width = 500;		
+        
+        
 	}
 			
 	public function btnCategory_Clicked($strFormId, $strControlId, $strParameter) {
@@ -142,6 +166,11 @@ class SocietalForm extends InstituteForm {
 		$strategyArray = Strategy::QueryArray($objConditions,$objClauses);		
 		$this->dtgPArray[$categoryId-1]->DataSource = $strategyArray;
 		$this->dtgPArray[$categoryId-1]->Refresh();
+		
+		$this->imgSpheres->Refresh();
+		$this->imgSpheresInvolvement->Refresh();
+		$this->imgGiants->Refresh();
+		$this->imgGiantsInvolvement->Refresh();
     }
     
  	public function RenderSpheres($objStrategy, StrategyDataGrid $dtgP) {
@@ -195,6 +224,10 @@ class SocietalForm extends InstituteForm {
 		$strategyArray = Strategy::QueryArray($objConditions,$objClauses);		
 		$this->dtgPArray[$categoryId-1]->DataSource = $strategyArray;
 		$this->dtgPArray[$categoryId-1]->Refresh();
+		$this->imgSpheres->Refresh();
+		$this->imgSpheresInvolvement->Refresh();
+		$this->imgGiants->Refresh();
+		$this->imgGiantsInvolvement->Refresh();
     }
         
 }

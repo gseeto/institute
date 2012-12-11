@@ -617,6 +617,7 @@
 		background-color:#ededed;
 		border: 1px solid #aaf;
 	}
+	.summaryTable {margin-top:10px; margin-left:20px; border: 1px solid #aaf;}
 	.scorecard_table {
 		margin-top:10px;
 		margin-bottom:10px;
@@ -648,6 +649,7 @@
 	    font: inherit;
 	    text-decoration: underline;
 	}
+	.societalImage {margin-left:10px;}
 	.leftPanel {
 		width:100px;
 		margin:20px;
@@ -660,3 +662,5 @@
 	}
 	.statement { border: 1px solid #aaf; padding:5px; width:800px; display: block;}
 	.tablecell { padding:5px; display: block;}
+	.link { text-decoration: underline; cursor:pointer; margin-top:10px; margin-bottom:10px; display: block;}
+	.resourceTable {margin-top:10px; margin-left:20px; border: 1px solid #aaf;}

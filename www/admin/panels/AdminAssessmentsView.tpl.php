@@ -14,6 +14,13 @@
 	<?php $_CONTROL->pnlAddTenPAssessment->Render(); ?>
 </div>
 <div class='section'>
+<h2>10-F Impact Assessments</h2>
+	<?php $_CONTROL->dtgTenFAssessments->Render(); ?> 
+	<br>
+	<?php $_CONTROL->btnAddTenFAssessment->Render(); ?> 
+	<?php $_CONTROL->pnlAddTenFAssessment->Render(); ?>
+</div>
+<div class='section'>
 <h2>LEMON Assessments</h2>
 	<?php $_CONTROL->dtgLemonAssessments->Render(); ?> 
 	<br>

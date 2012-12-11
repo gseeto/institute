@@ -11,10 +11,10 @@ $intScorecardId = QApplication::PathInfo(0);
 $objStrategyArray = Strategy::LoadArrayByScorecardId($intScorecardId);
 
 // Get the associations and calculate
-foreach(Strategy::LoadArrayByScorecardId($intScorecardId) as $objStrategy) {
+foreach($objStrategyArray as $objStrategy) {
 	$giantArray = $objStrategy->GetGiantsAsGiantArray();
 	foreach($giantArray as $objGiant) {
-		if (array_keys($giantCount,$objGiant->Giant)) {
+		if (array_key_exists($objGiant->Giant, $giantCount)) {
 			$giantCount[$objGiant->Giant]++;
 			$giantKpi[$objGiant->Giant] += $objStrategy->GetAverageKpiRating();
 		} else {
@@ -29,8 +29,9 @@ $data1y=array();
 $data2y=array();
 $labels = array();
 $i = 0;
+
 foreach($giantCount as $key=>$value) {
-	$data1y[$i] = ($value != 0)? ($giantKpi[$key]/$value)/5 * $value : 0;
+	$data1y[$i] = ($value != 0)? (($giantKpi[$key]/$value)/5) * $value : 0;
 	$data2y[$i] = ($value != 0)? $value - $data1y[$i] : 0;
 	$labels[$i] = $key;
 	$i++;

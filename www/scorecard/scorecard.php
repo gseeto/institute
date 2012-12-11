@@ -59,12 +59,18 @@ class ScorecardForm extends InstituteForm {
 			
 			$dtgP->NoDataHtml = '<div style=\'padding:20px;\'><p><b>'.$value.' Strategy Summary</b></p>' .'No Strategies.<br></div>';
 			$dtgP->UseAjax = true;
+			$dtgP->CssClass = 'summaryTable';
+			$dtgP->GridLines = QGridLines::Both;
 			$objStyle = $dtgP->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
 	        $objStyle->BackColor = '#003366'; 	        
 	        $objStyle = $dtgP->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 	      
+	        $objStyle->BackColor = '#003366'; 
+	        	
+	        $objStyle = $dtgP->RowStyle; 
+	        $objStyle->ForeColor = '#888888';
+	        $objStyle->BackColor = '#ffffff';      
 			
 			$this->dtgPArray[] = $dtgP;
 		}	

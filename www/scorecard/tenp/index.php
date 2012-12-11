@@ -151,7 +151,7 @@ class ScorecardForm extends InstituteForm {
 			$dtgActionItem->AddColumn(new QDataGridColumn('Delete', '<?= $_FORM->RenderDeleteAction($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));
 			
 			$dtgActionItem->CellPadding = 2;
-			$dtgActionItem->DataSource = ActionItems::LoadArrayByScorecardIdAndCategoryTypeIdAndStrategyId($this->objScorecard->Id, $this->intCategoryTypeId,$objStrategy->Id);
+			$dtgActionItem->DataSource = ActionItems::LoadArrayByStrategyId($objStrategy->Id);
 			$dtgActionItem->NoDataHtml = '<div style=\'padding:20px;\'><p><b>Action Item Table</b></p>' .'No Actions.<br></div>';
 			$dtgActionItem->UseAjax = true;
 			$dtgActionItem->GridLines = 'both';
@@ -263,14 +263,18 @@ class ScorecardForm extends InstituteForm {
 		$objActionItem = new ActionItems();
 		$objActionItem->ScorecardId = $this->objScorecard->Id;
 		$objActionItem->CategoryId = $this->intCategoryTypeId;
-		$objActionItem->StrategyId = $objStrategy->Id;
+		$objActionItem->StrategyId = $strParameter;
 		$objActionItem->Action = 'New action item';
+		$objActionItem->StatusType = StatusType::_0;
 		$objActionItem->Count = ActionItems::GetNextCount($this->objScorecard->Id,$this->intCategoryTypeId,$objStrategy->Id);
 		$objActionItem->ModifiedBy = $this->intUserId;
 		$objActionItem->Save();
-		$intIndex = $objStrategy->Count-1;
-		$this->dtgActionItems[$intIndex]->DataSource = ActionItems::LoadArrayByScorecardIdAndCategoryTypeIdAndStrategyId($this->objScorecard->Id, $this->intCategoryTypeId,$objStrategy->Id);
-		$this->dtgActionItems[$intIndex]->Refresh();
+		if($objStrategy != null) {
+			$intIndex = $objStrategy->Count - 1;
+			$this->dtgActionItems[$intIndex]->DataSource = ActionItems::LoadArrayByStrategyId($strParameter);
+			$this->dtgActionItems[$intIndex]->Refresh();
+			//QApplication::Redirect('/inst/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
+		}
 	}
 	
 	public function btnAddKPI_Clicked($strFormId, $strControlId, $strParameter) {
@@ -317,7 +321,7 @@ class ScorecardForm extends InstituteForm {
         $strLblControlId = 'lblKpi' .  $objKPI->Id;
         $lblKpi = $this->GetControl($strLblControlId);     
         if (!$lblKpi) {
-        	$lblKpi = new QLabel($this,$strLblControlId);
+        	$lblKpi = new QLabel($this->dtgKPIs[$objStrategy->Count-1],$strLblControlId);
         	$lblKpi->Text = $objKPI->Kpi;
         	$lblKpi->ActionParameter = $strControlId;
         	$lblKpi->CssClass = 'tablecell';
@@ -396,7 +400,7 @@ class ScorecardForm extends InstituteForm {
         $strLblControlId = 'lblKpiComment' .  $objKpi->Id;
         $lblComment = $this->GetControl($strLblControlId);     
         if (!$lblComment) {
-        	$lblComment = new QLabel($this,$strLblControlId);
+        	$lblComment = new QLabel($this->dtgKPIs[$intIndex],$strLblControlId);
         	$lblComment->Text = $objKpi->Comments;
         	$lblComment->ActionParameter = $strControlId;
         	$lblComment->CssClass = 'tablecell';
@@ -445,7 +449,7 @@ class ScorecardForm extends InstituteForm {
         $strLblControlId = 'lblAction' .  $objAction->Id;
         $lblAction = $this->GetControl($strLblControlId);     
         if (!$lblAction) {
-        	$lblAction = new QLabel($this,$strLblControlId);
+        	$lblAction = new QLabel($this->dtgActionItems[$objStrategy->Count-1],$strLblControlId);
         	$lblAction->Text = $objAction->Action;
         	$lblAction->ActionParameter = $strControlId;
         	$lblAction->AddAction(new QMouseOverEvent(), new QAjaxAction('lblAction_MouseOver'));
@@ -569,7 +573,7 @@ class ScorecardForm extends InstituteForm {
         $strLblControlId = 'lblStrategy' . $objStrategy->Id;
         $lblStrategy = $this->GetControl($strLblControlId);     
         if (!$lblStrategy) {
-        	$lblStrategy = new QLabel($this,$strLblControlId);
+        	$lblStrategy = new QLabel($this->dtgStrategyArray[$objStrategy->Count -1],$strLblControlId);
         	$lblStrategy->Text = $objStrategy->Strategy;
         	$lblStrategy->ActionParameter = $strControlId;
         	$lblStrategy->Width = 700;
@@ -655,7 +659,7 @@ class ScorecardForm extends InstituteForm {
         $strLblControlId = 'lblComment' . $objAction->Id;
         $lblComment = $this->GetControl($strLblControlId);     
         if (!$lblComment) {
-        	$lblComment = new QLabel($this,$strLblControlId);
+        	$lblComment = new QLabel($this->dtgActionItems[$intIndex],$strLblControlId);
         	$lblComment->Text = ($objAction->Comments != null)? $objAction->Comments : ' ';
         	$lblComment->ActionParameter = $strControlId;
         	$lblComment->Width = 150;
@@ -807,6 +811,7 @@ class ScorecardForm extends InstituteForm {
 		// Then refresh
 		$this->dtgActionItems[$intIndex]->DataSource = ActionItems::LoadArrayByStrategyId($objStrategy->Id);
 		$this->dtgActionItems[$intIndex]->Refresh();
+		//QApplication::Redirect('/inst/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
 	}
 	
 	public function RenderDeleteKpi(Kpis $objKpi) {

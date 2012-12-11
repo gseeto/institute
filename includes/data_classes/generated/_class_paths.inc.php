@@ -13,6 +13,27 @@
 		QApplicationBase::$ClassFile['addressmetacontrol'] = __DATA_META_CONTROLS__ . '/AddressMetaControl.class.php';
 		QApplicationBase::$ClassFile['addressdatagrid'] = __DATA_META_CONTROLS__ . '/AddressDataGrid.class.php';
 
+	// ClassPaths for the CannedActionItem class
+		QApplicationBase::$ClassFile['cannedactionitem'] = __DATA_CLASSES__ . '/CannedActionItem.class.php';
+		QApplicationBase::$ClassFile['qqnodecannedactionitem'] = __DATA_CLASSES__ . '/CannedActionItem.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodecannedactionitem'] = __DATA_CLASSES__ . '/CannedActionItem.class.php';
+		QApplicationBase::$ClassFile['cannedactionitemmetacontrol'] = __DATA_META_CONTROLS__ . '/CannedActionItemMetaControl.class.php';
+		QApplicationBase::$ClassFile['cannedactionitemdatagrid'] = __DATA_META_CONTROLS__ . '/CannedActionItemDataGrid.class.php';
+
+	// ClassPaths for the CannedKpi class
+		QApplicationBase::$ClassFile['cannedkpi'] = __DATA_CLASSES__ . '/CannedKpi.class.php';
+		QApplicationBase::$ClassFile['qqnodecannedkpi'] = __DATA_CLASSES__ . '/CannedKpi.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodecannedkpi'] = __DATA_CLASSES__ . '/CannedKpi.class.php';
+		QApplicationBase::$ClassFile['cannedkpimetacontrol'] = __DATA_META_CONTROLS__ . '/CannedKpiMetaControl.class.php';
+		QApplicationBase::$ClassFile['cannedkpidatagrid'] = __DATA_META_CONTROLS__ . '/CannedKpiDataGrid.class.php';
+
+	// ClassPaths for the CannedStrategy class
+		QApplicationBase::$ClassFile['cannedstrategy'] = __DATA_CLASSES__ . '/CannedStrategy.class.php';
+		QApplicationBase::$ClassFile['qqnodecannedstrategy'] = __DATA_CLASSES__ . '/CannedStrategy.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodecannedstrategy'] = __DATA_CLASSES__ . '/CannedStrategy.class.php';
+		QApplicationBase::$ClassFile['cannedstrategymetacontrol'] = __DATA_META_CONTROLS__ . '/CannedStrategyMetaControl.class.php';
+		QApplicationBase::$ClassFile['cannedstrategydatagrid'] = __DATA_META_CONTROLS__ . '/CannedStrategyDataGrid.class.php';
+
 	// ClassPaths for the Company class
 		QApplicationBase::$ClassFile['company'] = __DATA_CLASSES__ . '/Company.class.php';
 		QApplicationBase::$ClassFile['qqnodecompany'] = __DATA_CLASSES__ . '/Company.class.php';
@@ -138,6 +159,34 @@
 		QApplicationBase::$ClassFile['qqreversereferencenodestrategy'] = __DATA_CLASSES__ . '/Strategy.class.php';
 		QApplicationBase::$ClassFile['strategymetacontrol'] = __DATA_META_CONTROLS__ . '/StrategyMetaControl.class.php';
 		QApplicationBase::$ClassFile['strategydatagrid'] = __DATA_META_CONTROLS__ . '/StrategyDataGrid.class.php';
+
+	// ClassPaths for the StrategyQuestionConditional class
+		QApplicationBase::$ClassFile['strategyquestionconditional'] = __DATA_CLASSES__ . '/StrategyQuestionConditional.class.php';
+		QApplicationBase::$ClassFile['qqnodestrategyquestionconditional'] = __DATA_CLASSES__ . '/StrategyQuestionConditional.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodestrategyquestionconditional'] = __DATA_CLASSES__ . '/StrategyQuestionConditional.class.php';
+		QApplicationBase::$ClassFile['strategyquestionconditionalmetacontrol'] = __DATA_META_CONTROLS__ . '/StrategyQuestionConditionalMetaControl.class.php';
+		QApplicationBase::$ClassFile['strategyquestionconditionaldatagrid'] = __DATA_META_CONTROLS__ . '/StrategyQuestionConditionalDataGrid.class.php';
+
+	// ClassPaths for the TenFAssessment class
+		QApplicationBase::$ClassFile['tenfassessment'] = __DATA_CLASSES__ . '/TenFAssessment.class.php';
+		QApplicationBase::$ClassFile['qqnodetenfassessment'] = __DATA_CLASSES__ . '/TenFAssessment.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodetenfassessment'] = __DATA_CLASSES__ . '/TenFAssessment.class.php';
+		QApplicationBase::$ClassFile['tenfassessmentmetacontrol'] = __DATA_META_CONTROLS__ . '/TenFAssessmentMetaControl.class.php';
+		QApplicationBase::$ClassFile['tenfassessmentdatagrid'] = __DATA_META_CONTROLS__ . '/TenFAssessmentDataGrid.class.php';
+
+	// ClassPaths for the TenFQuestions class
+		QApplicationBase::$ClassFile['tenfquestions'] = __DATA_CLASSES__ . '/TenFQuestions.class.php';
+		QApplicationBase::$ClassFile['qqnodetenfquestions'] = __DATA_CLASSES__ . '/TenFQuestions.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodetenfquestions'] = __DATA_CLASSES__ . '/TenFQuestions.class.php';
+		QApplicationBase::$ClassFile['tenfquestionsmetacontrol'] = __DATA_META_CONTROLS__ . '/TenFQuestionsMetaControl.class.php';
+		QApplicationBase::$ClassFile['tenfquestionsdatagrid'] = __DATA_META_CONTROLS__ . '/TenFQuestionsDataGrid.class.php';
+
+	// ClassPaths for the TenFResults class
+		QApplicationBase::$ClassFile['tenfresults'] = __DATA_CLASSES__ . '/TenFResults.class.php';
+		QApplicationBase::$ClassFile['qqnodetenfresults'] = __DATA_CLASSES__ . '/TenFResults.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodetenfresults'] = __DATA_CLASSES__ . '/TenFResults.class.php';
+		QApplicationBase::$ClassFile['tenfresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/TenFResultsMetaControl.class.php';
+		QApplicationBase::$ClassFile['tenfresultsdatagrid'] = __DATA_META_CONTROLS__ . '/TenFResultsDataGrid.class.php';
 
 	// ClassPaths for the TenPAssessment class
 		QApplicationBase::$ClassFile['tenpassessment'] = __DATA_CLASSES__ . '/TenPAssessment.class.php';

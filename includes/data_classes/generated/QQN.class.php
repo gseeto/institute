@@ -13,6 +13,24 @@
 			return new QQNodeAddress('address', null, null);
 		}
 		/**
+		 * @return QQNodeCannedActionItem
+		 */
+		static public function CannedActionItem() {
+			return new QQNodeCannedActionItem('canned_action_item', null, null);
+		}
+		/**
+		 * @return QQNodeCannedKpi
+		 */
+		static public function CannedKpi() {
+			return new QQNodeCannedKpi('canned_kpi', null, null);
+		}
+		/**
+		 * @return QQNodeCannedStrategy
+		 */
+		static public function CannedStrategy() {
+			return new QQNodeCannedStrategy('canned_strategy', null, null);
+		}
+		/**
 		 * @return QQNodeCompany
 		 */
 		static public function Company() {
@@ -119,6 +137,30 @@
 		 */
 		static public function Strategy() {
 			return new QQNodeStrategy('strategy', null, null);
+		}
+		/**
+		 * @return QQNodeStrategyQuestionConditional
+		 */
+		static public function StrategyQuestionConditional() {
+			return new QQNodeStrategyQuestionConditional('strategy_question_conditional', null, null);
+		}
+		/**
+		 * @return QQNodeTenFAssessment
+		 */
+		static public function TenFAssessment() {
+			return new QQNodeTenFAssessment('ten_f_assessment', null, null);
+		}
+		/**
+		 * @return QQNodeTenFQuestions
+		 */
+		static public function TenFQuestions() {
+			return new QQNodeTenFQuestions('ten_f_questions', null, null);
+		}
+		/**
+		 * @return QQNodeTenFResults
+		 */
+		static public function TenFResults() {
+			return new QQNodeTenFResults('ten_f_results', null, null);
 		}
 		/**
 		 * @return QQNodeTenPAssessment

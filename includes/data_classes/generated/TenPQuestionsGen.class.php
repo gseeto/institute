@@ -19,6 +19,8 @@
 	 * @property integer $Count the value for intCount (Unique)
 	 * @property string $Text the value for strText 
 	 * @property integer $CategoryId the value for intCategoryId 
+	 * @property StrategyQuestionConditional $_StrategyQuestionConditionalAsQuestion the value for the private _objStrategyQuestionConditionalAsQuestion (Read-Only) if set due to an expansion on the strategy_question_conditional.question_id reverse relationship
+	 * @property StrategyQuestionConditional[] $_StrategyQuestionConditionalAsQuestionArray the value for the private _objStrategyQuestionConditionalAsQuestionArray (Read-Only) if set due to an ExpandAsArray on the strategy_question_conditional.question_id reverse relationship
 	 * @property TenPResults $_TenPResultsAsQuestion the value for the private _objTenPResultsAsQuestion (Read-Only) if set due to an expansion on the ten_p_results.question_id reverse relationship
 	 * @property TenPResults[] $_TenPResultsAsQuestionArray the value for the private _objTenPResultsAsQuestionArray (Read-Only) if set due to an ExpandAsArray on the ten_p_results.question_id reverse relationship
 	 * @property boolean $__Restored whether or not this object was restored from the database (as opposed to created new)
@@ -61,6 +63,22 @@
 		protected $intCategoryId;
 		const CategoryIdDefault = null;
 
+
+		/**
+		 * Private member variable that stores a reference to a single StrategyQuestionConditionalAsQuestion object
+		 * (of type StrategyQuestionConditional), if this TenPQuestions object was restored with
+		 * an expansion on the strategy_question_conditional association table.
+		 * @var StrategyQuestionConditional _objStrategyQuestionConditionalAsQuestion;
+		 */
+		private $_objStrategyQuestionConditionalAsQuestion;
+
+		/**
+		 * Private member variable that stores a reference to an array of StrategyQuestionConditionalAsQuestion objects
+		 * (of type StrategyQuestionConditional[]), if this TenPQuestions object was restored with
+		 * an ExpandAsArray on the strategy_question_conditional association table.
+		 * @var StrategyQuestionConditional[] _objStrategyQuestionConditionalAsQuestionArray;
+		 */
+		private $_objStrategyQuestionConditionalAsQuestionArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single TenPResultsAsQuestion object
@@ -452,6 +470,20 @@
 					$strAliasPrefix = 'ten_p_questions__';
 
 
+				$strAlias = $strAliasPrefix . 'strategyquestionconditionalasquestion__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objStrategyQuestionConditionalAsQuestionArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objStrategyQuestionConditionalAsQuestionArray[$intPreviousChildItemCount - 1];
+						$objChildItem = StrategyQuestionConditional::InstantiateDbRow($objDbRow, $strAliasPrefix . 'strategyquestionconditionalasquestion__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objStrategyQuestionConditionalAsQuestionArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objStrategyQuestionConditionalAsQuestionArray[] = StrategyQuestionConditional::InstantiateDbRow($objDbRow, $strAliasPrefix . 'strategyquestionconditionalasquestion__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'tenpresultsasquestion__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -500,6 +532,16 @@
 
 
 
+
+			// Check for StrategyQuestionConditionalAsQuestion Virtual Binding
+			$strAlias = $strAliasPrefix . 'strategyquestionconditionalasquestion__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objStrategyQuestionConditionalAsQuestionArray[] = StrategyQuestionConditional::InstantiateDbRow($objDbRow, $strAliasPrefix . 'strategyquestionconditionalasquestion__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objStrategyQuestionConditionalAsQuestion = StrategyQuestionConditional::InstantiateDbRow($objDbRow, $strAliasPrefix . 'strategyquestionconditionalasquestion__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
 
 			// Check for TenPResultsAsQuestion Virtual Binding
 			$strAlias = $strAliasPrefix . 'tenpresultsasquestion__id';
@@ -892,6 +934,18 @@
 				// (If restored via a "Many-to" expansion)
 				////////////////////////////
 
+				case '_StrategyQuestionConditionalAsQuestion':
+					// Gets the value for the private _objStrategyQuestionConditionalAsQuestion (Read-Only)
+					// if set due to an expansion on the strategy_question_conditional.question_id reverse relationship
+					// @return StrategyQuestionConditional
+					return $this->_objStrategyQuestionConditionalAsQuestion;
+
+				case '_StrategyQuestionConditionalAsQuestionArray':
+					// Gets the value for the private _objStrategyQuestionConditionalAsQuestionArray (Read-Only)
+					// if set due to an ExpandAsArray on the strategy_question_conditional.question_id reverse relationship
+					// @return StrategyQuestionConditional[]
+					return (array) $this->_objStrategyQuestionConditionalAsQuestionArray;
+
 				case '_TenPResultsAsQuestion':
 					// Gets the value for the private _objTenPResultsAsQuestion (Read-Only)
 					// if set due to an expansion on the ten_p_results.question_id reverse relationship
@@ -994,6 +1048,188 @@
 		///////////////////////////////
 		// ASSOCIATED OBJECTS' METHODS
 		///////////////////////////////
+
+			
+		
+		// Related Objects' Methods for StrategyQuestionConditionalAsQuestion
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated StrategyQuestionConditionalsAsQuestion as an array of StrategyQuestionConditional objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return StrategyQuestionConditional[]
+		*/ 
+		public function GetStrategyQuestionConditionalAsQuestionArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return StrategyQuestionConditional::LoadArrayByQuestionId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated StrategyQuestionConditionalsAsQuestion
+		 * @return int
+		*/ 
+		public function CountStrategyQuestionConditionalsAsQuestion() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return StrategyQuestionConditional::CountByQuestionId($this->intId);
+		}
+
+		/**
+		 * Associates a StrategyQuestionConditionalAsQuestion
+		 * @param StrategyQuestionConditional $objStrategyQuestionConditional
+		 * @return void
+		*/ 
+		public function AssociateStrategyQuestionConditionalAsQuestion(StrategyQuestionConditional $objStrategyQuestionConditional) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateStrategyQuestionConditionalAsQuestion on this unsaved TenPQuestions.');
+			if ((is_null($objStrategyQuestionConditional->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateStrategyQuestionConditionalAsQuestion on this TenPQuestions with an unsaved StrategyQuestionConditional.');
+
+			// Get the Database Object for this Class
+			$objDatabase = TenPQuestions::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`strategy_question_conditional`
+				SET
+					`question_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objStrategyQuestionConditional->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objStrategyQuestionConditional->QuestionId = $this->intId;
+				$objStrategyQuestionConditional->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a StrategyQuestionConditionalAsQuestion
+		 * @param StrategyQuestionConditional $objStrategyQuestionConditional
+		 * @return void
+		*/ 
+		public function UnassociateStrategyQuestionConditionalAsQuestion(StrategyQuestionConditional $objStrategyQuestionConditional) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateStrategyQuestionConditionalAsQuestion on this unsaved TenPQuestions.');
+			if ((is_null($objStrategyQuestionConditional->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateStrategyQuestionConditionalAsQuestion on this TenPQuestions with an unsaved StrategyQuestionConditional.');
+
+			// Get the Database Object for this Class
+			$objDatabase = TenPQuestions::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`strategy_question_conditional`
+				SET
+					`question_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objStrategyQuestionConditional->Id) . ' AND
+					`question_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objStrategyQuestionConditional->QuestionId = null;
+				$objStrategyQuestionConditional->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all StrategyQuestionConditionalsAsQuestion
+		 * @return void
+		*/ 
+		public function UnassociateAllStrategyQuestionConditionalsAsQuestion() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateStrategyQuestionConditionalAsQuestion on this unsaved TenPQuestions.');
+
+			// Get the Database Object for this Class
+			$objDatabase = TenPQuestions::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (StrategyQuestionConditional::LoadArrayByQuestionId($this->intId) as $objStrategyQuestionConditional) {
+					$objStrategyQuestionConditional->QuestionId = null;
+					$objStrategyQuestionConditional->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`strategy_question_conditional`
+				SET
+					`question_id` = null
+				WHERE
+					`question_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated StrategyQuestionConditionalAsQuestion
+		 * @param StrategyQuestionConditional $objStrategyQuestionConditional
+		 * @return void
+		*/ 
+		public function DeleteAssociatedStrategyQuestionConditionalAsQuestion(StrategyQuestionConditional $objStrategyQuestionConditional) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateStrategyQuestionConditionalAsQuestion on this unsaved TenPQuestions.');
+			if ((is_null($objStrategyQuestionConditional->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateStrategyQuestionConditionalAsQuestion on this TenPQuestions with an unsaved StrategyQuestionConditional.');
+
+			// Get the Database Object for this Class
+			$objDatabase = TenPQuestions::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`strategy_question_conditional`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objStrategyQuestionConditional->Id) . ' AND
+					`question_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objStrategyQuestionConditional->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated StrategyQuestionConditionalsAsQuestion
+		 * @return void
+		*/ 
+		public function DeleteAllStrategyQuestionConditionalsAsQuestion() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateStrategyQuestionConditionalAsQuestion on this unsaved TenPQuestions.');
+
+			// Get the Database Object for this Class
+			$objDatabase = TenPQuestions::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (StrategyQuestionConditional::LoadArrayByQuestionId($this->intId) as $objStrategyQuestionConditional) {
+					$objStrategyQuestionConditional->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`strategy_question_conditional`
+				WHERE
+					`question_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
 
 			
 		
@@ -1258,6 +1494,7 @@
 	 * @property-read QQNode $Count
 	 * @property-read QQNode $Text
 	 * @property-read QQNode $CategoryId
+	 * @property-read QQReverseReferenceNodeStrategyQuestionConditional $StrategyQuestionConditionalAsQuestion
 	 * @property-read QQReverseReferenceNodeTenPResults $TenPResultsAsQuestion
 	 */
 	class QQNodeTenPQuestions extends QQNode {
@@ -1274,6 +1511,8 @@
 					return new QQNode('text', 'Text', 'string', $this);
 				case 'CategoryId':
 					return new QQNode('category_id', 'CategoryId', 'integer', $this);
+				case 'StrategyQuestionConditionalAsQuestion':
+					return new QQReverseReferenceNodeStrategyQuestionConditional($this, 'strategyquestionconditionalasquestion', 'reverse_reference', 'question_id');
 				case 'TenPResultsAsQuestion':
 					return new QQReverseReferenceNodeTenPResults($this, 'tenpresultsasquestion', 'reverse_reference', 'question_id');
 
@@ -1295,6 +1534,7 @@
 	 * @property-read QQNode $Count
 	 * @property-read QQNode $Text
 	 * @property-read QQNode $CategoryId
+	 * @property-read QQReverseReferenceNodeStrategyQuestionConditional $StrategyQuestionConditionalAsQuestion
 	 * @property-read QQReverseReferenceNodeTenPResults $TenPResultsAsQuestion
 	 * @property-read QQNode $_PrimaryKeyNode
 	 */
@@ -1312,6 +1552,8 @@
 					return new QQNode('text', 'Text', 'string', $this);
 				case 'CategoryId':
 					return new QQNode('category_id', 'CategoryId', 'integer', $this);
+				case 'StrategyQuestionConditionalAsQuestion':
+					return new QQReverseReferenceNodeStrategyQuestionConditional($this, 'strategyquestionconditionalasquestion', 'reverse_reference', 'question_id');
 				case 'TenPResultsAsQuestion':
 					return new QQReverseReferenceNodeTenPResults($this, 'tenpresultsasquestion', 'reverse_reference', 'question_id');
 

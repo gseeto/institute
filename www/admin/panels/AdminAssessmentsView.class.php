@@ -11,6 +11,10 @@
 		public $btnAddTenPAssessment;
 		public $pnlAddTenPAssessment;
         
+		public $dtgTenFAssessments;
+		public $btnAddTenFAssessment;
+		public $pnlAddTenFAssessment;
+		
 		public $dtgLemonAssessments;
 		public $btnAddLemonAssessment;
 		public $pnlAddLemonAssessment;
@@ -146,6 +150,45 @@
 	        $this->pnlAddTenPAssessment->Position = QPosition::Relative;
 	        $this->pnlAddTenPAssessment->Visible = false;
 	        $this->pnlAddTenPAssessment->AutoRenderChildren = true;
+	        /*******************************/
+	        $this->dtgTenFAssessments = new TenFAssessmentDataGrid($this);
+            $this->dtgTenFAssessments->Paginator = new QPaginator($this->dtgTenFAssessments);
+            $this->dtgTenFAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUser($_ITEM->UserId) ?>', 'HtmlEntities=false', 'Width=300px' ));
+            /*$this->dtgTenFAssessments->AddColumn(new QDataGridColumn('Company', '<?= $_CONTROL->ParentControl->RenderCompany($_ITEM->CompanyId) ?>', 'HtmlEntities=false', 'Width=300px' ));*/
+            $this->dtgTenFAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px' ));
+                      
+            $this->dtgTenFAssessments->CellPadding = 5;
+			$this->dtgTenFAssessments->SetDataBinder('dtgTenFAssessments_Bind',$this);
+			$this->dtgTenFAssessments->NoDataHtml = 'No 10-F Assessments have been assigned.';
+			$this->dtgTenFAssessments->UseAjax = true;
+			
+			$this->dtgTenFAssessments->SortColumnIndex = 1;
+			$this->dtgTenFAssessments->ItemsPerPage = 20;
+			
+			$objStyle = $this->dtgTenFAssessments->RowStyle;
+	        $objStyle->BackColor = '#ffffff';
+	        $objStyle->FontSize = 12;
+	
+	        $objStyle = $this->dtgTenFAssessments->AlternateRowStyle;
+	        $objStyle->BackColor = '#CCCCCC';
+	
+	        $objStyle = $this->dtgTenFAssessments->HeaderRowStyle;
+	        $objStyle->ForeColor = '#ffffff';
+	        $objStyle->BackColor = '#003366'; 
+	        
+	        $objStyle = $this->dtgTenFAssessments->HeaderLinkStyle;
+	        $objStyle->ForeColor = '#ffffff';
+	        $objStyle->BackColor = '#003366'; 
+	        
+	        $this->btnAddTenFAssessment = new QButton($this);
+	        $this->btnAddTenFAssessment->Text = 'Add A User';
+	        $this->btnAddTenFAssessment->CssClass = 'primary';
+	        $this->btnAddTenFAssessment->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnAddTenFAssessment_Click'));
+          
+	        $this->pnlAddTenFAssessment = new QPanel($this);
+	        $this->pnlAddTenFAssessment->Position = QPosition::Relative;
+	        $this->pnlAddTenFAssessment->Visible = false;
+	        $this->pnlAddTenFAssessment->AutoRenderChildren = true;
         }
         
     	public function dtgKingdomBizAssessments_Bind() {
@@ -162,6 +205,13 @@
 			$this->dtgTenPAssessments->DataSource = $TenPArray; 
 		}
 	
+    	public function dtgTenFAssessments_Bind() {
+			$objConditions = QQ::All();
+			$objClauses = array();
+			$TenPArray = TenFAssessment::QueryArray($objConditions,$objClauses);		
+			$this->dtgTenFAssessments->DataSource = $TenPArray; 
+		}
+		
 		public function dtgLemonAssessments_Bind() {
 			$objConditions = QQ::All();
 			$objClauses = array();
@@ -212,6 +262,20 @@
 	    public function UpdateTenPAssessmentList($blnUpdatesMade) {
 	    	$this->dtgTenPAssessments->PageNumber = 1;
 			$this->dtgTenPAssessments->Refresh();
+	    }
+	    
+    	public function btnAddTenFAssessment_Click($strFormId, $strControlId, $strParameter) {
+			// Open up the panel and allow the adding of members to the company
+	        $this->pnlAddTenFAssessment->Visible = true;
+	        $this->pnlAddTenFAssessment->RemoveChildControls(true);
+	        $pnlAddTenFView = new AddTenFAssessment($this->pnlAddTenFAssessment,'UpdateTenFAssessmentList',$this);
+		
+		}
+		
+	    // Method Call back for the  panels 
+	    public function UpdateTenFAssessmentList($blnUpdatesMade) {
+	    	$this->dtgTenFAssessments->PageNumber = 1;
+			$this->dtgTenFAssessments->Refresh();
 	    }
 	    
     	public function btnAddLemonAssessment_Click($strFormId, $strControlId, $strParameter) {

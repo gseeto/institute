@@ -25,6 +25,8 @@
 	 * @property LemonAssessment[] $_LemonAssessmentArray the value for the private _objLemonAssessmentArray (Read-Only) if set due to an ExpandAsArray on the lemon_assessment.resource_id reverse relationship
 	 * @property Scorecard $_Scorecard the value for the private _objScorecard (Read-Only) if set due to an expansion on the scorecard.resource_id reverse relationship
 	 * @property Scorecard[] $_ScorecardArray the value for the private _objScorecardArray (Read-Only) if set due to an ExpandAsArray on the scorecard.resource_id reverse relationship
+	 * @property TenFAssessment $_TenFAssessment the value for the private _objTenFAssessment (Read-Only) if set due to an expansion on the ten_f_assessment.resource_id reverse relationship
+	 * @property TenFAssessment[] $_TenFAssessmentArray the value for the private _objTenFAssessmentArray (Read-Only) if set due to an ExpandAsArray on the ten_f_assessment.resource_id reverse relationship
 	 * @property TenPAssessment $_TenPAssessment the value for the private _objTenPAssessment (Read-Only) if set due to an expansion on the ten_p_assessment.resource_id reverse relationship
 	 * @property TenPAssessment[] $_TenPAssessmentArray the value for the private _objTenPAssessmentArray (Read-Only) if set due to an ExpandAsArray on the ten_p_assessment.resource_id reverse relationship
 	 * @property boolean $__Restored whether or not this object was restored from the database (as opposed to created new)
@@ -115,6 +117,22 @@
 		 * @var Scorecard[] _objScorecardArray;
 		 */
 		private $_objScorecardArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single TenFAssessment object
+		 * (of type TenFAssessment), if this Resource object was restored with
+		 * an expansion on the ten_f_assessment association table.
+		 * @var TenFAssessment _objTenFAssessment;
+		 */
+		private $_objTenFAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of TenFAssessment objects
+		 * (of type TenFAssessment[]), if this Resource object was restored with
+		 * an ExpandAsArray on the ten_f_assessment association table.
+		 * @var TenFAssessment[] _objTenFAssessmentArray;
+		 */
+		private $_objTenFAssessmentArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single TenPAssessment object
@@ -560,6 +578,20 @@
 					$blnExpandedViaArray = true;
 				}
 
+				$strAlias = $strAliasPrefix . 'tenfassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objTenFAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objTenFAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = TenFAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenfassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objTenFAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objTenFAssessmentArray[] = TenFAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenfassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'tenpassessment__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -643,6 +675,16 @@
 					$objToReturn->_objScorecardArray[] = Scorecard::InstantiateDbRow($objDbRow, $strAliasPrefix . 'scorecard__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objScorecard = Scorecard::InstantiateDbRow($objDbRow, $strAliasPrefix . 'scorecard__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for TenFAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'tenfassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objTenFAssessmentArray[] = TenFAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenfassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objTenFAssessment = TenFAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenfassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			// Check for TenPAssessment Virtual Binding
@@ -1046,6 +1088,18 @@
 					// if set due to an ExpandAsArray on the scorecard.resource_id reverse relationship
 					// @return Scorecard[]
 					return (array) $this->_objScorecardArray;
+
+				case '_TenFAssessment':
+					// Gets the value for the private _objTenFAssessment (Read-Only)
+					// if set due to an expansion on the ten_f_assessment.resource_id reverse relationship
+					// @return TenFAssessment
+					return $this->_objTenFAssessment;
+
+				case '_TenFAssessmentArray':
+					// Gets the value for the private _objTenFAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the ten_f_assessment.resource_id reverse relationship
+					// @return TenFAssessment[]
+					return (array) $this->_objTenFAssessmentArray;
 
 				case '_TenPAssessment':
 					// Gets the value for the private _objTenPAssessment (Read-Only)
@@ -1676,6 +1730,188 @@
 
 			
 		
+		// Related Objects' Methods for TenFAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated TenFAssessments as an array of TenFAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return TenFAssessment[]
+		*/ 
+		public function GetTenFAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return TenFAssessment::LoadArrayByResourceId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated TenFAssessments
+		 * @return int
+		*/ 
+		public function CountTenFAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return TenFAssessment::CountByResourceId($this->intId);
+		}
+
+		/**
+		 * Associates a TenFAssessment
+		 * @param TenFAssessment $objTenFAssessment
+		 * @return void
+		*/ 
+		public function AssociateTenFAssessment(TenFAssessment $objTenFAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateTenFAssessment on this unsaved Resource.');
+			if ((is_null($objTenFAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateTenFAssessment on this Resource with an unsaved TenFAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`ten_f_assessment`
+				SET
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objTenFAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objTenFAssessment->ResourceId = $this->intId;
+				$objTenFAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a TenFAssessment
+		 * @param TenFAssessment $objTenFAssessment
+		 * @return void
+		*/ 
+		public function UnassociateTenFAssessment(TenFAssessment $objTenFAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTenFAssessment on this unsaved Resource.');
+			if ((is_null($objTenFAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTenFAssessment on this Resource with an unsaved TenFAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`ten_f_assessment`
+				SET
+					`resource_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objTenFAssessment->Id) . ' AND
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objTenFAssessment->ResourceId = null;
+				$objTenFAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all TenFAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllTenFAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTenFAssessment on this unsaved Resource.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (TenFAssessment::LoadArrayByResourceId($this->intId) as $objTenFAssessment) {
+					$objTenFAssessment->ResourceId = null;
+					$objTenFAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`ten_f_assessment`
+				SET
+					`resource_id` = null
+				WHERE
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated TenFAssessment
+		 * @param TenFAssessment $objTenFAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedTenFAssessment(TenFAssessment $objTenFAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTenFAssessment on this unsaved Resource.');
+			if ((is_null($objTenFAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTenFAssessment on this Resource with an unsaved TenFAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`ten_f_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objTenFAssessment->Id) . ' AND
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objTenFAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated TenFAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllTenFAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTenFAssessment on this unsaved Resource.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (TenFAssessment::LoadArrayByResourceId($this->intId) as $objTenFAssessment) {
+					$objTenFAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`ten_f_assessment`
+				WHERE
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
 		// Related Objects' Methods for TenPAssessment
 		//-------------------------------------------------------------------
 
@@ -2148,6 +2384,7 @@
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
 	 * @property-read QQReverseReferenceNodeScorecard $Scorecard
+	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessment
 	 * @property-read QQReverseReferenceNodeTenPAssessment $TenPAssessment
 	 */
 	class QQNodeResource extends QQNode {
@@ -2168,6 +2405,8 @@
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessment', 'reverse_reference', 'resource_id');
 				case 'Scorecard':
 					return new QQReverseReferenceNodeScorecard($this, 'scorecard', 'reverse_reference', 'resource_id');
+				case 'TenFAssessment':
+					return new QQReverseReferenceNodeTenFAssessment($this, 'tenfassessment', 'reverse_reference', 'resource_id');
 				case 'TenPAssessment':
 					return new QQReverseReferenceNodeTenPAssessment($this, 'tenpassessment', 'reverse_reference', 'resource_id');
 
@@ -2191,6 +2430,7 @@
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
 	 * @property-read QQReverseReferenceNodeScorecard $Scorecard
+	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessment
 	 * @property-read QQReverseReferenceNodeTenPAssessment $TenPAssessment
 	 * @property-read QQNode $_PrimaryKeyNode
 	 */
@@ -2212,6 +2452,8 @@
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessment', 'reverse_reference', 'resource_id');
 				case 'Scorecard':
 					return new QQReverseReferenceNodeScorecard($this, 'scorecard', 'reverse_reference', 'resource_id');
+				case 'TenFAssessment':
+					return new QQReverseReferenceNodeTenFAssessment($this, 'tenfassessment', 'reverse_reference', 'resource_id');
 				case 'TenPAssessment':
 					return new QQReverseReferenceNodeTenPAssessment($this, 'tenpassessment', 'reverse_reference', 'resource_id');
 

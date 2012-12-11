@@ -195,7 +195,7 @@ class ToolslForm extends InstituteForm {
 					$timecheck = time() - (31 * 24 * 60 * 60); // 7 days; 24 hours; 60 mins; 60secs = 1 month
 					break;	
 			}
-			$sGMTMySqlString = gmdate("Y-m-d H:i:s", $timecheck);;
+			$sGMTMySqlString = gmdate("Y-m-d H:i:s", $timecheck);
 			$objConditions = QQ::AndCondition($objConditions,
 			QQ::GreaterOrEqual( QQN::Kpis()->Modified, $sGMTMySqlString)
 			);

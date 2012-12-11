@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="Autoloader.php" server="supremecenter20.com//scorecard/prototype/" local="129298459806318000" remote="129507283800000000" Dst="-1" />
+<file name="CachedObjectStorageFactory.php" server="supremecenter20.com//scorecard/prototype/" local="129298459834918000" remote="129507283800000000" Dst="-1" />
+<file name="Calculation.php" server="supremecenter20.com//scorecard/prototype/" local="129298459778128000" remote="129507283800000000" Dst="-1" />
+<file name="Cell.php" server="supremecenter20.com//scorecard/prototype/" local="129298459802518000" remote="129507284400000000" Dst="-1" />
+<file name="Comment.php" server="supremecenter20.com//scorecard/prototype/" local="129298459831428000" remote="129507284400000000" Dst="-1" />
+<file name="DocumentProperties.php" server="supremecenter20.com//scorecard/prototype/" local="129298459813738000" remote="129507284400000000" Dst="-1" />
+<file name="DocumentSecurity.php" server="supremecenter20.com//scorecard/prototype/" local="129298459836928000" remote="129507284400000000" Dst="-1" />
+<file name="HashTable.php" server="supremecenter20.com//scorecard/prototype/" local="129298459761458000" remote="129507284400000000" Dst="-1" />
+<file name="IComparable.php" server="supremecenter20.com//scorecard/prototype/" local="129298459808668000" remote="129507284400000000" Dst="-1" />
+<file name="IOFactory.php" server="supremecenter20.com//scorecard/prototype/" local="129298459781378000" remote="129507284400000000" Dst="-1" />
+<file name="NamedRange.php" server="supremecenter20.com//scorecard/prototype/" local="129298459795448000" remote="129507284400000000" Dst="-1" />
+<file name="ReferenceHelper.php" server="supremecenter20.com//scorecard/prototype/" local="129298459792798000" remote="129507284400000000" Dst="-1" />
+<file name="RichText.php" server="supremecenter20.com//scorecard/prototype/" local="129298459844568000" remote="129507284400000000" Dst="-1" />
+<file name="Settings.php" server="supremecenter20.com//scorecard/prototype/" local="129298459840878000" remote="129507284400000000" Dst="-1" />
+<file name="Style.php" server="supremecenter20.com//scorecard/prototype/" local="129298459788218000" remote="129507286200000000" Dst="-1" />
+<file name="Worksheet.php" server="supremecenter20.com//scorecard/prototype/" local="129298459822318000" remote="129507286200000000" Dst="-1" />
+<file name="WorksheetIterator.php" server="supremecenter20.com//scorecard/prototype/" local="129298459854028000" remote="129507286200000000" Dst="-1" />
+<file name="IOFactory.php" server="supremecenter20.com//scorecard/" local="129298459781378000" remote="129510574800000000" Dst="-1" />
+<file name="Autoloader.php" server="inst.net//scorecard/" local="129298459806318000" remote="129744447000000000" Dst="-1" />
+<file name="CachedObjectStorageFactory.php" server="inst.net//scorecard/" local="129298459834918000" remote="129744447000000000" Dst="-1" />
+<file name="Calculation.php" server="inst.net//scorecard/" local="129298459778128000" remote="129744447000000000" Dst="-1" />
+<file name="Cell.php" server="inst.net//scorecard/" local="129298459802518000" remote="129744447000000000" Dst="-1" />
+<file name="Comment.php" server="inst.net//scorecard/" local="129298459831428000" remote="129744447000000000" Dst="-1" />
+<file name="DocumentProperties.php" server="inst.net//scorecard/" local="129298459813738000" remote="129744447000000000" Dst="-1" />
+<file name="DocumentSecurity.php" server="inst.net//scorecard/" local="129298459836928000" remote="129744447000000000" Dst="-1" />
+<file name="HashTable.php" server="inst.net//scorecard/" local="129298459761458000" remote="129744447000000000" Dst="-1" />
+<file name="IComparable.php" server="inst.net//scorecard/" local="129298459808668000" remote="129744447000000000" Dst="-1" />
+<file name="IOFactory.php" server="inst.net//scorecard/" local="129298459781378000" remote="129949597200000000" Dst="2" />
+<file name="NamedRange.php" server="inst.net//scorecard/" local="129298459795448000" remote="129744447600000000" Dst="-1" />
+<file name="ReferenceHelper.php" server="inst.net//scorecard/" local="129298459792798000" remote="129744447600000000" Dst="-1" />
+<file name="RichText.php" server="inst.net//scorecard/" local="129298459844568000" remote="129744447600000000" Dst="-1" />
+<file name="Settings.php" server="inst.net//scorecard/" local="129298459840878000" remote="129744447600000000" Dst="-1" />
+<file name="Style.php" server="inst.net//scorecard/" local="129298459788218000" remote="129744449400000000" Dst="-1" />
+<file name="Worksheet.php" server="inst.net//scorecard/" local="129298459822318000" remote="129744449400000000" Dst="-1" />
+<file name="WorksheetIterator.php" server="inst.net//scorecard/" local="129298459854028000" remote="129744449400000000" Dst="-1" />
+</dwsync>

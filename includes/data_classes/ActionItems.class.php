@@ -70,6 +70,33 @@
 			return ActionItems::QueryArray($objConditions,$objClauses);		
 		}
 		
+		/**
+		 * Load an array of ActionItems objects,
+		 * by ScorecardId Index(es)
+		 * @param integer $intScorecardId
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return ActionItems[]
+		*/
+		public static function LoadArrayByScorecardIdAndUserId($intScorecardId, $intUserId, $objOptionalClauses = null) {
+			// Call ActionItems::QueryArray to perform the LoadArrayByScorecardId query
+			try {
+				$objConditions = QQ::All();
+				$objConditions = QQ::AndCondition($objConditions,
+				QQ::Equal( QQN::ActionItems()->ScorecardId, $intScorecardId));
+				
+				$objConditions = QQ::AndCondition($objConditions,
+				QQ::Equal(QQN::ActionItems()->Who, $intUserId));
+							
+				return ActionItems::QueryArray(
+					$objConditions,
+					$objOptionalClauses
+					);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+		
 		// Override or Create New Load/Count methods
 		// (For obvious reasons, these methods are commented out...
 		// but feel free to use these as a starting point)

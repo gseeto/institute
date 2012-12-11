@@ -21,12 +21,15 @@
 	}
 ?>
 </ul></div>
-
-<img src='/inst/scorecard/societal/spheresImg.php/<?php _p($this->objScorecard->Id);?>' style='margin:20px;'> 
-<img src='/inst/scorecard/societal/spheresInvolvementImg.php/<?php _p($this->objScorecard->Id);?>' style='margin:20px;'>
+<?php 
+$this->imgSpheres->Render();
+$this->imgSpheresInvolvement->Render();
+?>
 <br>
-<img src='/inst/scorecard/societal/giantsImg.php/<?php _p($this->objScorecard->Id);?>' style='margin:20px;'> 
-<img src='/inst/scorecard/societal/giantsInvolvementImg.php/<?php _p($this->objScorecard->Id);?>' style='margin:20px;'>
+<?php 
+$this->imgGiants->Render();
+$this->imgGiantsInvolvement->Render();
+?>
 <br>
 <?php 
 	foreach($this->dtgPArray as $dtgP) {
