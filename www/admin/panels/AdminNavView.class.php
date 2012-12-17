@@ -53,7 +53,7 @@
             $this->btnAssessments->CssClass = 'SideNavButton';
             $this->btnAssessments->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnAssessments_Click'));
             
-            // Initialize main content panel to Users
+            // Initialize main content panel
             $pnlMain = $this->objForm->GetControl($this->strPanelMainControlId);
 
             // First, remove all children panels from pnlMain. Then populate it
@@ -70,6 +70,10 @@
             	case 'assessments':
             		new AdminAssessmentsViewPanel($pnlMain);
             		$this->btnAssessments->CssClass = 'SideNavButtonSelected';
+            		break;
+            	case 'scorecards':
+            		new AdminScorecardsView($pnlMain);
+            		$this->btnScorecards->CssClass = 'SideNavButtonSelected';
             		break;
             	default:
             		new AdminUsersView($pnlMain);

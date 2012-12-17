@@ -15,6 +15,15 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
         public $dtgCannedStrategy;
         public $btnAddCannedStrategy;
         public $pnlAddCannedStrategy;
+        public $dtgRule;
+		public $btnAddRule;
+		public $pnlAddRule;
+		public $lblScorecard;
+		public $lstScorecard;
+		public $lblTenPAssessment;
+		public $lstTenPAssessment;
+		public $btnGenerateScorecard;
+		public $lblgenerationFeedback;
         public $lblDebug;
         
         // Specify the Template File for this custom QPanel
@@ -88,16 +97,18 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 			/*************************/
 	        $this->dtgCannedStrategy = new CannedStrategyDataGrid($this);
 	        $this->dtgCannedStrategy->Paginator = new QPaginator($this->dtgCannedStrategy);
-			$this->dtgCannedStrategy->AddColumn(new QDataGridColumn('Canned Strategy', '<?= $_ITEM->Strategy ?>', 'HtmlEntities=false', 'Width=400px' ));
+			$this->dtgCannedStrategy->AddColumn(new QDataGridColumn('Index', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>'));
+			$this->dtgCannedStrategy->MetaAddEditLinkColumn('/inst/admin/EditCannedStrategy.php', '<?= $_ITEM->Strategy ?>','Canned Strategy');
 			$this->dtgCannedStrategy->MetaAddTypeColumn('CategoryTypeId', 'CategoryType');
             $this->dtgCannedStrategy->AddColumn(new QDataGridColumn('Actions', '<?= $_CONTROL->ParentControl->RenderActions($_ITEM->Id) ?>', 'HtmlEntities=false', 'Width=200px' ));
 			$this->dtgCannedStrategy->AddColumn(new QDataGridColumn('KPIs', '<?= $_CONTROL->ParentControl->RenderKPIs($_ITEM->Id) ?>', 'HtmlEntities=false', 'Width=200px' ));
-           /* $this->dtgCannedStrategy->MetaAddEditLinkColumn('<?="/inst/admin/panels/ExportScorecard.php/".$_ITEM->Id?>', '<img src=\'/inst/assets/images/download.png\' />Download','Download Scorecard');*/
-        	$this->dtgCannedStrategy->CellPadding = 5;
+            
+        	$this->dtgCannedStrategy->CellPadding = 2;
 			$this->dtgCannedStrategy->SetDataBinder('dtgCannedStrategy_Bind',$this);
 			$this->dtgCannedStrategy->NoDataHtml = 'No Canned strategies.';
 			$this->dtgCannedStrategy->UseAjax = true;
 			$this->dtgCannedStrategy->GridLines = QGridLines::Both;
+			$this->dtgCannedStrategy->CssClass = 'scorecard_table';
 			
 			$this->dtgCannedStrategy->SortColumnIndex = 1;
 			$this->dtgCannedStrategy->ItemsPerPage = 20;
@@ -126,6 +137,76 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 	        $this->pnlAddCannedStrategy->Position = QPosition::Relative;
 	        $this->pnlAddCannedStrategy->Visible = false;
 	        $this->pnlAddCannedStrategy->AutoRenderChildren = true;
+	        /**********************/
+	        $this->dtgRule = new StrategyQuestionConditionalDataGrid($this);
+	        $this->dtgRule->Paginator = new QPaginator($this->dtgRule);
+			$this->dtgRule->AddColumn(new QDataGridColumn('Index', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>'));
+            $this->dtgRule->AddColumn(new QDataGridColumn('Canned Strategy', '<?= $_CONTROL->ParentControl->RenderRuleStrategy($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
+			$this->dtgRule->AddColumn(new QDataGridColumn('Category', '<?= $_CONTROL->ParentControl->RenderRuleCategory($_ITEM) ?>', 'HtmlEntities=false', 'Width=100px' ));
+            $this->dtgRule->AddColumn(new QDataGridColumn('Conditional', '<?= $_CONTROL->ParentControl->RenderRuleConditional($_ITEM) ?>', 'HtmlEntities=false', 'Width=200px' ));
+            $this->dtgRule->AddColumn(new QDataGridColumn('Question', '<?= $_CONTROL->ParentControl->RenderRuleQuestion($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
+            
+        	$this->dtgRule->CellPadding = 2;
+			$this->dtgRule->SetDataBinder('dtgRule_Bind',$this);
+			$this->dtgRule->NoDataHtml = 'No Rules set';
+			$this->dtgRule->UseAjax = true;
+			$this->dtgRule->GridLines = QGridLines::Both;
+			$this->dtgRule->CssClass = 'scorecard_table';
+			
+			$this->dtgRule->SortColumnIndex = 1;
+			$this->dtgRule->ItemsPerPage = 20;
+		
+			$objStyle = $this->dtgRule->RowStyle;
+	        $objStyle->BackColor = '#ffffff';
+	        $objStyle->FontSize = 12;
+	
+	        $objStyle = $this->dtgRule->AlternateRowStyle;
+	        $objStyle->BackColor = '#CCCCCC';
+	
+	        $objStyle = $this->dtgRule->HeaderRowStyle;
+	        $objStyle->ForeColor = '#ffffff';
+	        $objStyle->BackColor = '#003366'; 
+	        
+	        $objStyle = $this->dtgRule->HeaderLinkStyle;
+	        $objStyle->ForeColor = '#ffffff';
+	        $objStyle->BackColor = '#003366'; 
+
+			$this->btnAddRule = new QButton($this);
+	        $this->btnAddRule->Text = 'Add A Rule';
+	        $this->btnAddRule->CssClass = 'primary';
+	        $this->btnAddRule->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnAddRule_Click'));
+	        
+			$this->pnlAddRule = new QPanel($this);
+	        $this->pnlAddRule->Position = QPosition::Relative;
+	        $this->pnlAddRule->Visible = false;
+	        $this->pnlAddRule->AutoRenderChildren = true;
+	        
+	        /******************/
+	        $this->lblScorecard = new QLabel($this);
+	        $this->lblScorecard->Text = 'Select the Scorecard you wish to generate Strategies for : ';
+			$this->lstScorecard = new QListBox($this);
+			foreach(Scorecard::LoadAll() as $objScorecard) {
+				$this->lstScorecard->AddItem($objScorecard->Name, $objScorecard->Id);
+			}
+			$this->lstScorecard->AddAction(new QChangeEvent(), new QAjaxControlAction($this, 'lstScorecard_Change'));
+			
+			$this->lblTenPAssessment = new QLabel($this);
+			$this->lblTenPAssessment->Text = 'Select the 10-P Assessment to apply to the Scorecard : ';
+			$this->lstTenPAssessment = new QListBox($this);
+			foreach(TenPAssessment::LoadAll() as $objTenPAssessment) {
+				$strUser = $objTenPAssessment->User->FirstName .' '.$objTenPAssessment->User->LastName;
+				$this->lstTenPAssessment->AddItem($strUser,$objTenPAssessment->Id);
+			}
+			$this->lstTenPAssessment->AddAction(new QChangeEvent(), new QAjaxControlAction($this, 'lstTenPAssessment_Change'));
+			
+			$this->btnGenerateScorecard = new QButton($this);
+			$this->btnGenerateScorecard->Text = 'Apply To Scorecard';
+	        $this->btnGenerateScorecard->CssClass = 'primary';
+	        $this->btnGenerateScorecard->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnGenerateScorecard_Click'));
+	        
+	        $this->lblgenerationFeedback = new QLabel($this);
+	        $this->lblgenerationFeedback->HtmlEntities = false;
+	        $this->lblgenerationFeedback->DisplayStyle = QDisplayStyle::Block;
         }
         
         // Event Handlers Here
@@ -136,22 +217,105 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 			$this->dtgCannedStrategy->DataSource = $cannedStrategyArray; 
         }
         
+        public function RenderRuleStrategy(StrategyQuestionConditional $objRule) {
+        	$strControlId = 'strategyRule' . $objRule->Id;
+        	$lstStrategy = $this->objForm->GetControl($strControlId);
+        	if(!$lstStrategy) {
+        		$lstStrategy = new QListBox($this->dtgRule,$strControlId);
+        		foreach( CannedStrategy::LoadAll() as $objCannedStrategy) {
+        			$lstStrategy->AddItem($objCannedStrategy->Strategy,$objCannedStrategy->Id,
+        				($objRule->StrategyId==$objCannedStrategy->Id)?true:false);	
+        		}
+        		$lstStrategy->ActionParameter = $objRule->Id;
+        		$lstStrategy->AddAction(new QChangeEvent(), new QAjaxControlAction($this, 'lstStrategy_Change'));
+        	}
+        	return $lstStrategy->Render(false);
+        }
+        public function RenderRuleCategory(StrategyQuestionConditional $objRule) {
+        	return CategoryType::ToString($objRule->Strategy->CategoryTypeId);
+        }
+        public function RenderRuleConditional(StrategyQuestionConditional $objRule) {
+        	$strControlId = 'conditionalRule' . $objRule->Id;
+        	$lstConditional = $this->objForm->GetControl($strControlId);
+        	if(!$lstConditional) {
+        		$lstConditional = new QListBox($this->dtgRule,$strControlId);
+        		foreach( ConditionalType::$NameArray as $key=>$value) {
+        			$lstConditional->AddItem($value,$key,
+        				($objRule->ConditionalType==$key)?true:false);	
+        		}
+        		$lstConditional->ActionParameter = $objRule->Id;
+        		$lstConditional->AddAction(new QChangeEvent(), new QAjaxControlAction($this, 'lstConditional_Change'));
+        	}
+        	return $lstConditional->Render(false);
+        }
+        public function RenderRuleQuestion(StrategyQuestionConditional $objRule) {
+        	$strControlId = 'questionRule' . $objRule->Id;
+        	$lstQuestion = $this->objForm->GetControl($strControlId);
+        	if(!$lstQuestion) {
+        		$lstQuestion = new QListBox($this->dtgRule,$strControlId);
+        		foreach(TenPQuestions::LoadAll() as $objQuestion) {
+        			$lstQuestion->AddItem($objQuestion->Text,$objQuestion->Id,
+        				($objRule->QuestionId==$objQuestion->Id)?true:false);	
+        		}
+        		$lstQuestion->ActionParameter = $objRule->Id;
+        		$lstQuestion->AddAction(new QChangeEvent(), new QAjaxControlAction($this, 'lstQuestion_Change'));
+        	}
+        	return $lstQuestion->Render(false);
+        }
+        public function lstQuestion_Change($strFormId, $strControlId, $strParameter) {
+        	$lstQuestion = $this->objForm->GetControl($strControlId);
+        	$objRule = StrategyQuestionConditional::Load($strParameter);
+        	$objRule->QuestionId = $lstQuestion->SelectedValue;
+        	$objRule->Save();
+        	$this->dtgRule->Refresh();
+        }
+        public function lstTenPAssessment_Change($strFormId, $strControlId, $strParameter) {
+        	$this->lblgenerationFeedback->Text = '';
+        }
+    	public function lstScorecard_Change($strFormId, $strControlId, $strParameter) {
+        	$this->lblgenerationFeedback->Text = '';
+        }
+        public function lstConditional_Change($strFormId, $strControlId, $strParameter) {
+        	$lstConditional = $this->objForm->GetControl($strControlId);
+        	$objRule = StrategyQuestionConditional::Load($strParameter);
+        	$objRule->ConditionalType = $lstConditional->SelectedValue;
+        	$objRule->Save();
+        	$this->dtgRule->Refresh();
+        }
+        
+        public function lstStrategy_Change($strFormId, $strControlId, $strParameter) {
+        	$lstStrategy = $this->objForm->GetControl($strControlId);
+        	$objRule = StrategyQuestionConditional::Load($strParameter);
+        	$objRule->StrategyId = $lstStrategy->SelectedValue;
+        	$objRule->Save();
+        	$this->dtgRule->Refresh();
+        }
+        
         public function RenderActions($intCannedStrategyId) {
-        	$strReturn = '';
+        	$strReturn = '<ol>';
         	$actionArray = CannedActionItem::LoadArrayByStrategyId($intCannedStrategyId);
         	foreach($actionArray as $objAction) {
-        		$strReturn .= $objAction->Action.'<br>';
+        		$strReturn .= '<li>'.$objAction->Action.'</li>';
         	}
+        	$strReturn .='</ol>';
         	return $strReturn;
         }
         
    	 	public function RenderKPIs($intCannedStrategyId) {
-        	$strReturn = '';
+        	$strReturn = '<ol>';
         	$kpiArray = CannedKpi::LoadArrayByStrategyId($intCannedStrategyId);
         	foreach($kpiArray as $objKpi) {
-        		$strReturn .= $objKpi->Kpi.'<br>';
+        		$strReturn .= '<li>'.$objKpi->Kpi.'</li>';
         	}
+        	$strReturn .='</ol>';
         	return $strReturn;
+        }
+        
+        public function dtgRule_Bind() {
+        	$objConditions = QQ::All();
+			$objClauses = array();
+			$ruleArray = StrategyQuestionConditional::QueryArray($objConditions,$objClauses);		
+			$this->dtgRule->DataSource = $ruleArray; 
         }
         
     	public function dtgScorecards_Bind() {
@@ -512,8 +676,134 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 			exit;
         }
         
+        public function btnAddRule_Click($strFormId, $strControlId, $strParameter) {
+			// Open up the panel and allow the adding of rules
+	        $this->pnlAddRule->Visible = true;
+	        $this->pnlAddRule->RemoveChildControls(true);
+	        $pnlAddRuleView = new AddRule($this->pnlAddRule,'UpdateRuleList',$this);  		
+		}
+		
+		public function btnGenerateScorecard_Click($strFormId, $strControlId, $strParameter) {
+			// Get selected Scorecard and 10-P Assessment
+			$intScorecardId = $this->lstScorecard->SelectedValue;
+			$intTenPAssessmentId = $this->lstTenPAssessment->SelectedValue;
+			$this->lblgenerationFeedback->Text .= 'Attempting to generate strategies for Scorecard: '.$this->lstScorecard->SelectedName .'<br>';
+			$objResultArray = TenPResults::LoadArrayByAssessmentId($intTenPAssessmentId);
+			//Iterate through rules, comparing conditionals and results of assessment
+			foreach(StrategyQuestionConditional::LoadAll() as $objRule) {
+				// If conditional met, propogate canned strategies to scorecard.
+				$bApplyRule = false;
+				foreach($objResultArray as $objResult) {
+					// Find the question result to check
+					if ($objResult->QuestionId == $objRule->QuestionId) {
+						// Determine the type of check we're going to perform
+						switch($objRule->ConditionalType) {
+							case ConditionalType::Importance2:
+								if($objResult->Importance < 2) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::Importance3:
+								if($objResult->Importance < 3) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::Importance4:
+								if($objResult->Importance < 4) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::Importance5:
+								if($objResult->Importance < 5) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::Importance6:
+								if($objResult->Importance < 6) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::ImportancePerformanceGap2:
+								if(abs($objResult->Importance - $objResult->Performance)>2) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::ImportancePerformanceGap3:
+								if(abs($objResult->Importance - $objResult->Performance)>3) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::ImportancePerformanceGap4:
+								if(abs($objResult->Importance - $objResult->Performance)>4) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::ImportancePerformanceGap5:
+								if(abs($objResult->Importance - $objResult->Performance)>5) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::Performance2:
+								if($objResult->Performance < 2) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::Performance3:
+								if($objResult->Performance < 3) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::Performance4:
+								if($objResult->Performance < 4) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::Performance5:
+								if($objResult->Performance < 5) {
+									$bApplyRule = true;
+								}
+								break;
+							case ConditionalType::Performance6:
+								if($objResult->Performance < 6) {
+									$bApplyRule = true;
+								}
+								break;
+						}
+						if($bApplyRule) {
+							// Apply the Rule.
+							$this->lblgenerationFeedback->Text .= 'Applying the Rule: '.$objRule->Id.'<br>'; 
+							$objCannedStrategy = CannedStrategy::Load($objRule->StrategyId);
+							$objStrategy = new Strategy();
+							$objStrategy->Strategy = $objCannedStrategy->Strategy;
+							$objStrategy->CategoryTypeId = $objCannedStrategy->CategoryTypeId;
+							$objStrategy->ScorecardId = $intScorecardId;
+							$objStrategy->Count = $objStrategy->GetNextCount($intScorecardId, $objCannedStrategy->CategoryTypeId);
+							$intStrategyId = $objStrategy->Save();
+							$this->lblgenerationFeedback->Text.= '&nbsp;&nbsp;&nbsp;&nbsp;' .$objCannedStrategy->Strategy.'<br>';
+							foreach(CannedActionItem::LoadArrayByStrategyId($objRule->StrategyId) as $objCannedAction) {
+								$objAction = new ActionItems();
+								$objAction->CategoryId = $objCannedStrategy->CategoryTypeId;
+								$objAction->Action = $objCannedAction->Action;
+								$objAction->StrategyId = $intStrategyId;
+								$objAction->ScorecardId = $intScorecardId;
+								$objAction->Count = $objAction->GetNextCount($intScorecardId, $objCannedStrategy->CategoryTypeId, $intStrategyId);
+								$objAction->Save();
+							}
+							foreach(CannedKpi::LoadArrayByStrategyId($objRule->StrategyId) as $objCannedKpi) {
+								$objKpi = new Kpis();
+								$objKpi->ScorecardId = $intScorecardId;
+								$objKpi->StrategyId = $intStrategyId;
+								$objKpi->Kpi = $objCannedKpi->Kpi;
+								$objKpi->Count = $objKpi->GetNextCount($intStrategyId);
+								$objKpi->Save();
+							}
+						}
+					}
+				}
+			}
+		}
         public function btnAddCannedStrategy_Click($strFormId, $strControlId, $strParameter) {
-			// Open up the panel and allow the adding of scorecards
+			// Open up the panel and allow the adding of Canned strategies
 	        $this->pnlAddCannedStrategy->Visible = true;
 	        $this->pnlAddCannedStrategy->RemoveChildControls(true);
 	        $pnlAddCannedStrategyView = new AddCannedStrategy($this->pnlAddCannedStrategy,'UpdateStrategyList',$this);  		
@@ -537,10 +827,14 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 	    public function UpdateScorecardList($blnUpdatesMade) {
 	    	$this->dtgScorecards->PageNumber = 1;
 			$this->dtgScorecards->Refresh();
+			$this->lstScorecard->Refresh();
 	    }
     	public function UpdateStrategyList($blnUpdatesMade) {
 	    	$this->dtgCannedStrategy->PageNumber = 1;
 			$this->dtgCannedStrategy->Refresh();
 	    }
-	    
+	    public function UpdateRuleList($blnUpdatesMade) {
+	    	$this->dtgRule->PageNumber = 1;
+			$this->dtgRule->Refresh();
+	    }
     }

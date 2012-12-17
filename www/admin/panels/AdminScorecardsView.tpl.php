@@ -23,10 +23,24 @@ available for deployment based upon set criteria.</p>
 <h3>Conditional Rules For Strategy To 10-P Assessment Association</h3>
 <p>The table below allows you to set conditionals in place that will be used to determine
 if certain Canned Strategies will be suitable for a Scorecard based off 10-P Assessment results.</p>
-
+<?php $_CONTROL->dtgRule->Render(); ?>
+<?php $_CONTROL->btnAddRule->Render(); ?>
+<?php $_CONTROL->pnlAddRule->Render(); ?>
 </div>
 <div class='section'>
 <h2>Scorecard Generation From 10-P Assessments</h2>
 <p>Specify a 10-P Assessment that you wish to use in order to generate a number of strategies
 that will be pre-populated into the designated Scorecard using the associations specified above.</p>
+<?php 
+	$_CONTROL->lblScorecard->Render();
+	$_CONTROL->lstScorecard->Render();
+?>
+<br>
+<?php 
+	$_CONTROL->lblTenPAssessment->Render();
+	$_CONTROL->lstTenPAssessment->Render();
+?>
+<br><br>
+<?php $_CONTROL->btnGenerateScorecard->Render(); ?>
+<?php $_CONTROL->lblgenerationFeedback->Render(); ?>
 </div>

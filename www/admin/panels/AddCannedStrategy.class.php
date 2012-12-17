@@ -53,6 +53,7 @@
 			}
 			$this->actionArray = array();
 			$this->dtgActions = new QDataGrid($this);
+			$this->dtgActions->AddColumn(new QDataGridColumn('Index', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>'));
 			$this->dtgActions->AddColumn(new QDataGridColumn('Action', '<?= $_CONTROL->ParentControl->RenderActions($_ITEM,$_CONTROL->CurrentRowIndex) ?>', 'HtmlEntities=false', 'Width=400px' ));
 			$this->dtgActions->SetDataBinder('dtgActions_Bind',$this);
 			$this->dtgActions->CellPadding = 5;
@@ -67,7 +68,8 @@
 			/**************/
 			$this->kpiArray = array();
 			$this->dtgKpis = new QDataGrid($this);
-			$this->dtgKpis->AddColumn(new QDataGridColumn('Action', '<?= $_CONTROL->ParentControl->RenderKpis($_ITEM,$_CONTROL->CurrentRowIndex) ?>', 'HtmlEntities=false', 'Width=400px' ));
+			$this->dtgKpis->AddColumn(new QDataGridColumn('Index', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>'));
+			$this->dtgKpis->AddColumn(new QDataGridColumn('KPI', '<?= $_CONTROL->ParentControl->RenderKpis($_ITEM,$_CONTROL->CurrentRowIndex) ?>', 'HtmlEntities=false', 'Width=400px' ));
 			$this->dtgKpis->SetDataBinder('dtgKpis_Bind',$this);
 			$this->dtgKpis->CellPadding = 5;
 			$this->dtgKpis->NoDataHtml = 'No KPIs';
@@ -174,7 +176,7 @@
 			$lblAction->Text = $txtAction->Text;
 			$lblAction->Visible = true;
 			$intIndex = intval(substr($strControlId,strlen('text')));
-			$this->actionArray[$intIndex-1] = $txtAction->Text;
+			$this->actionArray[$intIndex] = $txtAction->Text;
 		}
 
 		public function RenderKpis($strAction,$intIndex) {
@@ -216,7 +218,7 @@
 			$lblKpi->Text = $txtKpi->Text;
 			$lblKpi->Visible = true;
 			$intIndex = intval(substr($strControlId,strlen('textKpi')));
-			$this->kpiArray[$intIndex-1] = $txtKpi->Text;
+			$this->kpiArray[$intIndex] = $txtKpi->Text;
 		}
 		
     }
