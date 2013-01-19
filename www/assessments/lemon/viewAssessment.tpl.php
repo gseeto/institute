@@ -3,11 +3,10 @@
 
 <div class="section">
 <p>
-Thank you for taking the LEMON Assessment.
-Your results are provided below.
+<?php $this->lblIntroduction->Render();?>
 </p>
 <?php  $this->btnReturn->Render(); ?>
-<img src='lemonAssessmentImg.php/<?php _p($this->objLemonAssessment->Id);?>'>
+<img src='/resources/assessments/lemon/lemonAssessmentImg.php/<?php _p($this->objLemonAssessment->Id);?>'>
 <br>
 <?php  $this->lblLemonDescription->Render(); ?>
 <br>

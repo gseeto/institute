@@ -70,6 +70,7 @@
 			$this->dtgKingdomBusinessAssessments->MetaAddColumn(QQN::KingdomBusinessAssessment()->Resource);
 			$this->dtgKingdomBusinessAssessments->MetaAddColumn(QQN::KingdomBusinessAssessment()->User);
 			$this->dtgKingdomBusinessAssessments->MetaAddColumn(QQN::KingdomBusinessAssessment()->ResourceStatus);
+			$this->dtgKingdomBusinessAssessments->MetaAddColumn(QQN::KingdomBusinessAssessment()->Group);
 
 			// Setup the Create New button
 			$this->btnCreateNew = new QButton($this);

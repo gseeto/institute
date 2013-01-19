@@ -300,6 +300,8 @@
 				case 'Resource': return QQN::TenFAssessment()->Resource;
 				case 'UserId': return QQN::TenFAssessment()->UserId;
 				case 'User': return QQN::TenFAssessment()->User;
+				case 'GroupId': return QQN::TenFAssessment()->GroupId;
+				case 'Group': return QQN::TenFAssessment()->Group;
 				default: throw new QCallerException('Simple Property not found in TenFAssessmentDataGrid content: ' . $mixContent);
 			} else if ($mixContent instanceof QQAssociationNode)
 				throw new QCallerException('Content QQNode cannot go through any "To Many" association nodes.');

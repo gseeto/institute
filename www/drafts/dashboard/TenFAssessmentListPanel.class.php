@@ -69,6 +69,7 @@
 			$this->dtgTenFAssessments->MetaAddColumn(QQN::TenFAssessment()->ResourceStatus);
 			$this->dtgTenFAssessments->MetaAddColumn(QQN::TenFAssessment()->Resource);
 			$this->dtgTenFAssessments->MetaAddColumn(QQN::TenFAssessment()->User);
+			$this->dtgTenFAssessments->MetaAddColumn(QQN::TenFAssessment()->Group);
 
 			// Setup the Create New button
 			$this->btnCreateNew = new QButton($this);

@@ -91,7 +91,7 @@
 		}   	
 		
 	    public function btnAdd_Click($strFormId, $strControlId, $strParameter) {
-			QApplication::Redirect('/inst/admin/newCompany.php');
+			QApplication::Redirect('/resources/admin/newCompany.php');
 		}
 		
     }

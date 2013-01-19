@@ -19,6 +19,20 @@
 		public $btnAddLemonAssessment;
 		public $pnlAddLemonAssessment;
 		
+		public $dtgGroupAssessments;
+		public $btnAddGroupAssessment;
+		public $pnlAddGroupAssessment;
+		
+		public $txtKeyCode;
+		public $lblKeyCode;
+		public $txtDescription;
+		public $lblDescription;
+		public $txtTotalKeys;
+		public $lblTotalKeys;
+		public $txtKeysLeft;
+		public $lblKeysLeft;
+		public $lstAssessmentType;
+		
         // Specify the Template File for this custom QPanel
         protected $strTemplate = 'panels/AdminAssessmentsView.tpl.php';
 
@@ -36,7 +50,7 @@
            
             $this->dtgKingdomBizAssessments = new KingdomBusinessAssessmentDataGrid($this);
             $this->dtgKingdomBizAssessments->Paginator = new QPaginator($this->dtgKingdomBizAssessments);
-            $this->dtgKingdomBizAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUser($_ITEM->UserId) ?>', 'HtmlEntities=false', 'Width=300px' ));
+            $this->dtgKingdomBizAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkKingdom($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
             $this->dtgKingdomBizAssessments->AddColumn(new QDataGridColumn('Company', '<?= $_CONTROL->ParentControl->RenderCompany($_ITEM->CompanyId) ?>', 'HtmlEntities=false', 'Width=300px' ));
             $this->dtgKingdomBizAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px' ));
                       
@@ -75,7 +89,7 @@
 	        /********************************************/
 	        $this->dtgLemonAssessments = new LemonAssessmentDataGrid($this);
             $this->dtgLemonAssessments->Paginator = new QPaginator($this->dtgLemonAssessments);
-            $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUser($_ITEM->UserId) ?>', 'HtmlEntities=false', 'Width=300px' ));
+            $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkLemon($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
             $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('Company', '<?= $_CONTROL->ParentControl->RenderCompany($_ITEM->CompanyId) ?>', 'HtmlEntities=false', 'Width=300px' ));
             $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px' ));
                       
@@ -114,7 +128,7 @@
 	        /*****************************************/
 	        $this->dtgTenPAssessments = new TenPAssessmentDataGrid($this);
             $this->dtgTenPAssessments->Paginator = new QPaginator($this->dtgTenPAssessments);
-            $this->dtgTenPAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUser($_ITEM->UserId) ?>', 'HtmlEntities=false', 'Width=300px' ));
+            $this->dtgTenPAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkTenP($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
             $this->dtgTenPAssessments->AddColumn(new QDataGridColumn('Company', '<?= $_CONTROL->ParentControl->RenderCompany($_ITEM->CompanyId) ?>', 'HtmlEntities=false', 'Width=300px' ));
             $this->dtgTenPAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px' ));
                       
@@ -153,7 +167,7 @@
 	        /*******************************/
 	        $this->dtgTenFAssessments = new TenFAssessmentDataGrid($this);
             $this->dtgTenFAssessments->Paginator = new QPaginator($this->dtgTenFAssessments);
-            $this->dtgTenFAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUser($_ITEM->UserId) ?>', 'HtmlEntities=false', 'Width=300px' ));
+            $this->dtgTenFAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkTenF($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
             /*$this->dtgTenFAssessments->AddColumn(new QDataGridColumn('Company', '<?= $_CONTROL->ParentControl->RenderCompany($_ITEM->CompanyId) ?>', 'HtmlEntities=false', 'Width=300px' ));*/
             $this->dtgTenFAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px' ));
                       
@@ -189,8 +203,220 @@
 	        $this->pnlAddTenFAssessment->Position = QPosition::Relative;
 	        $this->pnlAddTenFAssessment->Visible = false;
 	        $this->pnlAddTenFAssessment->AutoRenderChildren = true;
+	        /***************************************************************/
+	        
+	        $this->dtgGroupAssessments = new GroupAssessmentListDataGrid($this);
+            $this->dtgGroupAssessments->Paginator = new QPaginator($this->dtgGroupAssessments);
+            $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Key Code', '<?= $_CONTROL->ParentControl->RenderKeyCode($_ITEM) ?>', 'HtmlEntities=false', 'Width=200px' ));
+            $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Description', '<?= $_CONTROL->ParentControl->RenderDescription($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
+            $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Total Keys', '<?= $_CONTROL->ParentControl->RenderTotalKeys($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));
+            $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_CONTROL->ParentControl->RenderKeysLeft($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));   
+            $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Assessment Type', '<?= $_CONTROL->ParentControl->RenderAssessmentType($_ITEM) ?>', 'HtmlEntities=false' )); 
+            $this->dtgGroupAssessments->CellPadding = 5;
+			$this->dtgGroupAssessments->SetDataBinder('dtgGroupAssessments_Bind',$this);
+			$this->dtgGroupAssessments->NoDataHtml = 'No Group Assessments have been assigned.';
+			$this->dtgGroupAssessments->UseAjax = true;
+			
+			$this->dtgGroupAssessments->SortColumnIndex = 1;
+			$this->dtgGroupAssessments->ItemsPerPage = 20;
+			
+			$objStyle = $this->dtgGroupAssessments->RowStyle;
+	        $objStyle->BackColor = '#ffffff';
+	        $objStyle->FontSize = 12;
+	
+	        $objStyle = $this->dtgGroupAssessments->AlternateRowStyle;
+	        $objStyle->BackColor = '#CCCCCC';
+	
+	        $objStyle = $this->dtgGroupAssessments->HeaderRowStyle;
+	        $objStyle->ForeColor = '#ffffff';
+	        $objStyle->BackColor = '#003366'; 
+	        
+	        $objStyle = $this->dtgGroupAssessments->HeaderLinkStyle;
+	        $objStyle->ForeColor = '#ffffff';
+	        $objStyle->BackColor = '#003366'; 
+	        
+	        $this->btnAddGroupAssessment = new QButton($this);
+	        $this->btnAddGroupAssessment->Text = 'Add Group Assessment';
+	        $this->btnAddGroupAssessment->CssClass = 'primary';
+	        $this->btnAddGroupAssessment->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnAddGroupAssessment_Click'));
+          
+	        $this->pnlAddGroupAssessment = new QPanel($this);
+	        $this->pnlAddGroupAssessment->Position = QPosition::Relative;
+	        $this->pnlAddGroupAssessment->Visible = false;
+	        $this->pnlAddGroupAssessment->AutoRenderChildren = true;
         }
         
+    public function RenderKeyCode($objGroupAssessment) {
+		$strControlId = 'txtKeyCode' . $objGroupAssessment->Id;
+        $txtKeyCode = $this->objForm->GetControl($strControlId);     
+        if (!$txtKeyCode) {
+        	$txtKeyCode = new QTextBox($this->dtgGroupAssessments,$strControlId);
+			$txtKeyCode->Name = 'Key Code';
+            $txtKeyCode->Text = $objGroupAssessment->KeyCode;
+            $txtKeyCode->ActionParameter = $objGroupAssessment->Id;
+            $txtKeyCode->Width = 100;
+            $txtKeyCode->Visible = false;
+            $txtKeyCode->AddAction(new QMouseOutEvent(), new QAjaxControlAction($this,'txtKeyCode_MouseOut'));
+        }
+        $strLblControlId = 'lblKeyCode' . $objGroupAssessment->Id;
+        $lblKeyCode = $this->objForm->GetControl($strLblControlId);     
+        if (!$lblKeyCode) {
+        	$lblKeyCode = new QLabel($this->dtgGroupAssessments,$strLblControlId);
+        	$lblKeyCode->Text = $objGroupAssessment->KeyCode;
+        	$lblKeyCode->ActionParameter = $strControlId;
+        	$lblKeyCode->AddAction(new QMouseOverEvent(), new QAjaxControlAction($this,'lblKeyCode_MouseOver'));
+        }
+        return ($txtKeyCode->Render(false) . $lblKeyCode->Render(false));
+	}
+    public function lblKeyCode_MouseOver($strFormId, $strControlId, $strParameter) {
+		$lblKeyCode = $this->objForm->GetControl($strControlId);
+		$lblKeyCode->Visible = false;
+		$txtKeyCode = $this->objForm->GetControl($strParameter);
+		$txtKeyCode->Visible = true;
+	}
+	
+	public function txtKeyCode_MouseOut($strFormId, $strControlId, $strParameter) {
+		$GroupAssessmentId = $strParameter;
+        $objGroupAssessment = GroupAssessmentList::Load($GroupAssessmentId);
+        $txtKeyCode = $this->objForm->GetControl($strControlId);
+        $objGroupAssessment->KeyCode = $txtKeyCode->Text;
+        $objGroupAssessment->Save();
+        $txtKeyCode->Visible = false;
+        $strLblControlId = 'lblKeyCode' . $objGroupAssessment->Id;
+        $lblKeyCode = $this->objForm->GetControl($strLblControlId); 
+        $lblKeyCode->Text = $txtKeyCode->Text;
+        $lblKeyCode->Visible = true;
+        $this->dtgGroupAssessments->Refresh();
+	}
+	
+    public function RenderDescription($objGroupAssessment) {
+		$strControlId = 'txtDescription' . $objGroupAssessment->Id;
+        $txtDescription = $this->objForm->GetControl($strControlId);     
+        if (!$txtDescription) {
+        	$txtDescription = new QTextBox($this->dtgGroupAssessments,$strControlId);
+			$txtDescription->Name = 'Description';
+            $txtDescription->Text = $objGroupAssessment->Description;
+            $txtDescription->ActionParameter = $objGroupAssessment->Id;
+            $txtDescription->Width = 300;
+            $txtDescription->Visible = false;
+            $txtDescription->AddAction(new QMouseOutEvent(), new QAjaxControlAction($this,'txtDescription_MouseOut'));
+        }
+        $strLblControlId = 'lblDescription' . $objGroupAssessment->Id;
+        $lblDescription = $this->objForm->GetControl($strLblControlId);     
+        if (!$lblDescription) {
+        	$lblDescription = new QLabel($this->dtgGroupAssessments,$strLblControlId);
+        	$lblDescription->Text = $objGroupAssessment->Description;
+        	$lblDescription->ActionParameter = $strControlId;
+        	$lblDescription->AddAction(new QMouseOverEvent(), new QAjaxControlAction($this,'lblDescription_MouseOver'));
+        }
+        return ($txtDescription->Render(false) . $lblDescription->Render(false));
+	}
+    public function lblDescription_MouseOver($strFormId, $strControlId, $strParameter) {
+		$lblDescription = $this->objForm->GetControl($strControlId);
+		$lblDescription->Visible = false;
+		$txtDescription = $this->objForm->GetControl($strParameter);
+		$txtDescription->Visible = true;
+	}
+	
+	public function txtDescription_MouseOut($strFormId, $strControlId, $strParameter) {
+		$GroupAssessmentId = $strParameter;
+        $objGroupAssessment = GroupAssessmentList::Load($GroupAssessmentId);
+        $txtDescription = $this->objForm->GetControl($strControlId);
+        $objGroupAssessment->Description = $txtDescription->Text;
+        $objGroupAssessment->Save();
+        $txtDescription->Visible = false;
+        $strLblControlId = 'lblDescription' . $objGroupAssessment->Id;
+        $lblDescription = $this->objForm->GetControl($strLblControlId); 
+        $lblDescription->Text = $txtDescription->Text;
+        $lblDescription->Visible = true;
+        $this->dtgGroupAssessments->Refresh();
+	}
+	
+     public function RenderTotalKeys($objGroupAssessment) {
+		$strControlId = 'txtTotalKeys' . $objGroupAssessment->Id;
+        $txtTotalKeys = $this->objForm->GetControl($strControlId);     
+        if (!$txtTotalKeys) {
+        	$txtTotalKeys = new QIntegerTextBox($this->dtgGroupAssessments,$strControlId);
+			$txtTotalKeys->Name = 'Total Keys';
+            $txtTotalKeys->Text = $objGroupAssessment->TotalKeys;
+            $txtTotalKeys->ActionParameter = $objGroupAssessment->Id;
+            $txtTotalKeys->Width = 50;
+            $txtTotalKeys->Visible = false;
+            $txtTotalKeys->AddAction(new QMouseOutEvent(), new QAjaxControlAction($this,'txtTotalKeys_MouseOut'));
+        }
+        $strLblControlId = 'lblTotalKeys' . $objGroupAssessment->Id;
+        $lblTtotalKeys = $this->objForm->GetControl($strLblControlId);     
+        if (!$lblTtotalKeys) {
+        	$lblTtotalKeys = new QLabel($this->dtgGroupAssessments,$strLblControlId);
+        	$lblTtotalKeys->Text = $objGroupAssessment->TotalKeys;
+        	$lblTtotalKeys->ActionParameter = $strControlId;
+        	$lblTtotalKeys->AddAction(new QMouseOverEvent(), new QAjaxControlAction($this,'lblTotalKeys_MouseOver'));
+        }
+        return ($txtTotalKeys->Render(false) . $lblTtotalKeys->Render(false));
+	}
+    public function lblTotalKeys_MouseOver($strFormId, $strControlId, $strParameter) {
+		$lblTtotalKeys = $this->objForm->GetControl($strControlId);
+		$lblTtotalKeys->Visible = false;
+		$txtTotalKeys = $this->objForm->GetControl($strParameter);
+		$txtTotalKeys->Visible = true;
+	}
+	
+	public function txtTotalKeys_MouseOut($strFormId, $strControlId, $strParameter) {
+		$GroupAssessmentId = $strParameter;
+        $objGroupAssessment = GroupAssessmentList::Load($GroupAssessmentId);
+        $txtTotalKeys = $this->objForm->GetControl($strControlId);
+        $objGroupAssessment->TotalKeys = $txtTotalKeys->Text;
+        $objGroupAssessment->Save();
+        $txtTotalKeys->Visible = false;
+        $strLblControlId = 'lblTotalKeys' . $objGroupAssessment->Id;
+        $lblTtotalKeys = $this->objForm->GetControl($strLblControlId); 
+        $lblTtotalKeys->Text = $txtTotalKeys->Text;
+        $lblTtotalKeys->Visible = true;
+        $this->dtgGroupAssessments->Refresh();
+	}
+	
+    public function RenderKeysLeft($objGroupAssessment) {
+		$strControlId = 'txtKeysLeft' . $objGroupAssessment->Id;
+        $txtKeysLeft = $this->objForm->GetControl($strControlId);     
+        if (!$txtKeysLeft) {
+        	$txtKeysLeft = new QIntegerTextBox($this->dtgGroupAssessments,$strControlId);
+			$txtKeysLeft->Name = 'Keys Left';
+            $txtKeysLeft->Text = $objGroupAssessment->KeysLeft;
+            $txtKeysLeft->ActionParameter = $objGroupAssessment->Id;
+            $txtKeysLeft->Width = 50;
+            $txtKeysLeft->Visible = false;
+            $txtKeysLeft->AddAction(new QMouseOutEvent(), new QAjaxControlAction($this,'txtKeysLeft_MouseOut'));
+        }
+        $strLblControlId = 'lblKeysLeft' . $objGroupAssessment->Id;
+        $lblKeysLeft = $this->objForm->GetControl($strLblControlId);     
+        if (!$lblKeysLeft) {
+        	$lblKeysLeft = new QLabel($this->dtgGroupAssessments,$strLblControlId);
+        	$lblKeysLeft->Text = $objGroupAssessment->KeysLeft;
+        	$lblKeysLeft->ActionParameter = $strControlId;
+        	$lblKeysLeft->AddAction(new QMouseOverEvent(), new QAjaxControlAction($this,'lblKeysLeft_MouseOver'));
+        }
+        return ($txtKeysLeft->Render(false) . $lblKeysLeft->Render(false));
+	}
+    public function lblKeysLeft_MouseOver($strFormId, $strControlId, $strParameter) {
+		$lblKeysLeft = $this->objForm->GetControl($strControlId);
+		$lblKeysLeft->Visible = false;
+		$txtKeysLeft = $this->objForm->GetControl($strParameter);
+		$txtKeysLeft->Visible = true;
+	}
+	
+	public function txtKeysLeft_MouseOut($strFormId, $strControlId, $strParameter) {
+		$GroupAssessmentId = $strParameter;
+        $objGroupAssessment = GroupAssessmentList::Load($GroupAssessmentId);
+        $txtKeysLeft = $this->objForm->GetControl($strControlId);
+        $objGroupAssessment->KeysLeft = $txtKeysLeft->Text;
+        $objGroupAssessment->Save();
+        $txtKeysLeft->Visible = false;
+        $strLblControlId = 'lblKeysLeft' . $objGroupAssessment->Id;
+        $lblKeysLeft = $this->objForm->GetControl($strLblControlId); 
+        $lblKeysLeft->Text = $txtKeysLeft->Text;
+        $lblKeysLeft->Visible = true;
+        $this->dtgGroupAssessments->Refresh();
+	}
     	public function dtgKingdomBizAssessments_Bind() {
 			$objConditions = QQ::All();
 			$objClauses = array();
@@ -219,6 +445,13 @@
 			$this->dtgLemonAssessments->DataSource = $LemonArray; 
 		}
 		
+		public function dtgGroupAssessments_Bind() {
+			$objConditions = QQ::All();
+			$objClauses = array();
+			$groupArray = GroupAssessmentList::QueryArray($objConditions,$objClauses);		
+			$this->dtgGroupAssessments->DataSource = $groupArray; 
+		}
+		
 		public function RenderCompany($intCompanyId) {
 			$objCompany = Company::Load($intCompanyId);
 			if (null != $objCompany)
@@ -232,6 +465,75 @@
 			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
 		}
 		
+    	public function RenderUserLinkKingdom($objAssessment) {
+    		$intUserId = $objAssessment->UserId;
+    		$objUser = User::Load($intUserId);
+    		// Only display link if there is an assessment to display
+    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
+				return sprintf("<a href='/resources/assessments/kingdom/viewAssessment.php/%s' target='_blank' >%s %s</a>", $intUserId, $objUser->FirstName, $objUser->LastName);
+    		} else {
+    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
+    		}
+		}
+    	public function RenderUserLinkLemon($objAssessment) {
+    		$intUserId = $objAssessment->UserId;
+    		$objUser = User::Load($intUserId);
+    		// Only display link if there is an assessment to display
+    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
+				return sprintf("<a href='/resources/assessments/lemon/viewAssessment.php/%s' target='_blank' >%s %s</a>", $intUserId, $objUser->FirstName, $objUser->LastName);
+    		} else {
+    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
+    		}
+		}
+    	public function RenderUserLinkTenP($objAssessment) {
+    		$intUserId = $objAssessment->UserId;
+    		$objUser = User::Load($intUserId);
+    		// Only display link if there is an assessment to display
+    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
+				return sprintf("<a href='/resources/assessments/tenp/viewAssessment.php/%s' target='_blank' >%s %s</a>", $intUserId, $objUser->FirstName, $objUser->LastName);
+    		} else {
+    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
+    		}
+		}
+		public function RenderAssessmentType($objGroupAssessment) {
+			$intResourceId = $objGroupAssessment->ResourceId;
+			$strControlId = 'lstAssessmentType' . $objGroupAssessment->Id;
+			$lstAssessmentType = $this->objForm->GetControl($strControlId);
+			if(!$lstAssessmentType) {
+				$lstAssessmentType = new QListBox($this->dtgGroupAssessments,$strControlId);
+				$lstAssessmentType->Name = 'AssessmentType';
+				foreach(Resource::LoadAll() as $objResource) {
+					if($objResource->Name != 'Scorecard') {
+						if($intResourceId == $objResource->Id)
+							$lstAssessmentType->AddItem($objResource->Name, $objResource->Id,true);
+						else 
+							$lstAssessmentType->AddItem($objResource->Name, $objResource->Id);
+					}
+				}			
+				$lstAssessmentType->ActionParameter = $objGroupAssessment->Id;
+				$lstAssessmentType->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'lstAssessmentType_Change'));
+			}
+			return $lstAssessmentType->Render(false);
+		}
+		public function lstAssessmentType_Change($strFormId, $strControlId, $strParameter) {
+			$lstAssessmentType = $this->objForm->GetControl($strControlId);
+			if ($lstAssessmentType != null){
+				$objGroupAssessment = GroupAssessmentList::Load($strParameter);
+				$objGroupAssessment->ResourceId = $lstAssessmentType->SelectedValue;
+				$objGroupAssessment->Save();
+			}
+			$this->dtgGroupAssessments->Refresh();
+		}
+    	public function RenderUserLinkTenF($objAssessment) {
+    		$intUserId = $objAssessment->UserId;
+    		$objUser = User::Load($intUserId);
+    		// Only display link if there is an assessment to display
+    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
+				return sprintf("<a href='/resources/assessments/tenf/viewAssessment.php/%s' target='_blank' >%s %s</a>", $intUserId, $objUser->FirstName, $objUser->LastName);
+    		} else {
+    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
+    		}
+		}
     	public function RenderStatus($intResourceStatusId) {
 			return ResourceStatus::Load($intResourceStatusId)->Value;
 		}
@@ -291,4 +593,16 @@
 			$this->dtgLemonAssessments->Refresh();
 	    }
 
+    	public function btnAddGroupAssessment_Click($strFormId, $strControlId, $strParameter) {
+			// Open up the panel and allow the adding of members to Group Assessments
+	        $this->pnlAddGroupAssessment->Visible = true;
+	        $this->pnlAddGroupAssessment->RemoveChildControls(true);
+	        $pnlAddGroupView = new AddGroupAssessment($this->pnlAddGroupAssessment,'UpdateGroupAssessmentList',$this);	
+		}
+		
+	    // Method Call back for the  panels 
+	    public function UpdateGroupAssessmentList($blnUpdatesMade) {
+	    	$this->dtgGroupAssessments->PageNumber = 1;
+			$this->dtgGroupAssessments->Refresh();
+	    }
     }

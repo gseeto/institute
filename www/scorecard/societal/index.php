@@ -18,7 +18,7 @@ class SocietalForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/inst/index.php');
+		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
 	}
 	
 	protected function Form_Create() {
@@ -61,19 +61,19 @@ class SocietalForm extends InstituteForm {
 			$this->imgSpheres = new QLabel($this);
 			$this->imgSpheres->CssClass = 'societalImage';
 			$this->imgSpheres->HtmlEntities = false;
-			$this->imgSpheres->Text = '<img src=\'/inst/scorecard/societal/spheresImg.php/'.$this->objScorecard->Id.'\' />';
+			$this->imgSpheres->Text = '<img src=\'/resources/scorecard/societal/spheresImg.php/'.$this->objScorecard->Id.'\' />';
 			$this->imgSpheresInvolvement = new QLabel($this);
 			$this->imgSpheresInvolvement->CssClass = 'societalImage';
 			$this->imgSpheresInvolvement->HtmlEntities = false;
-			$this->imgSpheresInvolvement->Text = '<img src=\'/inst/scorecard/societal/spheresInvolvementImg.php/'.$this->objScorecard->Id.'\' />';
+			$this->imgSpheresInvolvement->Text = '<img src=\'/resources/scorecard/societal/spheresInvolvementImg.php/'.$this->objScorecard->Id.'\' />';
 			$this->imgGiants = new QLabel($this);
 			$this->imgGiants->CssClass = 'societalImage';
 			$this->imgGiants->HtmlEntities = false;
-			$this->imgGiants->Text = '<img src=\'/inst/scorecard/societal/giantsImg.php/'.$this->objScorecard->Id.'\' />';
+			$this->imgGiants->Text = '<img src=\'/resources/scorecard/societal/giantsImg.php/'.$this->objScorecard->Id.'\' />';
 			$this->imgGiantsInvolvement = new QLabel($this);
 			$this->imgGiantsInvolvement->CssClass = 'societalImage';
 			$this->imgGiantsInvolvement->HtmlEntities = false;	
-			$this->imgGiantsInvolvement->Text= '<img src=\'/inst/scorecard/societal/giantsInvolvementImg.php/'.$this->objScorecard->Id.'\' />';		
+			$this->imgGiantsInvolvement->Text= '<img src=\'/resources/scorecard/societal/giantsInvolvementImg.php/'.$this->objScorecard->Id.'\' />';		
 		}
 		
 		// Define the AssociateSphere Dialog. passing in the Method Callback for whenever the dialog is Closed
@@ -90,10 +90,10 @@ class SocietalForm extends InstituteForm {
 			
 	public function btnCategory_Clicked($strFormId, $strControlId, $strParameter) {
 		if ($strParameter == 'Summary') {
-			QApplication::Redirect('/inst/scorecard/scorecard.php/'.$this->objScorecard->Id);
+			QApplication::Redirect('/resources/scorecard/scorecard.php/'.$this->objScorecard->Id);
 		} else { 
 			$intCategoryId = $strParameter;
-			QApplication::Redirect('/inst/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$intCategoryId );
+			QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$intCategoryId );
 		}
     }
     
@@ -112,7 +112,7 @@ class SocietalForm extends InstituteForm {
     
  	public function btnSubmit_Click() {
 		// redirect to appropriate scorecard
-		QApplication::Redirect('/inst/scorecard/scorecard.php/'.$this->rbnScorecards->SelectedValue);
+		QApplication::Redirect('/resources/scorecard/scorecard.php/'.$this->rbnScorecards->SelectedValue);
 	}
 	
  	public function RenderGiants(Strategy $objStrategy, StrategyDataGrid $dtgP) {

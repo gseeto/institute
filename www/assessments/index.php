@@ -10,7 +10,7 @@ class AssessmentForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/inst/index.php');
+		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
 	}
 	
 	protected function Form_Create() {
@@ -53,17 +53,17 @@ class AssessmentForm extends InstituteForm {
 	}
 
 	protected function btnKingdomBusinessAssessment_Click() {	
-		QApplication::Redirect('/inst/assessments/kingdom/');
+		QApplication::Redirect('/resources/assessments/kingdom/');
 	}
 	
 	protected function btnPAssessment_Click() {	
-		QApplication::Redirect('/inst/assessments/tenp/');
+		QApplication::Redirect('/resources/assessments/tenp/');
 	}
 	protected function btnFAssessment_Click() {	
-		QApplication::Redirect('/inst/assessments/tenf/');
+		QApplication::Redirect('/resources/assessments/tenf/');
 	}
 	protected function btnLemonAssessment_Click() {
-		QApplication::Redirect('/inst/assessments/lemon/');
+		QApplication::Redirect('/resources/assessments/lemon/');
 	}
 }
 

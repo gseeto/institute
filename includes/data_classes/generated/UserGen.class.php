@@ -33,10 +33,10 @@
 	 * @property Resource[] $_ResourceArray the value for the private _objResourceArray (Read-Only) if set due to an ExpandAsArray on the resource_user_assn association table
 	 * @property Scorecard $_Scorecard the value for the private _objScorecard (Read-Only) if set due to an expansion on the scorecard_user_assn association table
 	 * @property Scorecard[] $_ScorecardArray the value for the private _objScorecardArray (Read-Only) if set due to an ExpandAsArray on the scorecard_user_assn association table
-	 * @property ActionItems $_ActionItemsAsWho the value for the private _objActionItemsAsWho (Read-Only) if set due to an expansion on the action_items.who reverse relationship
-	 * @property ActionItems[] $_ActionItemsAsWhoArray the value for the private _objActionItemsAsWhoArray (Read-Only) if set due to an ExpandAsArray on the action_items.who reverse relationship
 	 * @property ActionItems $_ActionItemsAsModifiedBy the value for the private _objActionItemsAsModifiedBy (Read-Only) if set due to an expansion on the action_items.modified_by reverse relationship
 	 * @property ActionItems[] $_ActionItemsAsModifiedByArray the value for the private _objActionItemsAsModifiedByArray (Read-Only) if set due to an ExpandAsArray on the action_items.modified_by reverse relationship
+	 * @property ActionItems $_ActionItemsAsWho the value for the private _objActionItemsAsWho (Read-Only) if set due to an expansion on the action_items.who reverse relationship
+	 * @property ActionItems[] $_ActionItemsAsWhoArray the value for the private _objActionItemsAsWhoArray (Read-Only) if set due to an ExpandAsArray on the action_items.who reverse relationship
 	 * @property KingdomBusinessAssessment $_KingdomBusinessAssessment the value for the private _objKingdomBusinessAssessment (Read-Only) if set due to an expansion on the kingdom_business_assessment.user_id reverse relationship
 	 * @property KingdomBusinessAssessment[] $_KingdomBusinessAssessmentArray the value for the private _objKingdomBusinessAssessmentArray (Read-Only) if set due to an ExpandAsArray on the kingdom_business_assessment.user_id reverse relationship
 	 * @property Kpis $_KpisAsModifiedBy the value for the private _objKpisAsModifiedBy (Read-Only) if set due to an expansion on the kpis.modified_by reverse relationship
@@ -199,22 +199,6 @@
 		private $_objScorecardArray = array();
 
 		/**
-		 * Private member variable that stores a reference to a single ActionItemsAsWho object
-		 * (of type ActionItems), if this User object was restored with
-		 * an expansion on the action_items association table.
-		 * @var ActionItems _objActionItemsAsWho;
-		 */
-		private $_objActionItemsAsWho;
-
-		/**
-		 * Private member variable that stores a reference to an array of ActionItemsAsWho objects
-		 * (of type ActionItems[]), if this User object was restored with
-		 * an ExpandAsArray on the action_items association table.
-		 * @var ActionItems[] _objActionItemsAsWhoArray;
-		 */
-		private $_objActionItemsAsWhoArray = array();
-
-		/**
 		 * Private member variable that stores a reference to a single ActionItemsAsModifiedBy object
 		 * (of type ActionItems), if this User object was restored with
 		 * an expansion on the action_items association table.
@@ -229,6 +213,22 @@
 		 * @var ActionItems[] _objActionItemsAsModifiedByArray;
 		 */
 		private $_objActionItemsAsModifiedByArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single ActionItemsAsWho object
+		 * (of type ActionItems), if this User object was restored with
+		 * an expansion on the action_items association table.
+		 * @var ActionItems _objActionItemsAsWho;
+		 */
+		private $_objActionItemsAsWho;
+
+		/**
+		 * Private member variable that stores a reference to an array of ActionItemsAsWho objects
+		 * (of type ActionItems[]), if this User object was restored with
+		 * an ExpandAsArray on the action_items association table.
+		 * @var ActionItems[] _objActionItemsAsWhoArray;
+		 */
+		private $_objActionItemsAsWhoArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single KingdomBusinessAssessment object
@@ -775,20 +775,6 @@
 				}
 
 
-				$strAlias = $strAliasPrefix . 'actionitemsaswho__id';
-				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
-				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
-					(!is_null($objDbRow->GetColumn($strAliasName)))) {
-					if ($intPreviousChildItemCount = count($objPreviousItem->_objActionItemsAsWhoArray)) {
-						$objPreviousChildItem = $objPreviousItem->_objActionItemsAsWhoArray[$intPreviousChildItemCount - 1];
-						$objChildItem = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsaswho__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
-						if ($objChildItem)
-							$objPreviousItem->_objActionItemsAsWhoArray[] = $objChildItem;
-					} else
-						$objPreviousItem->_objActionItemsAsWhoArray[] = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsaswho__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
-					$blnExpandedViaArray = true;
-				}
-
 				$strAlias = $strAliasPrefix . 'actionitemsasmodifiedby__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -800,6 +786,20 @@
 							$objPreviousItem->_objActionItemsAsModifiedByArray[] = $objChildItem;
 					} else
 						$objPreviousItem->_objActionItemsAsModifiedByArray[] = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsasmodifiedby__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
+				$strAlias = $strAliasPrefix . 'actionitemsaswho__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objActionItemsAsWhoArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objActionItemsAsWhoArray[$intPreviousChildItemCount - 1];
+						$objChildItem = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsaswho__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objActionItemsAsWhoArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objActionItemsAsWhoArray[] = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsaswho__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 					$blnExpandedViaArray = true;
 				}
 
@@ -986,16 +986,6 @@
 			}
 
 
-			// Check for ActionItemsAsWho Virtual Binding
-			$strAlias = $strAliasPrefix . 'actionitemsaswho__id';
-			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
-			if (!is_null($objDbRow->GetColumn($strAliasName))) {
-				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
-					$objToReturn->_objActionItemsAsWhoArray[] = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsaswho__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
-				else
-					$objToReturn->_objActionItemsAsWho = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsaswho__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
-			}
-
 			// Check for ActionItemsAsModifiedBy Virtual Binding
 			$strAlias = $strAliasPrefix . 'actionitemsasmodifiedby__id';
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
@@ -1004,6 +994,16 @@
 					$objToReturn->_objActionItemsAsModifiedByArray[] = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsasmodifiedby__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objActionItemsAsModifiedBy = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsasmodifiedby__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for ActionItemsAsWho Virtual Binding
+			$strAlias = $strAliasPrefix . 'actionitemsaswho__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objActionItemsAsWhoArray[] = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsaswho__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objActionItemsAsWho = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsaswho__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			// Check for KingdomBusinessAssessment Virtual Binding
@@ -1665,18 +1665,6 @@
 					// @return Scorecard[]
 					return (array) $this->_objScorecardArray;
 
-				case '_ActionItemsAsWho':
-					// Gets the value for the private _objActionItemsAsWho (Read-Only)
-					// if set due to an expansion on the action_items.who reverse relationship
-					// @return ActionItems
-					return $this->_objActionItemsAsWho;
-
-				case '_ActionItemsAsWhoArray':
-					// Gets the value for the private _objActionItemsAsWhoArray (Read-Only)
-					// if set due to an ExpandAsArray on the action_items.who reverse relationship
-					// @return ActionItems[]
-					return (array) $this->_objActionItemsAsWhoArray;
-
 				case '_ActionItemsAsModifiedBy':
 					// Gets the value for the private _objActionItemsAsModifiedBy (Read-Only)
 					// if set due to an expansion on the action_items.modified_by reverse relationship
@@ -1688,6 +1676,18 @@
 					// if set due to an ExpandAsArray on the action_items.modified_by reverse relationship
 					// @return ActionItems[]
 					return (array) $this->_objActionItemsAsModifiedByArray;
+
+				case '_ActionItemsAsWho':
+					// Gets the value for the private _objActionItemsAsWho (Read-Only)
+					// if set due to an expansion on the action_items.who reverse relationship
+					// @return ActionItems
+					return $this->_objActionItemsAsWho;
+
+				case '_ActionItemsAsWhoArray':
+					// Gets the value for the private _objActionItemsAsWhoArray (Read-Only)
+					// if set due to an ExpandAsArray on the action_items.who reverse relationship
+					// @return ActionItems[]
+					return (array) $this->_objActionItemsAsWhoArray;
 
 				case '_KingdomBusinessAssessment':
 					// Gets the value for the private _objKingdomBusinessAssessment (Read-Only)
@@ -1974,188 +1974,6 @@
 
 			
 		
-		// Related Objects' Methods for ActionItemsAsWho
-		//-------------------------------------------------------------------
-
-		/**
-		 * Gets all associated ActionItemsesAsWho as an array of ActionItems objects
-		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
-		 * @return ActionItems[]
-		*/ 
-		public function GetActionItemsAsWhoArray($objOptionalClauses = null) {
-			if ((is_null($this->intId)))
-				return array();
-
-			try {
-				return ActionItems::LoadArrayByWho($this->intId, $objOptionalClauses);
-			} catch (QCallerException $objExc) {
-				$objExc->IncrementOffset();
-				throw $objExc;
-			}
-		}
-
-		/**
-		 * Counts all associated ActionItemsesAsWho
-		 * @return int
-		*/ 
-		public function CountActionItemsesAsWho() {
-			if ((is_null($this->intId)))
-				return 0;
-
-			return ActionItems::CountByWho($this->intId);
-		}
-
-		/**
-		 * Associates a ActionItemsAsWho
-		 * @param ActionItems $objActionItems
-		 * @return void
-		*/ 
-		public function AssociateActionItemsAsWho(ActionItems $objActionItems) {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call AssociateActionItemsAsWho on this unsaved User.');
-			if ((is_null($objActionItems->Id)))
-				throw new QUndefinedPrimaryKeyException('Unable to call AssociateActionItemsAsWho on this User with an unsaved ActionItems.');
-
-			// Get the Database Object for this Class
-			$objDatabase = User::GetDatabase();
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				UPDATE
-					`action_items`
-				SET
-					`who` = ' . $objDatabase->SqlVariable($this->intId) . '
-				WHERE
-					`id` = ' . $objDatabase->SqlVariable($objActionItems->Id) . '
-			');
-
-			// Journaling (if applicable)
-			if ($objDatabase->JournalingDatabase) {
-				$objActionItems->Who = $this->intId;
-				$objActionItems->Journal('UPDATE');
-			}
-		}
-
-		/**
-		 * Unassociates a ActionItemsAsWho
-		 * @param ActionItems $objActionItems
-		 * @return void
-		*/ 
-		public function UnassociateActionItemsAsWho(ActionItems $objActionItems) {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsWho on this unsaved User.');
-			if ((is_null($objActionItems->Id)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsWho on this User with an unsaved ActionItems.');
-
-			// Get the Database Object for this Class
-			$objDatabase = User::GetDatabase();
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				UPDATE
-					`action_items`
-				SET
-					`who` = null
-				WHERE
-					`id` = ' . $objDatabase->SqlVariable($objActionItems->Id) . ' AND
-					`who` = ' . $objDatabase->SqlVariable($this->intId) . '
-			');
-
-			// Journaling
-			if ($objDatabase->JournalingDatabase) {
-				$objActionItems->Who = null;
-				$objActionItems->Journal('UPDATE');
-			}
-		}
-
-		/**
-		 * Unassociates all ActionItemsesAsWho
-		 * @return void
-		*/ 
-		public function UnassociateAllActionItemsesAsWho() {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsWho on this unsaved User.');
-
-			// Get the Database Object for this Class
-			$objDatabase = User::GetDatabase();
-
-			// Journaling
-			if ($objDatabase->JournalingDatabase) {
-				foreach (ActionItems::LoadArrayByWho($this->intId) as $objActionItems) {
-					$objActionItems->Who = null;
-					$objActionItems->Journal('UPDATE');
-				}
-			}
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				UPDATE
-					`action_items`
-				SET
-					`who` = null
-				WHERE
-					`who` = ' . $objDatabase->SqlVariable($this->intId) . '
-			');
-		}
-
-		/**
-		 * Deletes an associated ActionItemsAsWho
-		 * @param ActionItems $objActionItems
-		 * @return void
-		*/ 
-		public function DeleteAssociatedActionItemsAsWho(ActionItems $objActionItems) {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsWho on this unsaved User.');
-			if ((is_null($objActionItems->Id)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsWho on this User with an unsaved ActionItems.');
-
-			// Get the Database Object for this Class
-			$objDatabase = User::GetDatabase();
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				DELETE FROM
-					`action_items`
-				WHERE
-					`id` = ' . $objDatabase->SqlVariable($objActionItems->Id) . ' AND
-					`who` = ' . $objDatabase->SqlVariable($this->intId) . '
-			');
-
-			// Journaling
-			if ($objDatabase->JournalingDatabase) {
-				$objActionItems->Journal('DELETE');
-			}
-		}
-
-		/**
-		 * Deletes all associated ActionItemsesAsWho
-		 * @return void
-		*/ 
-		public function DeleteAllActionItemsesAsWho() {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsWho on this unsaved User.');
-
-			// Get the Database Object for this Class
-			$objDatabase = User::GetDatabase();
-
-			// Journaling
-			if ($objDatabase->JournalingDatabase) {
-				foreach (ActionItems::LoadArrayByWho($this->intId) as $objActionItems) {
-					$objActionItems->Journal('DELETE');
-				}
-			}
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				DELETE FROM
-					`action_items`
-				WHERE
-					`who` = ' . $objDatabase->SqlVariable($this->intId) . '
-			');
-		}
-
-			
-		
 		// Related Objects' Methods for ActionItemsAsModifiedBy
 		//-------------------------------------------------------------------
 
@@ -2333,6 +2151,188 @@
 					`action_items`
 				WHERE
 					`modified_by` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for ActionItemsAsWho
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated ActionItemsesAsWho as an array of ActionItems objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return ActionItems[]
+		*/ 
+		public function GetActionItemsAsWhoArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return ActionItems::LoadArrayByWho($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated ActionItemsesAsWho
+		 * @return int
+		*/ 
+		public function CountActionItemsesAsWho() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return ActionItems::CountByWho($this->intId);
+		}
+
+		/**
+		 * Associates a ActionItemsAsWho
+		 * @param ActionItems $objActionItems
+		 * @return void
+		*/ 
+		public function AssociateActionItemsAsWho(ActionItems $objActionItems) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateActionItemsAsWho on this unsaved User.');
+			if ((is_null($objActionItems->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateActionItemsAsWho on this User with an unsaved ActionItems.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`action_items`
+				SET
+					`who` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objActionItems->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objActionItems->Who = $this->intId;
+				$objActionItems->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a ActionItemsAsWho
+		 * @param ActionItems $objActionItems
+		 * @return void
+		*/ 
+		public function UnassociateActionItemsAsWho(ActionItems $objActionItems) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsWho on this unsaved User.');
+			if ((is_null($objActionItems->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsWho on this User with an unsaved ActionItems.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`action_items`
+				SET
+					`who` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objActionItems->Id) . ' AND
+					`who` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objActionItems->Who = null;
+				$objActionItems->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all ActionItemsesAsWho
+		 * @return void
+		*/ 
+		public function UnassociateAllActionItemsesAsWho() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsWho on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (ActionItems::LoadArrayByWho($this->intId) as $objActionItems) {
+					$objActionItems->Who = null;
+					$objActionItems->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`action_items`
+				SET
+					`who` = null
+				WHERE
+					`who` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated ActionItemsAsWho
+		 * @param ActionItems $objActionItems
+		 * @return void
+		*/ 
+		public function DeleteAssociatedActionItemsAsWho(ActionItems $objActionItems) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsWho on this unsaved User.');
+			if ((is_null($objActionItems->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsWho on this User with an unsaved ActionItems.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`action_items`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objActionItems->Id) . ' AND
+					`who` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objActionItems->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated ActionItemsesAsWho
+		 * @return void
+		*/ 
+		public function DeleteAllActionItemsesAsWho() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsWho on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (ActionItems::LoadArrayByWho($this->intId) as $objActionItems) {
+					$objActionItems->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`action_items`
+				WHERE
+					`who` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
 		}
 
@@ -4374,8 +4374,8 @@
 	 * @property-read QQNodeUserCompany $Company
 	 * @property-read QQNodeUserResource $Resource
 	 * @property-read QQNodeUserScorecard $Scorecard
-	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsWho
 	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsModifiedBy
+	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsWho
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeKpis $KpisAsModifiedBy
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
@@ -4420,10 +4420,10 @@
 					return new QQNodeUserResource($this);
 				case 'Scorecard':
 					return new QQNodeUserScorecard($this);
-				case 'ActionItemsAsWho':
-					return new QQReverseReferenceNodeActionItems($this, 'actionitemsaswho', 'reverse_reference', 'who');
 				case 'ActionItemsAsModifiedBy':
 					return new QQReverseReferenceNodeActionItems($this, 'actionitemsasmodifiedby', 'reverse_reference', 'modified_by');
+				case 'ActionItemsAsWho':
+					return new QQReverseReferenceNodeActionItems($this, 'actionitemsaswho', 'reverse_reference', 'who');
 				case 'KingdomBusinessAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'user_id');
 				case 'KpisAsModifiedBy':
@@ -4468,8 +4468,8 @@
 	 * @property-read QQNodeUserCompany $Company
 	 * @property-read QQNodeUserResource $Resource
 	 * @property-read QQNodeUserScorecard $Scorecard
-	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsWho
 	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsModifiedBy
+	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsWho
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeKpis $KpisAsModifiedBy
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
@@ -4515,10 +4515,10 @@
 					return new QQNodeUserResource($this);
 				case 'Scorecard':
 					return new QQNodeUserScorecard($this);
-				case 'ActionItemsAsWho':
-					return new QQReverseReferenceNodeActionItems($this, 'actionitemsaswho', 'reverse_reference', 'who');
 				case 'ActionItemsAsModifiedBy':
 					return new QQReverseReferenceNodeActionItems($this, 'actionitemsasmodifiedby', 'reverse_reference', 'modified_by');
+				case 'ActionItemsAsWho':
+					return new QQReverseReferenceNodeActionItems($this, 'actionitemsaswho', 'reverse_reference', 'who');
 				case 'KingdomBusinessAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'user_id');
 				case 'KpisAsModifiedBy':

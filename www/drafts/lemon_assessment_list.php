@@ -60,6 +60,7 @@
 			$this->dtgLemonAssessments->MetaAddColumn(QQN::LemonAssessment()->Company);
 			$this->dtgLemonAssessments->MetaAddColumn(QQN::LemonAssessment()->Resource);
 			$this->dtgLemonAssessments->MetaAddColumn('ResourceStatusId');
+			$this->dtgLemonAssessments->MetaAddColumn(QQN::LemonAssessment()->Group);
 		}
 	}
 

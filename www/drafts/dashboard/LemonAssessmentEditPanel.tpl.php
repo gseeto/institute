@@ -15,6 +15,8 @@
 
 		<?php $_CONTROL->txtResourceStatusId->RenderWithName(); ?>
 
+		<?php $_CONTROL->lstGroup->RenderWithName(); ?>
+
 	</div>
 
 	<div id="formActions">

@@ -15,7 +15,7 @@ class NewLemonAssessmentForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/inst/index.php');
+		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
 	}
 	
 	protected function Form_Create() {		
@@ -69,7 +69,7 @@ class NewLemonAssessmentForm extends InstituteForm {
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect('/inst/assessments/lemon/index.php');
+		QApplication::Redirect('/resources/assessments/lemon/index.php');
 	}
 	
 	protected function btnSubmit_Click() {	
@@ -88,7 +88,7 @@ class NewLemonAssessmentForm extends InstituteForm {
 	        $this->objLemonAssessment->ResourceStatusId = 2;
 	        $this->objLemonAssessment->Save();
         }
-		QApplication::Redirect('/inst/assessments/lemon/viewAssessment.php');
+		QApplication::Redirect('/resources/assessments/lemon/viewAssessment.php');
 	}
 	
 	public function dtgAssessmentQuestions_Bind() {

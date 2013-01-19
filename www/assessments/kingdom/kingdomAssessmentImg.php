@@ -1,7 +1,7 @@
 <?php // content="text/plain; charset=utf-8"
 require(dirname(__FILE__) . '/../../../includes/prepend.inc.php');
-require_once ('jpgraph/jpgraph.php');
-require_once ('jpgraph/jpgraph_radar.php');
+require_once (dirname(__FILE__) . '/../../../includes/jpgraph/jpgraph.php');
+require_once (dirname(__FILE__) . '/../../../includes/jpgraph/jpgraph_radar.php');
 
 // Create the basic radar graph
 $graph = new RadarGraph(800,533);

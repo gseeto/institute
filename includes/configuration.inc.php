@@ -15,7 +15,7 @@
 		case 'dev':
 			define ('__DOCROOT__', '/var/www');
 			define ('__VIRTUAL_DIRECTORY__', '');
-			define ('__SUBDIRECTORY__', '/inst');
+			define ('__SUBDIRECTORY__', '/resources');
 
 			define('DB_CONNECTION_1', serialize(array(
 				'adapter' => 'MySqli5',
@@ -34,6 +34,18 @@
 			break;
 
 		case 'prod':
+			define ('__DOCROOT__', getenv("DOCUMENT_ROOT"));
+			define ('__VIRTUAL_DIRECTORY__', '');
+			define ('__SUBDIRECTORY__', '/resources');
+
+			define('DB_CONNECTION_1', serialize(array(
+				'adapter' => 'MySqli5',
+				'server' => 'localhost',
+				'port' => null,
+				'database' => 'brettj_institute',
+				'username' => 'brettj_institute',
+				'password' => 'basketful12',
+				'profiling' => false)));
 			break;
 	}
 

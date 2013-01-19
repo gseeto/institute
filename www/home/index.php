@@ -49,7 +49,7 @@ class HomeForm extends InstituteForm {
 	
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/inst/index.php');
+		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
 	}
 	
 	protected function Form_Create() {
@@ -165,16 +165,16 @@ class HomeForm extends InstituteForm {
 				if($objUser->IsResourceAssociated($objResource)) {
 					switch ($objResource->Name) {
 						case 'Kingdom Business Assessment':
-							$lblAssessmentLink->Text = '<li><a href=\'/inst/assessments/kingdom/\'>Kingdom Business Assessment</a></li>';	
+							$lblAssessmentLink->Text = '<li><a href=\'/resources/assessments/kingdom/\'>Kingdom Business Assessment</a></li>';	
 							break;
 						case '10-P Assessment':
-							$lblAssessmentLink->Text = '<li><a href=\'/inst/assessments/tenp/\'>10-P Assessment</a></li>';	
+							$lblAssessmentLink->Text = '<li><a href=\'/resources/assessments/tenp/\'>10-P Assessment</a></li>';	
 							break;
 						case '10-F Assessment':
-							$lblAssessmentLink->Text = '<li><a href=\'/inst/assessments/tenf/\'>10-F Assessment</a></li>';	
+							$lblAssessmentLink->Text = '<li><a href=\'/resources/assessments/tenf/\'>10-F Assessment</a></li>';	
 							break;
 						case 'LEMON Assessment':
-							$lblAssessmentLink->Text = '<li><a href=\'/inst/assessments/lemon/\'>LEMON Assessment</a></li>';	
+							$lblAssessmentLink->Text = '<li><a href=\'/resources/assessments/lemon/\'>LEMON Assessment</a></li>';	
 							break;
 					}
 					$this->lblAssessments[] = $lblAssessmentLink;						
@@ -188,7 +188,7 @@ class HomeForm extends InstituteForm {
 			$lblScorecardLink = new QLabel($this);
 			$lblScorecardLink->Name = $objScorecard->Id;
 			$lblScorecardLink->HtmlEntities = false;
-			$lblScorecardLink->Text = '<li><a href=\'/inst/scorecard/scorecard.php/'.$objScorecard->Id. '\'>'.$objScorecard->Name.'</a></li>';
+			$lblScorecardLink->Text = '<li><a href=\'/resources/scorecard/scorecard.php/'.$objScorecard->Id. '\'>'.$objScorecard->Name.'</a></li>';
 			$this->lblScorecards[] = $lblScorecardLink;
 		}
 	}

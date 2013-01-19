@@ -21,7 +21,7 @@
 	}
 ?>
 </ul></div>
-<img src='/inst/scorecard/resource/resourceImg.php/<?php _p($this->objScorecard->Id);?>' style='margin:20px;'>
+<img src='/resources/scorecard/resource/resourceImg.php/<?php _p($this->objScorecard->Id);?>' style='margin:20px;'>
 <div class="section">
 <h2>Individual Information</h2>
 <?php  $this->lstIndividuals->RenderWithName();?>

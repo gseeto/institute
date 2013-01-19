@@ -68,7 +68,7 @@
             		$this->btnCompany->CssClass = 'SideNavButtonSelected';
             		break;
             	case 'assessments':
-            		new AdminAssessmentsViewPanel($pnlMain);
+            		new AdminAssessmentsView($pnlMain);
             		$this->btnAssessments->CssClass = 'SideNavButtonSelected';
             		break;
             	case 'scorecards':

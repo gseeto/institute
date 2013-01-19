@@ -3,11 +3,10 @@
 
 <div class="section">
 <p>
-Thank you for taking the 10-P Assessment.
-Your results are provided below.
+<?php $this->lblIntroduction->Render();?>
 </p>
 <?php  $this->btnReturn->Render(); ?>
-<img src='tenpAssessmentImg.php/<?php _p($this->objTenPAssessment->Id);?>'>
+<img src='/resources/assessments/tenp/tenpAssessmentImg.php/<?php _p($this->objTenPAssessment->Id);?>'>
 <br>
 <br>
 <?php  $this->dtgAssessmentResults->Render(); ?>

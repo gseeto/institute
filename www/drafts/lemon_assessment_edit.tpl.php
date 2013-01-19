@@ -27,6 +27,8 @@
 
 		<?php $this->txtResourceStatusId->RenderWithName(); ?>
 
+		<?php $this->lstGroup->RenderWithName(); ?>
+
 	</div>
 
 	<div id="formActions">

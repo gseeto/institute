@@ -20,10 +20,12 @@
 	 * @property integer $ResourceId the value for intResourceId 
 	 * @property integer $UserId the value for intUserId 
 	 * @property integer $ResourceStatusId the value for intResourceStatusId 
+	 * @property integer $GroupId the value for intGroupId 
 	 * @property Company $Company the value for the Company object referenced by intCompanyId 
 	 * @property Resource $Resource the value for the Resource object referenced by intResourceId 
 	 * @property User $User the value for the User object referenced by intUserId 
 	 * @property ResourceStatus $ResourceStatus the value for the ResourceStatus object referenced by intResourceStatusId 
+	 * @property GroupAssessmentList $Group the value for the GroupAssessmentList object referenced by intGroupId 
 	 * @property KingdomBusinessResults $_KingdomBusinessResultsAsAssessment the value for the private _objKingdomBusinessResultsAsAssessment (Read-Only) if set due to an expansion on the kingdom_business_results.assessment_id reverse relationship
 	 * @property KingdomBusinessResults[] $_KingdomBusinessResultsAsAssessmentArray the value for the private _objKingdomBusinessResultsAsAssessmentArray (Read-Only) if set due to an ExpandAsArray on the kingdom_business_results.assessment_id reverse relationship
 	 * @property boolean $__Restored whether or not this object was restored from the database (as opposed to created new)
@@ -72,6 +74,14 @@
 		 */
 		protected $intResourceStatusId;
 		const ResourceStatusIdDefault = null;
+
+
+		/**
+		 * Protected member variable that maps to the database column kingdom_business_assessment.group_id
+		 * @var integer intGroupId
+		 */
+		protected $intGroupId;
+		const GroupIdDefault = null;
 
 
 		/**
@@ -151,6 +161,16 @@
 		 * @var ResourceStatus objResourceStatus
 		 */
 		protected $objResourceStatus;
+
+		/**
+		 * Protected member variable that contains the object pointed by the reference
+		 * in the database column kingdom_business_assessment.group_id.
+		 *
+		 * NOTE: Always use the Group property getter to correctly retrieve this GroupAssessmentList object.
+		 * (Because this class implements late binding, this variable reference MAY be null.)
+		 * @var GroupAssessmentList objGroup
+		 */
+		protected $objGroup;
 
 
 
@@ -467,6 +487,7 @@
 			$objBuilder->AddSelectItem($strTableName, 'resource_id', $strAliasPrefix . 'resource_id');
 			$objBuilder->AddSelectItem($strTableName, 'user_id', $strAliasPrefix . 'user_id');
 			$objBuilder->AddSelectItem($strTableName, 'resource_status_id', $strAliasPrefix . 'resource_status_id');
+			$objBuilder->AddSelectItem($strTableName, 'group_id', $strAliasPrefix . 'group_id');
 		}
 
 
@@ -540,6 +561,8 @@
 			$objToReturn->intUserId = $objDbRow->GetColumn($strAliasName, 'Integer');
 			$strAliasName = array_key_exists($strAliasPrefix . 'resource_status_id', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'resource_status_id'] : $strAliasPrefix . 'resource_status_id';
 			$objToReturn->intResourceStatusId = $objDbRow->GetColumn($strAliasName, 'Integer');
+			$strAliasName = array_key_exists($strAliasPrefix . 'group_id', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'group_id'] : $strAliasPrefix . 'group_id';
+			$objToReturn->intGroupId = $objDbRow->GetColumn($strAliasName, 'Integer');
 
 			// Instantiate Virtual Attributes
 			foreach ($objDbRow->GetColumnNameArray() as $strColumnName => $mixValue) {
@@ -576,6 +599,12 @@
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 			if (!is_null($objDbRow->GetColumn($strAliasName)))
 				$objToReturn->objResourceStatus = ResourceStatus::InstantiateDbRow($objDbRow, $strAliasPrefix . 'resource_status_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+
+			// Check for Group Early Binding
+			$strAlias = $strAliasPrefix . 'group_id__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName)))
+				$objToReturn->objGroup = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'group_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 
 
 
@@ -809,6 +838,40 @@
 			, $objOptionalClauses
 			);
 		}
+			
+		/**
+		 * Load an array of KingdomBusinessAssessment objects,
+		 * by GroupId Index(es)
+		 * @param integer $intGroupId
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return KingdomBusinessAssessment[]
+		*/
+		public static function LoadArrayByGroupId($intGroupId, $objOptionalClauses = null) {
+			// Call KingdomBusinessAssessment::QueryArray to perform the LoadArrayByGroupId query
+			try {
+				return KingdomBusinessAssessment::QueryArray(
+					QQ::Equal(QQN::KingdomBusinessAssessment()->GroupId, $intGroupId),
+					$objOptionalClauses
+					);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Count KingdomBusinessAssessments
+		 * by GroupId Index(es)
+		 * @param integer $intGroupId
+		 * @return int
+		*/
+		public static function CountByGroupId($intGroupId, $objOptionalClauses = null) {
+			// Call KingdomBusinessAssessment::QueryCount to perform the CountByGroupId query
+			return KingdomBusinessAssessment::QueryCount(
+				QQ::Equal(QQN::KingdomBusinessAssessment()->GroupId, $intGroupId)
+			, $objOptionalClauses
+			);
+		}
 
 
 
@@ -843,12 +906,14 @@
 							`company_id`,
 							`resource_id`,
 							`user_id`,
-							`resource_status_id`
+							`resource_status_id`,
+							`group_id`
 						) VALUES (
 							' . $objDatabase->SqlVariable($this->intCompanyId) . ',
 							' . $objDatabase->SqlVariable($this->intResourceId) . ',
 							' . $objDatabase->SqlVariable($this->intUserId) . ',
-							' . $objDatabase->SqlVariable($this->intResourceStatusId) . '
+							' . $objDatabase->SqlVariable($this->intResourceStatusId) . ',
+							' . $objDatabase->SqlVariable($this->intGroupId) . '
 						)
 					');
 
@@ -871,7 +936,8 @@
 							`company_id` = ' . $objDatabase->SqlVariable($this->intCompanyId) . ',
 							`resource_id` = ' . $objDatabase->SqlVariable($this->intResourceId) . ',
 							`user_id` = ' . $objDatabase->SqlVariable($this->intUserId) . ',
-							`resource_status_id` = ' . $objDatabase->SqlVariable($this->intResourceStatusId) . '
+							`resource_status_id` = ' . $objDatabase->SqlVariable($this->intResourceStatusId) . ',
+							`group_id` = ' . $objDatabase->SqlVariable($this->intGroupId) . '
 						WHERE
 							`id` = ' . $objDatabase->SqlVariable($this->intId) . '
 					');
@@ -960,6 +1026,7 @@
 			$this->ResourceId = $objReloaded->ResourceId;
 			$this->UserId = $objReloaded->UserId;
 			$this->ResourceStatusId = $objReloaded->ResourceStatusId;
+			$this->GroupId = $objReloaded->GroupId;
 		}
 
 		/**
@@ -977,6 +1044,7 @@
 					`resource_id`,
 					`user_id`,
 					`resource_status_id`,
+					`group_id`,
 					__sys_login_id,
 					__sys_action,
 					__sys_date
@@ -986,6 +1054,7 @@
 					' . $objDatabase->SqlVariable($this->intResourceId) . ',
 					' . $objDatabase->SqlVariable($this->intUserId) . ',
 					' . $objDatabase->SqlVariable($this->intResourceStatusId) . ',
+					' . $objDatabase->SqlVariable($this->intGroupId) . ',
 					' . (($objDatabase->JournaledById) ? $objDatabase->JournaledById : 'NULL') . ',
 					' . $objDatabase->SqlVariable($strJournalCommand) . ',
 					NOW()
@@ -1061,6 +1130,11 @@
 					// @return integer
 					return $this->intResourceStatusId;
 
+				case 'GroupId':
+					// Gets the value for intGroupId 
+					// @return integer
+					return $this->intGroupId;
+
 
 				///////////////////
 				// Member Objects
@@ -1108,6 +1182,18 @@
 						if ((!$this->objResourceStatus) && (!is_null($this->intResourceStatusId)))
 							$this->objResourceStatus = ResourceStatus::Load($this->intResourceStatusId);
 						return $this->objResourceStatus;
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'Group':
+					// Gets the value for the GroupAssessmentList object referenced by intGroupId 
+					// @return GroupAssessmentList
+					try {
+						if ((!$this->objGroup) && (!is_null($this->intGroupId)))
+							$this->objGroup = GroupAssessmentList::Load($this->intGroupId);
+						return $this->objGroup;
 					} catch (QCallerException $objExc) {
 						$objExc->IncrementOffset();
 						throw $objExc;
@@ -1201,6 +1287,18 @@
 					try {
 						$this->objResourceStatus = null;
 						return ($this->intResourceStatusId = QType::Cast($mixValue, QType::Integer));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'GroupId':
+					// Sets the value for intGroupId 
+					// @param integer $mixValue
+					// @return integer
+					try {
+						$this->objGroup = null;
+						return ($this->intGroupId = QType::Cast($mixValue, QType::Integer));
 					} catch (QCallerException $objExc) {
 						$objExc->IncrementOffset();
 						throw $objExc;
@@ -1324,6 +1422,36 @@
 						// Update Local Member Variables
 						$this->objResourceStatus = $mixValue;
 						$this->intResourceStatusId = $mixValue->Id;
+
+						// Return $mixValue
+						return $mixValue;
+					}
+					break;
+
+				case 'Group':
+					// Sets the value for the GroupAssessmentList object referenced by intGroupId 
+					// @param GroupAssessmentList $mixValue
+					// @return GroupAssessmentList
+					if (is_null($mixValue)) {
+						$this->intGroupId = null;
+						$this->objGroup = null;
+						return null;
+					} else {
+						// Make sure $mixValue actually is a GroupAssessmentList object
+						try {
+							$mixValue = QType::Cast($mixValue, 'GroupAssessmentList');
+						} catch (QInvalidCastException $objExc) {
+							$objExc->IncrementOffset();
+							throw $objExc;
+						} 
+
+						// Make sure $mixValue is a SAVED GroupAssessmentList object
+						if (is_null($mixValue->Id))
+							throw new QCallerException('Unable to set an unsaved Group for this KingdomBusinessAssessment');
+
+						// Update Local Member Variables
+						$this->objGroup = $mixValue;
+						$this->intGroupId = $mixValue->Id;
 
 						// Return $mixValue
 						return $mixValue;
@@ -1554,6 +1682,7 @@
 			$strToReturn .= '<element name="Resource" type="xsd1:Resource"/>';
 			$strToReturn .= '<element name="User" type="xsd1:User"/>';
 			$strToReturn .= '<element name="ResourceStatus" type="xsd1:ResourceStatus"/>';
+			$strToReturn .= '<element name="Group" type="xsd1:GroupAssessmentList"/>';
 			$strToReturn .= '<element name="__blnRestored" type="xsd:boolean"/>';
 			$strToReturn .= '</sequence></complexType>';
 			return $strToReturn;
@@ -1566,6 +1695,7 @@
 				Resource::AlterSoapComplexTypeArray($strComplexTypeArray);
 				User::AlterSoapComplexTypeArray($strComplexTypeArray);
 				ResourceStatus::AlterSoapComplexTypeArray($strComplexTypeArray);
+				GroupAssessmentList::AlterSoapComplexTypeArray($strComplexTypeArray);
 			}
 		}
 
@@ -1594,6 +1724,9 @@
 			if ((property_exists($objSoapObject, 'ResourceStatus')) &&
 				($objSoapObject->ResourceStatus))
 				$objToReturn->ResourceStatus = ResourceStatus::GetObjectFromSoapObject($objSoapObject->ResourceStatus);
+			if ((property_exists($objSoapObject, 'Group')) &&
+				($objSoapObject->Group))
+				$objToReturn->Group = GroupAssessmentList::GetObjectFromSoapObject($objSoapObject->Group);
 			if (property_exists($objSoapObject, '__blnRestored'))
 				$objToReturn->__blnRestored = $objSoapObject->__blnRestored;
 			return $objToReturn;
@@ -1628,6 +1761,10 @@
 				$objObject->objResourceStatus = ResourceStatus::GetSoapObjectFromObject($objObject->objResourceStatus, false);
 			else if (!$blnBindRelatedObjects)
 				$objObject->intResourceStatusId = null;
+			if ($objObject->objGroup)
+				$objObject->objGroup = GroupAssessmentList::GetSoapObjectFromObject($objObject->objGroup, false);
+			else if (!$blnBindRelatedObjects)
+				$objObject->intGroupId = null;
 			return $objObject;
 		}
 
@@ -1652,6 +1789,8 @@
 	 * @property-read QQNodeUser $User
 	 * @property-read QQNode $ResourceStatusId
 	 * @property-read QQNodeResourceStatus $ResourceStatus
+	 * @property-read QQNode $GroupId
+	 * @property-read QQNodeGroupAssessmentList $Group
 	 * @property-read QQReverseReferenceNodeKingdomBusinessResults $KingdomBusinessResultsAsAssessment
 	 */
 	class QQNodeKingdomBusinessAssessment extends QQNode {
@@ -1678,6 +1817,10 @@
 					return new QQNode('resource_status_id', 'ResourceStatusId', 'integer', $this);
 				case 'ResourceStatus':
 					return new QQNodeResourceStatus('resource_status_id', 'ResourceStatus', 'integer', $this);
+				case 'GroupId':
+					return new QQNode('group_id', 'GroupId', 'integer', $this);
+				case 'Group':
+					return new QQNodeGroupAssessmentList('group_id', 'Group', 'integer', $this);
 				case 'KingdomBusinessResultsAsAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessResults($this, 'kingdombusinessresultsasassessment', 'reverse_reference', 'assessment_id');
 
@@ -1704,6 +1847,8 @@
 	 * @property-read QQNodeUser $User
 	 * @property-read QQNode $ResourceStatusId
 	 * @property-read QQNodeResourceStatus $ResourceStatus
+	 * @property-read QQNode $GroupId
+	 * @property-read QQNodeGroupAssessmentList $Group
 	 * @property-read QQReverseReferenceNodeKingdomBusinessResults $KingdomBusinessResultsAsAssessment
 	 * @property-read QQNode $_PrimaryKeyNode
 	 */
@@ -1731,6 +1876,10 @@
 					return new QQNode('resource_status_id', 'ResourceStatusId', 'integer', $this);
 				case 'ResourceStatus':
 					return new QQNodeResourceStatus('resource_status_id', 'ResourceStatus', 'integer', $this);
+				case 'GroupId':
+					return new QQNode('group_id', 'GroupId', 'integer', $this);
+				case 'Group':
+					return new QQNodeGroupAssessmentList('group_id', 'Group', 'integer', $this);
 				case 'KingdomBusinessResultsAsAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessResults($this, 'kingdombusinessresultsasassessment', 'reverse_reference', 'assessment_id');
 

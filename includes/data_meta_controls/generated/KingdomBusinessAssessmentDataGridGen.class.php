@@ -302,6 +302,8 @@
 				case 'User': return QQN::KingdomBusinessAssessment()->User;
 				case 'ResourceStatusId': return QQN::KingdomBusinessAssessment()->ResourceStatusId;
 				case 'ResourceStatus': return QQN::KingdomBusinessAssessment()->ResourceStatus;
+				case 'GroupId': return QQN::KingdomBusinessAssessment()->GroupId;
+				case 'Group': return QQN::KingdomBusinessAssessment()->Group;
 				default: throw new QCallerException('Simple Property not found in KingdomBusinessAssessmentDataGrid content: ' . $mixContent);
 			} else if ($mixContent instanceof QQAssociationNode)
 				throw new QCallerException('Content QQNode cannot go through any "To Many" association nodes.');

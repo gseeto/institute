@@ -13,6 +13,8 @@
 
 		<?php $_CONTROL->lstUser->RenderWithName(); ?>
 
+		<?php $_CONTROL->lstGroup->RenderWithName(); ?>
+
 	</div>
 
 	<div id="formActions">

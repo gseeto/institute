@@ -28,7 +28,7 @@ class ViewCompanyForm extends InstituteForm {
  	
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/inst/index.php');
+		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
 	}
 	
 	protected function Form_Create() {
@@ -171,11 +171,11 @@ class ViewCompanyForm extends InstituteForm {
 			}
 		}
 
-		QApplication::Redirect('/inst/admin/index.php/companies');
+		QApplication::Redirect('/resources/admin/index.php/companies');
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect('/inst/admin/index.php/companies');
+		QApplication::Redirect('/resources/admin/index.php/companies');
 	}
 }
 

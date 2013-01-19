@@ -48,6 +48,13 @@
 		QApplicationBase::$ClassFile['giantsmetacontrol'] = __DATA_META_CONTROLS__ . '/GiantsMetaControl.class.php';
 		QApplicationBase::$ClassFile['giantsdatagrid'] = __DATA_META_CONTROLS__ . '/GiantsDataGrid.class.php';
 
+	// ClassPaths for the GroupAssessmentList class
+		QApplicationBase::$ClassFile['groupassessmentlist'] = __DATA_CLASSES__ . '/GroupAssessmentList.class.php';
+		QApplicationBase::$ClassFile['qqnodegroupassessmentlist'] = __DATA_CLASSES__ . '/GroupAssessmentList.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodegroupassessmentlist'] = __DATA_CLASSES__ . '/GroupAssessmentList.class.php';
+		QApplicationBase::$ClassFile['groupassessmentlistmetacontrol'] = __DATA_META_CONTROLS__ . '/GroupAssessmentListMetaControl.class.php';
+		QApplicationBase::$ClassFile['groupassessmentlistdatagrid'] = __DATA_META_CONTROLS__ . '/GroupAssessmentListDataGrid.class.php';
+
 	// ClassPaths for the Industry class
 		QApplicationBase::$ClassFile['industry'] = __DATA_CLASSES__ . '/Industry.class.php';
 		QApplicationBase::$ClassFile['qqnodeindustry'] = __DATA_CLASSES__ . '/Industry.class.php';

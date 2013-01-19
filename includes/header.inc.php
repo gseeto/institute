@@ -17,7 +17,7 @@
 	<div class="status">
 		Welcome, <strong><?php _p(QApplication::$Login->__get('Username')); ?></strong>
 		&nbsp;|&nbsp;
-		<a href="/inst/logout/" title="Log Out of The Institute Portal">Logout</a>
+		<a href="/resources/logout/" title="Log Out of The Institute Portal">Logout</a>
 		<br/>
 	</div>
 	<!-- Put the Navigation here -->

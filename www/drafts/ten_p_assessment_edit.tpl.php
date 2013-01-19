@@ -27,6 +27,8 @@
 
 		<?php $this->lstUser->RenderWithName(); ?>
 
+		<?php $this->lstGroup->RenderWithName(); ?>
+
 	</div>
 
 	<div id="formActions">

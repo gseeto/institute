@@ -25,7 +25,7 @@ class ScorecardForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/inst/index.php');
+		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
 	}
 	
 	protected function Form_Create() {
@@ -229,10 +229,10 @@ class ScorecardForm extends InstituteForm {
 	
 	public function btnCategory_Clicked($strFormId, $strControlId, $strParameter) {
 		if ($strParameter == 'Summary') {
-			QApplication::Redirect('/inst/scorecard/scorecard.php/'.$this->objScorecard->Id);
+			QApplication::Redirect('/resources/scorecard/scorecard.php/'.$this->objScorecard->Id);
 		} else { 
 			$intCategoryId = $strParameter;
-			QApplication::Redirect('/inst/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$intCategoryId );
+			QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$intCategoryId );
 		}
     }
     
@@ -255,7 +255,7 @@ class ScorecardForm extends InstituteForm {
     
  	public function btnSubmit_Click() {
 		// redirect to appropriate scorecard
-		QApplication::Redirect('/inst/scorecard/scorecard.php/'.$this->rbnScorecards->SelectedValue);
+		QApplication::Redirect('/resources/scorecard/scorecard.php/'.$this->rbnScorecards->SelectedValue);
 	}
 	
 	public function btnAddAction_Clicked($strFormId, $strControlId, $strParameter) {
@@ -273,7 +273,7 @@ class ScorecardForm extends InstituteForm {
 			$intIndex = $objStrategy->Count - 1;
 			$this->dtgActionItems[$intIndex]->DataSource = ActionItems::LoadArrayByStrategyId($strParameter);
 			$this->dtgActionItems[$intIndex]->Refresh();
-			//QApplication::Redirect('/inst/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
+			//QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
 		}
 	}
 	
@@ -300,7 +300,7 @@ class ScorecardForm extends InstituteForm {
 		$objStrategy->Count = Strategy::GetNextCount( $this->objScorecard->Id,$this->intCategoryTypeId);
 		$objStrategy->ModifiedBy = $this->intUserId;
 		$objStrategy->Save();
-		QApplication::Redirect('/inst/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
+		QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
 	}
 
 	public function RenderKPI($objKPI) {
@@ -781,7 +781,7 @@ class ScorecardForm extends InstituteForm {
 			$i++;
 		}
 		// Then refresh the page
-		QApplication::Redirect('/inst/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
+		QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
 	}
 	
 	public function RenderDeleteAction(ActionItems $objAction) {
@@ -811,7 +811,7 @@ class ScorecardForm extends InstituteForm {
 		// Then refresh
 		$this->dtgActionItems[$intIndex]->DataSource = ActionItems::LoadArrayByStrategyId($objStrategy->Id);
 		$this->dtgActionItems[$intIndex]->Refresh();
-		//QApplication::Redirect('/inst/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
+		//QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
 	}
 	
 	public function RenderDeleteKpi(Kpis $objKpi) {

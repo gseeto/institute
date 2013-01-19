@@ -3,11 +3,10 @@
 
 <div class="section">
 <p>
-Thank you for taking the 10-F Assessment.
-Your results are provided below.
+<?php $this->lblIntroduction->Render();?>
 </p>
 <?php  $this->btnReturn->Render(); ?>
-<img src='tenfAssessmentImg.php/<?php _p($this->objTenFAssessment->Id);?>'>
+<img src='/resources/assessments/tenf/tenfAssessmentImg.php/<?php _p($this->objTenFAssessment->Id);?>'>
 <br>
 <br>
 <?php  $this->dtgAssessmentResults->Render(); ?>

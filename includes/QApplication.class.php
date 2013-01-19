@@ -144,7 +144,7 @@
 			unset($_SESSION['intLoginId']);
 			QApplication::$Login = null;
 			QApplication::$LoginId = null;
-			QApplication::Redirect('/inst/home/');
+			QApplication::Redirect('/resources/home/');
 		}
 	}
 ?>

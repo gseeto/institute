@@ -60,6 +60,7 @@
 			$this->dtgTenPAssessments->MetaAddColumn(QQN::TenPAssessment()->Company);
 			$this->dtgTenPAssessments->MetaAddColumn(QQN::TenPAssessment()->Resource);
 			$this->dtgTenPAssessments->MetaAddColumn(QQN::TenPAssessment()->User);
+			$this->dtgTenPAssessments->MetaAddColumn(QQN::TenPAssessment()->Group);
 		}
 	}
 

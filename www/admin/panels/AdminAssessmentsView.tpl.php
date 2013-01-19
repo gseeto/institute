@@ -27,3 +27,12 @@
 	<?php $_CONTROL->btnAddLemonAssessment->Render(); ?> 
 	<?php $_CONTROL->pnlAddLemonAssessment->Render(); ?>
 </div>
+<div class='section'>
+<h2>Group Assessments</h2>
+	<p>Add a group assessment. This allows you to set up a key code (typically for companies) so that a number of people can use the same key code to access an assessment.</p>
+	<p>As the individuals take the assessment, separate individual accounts will be created for them that they can use to access their assessments in future.</p>  
+	<?php $_CONTROL->dtgGroupAssessments->Render(); ?> 
+	<br>
+	<?php $_CONTROL->btnAddGroupAssessment->Render(); ?> 
+	<?php $_CONTROL->pnlAddGroupAssessment->Render(); ?>
+</div>

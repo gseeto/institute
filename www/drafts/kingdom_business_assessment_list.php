@@ -60,6 +60,7 @@
 			$this->dtgKingdomBusinessAssessments->MetaAddColumn(QQN::KingdomBusinessAssessment()->Resource);
 			$this->dtgKingdomBusinessAssessments->MetaAddColumn(QQN::KingdomBusinessAssessment()->User);
 			$this->dtgKingdomBusinessAssessments->MetaAddColumn(QQN::KingdomBusinessAssessment()->ResourceStatus);
+			$this->dtgKingdomBusinessAssessments->MetaAddColumn(QQN::KingdomBusinessAssessment()->Group);
 		}
 	}
 

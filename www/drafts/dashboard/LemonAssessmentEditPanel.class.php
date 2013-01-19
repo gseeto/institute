@@ -25,6 +25,7 @@
 		public $lstCompany;
 		public $lstResource;
 		public $txtResourceStatusId;
+		public $lstGroup;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
 
@@ -59,6 +60,7 @@
 			$this->lstCompany = $this->mctLemonAssessment->lstCompany_Create();
 			$this->lstResource = $this->mctLemonAssessment->lstResource_Create();
 			$this->txtResourceStatusId = $this->mctLemonAssessment->txtResourceStatusId_Create();
+			$this->lstGroup = $this->mctLemonAssessment->lstGroup_Create();
 
 			// Create Buttons and Actions on this Form
 			$this->btnSave = new QButton($this);

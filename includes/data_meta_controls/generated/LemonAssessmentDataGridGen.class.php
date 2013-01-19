@@ -301,6 +301,8 @@
 				case 'ResourceId': return QQN::LemonAssessment()->ResourceId;
 				case 'Resource': return QQN::LemonAssessment()->Resource;
 				case 'ResourceStatusId': return QQN::LemonAssessment()->ResourceStatusId;
+				case 'GroupId': return QQN::LemonAssessment()->GroupId;
+				case 'Group': return QQN::LemonAssessment()->Group;
 				default: throw new QCallerException('Simple Property not found in LemonAssessmentDataGrid content: ' . $mixContent);
 			} else if ($mixContent instanceof QQAssociationNode)
 				throw new QCallerException('Content QQNode cannot go through any "To Many" association nodes.');

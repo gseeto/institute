@@ -50,7 +50,7 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 			$this->dtgScorecards->AddColumn(new QDataGridColumn('Company', '<?= $_CONTROL->ParentControl->RenderCompany($_ITEM->CompanyId) ?>', 'HtmlEntities=false', 'Width=400px' ));
             $this->dtgScorecards->AddColumn(new QDataGridColumn('Users', '<?= $_CONTROL->ParentControl->RenderUsers($_ITEM) ?>', 'HtmlEntities=false', 'Width=200px' ));
 			$this->dtgScorecards->AddColumn(new QDataGridColumn('Import Scorecard', '<?= $_CONTROL->ParentControl->RenderImport($_ITEM) ?>', 'HtmlEntities=false', 'Width=100px' ));
-            $this->dtgScorecards->MetaAddEditLinkColumn('<?="/inst/admin/panels/ExportScorecard.php/".$_ITEM->Id?>', '<img src=\'/inst/assets/images/download.png\' />Download','Download Scorecard');
+            $this->dtgScorecards->MetaAddEditLinkColumn('<?="/resources/admin/panels/ExportScorecard.php/".$_ITEM->Id?>', '<img src=\'/inst/assets/images/download.png\' />Download','Download Scorecard');
         	$this->dtgScorecards->CellPadding = 5;
 			$this->dtgScorecards->SetDataBinder('dtgScorecards_Bind',$this);
 			$this->dtgScorecards->NoDataHtml = 'No Scorecards.';
@@ -98,7 +98,7 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 	        $this->dtgCannedStrategy = new CannedStrategyDataGrid($this);
 	        $this->dtgCannedStrategy->Paginator = new QPaginator($this->dtgCannedStrategy);
 			$this->dtgCannedStrategy->AddColumn(new QDataGridColumn('Index', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>'));
-			$this->dtgCannedStrategy->MetaAddEditLinkColumn('/inst/admin/EditCannedStrategy.php', '<?= $_ITEM->Strategy ?>','Canned Strategy');
+			$this->dtgCannedStrategy->MetaAddEditLinkColumn('/resources/admin/EditCannedStrategy.php', '<?= $_ITEM->Strategy ?>','Canned Strategy');
 			$this->dtgCannedStrategy->MetaAddTypeColumn('CategoryTypeId', 'CategoryType');
             $this->dtgCannedStrategy->AddColumn(new QDataGridColumn('Actions', '<?= $_CONTROL->ParentControl->RenderActions($_ITEM->Id) ?>', 'HtmlEntities=false', 'Width=200px' ));
 			$this->dtgCannedStrategy->AddColumn(new QDataGridColumn('KPIs', '<?= $_CONTROL->ParentControl->RenderKPIs($_ITEM->Id) ?>', 'HtmlEntities=false', 'Width=200px' ));
@@ -346,7 +346,7 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
         	if (!$objFile) {
 	        	$objFile = new QFileUploader($this->dtgScorecards,$strControlId);
 	        	$objFile->ActionParameter = $objScorecard->Id;
-	        	$objFile->TemporaryUploadFolder =  __DOCROOT__ . '/inst/scorecard/temp_uploads';
+	        	$objFile->TemporaryUploadFolder =  __DOCROOT__ . '/resources/scorecard/temp_uploads';
 	        	$objFile->SetFileUploadedCallback($this,'ExtractInformation');
         	}
         	return $objFile->Render(false);
@@ -507,7 +507,7 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
         	$imgDownload->HtmlEntities = false;
         	$imgDownload->CssClass = 'link';
         	$imgDownload->ActionParameter = $objScorecard->Id;
-        	$imgDownload->Text = '<href src=\'/inst/admin/panels/exportScorecard.php/'.$objScorecard->Id.'\'><img src=\'/inst/assets/images/download.png\' />Download</a>';
+        	$imgDownload->Text = '<href src=\'/resources/admin/panels/exportScorecard.php/'.$objScorecard->Id.'\'><img src=\'/inst/assets/images/download.png\' />Download</a>';
         	//$imgDownload->AddAction(new QClickEvent(),new QAjaxControlAction($this,'imgDownload_Click'));
         	return $imgDownload->Render(false);
         }

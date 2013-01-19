@@ -28,6 +28,7 @@
 		protected $lstCompany;
 		protected $lstResource;
 		protected $lstUser;
+		protected $lstGroup;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
 
@@ -59,6 +60,7 @@
 			$this->lstCompany = $this->mctTenPAssessment->lstCompany_Create();
 			$this->lstResource = $this->mctTenPAssessment->lstResource_Create();
 			$this->lstUser = $this->mctTenPAssessment->lstUser_Create();
+			$this->lstGroup = $this->mctTenPAssessment->lstGroup_Create();
 
 			// Create Buttons and Actions on this Form
 			$this->btnSave = new QButton($this);

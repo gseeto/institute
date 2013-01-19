@@ -24,6 +24,8 @@
 	 * property-read QLabel $ResourceIdLabel
 	 * property QListBox $UserIdControl
 	 * property-read QLabel $UserIdLabel
+	 * property QListBox $GroupIdControl
+	 * property-read QLabel $GroupIdLabel
 	 * property-read string $TitleVerb a verb indicating whether or not this is being edited or created
 	 * property-read boolean $EditMode a boolean indicating whether or not this is being edited or created
 	 */
@@ -79,6 +81,12 @@
          */
 		protected $lstUser;
 
+        /**
+         * @var QListBox lstGroup;
+         * @access protected
+         */
+		protected $lstGroup;
+
 
 		// Controls that allow the viewing of TenFAssessment's individual data fields
         /**
@@ -98,6 +106,12 @@
          * @access protected
          */
 		protected $lblUserId;
+
+        /**
+         * @var QLabel lblGroupId
+         * @access protected
+         */
+		protected $lblGroupId;
 
 
 		// QListBox Controls (if applicable) to edit Unique ReverseReferences and ManyToMany References
@@ -332,6 +346,46 @@
 			return $this->lblUserId;
 		}
 
+		/**
+		 * Create and setup QListBox lstGroup
+		 * @param string $strControlId optional ControlId to use
+		 * @param QQCondition $objConditions override the default condition of QQ::All() to the query, itself
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause object or array of QQClause objects for the query
+		 * @return QListBox
+		 */
+		public function lstGroup_Create($strControlId = null, QQCondition $objCondition = null, $objOptionalClauses = null) {
+			$this->lstGroup = new QListBox($this->objParentObject, $strControlId);
+			$this->lstGroup->Name = QApplication::Translate('Group');
+			$this->lstGroup->AddItem(QApplication::Translate('- Select One -'), null);
+
+			// Setup and perform the Query
+			if (is_null($objCondition)) $objCondition = QQ::All();
+			$objGroupCursor = GroupAssessmentList::QueryCursor($objCondition, $objOptionalClauses);
+
+			// Iterate through the Cursor
+			while ($objGroup = GroupAssessmentList::InstantiateCursor($objGroupCursor)) {
+				$objListItem = new QListItem($objGroup->__toString(), $objGroup->Id);
+				if (($this->objTenFAssessment->Group) && ($this->objTenFAssessment->Group->Id == $objGroup->Id))
+					$objListItem->Selected = true;
+				$this->lstGroup->AddItem($objListItem);
+			}
+
+			// Return the QListBox
+			return $this->lstGroup;
+		}
+
+		/**
+		 * Create and setup QLabel lblGroupId
+		 * @param string $strControlId optional ControlId to use
+		 * @return QLabel
+		 */
+		public function lblGroupId_Create($strControlId = null) {
+			$this->lblGroupId = new QLabel($this->objParentObject, $strControlId);
+			$this->lblGroupId->Name = QApplication::Translate('Group');
+			$this->lblGroupId->Text = ($this->objTenFAssessment->Group) ? $this->objTenFAssessment->Group->__toString() : null;
+			return $this->lblGroupId;
+		}
+
 
 
 		/**
@@ -384,6 +438,19 @@
 			}
 			if ($this->lblUserId) $this->lblUserId->Text = ($this->objTenFAssessment->User) ? $this->objTenFAssessment->User->__toString() : null;
 
+			if ($this->lstGroup) {
+					$this->lstGroup->RemoveAllItems();
+				$this->lstGroup->AddItem(QApplication::Translate('- Select One -'), null);
+				$objGroupArray = GroupAssessmentList::LoadAll();
+				if ($objGroupArray) foreach ($objGroupArray as $objGroup) {
+					$objListItem = new QListItem($objGroup->__toString(), $objGroup->Id);
+					if (($this->objTenFAssessment->Group) && ($this->objTenFAssessment->Group->Id == $objGroup->Id))
+						$objListItem->Selected = true;
+					$this->lstGroup->AddItem($objListItem);
+				}
+			}
+			if ($this->lblGroupId) $this->lblGroupId->Text = ($this->objTenFAssessment->Group) ? $this->objTenFAssessment->Group->__toString() : null;
+
 		}
 
 
@@ -410,6 +477,7 @@
 				if ($this->lstResourceStatus) $this->objTenFAssessment->ResourceStatusId = $this->lstResourceStatus->SelectedValue;
 				if ($this->lstResource) $this->objTenFAssessment->ResourceId = $this->lstResource->SelectedValue;
 				if ($this->lstUser) $this->objTenFAssessment->UserId = $this->lstUser->SelectedValue;
+				if ($this->lstGroup) $this->objTenFAssessment->GroupId = $this->lstGroup->SelectedValue;
 
 				// Update any UniqueReverseReferences (if any) for controls that have been created for it
 
@@ -476,6 +544,12 @@
 				case 'UserIdLabel':
 					if (!$this->lblUserId) return $this->lblUserId_Create();
 					return $this->lblUserId;
+				case 'GroupIdControl':
+					if (!$this->lstGroup) return $this->lstGroup_Create();
+					return $this->lstGroup;
+				case 'GroupIdLabel':
+					if (!$this->lblGroupId) return $this->lblGroupId_Create();
+					return $this->lblGroupId;
 				default:
 					try {
 						return parent::__get($strName);
@@ -506,6 +580,8 @@
 						return ($this->lstResource = QType::Cast($mixValue, 'QControl'));
 					case 'UserIdControl':
 						return ($this->lstUser = QType::Cast($mixValue, 'QControl'));
+					case 'GroupIdControl':
+						return ($this->lstGroup = QType::Cast($mixValue, 'QControl'));
 					default:
 						return parent::__set($strName, $mixValue);
 				}

@@ -16,7 +16,7 @@ class NewTenPAssessmentForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/inst/index.php');
+		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
 	}
 	
 	protected function Form_Create() {		
@@ -73,7 +73,7 @@ class NewTenPAssessmentForm extends InstituteForm {
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect('/inst/assessments/tenp/index.php');
+		QApplication::Redirect('/resources/assessments/tenp/index.php');
 	}
 	
 	protected function btnSubmit_Click() {	
@@ -93,7 +93,7 @@ class NewTenPAssessmentForm extends InstituteForm {
 	        $this->objTenPAssessment->ResourceStatusId = 2;
 	        $this->objTenPAssessment->Save();
         }
-		QApplication::Redirect('/inst/assessments/tenp/viewAssessment.php');
+		QApplication::Redirect('/resources/assessments/tenp/viewAssessment.php');
 	}
 	
 	public function dtgAssessmentQuestions_Bind() {

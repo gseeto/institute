@@ -15,6 +15,8 @@
 
 		<?php $_CONTROL->lstResourceStatus->RenderWithName(); ?>
 
+		<?php $_CONTROL->lstGroup->RenderWithName(); ?>
+
 	</div>
 
 	<div id="formActions">

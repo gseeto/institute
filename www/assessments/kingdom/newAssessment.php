@@ -16,7 +16,7 @@ class NewKingdomAssessmentForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/inst/index.php');
+		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
 	}
 	
 	protected function Form_Create() {		
@@ -73,7 +73,7 @@ class NewKingdomAssessmentForm extends InstituteForm {
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect('/inst/assessments/kingdom/index.php');
+		QApplication::Redirect('/resources/assessments/kingdom/index.php');
 	}
 	
 	protected function btnSubmit_Click() {	
@@ -93,7 +93,7 @@ class NewKingdomAssessmentForm extends InstituteForm {
 	        $this->objKingdomAssessment->ResourceStatusId = 2;
 	        $this->objKingdomAssessment->Save();
         }
-		QApplication::Redirect('/inst/assessments/kingdom/viewAssessment.php');
+		QApplication::Redirect('/resources/assessments/kingdom/viewAssessment.php');
 	}
 	
 	public function dtgAssessmentQuestions_Bind() {

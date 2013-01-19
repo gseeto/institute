@@ -1,8 +1,8 @@
 <?php // content="text/plain; charset=utf-8"
 require(dirname(__FILE__) . '/../../../includes/prepend.inc.php');
-require_once ('jpgraph/jpgraph.php');
-require_once ('jpgraph/jpgraph_bar.php');
-require_once ("jpgraph/jpgraph_table.php");
+require_once (dirname(__FILE__) . '/../../../includes/jpgraph/jpgraph.php');
+require_once (dirname(__FILE__) . '/../../../includes/jpgraph/jpgraph_bar.php');
+require_once (dirname(__FILE__) . '/../../../includes/jpgraph/jpgraph_table.php');
 
 // We need some data
 $labelArray = array();

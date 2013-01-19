@@ -43,6 +43,12 @@
 			return new QQNodeGiants('giants', null, null);
 		}
 		/**
+		 * @return QQNodeGroupAssessmentList
+		 */
+		static public function GroupAssessmentList() {
+			return new QQNodeGroupAssessmentList('group_assessment_list', null, null);
+		}
+		/**
 		 * @return QQNodeIndustry
 		 */
 		static public function Industry() {

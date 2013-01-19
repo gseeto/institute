@@ -3,11 +3,10 @@
 
 <div class="section">
 <p>
-Thank you for taking the Kingdom Business Assessment.
-Your results are provided below.
+<?php $this->lblIntroduction->Render();?>
 </p>
 <?php  $this->btnReturn->Render(); ?>
-<img src='kingdomAssessmentImg.php/<?php _p($this->objKingdomAssessment->Id);?>'>
+<img src='/resources/assessments/kingdom/kingdomAssessmentImg.php/<?php _p($this->objKingdomAssessment->Id);?>'>
 <br>
 <br>
 <?php  $this->dtgAssessmentResults->Render(); ?>

@@ -67,7 +67,7 @@ class ResourceForm extends InstituteForm {
 	protected $lblDebug;
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/inst/index.php');
+		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
 	}
 	
 	protected function Form_Create() {
@@ -164,7 +164,7 @@ class ResourceForm extends InstituteForm {
         $this->dtgZeroPct->MetaAddTypeColumn('CategoryId', 'CategoryType');
 		$this->dtgZeroPct->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Count ?>', 'HtmlEntities=false', 'Width=50px' ));
 		$this->dtgZeroPct->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));		
-		$this->dtgZeroPct->MetaAddEditLinkColumn('<?="/inst/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
+		$this->dtgZeroPct->MetaAddEditLinkColumn('<?="/resources/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgZeroPct->Visible = false;
 		$this->dtgZeroPct->CellPadding = 5;
 		$this->dtgZeroPct->CssClass = 'resourceTable';
@@ -187,7 +187,7 @@ class ResourceForm extends InstituteForm {
         $this->dtgTwentyFivePct->MetaAddTypeColumn('CategoryId', 'CategoryType');
 		$this->dtgTwentyFivePct->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Count ?>', 'HtmlEntities=false', 'Width=50px' ));
 		$this->dtgTwentyFivePct->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
-		$this->dtgTwentyFivePct->MetaAddEditLinkColumn('<?="/inst/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
+		$this->dtgTwentyFivePct->MetaAddEditLinkColumn('<?="/resources/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgTwentyFivePct->Visible = false;
 		$this->dtgTwentyFivePct->CellPadding = 5;
 		$this->dtgTwentyFivePct->CssClass = 'resourceTable';
@@ -210,7 +210,7 @@ class ResourceForm extends InstituteForm {
         $this->dtgFiftyPct->MetaAddTypeColumn('CategoryId', 'CategoryType');
 		$this->dtgFiftyPct->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Count ?>', 'HtmlEntities=false', 'Width=50px' ));
 		$this->dtgFiftyPct->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
-		$this->dtgFiftyPct->MetaAddEditLinkColumn('<?="/inst/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
+		$this->dtgFiftyPct->MetaAddEditLinkColumn('<?="/resources/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgFiftyPct->Visible = false;
 		$this->dtgFiftyPct->CellPadding = 5;
 		$this->dtgFiftyPct->CssClass = 'resourceTable';
@@ -233,7 +233,7 @@ class ResourceForm extends InstituteForm {
         $this->dtgSeventyFivePct->MetaAddTypeColumn('CategoryId', 'CategoryType');
 		$this->dtgSeventyFivePct->AddColumn(new QDataGridColumn('Strategy Count', '<?= $_ITEM->Strategy->Count ?>', 'HtmlEntities=false', 'Width=50px' ));
 		$this->dtgSeventyFivePct->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
-		$this->dtgSeventyFivePct->MetaAddEditLinkColumn('<?="/inst/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
+		$this->dtgSeventyFivePct->MetaAddEditLinkColumn('<?="/resources/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgSeventyFivePct->Visible = false;
 		$this->dtgSeventyFivePct->CellPadding = 5;
 		$this->dtgSeventyFivePct->CssClass = 'resourceTable';
@@ -256,7 +256,7 @@ class ResourceForm extends InstituteForm {
         $this->dtgHundredPct->MetaAddTypeColumn('CategoryId', 'CategoryType');
 		$this->dtgHundredPct->AddColumn(new QDataGridColumn('Strategy Count', '<?= $_ITEM->Strategy->Count ?>', 'HtmlEntities=false', 'Width=50px' ));
 		$this->dtgHundredPct->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
-		$this->dtgHundredPct->MetaAddEditLinkColumn('<?="/inst/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
+		$this->dtgHundredPct->MetaAddEditLinkColumn('<?="/resources/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgHundredPct->Visible = false;
 		$this->dtgHundredPct->CellPadding = 5;
 		$this->dtgHundredPct->CssClass = 'resourceTable';
@@ -279,7 +279,7 @@ class ResourceForm extends InstituteForm {
         $this->dtgRecurringPct->MetaAddTypeColumn('CategoryId', 'CategoryType');
 		$this->dtgRecurringPct->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Count ?>', 'HtmlEntities=false', 'Width=50px' ));
 		$this->dtgRecurringPct->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
-		$this->dtgRecurringPct->MetaAddEditLinkColumn('<?="/inst/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
+		$this->dtgRecurringPct->MetaAddEditLinkColumn('<?="/resources/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgRecurringPct->Visible = false;
 		$this->dtgRecurringPct->CellPadding = 5;
 		$this->dtgRecurringPct->CssClass = 'resourceTable';
@@ -324,7 +324,7 @@ class ResourceForm extends InstituteForm {
         $this->dtgPriorityHigh->MetaAddTypeColumn('CategoryId', 'CategoryType');
 		$this->dtgPriorityHigh->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Count ?>', 'HtmlEntities=false', 'Width=50px' ));
 		$this->dtgPriorityHigh->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
-		$this->dtgPriorityHigh->MetaAddEditLinkColumn('<?="/inst/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
+		$this->dtgPriorityHigh->MetaAddEditLinkColumn('<?="/resources/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgPriorityHigh->MetaAddTypeColumn('StatusType', 'StatusType');	
 		$this->dtgPriorityHigh->Visible = false;
 		$this->dtgPriorityHigh->CellPadding = 5;
@@ -348,7 +348,7 @@ class ResourceForm extends InstituteForm {
         $this->dtgPriorityMedium->MetaAddTypeColumn('CategoryId', 'CategoryType');
 		$this->dtgPriorityMedium->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Count ?>', 'HtmlEntities=false', 'Width=50px' ));
 		$this->dtgPriorityMedium->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
-		$this->dtgPriorityMedium->MetaAddEditLinkColumn('<?="/inst/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
+		$this->dtgPriorityMedium->MetaAddEditLinkColumn('<?="/resources/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgPriorityMedium->MetaAddTypeColumn('StatusType', 'StatusType');		
 		$this->dtgPriorityMedium->Visible = false;
 		$this->dtgPriorityMedium->CellPadding = 5;
@@ -372,7 +372,7 @@ class ResourceForm extends InstituteForm {
         $this->dtgPriorityLow->MetaAddTypeColumn('CategoryId', 'CategoryType');
 		$this->dtgPriorityLow->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Count ?>', 'HtmlEntities=false', 'Width=50px' ));
 		$this->dtgPriorityLow->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
-		$this->dtgPriorityLow->MetaAddEditLinkColumn('<?="/inst/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
+		$this->dtgPriorityLow->MetaAddEditLinkColumn('<?="/resources/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgPriorityLow->MetaAddTypeColumn('StatusType', 'StatusType');		
 		$this->dtgPriorityLow->Visible = false;
 		$this->dtgPriorityLow->CellPadding = 5;
@@ -396,7 +396,7 @@ class ResourceForm extends InstituteForm {
         $this->dtgPriorityNone->MetaAddTypeColumn('CategoryId', 'CategoryType');
 		$this->dtgPriorityNone->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Count ?>', 'HtmlEntities=false', 'Width=50px' ));
 		$this->dtgPriorityNone->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
-		$this->dtgPriorityNone->MetaAddEditLinkColumn('<?="/inst/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
+		$this->dtgPriorityNone->MetaAddEditLinkColumn('<?="/resources/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgPriorityNone->MetaAddTypeColumn('StatusType', 'StatusType');		
 		$this->dtgPriorityNone->Visible = false;
 		$this->dtgPriorityNone->CellPadding = 5;
@@ -461,7 +461,7 @@ class ResourceForm extends InstituteForm {
         $this->dtgForecastTenDay->MetaAddTypeColumn('CategoryId', 'CategoryType');
 		$this->dtgForecastTenDay->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Count ?>', 'HtmlEntities=false', 'Width=50px' ));
 		$this->dtgForecastTenDay->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
-		$this->dtgForecastTenDay->MetaAddEditLinkColumn('<?="/inst/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
+		$this->dtgForecastTenDay->MetaAddEditLinkColumn('<?="/resources/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgForecastTenDay->MetaAddTypeColumn('StatusType', 'StatusType');		
 		$this->dtgForecastTenDay->AddColumn(new QDataGridColumn('When', '<?= $_FORM->RenderTenDayWhen($_ITEM) ?>', 'HtmlEntities=false', 'Width=80px',array('OrderByClause' => QQ::OrderBy(QQN::ActionItems()->When), 'ReverseOrderByClause' => QQ::OrderBy(QQN::ActionItems()->When, false))  ));		
 		$this->dtgForecastTenDay->Visible = false;
@@ -492,7 +492,7 @@ class ResourceForm extends InstituteForm {
         $this->dtgForecastThirtyDay->MetaAddTypeColumn('CategoryId', 'CategoryType');
 		$this->dtgForecastThirtyDay->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Count ?>', 'HtmlEntities=false', 'Width=50px' ));
 		$this->dtgForecastThirtyDay->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
-		$this->dtgForecastThirtyDay->MetaAddEditLinkColumn('<?="/inst/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
+		$this->dtgForecastThirtyDay->MetaAddEditLinkColumn('<?="/resources/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgForecastThirtyDay->MetaAddTypeColumn('StatusType', 'StatusType');		
 		$this->dtgForecastThirtyDay->AddColumn(new QDataGridColumn('When', '<?= $_FORM->RenderThirtyDayWhen($_ITEM) ?>', 'HtmlEntities=false', 'Width=80px',array('OrderByClause' => QQ::OrderBy(QQN::ActionItems()->When), 'ReverseOrderByClause' => QQ::OrderBy(QQN::ActionItems()->When, false))  ));		
 		$this->dtgForecastThirtyDay->Visible = false;
@@ -865,7 +865,7 @@ class ResourceForm extends InstituteForm {
 		if($this->lstIndividuals->SelectedValue != 0) {
 			$this->getStatistics();
 			//Refresh allocation
-			$this->imgResourceAllocation->Text = '<img src=\'/inst/scorecard/resource/allocationImg.php/'.$this->objScorecard->Id.'/'.$this->lstIndividuals->SelectedValue.'\' />';
+			$this->imgResourceAllocation->Text = '<img src=\'/resources/scorecard/resource/allocationImg.php/'.$this->objScorecard->Id.'/'.$this->lstIndividuals->SelectedValue.'\' />';
 			$this->imgResourceAllocation->Visible = true;
 		} 
 	}

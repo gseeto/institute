@@ -1,10 +1,10 @@
 <?php // content="text/plain; charset=utf-8"
 // Change this defines to where Your fonts are stored
-DEFINE("TTF_DIR","/usr/share/fonts/truetype/freefont/");
- 
+//DEFINE("TTF_DIR","/usr/share/fonts/truetype/freefont/");
+DEFINE("TTF_DIR","fonts/"); 
 // Change this define to a font file that You know that You have
-//DEFINE("TTF_FONTFILE","arial.ttf");
-DEFINE("TTF_FONTFILE","FreeSerifBold.ttf");
+DEFINE("TTF_FONTFILE","DejaVuSans-Oblique.ttf");
+//DEFINE("TTF_FONTFILE","FreeSerifBold.ttf");
  
 // Text to display
 DEFINE("TTF_TEXT","Hello World!");

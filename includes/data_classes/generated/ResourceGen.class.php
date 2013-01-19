@@ -19,6 +19,8 @@
 	 * @property string $Name the value for strName 
 	 * @property User $_User the value for the private _objUser (Read-Only) if set due to an expansion on the resource_user_assn association table
 	 * @property User[] $_UserArray the value for the private _objUserArray (Read-Only) if set due to an ExpandAsArray on the resource_user_assn association table
+	 * @property GroupAssessmentList $_GroupAssessmentList the value for the private _objGroupAssessmentList (Read-Only) if set due to an expansion on the group_assessment_list.resource_id reverse relationship
+	 * @property GroupAssessmentList[] $_GroupAssessmentListArray the value for the private _objGroupAssessmentListArray (Read-Only) if set due to an ExpandAsArray on the group_assessment_list.resource_id reverse relationship
 	 * @property KingdomBusinessAssessment $_KingdomBusinessAssessment the value for the private _objKingdomBusinessAssessment (Read-Only) if set due to an expansion on the kingdom_business_assessment.resource_id reverse relationship
 	 * @property KingdomBusinessAssessment[] $_KingdomBusinessAssessmentArray the value for the private _objKingdomBusinessAssessmentArray (Read-Only) if set due to an ExpandAsArray on the kingdom_business_assessment.resource_id reverse relationship
 	 * @property LemonAssessment $_LemonAssessment the value for the private _objLemonAssessment (Read-Only) if set due to an expansion on the lemon_assessment.resource_id reverse relationship
@@ -69,6 +71,22 @@
 		 * @var User[] _objUserArray;
 		 */
 		private $_objUserArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single GroupAssessmentList object
+		 * (of type GroupAssessmentList), if this Resource object was restored with
+		 * an expansion on the group_assessment_list association table.
+		 * @var GroupAssessmentList _objGroupAssessmentList;
+		 */
+		private $_objGroupAssessmentList;
+
+		/**
+		 * Private member variable that stores a reference to an array of GroupAssessmentList objects
+		 * (of type GroupAssessmentList[]), if this Resource object was restored with
+		 * an ExpandAsArray on the group_assessment_list association table.
+		 * @var GroupAssessmentList[] _objGroupAssessmentListArray;
+		 */
+		private $_objGroupAssessmentListArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single KingdomBusinessAssessment object
@@ -536,6 +554,20 @@
 				}
 
 
+				$strAlias = $strAliasPrefix . 'groupassessmentlist__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objGroupAssessmentListArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objGroupAssessmentListArray[$intPreviousChildItemCount - 1];
+						$objChildItem = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlist__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objGroupAssessmentListArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objGroupAssessmentListArray[] = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlist__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'kingdombusinessassessment__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -646,6 +678,16 @@
 					$objToReturn->_objUser = User::InstantiateDbRow($objDbRow, $strAliasPrefix . 'user__user_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
+
+			// Check for GroupAssessmentList Virtual Binding
+			$strAlias = $strAliasPrefix . 'groupassessmentlist__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objGroupAssessmentListArray[] = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlist__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objGroupAssessmentList = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlist__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
 
 			// Check for KingdomBusinessAssessment Virtual Binding
 			$strAlias = $strAliasPrefix . 'kingdombusinessassessment__id';
@@ -1053,6 +1095,18 @@
 					// @return User[]
 					return (array) $this->_objUserArray;
 
+				case '_GroupAssessmentList':
+					// Gets the value for the private _objGroupAssessmentList (Read-Only)
+					// if set due to an expansion on the group_assessment_list.resource_id reverse relationship
+					// @return GroupAssessmentList
+					return $this->_objGroupAssessmentList;
+
+				case '_GroupAssessmentListArray':
+					// Gets the value for the private _objGroupAssessmentListArray (Read-Only)
+					// if set due to an ExpandAsArray on the group_assessment_list.resource_id reverse relationship
+					// @return GroupAssessmentList[]
+					return (array) $this->_objGroupAssessmentListArray;
+
 				case '_KingdomBusinessAssessment':
 					// Gets the value for the private _objKingdomBusinessAssessment (Read-Only)
 					// if set due to an expansion on the kingdom_business_assessment.resource_id reverse relationship
@@ -1181,6 +1235,188 @@
 		///////////////////////////////
 		// ASSOCIATED OBJECTS' METHODS
 		///////////////////////////////
+
+			
+		
+		// Related Objects' Methods for GroupAssessmentList
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated GroupAssessmentLists as an array of GroupAssessmentList objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return GroupAssessmentList[]
+		*/ 
+		public function GetGroupAssessmentListArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return GroupAssessmentList::LoadArrayByResourceId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated GroupAssessmentLists
+		 * @return int
+		*/ 
+		public function CountGroupAssessmentLists() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return GroupAssessmentList::CountByResourceId($this->intId);
+		}
+
+		/**
+		 * Associates a GroupAssessmentList
+		 * @param GroupAssessmentList $objGroupAssessmentList
+		 * @return void
+		*/ 
+		public function AssociateGroupAssessmentList(GroupAssessmentList $objGroupAssessmentList) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateGroupAssessmentList on this unsaved Resource.');
+			if ((is_null($objGroupAssessmentList->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateGroupAssessmentList on this Resource with an unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`group_assessment_list`
+				SET
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objGroupAssessmentList->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objGroupAssessmentList->ResourceId = $this->intId;
+				$objGroupAssessmentList->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a GroupAssessmentList
+		 * @param GroupAssessmentList $objGroupAssessmentList
+		 * @return void
+		*/ 
+		public function UnassociateGroupAssessmentList(GroupAssessmentList $objGroupAssessmentList) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateGroupAssessmentList on this unsaved Resource.');
+			if ((is_null($objGroupAssessmentList->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateGroupAssessmentList on this Resource with an unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`group_assessment_list`
+				SET
+					`resource_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objGroupAssessmentList->Id) . ' AND
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objGroupAssessmentList->ResourceId = null;
+				$objGroupAssessmentList->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all GroupAssessmentLists
+		 * @return void
+		*/ 
+		public function UnassociateAllGroupAssessmentLists() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateGroupAssessmentList on this unsaved Resource.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (GroupAssessmentList::LoadArrayByResourceId($this->intId) as $objGroupAssessmentList) {
+					$objGroupAssessmentList->ResourceId = null;
+					$objGroupAssessmentList->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`group_assessment_list`
+				SET
+					`resource_id` = null
+				WHERE
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated GroupAssessmentList
+		 * @param GroupAssessmentList $objGroupAssessmentList
+		 * @return void
+		*/ 
+		public function DeleteAssociatedGroupAssessmentList(GroupAssessmentList $objGroupAssessmentList) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateGroupAssessmentList on this unsaved Resource.');
+			if ((is_null($objGroupAssessmentList->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateGroupAssessmentList on this Resource with an unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`group_assessment_list`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objGroupAssessmentList->Id) . ' AND
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objGroupAssessmentList->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated GroupAssessmentLists
+		 * @return void
+		*/ 
+		public function DeleteAllGroupAssessmentLists() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateGroupAssessmentList on this unsaved Resource.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (GroupAssessmentList::LoadArrayByResourceId($this->intId) as $objGroupAssessmentList) {
+					$objGroupAssessmentList->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`group_assessment_list`
+				WHERE
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
 
 			
 		
@@ -2381,6 +2617,7 @@
 	 * @property-read QQNode $Id
 	 * @property-read QQNode $Name
 	 * @property-read QQNodeResourceUser $User
+	 * @property-read QQReverseReferenceNodeGroupAssessmentList $GroupAssessmentList
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
 	 * @property-read QQReverseReferenceNodeScorecard $Scorecard
@@ -2399,6 +2636,8 @@
 					return new QQNode('name', 'Name', 'string', $this);
 				case 'User':
 					return new QQNodeResourceUser($this);
+				case 'GroupAssessmentList':
+					return new QQReverseReferenceNodeGroupAssessmentList($this, 'groupassessmentlist', 'reverse_reference', 'resource_id');
 				case 'KingdomBusinessAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'resource_id');
 				case 'LemonAssessment':
@@ -2427,6 +2666,7 @@
 	 * @property-read QQNode $Id
 	 * @property-read QQNode $Name
 	 * @property-read QQNodeResourceUser $User
+	 * @property-read QQReverseReferenceNodeGroupAssessmentList $GroupAssessmentList
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
 	 * @property-read QQReverseReferenceNodeScorecard $Scorecard
@@ -2446,6 +2686,8 @@
 					return new QQNode('name', 'Name', 'string', $this);
 				case 'User':
 					return new QQNodeResourceUser($this);
+				case 'GroupAssessmentList':
+					return new QQReverseReferenceNodeGroupAssessmentList($this, 'groupassessmentlist', 'reverse_reference', 'resource_id');
 				case 'KingdomBusinessAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'resource_id');
 				case 'LemonAssessment':

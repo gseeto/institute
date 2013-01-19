@@ -27,7 +27,7 @@
 	}
 ?>
 <div class='pcontent'>
-<img src='/inst/scorecard/summaryImg.php/<?php _p($this->objScorecard->Id);?>' style='margin:20px;'>
+<img src='/resources/scorecard/summaryImg.php/<?php _p($this->objScorecard->Id);?>' style='margin:20px;'>
 <?php 
 	foreach($this->dtgPArray as $dtgP) {
 		$dtgP->Render();
