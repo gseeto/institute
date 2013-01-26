@@ -37,7 +37,7 @@ class ToolslForm extends InstituteForm {
 		$this->dtgUnassigned = new ActionItemsDataGrid($this);
 		$this->dtgUnassigned->Paginator = new QPaginator($this->dtgUnassigned);
 		$this->dtgUnassigned->MetaAddTypeColumn('CategoryId','CategoryType');
-		$this->dtgUnassigned->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Id ?>', 'HtmlEntities=false', 'Width=10px' ));
+		$this->dtgUnassigned->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_FORM->RenderStrategyId($_ITEM) ?>', 'HtmlEntities=false', 'Width=10px' ));
         $this->dtgUnassigned->AddColumn(new QDataGridColumn('Action Index', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=10px' ));
 		$this->dtgUnassigned->AddColumn(new QDataGridColumn('Action Items', '<?= $_FORM->RenderAction($_ITEM) ?>', 'HtmlEntities=false', 'Width=450px' ));
 		$this->dtgUnassigned->AddColumn(new QDataGridColumn('Who', '<?= $_FORM->RenderWho($_ITEM) ?>', 'HtmlEntities=false', 'Width=110px' ));
@@ -70,7 +70,7 @@ class ToolslForm extends InstituteForm {
         $this->dtgUserActions = new ActionItemsDataGrid($this);
 		$this->dtgUserActions->Paginator = new QPaginator($this->dtgUserActions);
 		$this->dtgUserActions->MetaAddTypeColumn('CategoryId','CategoryType');	
-        $this->dtgUserActions->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Id ?>', 'HtmlEntities=false', 'Width=10px' ));
+        $this->dtgUserActions->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_FORM->RenderUserStrategyId($_ITEM) ?>', 'HtmlEntities=false', 'Width=10px' ));
 		$this->dtgUserActions->AddColumn(new QDataGridColumn('Action Index', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=10px' ));
 		$this->dtgUserActions->AddColumn(new QDataGridColumn('Action Items', '<?= $_FORM->RenderUserAction($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
 		$this->dtgUserActions->AddColumn(new QDataGridColumn('When', '<?= $_FORM->RenderUserWhen($_ITEM) ?>', 'HtmlEntities=false', 'Width=80px',array('OrderByClause' => QQ::OrderBy(QQN::ActionItems()->When), 'ReverseOrderByClause' => QQ::OrderBy(QQN::ActionItems()->When, false))  ));
@@ -129,7 +129,7 @@ class ToolslForm extends InstituteForm {
 		$this->dtgLatestAction = new ActionItemsDataGrid($this);
 		$this->dtgLatestAction->Paginator = new QPaginator($this->dtgLatestAction);
 		$this->dtgLatestAction->MetaAddTypeColumn('CategoryId','CategoryType');	
-        $this->dtgLatestAction->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_ITEM->Strategy->Id ?>', 'HtmlEntities=false', 'Width=10px' ));
+        $this->dtgLatestAction->AddColumn(new QDataGridColumn('Strategy Index', '<?= $_FORM->RenderLatestStrategyId($_ITEM) ?>', 'HtmlEntities=false', 'Width=10px' ));
 		$this->dtgLatestAction->AddColumn(new QDataGridColumn('Action Index', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=10px' ));
 		$this->dtgLatestAction->AddColumn(new QDataGridColumn('Action Items', '<?= $_FORM->RenderLatestAction($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
 		$this->dtgLatestAction->AddColumn(new QDataGridColumn('When', '<?= $_FORM->RenderLatestWhen($_ITEM) ?>', 'HtmlEntities=false', 'Width=80px',array('OrderByClause' => QQ::OrderBy(QQN::ActionItems()->When), 'ReverseOrderByClause' => QQ::OrderBy(QQN::ActionItems()->When, false))  ));
@@ -340,6 +340,27 @@ class ToolslForm extends InstituteForm {
 		}
 	}
 	
+	public function RenderStrategyId($objAction) {
+		if($objAction->Strategy) {
+			return $objAction->Strategy->Count;
+		} else {
+			return "N/A";
+		}
+	}
+	public function RenderUserStrategyId($objAction) {
+		if($objAction->Strategy) {
+			return $objAction->Strategy->Count;
+		} else {
+			return "N/A";
+		}
+	}
+	public function RenderLatestStrategyId($objAction) {
+		if($objAction->Strategy) {
+			return $objAction->Strategy->Count;
+		} else {
+			return "N/A";
+		}
+	}
 	public function RenderWho($objAction) {
 		$objWho = User::Load($objAction->Who);
 		$strControlId = 'lstActionWho' . $objAction->Id;
@@ -827,14 +848,16 @@ class ToolslForm extends InstituteForm {
 	}
 
 	public function RenderUserPriority($objAction) {
-		$intPriority = ($objAction->Strategy->Priority!=null) ? $objAction->Strategy->Priority : 0;
 		$strImgPriorityCtrl = 'imgPriority' .$objAction->Id; 
 		$imgPriority = $this->GetControl($strImgPriorityCtrl);    
 		if (!$imgPriority) {
 			$imgPriority = new QImageControl($this->dtgUserActions,$strImgPriorityCtrl);
-			$imgPriority->CssClass = 'priority-'.$intPriority;
 			$imgPriority->Width = 25;
 			$imgPriority->Height = 25;
+		}
+		
+		if ($objAction->Strategy) {
+			$intPriority = ($objAction->Strategy->Priority!=null) ? $objAction->Strategy->Priority : 0;
 			switch ($intPriority) {
 				case 0:
 					$imgPriority->ImagePath = dirname(__FILE__) .'/../../assets/images/priority-0.png'; 
@@ -851,7 +874,11 @@ class ToolslForm extends InstituteForm {
 				default:
 					$imgPriority->ImagePath = dirname(__FILE__) .'/../../assets/images/priority-0.png'; 
 					break;				
-			}	
+			}
+			$imgPriority->CssClass = 'priority-'.$intPriority;	
+		} else {
+			$imgPriority->ImagePath = dirname(__FILE__) .'/../../assets/images/priority-0.png';
+			$imgPriority->CssClass = 'priority-0';
 		}
 		return $imgPriority->Render(false);
 	}

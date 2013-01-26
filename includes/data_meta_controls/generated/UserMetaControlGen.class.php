@@ -38,6 +38,8 @@
 	 * property-read QLabel $TenureLabel
 	 * property QIntegerTextBox $CareerLengthControl
 	 * property-read QLabel $CareerLengthLabel
+	 * property QListBox $GroupAssessmentListAsAssessmentManagerControl
+	 * property-read QLabel $GroupAssessmentListAsAssessmentManagerLabel
 	 * property QListBox $CompanyControl
 	 * property-read QLabel $CompanyLabel
 	 * property QListBox $ResourceControl
@@ -205,6 +207,8 @@
 
 
 		// QListBox Controls (if applicable) to edit Unique ReverseReferences and ManyToMany References
+		protected $lstGroupAssessmentListsAsAssessmentManager;
+
 		protected $lstCompanies;
 
 		protected $lstResources;
@@ -213,6 +217,8 @@
 
 
 		// QLabel Controls (if applicable) to view Unique ReverseReferences and ManyToMany References
+		protected $lblGroupAssessmentListsAsAssessmentManager;
+
 		protected $lblCompanies;
 
 		protected $lblResources;
@@ -595,6 +601,57 @@
 		}
 
 		/**
+		 * Create and setup QListBox lstGroupAssessmentListsAsAssessmentManager
+		 * @param string $strControlId optional ControlId to use
+		 * @param QQCondition $objConditions override the default condition of QQ::All() to the query, itself
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause object or array of QQClause objects for the query
+		 * @return QListBox
+		 */
+		public function lstGroupAssessmentListsAsAssessmentManager_Create($strControlId = null, QQCondition $objCondition = null, $objOptionalClauses = null) {
+			$this->lstGroupAssessmentListsAsAssessmentManager = new QListBox($this->objParentObject, $strControlId);
+			$this->lstGroupAssessmentListsAsAssessmentManager->Name = QApplication::Translate('Group Assessment Lists As Assessment Manager');
+			$this->lstGroupAssessmentListsAsAssessmentManager->SelectionMode = QSelectionMode::Multiple;
+
+			// We need to know which items to "Pre-Select"
+			$objAssociatedArray = $this->objUser->GetGroupAssessmentListAsAssessmentManagerArray();
+
+			// Setup and perform the Query
+			if (is_null($objCondition)) $objCondition = QQ::All();
+			$objGroupAssessmentListCursor = GroupAssessmentList::QueryCursor($objCondition, $objOptionalClauses);
+
+			// Iterate through the Cursor
+			while ($objGroupAssessmentList = GroupAssessmentList::InstantiateCursor($objGroupAssessmentListCursor)) {
+				$objListItem = new QListItem($objGroupAssessmentList->__toString(), $objGroupAssessmentList->Id);
+				foreach ($objAssociatedArray as $objAssociated) {
+					if ($objAssociated->Id == $objGroupAssessmentList->Id)
+						$objListItem->Selected = true;
+				}
+				$this->lstGroupAssessmentListsAsAssessmentManager->AddItem($objListItem);
+			}
+
+			// Return the QListControl
+			return $this->lstGroupAssessmentListsAsAssessmentManager;
+		}
+
+		/**
+		 * Create and setup QLabel lblGroupAssessmentListsAsAssessmentManager
+		 * @param string $strControlId optional ControlId to use
+		 * @param string $strGlue glue to display in between each associated object
+		 * @return QLabel
+		 */
+		public function lblGroupAssessmentListsAsAssessmentManager_Create($strControlId = null, $strGlue = ', ') {
+			$this->lblGroupAssessmentListsAsAssessmentManager = new QLabel($this->objParentObject, $strControlId);
+			$this->lstGroupAssessmentListsAsAssessmentManager->Name = QApplication::Translate('Group Assessment Lists As Assessment Manager');
+			
+			$objAssociatedArray = $this->objUser->GetGroupAssessmentListAsAssessmentManagerArray();
+			$strItems = array();
+			foreach ($objAssociatedArray as $objAssociated)
+				$strItems[] = $objAssociated->__toString();
+			$this->lblGroupAssessmentListsAsAssessmentManager->Text = implode($strGlue, $strItems);
+			return $this->lblGroupAssessmentListsAsAssessmentManager;
+		}
+
+		/**
 		 * Create and setup QListBox lstCompanies
 		 * @param string $strControlId optional ControlId to use
 		 * @param QQCondition $objConditions override the default condition of QQ::All() to the query, itself
@@ -800,6 +857,27 @@
 			if ($this->txtCareerLength) $this->txtCareerLength->Text = $this->objUser->CareerLength;
 			if ($this->lblCareerLength) $this->lblCareerLength->Text = $this->objUser->CareerLength;
 
+			if ($this->lstGroupAssessmentListsAsAssessmentManager) {
+				$this->lstGroupAssessmentListsAsAssessmentManager->RemoveAllItems();
+				$objAssociatedArray = $this->objUser->GetGroupAssessmentListAsAssessmentManagerArray();
+				$objGroupAssessmentListArray = GroupAssessmentList::LoadAll();
+				if ($objGroupAssessmentListArray) foreach ($objGroupAssessmentListArray as $objGroupAssessmentList) {
+					$objListItem = new QListItem($objGroupAssessmentList->__toString(), $objGroupAssessmentList->Id);
+					foreach ($objAssociatedArray as $objAssociated) {
+						if ($objAssociated->Id == $objGroupAssessmentList->Id)
+							$objListItem->Selected = true;
+					}
+					$this->lstGroupAssessmentListsAsAssessmentManager->AddItem($objListItem);
+				}
+			}
+			if ($this->lblGroupAssessmentListsAsAssessmentManager) {
+				$objAssociatedArray = $this->objUser->GetGroupAssessmentListAsAssessmentManagerArray();
+				$strItems = array();
+				foreach ($objAssociatedArray as $objAssociated)
+					$strItems[] = $objAssociated->__toString();
+				$this->lblGroupAssessmentListsAsAssessmentManager->Text = implode($strGlue, $strItems);
+			}
+
 			if ($this->lstCompanies) {
 				$this->lstCompanies->RemoveAllItems();
 				$objAssociatedArray = $this->objUser->GetCompanyArray();
@@ -871,6 +949,16 @@
 		// PROTECTED UPDATE METHODS for ManyToManyReferences (if any)
 		///////////////////////////////////////////////
 
+		protected function lstGroupAssessmentListsAsAssessmentManager_Update() {
+			if ($this->lstGroupAssessmentListsAsAssessmentManager) {
+				$this->objUser->UnassociateAllGroupAssessmentListsAsAssessmentManager();
+				$objSelectedListItems = $this->lstGroupAssessmentListsAsAssessmentManager->SelectedItems;
+				if ($objSelectedListItems) foreach ($objSelectedListItems as $objListItem) {
+					$this->objUser->AssociateGroupAssessmentListAsAssessmentManager(GroupAssessmentList::Load($objListItem->Value));
+				}
+			}
+		}
+
 		protected function lstCompanies_Update() {
 			if ($this->lstCompanies) {
 				$this->objUser->UnassociateAllCompanies();
@@ -933,6 +1021,7 @@
 				$this->objUser->Save();
 
 				// Finally, update any ManyToManyReferences (if any)
+				$this->lstGroupAssessmentListsAsAssessmentManager_Update();
 				$this->lstCompanies_Update();
 				$this->lstResources_Update();
 				$this->lstScorecards_Update();
@@ -947,6 +1036,7 @@
 		 * It will also unassociate itself from any ManyToManyReferences.
 		 */
 		public function DeleteUser() {
+			$this->objUser->UnassociateAllGroupAssessmentListsAsAssessmentManager();
 			$this->objUser->UnassociateAllCompanies();
 			$this->objUser->UnassociateAllResources();
 			$this->objUser->UnassociateAllScorecards();
@@ -1040,6 +1130,12 @@
 				case 'CareerLengthLabel':
 					if (!$this->lblCareerLength) return $this->lblCareerLength_Create();
 					return $this->lblCareerLength;
+				case 'GroupAssessmentListAsAssessmentManagerControl':
+					if (!$this->lstGroupAssessmentListsAsAssessmentManager) return $this->lstGroupAssessmentListsAsAssessmentManager_Create();
+					return $this->lstGroupAssessmentListsAsAssessmentManager;
+				case 'GroupAssessmentListAsAssessmentManagerLabel':
+					if (!$this->lblGroupAssessmentListsAsAssessmentManager) return $this->lblGroupAssessmentListsAsAssessmentManager_Create();
+					return $this->lblGroupAssessmentListsAsAssessmentManager;
 				case 'CompanyControl':
 					if (!$this->lstCompanies) return $this->lstCompanies_Create();
 					return $this->lstCompanies;
@@ -1102,6 +1198,8 @@
 						return ($this->txtTenure = QType::Cast($mixValue, 'QControl'));
 					case 'CareerLengthControl':
 						return ($this->txtCareerLength = QType::Cast($mixValue, 'QControl'));
+					case 'GroupAssessmentListAsAssessmentManagerControl':
+						return ($this->lstGroupAssessmentListsAsAssessmentManager = QType::Cast($mixValue, 'QControl'));
 					case 'CompanyControl':
 						return ($this->lstCompanies = QType::Cast($mixValue, 'QControl'));
 					case 'ResourceControl':

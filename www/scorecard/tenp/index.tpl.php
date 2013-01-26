@@ -33,7 +33,10 @@
 <h3><?php  _p($this->strCategory);?> Statement</h3>
 <?php
 	 $this->lblStatement->render();
+	 $this->imgStatement->render();
 	 $this->txtStatement->render();
+	 $this->btnSaveStatement->render();
+	 $this->btnCancelStatement->render();
  } ?>
 <h3><?php _p($this->strCategory);?> Strategy Summary</h3>
 <?php 
@@ -63,4 +66,10 @@ for ($i=0; $i< count($this->dtgStrategyArray); $i++) {
 }
 ?>
 </div>
+
+<script type="text/javascript">
+$( ".ui-theme-button" ).button();
+
+</script>
+
 <?php require('/../..'.__INCLUDES__ . '/footer.inc.php'); ?>

@@ -27,6 +27,8 @@
 	 * @property integer $Tenure the value for intTenure 
 	 * @property integer $CareerLength the value for intCareerLength 
 	 * @property Login $Login the value for the Login object referenced by intLoginId 
+	 * @property GroupAssessmentList $_GroupAssessmentListAsAssessmentManager the value for the private _objGroupAssessmentListAsAssessmentManager (Read-Only) if set due to an expansion on the assessment_manager_assn association table
+	 * @property GroupAssessmentList[] $_GroupAssessmentListAsAssessmentManagerArray the value for the private _objGroupAssessmentListAsAssessmentManagerArray (Read-Only) if set due to an ExpandAsArray on the assessment_manager_assn association table
 	 * @property Company $_Company the value for the private _objCompany (Read-Only) if set due to an expansion on the company_user_assn association table
 	 * @property Company[] $_CompanyArray the value for the private _objCompanyArray (Read-Only) if set due to an ExpandAsArray on the company_user_assn association table
 	 * @property Resource $_Resource the value for the private _objResource (Read-Only) if set due to an expansion on the resource_user_assn association table
@@ -149,6 +151,22 @@
 		protected $intCareerLength;
 		const CareerLengthDefault = null;
 
+
+		/**
+		 * Private member variable that stores a reference to a single GroupAssessmentListAsAssessmentManager object
+		 * (of type GroupAssessmentList), if this User object was restored with
+		 * an expansion on the assessment_manager_assn association table.
+		 * @var GroupAssessmentList _objGroupAssessmentListAsAssessmentManager;
+		 */
+		private $_objGroupAssessmentListAsAssessmentManager;
+
+		/**
+		 * Private member variable that stores a reference to an array of GroupAssessmentListAsAssessmentManager objects
+		 * (of type GroupAssessmentList[]), if this User object was restored with
+		 * an ExpandAsArray on the assessment_manager_assn association table.
+		 * @var GroupAssessmentList[] _objGroupAssessmentListAsAssessmentManagerArray;
+		 */
+		private $_objGroupAssessmentListAsAssessmentManagerArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single Company object
@@ -732,6 +750,20 @@
 				if (!$strAliasPrefix)
 					$strAliasPrefix = 'user__';
 
+				$strAlias = $strAliasPrefix . 'groupassessmentlistasassessmentmanager__group_assessment_id__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objGroupAssessmentListAsAssessmentManagerArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objGroupAssessmentListAsAssessmentManagerArray[$intPreviousChildItemCount - 1];
+						$objChildItem = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlistasassessmentmanager__group_assessment_id__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objGroupAssessmentListAsAssessmentManagerArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objGroupAssessmentListAsAssessmentManagerArray[] = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlistasassessmentmanager__group_assessment_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'company__company_id__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -954,6 +986,16 @@
 				$objToReturn->objLogin = Login::InstantiateDbRow($objDbRow, $strAliasPrefix . 'login_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 
 
+
+			// Check for GroupAssessmentListAsAssessmentManager Virtual Binding
+			$strAlias = $strAliasPrefix . 'groupassessmentlistasassessmentmanager__group_assessment_id__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objGroupAssessmentListAsAssessmentManagerArray[] = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlistasassessmentmanager__group_assessment_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objGroupAssessmentListAsAssessmentManager = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlistasassessmentmanager__group_assessment_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
 
 			// Check for Company Virtual Binding
 			$strAlias = $strAliasPrefix . 'company__company_id__id';
@@ -1199,6 +1241,38 @@
 		////////////////////////////////////////////////////
 		// INDEX-BASED LOAD METHODS (Array via Many to Many)
 		////////////////////////////////////////////////////
+			/**
+		 * Load an array of GroupAssessmentList objects for a given GroupAssessmentListAsAssessmentManager
+		 * via the assessment_manager_assn table
+		 * @param integer $intGroupAssessmentId
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return User[]
+		*/
+		public static function LoadArrayByGroupAssessmentListAsAssessmentManager($intGroupAssessmentId, $objOptionalClauses = null) {
+			// Call User::QueryArray to perform the LoadArrayByGroupAssessmentListAsAssessmentManager query
+			try {
+				return User::QueryArray(
+					QQ::Equal(QQN::User()->GroupAssessmentListAsAssessmentManager->GroupAssessmentId, $intGroupAssessmentId),
+					$objOptionalClauses
+				);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Count Users for a given GroupAssessmentListAsAssessmentManager
+		 * via the assessment_manager_assn table
+		 * @param integer $intGroupAssessmentId
+		 * @return int
+		*/
+		public static function CountByGroupAssessmentListAsAssessmentManager($intGroupAssessmentId, $objOptionalClauses = null) {
+			return User::QueryCount(
+				QQ::Equal(QQN::User()->GroupAssessmentListAsAssessmentManager->GroupAssessmentId, $intGroupAssessmentId),
+				$objOptionalClauses
+			);
+		}
 			/**
 		 * Load an array of Company objects for a given Company
 		 * via the company_user_assn table
@@ -1628,6 +1702,18 @@
 				// Virtual Object References (Many to Many and Reverse References)
 				// (If restored via a "Many-to" expansion)
 				////////////////////////////
+
+				case '_GroupAssessmentListAsAssessmentManager':
+					// Gets the value for the private _objGroupAssessmentListAsAssessmentManager (Read-Only)
+					// if set due to an expansion on the assessment_manager_assn association table
+					// @return GroupAssessmentList
+					return $this->_objGroupAssessmentListAsAssessmentManager;
+
+				case '_GroupAssessmentListAsAssessmentManagerArray':
+					// Gets the value for the private _objGroupAssessmentListAsAssessmentManagerArray (Read-Only)
+					// if set due to an ExpandAsArray on the assessment_manager_assn association table
+					// @return GroupAssessmentList[]
+					return (array) $this->_objGroupAssessmentListAsAssessmentManagerArray;
 
 				case '_Company':
 					// Gets the value for the private _objCompany (Read-Only)
@@ -3611,6 +3697,189 @@
 		}
 
 			
+		// Related Many-to-Many Objects' Methods for GroupAssessmentListAsAssessmentManager
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all many-to-many associated GroupAssessmentListsAsAssessmentManager as an array of GroupAssessmentList objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return GroupAssessmentList[]
+		*/ 
+		public function GetGroupAssessmentListAsAssessmentManagerArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return GroupAssessmentList::LoadArrayByUserAsAssessmentManager($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all many-to-many associated GroupAssessmentListsAsAssessmentManager
+		 * @return int
+		*/ 
+		public function CountGroupAssessmentListsAsAssessmentManager() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return GroupAssessmentList::CountByUserAsAssessmentManager($this->intId);
+		}
+
+		/**
+		 * Checks to see if an association exists with a specific GroupAssessmentListAsAssessmentManager
+		 * @param GroupAssessmentList $objGroupAssessmentList
+		 * @return bool
+		*/
+		public function IsGroupAssessmentListAsAssessmentManagerAssociated(GroupAssessmentList $objGroupAssessmentList) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call IsGroupAssessmentListAsAssessmentManagerAssociated on this unsaved User.');
+			if ((is_null($objGroupAssessmentList->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call IsGroupAssessmentListAsAssessmentManagerAssociated on this User with an unsaved GroupAssessmentList.');
+
+			$intRowCount = User::QueryCount(
+				QQ::AndCondition(
+					QQ::Equal(QQN::User()->Id, $this->intId),
+					QQ::Equal(QQN::User()->GroupAssessmentListAsAssessmentManager->GroupAssessmentId, $objGroupAssessmentList->Id)
+				)
+			);
+
+			return ($intRowCount > 0);
+		}
+
+		/**
+		 * Journals the GroupAssessmentListAsAssessmentManager relationship into the Log database.
+		 * Used internally as a helper method.
+		 * @param string $strJournalCommand
+		 */
+		public function JournalGroupAssessmentListAsAssessmentManagerAssociation($intAssociatedId, $strJournalCommand) {
+			$objDatabase = User::GetDatabase()->JournalingDatabase;
+
+			$objDatabase->NonQuery('
+				INSERT INTO `assessment_manager_assn` (
+					`user_id`,
+					`group_assessment_id`,
+					__sys_login_id,
+					__sys_action,
+					__sys_date
+				) VALUES (
+					' . $objDatabase->SqlVariable($this->intId) . ',
+					' . $objDatabase->SqlVariable($intAssociatedId) . ',
+					' . (($objDatabase->JournaledById) ? $objDatabase->JournaledById : 'NULL') . ',
+					' . $objDatabase->SqlVariable($strJournalCommand) . ',
+					NOW()
+				);
+			');
+		}
+
+		/**
+		 * Gets the historical journal for an object's GroupAssessmentListAsAssessmentManager relationship from the log database.
+		 * @param integer intId
+		 * @return QDatabaseResult $objResult
+		 */
+		public static function GetJournalGroupAssessmentListAsAssessmentManagerAssociationForId($intId) {
+			$objDatabase = User::GetDatabase()->JournalingDatabase;
+
+			return $objDatabase->Query('SELECT * FROM assessment_manager_assn WHERE user_id = ' .
+				$objDatabase->SqlVariable($intId) . ' ORDER BY __sys_date');
+		}
+
+		/**
+		 * Gets the historical journal for this object's GroupAssessmentListAsAssessmentManager relationship from the log database.
+		 * @return QDatabaseResult $objResult
+		 */
+		public function GetJournalGroupAssessmentListAsAssessmentManagerAssociation() {
+			return User::GetJournalGroupAssessmentListAsAssessmentManagerAssociationForId($this->intId);
+		}
+
+		/**
+		 * Associates a GroupAssessmentListAsAssessmentManager
+		 * @param GroupAssessmentList $objGroupAssessmentList
+		 * @return void
+		*/ 
+		public function AssociateGroupAssessmentListAsAssessmentManager(GroupAssessmentList $objGroupAssessmentList) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateGroupAssessmentListAsAssessmentManager on this unsaved User.');
+			if ((is_null($objGroupAssessmentList->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateGroupAssessmentListAsAssessmentManager on this User with an unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				INSERT INTO `assessment_manager_assn` (
+					`user_id`,
+					`group_assessment_id`
+				) VALUES (
+					' . $objDatabase->SqlVariable($this->intId) . ',
+					' . $objDatabase->SqlVariable($objGroupAssessmentList->Id) . '
+				)
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase)
+				$this->JournalGroupAssessmentListAsAssessmentManagerAssociation($objGroupAssessmentList->Id, 'INSERT');
+		}
+
+		/**
+		 * Unassociates a GroupAssessmentListAsAssessmentManager
+		 * @param GroupAssessmentList $objGroupAssessmentList
+		 * @return void
+		*/ 
+		public function UnassociateGroupAssessmentListAsAssessmentManager(GroupAssessmentList $objGroupAssessmentList) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateGroupAssessmentListAsAssessmentManager on this unsaved User.');
+			if ((is_null($objGroupAssessmentList->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateGroupAssessmentListAsAssessmentManager on this User with an unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`assessment_manager_assn`
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . ' AND
+					`group_assessment_id` = ' . $objDatabase->SqlVariable($objGroupAssessmentList->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase)
+				$this->JournalGroupAssessmentListAsAssessmentManagerAssociation($objGroupAssessmentList->Id, 'DELETE');
+		}
+
+		/**
+		 * Unassociates all GroupAssessmentListsAsAssessmentManager
+		 * @return void
+		*/ 
+		public function UnassociateAllGroupAssessmentListsAsAssessmentManager() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateAllGroupAssessmentListAsAssessmentManagerArray on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objResult = $objDatabase->Query('SELECT `group_assessment_id` AS associated_id FROM `assessment_manager_assn` WHERE `user_id` = ' . $objDatabase->SqlVariable($this->intId));
+				while ($objRow = $objResult->GetNextRow()) {
+					$this->JournalGroupAssessmentListAsAssessmentManagerAssociation($objRow->GetColumn('associated_id'), 'DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`assessment_manager_assn`
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+			
 		// Related Many-to-Many Objects' Methods for Company
 		//-------------------------------------------------------------------
 
@@ -4263,6 +4532,38 @@
 	/////////////////////////////////////
 
 	/**
+	 * @property-read QQNode $GroupAssessmentId
+	 * @property-read QQNodeGroupAssessmentList $GroupAssessmentList
+	 * @property-read QQNodeGroupAssessmentList $_ChildTableNode
+	 */
+	class QQNodeUserGroupAssessmentListAsAssessmentManager extends QQAssociationNode {
+		protected $strType = 'association';
+		protected $strName = 'groupassessmentlistasassessmentmanager';
+
+		protected $strTableName = 'assessment_manager_assn';
+		protected $strPrimaryKey = 'user_id';
+		protected $strClassName = 'GroupAssessmentList';
+
+		public function __get($strName) {
+			switch ($strName) {
+				case 'GroupAssessmentId':
+					return new QQNode('group_assessment_id', 'GroupAssessmentId', 'integer', $this);
+				case 'GroupAssessmentList':
+					return new QQNodeGroupAssessmentList('group_assessment_id', 'GroupAssessmentId', 'integer', $this);
+				case '_ChildTableNode':
+					return new QQNodeGroupAssessmentList('group_assessment_id', 'GroupAssessmentId', 'integer', $this);
+				default:
+					try {
+						return parent::__get($strName);
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+			}
+		}
+	}
+
+	/**
 	 * @property-read QQNode $CompanyId
 	 * @property-read QQNodeCompany $Company
 	 * @property-read QQNodeCompany $_ChildTableNode
@@ -4371,6 +4672,7 @@
 	 * @property-read QQNode $Title
 	 * @property-read QQNode $Tenure
 	 * @property-read QQNode $CareerLength
+	 * @property-read QQNodeUserGroupAssessmentListAsAssessmentManager $GroupAssessmentListAsAssessmentManager
 	 * @property-read QQNodeUserCompany $Company
 	 * @property-read QQNodeUserResource $Resource
 	 * @property-read QQNodeUserScorecard $Scorecard
@@ -4414,6 +4716,8 @@
 					return new QQNode('tenure', 'Tenure', 'integer', $this);
 				case 'CareerLength':
 					return new QQNode('career_length', 'CareerLength', 'integer', $this);
+				case 'GroupAssessmentListAsAssessmentManager':
+					return new QQNodeUserGroupAssessmentListAsAssessmentManager($this);
 				case 'Company':
 					return new QQNodeUserCompany($this);
 				case 'Resource':
@@ -4465,6 +4769,7 @@
 	 * @property-read QQNode $Title
 	 * @property-read QQNode $Tenure
 	 * @property-read QQNode $CareerLength
+	 * @property-read QQNodeUserGroupAssessmentListAsAssessmentManager $GroupAssessmentListAsAssessmentManager
 	 * @property-read QQNodeUserCompany $Company
 	 * @property-read QQNodeUserResource $Resource
 	 * @property-read QQNodeUserScorecard $Scorecard
@@ -4509,6 +4814,8 @@
 					return new QQNode('tenure', 'Tenure', 'integer', $this);
 				case 'CareerLength':
 					return new QQNode('career_length', 'CareerLength', 'integer', $this);
+				case 'GroupAssessmentListAsAssessmentManager':
+					return new QQNodeUserGroupAssessmentListAsAssessmentManager($this);
 				case 'Company':
 					return new QQNodeUserCompany($this);
 				case 'Resource':

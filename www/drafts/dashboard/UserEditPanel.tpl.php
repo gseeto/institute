@@ -27,6 +27,8 @@
 
 		<?php $_CONTROL->txtCareerLength->RenderWithName(); ?>
 
+		<?php $_CONTROL->lstGroupAssessmentListsAsAssessmentManager->RenderWithName(true, "Rows=7"); ?>
+
 		<?php $_CONTROL->lstCompanies->RenderWithName(true, "Rows=7"); ?>
 
 		<?php $_CONTROL->lstResources->RenderWithName(true, "Rows=7"); ?>

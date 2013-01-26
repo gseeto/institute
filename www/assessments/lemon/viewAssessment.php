@@ -100,10 +100,10 @@ Your results are provided below.';
 			if(array_key_exists($key,$lemonValues)) {
 				$lemonValues[$key] += $objResult->Value;
 			} else {
-				$lemonValues[$key] = 0;
+				$lemonValues[$key] = $objResult->Value;
 			}
 		}
-		arsort($lemonValues);
+		arsort($lemonValues,SORT_NUMERIC);
 		$i=1;
 		$strPrimary = '';
 		$strSecondary = '';
@@ -121,11 +121,7 @@ Your results are provided below.';
 						   <li>Inspire organizations through the power of their ideas</li>
 						   <li>Sometimes stay above practical, day-to-day tasks</li>
 						   <li>Care more about Why than how</li>
-					   </ul>';
-						if($i==1) 
-							$strPrimary =  '<h4>Your Primary LEMON Type is: ' .$key . '</h4>' .$strDescription;
-						else 
-							$strSecondary = '<h4>Your Secondary LEMON Type is: ' .$key . '</h4>' .$strDescription;
+					   </ul>';		
 						break;
 					case 'Entrepreneur':
 						$strDescription = 
@@ -139,10 +135,6 @@ Your results are provided below.';
 						   <li>See failure as learning experiences</li>
 						   <li>Care more about results: the Wherefore</li>
 						</ul>';
-						if($i==1) 
-							$strPrimary =  '<h4>Your Primary LEMON Type is: ' .$key . '</h4>' .$strDescription;
-						else 
-							$strSecondary = '<h4>Your Secondary LEMON Type is: ' .$key . '</h4>' .$strDescription;
 						break;
 					case 'Manager':
 						$strDescription = 
@@ -155,10 +147,6 @@ Your results are provided below.';
 						   <li>Will build a team to get tasks done rather than do the tasks themselves</li>
 						   <li>Understand process, planning, profits: How</li>
 						</ul>';
-						if($i==1) 
-							$strPrimary =  '<h4>Your Primary LEMON Type is: ' .$key . '</h4>' .$strDescription;
-						else 
-							$strSecondary = '<h4>Your Secondary LEMON Type is: ' .$key . '</h4>' .$strDescription;
 						break;
 					case 'Organizer':
 						$strDescription =
@@ -172,10 +160,6 @@ Your results are provided below.';
 						   <li>They are often practical, and quickly get to what needs to be done</li>
 						   <li>Care about When</li>
 						</ul>';
-						if($i==1) 
-							$strPrimary =  '<h4>Your Primary LEMON Type is: ' .$key . '</h4>' .$strDescription;
-						else 
-							$strSecondary = '<h4>Your Secondary LEMON Type is: ' .$key . '</h4>' .$strDescription;
 						break;
 					case 'Networker':
 						$strDescription = 
@@ -188,12 +172,12 @@ Your results are provided below.';
 						   <li>Often event driven</li>
 						   <li>Care about Who</li>
 						</ul>';
-						if($i==1) 
-							$strPrimary =  '<h4>Your Primary LEMON Type is: ' .$key . '</h4>' .$strDescription;
-						else 
-							$strSecondary = '<h4>Your Secondary LEMON Type is: ' .$key . '</h4>' .$strDescription;
 						break;
 				}
+				if($i==1) 
+					$strPrimary =  '<h4>Your Primary LEMON Type is: ' .$key . '</h4>' .$strDescription;
+				else 
+					$strSecondary = '<h4>Your Secondary LEMON Type is: ' .$key . '</h4>' .$strDescription;
 			}
 			$i++;
 		}

@@ -36,6 +36,7 @@
 		protected $txtCareerLength;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
+		protected $lstGroupAssessmentListsAsAssessmentManager;
 		protected $lstCompanies;
 		protected $lstResources;
 		protected $lstScorecards;
@@ -74,6 +75,7 @@
 			$this->txtTitle = $this->mctUser->txtTitle_Create();
 			$this->txtTenure = $this->mctUser->txtTenure_Create();
 			$this->txtCareerLength = $this->mctUser->txtCareerLength_Create();
+			$this->lstGroupAssessmentListsAsAssessmentManager = $this->mctUser->lstGroupAssessmentListsAsAssessmentManager_Create();
 			$this->lstCompanies = $this->mctUser->lstCompanies_Create();
 			$this->lstResources = $this->mctUser->lstResources_Create();
 			$this->lstScorecards = $this->mctUser->lstScorecards_Create();

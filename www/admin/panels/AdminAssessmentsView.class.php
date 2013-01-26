@@ -212,6 +212,7 @@
             $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Total Keys', '<?= $_CONTROL->ParentControl->RenderTotalKeys($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));
             $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_CONTROL->ParentControl->RenderKeysLeft($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));   
             $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Assessment Type', '<?= $_CONTROL->ParentControl->RenderAssessmentType($_ITEM) ?>', 'HtmlEntities=false' )); 
+            $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Assessment Manager', '<?= $_CONTROL->ParentControl->RenderAssessmentManager($_ITEM) ?>', 'HtmlEntities=false' )); 
             $this->dtgGroupAssessments->CellPadding = 5;
 			$this->dtgGroupAssessments->SetDataBinder('dtgGroupAssessments_Bind',$this);
 			$this->dtgGroupAssessments->NoDataHtml = 'No Group Assessments have been assigned.';
@@ -524,6 +525,41 @@
 			}
 			$this->dtgGroupAssessments->Refresh();
 		}
+		public function RenderAssessmentManager(GroupAssessmentList $objGroupAssessment) {
+			$strControlId = 'lstAssessmentManager' . $objGroupAssessment->Id;
+			$lstAssessmentManager = $this->objForm->GetControl($strControlId);
+			if(!$lstAssessmentManager) {
+				$lstAssessmentManager = new QListBox($this->dtgGroupAssessments,$strControlId);
+				$lstAssessmentManager->Name = 'AssessmentManager';
+				$lstAssessmentManager->AddItem('-Non Selected-', 0);
+				$objConditions = QQ::OrCondition(QQ::Equal( QQN::User()->Login->Role->Name, 'Administrator'),
+					QQ::Equal( QQN::User()->Login->Role->Name, 'Company Manager'));
+				$objConditions = QQ::OrCondition($objConditions,
+					QQ::Equal( QQN::User()->Login->Role->Name, 'Manager'));
+				foreach(User::QueryArray($objConditions) as $objUser) {
+					if($objGroupAssessment->IsUserAsAssessmentManagerAssociated($objUser)) 
+							$lstAssessmentManager->AddItem($objUser->FirstName.' '.$objUser->LastName, $objUser->Id,true);
+						else 
+							$lstAssessmentManager->AddItem($objUser->FirstName.' '.$objUser->LastName, $objUser->Id);	
+				}			
+				$lstAssessmentManager->ActionParameter = $objGroupAssessment->Id;
+				$lstAssessmentManager->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'lstAssessmentManager_Change'));
+			}
+			return $lstAssessmentManager->Render(false);
+		}
+    	public function lstAssessmentManager_Change($strFormId, $strControlId, $strParameter) {
+			$lstAssessmentManager = $this->objForm->GetControl($strControlId);
+			if ($lstAssessmentManager != null){
+				if ($lstAssessmentManager->SelectedValue != 0) {
+					$objGroupAssessment = GroupAssessmentList::Load($strParameter);
+					$objUser = User::Load($lstAssessmentManager->SelectedValue);
+					$objGroupAssessment->AssociateUserAsAssessmentManager($objUser);
+					$objGroupAssessment->Save();
+				}
+			}
+			$this->dtgGroupAssessments->Refresh();
+		}
+		
     	public function RenderUserLinkTenF($objAssessment) {
     		$intUserId = $objAssessment->UserId;
     		$objUser = User::Load($intUserId);

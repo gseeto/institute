@@ -6,7 +6,7 @@ class ViewTenPAssessmentForm extends InstituteForm {
 	protected $strPageTitle = '10-P Assessment';
 	protected $intNavSectionId = InstituteForm::NavSectionAssessments;
 	protected $objTenPAssessment;
-	protected $dtgAssessmentResults;
+	protected $dtgAssessmentResultsArray;
 	protected $btnReturn;
 	protected $lblIntroduction;
 	
@@ -32,32 +32,36 @@ Your results are provided below.';
 			$assessmentArray = TenPAssessment::LoadArrayByUserId($intUserId);
 			$this->objTenPAssessment = $assessmentArray[0];
 		}
-				
-		$this->dtgAssessmentResults = new TenPResultsDataGrid($this);
-		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('', '<?= $_FORM->RenderCategory($_ITEM->QuestionId) ?>', 'HtmlEntities=false', 'Width=30px' ));
-		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('', '<?= $_ITEM->QuestionId ?>', 'HtmlEntities=false', 'Width=30px' ));
-		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('Question', '<?= $_FORM->RenderQuestion($_ITEM->QuestionId) ?>', 'HtmlEntities=false', 'Width=450px' ));			
-		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('Importance', '<?= $_ITEM->Importance ?>','HtmlEntities=false'));
-		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('Performance', '<?= $_ITEM->Performance ?>','HtmlEntities=false'));
-		$this->dtgAssessmentResults->CellPadding = 5;
-		$this->dtgAssessmentResults->SetDataBinder('dtgAssessmentResults_Bind',$this);
-		$this->dtgAssessmentResults->UseAjax = true;
-		
-		$objStyle = $this->dtgAssessmentResults->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgAssessmentResults->AlternateRowStyle;
-        $objStyle->BackColor = '#CCCCCC';
-
-        $objStyle = $this->dtgAssessmentResults->HeaderRowStyle;
-        $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
-        
-        $objStyle = $this->dtgAssessmentResults->HeaderLinkStyle;
-        $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
-        
+		$this->dtgAssessmentResultsArray = array();
+		for($i=0; $i<10;$i++) {
+	 		$this->dtgAssessmentResultsArray[$i] = new TenPResultsDataGrid($this);
+			$this->dtgAssessmentResultsArray[$i]->AddColumn(new QDataGridColumn('', '<?= $_FORM->RenderQuestionId($_ITEM->QuestionId) ?>', 'HtmlEntities=false', 'Width=30px' ));
+			$this->dtgAssessmentResultsArray[$i]->AddColumn(new QDataGridColumn('Question', '<?= $_FORM->RenderQuestion($_ITEM->QuestionId) ?>', 'HtmlEntities=false', 'Width=450px' ));			
+			$this->dtgAssessmentResultsArray[$i]->AddColumn(new QDataGridColumn('Importance', '<?= $_ITEM->Importance ?>','HtmlEntities=false'));
+			$this->dtgAssessmentResultsArray[$i]->AddColumn(new QDataGridColumn('Performance', '<?= $_ITEM->Performance ?>','HtmlEntities=false'));
+			$this->dtgAssessmentResultsArray[$i]->CellPadding = 5;
+	
+			$assessmentArray = TenPResults::LoadArrayByAssessmentIdAndCategory($this->objTenPAssessment->Id, $i+1);					
+			$this->dtgAssessmentResultsArray[$i]->DataSource = $assessmentArray; 
+			
+			$this->dtgAssessmentResultsArray[$i]->UseAjax = true;
+			
+			$objStyle = $this->dtgAssessmentResultsArray[$i]->RowStyle;
+	        $objStyle->BackColor = '#ffffff';
+	        $objStyle->FontSize = 14;
+	
+	        $objStyle = $this->dtgAssessmentResultsArray[$i]->AlternateRowStyle;
+	        $objStyle->BackColor = '#CCCCCC';
+	
+	        $objStyle = $this->dtgAssessmentResultsArray[$i]->HeaderRowStyle;
+	        $objStyle->ForeColor = '#ffffff';
+	        $objStyle->BackColor = '#003366'; 
+	        
+	        $objStyle = $this->dtgAssessmentResultsArray[$i]->HeaderLinkStyle;
+	        $objStyle->ForeColor = '#ffffff';
+	        $objStyle->BackColor = '#003366';  		
+	 	}
+	 			        
         $this->btnReturn = new QButton($this);
         $this->btnReturn->Text = 'Return';
 	 	$this->btnReturn->CssClass = 'right primary';
@@ -71,21 +75,16 @@ Your results are provided below.';
 		QApplication::Redirect('/resources/assessments/tenp/index.php');
 	}
 	
-	public function dtgAssessmentResults_Bind() {
-		$assessmentArray = TenPResults::LoadArrayByAssessmentId($this->objTenPAssessment->Id);		
-		$this->dtgAssessmentResults->DataSource = $assessmentArray; 
-	}
-	
     public function RenderQuestion($intQuestionId) {
     	$objQuestion = TenPQuestions::Load($intQuestionId);
     	return $objQuestion->Text;
     } 
 
-     public function RenderCategory($intQuestionId) {
-    	$objQuestion = TenPQuestions::Load($intQuestionId);
-    	return CategoryType::ToString($objQuestion->CategoryId);
-    }  
-
+    public function RenderQuestionId($intQuestionId) {
+    	$txtReturn = sprintf('<div style="color:#888888">%s</div>',$intQuestionId);
+    	return $txtReturn;
+    } 
+    
 }
 
 ViewTenPAssessmentForm::Run('ViewTenPAssessmentForm');

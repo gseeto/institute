@@ -6,6 +6,7 @@ class AssessmentForm extends InstituteForm {
 	protected $strPageTitle = 'Home';
 	protected $intNavSectionId = InstituteForm::NavSectionAssessments;
 	protected $btnAssessments;
+	protected $btnGroupAssessments;
 
 
 	protected function Form_Run() {
@@ -50,8 +51,24 @@ class AssessmentForm extends InstituteForm {
 				$this->btnAssessments[] = $btnResource;
 			}
 		}
+		$this->btnGroupAssessments = new QButton($this);
+		$this->btnGroupAssessments->Name = 'Group Assessments';
+		$this->btnGroupAssessments->Text = 'Group Assessments';
+		$this->btnGroupAssessments->CssClass = 'assessmentButton';
+		if((QApplication::$Login->Role->Name == 'Company Manager') ||
+			(QApplication::$Login->Role->Name == 'Administrator')) {
+			$this->btnGroupAssessments->Enabled = true;
+		} else {
+			$this->btnGroupAssessments->Enabled = false;
+			$this->btnGroupAssessments->CssClass = 'assessmentButtonDisabled';
+		}
+		$this->btnGroupAssessments->AddAction(new QClickEvent(), new QAjaxAction('btnGroupAssessments_Click'));
 	}
 
+	protected function btnGroupAssessments_Click() {	
+		QApplication::Redirect('/resources/assessments/lemon/groupAggregation.php');
+	}
+	
 	protected function btnKingdomBusinessAssessment_Click() {	
 		QApplication::Redirect('/resources/assessments/kingdom/');
 	}

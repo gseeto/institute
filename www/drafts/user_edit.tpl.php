@@ -39,6 +39,8 @@
 
 		<?php $this->txtCareerLength->RenderWithName(); ?>
 
+		<?php $this->lstGroupAssessmentListsAsAssessmentManager->RenderWithName(true, "Rows=7"); ?>
+
 		<?php $this->lstCompanies->RenderWithName(true, "Rows=7"); ?>
 
 		<?php $this->lstResources->RenderWithName(true, "Rows=7"); ?>

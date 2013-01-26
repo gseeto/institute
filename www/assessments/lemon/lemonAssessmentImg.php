@@ -54,7 +54,7 @@ $table->SetPos($tablexpos,$tableypos+1);
 
 // Basic table formatting
 $table->SetFont(FF_FONT1,FS_NORMAL,10);
-$table->SetAlign('right');
+$table->SetAlign('center');
 $table->SetMinColWidth($cellwidth);
 $table->SetNumberFormat('%0.1f');
 

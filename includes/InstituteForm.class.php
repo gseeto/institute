@@ -9,6 +9,7 @@ class InstituteForm extends QForm {
 	const NavSectionAdministration = 4;
 	const DirCompany = '/company/';
 	const DirUser = '/user/';
+	const DirAssessments = '/assessments/';
 	
 	const NavScorecardTenP = 1;
 	const NavScorecardView = 2;

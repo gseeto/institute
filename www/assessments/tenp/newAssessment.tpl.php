@@ -13,7 +13,17 @@ Please rate each statement below using the scale from 1 to 7 in the drop-down bo
 <br>
 <span style="color:#131BF9;">PERFORMANCE: Please evaluate how you feel you are currently performing relative to the importance you assigned.</span>
 </p>
-<?php  $this->dtgAssessmentQuestions->Render(); ?>
+<?php  
+ 
+for($i=0; $i<10;$i++) {
+?>
+	<br>
+	<h3><?php _p(CategoryType::$NameArray[$i+1]);?></h3>
+<?php 
+	$this->dtgAssessmentQuestionArray[$i]->Render();
+}
+?>
+<br>
 <?php  $this->btnSubmit->Render(); ?>
 <?php  $this->btnCancel->Render(); ?>
 </div>
