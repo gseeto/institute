@@ -16,17 +16,28 @@ $total = 0;
 $strArgs = substr(QApplication::$PathInfo, 1 );
 $assessmentArray = explode('/',$strArgs);
 foreach($assessmentArray as $intAssessmentId) {
-	$resultArray = LemonAssessmentResults::LoadArrayByAssessmentId($intAssessmentId);
-	foreach($resultArray as $objResult) {
-		$intIndex = $objResult->Question->LemonTypeId - 1;
-		$lemonValues[$intIndex] += $objResult->Value;
-		$total+= $objResult->Value;
+	$objAssessment = LemonAssessment::Load($intAssessmentId);
+	if($objAssessment->L) {
+		$lemonValues[0] += $objAssessment->L;
+		$lemonValues[1] += $objAssessment->E;
+		$lemonValues[2] += $objAssessment->M;
+		$lemonValues[3] += $objAssessment->O;
+		$lemonValues[4] += $objAssessment->N;
+		$total+= $objAssessment->L + $objAssessment->E + $objAssessment->M + $objAssessment->O + $objAssessment->N;
+	} else {
+		$resultArray = LemonAssessmentResults::LoadArrayByAssessmentId($intAssessmentId);
+		foreach($resultArray as $objResult) {
+			$intIndex = $objResult->Question->LemonTypeId - 1;
+			$lemonValues[$intIndex] += $objResult->Value;
+			$total+= $objResult->Value;
+		}
 	}
 }
 
-// Get percentages of all the slices
+// Get percentages of all the slices - or lets get the average for each type instead
 for($i=0; $i<5; $i++) {
 	$lemonValues[$i] = ($lemonValues[$i]/$total)*100;
+	//$lemonValues[$i] = ($lemonValues[$i]/count($assessmentArray));
 }
 
 
@@ -52,7 +63,8 @@ $graph->SetMarginColor('white');
 
 // Setup titles and fonts
 $graph->title->Set('LEMON Results');
-$graph->title->SetFont(FF_FONT1,FS_BOLD,18);
+$graph->SetUserFont('ttf-dejavu/DejaVuSans.ttf');
+$graph->title->SetFont(FF_USERFONT,FS_NORMAL,18);
 $graph->xaxis->HideLabels();
 
 $bplot = new BarPlot($datay[1]);
@@ -67,14 +79,14 @@ $table->Set($datay);
 $table->SetPos($tablexpos,$tableypos+1);
 
 // Basic table formatting
-$table->SetFont(FF_FONT1,FS_NORMAL,10);
+$table->SetFont(FF_USERFONT,FS_NORMAL,8);
 $table->SetAlign('center');
 $table->SetMinColWidth($cellwidth);
 $table->SetNumberFormat('%0.2f');
 
 // Format table header row
 $table->SetRowFillColor(0,'teal@0.7');
-$table->SetRowFont(0,FF_FONT1,FS_NORMAL,11);
+$table->SetRowFont(0,FF_USERFONT,FS_NORMAL,9);
 $table->SetRowAlign(0,'center');
 
 // .. and add it to the graph

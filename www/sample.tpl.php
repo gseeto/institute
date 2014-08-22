@@ -11,4 +11,5 @@
 	<p><?php $this->lblMessage->Render(); ?></p>
 	<p><?php $this->btnButton->Render(); ?></p>
 <?php $this->RenderEnd(); ?>
+<?php  phpinfo();?>
 </body></html>

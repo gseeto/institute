@@ -1,8 +1,8 @@
-<ul style='list-style: none; 
-		width:100px;
-		padding:5px;'>
-	<li><?php $_CONTROL->btnUsers->Render(); ?> </li>
-	<li><?php $_CONTROL->btnCompany->Render(); ?> </li>
-	<li><?php $_CONTROL->btnScorecards->Render(); ?> </li>
-	<li><?php $_CONTROL->btnAssessments->Render(); ?> </li>
-</ul>
+<div class="scorecardnavbar" style="height:35px;">
+	<ul class="scorecardnavbar" >
+		<li><?php $_CONTROL->btnUsers->Render(); ?> </li>
+		<li><?php $_CONTROL->btnCompany->Render(); ?> </li>
+		<li><?php $_CONTROL->btnScorecards->Render(); ?> </li>
+		<li><?php $_CONTROL->btnAssessments->Render(); ?> </li>
+	</ul>
+</div>

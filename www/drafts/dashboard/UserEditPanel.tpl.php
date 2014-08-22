@@ -17,13 +17,13 @@
 
 		<?php $_CONTROL->chkGender->RenderWithName(); ?>
 
-		<?php $_CONTROL->txtCountry->RenderWithName(); ?>
+		<?php $_CONTROL->lstCountry->RenderWithName(); ?>
 
 		<?php $_CONTROL->txtDepartment->RenderWithName(); ?>
 
-		<?php $_CONTROL->txtTitle->RenderWithName(); ?>
+		<?php $_CONTROL->lstTitle->RenderWithName(); ?>
 
-		<?php $_CONTROL->txtTenure->RenderWithName(); ?>
+		<?php $_CONTROL->lstTenure->RenderWithName(); ?>
 
 		<?php $_CONTROL->txtCareerLength->RenderWithName(); ?>
 

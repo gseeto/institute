@@ -24,14 +24,22 @@
 	 * @property Resource $Resource the value for the Resource object referenced by intResourceId 
 	 * @property User $_UserAsAssessmentManager the value for the private _objUserAsAssessmentManager (Read-Only) if set due to an expansion on the assessment_manager_assn association table
 	 * @property User[] $_UserAsAssessmentManagerArray the value for the private _objUserAsAssessmentManagerArray (Read-Only) if set due to an ExpandAsArray on the assessment_manager_assn association table
+	 * @property IntegrationAssessment $_IntegrationAssessmentAsGroup the value for the private _objIntegrationAssessmentAsGroup (Read-Only) if set due to an expansion on the integration_assessment.group_id reverse relationship
+	 * @property IntegrationAssessment[] $_IntegrationAssessmentAsGroupArray the value for the private _objIntegrationAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the integration_assessment.group_id reverse relationship
 	 * @property KingdomBusinessAssessment $_KingdomBusinessAssessmentAsGroup the value for the private _objKingdomBusinessAssessmentAsGroup (Read-Only) if set due to an expansion on the kingdom_business_assessment.group_id reverse relationship
 	 * @property KingdomBusinessAssessment[] $_KingdomBusinessAssessmentAsGroupArray the value for the private _objKingdomBusinessAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the kingdom_business_assessment.group_id reverse relationship
 	 * @property LemonAssessment $_LemonAssessmentAsGroup the value for the private _objLemonAssessmentAsGroup (Read-Only) if set due to an expansion on the lemon_assessment.group_id reverse relationship
 	 * @property LemonAssessment[] $_LemonAssessmentAsGroupArray the value for the private _objLemonAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the lemon_assessment.group_id reverse relationship
+	 * @property LraAssessment $_LraAssessmentAsGroup the value for the private _objLraAssessmentAsGroup (Read-Only) if set due to an expansion on the lra_assessment.group_id reverse relationship
+	 * @property LraAssessment[] $_LraAssessmentAsGroupArray the value for the private _objLraAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the lra_assessment.group_id reverse relationship
+	 * @property SeasonalAssessment $_SeasonalAssessmentAsGroup the value for the private _objSeasonalAssessmentAsGroup (Read-Only) if set due to an expansion on the seasonal_assessment.group_id reverse relationship
+	 * @property SeasonalAssessment[] $_SeasonalAssessmentAsGroupArray the value for the private _objSeasonalAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the seasonal_assessment.group_id reverse relationship
 	 * @property TenFAssessment $_TenFAssessmentAsGroup the value for the private _objTenFAssessmentAsGroup (Read-Only) if set due to an expansion on the ten_f_assessment.group_id reverse relationship
 	 * @property TenFAssessment[] $_TenFAssessmentAsGroupArray the value for the private _objTenFAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the ten_f_assessment.group_id reverse relationship
 	 * @property TenPAssessment $_TenPAssessmentAsGroup the value for the private _objTenPAssessmentAsGroup (Read-Only) if set due to an expansion on the ten_p_assessment.group_id reverse relationship
 	 * @property TenPAssessment[] $_TenPAssessmentAsGroupArray the value for the private _objTenPAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the ten_p_assessment.group_id reverse relationship
+	 * @property TimeAssessment $_TimeAssessmentAsGroup the value for the private _objTimeAssessmentAsGroup (Read-Only) if set due to an expansion on the time_assessment.group_id reverse relationship
+	 * @property TimeAssessment[] $_TimeAssessmentAsGroupArray the value for the private _objTimeAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the time_assessment.group_id reverse relationship
 	 * @property boolean $__Restored whether or not this object was restored from the database (as opposed to created new)
 	 */
 	class GroupAssessmentListGen extends QBaseClass {
@@ -107,6 +115,22 @@
 		private $_objUserAsAssessmentManagerArray = array();
 
 		/**
+		 * Private member variable that stores a reference to a single IntegrationAssessmentAsGroup object
+		 * (of type IntegrationAssessment), if this GroupAssessmentList object was restored with
+		 * an expansion on the integration_assessment association table.
+		 * @var IntegrationAssessment _objIntegrationAssessmentAsGroup;
+		 */
+		private $_objIntegrationAssessmentAsGroup;
+
+		/**
+		 * Private member variable that stores a reference to an array of IntegrationAssessmentAsGroup objects
+		 * (of type IntegrationAssessment[]), if this GroupAssessmentList object was restored with
+		 * an ExpandAsArray on the integration_assessment association table.
+		 * @var IntegrationAssessment[] _objIntegrationAssessmentAsGroupArray;
+		 */
+		private $_objIntegrationAssessmentAsGroupArray = array();
+
+		/**
 		 * Private member variable that stores a reference to a single KingdomBusinessAssessmentAsGroup object
 		 * (of type KingdomBusinessAssessment), if this GroupAssessmentList object was restored with
 		 * an expansion on the kingdom_business_assessment association table.
@@ -139,6 +163,38 @@
 		private $_objLemonAssessmentAsGroupArray = array();
 
 		/**
+		 * Private member variable that stores a reference to a single LraAssessmentAsGroup object
+		 * (of type LraAssessment), if this GroupAssessmentList object was restored with
+		 * an expansion on the lra_assessment association table.
+		 * @var LraAssessment _objLraAssessmentAsGroup;
+		 */
+		private $_objLraAssessmentAsGroup;
+
+		/**
+		 * Private member variable that stores a reference to an array of LraAssessmentAsGroup objects
+		 * (of type LraAssessment[]), if this GroupAssessmentList object was restored with
+		 * an ExpandAsArray on the lra_assessment association table.
+		 * @var LraAssessment[] _objLraAssessmentAsGroupArray;
+		 */
+		private $_objLraAssessmentAsGroupArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single SeasonalAssessmentAsGroup object
+		 * (of type SeasonalAssessment), if this GroupAssessmentList object was restored with
+		 * an expansion on the seasonal_assessment association table.
+		 * @var SeasonalAssessment _objSeasonalAssessmentAsGroup;
+		 */
+		private $_objSeasonalAssessmentAsGroup;
+
+		/**
+		 * Private member variable that stores a reference to an array of SeasonalAssessmentAsGroup objects
+		 * (of type SeasonalAssessment[]), if this GroupAssessmentList object was restored with
+		 * an ExpandAsArray on the seasonal_assessment association table.
+		 * @var SeasonalAssessment[] _objSeasonalAssessmentAsGroupArray;
+		 */
+		private $_objSeasonalAssessmentAsGroupArray = array();
+
+		/**
 		 * Private member variable that stores a reference to a single TenFAssessmentAsGroup object
 		 * (of type TenFAssessment), if this GroupAssessmentList object was restored with
 		 * an expansion on the ten_f_assessment association table.
@@ -169,6 +225,22 @@
 		 * @var TenPAssessment[] _objTenPAssessmentAsGroupArray;
 		 */
 		private $_objTenPAssessmentAsGroupArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single TimeAssessmentAsGroup object
+		 * (of type TimeAssessment), if this GroupAssessmentList object was restored with
+		 * an expansion on the time_assessment association table.
+		 * @var TimeAssessment _objTimeAssessmentAsGroup;
+		 */
+		private $_objTimeAssessmentAsGroup;
+
+		/**
+		 * Private member variable that stores a reference to an array of TimeAssessmentAsGroup objects
+		 * (of type TimeAssessment[]), if this GroupAssessmentList object was restored with
+		 * an ExpandAsArray on the time_assessment association table.
+		 * @var TimeAssessment[] _objTimeAssessmentAsGroupArray;
+		 */
+		private $_objTimeAssessmentAsGroupArray = array();
 
 		/**
 		 * Protected array of virtual attributes for this object (e.g. extra/other calculated and/or non-object bound
@@ -570,6 +642,20 @@
 				}
 
 
+				$strAlias = $strAliasPrefix . 'integrationassessmentasgroup__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objIntegrationAssessmentAsGroupArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objIntegrationAssessmentAsGroupArray[$intPreviousChildItemCount - 1];
+						$objChildItem = IntegrationAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'integrationassessmentasgroup__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objIntegrationAssessmentAsGroupArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objIntegrationAssessmentAsGroupArray[] = IntegrationAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'integrationassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'kingdombusinessassessmentasgroup__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -598,6 +684,34 @@
 					$blnExpandedViaArray = true;
 				}
 
+				$strAlias = $strAliasPrefix . 'lraassessmentasgroup__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objLraAssessmentAsGroupArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objLraAssessmentAsGroupArray[$intPreviousChildItemCount - 1];
+						$objChildItem = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessmentasgroup__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objLraAssessmentAsGroupArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objLraAssessmentAsGroupArray[] = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
+				$strAlias = $strAliasPrefix . 'seasonalassessmentasgroup__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objSeasonalAssessmentAsGroupArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objSeasonalAssessmentAsGroupArray[$intPreviousChildItemCount - 1];
+						$objChildItem = SeasonalAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'seasonalassessmentasgroup__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objSeasonalAssessmentAsGroupArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objSeasonalAssessmentAsGroupArray[] = SeasonalAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'seasonalassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'tenfassessmentasgroup__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -623,6 +737,20 @@
 							$objPreviousItem->_objTenPAssessmentAsGroupArray[] = $objChildItem;
 					} else
 						$objPreviousItem->_objTenPAssessmentAsGroupArray[] = TenPAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenpassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
+				$strAlias = $strAliasPrefix . 'timeassessmentasgroup__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objTimeAssessmentAsGroupArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objTimeAssessmentAsGroupArray[$intPreviousChildItemCount - 1];
+						$objChildItem = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessmentasgroup__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objTimeAssessmentAsGroupArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objTimeAssessmentAsGroupArray[] = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 					$blnExpandedViaArray = true;
 				}
 
@@ -681,6 +809,16 @@
 			}
 
 
+			// Check for IntegrationAssessmentAsGroup Virtual Binding
+			$strAlias = $strAliasPrefix . 'integrationassessmentasgroup__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objIntegrationAssessmentAsGroupArray[] = IntegrationAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'integrationassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objIntegrationAssessmentAsGroup = IntegrationAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'integrationassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
 			// Check for KingdomBusinessAssessmentAsGroup Virtual Binding
 			$strAlias = $strAliasPrefix . 'kingdombusinessassessmentasgroup__id';
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
@@ -701,6 +839,26 @@
 					$objToReturn->_objLemonAssessmentAsGroup = LemonAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
+			// Check for LraAssessmentAsGroup Virtual Binding
+			$strAlias = $strAliasPrefix . 'lraassessmentasgroup__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objLraAssessmentAsGroupArray[] = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objLraAssessmentAsGroup = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for SeasonalAssessmentAsGroup Virtual Binding
+			$strAlias = $strAliasPrefix . 'seasonalassessmentasgroup__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objSeasonalAssessmentAsGroupArray[] = SeasonalAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'seasonalassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objSeasonalAssessmentAsGroup = SeasonalAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'seasonalassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
 			// Check for TenFAssessmentAsGroup Virtual Binding
 			$strAlias = $strAliasPrefix . 'tenfassessmentasgroup__id';
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
@@ -719,6 +877,16 @@
 					$objToReturn->_objTenPAssessmentAsGroupArray[] = TenPAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenpassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objTenPAssessmentAsGroup = TenPAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenpassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for TimeAssessmentAsGroup Virtual Binding
+			$strAlias = $strAliasPrefix . 'timeassessmentasgroup__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objTimeAssessmentAsGroupArray[] = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objTimeAssessmentAsGroup = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			return $objToReturn;
@@ -1180,6 +1348,18 @@
 					// @return User[]
 					return (array) $this->_objUserAsAssessmentManagerArray;
 
+				case '_IntegrationAssessmentAsGroup':
+					// Gets the value for the private _objIntegrationAssessmentAsGroup (Read-Only)
+					// if set due to an expansion on the integration_assessment.group_id reverse relationship
+					// @return IntegrationAssessment
+					return $this->_objIntegrationAssessmentAsGroup;
+
+				case '_IntegrationAssessmentAsGroupArray':
+					// Gets the value for the private _objIntegrationAssessmentAsGroupArray (Read-Only)
+					// if set due to an ExpandAsArray on the integration_assessment.group_id reverse relationship
+					// @return IntegrationAssessment[]
+					return (array) $this->_objIntegrationAssessmentAsGroupArray;
+
 				case '_KingdomBusinessAssessmentAsGroup':
 					// Gets the value for the private _objKingdomBusinessAssessmentAsGroup (Read-Only)
 					// if set due to an expansion on the kingdom_business_assessment.group_id reverse relationship
@@ -1204,6 +1384,30 @@
 					// @return LemonAssessment[]
 					return (array) $this->_objLemonAssessmentAsGroupArray;
 
+				case '_LraAssessmentAsGroup':
+					// Gets the value for the private _objLraAssessmentAsGroup (Read-Only)
+					// if set due to an expansion on the lra_assessment.group_id reverse relationship
+					// @return LraAssessment
+					return $this->_objLraAssessmentAsGroup;
+
+				case '_LraAssessmentAsGroupArray':
+					// Gets the value for the private _objLraAssessmentAsGroupArray (Read-Only)
+					// if set due to an ExpandAsArray on the lra_assessment.group_id reverse relationship
+					// @return LraAssessment[]
+					return (array) $this->_objLraAssessmentAsGroupArray;
+
+				case '_SeasonalAssessmentAsGroup':
+					// Gets the value for the private _objSeasonalAssessmentAsGroup (Read-Only)
+					// if set due to an expansion on the seasonal_assessment.group_id reverse relationship
+					// @return SeasonalAssessment
+					return $this->_objSeasonalAssessmentAsGroup;
+
+				case '_SeasonalAssessmentAsGroupArray':
+					// Gets the value for the private _objSeasonalAssessmentAsGroupArray (Read-Only)
+					// if set due to an ExpandAsArray on the seasonal_assessment.group_id reverse relationship
+					// @return SeasonalAssessment[]
+					return (array) $this->_objSeasonalAssessmentAsGroupArray;
+
 				case '_TenFAssessmentAsGroup':
 					// Gets the value for the private _objTenFAssessmentAsGroup (Read-Only)
 					// if set due to an expansion on the ten_f_assessment.group_id reverse relationship
@@ -1227,6 +1431,18 @@
 					// if set due to an ExpandAsArray on the ten_p_assessment.group_id reverse relationship
 					// @return TenPAssessment[]
 					return (array) $this->_objTenPAssessmentAsGroupArray;
+
+				case '_TimeAssessmentAsGroup':
+					// Gets the value for the private _objTimeAssessmentAsGroup (Read-Only)
+					// if set due to an expansion on the time_assessment.group_id reverse relationship
+					// @return TimeAssessment
+					return $this->_objTimeAssessmentAsGroup;
+
+				case '_TimeAssessmentAsGroupArray':
+					// Gets the value for the private _objTimeAssessmentAsGroupArray (Read-Only)
+					// if set due to an ExpandAsArray on the time_assessment.group_id reverse relationship
+					// @return TimeAssessment[]
+					return (array) $this->_objTimeAssessmentAsGroupArray;
 
 
 				case '__Restored':
@@ -1371,6 +1587,188 @@
 		///////////////////////////////
 		// ASSOCIATED OBJECTS' METHODS
 		///////////////////////////////
+
+			
+		
+		// Related Objects' Methods for IntegrationAssessmentAsGroup
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated IntegrationAssessmentsAsGroup as an array of IntegrationAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return IntegrationAssessment[]
+		*/ 
+		public function GetIntegrationAssessmentAsGroupArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return IntegrationAssessment::LoadArrayByGroupId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated IntegrationAssessmentsAsGroup
+		 * @return int
+		*/ 
+		public function CountIntegrationAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return IntegrationAssessment::CountByGroupId($this->intId);
+		}
+
+		/**
+		 * Associates a IntegrationAssessmentAsGroup
+		 * @param IntegrationAssessment $objIntegrationAssessment
+		 * @return void
+		*/ 
+		public function AssociateIntegrationAssessmentAsGroup(IntegrationAssessment $objIntegrationAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateIntegrationAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objIntegrationAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateIntegrationAssessmentAsGroup on this GroupAssessmentList with an unsaved IntegrationAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`integration_assessment`
+				SET
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objIntegrationAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objIntegrationAssessment->GroupId = $this->intId;
+				$objIntegrationAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a IntegrationAssessmentAsGroup
+		 * @param IntegrationAssessment $objIntegrationAssessment
+		 * @return void
+		*/ 
+		public function UnassociateIntegrationAssessmentAsGroup(IntegrationAssessment $objIntegrationAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objIntegrationAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessmentAsGroup on this GroupAssessmentList with an unsaved IntegrationAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`integration_assessment`
+				SET
+					`group_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objIntegrationAssessment->Id) . ' AND
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objIntegrationAssessment->GroupId = null;
+				$objIntegrationAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all IntegrationAssessmentsAsGroup
+		 * @return void
+		*/ 
+		public function UnassociateAllIntegrationAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessmentAsGroup on this unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (IntegrationAssessment::LoadArrayByGroupId($this->intId) as $objIntegrationAssessment) {
+					$objIntegrationAssessment->GroupId = null;
+					$objIntegrationAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`integration_assessment`
+				SET
+					`group_id` = null
+				WHERE
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated IntegrationAssessmentAsGroup
+		 * @param IntegrationAssessment $objIntegrationAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedIntegrationAssessmentAsGroup(IntegrationAssessment $objIntegrationAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objIntegrationAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessmentAsGroup on this GroupAssessmentList with an unsaved IntegrationAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`integration_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objIntegrationAssessment->Id) . ' AND
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objIntegrationAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated IntegrationAssessmentsAsGroup
+		 * @return void
+		*/ 
+		public function DeleteAllIntegrationAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessmentAsGroup on this unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (IntegrationAssessment::LoadArrayByGroupId($this->intId) as $objIntegrationAssessment) {
+					$objIntegrationAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`integration_assessment`
+				WHERE
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
 
 			
 		
@@ -1731,6 +2129,370 @@
 			$objDatabase->NonQuery('
 				DELETE FROM
 					`lemon_assessment`
+				WHERE
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for LraAssessmentAsGroup
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated LraAssessmentsAsGroup as an array of LraAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return LraAssessment[]
+		*/ 
+		public function GetLraAssessmentAsGroupArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return LraAssessment::LoadArrayByGroupId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated LraAssessmentsAsGroup
+		 * @return int
+		*/ 
+		public function CountLraAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return LraAssessment::CountByGroupId($this->intId);
+		}
+
+		/**
+		 * Associates a LraAssessmentAsGroup
+		 * @param LraAssessment $objLraAssessment
+		 * @return void
+		*/ 
+		public function AssociateLraAssessmentAsGroup(LraAssessment $objLraAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateLraAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objLraAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateLraAssessmentAsGroup on this GroupAssessmentList with an unsaved LraAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lra_assessment`
+				SET
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLraAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objLraAssessment->GroupId = $this->intId;
+				$objLraAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a LraAssessmentAsGroup
+		 * @param LraAssessment $objLraAssessment
+		 * @return void
+		*/ 
+		public function UnassociateLraAssessmentAsGroup(LraAssessment $objLraAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objLraAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessmentAsGroup on this GroupAssessmentList with an unsaved LraAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lra_assessment`
+				SET
+					`group_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLraAssessment->Id) . ' AND
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objLraAssessment->GroupId = null;
+				$objLraAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all LraAssessmentsAsGroup
+		 * @return void
+		*/ 
+		public function UnassociateAllLraAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessmentAsGroup on this unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (LraAssessment::LoadArrayByGroupId($this->intId) as $objLraAssessment) {
+					$objLraAssessment->GroupId = null;
+					$objLraAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lra_assessment`
+				SET
+					`group_id` = null
+				WHERE
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated LraAssessmentAsGroup
+		 * @param LraAssessment $objLraAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedLraAssessmentAsGroup(LraAssessment $objLraAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objLraAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessmentAsGroup on this GroupAssessmentList with an unsaved LraAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`lra_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLraAssessment->Id) . ' AND
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objLraAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated LraAssessmentsAsGroup
+		 * @return void
+		*/ 
+		public function DeleteAllLraAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessmentAsGroup on this unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (LraAssessment::LoadArrayByGroupId($this->intId) as $objLraAssessment) {
+					$objLraAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`lra_assessment`
+				WHERE
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for SeasonalAssessmentAsGroup
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated SeasonalAssessmentsAsGroup as an array of SeasonalAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return SeasonalAssessment[]
+		*/ 
+		public function GetSeasonalAssessmentAsGroupArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return SeasonalAssessment::LoadArrayByGroupId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated SeasonalAssessmentsAsGroup
+		 * @return int
+		*/ 
+		public function CountSeasonalAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return SeasonalAssessment::CountByGroupId($this->intId);
+		}
+
+		/**
+		 * Associates a SeasonalAssessmentAsGroup
+		 * @param SeasonalAssessment $objSeasonalAssessment
+		 * @return void
+		*/ 
+		public function AssociateSeasonalAssessmentAsGroup(SeasonalAssessment $objSeasonalAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateSeasonalAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objSeasonalAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateSeasonalAssessmentAsGroup on this GroupAssessmentList with an unsaved SeasonalAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`seasonal_assessment`
+				SET
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objSeasonalAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objSeasonalAssessment->GroupId = $this->intId;
+				$objSeasonalAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a SeasonalAssessmentAsGroup
+		 * @param SeasonalAssessment $objSeasonalAssessment
+		 * @return void
+		*/ 
+		public function UnassociateSeasonalAssessmentAsGroup(SeasonalAssessment $objSeasonalAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objSeasonalAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessmentAsGroup on this GroupAssessmentList with an unsaved SeasonalAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`seasonal_assessment`
+				SET
+					`group_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objSeasonalAssessment->Id) . ' AND
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objSeasonalAssessment->GroupId = null;
+				$objSeasonalAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all SeasonalAssessmentsAsGroup
+		 * @return void
+		*/ 
+		public function UnassociateAllSeasonalAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessmentAsGroup on this unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (SeasonalAssessment::LoadArrayByGroupId($this->intId) as $objSeasonalAssessment) {
+					$objSeasonalAssessment->GroupId = null;
+					$objSeasonalAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`seasonal_assessment`
+				SET
+					`group_id` = null
+				WHERE
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated SeasonalAssessmentAsGroup
+		 * @param SeasonalAssessment $objSeasonalAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedSeasonalAssessmentAsGroup(SeasonalAssessment $objSeasonalAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objSeasonalAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessmentAsGroup on this GroupAssessmentList with an unsaved SeasonalAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`seasonal_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objSeasonalAssessment->Id) . ' AND
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objSeasonalAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated SeasonalAssessmentsAsGroup
+		 * @return void
+		*/ 
+		public function DeleteAllSeasonalAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessmentAsGroup on this unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (SeasonalAssessment::LoadArrayByGroupId($this->intId) as $objSeasonalAssessment) {
+					$objSeasonalAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`seasonal_assessment`
 				WHERE
 					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
@@ -2101,6 +2863,188 @@
 		}
 
 			
+		
+		// Related Objects' Methods for TimeAssessmentAsGroup
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated TimeAssessmentsAsGroup as an array of TimeAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return TimeAssessment[]
+		*/ 
+		public function GetTimeAssessmentAsGroupArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return TimeAssessment::LoadArrayByGroupId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated TimeAssessmentsAsGroup
+		 * @return int
+		*/ 
+		public function CountTimeAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return TimeAssessment::CountByGroupId($this->intId);
+		}
+
+		/**
+		 * Associates a TimeAssessmentAsGroup
+		 * @param TimeAssessment $objTimeAssessment
+		 * @return void
+		*/ 
+		public function AssociateTimeAssessmentAsGroup(TimeAssessment $objTimeAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateTimeAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objTimeAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateTimeAssessmentAsGroup on this GroupAssessmentList with an unsaved TimeAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`time_assessment`
+				SET
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objTimeAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objTimeAssessment->GroupId = $this->intId;
+				$objTimeAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a TimeAssessmentAsGroup
+		 * @param TimeAssessment $objTimeAssessment
+		 * @return void
+		*/ 
+		public function UnassociateTimeAssessmentAsGroup(TimeAssessment $objTimeAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objTimeAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessmentAsGroup on this GroupAssessmentList with an unsaved TimeAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`time_assessment`
+				SET
+					`group_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objTimeAssessment->Id) . ' AND
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objTimeAssessment->GroupId = null;
+				$objTimeAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all TimeAssessmentsAsGroup
+		 * @return void
+		*/ 
+		public function UnassociateAllTimeAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessmentAsGroup on this unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (TimeAssessment::LoadArrayByGroupId($this->intId) as $objTimeAssessment) {
+					$objTimeAssessment->GroupId = null;
+					$objTimeAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`time_assessment`
+				SET
+					`group_id` = null
+				WHERE
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated TimeAssessmentAsGroup
+		 * @param TimeAssessment $objTimeAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedTimeAssessmentAsGroup(TimeAssessment $objTimeAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objTimeAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessmentAsGroup on this GroupAssessmentList with an unsaved TimeAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`time_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objTimeAssessment->Id) . ' AND
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objTimeAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated TimeAssessmentsAsGroup
+		 * @return void
+		*/ 
+		public function DeleteAllTimeAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessmentAsGroup on this unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (TimeAssessment::LoadArrayByGroupId($this->intId) as $objTimeAssessment) {
+					$objTimeAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`time_assessment`
+				WHERE
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
 		// Related Many-to-Many Objects' Methods for UserAsAssessmentManager
 		//-------------------------------------------------------------------
 
@@ -2412,10 +3356,14 @@
 	 * @property-read QQNode $KeyCode
 	 * @property-read QQNode $Description
 	 * @property-read QQNodeGroupAssessmentListUserAsAssessmentManager $UserAsAssessmentManager
+	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessmentAsGroup
+	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessmentAsGroup
+	 * @property-read QQReverseReferenceNodeSeasonalAssessment $SeasonalAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeTenPAssessment $TenPAssessmentAsGroup
+	 * @property-read QQReverseReferenceNodeTimeAssessment $TimeAssessmentAsGroup
 	 */
 	class QQNodeGroupAssessmentList extends QQNode {
 		protected $strTableName = 'group_assessment_list';
@@ -2439,14 +3387,22 @@
 					return new QQNode('description', 'Description', 'string', $this);
 				case 'UserAsAssessmentManager':
 					return new QQNodeGroupAssessmentListUserAsAssessmentManager($this);
+				case 'IntegrationAssessmentAsGroup':
+					return new QQReverseReferenceNodeIntegrationAssessment($this, 'integrationassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'KingdomBusinessAssessmentAsGroup':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'LemonAssessmentAsGroup':
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessmentasgroup', 'reverse_reference', 'group_id');
+				case 'LraAssessmentAsGroup':
+					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessmentasgroup', 'reverse_reference', 'group_id');
+				case 'SeasonalAssessmentAsGroup':
+					return new QQReverseReferenceNodeSeasonalAssessment($this, 'seasonalassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'TenFAssessmentAsGroup':
 					return new QQReverseReferenceNodeTenFAssessment($this, 'tenfassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'TenPAssessmentAsGroup':
 					return new QQReverseReferenceNodeTenPAssessment($this, 'tenpassessmentasgroup', 'reverse_reference', 'group_id');
+				case 'TimeAssessmentAsGroup':
+					return new QQReverseReferenceNodeTimeAssessment($this, 'timeassessmentasgroup', 'reverse_reference', 'group_id');
 
 				case '_PrimaryKeyNode':
 					return new QQNode('id', 'Id', 'integer', $this);
@@ -2470,10 +3426,14 @@
 	 * @property-read QQNode $KeyCode
 	 * @property-read QQNode $Description
 	 * @property-read QQNodeGroupAssessmentListUserAsAssessmentManager $UserAsAssessmentManager
+	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessmentAsGroup
+	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessmentAsGroup
+	 * @property-read QQReverseReferenceNodeSeasonalAssessment $SeasonalAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeTenPAssessment $TenPAssessmentAsGroup
+	 * @property-read QQReverseReferenceNodeTimeAssessment $TimeAssessmentAsGroup
 	 * @property-read QQNode $_PrimaryKeyNode
 	 */
 	class QQReverseReferenceNodeGroupAssessmentList extends QQReverseReferenceNode {
@@ -2498,14 +3458,22 @@
 					return new QQNode('description', 'Description', 'string', $this);
 				case 'UserAsAssessmentManager':
 					return new QQNodeGroupAssessmentListUserAsAssessmentManager($this);
+				case 'IntegrationAssessmentAsGroup':
+					return new QQReverseReferenceNodeIntegrationAssessment($this, 'integrationassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'KingdomBusinessAssessmentAsGroup':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'LemonAssessmentAsGroup':
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessmentasgroup', 'reverse_reference', 'group_id');
+				case 'LraAssessmentAsGroup':
+					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessmentasgroup', 'reverse_reference', 'group_id');
+				case 'SeasonalAssessmentAsGroup':
+					return new QQReverseReferenceNodeSeasonalAssessment($this, 'seasonalassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'TenFAssessmentAsGroup':
 					return new QQReverseReferenceNodeTenFAssessment($this, 'tenfassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'TenPAssessmentAsGroup':
 					return new QQReverseReferenceNodeTenPAssessment($this, 'tenpassessmentasgroup', 'reverse_reference', 'group_id');
+				case 'TimeAssessmentAsGroup':
+					return new QQReverseReferenceNodeTimeAssessment($this, 'timeassessmentasgroup', 'reverse_reference', 'group_id');
 
 				case '_PrimaryKeyNode':
 					return new QQNode('id', 'Id', 'integer', $this);

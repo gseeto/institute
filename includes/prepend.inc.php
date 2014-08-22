@@ -29,7 +29,7 @@
 		 * Finally, make sure you check and update configuration.inc.php and ensure
 		 * all the constants are configured correctly.
 		 */
-		if (!file_exists(dirname(__FILE__) . '/configuration.inc.php'))
+		if (!is_file(dirname(__FILE__) . '/configuration.inc.php'))
 			exit('error: configuration.inc.php missing from includes/ directory; copy includes/qcodo/_core/configuration.inc.php-dist to the includes/ directory');
 		require(dirname(__FILE__) . '/configuration.inc.php');
 		if (realpath(__FILE__) != realpath(__INCLUDES__ . '/prepend.inc.php'))

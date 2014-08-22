@@ -145,9 +145,11 @@
 			var strNextYear = (intViewYear + 1) + ',' + intViewMonth;
 
 			var strNavigator = '<div class="navigator">';
-			strNavigator += '<div class="left"><a href="#" onclick="qc.getC(\'' + this.id + '\').drawCalendar(' + strPreviousMonth + ');return false;">&laquo;</a></div>';
-			strNavigator += '<div class="month">' + qcodo.monthNames[intViewMonth] + '</div>';
-			strNavigator += '<div class="left"><a href="#" onclick="qc.getC(\'' + this.id + '\').drawCalendar(' + strNextMonth + ');return false;">&raquo;</a></div>';
+			strNavigator += '<div style="position: relative; left:40px; width:160px;">';
+			strNavigator += '<span class="left"><a href="#" onclick="qc.getC(\'' + this.id + '\').drawCalendar(' + strPreviousMonth + ');return false;">&laquo;</a></span>';
+			strNavigator += '<span class="month">' + qcodo.monthNames[intViewMonth] + '</span>';
+			strNavigator += '<span class="left"><a href="#" onclick="qc.getC(\'' + this.id + '\').drawCalendar(' + strNextMonth + ');return false;">&raquo;</a></span>';
+			strNavigator += '</div>';
 			strNavigator += '<div class="year"><a href="#" onclick="qc.getC(\'' + this.id + '\').drawCalendar(' + strPreviousYear + ');return false;">&laquo;</a>';
 			strNavigator += '<span>' + intViewYear + '</span>';
 			strNavigator += '<a href="#" onclick="qc.getC(\'' + this.id + '\').drawCalendar(' + strNextYear + ');return false;">&raquo;</a></div>';

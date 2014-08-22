@@ -40,6 +40,18 @@
 		}
 
 		/**
+		 * Overriding QApplicationBase
+		 * @return void
+		 */
+		public static function InitializeAutoIncludes() {
+			$strFile = sprintf('%s/auto_includes/i18n.inc.php', __INCLUDES__);
+				if (is_file($strFile)) require($strFile);
+				
+			$strFile = sprintf('%s/auto_includes/login.inc.php', __INCLUDES__);
+				if (is_file($strFile)) require($strFile);
+		}
+		
+		/**
 		 * Method will setup Internationalization.
 		 * NOTE: This method has been INTENTIONALLY left incomplete.
 		 * @return void
@@ -101,24 +113,6 @@
 				// Otherwise, process
 				} else {
 					QApplication::$LoginId = QApplication::$Login->Id;
-					
-					// Update the NavBar based on Login
-					/*if (QApplication::$Login->RoleTypeId != RoleType::ChMSAdministrator) {
-						unset(ChmsForm::$NavSectionArray[ChmsForm::NavSectionAdministration]);
-					}
-
-					if (!QApplication::$Login->IsPermissionAllowed(PermissionType::AccessStewardship)) {
-						unset(ChmsForm::$NavSectionArray[ChmsForm::NavSectionStewardship]);
-					}
-					
-					if (!QApplication::$Login->IsPermissionAllowed(PermissionType::ManageClassifieds)) {
-						unset(ChmsForm::$NavSectionArray[ChmsForm::NavSectionClassifieds]);
-					}
-					
-					if (!QApplication::$Login->IsPermissionAllowed(PermissionType::ManageClasses)) {
-						ChmsForm::$NavSectionArray[ChmsForm::NavSectionEvents][0] = 'Events';
-					}
-					*/
 				}
 				
 			}
@@ -144,7 +138,7 @@
 			unset($_SESSION['intLoginId']);
 			QApplication::$Login = null;
 			QApplication::$LoginId = null;
-			QApplication::Redirect('/resources/home/');
+			QApplication::Redirect(__SUBDIRECTORY__.'/home/');
 		}
 	}
 ?>

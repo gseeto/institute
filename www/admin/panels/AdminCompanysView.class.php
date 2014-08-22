@@ -41,11 +41,11 @@
 	
 	        $objStyle = $this->dtgCompanys->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        
 	        $objStyle = $this->dtgCompanys->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        
 	        $this->btnAdd = new QButton($this);
 	        $this->btnAdd->Text = 'Add A Company';
@@ -91,7 +91,7 @@
 		}   	
 		
 	    public function btnAdd_Click($strFormId, $strControlId, $strParameter) {
-			QApplication::Redirect('/resources/admin/newCompany.php');
+			QApplication::Redirect(__SUBDIRECTORY__.'/admin/newCompany.php');
 		}
 		
     }

@@ -5,7 +5,7 @@
 <?php $this->txtLastName->RenderWithName(); ?>
 <?php $this->txtEmail->RenderWithName(); ?>  
 <?php $this->lstGender->RenderWithName(); ?> 
-<?php $this->txtCountry->RenderWithName(); ?> 
+<?php $this->lstCountry->RenderWithName(); ?> 
 <?php $this->txtUserName->RenderWithName(); ?> 
 <?php $this->txtPassword->RenderWithName(); ?> 
 <?php $this->lstRole->RenderWithName(); ?> 

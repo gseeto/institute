@@ -1,10 +1,10 @@
 <div class='subsection'>
 	<h3>Add A Group Assessment</h3>
-	<div> Key Code: <?php $_CONTROL->txtKeyCode->Render(); ?> </div>
-	<div> Description: <?php $_CONTROL->txtDescription->Render(); ?> </div>
-	<div> Total Keys: <?php $_CONTROL->txtTotalKeys->Render(); ?></div>
-	<div> Keys Left: <?php $_CONTROL->txtKeysLeft->Render(); ?></div>
-	<div> Assessment Type: <?php $_CONTROL->lstAssessmentType->Render(); ?></div>
+	<div> <?php $_CONTROL->txtKeyCode->RenderWithName(); ?> </div>
+	<div> <?php $_CONTROL->txtDescription->RenderWithName(); ?> </div>
+	<div> <?php $_CONTROL->txtTotalKeys->RenderWithName(); ?></div>
+	<div> <?php $_CONTROL->txtKeysLeft->RenderWithName(); ?></div>
+	<div> <?php $_CONTROL->lstAssessmentType->RenderWithName(); ?></div>
 	<div class="cleaner">&nbsp;</div>
 <br>
 <?php $_CONTROL->btnSubmit->Render(); ?>

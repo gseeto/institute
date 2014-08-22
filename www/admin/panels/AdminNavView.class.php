@@ -46,12 +46,12 @@
             $this->btnScorecards->Text = 'Scorecards';
             $this->btnScorecards->CssClass = 'SideNavButton';
             $this->btnScorecards->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnScorecards_Click'));
-            
+        
             $this->btnAssessments = new QButton($this);
             $this->btnAssessments->Name = 'Assessments';
             $this->btnAssessments->Text = 'Assessments';
             $this->btnAssessments->CssClass = 'SideNavButton';
-            $this->btnAssessments->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnAssessments_Click'));
+            $this->btnAssessments->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnAssessments_Click'));            
             
             // Initialize main content panel
             $pnlMain = $this->objForm->GetControl($this->strPanelMainControlId);
@@ -119,7 +119,7 @@
         
     	public function btnAssessments_Click($strFormId, $strControlId, $strParameter) {
             $pnlMain = $this->objForm->GetControl($this->strPanelMainControlId);
-            // First, remove all children panels from pnlMain. Then populate it
+            // First, remove all children panels from pnlMain. Then populate it          
             $pnlMain->RemoveChildControls(true);
             new AdminAssessmentsView($pnlMain);
             $this->btnAssessments->CssClass = 'SideNavButtonSelected';

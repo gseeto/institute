@@ -1,5 +1,5 @@
 /* SQLEditor (MySQL (2))*/
-use brettj_institute;
+use institute;
 
 CREATE TABLE `spheres`
 (

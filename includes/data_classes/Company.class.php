@@ -27,7 +27,14 @@
 			return sprintf('Company Object %s',  $this->intId);
 		}
 
-
+		public static function LoadArrayByName($strName, $objOptionalClauses = null) {
+			// This will return an array of Company objects
+			return Company::QueryArray(
+				QQ::AndCondition(
+					QQ::Equal(QQN::Company()->Name, $strName)),
+				$objOptionalClauses
+			);
+		}
 		// Override or Create New Load/Count methods
 		// (For obvious reasons, these methods are commented out...
 		// but feel free to use these as a starting point)

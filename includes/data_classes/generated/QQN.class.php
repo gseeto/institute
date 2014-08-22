@@ -37,6 +37,12 @@
 			return new QQNodeCompany('company', null, null);
 		}
 		/**
+		 * @return QQNodeCountryList
+		 */
+		static public function CountryList() {
+			return new QQNodeCountryList('country_list', null, null);
+		}
+		/**
 		 * @return QQNodeGiants
 		 */
 		static public function Giants() {
@@ -53,6 +59,24 @@
 		 */
 		static public function Industry() {
 			return new QQNodeIndustry('industry', null, null);
+		}
+		/**
+		 * @return QQNodeIntegrationAssessment
+		 */
+		static public function IntegrationAssessment() {
+			return new QQNodeIntegrationAssessment('integration_assessment', null, null);
+		}
+		/**
+		 * @return QQNodeIntegrationQuestions
+		 */
+		static public function IntegrationQuestions() {
+			return new QQNodeIntegrationQuestions('integration_questions', null, null);
+		}
+		/**
+		 * @return QQNodeIntegrationResults
+		 */
+		static public function IntegrationResults() {
+			return new QQNodeIntegrationResults('integration_results', null, null);
 		}
 		/**
 		 * @return QQNodeKingdomBusinessAssessment
@@ -103,6 +127,24 @@
 			return new QQNodeLogin('login', null, null);
 		}
 		/**
+		 * @return QQNodeLraAssessment
+		 */
+		static public function LraAssessment() {
+			return new QQNodeLraAssessment('lra_assessment', null, null);
+		}
+		/**
+		 * @return QQNodeLraQuestions
+		 */
+		static public function LraQuestions() {
+			return new QQNodeLraQuestions('lra_questions', null, null);
+		}
+		/**
+		 * @return QQNodeLraResults
+		 */
+		static public function LraResults() {
+			return new QQNodeLraResults('lra_results', null, null);
+		}
+		/**
 		 * @return QQNodeResource
 		 */
 		static public function Resource() {
@@ -125,6 +167,24 @@
 		 */
 		static public function Scorecard() {
 			return new QQNodeScorecard('scorecard', null, null);
+		}
+		/**
+		 * @return QQNodeSeasonalAssessment
+		 */
+		static public function SeasonalAssessment() {
+			return new QQNodeSeasonalAssessment('seasonal_assessment', null, null);
+		}
+		/**
+		 * @return QQNodeSeasonalQuestions
+		 */
+		static public function SeasonalQuestions() {
+			return new QQNodeSeasonalQuestions('seasonal_questions', null, null);
+		}
+		/**
+		 * @return QQNodeSeasonalResults
+		 */
+		static public function SeasonalResults() {
+			return new QQNodeSeasonalResults('seasonal_results', null, null);
 		}
 		/**
 		 * @return QQNodeSpheres
@@ -185,6 +245,30 @@
 		 */
 		static public function TenPResults() {
 			return new QQNodeTenPResults('ten_p_results', null, null);
+		}
+		/**
+		 * @return QQNodeTenureList
+		 */
+		static public function TenureList() {
+			return new QQNodeTenureList('tenure_list', null, null);
+		}
+		/**
+		 * @return QQNodeTimeAssessment
+		 */
+		static public function TimeAssessment() {
+			return new QQNodeTimeAssessment('time_assessment', null, null);
+		}
+		/**
+		 * @return QQNodeTimeResults
+		 */
+		static public function TimeResults() {
+			return new QQNodeTimeResults('time_results', null, null);
+		}
+		/**
+		 * @return QQNodeTitleList
+		 */
+		static public function TitleList() {
+			return new QQNodeTitleList('title_list', null, null);
 		}
 		/**
 		 * @return QQNodeUser

@@ -6,10 +6,9 @@
 	<p>If this is disabled it is because you are not a manager.</p>
 	<?php $this->btnGroupAssessments->Render();?>
 </div>
-<div class="section" style="width:400px; height:400px;">
+<div class="section" style="width:400px; height:800px;">
 	<p>Only the assessments you have requested will be enabled.</p>
 	<p>If you wish to purchase additional assessments, please contact info@inst.net.</p>
-	<p>Sooner or later I'll automate it too though, and include a payment system.</p>
 	<ul style='list-style: none; 
 			width:100px;
 			padding:5px;'>

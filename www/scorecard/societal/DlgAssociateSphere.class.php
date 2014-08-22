@@ -55,14 +55,14 @@
         	foreach($this->chkSpheres as $chkSphere) {
         		$objSphere = Spheres::Load($chkSphere->Name);
         		if($chkSphere->Checked) {
-        			$this->strAssociatedSpheres .= $chkSphere->Text . ',';  
+        			$this->strAssociatedSpheres .= $chkSphere->Text . '<br>';  
         			if (!$objStrategy->IsSpheresAsSphereAssociated($objSphere))    			
         				$objStrategy->AssociateSpheresAsSphere($objSphere);
         		} else {
         			$objStrategy->UnassociateSpheresAsSphere($objSphere);
         		}
         	}  
-        	trim($this->strAssociatedSpheres,',');
+        	trim($this->strAssociatedSpheres,'<br>');
             call_user_func(array($this->objForm, $this->strCloseCallback));
             $this->HideDialogBox();
         }
@@ -72,7 +72,7 @@
          */
         public function ShowDialogBox() {
             parent::ShowDialogBox();
-            $associatedArray = explode(',',$this->strAssociatedSpheres);
+            $associatedArray = explode('<br>',$this->strAssociatedSpheres);
             foreach($this->chkSpheres as $chkSphere) {
         		if(in_array($chkSphere->Text,$associatedArray))
         			$chkSphere->Checked = true;

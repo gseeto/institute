@@ -19,7 +19,7 @@ class EditCannedStrategy extends InstituteForm {
    
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {
@@ -96,7 +96,7 @@ class EditCannedStrategy extends InstituteForm {
         	$this->objStrategy->Strategy = $this->strStrategy->Text;
         	$this->objStrategy->CategoryTypeId = $this->lstCategory->SelectedValue;
         	$this->objStrategy->Save();
-        	QApplication::Redirect('/resources/admin/index.php/scorecards');
+        	QApplication::Redirect(__SUBDIRECTORY__.'/admin/index.php/scorecards');
 		}
 		 
         public function btnActionAdd_Click($strFormId, $strControlId, $strParameter) {

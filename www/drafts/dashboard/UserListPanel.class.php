@@ -71,10 +71,10 @@
 			$this->dtgUsers->MetaAddColumn('LastName');
 			$this->dtgUsers->MetaAddColumn('Email');
 			$this->dtgUsers->MetaAddColumn('Gender');
-			$this->dtgUsers->MetaAddColumn('Country');
+			$this->dtgUsers->MetaAddColumn(QQN::User()->Country);
 			$this->dtgUsers->MetaAddColumn('Department');
-			$this->dtgUsers->MetaAddColumn('Title');
-			$this->dtgUsers->MetaAddColumn('Tenure');
+			$this->dtgUsers->MetaAddColumn(QQN::User()->Title);
+			$this->dtgUsers->MetaAddColumn(QQN::User()->Tenure);
 			$this->dtgUsers->MetaAddColumn('CareerLength');
 
 			// Setup the Create New button

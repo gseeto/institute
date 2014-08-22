@@ -61,6 +61,12 @@
 			$this->dtgLemonAssessments->MetaAddColumn(QQN::LemonAssessment()->Resource);
 			$this->dtgLemonAssessments->MetaAddColumn('ResourceStatusId');
 			$this->dtgLemonAssessments->MetaAddColumn(QQN::LemonAssessment()->Group);
+			$this->dtgLemonAssessments->MetaAddColumn('L');
+			$this->dtgLemonAssessments->MetaAddColumn('E');
+			$this->dtgLemonAssessments->MetaAddColumn('M');
+			$this->dtgLemonAssessments->MetaAddColumn('O');
+			$this->dtgLemonAssessments->MetaAddColumn('N');
+			$this->dtgLemonAssessments->MetaAddColumn('DateModified');
 		}
 	}
 

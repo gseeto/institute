@@ -12,6 +12,8 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
         public $pnlAddScorecard;
         public $btnAddUser;
         public $pnlAddUser;
+        public $btnRemoveUser;
+        public $pnlRemoveUser;
         public $dtgCannedStrategy;
         public $btnAddCannedStrategy;
         public $pnlAddCannedStrategy;
@@ -25,7 +27,7 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 		public $btnGenerateScorecard;
 		public $lblgenerationFeedback;
         public $lblDebug;
-        
+     
         // Specify the Template File for this custom QPanel
         protected $strTemplate = 'panels/AdminScorecardsView.tpl.php';
 
@@ -43,14 +45,14 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
             $this->lblDebug = new QLabel($this);
             $this->lblDebug->DisplayStyle = QDisplayStyle::Block;
             $this->lblDebug->HtmlEntities = false;
-            
+                
             $this->dtgScorecards = new ScorecardDataGrid($this);
             $this->dtgScorecards->Paginator = new QPaginator($this->dtgScorecards);
 			$this->dtgScorecards->AddColumn(new QDataGridColumn('Scorecard Name', '<?= $_ITEM->Name ?>', 'HtmlEntities=false', 'Width=100px' ));
 			$this->dtgScorecards->AddColumn(new QDataGridColumn('Company', '<?= $_CONTROL->ParentControl->RenderCompany($_ITEM->CompanyId) ?>', 'HtmlEntities=false', 'Width=400px' ));
             $this->dtgScorecards->AddColumn(new QDataGridColumn('Users', '<?= $_CONTROL->ParentControl->RenderUsers($_ITEM) ?>', 'HtmlEntities=false', 'Width=200px' ));
 			$this->dtgScorecards->AddColumn(new QDataGridColumn('Import Scorecard', '<?= $_CONTROL->ParentControl->RenderImport($_ITEM) ?>', 'HtmlEntities=false', 'Width=100px' ));
-            $this->dtgScorecards->MetaAddEditLinkColumn('<?="/resources/admin/panels/ExportScorecard.php/".$_ITEM->Id?>', '<img src=\'/inst/assets/images/download.png\' />Download','Download Scorecard');
+            $this->dtgScorecards->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__."/admin/panels/ExportScorecard.php/".$_ITEM->Id?>', '<img src=\'/inst/assets/images/download.png\' />Download','Download Scorecard');
         	$this->dtgScorecards->CellPadding = 5;
 			$this->dtgScorecards->SetDataBinder('dtgScorecards_Bind',$this);
 			$this->dtgScorecards->NoDataHtml = 'No Scorecards.';
@@ -69,11 +71,11 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 	
 	        $objStyle = $this->dtgScorecards->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        
 	        $objStyle = $this->dtgScorecards->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        
 	        $this->btnAddScorecard = new QButton($this);
 	        $this->btnAddScorecard->Text = 'Add A Scorecard';
@@ -94,11 +96,21 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 	        $this->pnlAddUser->Position = QPosition::Relative;
 	        $this->pnlAddUser->Visible = false;
 	        $this->pnlAddUser->AutoRenderChildren = true;
+	        
+	        $this->btnRemoveUser = new QButton($this);
+	        $this->btnRemoveUser->Text = 'Remove Users From A Scorecard';
+	        $this->btnRemoveUser->CssClass = 'primary';
+	        $this->btnRemoveUser->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnRemoveUser_Click'));
+	        
+	        $this->pnlRemoveUser = new QPanel($this);
+	        $this->pnlRemoveUser->Position = QPosition::Relative;
+	        $this->pnlRemoveUser->Visible = false;
+	        $this->pnlRemoveUser->AutoRenderChildren = true;
 			/*************************/
 	        $this->dtgCannedStrategy = new CannedStrategyDataGrid($this);
 	        $this->dtgCannedStrategy->Paginator = new QPaginator($this->dtgCannedStrategy);
 			$this->dtgCannedStrategy->AddColumn(new QDataGridColumn('Index', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>'));
-			$this->dtgCannedStrategy->MetaAddEditLinkColumn('/resources/admin/EditCannedStrategy.php', '<?= $_ITEM->Strategy ?>','Canned Strategy');
+			$this->dtgCannedStrategy->MetaAddEditLinkColumn(__SUBDIRECTORY__.'/admin/EditCannedStrategy.php', '<?= $_ITEM->Strategy ?>','Canned Strategy');
 			$this->dtgCannedStrategy->MetaAddTypeColumn('CategoryTypeId', 'CategoryType');
             $this->dtgCannedStrategy->AddColumn(new QDataGridColumn('Actions', '<?= $_CONTROL->ParentControl->RenderActions($_ITEM->Id) ?>', 'HtmlEntities=false', 'Width=200px' ));
 			$this->dtgCannedStrategy->AddColumn(new QDataGridColumn('KPIs', '<?= $_CONTROL->ParentControl->RenderKPIs($_ITEM->Id) ?>', 'HtmlEntities=false', 'Width=200px' ));
@@ -122,11 +134,11 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 	
 	        $objStyle = $this->dtgCannedStrategy->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        
 	        $objStyle = $this->dtgCannedStrategy->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        
 	        $this->btnAddCannedStrategy = new QButton($this);
 	        $this->btnAddCannedStrategy->Text = 'Add A Canned Strategy';
@@ -165,11 +177,11 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 	
 	        $objStyle = $this->dtgRule->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        
 	        $objStyle = $this->dtgRule->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 
 			$this->btnAddRule = new QButton($this);
 	        $this->btnAddRule->Text = 'Add A Rule';
@@ -332,9 +344,15 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
         
         public function RenderUsers($objScorecard) {
         	$strUsers = '';
+        	$linebreak = 6; // line break every 6 people
+        	$i = 1;
         	$userArray = $objScorecard->GetUserArray();
         	foreach($userArray as $objUser) {
         		$strUsers .= Login::Load($objUser->LoginId)->Username .',';
+        		if($i % $linebreak === 0) {
+        			$strUsers .= "<br>";
+        		}
+        		$i++;
         	}
         	$strUsers = rtrim($strUsers,',');
         	return $strUsers;
@@ -346,7 +364,7 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
         	if (!$objFile) {
 	        	$objFile = new QFileUploader($this->dtgScorecards,$strControlId);
 	        	$objFile->ActionParameter = $objScorecard->Id;
-	        	$objFile->TemporaryUploadFolder =  __DOCROOT__ . '/resources/scorecard/temp_uploads';
+	        	$objFile->TemporaryUploadFolder =  __DOCROOT__ . __SUBDIRECTORY__.'/scorecard/temp_uploads';
 	        	$objFile->SetFileUploadedCallback($this,'ExtractInformation');
         	}
         	return $objFile->Render(false);
@@ -507,7 +525,7 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
         	$imgDownload->HtmlEntities = false;
         	$imgDownload->CssClass = 'link';
         	$imgDownload->ActionParameter = $objScorecard->Id;
-        	$imgDownload->Text = '<href src=\'/resources/admin/panels/exportScorecard.php/'.$objScorecard->Id.'\'><img src=\'/inst/assets/images/download.png\' />Download</a>';
+        	$imgDownload->Text = '<href src=\''.__SUBDIRECTORY__.'/admin/panels/exportScorecard.php/'.$objScorecard->Id.'\'><img src=\'/inst/assets/images/download.png\' />Download</a>';
         	//$imgDownload->AddAction(new QClickEvent(),new QAjaxControlAction($this,'imgDownload_Click'));
         	return $imgDownload->Render(false);
         }
@@ -820,7 +838,16 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 			// Open up the panel and allow the adding of users to a scorecard
 	        $this->pnlAddUser->Visible = true;
 	        $this->pnlAddUser->RemoveChildControls(true);
+	        $this->pnlRemoveUser->RemoveChildControls(true);
 	        $pnlAddUserView = new AddScorecardUser($this->pnlAddUser,'UpdateScorecardList',$this);  		
+		}
+    
+		public function btnRemoveUser_Click($strFormId, $strControlId, $strParameter) {
+			// Open up the panel and allow the adding of users to a scorecard
+	        $this->pnlRemoveUser->Visible = true;
+	        $this->pnlRemoveUser->RemoveChildControls(true);
+	        $this->pnlAddUser->RemoveChildControls(true);
+	        $pnlRemoveUserView = new RemoveScorecardUser($this->pnlRemoveUser,'UpdateScorecardList',$this);  		
 		}
 		
     	// Method Call back for the  panels 
@@ -837,4 +864,12 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 	    	$this->dtgRule->PageNumber = 1;
 			$this->dtgRule->Refresh();
 	    }
+	    
+    	// For any JavaScript calls that need to be made whenever this control is rendered or re-rendered
+    	// Need to initialize the jquery tab here.
+		public function GetEndScript() {
+			$strToReturn = parent::GetEndScript();
+			$strToReturn .= '$( "#tabs" ).tabs();';
+			return $strToReturn;
+		}
     }

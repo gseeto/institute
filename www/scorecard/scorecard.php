@@ -12,13 +12,15 @@ class ScorecardForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {
 		$this->objScorecard = Scorecard::Load(QApplication::PathInfo(0));
 		$this->btnCategoryArray = array();
 		$this->dtgPArray = array();
+		
+		$this->initializeChart();
 		
 		// Create a specific button for Summary and by default start there
 		$btnCategory = new QButton($this);
@@ -63,10 +65,10 @@ class ScorecardForm extends InstituteForm {
 			$dtgP->GridLines = QGridLines::Both;
 			$objStyle = $dtgP->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 	        
+	        $objStyle->BackColor = '#0098c3'; 	        
 	        $objStyle = $dtgP->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        	
 	        $objStyle = $dtgP->RowStyle; 
 	        $objStyle->ForeColor = '#888888';
@@ -75,13 +77,36 @@ class ScorecardForm extends InstituteForm {
 			$this->dtgPArray[] = $dtgP;
 		}	
 	}
-			
+
+	protected function initializeChart() {
+		$associatedArray = array(); 		
+		$colorArray = array('#FF0F00','#FF6600','#FF9E01','#FCD202','#F8FF01','#B0DE09','#04D215','#0D8ECF','#0D52D1','#2A0CD0');
+		foreach(CategoryType::$NameArray as $key=>$value) {
+			$categoriesArray[] = $value;
+			$kpiArray = Kpis::LoadArrayByScorecardIdAndCategoryId($this->objScorecard->Id,$key);
+			$ptotal = 0;
+			foreach( $kpiArray as $objKpi) {
+				$ptotal += $objKpi->Rating;
+			}
+			$objItem = new summaryArray();
+			$objItem->P = $value;
+			if(count($kpiArray) == 0) {
+				$objItem->Kpi = 0;
+			}else {
+				$objItem->Kpi  = round($ptotal/count($kpiArray),2);
+			}
+			$objItem->color = $colorArray[$key - 1];
+			$associatedArray[] = $objItem;
+		}
+		QApplication::ExecuteJavaScript('DisplayChart('.json_encode($associatedArray).');');	
+	}
+	
 	public function btnCategory_Clicked($strFormId, $strControlId, $strParameter) {
 		if ($strParameter == 'Summary') {
-			QApplication::Redirect('/resources/scorecard/scorecard.php/'.$this->objScorecard->Id);
+			QApplication::Redirect(__SUBDIRECTORY__.'/scorecard/scorecard.php/'.$this->objScorecard->Id);
 		} else { 
 			$intCategoryId = $strParameter;
-			QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$intCategoryId );
+			QApplication::Redirect(__SUBDIRECTORY__.'/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$intCategoryId );
 		}
     }
     
@@ -100,10 +125,15 @@ class ScorecardForm extends InstituteForm {
     
  	public function btnSubmit_Click() {
 		// redirect to appropriate scorecard
-		QApplication::Redirect('/resources/scorecard/scorecard.php/'.$this->rbnScorecards->SelectedValue);
+		QApplication::Redirect(__SUBDIRECTORY__.'/scorecard/scorecard.php/'.$this->rbnScorecards->SelectedValue);
 	}
 
 }
 
 ScorecardForm::Run('ScorecardForm');
+class summaryArray {
+			public $P;
+			public $Kpi;
+			public $color;
+		}
 ?>

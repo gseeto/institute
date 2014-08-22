@@ -11,10 +11,27 @@ $intAssessmentId = QApplication::PathInfo(0);
 for($i=1; $i<6; $i++) {
 	$labelArray[] = LemonType::ToString($i);
 }
-$resultArray = LemonAssessmentResults::LoadArrayByAssessmentId($intAssessmentId);
-foreach($resultArray as $objResult) {
-	$intIndex = $objResult->Question->LemonTypeId - 1;
-	$lemonValues[$intIndex] += $objResult->Value;
+$objAssessment = LemonAssessment::Load($intAssessmentId);
+$title = $objAssessment->User->FirstName.' '.$objAssessment->User->LastName;
+if($objAssessment->L) {
+	$lemonValues[0] = $objAssessment->L;
+	$lemonValues[1] = $objAssessment->E;
+	$lemonValues[2] = $objAssessment->M;
+	$lemonValues[3] = $objAssessment->O;
+	$lemonValues[4] = $objAssessment->N;
+} else {
+	$resultArray = LemonAssessmentResults::LoadArrayByAssessmentId($intAssessmentId);
+	foreach($resultArray as $objResult) {
+		$intIndex = $objResult->Question->LemonTypeId - 1;
+		$lemonValues[$intIndex] += $objResult->Value;
+	}
+	// Save the values if they haven't already been saved.
+	$objAssessment->L = $lemonValues[0];
+	$objAssessment->E = $lemonValues[1];
+	$objAssessment->M = $lemonValues[2];
+	$objAssessment->O = $lemonValues[3];
+	$objAssessment->N = $lemonValues[4];
+	$objAssessment->Save();	
 }
 $datay = array($labelArray,$lemonValues);
 
@@ -37,8 +54,10 @@ $graph->SetScale("textlin");
 $graph->SetMarginColor('white');
 
 // Setup titles and fonts
-$graph->title->Set('LEMON Results');
-$graph->title->SetFont(FF_FONT1,FS_BOLD,18);
+$graph->title->Set('LEMON Results for '.$title);
+$graph->SetUserFont('ttf-dejavu/DejaVuSans.ttf');
+$graph->title->SetFont(FF_USERFONT,FS_NORMAL,18);
+$graph->title->SetColor('#808080');
 $graph->xaxis->HideLabels();
 
 $bplot = new BarPlot($datay[1]);
@@ -53,18 +72,31 @@ $table->Set($datay);
 $table->SetPos($tablexpos,$tableypos+1);
 
 // Basic table formatting
-$table->SetFont(FF_FONT1,FS_NORMAL,10);
+$table->SetFont(FF_USERFONT,FS_NORMAL,10);
 $table->SetAlign('center');
 $table->SetMinColWidth($cellwidth);
 $table->SetNumberFormat('%0.1f');
 
 // Format table header row
 $table->SetRowFillColor(0,'teal@0.7');
-$table->SetRowFont(0,FF_FONT1,FS_NORMAL,11);
+$table->SetRowFont(0,FF_USERFONT,FS_NORMAL,11);
 $table->SetRowAlign(0,'center');
 
 // .. and add it to the graph
 $graph->Add($table);
-$graph->Stroke();
+//$graph->Stroke();
 
+// Get the handler to prevent the library from sending the
+// image to the browser
+$gdImgHandler = $graph->Stroke(_IMG_HANDLER);
+
+// Stroke image to a file and browser
+
+// Default is PNG so use ".png" as suffix
+$fileName =  __UPLOAD_DIR__.'/Lemon' . $intAssessmentId. '.png';
+$graph->img->Stream($fileName);
+
+// Send it back to browser
+$graph->img->Headers();
+$graph->img->Stream();
 ?>

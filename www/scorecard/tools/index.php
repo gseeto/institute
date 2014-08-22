@@ -16,15 +16,18 @@ class ToolslForm extends InstituteForm {
 	protected $dtgLatestStrategy;
 	protected $dtgLatestAction;
 	protected $dtgLatestKpi;
+	protected $intUserId;
 	protected $lblDebug;
 	
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {
 		$this->objScorecard = Scorecard::Load(QApplication::PathInfo(0));
+		$userArray = QApplication::$Login->GetUserArray();
+		$this->intUserId = $userArray[0]->Id;
 		
 		$this->chkUnassignedAction = new QCheckBox($this);
 		$this->chkUnassignedAction->Text = 'Unassigned Action Items';
@@ -53,10 +56,10 @@ class ToolslForm extends InstituteForm {
 		$this->dtgUnassigned->CssClass = 'scorecard_table';
 		$objStyle = $this->dtgUnassigned->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 	        
+        $objStyle->BackColor = '#0098c3'; 	        
         $objStyle = $this->dtgUnassigned->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
+        $objStyle->BackColor = '#0098c3'; 
 		
         $this->lstUser = new QListBox($this);
         $this->lstUser->Name = 'UserList';
@@ -88,10 +91,10 @@ class ToolslForm extends InstituteForm {
 		$this->dtgUserActions->CssClass = 'scorecard_table';
 		$objStyle = $this->dtgUserActions->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 	        
+        $objStyle->BackColor = '#0098c3'; 	        
         $objStyle = $this->dtgUserActions->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
+        $objStyle->BackColor = '#0098c3'; 
         
         $this->lstLatest = new QListBox($this);
         $this->lstLatest->Name = 'LatestList';
@@ -105,7 +108,7 @@ class ToolslForm extends InstituteForm {
         $this->dtgLatestStrategy->Paginator = new QPaginator($this->dtgLatestStrategy);
         $this->dtgLatestStrategy->MetaAddTypeColumn('CategoryTypeId','CategoryType');		
         $this->dtgLatestStrategy->AddColumn(new QDataGridColumn('Index', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=10px' ));
-		$this->dtgLatestStrategy->AddColumn(new QDataGridColumn('Strategy', '<?= $_FORM->RenderLatestStrategy($_ITEM) ?>', 'HtmlEntities=false', 'Width=200px' ));
+		$this->dtgLatestStrategy->AddColumn(new QDataGridColumn('Strategy', '<?= $_FORM->RenderLatestStrategy($_ITEM) ?>', 'HtmlEntities=false', 'Width=500px' ));
 		$this->dtgLatestStrategy->AddColumn(new QDataGridColumn('Priority', '<?= $_FORM->RenderLatestPriority($_ITEM) ?>', 'HtmlEntities=false', 'Width=60px',array('OrderByClause' => QQ::OrderBy(QQN::Strategy()->Priority), 'ReverseOrderByClause' => QQ::OrderBy(QQN::Strategy()->Priority, false)) ));		
 		$this->dtgLatestStrategy->AddColumn(new QDataGridColumn('Date Modified', '<?= $_ITEM->Modified ?>', 'HtmlEntities=false', 'Width=80px',array('OrderByClause' => QQ::OrderBy(QQN::Strategy()->Modified), 'ReverseOrderByClause' => QQ::OrderBy(QQN::Strategy()->Modified, false)) ));		
 		$this->dtgLatestStrategy->AddColumn(new QDataGridColumn('Modified By', '<?= $_FORM->RenderLatestModifiedBy($_ITEM->ModifiedBy) ?>', 'HtmlEntities=false', 'Width=60px',array('OrderByClause' => QQ::OrderBy(QQN::Strategy()->ModifiedBy), 'ReverseOrderByClause' => QQ::OrderBy(QQN::Strategy()->ModifiedBy, false)) ));		
@@ -121,10 +124,10 @@ class ToolslForm extends InstituteForm {
 		$this->dtgLatestStrategy->CssClass = 'scorecard_table';
 		$objStyle = $this->dtgLatestStrategy->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 	        
+        $objStyle->BackColor = '#0098c3'; 	        
         $objStyle = $this->dtgLatestStrategy->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
+        $objStyle->BackColor = '#0098c3'; 
         
 		$this->dtgLatestAction = new ActionItemsDataGrid($this);
 		$this->dtgLatestAction->Paginator = new QPaginator($this->dtgLatestAction);
@@ -149,10 +152,10 @@ class ToolslForm extends InstituteForm {
 		$this->dtgLatestAction->CssClass = 'scorecard_table';
 		$objStyle = $this->dtgLatestAction->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 	        
+        $objStyle->BackColor = '#0098c3'; 	        
         $objStyle = $this->dtgLatestAction->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
+        $objStyle->BackColor = '#0098c3'; 
         
 		$this->dtgLatestKpi = new KpisDataGrid($this);
 		$this->dtgLatestKpi->Paginator = new QPaginator($this->dtgLatestKpi);	
@@ -173,15 +176,18 @@ class ToolslForm extends InstituteForm {
 		$this->dtgLatestKpi->CssClass = 'scorecard_table';
 		$objStyle = $this->dtgLatestKpi->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 	        
+        $objStyle->BackColor = '#0098c3'; 	        
         $objStyle = $this->dtgLatestKpi->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
+        $objStyle->BackColor = '#0098c3'; 
 	}
 
 	public function dtgLatestKpi_Bind() {
 		$objConditions = QQ::All(); 
 		$objClauses = array();
+		$objConditions = QQ::AndCondition($objConditions,
+			QQ::Equal( QQN::Kpis()->ScorecardId, $this->objScorecard->Id)
+			);
 		if($this->lstLatest->SelectedValue){
 			$timecheck = 0;
 			switch($this->lstLatest->SelectedValue) {
@@ -200,6 +206,7 @@ class ToolslForm extends InstituteForm {
 			QQ::GreaterOrEqual( QQN::Kpis()->Modified, $sGMTMySqlString)
 			);
 		}
+		
 		// If nothing selected, don't populate the table.
 		if((!$this->lstLatest->SelectedValue) || ($this->lstLatest->SelectedValue == 'None')) {
 			return;
@@ -212,7 +219,9 @@ class ToolslForm extends InstituteForm {
 	public function dtgLatestAction_Bind() {
 		$objConditions = QQ::All(); 
 		$objClauses = array();
-
+		$objConditions = QQ::AndCondition($objConditions,
+			QQ::Equal( QQN::ActionItems()->ScorecardId, (int)$this->objScorecard->Id)
+			);
 		if($this->lstLatest->SelectedValue){
 			$timecheck = 0;
 			switch($this->lstLatest->SelectedValue) {
@@ -232,6 +241,7 @@ class ToolslForm extends InstituteForm {
 			QQ::GreaterOrEqual( QQN::ActionItems()->Modified, $sGMTMySqlString)
 			);
 		}
+		
 		// If nothing selected, don't populate the table.
 		if((!$this->lstLatest->SelectedValue) || ($this->lstLatest->SelectedValue == 'None')) {
 			return;
@@ -244,6 +254,9 @@ class ToolslForm extends InstituteForm {
 		$objConditions = QQ::All(); 
 		$objClauses = array();
 
+		$objConditions = QQ::AndCondition($objConditions,
+			QQ::Equal( QQN::Strategy()->ScorecardId, (int)$this->objScorecard->Id)
+			);
 		if($this->lstLatest->SelectedValue){
 			$timecheck = 0;
 			switch($this->lstLatest->SelectedValue) {
@@ -263,6 +276,7 @@ class ToolslForm extends InstituteForm {
 			QQ::GreaterOrEqual( QQN::Strategy()->Modified, $sGMTMySqlString)
 			);
 		}
+		
 		// If nothing selected, don't populate the table.
 		if((!$this->lstLatest->SelectedValue) || ($this->lstLatest->SelectedValue == 'None')) {
 			return;
@@ -402,44 +416,76 @@ class ToolslForm extends InstituteForm {
             $txtLatestComment = new QTextBox($this->dtgLatestKpi, $strControlId);
             $txtLatestComment->Text = ($objKpi->Comments != null)? $objKpi->Comments : ' ';
             $txtLatestComment->ActionParameter = $objKpi->Id;
-            $txtLatestComment->Width = 130;
+            $txtLatestComment->Width = 400;
             $txtLatestComment->TextMode = QTextMode::MultiLine;
             $txtLatestComment->Height = 30;
-            $txtLatestComment->Visible = false;
-            $txtLatestComment->AddAction(new QMouseOutEvent(), new QAjaxAction('txtLatestKpiComment_MouseOut'));
+            $txtLatestComment->Display = false;
         }
-		$strLblControlId = 'lblLatestKpiComment' . $objKpi->Id;
-        $lblComment = $this->GetControl($strLblControlId);     
-        if (!$lblComment) {
-        	$lblComment = new QLabel($this->dtgLatestKpi, $strLblControlId);
-        	$lblComment->DisplayStyle = QDisplayStyle::Block;
-        	$lblComment->CssClass = 'tablecell';
-        	$lblComment->Text = ($objKpi->Comments != null)? $objKpi->Comments : ' ';
-        	$lblComment->Width = 130;
-        	$lblComment->ActionParameter = $strControlId;
-        	$lblComment->AddAction(new QMouseOverEvent(), new QAjaxAction('lblLatestKpiComment_Clicked'));
+        $strActionSave = 'btnLatestKpiCommentSave' . $objKpi->Id;
+        $btnSave = $this->GetControl($strActionSave); 
+        if(!$btnSave) {
+	        $btnSave = new QButton($this->dtgLatestKpi,$strActionSave);
+	        $btnSave->Text = 'Save';
+	        $btnSave->ActionParameter = $objKpi->Id;
+	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveLatestKpiComment_Click'));
+	        $btnSave->PrimaryButton = true;
+	        $btnSave->CausesValidation = true;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
-        return ($txtLatestComment->Render(false) . $lblComment->Render(false));
+        
+        $strActionCancel = 'btnLatestKpiCommentCancel' . $objKpi->Id;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        if(!$btnCancel) {
+	        $btnCancel = new QButton($this->dtgLatestKpi,$strActionCancel);
+	        $btnCancel->Text = 'Cancel';
+	        $btnCancel->ActionParameter = $objKpi->Id;
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelLatestKpiComment_Click(this)'));        
+	       	$btnCancel->CausesValidation = false;
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
+        }
+		$strImgEdit = 'imgEditLatestKpiComment' . $objKpi->Id;
+        $strLblControlId = 'lblLatestKpiComment' .  $objKpi->Id;
+        $lblAction = $this->GetControl($strLblControlId);     
+        if (!$lblAction) {
+        	$lblAction = new QLabel($this->dtgLatestKpi,$strLblControlId);
+        	$lblAction->Text = ($objKpi->Comments != null)? $objKpi->Comments : '<span style="color:#aaaaaa;">Add a Comment</span>';
+        	$lblAction->ActionParameter = $objKpi->Id;
+        	$lblAction->Cursor = 'pointer';
+        	$lblAction->Width = 400;
+        	$lblAction->HtmlEntities = false;
+        	$lblAction->Padding = '5px 15px';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	
+  			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblLatestKpiComment_Clicked(this)'));	
+        }
+        return ($txtLatestComment->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblAction->RenderWithName(false));
 	}
 	
-	public function lblLatestKpiComment_Clicked($strFormId, $strControlId, $strParameter) {
-		$lblComment = $this->GetControl($strControlId);
-		$lblComment->Visible = false;
-		$txtComment = $this->GetControl($strParameter);
-		$txtComment->Visible = true;
-	}
-	
-	public function txtLatestKpiComment_MouseOut($strFormId, $strControlId, $strParameter) {
-        $objKpi = Kpis::Load($strParameter);
-        $txtComment = $this->GetControl($strControlId);
-        $objKpi->Comments = $txtComment->Text;
+	public function btnSaveLatestKpiComment_Click($strFormId, $strControlId, $strParameter) {
+		$KpiId = $strParameter;	
+		$strControlId = 'txtLatestKpiComment' . $KpiId;
+        $txtKpiComment = $this->GetControl($strControlId);
+        $objKpi = Kpis::Load($KpiId);
+        $objKpi->Comments = $txtKpiComment->Text;
+        $objKpi->ModifiedBy = $this->intUserId;
         $objKpi->Save();
-        $txtComment->Visible = false;
-        $strLblControlId = 'lblLatestKpiComment' . $strParameter;
-        $lblComment = $this->GetControl($strLblControlId);   
-        $lblComment->Text = $txtComment->Text;
-        $lblComment->Visible = true;
+        $txtKpiComment->Display = false;
+        
+        $strActionSave = 'btnLatestKpiCommentSave' . $KpiId;
+        $btnSave = $this->GetControl($strActionSave); 
+        $btnSave->Display = false;
+        $strActionCancel = 'btnLatestKpiCommentCancel' . $KpiId;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        $btnCancel->Display = false;
+        
+        $strLblControlId = 'lblLatestKpiComment' .  $objKpi->Id;
+        $lblAction = $this->GetControl($strLblControlId); 
+        $lblAction->Text = $txtKpiComment->Text;
+        $lblAction->Display = true;
 	}
+	
 	
 	public function RenderLatestComments($objAction) {
 		$strControlId = 'txtLatestComment' . $objAction->Id;
@@ -448,44 +494,74 @@ class ToolslForm extends InstituteForm {
             $txtLatestComment = new QTextBox($this->dtgLatestAction, $strControlId);
             $txtLatestComment->Text = ($objAction->Comments != null)? $objAction->Comments : ' ';
             $txtLatestComment->ActionParameter = $objAction->Id;
-            $txtLatestComment->Width = 130;
+            $txtLatestComment->Width = 200;
             $txtLatestComment->TextMode = QTextMode::MultiLine;
-            $txtLatestComment->Height = 30;
-            $txtLatestComment->Visible = false;
-            $txtLatestComment->AddAction(new QMouseOutEvent(), new QAjaxAction('txtLatestComment_MouseOut'));
+            $txtLatestComment->Height = 50;
+            $txtLatestComment->Display = false;
         }
-		$strLblControlId = 'lblLatestComment' . $objAction->Id;
-        $lblComment = $this->GetControl($strLblControlId);     
-        if (!$lblComment) {
-        	$lblComment = new QLabel($this->dtgLatestAction, $strLblControlId);
-        	$lblComment->DisplayStyle = QDisplayStyle::Block;
-        	$lblComment->CssClass = 'tablecell';
-        	$lblComment->Text = ($objAction->Comments != null)? $objAction->Comments : ' ';
-        	$lblComment->Width = 130;
-        	$lblComment->ActionParameter = $strControlId;
-        	$lblComment->AddAction(new QMouseOverEvent(), new QAjaxAction('lblLatestComment_Clicked'));
+        $strActionSave = 'btnLatestCommentSave' . $objAction->Id;
+        $btnSave = $this->GetControl($strActionSave); 
+        if(!$btnSave) {
+	        $btnSave = new QButton($this->dtgLatestAction,$strActionSave);
+	        $btnSave->Text = 'Save';
+	        $btnSave->ActionParameter = $objAction->Id;
+	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveLatestComment_Click'));
+	        $btnSave->PrimaryButton = true;
+	        $btnSave->CausesValidation = true;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
-        return ($txtLatestComment->Render(false) . $lblComment->Render(false));
+        
+        $strActionCancel = 'btnLatestCommentCancel' . $objAction->Id;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        if(!$btnCancel) {
+	        $btnCancel = new QButton($this->dtgLatestAction,$strActionCancel);
+	        $btnCancel->Text = 'Cancel';
+	        $btnCancel->ActionParameter = $objAction->Id;
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelLatestComment_Click(this)'));        
+	       	$btnCancel->CausesValidation = false;
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
+        }
+		$strImgEdit = 'imgEditLatestComment' . $objAction->Id;
+        $strLblControlId = 'lblLatestComment' .  $objAction->Id;
+        $lblAction = $this->GetControl($strLblControlId);     
+        if (!$lblAction) {
+        	$lblAction = new QLabel($this->dtgLatestAction,$strLblControlId);
+        	$lblAction->Text = ($objAction->Comments != null)? $objAction->Comments : '<span style="color:#aaaaaa;">Add a comment</span>';
+        	$lblAction->ActionParameter = $objAction->Id;
+        	$lblAction->Cursor = 'pointer';
+        	$lblAction->Width = 200;
+        	$lblAction->HtmlEntities = false;
+        	$lblAction->Padding = '5px 15px';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	
+  			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblLatestComment_Clicked(this)'));	
+        }
+        return ($txtLatestComment->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblAction->RenderWithName(false));
 	}
 	
-	public function lblLatestComment_Clicked($strFormId, $strControlId, $strParameter) {
-		$lblComment = $this->GetControl($strControlId);
-		$lblComment->Visible = false;
-		$txtComment = $this->GetControl($strParameter);
-		$txtComment->Visible = true;
-	}
-	
-	public function txtLatestComment_MouseOut($strFormId, $strControlId, $strParameter) {
-		$ActionId = $strParameter;
+	public function btnSaveLatestComment_Click($strFormId, $strControlId, $strParameter) {
+		$ActionId = $strParameter;	
+		$strControlId = 'txtLatestComment' . $ActionId;
+        $txtAction = $this->GetControl($strControlId);
         $objAction = ActionItems::Load($ActionId);
-        $txtComment = $this->GetControl($strControlId);
-        $objAction->Comments = $txtComment->Text;
+        $objAction->Comments = $txtAction->Text;
+        $objAction->ModifiedBy = $this->intUserId;
         $objAction->Save();
-        $txtComment->Visible = false;
-        $strLblControlId = 'lblLatestComment' . $ActionId;
-        $lblComment = $this->GetControl($strLblControlId);   
-        $lblComment->Text = $txtComment->Text;
-        $lblComment->Visible = true;
+        $txtAction->Display = false;
+        
+        $strActionSave = 'btnLatestCommentSave' . $ActionId;
+        $btnSave = $this->GetControl($strActionSave); 
+        $btnSave->Display = false;
+        $strActionCancel = 'btnLatestCommentCancel' . $ActionId;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        $btnCancel->Display = false;
+        
+        $strLblControlId = 'lblLatestComment' .  $objAction->Id;
+        $lblAction = $this->GetControl($strLblControlId); 
+        $lblAction->Text = $txtAction->Text;
+        $lblAction->Display = true;
 	}
 	
 	public function RenderUserComments($objAction) {
@@ -495,44 +571,74 @@ class ToolslForm extends InstituteForm {
             $txtUserComment = new QTextBox($this->dtgUserActions, $strControlId);
             $txtUserComment->Text = ($objAction->Comments != null)? $objAction->Comments : ' ';
             $txtUserComment->ActionParameter = $objAction->Id;
-            $txtUserComment->Width = 130;
+            $txtUserComment->Width = 200;
             $txtUserComment->TextMode = QTextMode::MultiLine;
-            $txtUserComment->Height = 30;
-            $txtUserComment->Visible = false;
-            $txtUserComment->AddAction(new QMouseOutEvent(), new QAjaxAction('txtUserComment_MouseOut'));
+            $txtUserComment->Height = 50;
+            $txtUserComment->Display = false;
         }
-		$strLblControlId = 'lblUserComment' . $objAction->Id;
-        $lblComment = $this->GetControl($strLblControlId);     
-        if (!$lblComment) {
-        	$lblComment = new QLabel($this->dtgUserActions, $strLblControlId);
-        	$lblComment->DisplayStyle = QDisplayStyle::Block;
-        	$lblComment->CssClass = 'tablecell';
-        	$lblComment->Text = ($objAction->Comments != null)? $objAction->Comments : ' ';
-        	$lblComment->Width = 130;
-        	$lblComment->ActionParameter = $strControlId;
-        	$lblComment->AddAction(new QMouseOverEvent(), new QAjaxAction('lblUserComment_Clicked'));
+        $strActionSave = 'btnUserCommentSave' . $objAction->Id;
+        $btnSave = $this->GetControl($strActionSave); 
+        if(!$btnSave) {
+	        $btnSave = new QButton($this->dtgUserActions,$strActionSave);
+	        $btnSave->Text = 'Save';
+	        $btnSave->ActionParameter = $objAction->Id;
+	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveUserComment_Click'));
+	        $btnSave->PrimaryButton = true;
+	        $btnSave->CausesValidation = true;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
-        return ($txtUserComment->Render(false) . $lblComment->Render(false));
+        
+        $strActionCancel = 'btnUserCommentCancel' . $objAction->Id;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        if(!$btnCancel) {
+	        $btnCancel = new QButton($this->dtgUserActions,$strActionCancel);
+	        $btnCancel->Text = 'Cancel';
+	        $btnCancel->ActionParameter = $objAction->Id;
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelUserComment_Click(this)'));        
+	       	$btnCancel->CausesValidation = false;
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
+        }
+		$strImgEdit = 'imgEditUserComment' . $objAction->Id;
+        $strLblControlId = 'lblUserComment' .  $objAction->Id;
+        $lblAction = $this->GetControl($strLblControlId);     
+        if (!$lblAction) {
+        	$lblAction = new QLabel($this->dtgUserActions,$strLblControlId);
+        	$lblAction->Text = ($objAction->Comments != null)? $objAction->Comments : '<span style="color:#aaaaaa;">Add a comment</span>';
+        	$lblAction->ActionParameter = $objAction->Id;
+        	$lblAction->Cursor = 'pointer';
+        	$lblAction->Width = 200;
+        	$lblAction->HtmlEntities = false;
+        	$lblAction->Padding = '5px 15px';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	
+  			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblUserComment_Clicked(this)'));	
+        }
+        return ($txtUserComment->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblAction->RenderWithName(false));
 	}
 	
-	public function lblUserComment_Clicked($strFormId, $strControlId, $strParameter) {
-		$lblComment = $this->GetControl($strControlId);
-		$lblComment->Visible = false;
-		$txtComment = $this->GetControl($strParameter);
-		$txtComment->Visible = true;
-	}
-	
-	public function txtUserComment_MouseOut($strFormId, $strControlId, $strParameter) {
-		$ActionId = $strParameter;
+	public function btnSaveUserComment_Click($strFormId, $strControlId, $strParameter) {
+		$ActionId = $strParameter;	
+		$strControlId = 'txtUserComment' . $ActionId;
+        $txtAction = $this->GetControl($strControlId);
         $objAction = ActionItems::Load($ActionId);
-        $txtComment = $this->GetControl($strControlId);
-        $objAction->Comments = $txtComment->Text;
+        $objAction->Comments = $txtAction->Text;
+        $objAction->ModifiedBy = $this->intUserId;
         $objAction->Save();
-        $txtComment->Visible = false;
-        $strLblControlId = 'lblUserComment' . $ActionId;
-        $lblComment = $this->GetControl($strLblControlId);   
-        $lblComment->Text = $txtComment->Text;
-        $lblComment->Visible = true;
+        $txtAction->Display = false;
+        
+        $strActionSave = 'btnUserCommentSave' . $ActionId;
+        $btnSave = $this->GetControl($strActionSave); 
+        $btnSave->Display = false;
+        $strActionCancel = 'btnUserCommentCancel' . $ActionId;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        $btnCancel->Display = false;
+        
+        $strLblControlId = 'lblUserComment' .  $objAction->Id;
+        $lblAction = $this->GetControl($strLblControlId); 
+        $lblAction->Text = $txtAction->Text;
+        $lblAction->Display = true;
 	}
 	
 	
@@ -674,40 +780,72 @@ class ToolslForm extends InstituteForm {
             $txtKpiItem->ActionParameter = $objKpi->Id;
             $txtKpiItem->Width = 300;
             $txtKpiItem->TextMode = QTextMode::MultiLine;
-            $txtKpiItem->Height = 20;
-            $txtKpiItem->AddAction(new QMouseOutEvent(), new QAjaxAction('txtLatestKpiItem_MouseOut'));
-            $txtKpiItem->Visible = false;
+            $txtKpiItem->Height = 50;
+            $txtKpiItem->Display = false;
+        }
+        $strActionSave = 'btnLatestKpiSave' . $objKpi->Id;
+        $btnSave = $this->GetControl($strActionSave); 
+        if(!$btnSave) {
+	        $btnSave = new QButton($this->dtgLatestKpi,$strActionSave);
+	        $btnSave->Text = 'Save';
+	        $btnSave->ActionParameter = $objKpi->Id;
+	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveLatestKpi_Click'));
+	        $btnSave->PrimaryButton = true;
+	        $btnSave->CausesValidation = true;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
         
-        $strLblControlId = 'lblLatestKpi' . $objKpi->Id;
-        $lblKpiItem = $this->GetControl($strLblControlId);     
-        if (!$lblKpiItem) {
-        	$lblKpiItem = new QLabel($this->dtgLatestKpi, $strLblControlId);
-        	$lblKpiItem->Text = $objKpi->Kpi;
-        	$lblKpiItem->ActionParameter = $strControlId;
-        	$lblKpiItem->AddAction(new QMouseOverEvent(), new QAjaxAction('lblLatestKpiItem_Clicked'));
+        $strActionCancel = 'btnLatestKpiCancel' . $objKpi->Id;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        if(!$btnCancel) {
+	        $btnCancel = new QButton($this->dtgLatestKpi,$strActionCancel);
+	        $btnCancel->Text = 'Cancel';
+	        $btnCancel->ActionParameter = $objKpi->Id;
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelLatestKpi_Click(this)'));        
+	       	$btnCancel->CausesValidation = false;
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
         }
-        return ($txtKpiItem->Render(false) .$lblKpiItem->Render(false));
+		$strImgEdit = 'imgEditLatestKpi' . $objKpi->Id;
+        $strLblControlId = 'lblLatestKpi' .  $objKpi->Id;
+        $lblAction = $this->GetControl($strLblControlId);     
+        if (!$lblAction) {
+        	$lblAction = new QLabel($this->dtgLatestKpi,$strLblControlId);
+        	$lblAction->Text = ($objKpi->Kpi != null)? $objKpi->Kpi : '<span style="color:#aaaaaa;">Add a KPI</span>';
+        	$lblAction->ActionParameter = $objKpi->Id;
+        	$lblAction->Cursor = 'pointer';
+        	$lblAction->Width = 400;
+        	$lblAction->HtmlEntities = false;
+        	$lblAction->Padding = '5px 15px';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	
+  			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblLatestKpi_Clicked(this)'));	
+        }
+        return ($txtKpiItem->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblAction->RenderWithName(false));
 	}
 	
-	public function lblLatestKpiItem_Clicked($strFormId, $strControlId, $strParameter) {
-		$lblKpiItem = $this->GetControl($strControlId);
-		$lblKpiItem->Visible = false;
-		$txtKpiItem = $this->GetControl($strParameter);
-		$txtKpiItem->Visible = true;
-	}
-	
-	public function txtLatestKpiItem_MouseOut($strFormId, $strControlId, $strParameter) {
+	public function btnSaveLatestKpi_Click($strFormId, $strControlId, $strParameter) {
 		$KpiId = $strParameter;	
+		$strControlId = 'txtLatestKpi' . $KpiId;
         $txtKpi = $this->GetControl($strControlId);
         $objKpi = Kpis::Load($KpiId);
         $objKpi->Kpi = $txtKpi->Text;
+        $objKpi->ModifiedBy = $this->intUserId;
         $objKpi->Save();
-        $txtKpi->Visible = false;
-        $strLblControlId = 'lblLatestKpi' . $objKpi->Id;
-        $lblKpi = $this->GetControl($strLblControlId);
-        $lblKpi->Text = $txtKpi->Text;
-        $lblKpi->Visible = true;
+        $txtKpi->Display = false;
+        
+        $strActionSave = 'btnLatestKpiSave' . $KpiId;
+        $btnSave = $this->GetControl($strActionSave); 
+        $btnSave->Display = false;
+        $strActionCancel = 'btnLatestKpiCancel' . $KpiId;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        $btnCancel->Display = false;
+        
+        $strLblControlId = 'lblLatestKpi' .  $objKpi->Id;
+        $lblAction = $this->GetControl($strLblControlId); 
+        $lblAction->Text = $txtKpi->Text;
+        $lblAction->Display = true;
 	}
 	
 	public function RenderLatestAction($objAction) {
@@ -720,86 +858,150 @@ class ToolslForm extends InstituteForm {
             $txtActionItem->ActionParameter = $objAction->Id;
             $txtActionItem->Width = 300;
             $txtActionItem->TextMode = QTextMode::MultiLine;
-            $txtActionItem->Height = 20;
-            $txtActionItem->AddAction(new QMouseOutEvent(), new QAjaxAction('txtLatestActionItem_MouseOut'));
-            $txtActionItem->Visible = false;
+            $txtActionItem->Height = 50;
+            $txtActionItem->Display = false;
+        }
+        $strActionSave = 'btnLatestActionSave' . $objAction->Id;
+        $btnSave = $this->GetControl($strActionSave); 
+        if(!$btnSave) {
+	        $btnSave = new QButton($this->dtgLatestAction,$strActionSave);
+	        $btnSave->Text = 'Save';
+	        $btnSave->ActionParameter = $objAction->Id;
+	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveLatestAction_Click'));
+	        $btnSave->PrimaryButton = true;
+	        $btnSave->CausesValidation = true;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
         
-        $strLblControlId = 'lblLatestAction' . $objAction->Id;
-        $lstActionItem = $this->GetControl($strLblControlId);     
-        if (!$lstActionItem) {
-        	$lstActionItem = new QLabel($this->dtgLatestAction, $strLblControlId);
-        	$lstActionItem->Text = $objAction->Action;
-        	$lstActionItem->ActionParameter = $strControlId;
-        	$lstActionItem->AddAction(new QMouseOverEvent(), new QAjaxAction('lblLatestActionItem_Clicked'));
+        $strActionCancel = 'btnLatestActionCancel' . $objAction->Id;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        if(!$btnCancel) {
+	        $btnCancel = new QButton($this->dtgLatestAction,$strActionCancel);
+	        $btnCancel->Text = 'Cancel';
+	        $btnCancel->ActionParameter = $objAction->Id;
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelLatestAction_Click(this)'));        
+	       	$btnCancel->CausesValidation = false;
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
         }
-        return ($txtActionItem->Render(false) .$lstActionItem->Render(false));
+		$strImgEdit = 'imgEditLatestAction' . $objAction->Id;
+        $strLblControlId = 'lblLatestAction' .  $objAction->Id;
+        $lblAction = $this->GetControl($strLblControlId);     
+        if (!$lblAction) {
+        	$lblAction = new QLabel($this->dtgLatestAction,$strLblControlId);
+        	$lblAction->Text = ($objAction->Action != null)? $objAction->Action : '<span style="color:#aaaaaa;">Add an action</span>';
+        	$lblAction->ActionParameter = $objAction->Id;
+        	$lblAction->Cursor = 'pointer';
+        	$lblAction->Width = 400;
+        	$lblAction->HtmlEntities = false;
+        	$lblAction->Padding = '5px 15px';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	
+  			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblLatestAction_Clicked(this)'));	
+        }
+        return ($txtActionItem->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblAction->RenderWithName(false));
 	}
 	
-	public function lblLatestActionItem_Clicked($strFormId, $strControlId, $strParameter) {
-		$lblActionItem = $this->GetControl($strControlId);
-		$lblActionItem->Visible = false;
-		$txtActionItem = $this->GetControl($strParameter);
-		$txtActionItem->Visible = true;
-	}
-	
-	public function txtLatestActionItem_MouseOut($strFormId, $strControlId, $strParameter) {
+	public function btnSaveLatestAction_Click($strFormId, $strControlId, $strParameter) {
 		$ActionId = $strParameter;	
+		$strControlId = 'txtLatestAction' . $ActionId;
         $txtAction = $this->GetControl($strControlId);
         $objAction = ActionItems::Load($ActionId);
         $objAction->Action = $txtAction->Text;
+        $objAction->ModifiedBy = $this->intUserId;
         $objAction->Save();
-        $txtAction->Visible = false;
-        $strLblControlId = 'lblLatestAction' . $objAction->Id;
-        $lblAction = $this->GetControl($strLblControlId);
+        $txtAction->Display = false;
+        
+        $strActionSave = 'btnLatestActionSave' . $ActionId;
+        $btnSave = $this->GetControl($strActionSave); 
+        $btnSave->Display = false;
+        $strActionCancel = 'btnLatestActionCancel' . $ActionId;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        $btnCancel->Display = false;
+        
+        $strLblControlId = 'lblLatestAction' .  $objAction->Id;
+        $lblAction = $this->GetControl($strLblControlId); 
         $lblAction->Text = $txtAction->Text;
-        $lblAction->Visible = true;
+        $lblAction->Display = true;
 	}
 	
 	public function RenderAction($objAction) {
 		$objStrategy = Strategy::Load($objAction->StrategyId);
 		$strControlId = 'txtAction' . $objAction->Id;
-        $txtActionItem = $this->GetControl($strControlId);     
+		$txtActionItem = $this->GetControl($strControlId);     
         if (!$txtActionItem) {
             $txtActionItem = new QTextBox($this->dtgUnassigned, $strControlId);
             $txtActionItem->Text = $objAction->Action;
             $txtActionItem->ActionParameter = $objAction->Id;
-            $txtActionItem->Width = 450;
+            $txtActionItem->Width = 400;
             $txtActionItem->TextMode = QTextMode::MultiLine;
-            $txtActionItem->Height = 20;
-            $txtActionItem->AddAction(new QMouseOutEvent(), new QAjaxAction('txtUnassignedActionItem_MouseOut'));
-            $txtActionItem->Visible = false;
+            $txtActionItem->Height = 50;
+            $txtActionItem->Display = false;
+        }
+        $strActionSave = 'btnActionSave' . $objAction->Id;
+        $btnSave = $this->GetControl($strActionSave); 
+        if(!$btnSave) {
+	        $btnSave = new QButton($this->dtgUnassigned,$strActionSave);
+	        $btnSave->Text = 'Save';
+	        $btnSave->ActionParameter = $objAction->Id;
+	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveAction_Click'));
+	        $btnSave->PrimaryButton = true;
+	        $btnSave->CausesValidation = true;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
         
-        $strLblControlId = 'lblAction' . $objAction->Id;
-        $lstActionItem = $this->GetControl($strLblControlId);     
-        if (!$lstActionItem) {
-        	$lstActionItem = new QLabel($this->dtgUnassigned, $strLblControlId);
-        	$lstActionItem->Text = $objAction->Action;
-        	$lstActionItem->ActionParameter = $strControlId;
-        	$lstActionItem->AddAction(new QMouseOverEvent(), new QAjaxAction('lblActionItem_Clicked'));
+        $strActionCancel = 'btnActionCancel' . $objAction->Id;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        if(!$btnCancel) {
+	        $btnCancel = new QButton($this->dtgUnassigned,$strActionCancel);
+	        $btnCancel->Text = 'Cancel';
+	        $btnCancel->ActionParameter = $objAction->Id;
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelAction_Click(this)'));        
+	       	$btnCancel->CausesValidation = false;
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
         }
-        return ($txtActionItem->Render(false) .$lstActionItem->Render(false));
+		$strImgEdit = 'imgEditAction' . $objAction->Id;
+        $strLblControlId = 'lblAction' .  $objAction->Id;
+        $lblAction = $this->GetControl($strLblControlId);     
+        if (!$lblAction) {
+        	$lblAction = new QLabel($this->dtgUnassigned,$strLblControlId);
+        	$lblAction->Text = ($objAction->Action != null)? $objAction->Action : '<span style="color:#aaaaaa;">Add an action</span>';
+        	$lblAction->ActionParameter = $objAction->Id;
+        	$lblAction->Cursor = 'pointer';
+        	$lblAction->Width = 400;
+        	$lblAction->HtmlEntities = false;
+        	$lblAction->Padding = '5px 15px';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	
+  			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblAction_Clicked(this)'));	
+        }
+        return ($txtActionItem->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblAction->RenderWithName(false));
 	}
 	
-	public function lblActionItem_Clicked($strFormId, $strControlId, $strParameter) {
-		$lblActionItem = $this->GetControl($strControlId);
-		$lblActionItem->Visible = false;
-		$txtActionItem = $this->GetControl($strParameter);
-		$txtActionItem->Visible = true;
-	}
-	
-	public function txtUnassignedActionItem_MouseOut($strFormId, $strControlId, $strParameter) {
+	public function btnSaveAction_Click($strFormId, $strControlId, $strParameter) {
 		$ActionId = $strParameter;	
+		$strControlId = 'txtAction' . $ActionId;
         $txtAction = $this->GetControl($strControlId);
         $objAction = ActionItems::Load($ActionId);
         $objAction->Action = $txtAction->Text;
+        $objAction->ModifiedBy = $this->intUserId;
         $objAction->Save();
-        $txtAction->Visible = false;
-        $strLblControlId = 'lblAction' . $objAction->Id;
-        $lblAction = $this->GetControl($strLblControlId);
+        $txtAction->Display = false;
+        
+        $strActionSave = 'btnActionSave' . $ActionId;
+        $btnSave = $this->GetControl($strActionSave); 
+        $btnSave->Display = false;
+        $strActionCancel = 'btnActionCancel' . $ActionId;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        $btnCancel->Display = false;
+        
+        $strLblControlId = 'lblAction' .  $objAction->Id;
+        $lblAction = $this->GetControl($strLblControlId); 
         $lblAction->Text = $txtAction->Text;
-        $lblAction->Visible = true;
+        $lblAction->Display = true;
 	}
 	
 	public function RenderUserAction($objAction) {
@@ -812,41 +1014,74 @@ class ToolslForm extends InstituteForm {
             $txtActionItem->ActionParameter = $objAction->Id;
             $txtActionItem->Width = 300;
             $txtActionItem->TextMode = QTextMode::MultiLine;
-            $txtActionItem->Height = 20;
-            $txtActionItem->AddAction(new QMouseOutEvent(), new QAjaxAction('txtUserActionItem_MouseOut'));
-            $txtActionItem->Visible = false;
+            $txtActionItem->Height = 50;
+            $txtActionItem->Display = false;
         }
-		$strLblControlId = 'lblUserAction' . $objAction->Id;
-        $lstActionItem = $this->GetControl($strLblControlId);     
-        if (!$lstActionItem) {
-        	$lstActionItem = new QLabel($this->dtgUserActions, $strLblControlId);
-        	$lstActionItem->Text = $objAction->Action;
-        	$lstActionItem->ActionParameter = $strControlId;
-        	$lstActionItem->AddAction(new QMouseOverEvent(), new QAjaxAction('lblUserActionItem_Clicked'));
+        $strActionSave = 'btnUserActionSave' . $objAction->Id;
+        $btnSave = $this->GetControl($strActionSave); 
+        if(!$btnSave) {
+	        $btnSave = new QButton($this->dtgUserActions,$strActionSave);
+	        $btnSave->Text = 'Save';
+	        $btnSave->ActionParameter = $objAction->Id;
+	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveUserAction_Click'));
+	        $btnSave->PrimaryButton = true;
+	        $btnSave->CausesValidation = true;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
-        return ($txtActionItem->Render(false) . $lstActionItem->Render(false));
+        
+        $strActionCancel = 'btnUserActionCancel' . $objAction->Id;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        if(!$btnCancel) {
+	        $btnCancel = new QButton($this->dtgUserActions,$strActionCancel);
+	        $btnCancel->Text = 'Cancel';
+	        $btnCancel->ActionParameter = $objAction->Id;
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelUserAction_Click(this)'));        
+	       	$btnCancel->CausesValidation = false;
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
+        }
+		$strImgEdit = 'imgEditUserAction' . $objAction->Id;
+        $strLblControlId = 'lblUserAction' .  $objAction->Id;
+        $lblAction = $this->GetControl($strLblControlId);     
+        if (!$lblAction) {
+        	$lblAction = new QLabel($this->dtgUserActions,$strLblControlId);
+        	$lblAction->Text = $objAction->Action;
+        	$lblAction->ActionParameter = $objAction->Id;
+        	$lblAction->Cursor = 'pointer';
+        	$lblAction->Width = 400;
+        	$lblAction->HtmlEntities = false;
+        	$lblAction->Padding = '5px 15px';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	
+  			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblUserAction_Clicked(this)'));	
+        }
+        return ($txtActionItem->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblAction->RenderWithName(false));
 	}
 	
-	public function lblUserActionItem_Clicked($strFormId, $strControlId, $strParameter) {
-		$lblActionItem = $this->GetControl($strControlId);
-		$lblActionItem->Visible = false;
-		$txtActionItem = $this->GetControl($strParameter);
-		$txtActionItem->Visible = true;
-	}
-	
-	public function txtUserActionItem_MouseOut($strFormId, $strControlId, $strParameter) {
+	public function btnSaveUserAction_Click($strFormId, $strControlId, $strParameter) {
 		$ActionId = $strParameter;	
+		$strControlId = 'txtUserAction' . $ActionId;
         $txtAction = $this->GetControl($strControlId);
         $objAction = ActionItems::Load($ActionId);
         $objAction->Action = $txtAction->Text;
+        $objAction->ModifiedBy = $this->intUserId;
         $objAction->Save();
-        $txtAction->Visible = false;
-        $strLblControlId = 'lblUserAction' . $objAction->Id;
-        $lblAction = $this->GetControl($strLblControlId);
+        $txtAction->Display = false;
+        
+        $strActionSave = 'btnUserActionSave' . $ActionId;
+        $btnSave = $this->GetControl($strActionSave); 
+        $btnSave->Display = false;
+        $strActionCancel = 'btnUserActionCancel' . $ActionId;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        $btnCancel->Display = false;
+        
+        $strLblControlId = 'lblUserAction' .  $objAction->Id;
+        $lblAction = $this->GetControl($strLblControlId); 
         $lblAction->Text = $txtAction->Text;
-        $lblAction->Visible = true;
+        $lblAction->Display = true;
 	}
-
+	
 	public function RenderUserPriority($objAction) {
 		$strImgPriorityCtrl = 'imgPriority' .$objAction->Id; 
 		$imgPriority = $this->GetControl($strImgPriorityCtrl);    
@@ -890,41 +1125,74 @@ class ToolslForm extends InstituteForm {
             $txtLatestStrategy = new QTextBox($this->dtgLatestStrategy, $strTxtControlId);
             $txtLatestStrategy->Text = $objStrategy->Strategy;
             $txtLatestStrategy->ActionParameter = $objStrategy->Id;
-            $txtLatestStrategy->Width = 200;
+            $txtLatestStrategy->Width = 450;
             $txtLatestStrategy->Height = 100;
             $txtLatestStrategy->TextMode = QTextMode::MultiLine;
-            $txtLatestStrategy->Visible = false;
-            $txtLatestStrategy->AddAction(new QMouseOutEvent(), new QAjaxAction('txtLatestStrategy_MouseOut'));
+            $txtLatestStrategy->Display = false;
         }
-        $strControlId = 'lblLatestStrategy' . $objStrategy->Id;
-        $lblLatestStrategy = $this->GetControl($strControlId);     
-        if (!$lblLatestStrategy) {
-        	$lblLatestStrategy = new QLabel($this->dtgLatestStrategy, $strControlId);
-        	$lblLatestStrategy->Text = $objStrategy->Strategy;
-        	$lblLatestStrategy->ActionParameter = $strTxtControlId;
-            $lblLatestStrategy->Width = 400;
-            $lblLatestStrategy->AddAction(new QMouseOverEvent(),new QAjaxAction('lblLatestStrategy_Clicked'));
+        $strActionSave = 'btnLatestStrategySave' . $objStrategy->Id;
+        $btnSave = $this->GetControl($strActionSave); 
+        if(!$btnSave) {
+	        $btnSave = new QButton($this->dtgLatestStrategy,$strActionSave);
+	        $btnSave->Text = 'Save';
+	        $btnSave->ActionParameter = $objStrategy->Id;
+	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveLatestStrategy_Click'));
+	        $btnSave->PrimaryButton = true;
+	        $btnSave->CausesValidation = true;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
-        return ($txtLatestStrategy->Render(false) . $lblLatestStrategy->Render(false));
+        
+        $strActionCancel = 'btnLatestStrategyCancel' . $objStrategy->Id;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        if(!$btnCancel) {
+	        $btnCancel = new QButton($this->dtgLatestStrategy,$strActionCancel);
+	        $btnCancel->Text = 'Cancel';
+	        $btnCancel->ActionParameter = $objStrategy->Id;
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelLatestStrategy_Click(this)'));        
+	       	$btnCancel->CausesValidation = false;
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
+        }
+		$strImgEdit = 'imgEditLatestStrategy' . $objStrategy->Id;
+        $strLblControlId = 'lblLatestStrategy' .  $objStrategy->Id;
+        $lblAction = $this->GetControl($strLblControlId);     
+        if (!$lblAction) {
+        	$lblAction = new QLabel($this->dtgLatestStrategy,$strLblControlId);
+        	$lblAction->Text = ($objStrategy->Strategy != null)? $objStrategy->Strategy : '<span style="color:#aaaaaa;">Add a Strategy</span>';
+        	$lblAction->ActionParameter = $objStrategy->Id;
+        	$lblAction->Cursor = 'pointer';
+        	$lblAction->Width = 400;
+        	$lblAction->HtmlEntities = false;
+        	$lblAction->Padding = '5px 15px';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	
+  			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblLatestStrategy_Clicked(this)'));	
+        }
+        return ($txtLatestStrategy->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblAction->RenderWithName(false));
 	}
 	
-	public function lblLatestStrategy_Clicked($strFormId, $strControlId, $strParameter) {
-		$lblLatestStrategy = $this->GetControl($strControlId); 
-		$lblLatestStrategy->Visible = false;
-		$txtLatestStrategy = $this->GetControl($strParameter); 
-		$txtLatestStrategy->Visible = true;
-	}
-	
-	public function txtLatestStrategy_MouseOut($strFormId, $strControlId, $strParameter) {
-		$txtLatestStrategy = $this->GetControl($strControlId); 
-		$objStrategy = Strategy::Load($strParameter);
-		$objStrategy->Strategy = $txtLatestStrategy->Text;
-		$objStrategy->Save();
-		$txtLatestStrategy->Visible = false;
-		$strLblControlId = 'lblLatestStrategy' . $objStrategy->Id;
-		$lblLatestStrategy = $this->GetControl($strLblControlId);
-		$lblLatestStrategy->Text = $txtLatestStrategy->Text;
-		$lblLatestStrategy->Visible = true;
+	public function btnSaveLatestStrategy_Click($strFormId, $strControlId, $strParameter) {
+		$StrategyId = $strParameter;	
+		$strControlId = 'txtLatestStrategy' . $StrategyId;
+        $txtStrategy = $this->GetControl($strControlId);
+        $objStrategy = Strategy::Load($StrategyId);
+        $objStrategy->Strategy = $txtStrategy->Text;
+        $objStrategy->ModifiedBy = $this->intUserId;
+        $objStrategy->Save();
+        $txtStrategy->Display = false;
+        
+        $strStrategySave = 'btnLatestStrategySave' . $StrategyId;
+        $btnSave = $this->GetControl($strStrategySave); 
+        $btnSave->Display = false;
+        $strActionCancel = 'btnLatestStrategyCancel' . $StrategyId;
+        $btnCancel = $this->GetControl($strActionCancel); 
+        $btnCancel->Display = false;
+        
+        $strLblControlId = 'lblLatestStrategy' . $StrategyId;
+        $lblAction = $this->GetControl($strLblControlId); 
+        $lblAction->Text = $txtStrategy->Text;
+        $lblAction->Display = true;
 	}
 	
 	public function RenderLatestPriority($objStrategy) {

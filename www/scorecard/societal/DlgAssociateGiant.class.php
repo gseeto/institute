@@ -109,12 +109,14 @@
         public function btnUpdate_Click() {
         	$this->strAssociatedGiants = '';
         	$objStrategy = Strategy::Load($this->intStrategyId);
-        	for($i=0; $i< $this->lstSelectedGiants->CountItems(); $i++) {
+        	$selectedGiantCount = $this->lstSelectedGiants->CountItems();
+        	for($i=0; $i<$selectedGiantCount; $i++) {
         		$objGiant = Giants::Load($this->lstSelectedGiants->GetItem($i)->Value);
         		if(!$objStrategy->IsGiantsAsGiantAssociated($objGiant))
         			$objStrategy->AssociateGiantsAsGiant($objGiant);
         	}
-        	for($i=0; $i< $this->lstGiants->CountItems(); $i++) {
+        	$giantCount = $this->lstGiants->CountItems();
+        	for($i=0; $i<$giantCount; $i++) {
         		$objGiant = Giants::Load($this->lstGiants->GetItem($i)->Value);
         		if($objStrategy->IsGiantsAsGiantAssociated($objGiant))
         			$objStrategy->UnassociateGiantsAsGiant($objGiant);

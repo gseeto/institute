@@ -16,7 +16,7 @@ class NewKingdomAssessmentForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {		
@@ -55,11 +55,11 @@ class NewKingdomAssessmentForm extends InstituteForm {
 
         $objStyle = $this->dtgAssessmentQuestions->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
+        $objStyle->BackColor = '#0098c3'; 
         
         $objStyle = $this->dtgAssessmentQuestions->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
+        $objStyle->BackColor = '#0098c3'; 
         
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = 'Submit';
@@ -73,7 +73,7 @@ class NewKingdomAssessmentForm extends InstituteForm {
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect('/resources/assessments/kingdom/index.php');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/kingdom/index.php');
 	}
 	
 	protected function btnSubmit_Click() {	
@@ -93,7 +93,7 @@ class NewKingdomAssessmentForm extends InstituteForm {
 	        $this->objKingdomAssessment->ResourceStatusId = 2;
 	        $this->objKingdomAssessment->Save();
         }
-		QApplication::Redirect('/resources/assessments/kingdom/viewAssessment.php');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/kingdom/viewAssessment.php');
 	}
 	
 	public function dtgAssessmentQuestions_Bind() {

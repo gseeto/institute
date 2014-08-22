@@ -28,6 +28,14 @@
 		}
 
 
+		public function CountActionItemByUser($intWho, $objOptionalClauses = null) {
+			// This will return a count of action items associated with a user
+			$objConditions = QQ::Equal(QQN::ActionItems()->ScorecardId, $this->intId);
+			$objConditions = QQ::AndCondition($objConditions,QQ::Equal(QQN::ActionItems()->Who, $intWho));
+			
+			return ActionItems::QueryCount($objConditions, $objOptionalClauses);
+		}
+		
 		// Override or Create New Load/Count methods
 		// (For obvious reasons, these methods are commented out...
 		// but feel free to use these as a starting point)

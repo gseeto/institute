@@ -27,6 +27,14 @@
 			return sprintf('Role Object %s',  $this->intId);
 		}
 
+		public static function LoadByName($strName, $objOptionalClauses = null) {
+			// This will return a single Role object
+			return Role::QuerySingle(
+				QQ::AndCondition(
+					QQ::Equal(QQN::Role()->Name, $strName)),
+				$objOptionalClauses
+			);
+		}
 
 		// Override or Create New Load/Count methods
 		// (For obvious reasons, these methods are commented out...

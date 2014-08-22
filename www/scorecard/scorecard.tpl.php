@@ -27,7 +27,50 @@
 	}
 ?>
 <div class='pcontent'>
-<img src='/resources/scorecard/summaryImg.php/<?php _p($this->objScorecard->Id);?>' style='margin:20px;'>
+<script type="text/javascript">
+
+       function DisplayChart(userData) {
+    		var chart;
+
+           	// SERIAL CHART
+                chart = new AmCharts.AmSerialChart();
+                chart.dataProvider = userData;
+                chart.categoryField = "P";
+                // the following two lines makes chart 3D
+                chart.depth3D = 20;
+                chart.angle = 30;
+
+                // AXES
+                // category
+                var categoryAxis = chart.categoryAxis;
+                categoryAxis.labelRotation = 90;
+                categoryAxis.dashLength = 5;
+                categoryAxis.gridPosition = "start";
+
+                // value
+                var valueAxis = new AmCharts.ValueAxis();
+                valueAxis.title = "Average KPI";
+                valueAxis.dashLength = 5;
+                valueAxis.maximum = 5;
+                chart.addValueAxis(valueAxis);
+
+                // GRAPH            
+                var graph = new AmCharts.AmGraph();
+                graph.valueField = "Kpi";
+                graph.colorField = "color";
+                graph.balloonText = "[[category]]: [[value]] KPI Average";
+                graph.type = "column";
+                graph.lineAlpha = 0;
+                graph.fillAlphas = 1;
+                chart.addGraph(graph);
+
+                // WRITE
+                chart.write("chartContainer");
+        }
+</script>
+
+<div id="chartContainer" style="width: 800px; height: 400px; margin-top:20px;"></div>
+
 <?php 
 	foreach($this->dtgPArray as $dtgP) {
 		$dtgP->Render();

@@ -11,7 +11,9 @@ class LemonGroupInfoForm extends InstituteForm {
 	protected $txtFirstName;
 	protected $txtLastName;
 	protected $txtEmail;
-	protected $txtCountry;
+	protected $lstCountry;
+	protected $lstLevel;
+	protected $lstTenure;
 	protected $lstGender;
 	protected $txtNewUser;
 	protected $txtNewPassword;
@@ -59,9 +61,26 @@ class LemonGroupInfoForm extends InstituteForm {
 		$this->txtEmail->Name = "Email: ";
 		$this->txtEmail->Width = 200;
 		
-		$this->txtCountry = new QTextBox($this);
-		$this->txtCountry->Name = "Country: ";
-		$this->txtCountry->Width = 200;
+		$this->lstCountry = new QListBox($this);
+		$this->lstCountry->Name = "Country: ";
+		$this->lstCountry->Width = 200;
+		foreach(CountryList::LoadAll() as $objCountry) {
+			$this->lstCountry->AddItem($objCountry->Name,$objCountry->Id);
+		}
+	 	
+		$this->lstLevel = new QListBox($this);
+		$this->lstLevel->Name = "Level: ";
+		$this->lstLevel->Width = 200;
+		foreach(TitleList::LoadAll() as $objLevel) {
+			$this->lstLevel->AddItem($objLevel->Name,$objLevel->Id);	
+		}	
+		
+		$this->lstTenure = new QListBox($this);
+		$this->lstTenure->Name = "Level: ";
+		$this->lstTenure->Width = 200;
+		foreach(TenureList::LoadAll() as $objTenure) {
+			$this->lstTenure->AddItem($objTenure->Range,$objTenure->Id);
+		}
 		
 		$this->lstGender = new QListBox($this);
 	 	$this->lstGender->Name = 'Gender : ';
@@ -121,7 +140,9 @@ class LemonGroupInfoForm extends InstituteForm {
 			$objUser->FirstName = trim($this->txtFirstName->Text);
 			$objUser->LastName = trim($this->txtLastName->Text);
 			$objUser->Email = trim($this->txtEmail->Text);
-			$objUser->Country = trim($this->txtCountry->Text);
+			$objUser->CountryId = trim($this->lstCountry->SelectedValue);
+			$objUser->TenureId = $this->lstTenure->SelectedValue;
+			$objUser->TitleId = $this->lstLevel->SelectedValue;
 			$objUser->Gender = $this->lstGender->SelectedValue;
 			$objUser->LoginId = $intLoginId;
 			$objUser->Save();
@@ -131,7 +152,8 @@ class LemonGroupInfoForm extends InstituteForm {
 	     	$objAssessment->UserId = $objUser->Id;
 	     	$objAssessment->ResourceId = 5; //LemonAssessment - going to have to find a nicer way of doing this
 	     	$objAssessment->ResourceStatusId = 1; // initial state is untouched
-	     	$objAssessment->GroupId = $this->intGroupAssessment;  	
+	     	$objAssessment->GroupId = $this->intGroupAssessment;  
+	     	$objAssessment->DateModified = new QDateTime('Now');	
 	     	$objUser->AssociateResource(Resource::Load(5));
 			$objAssessment->Save();
 			
@@ -162,9 +184,9 @@ class LemonGroupInfoForm extends InstituteForm {
 		if (!$objLogin) {
 			$this->lblErrorMsg->Text = 'Invalid username or password.';
 			$this->lblErrorMsg->Visible = true;
-			$this->txtUsername->Blink();
+			$this->txtUser->Blink();
 			$this->txtPassword->Blink();
-			$this->txtUsername->Focus();
+			$this->txtUser->Focus();
 			return;
 		} 	
 		$objUserArray = User::LoadArrayByLoginId($objLogin->Id);
@@ -172,13 +194,18 @@ class LemonGroupInfoForm extends InstituteForm {
 		// Create a new assessment entry associated with the user if not already associated
 		if ($objUser->IsResourceAssociated(Resource::Load(5))) {
 			QApplication::Login($objLogin);
+			$objAssessment = LemonAssessment::LoadArrayByUserId($objUser->Id);
+			$objAssessment[0]->GroupId = $this->intGroupAssessment; 
+			$objAssessment[0]->DateModified = new QDateTime('Now');
+			$objAssessment[0]->Save();
 			QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/groupQuestions.php/edit');
 		} else {
 	     	$objAssessment = new LemonAssessment();
 	     	$objAssessment->UserId = $objUser->Id;
 	     	$objAssessment->ResourceId = 5; //LemonAssessment - going to have to find a nicer way of doing this
 	     	$objAssessment->ResourceStatusId = 1; // initial state is untouched
-	     	$objAssessment->GroupId = $this->intGroupAssessment;  	
+	     	$objAssessment->GroupId = $this->intGroupAssessment; 
+	     	$objAssessment->DateModified = new QDateTime('Now'); 	
 	     	$objUser->AssociateResource(Resource::Load(5));
 			$objAssessment->Save();
 			QApplication::Login($objLogin);

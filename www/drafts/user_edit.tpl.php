@@ -29,13 +29,13 @@
 
 		<?php $this->chkGender->RenderWithName(); ?>
 
-		<?php $this->txtCountry->RenderWithName(); ?>
+		<?php $this->lstCountry->RenderWithName(); ?>
 
 		<?php $this->txtDepartment->RenderWithName(); ?>
 
-		<?php $this->txtTitle->RenderWithName(); ?>
+		<?php $this->lstTitle->RenderWithName(); ?>
 
-		<?php $this->txtTenure->RenderWithName(); ?>
+		<?php $this->lstTenure->RenderWithName(); ?>
 
 		<?php $this->txtCareerLength->RenderWithName(); ?>
 

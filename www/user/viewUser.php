@@ -10,7 +10,7 @@ class ViewUserForm extends InstituteForm {
 	protected $txtLastName;
 	protected $txtEmail;
 	protected $lstGender;
-	protected $txtCountry;
+	protected $lstCountry;
 	protected $txtUserName;
 	protected $txtPassword;
 	protected $lstRole;
@@ -22,7 +22,7 @@ class ViewUserForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {
@@ -52,9 +52,9 @@ class ViewUserForm extends InstituteForm {
 		 	$this->lstGender->AddItem('Female',0,true);
 	 	}
 	 	
-	 	$this->txtCountry = $this->mctUser->txtCountry_Create();
-	 	$this->txtCountry->Name = 'Country : ';
-	 	$this->txtCountry->TextMode = QTextMode::SingleLine;
+	 	$this->lstCountry = $this->mctUser->lstCountry_Create();
+	 	$this->lstCountry->Name = 'Country : ';
+
 	 	
 	 	$this->txtUserName = new QTextBox($this);
 	 	$this->txtUserName->Name = 'UserName : ';
@@ -98,11 +98,11 @@ class ViewUserForm extends InstituteForm {
 		$this->objUser->Save();	
 		$this->mctUser->SaveUser();
 		
-		QApplication::Redirect('/resources/admin/index.php/users');
+		QApplication::Redirect(__SUBDIRECTORY__.'/admin/index.php/users');
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect('/resources/admin/index.php/users');
+		QApplication::Redirect(__SUBDIRECTORY__.'/admin/index.php/users');
 	}
 }
 

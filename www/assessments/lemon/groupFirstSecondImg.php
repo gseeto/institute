@@ -4,35 +4,6 @@ require_once (dirname(__FILE__) . '/../../../includes/jpgraph/jpgraph.php');
 require_once (dirname(__FILE__) . '/../../../includes/jpgraph/jpgraph_bar.php');
 
 setlocale (LC_ALL, 'et_EE.ISO-8859-1');
-
-/*$sphereCount = array(0,0,0,0,0,0,0,0,0,0);
-$sphereKpi = array(0,0,0,0,0,0,0,0,0,0);
-$intScorecardId = QApplication::PathInfo(0);
-$objStrategyArray = Strategy::LoadArrayByScorecardId($intScorecardId);
-
-// Get the associations and calculate
-foreach(Strategy::LoadArrayByScorecardId($intScorecardId) as $objStrategy) {
-	$sphereArray = $objStrategy->GetSpheresAsSphereArray();
-	foreach($sphereArray as $objSphere) {
-		$sphereCount[$objSphere->Id-1]++;
-		$sphereKpi[$objSphere->Id-1] += $objStrategy->GetAverageKpiRating();
-	}
-}
-
-// Get the labels
-$labels = array();
-foreach(Spheres::LoadAll() as $objSphere) {
-	$labels[] = $objSphere->Sphere;
-}
-
-$data1y=array();
-$data2y=array();
-for($i=0; $i<10;$i++) {
-	$data1y[$i] = ($sphereCount[$i] != 0)? ($sphereKpi[$i]/$sphereCount[$i])/5 * $sphereCount[$i] : 0;
-	$data2y[$i] = ($sphereCount[$i] != 0)? $sphereCount[$i] - $data1y[$i] : 0;
-}
-*/
-
 $labels = array();
 for($i=1; $i<6; $i++) {
 	$labels[] = LemonType::ToString($i);
@@ -42,31 +13,40 @@ $data2y=array(0,0,0,0,0);
 $strArgs = substr(QApplication::$PathInfo, 1 );
 $assessmentArray = explode('/',$strArgs);
 foreach($assessmentArray as $intAssessmentId) {
-	$resultArray = LemonAssessmentResults::LoadArrayByAssessmentId($intAssessmentId);
 	$lemonValues = array();
-	foreach($resultArray as $objResult) {
-		$intLemonType = $objResult->Question->LemonTypeId;
-		switch($intLemonType) {
-			case 1:
-				$key = 'Luminary';
-				break;
-			case 2:
-				$key = 'Entrepreneur';
-				break;
-			case 3:
-				$key = 'Manager';
-				break;
-			case 4:
-				$key = 'Organizer';
-				break;
-			case 5:
-				$key = 'Networker';
-				break;
-		}
-		if(array_key_exists($key,$lemonValues)) {
-			$lemonValues[$key] += $objResult->Value;
-		} else {
-			$lemonValues[$key] = $objResult->Value;
+	$objAssessment = LemonAssessment::Load($intAssessmentId);
+	if($objAssessment->L) {
+		$lemonValues['Luminary'] = $objAssessment->L;
+		$lemonValues['Entrepreneur'] = $objAssessment->E;
+		$lemonValues['Manager'] = $objAssessment->M;
+		$lemonValues['Organizer'] = $objAssessment->O;
+		$lemonValues['Networker'] = $objAssessment->N;
+	} else {
+		$resultArray = LemonAssessmentResults::LoadArrayByAssessmentId($intAssessmentId);
+		foreach($resultArray as $objResult) {
+			$intLemonType = $objResult->Question->LemonTypeId;
+			switch($intLemonType) {
+				case 1:
+					$key = 'Luminary';
+					break;
+				case 2:
+					$key = 'Entrepreneur';
+					break;
+				case 3:
+					$key = 'Manager';
+					break;
+				case 4:
+					$key = 'Organizer';
+					break;
+				case 5:
+					$key = 'Networker';
+					break;
+			}
+			if(array_key_exists($key,$lemonValues)) {
+				$lemonValues[$key] += $objResult->Value;
+			} else {
+				$lemonValues[$key] = $objResult->Value;
+			}
 		}
 	}
 	$i=1;
@@ -132,7 +112,7 @@ $b2plot->SetShadow();
 $b2plot->SetNoFill();
 
 $b2plot->SetColor('#93C0E2');
-$b2plot->SetFillColor(array('#7fa5ba','#99c981','#ffda58','#ffcc8c','#f2bd7d'));
+$b2plot->SetFillColor(array('#6C98B0@0.6','#8AC16E@0.6','#FFD43F@0.6','#FCA343@0.6','#E66E24@0.6'));
 
 
 
@@ -144,13 +124,15 @@ $graph->graph_theme = null;
 $graph->Add($gbplot);
 
 $graph->title->Set("First And Second Slices");
+$graph->SetUserFont('ttf-dejavu/DejaVuSans.ttf');
+$graph->title->SetFont(FF_USERFONT,FS_NORMAL,18);
+
 //$graph->xaxis->title->Set("Spheres Or Sectors");
 $graph->xaxis->SetTickLabels($labels);
 $graph->xaxis->SetLabelAngle(45); // 45 degrees angle
 
-$graph->title->SetFont(FF_FONT1,FS_BOLD);
-$graph->yaxis->title->SetFont(FF_FONT1,FS_BOLD);
-$graph->xaxis->title->SetFont(FF_FONT1,FS_BOLD);
+$graph->yaxis->title->SetFont(FF_USERFONT,FS_NORMAL);
+$graph->xaxis->title->SetFont(FF_USERFONT,FS_NORMAL);
 
 // Display the graph
 $graph->Stroke();

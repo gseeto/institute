@@ -36,7 +36,7 @@ class LemonGroupLoginForm extends InstituteForm {
 				$this->lblErrorMsg->Visible = true;
 			} else {
 				// If you get here, then move to the next page to get user details
-				QApplication::Redirect('/resources/assessments/lemon/groupInfo.php/'.$objGroupAssessment->Id);
+				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/groupInfo.php/'.$objGroupAssessment->Id);
 			}
 		}
 	}

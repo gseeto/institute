@@ -4,6 +4,9 @@
         // Typically, you would want to do this by having public __getters for each control
         // But for simplicity of this demo, we'll simply make the child controls public, themselves.
         public $pnlTitle;
+        public $strFirstName;
+		public $strUsername;
+		public $strLastName;
         public $dtgUsers;
         public $lstScorecard;
         public $btnSubmit;
@@ -56,11 +59,11 @@
 		
 	        $objStyle = $this->dtgUsers->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        
 	        $objStyle = $this->dtgUsers->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 			$this->lstScorecard = new QListBox($this);
 			$this->lstScorecard->Name = 'Scorecard';
 			$objScorecardArray = Scorecard::LoadAll();
@@ -75,6 +78,27 @@
 			}
 			$this->lstScorecard->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			
+			$this->strFirstName = new QTextBox($this);
+			$this->strFirstName->Name = 'First Name';
+			$this->strFirstName->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
+			$this->strFirstName->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
+			$this->strFirstName->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			$this->strFirstName->Focus();
+			
+			$this->strLastName = new QTextBox($this);
+			$this->strLastName->Name = 'Last Name';
+			$this->strLastName->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
+			$this->strLastName->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
+			$this->strLastName->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			$this->strLastName->Focus();
+			
+			$this->strUsername = new QTextBox($this);
+			$this->strUsername->Name = 'Username';
+			$this->strUsername->Width = 50;
+			$this->strUsername->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
+			$this->strUsername->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
+			$this->strUsername->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			
 			$this->btnSubmit = new QButton($this);
 			$this->btnSubmit->Text = "Add Users to Scorecard";
 			$this->btnSubmit->CssClass = 'primary';
@@ -86,7 +110,7 @@
 			$this->btnCancel->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnCancel_Click'));
 			
         }       
-
+	
 	     public function btnSubmit_Click($strFormId, $strControlId, $strParameter) {
 			//Associate selected Users and hide panel
 	     	$intScorecardIndex = $this->lstScorecard->SelectedValue;
@@ -144,8 +168,35 @@
 		
 		public function dtgUsers_Bind() {
 			$objConditions = QQ::All();
-			$objClauses = array();
-			$userArray = User::QueryArray($objConditions,$objClauses);	
+			$objClauses = QQ::Clause($this->dtgUsers->LimitClause);
+			
+			if ($strName = trim($this->strFirstName->Text)) {
+				$objConditions = QQ::AndCondition($objConditions,
+					QQ::Like( QQN::User()->FirstName, $strName . '%')
+				);
+			}
+	
+			if ($strName = trim($this->strLastName->Text)) {
+				$objConditions = QQ::AndCondition($objConditions,
+					QQ::Like( QQN::User()->LastName, $strName . '%')
+				);
+			}
+			
+			if ($strName = trim($this->strUsername->Text)) {
+				$objLoginCondition = QQ::All();
+				$objLoginCondition = QQ::AndCondition($objLoginCondition,
+					QQ::Like( QQN::Login()->Username, $strName . '%')
+				);
+				$objLogin = Login::QuerySingle($objLoginCondition);
+				if (null != $objLogin) {
+					$objConditions = QQ::AndCondition($objConditions,
+					QQ::Equal( QQN::User()->LoginId, (int)$objLogin->Id)
+				);
+				} 
+			}
+			$this->dtgUsers->TotalItemCount = User::CountAll();
+			$userArray = User::QueryArray($objConditions,$objClauses);
+		
 			// Remove all users already associated with selected Scorecard
 			$intScorecardIndex = $this->lstScorecard->SelectedValue;
 			if ($intScorecardIndex) {

@@ -17,7 +17,7 @@ class NewTenPAssessmentForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {		
@@ -57,11 +57,11 @@ class NewTenPAssessmentForm extends InstituteForm {
 	
 	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        
 	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	 		
 	 	}
 		       
@@ -77,7 +77,7 @@ class NewTenPAssessmentForm extends InstituteForm {
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect('/resources/assessments/tenp/index.php');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/tenp/index.php');
 	}
 	
 	protected function btnSubmit_Click() {	
@@ -97,7 +97,7 @@ class NewTenPAssessmentForm extends InstituteForm {
 	        $this->objTenPAssessment->ResourceStatusId = 2;
 	        $this->objTenPAssessment->Save();
         }
-		QApplication::Redirect('/resources/assessments/tenp/viewAssessment.php');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/tenp/viewAssessment.php');
 	}
 	
     public function lstImportance_Render(TenPQuestions $objQuestions) {

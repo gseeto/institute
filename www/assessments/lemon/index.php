@@ -12,7 +12,7 @@ class LemonAssessmentForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {		
@@ -20,7 +20,12 @@ class LemonAssessmentForm extends InstituteForm {
 		$intUserId = $userArray[0]->Id;
 		
 		$assessmentArray = LemonAssessment::LoadArrayByUserId($intUserId);
-		$this->objLemonAssessment = $assessmentArray[0];
+		if($assessmentArray)
+			$this->objLemonAssessment = $assessmentArray[0];
+		else {
+			$this->objLemonAssessment = new LemonAssessment();
+			$this->objLemonAssessment->ResourceStatusId = 1;
+		}
 
 		$this->btnView = new QButton($this);
         $this->btnView->Text = 'View Assessment Results';

@@ -11,7 +11,7 @@ class AssessmentForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {
@@ -41,6 +41,18 @@ class AssessmentForm extends InstituteForm {
 							case 'LEMON Assessment':
 								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnLemonAssessment_Click'));	
 								break;
+							case 'Integration Assessment':
+								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnIntegrationAssessment_Click'));	
+								break;
+							case 'Seasonal Assessment':
+								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnSeasonalAssessment_Click'));	
+								break;
+							case 'Where Does The Time Go Assessment':
+								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnTimeAssessment_Click'));	
+								break;
+							case 'Leadership Readiness Assessment':
+								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnLRAAssessment_Click'));	
+								break;
 						}
 											
 					} else {
@@ -66,21 +78,35 @@ class AssessmentForm extends InstituteForm {
 	}
 
 	protected function btnGroupAssessments_Click() {	
-		QApplication::Redirect('/resources/assessments/lemon/groupAggregation.php');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/groupAggregation.php');
 	}
 	
 	protected function btnKingdomBusinessAssessment_Click() {	
-		QApplication::Redirect('/resources/assessments/kingdom/');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/kingdom/');
 	}
 	
 	protected function btnPAssessment_Click() {	
-		QApplication::Redirect('/resources/assessments/tenp/');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/tenp/');
 	}
 	protected function btnFAssessment_Click() {	
-		QApplication::Redirect('/resources/assessments/tenf/');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/tenf/');
 	}
 	protected function btnLemonAssessment_Click() {
-		QApplication::Redirect('/resources/assessments/lemon/');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/');
+	}
+	protected function btnIntegrationAssessment_Click() {
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/integration/');
+	}
+	protected function btnSeasonalAssessment_Click() {
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/seasons/');
+	}
+	
+	protected function btnTimeAssessment_Click() {
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/time/');
+	}
+	
+	protected function btnLRAAssessment_Click() {
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lra/');
 	}
 }
 

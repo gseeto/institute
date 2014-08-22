@@ -29,6 +29,18 @@
 
 		<?php $this->lstGroup->RenderWithName(); ?>
 
+		<?php $this->txtL->RenderWithName(); ?>
+
+		<?php $this->txtE->RenderWithName(); ?>
+
+		<?php $this->txtM->RenderWithName(); ?>
+
+		<?php $this->txtO->RenderWithName(); ?>
+
+		<?php $this->txtN->RenderWithName(); ?>
+
+		<?php $this->calDateModified->RenderWithName(); ?>
+
 	</div>
 
 	<div id="formActions">

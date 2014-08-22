@@ -300,9 +300,12 @@
 				case 'LastName': return QQN::User()->LastName;
 				case 'Email': return QQN::User()->Email;
 				case 'Gender': return QQN::User()->Gender;
+				case 'CountryId': return QQN::User()->CountryId;
 				case 'Country': return QQN::User()->Country;
 				case 'Department': return QQN::User()->Department;
+				case 'TitleId': return QQN::User()->TitleId;
 				case 'Title': return QQN::User()->Title;
+				case 'TenureId': return QQN::User()->TenureId;
 				case 'Tenure': return QQN::User()->Tenure;
 				case 'CareerLength': return QQN::User()->CareerLength;
 				default: throw new QCallerException('Simple Property not found in UserDataGrid content: ' . $mixContent);

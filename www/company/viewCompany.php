@@ -28,7 +28,7 @@ class ViewCompanyForm extends InstituteForm {
  	
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {
@@ -109,11 +109,11 @@ class ViewCompanyForm extends InstituteForm {
 
         $objStyle = $this->dtgMembers->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
+        $objStyle->BackColor = '#0098c3'; 
         
         $objStyle = $this->dtgMembers->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
+        $objStyle->BackColor = '#0098c3'; 
  	 
         $this->pnlAddMember = new QPanel($this);
         $this->pnlAddMember->Position = QPosition::Relative;
@@ -171,11 +171,11 @@ class ViewCompanyForm extends InstituteForm {
 			}
 		}
 
-		QApplication::Redirect('/resources/admin/index.php/companies');
+		QApplication::Redirect(__SUBDIRECTORY__.'/admin/index.php/companies');
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect('/resources/admin/index.php/companies');
+		QApplication::Redirect(__SUBDIRECTORY__.'/admin/index.php/companies');
 	}
 }
 

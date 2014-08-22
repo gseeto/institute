@@ -26,13 +26,270 @@ INSERT INTO `category_type` VALUES (5,'Partnering'),(7,'People'),(8,'Place'),(9,
 UNLOCK TABLES;
 
 --
--- Dumping data for table `company`
+-- Dumping data for table `conditional_type`
 --
 
-LOCK TABLES `company` WRITE;
-/*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (2,'The Institute For Innovation, Integration and Impact',2),(3,'Abundant Life Christian Fellowship',3);
-/*!40000 ALTER TABLE `company` ENABLE KEYS */;
+INSERT INTO `conditional_type` (`id`, `token`) VALUES
+(10, 'Importance < 2'),
+(11, 'Importance < 3'),
+(12, 'Importance < 4'),
+(13, 'Importance < 5'),
+(14, 'Importance < 6'),
+(6, 'Importance/Performance Gap > 2'),
+(7, 'Importance/Performance Gap > 3'),
+(8, 'Importance/Performance Gap > 4'),
+(9, 'Importance/Performance Gap > 5'),
+(1, 'Performance < 2'),
+(2, 'Performance < 3'),
+(3, 'Performance < 4'),
+(4, 'Performance < 5'),
+(5, 'Performance < 6');
+
+--
+-- Dumping data for table `f_category_type`
+--
+
+INSERT INTO `f_category_type` (`id`, `value`) VALUES
+(10, 'Faith'),
+(7, 'Family'),
+(1, 'Feelings'),
+(9, 'Finances'),
+(8, 'Fitness'),
+(2, 'Fresh Thinking'),
+(3, 'Friendship'),
+(4, 'Fulfillment At Work'),
+(6, 'Fun'),
+(5, 'Function In Society');
+
+INSERT INTO `integration_category_type` (`id`, `value`) VALUES
+(1, 'Identity'),
+(2, 'Integration'),
+(3, 'Work'),
+(4, 'Ministry'),
+(5, 'Purpose'),
+(6, 'Worldview'),
+(7, 'Money');
+
+INSERT INTO `seasonal_category_type` (`id`, `value`) VALUES
+(1, 'Discovering your Gifts'),
+(2, 'Faith'),
+(3, 'Hearing and Fearing God'),
+(4, 'Skills Building'),
+(5, 'Internal Integrity'),
+(6, '(re)choosing your spouse'),
+(7, 'University of the Desert');
+
+--
+-- Dumping data for table `country_list`
+--
+LOCK TABLES `country_list` WRITE;
+--
+-- Dumping data for table `country_list`
+--
+INSERT INTO `country_list` (`id`, `name`) VALUES
+(1, 'Afghanistan'),
+(2, 'Albania'),
+(3, 'Algeria'),
+(4, 'Andorra'),
+(5, 'Angola'),
+(6, 'Antigua and Barbuda'),
+(7, 'Argentina'),
+(8, 'Armenia'),
+(9, 'Australia'),
+(10, 'Austria'),
+(11, 'Azerbaijan'),
+(12, 'Bahamas'),
+(13, 'Bahrain'),
+(14, 'Bangladesh'),
+(15, 'Barbados'),
+(16, 'Belarus'),
+(17, 'Belgium'),
+(18, 'Belize'),
+(19, 'Benin'),
+(20, 'Bhutan'),
+(21, 'Bolivia'),
+(22, 'Bosnia and Herzegovina'),
+(23, 'Botswana'),
+(24, 'Brazil'),
+(25, 'Brunei'),
+(26, 'Bulgaria'),
+(27, 'Burkina Faso'),
+(28, 'Burma'),
+(29, 'Burundi'),
+(30, 'Cambodia'),
+(31, 'Cameroon'),
+(32, 'Canada'),
+(33, 'Cape Verde'),
+(34, 'Central African Republic'),
+(35, 'Chad'),
+(36, 'Chile'),
+(37, 'China'),
+(38, 'Colombia'),
+(39, 'Comoros'),
+(40, 'Congo'),
+(41, 'Costa Rica'),
+(42, 'Cote d''Ivoire'),
+(43, 'Croatia'),
+(44, 'Cuba'),
+(45, 'Cyprus'),
+(46, 'Czech Republic'),
+(47, 'Denmark'),
+(48, 'Djibouti'),
+(49, 'Dominica'),
+(50, 'Dominican Republic'),
+(51, 'East Timor'),
+(52, 'Ecuador'),
+(53, 'Egypt'),
+(54, 'El Salvador'),
+(55, 'Equatorial Guinea'),
+(56, 'Eritrea'),
+(57, 'Estonia'),
+(58, 'Ethiopia'),
+(92, 'Fiji'),
+(93, 'Finland'),
+(94, 'France'),
+(95, 'Gabon'),
+(96, 'Gambia, The'),
+(97, 'Georgia'),
+(98, 'Germany'),
+(99, 'Ghana'),
+(100, 'Greece'),
+(101, 'Grenada'),
+(102, 'Guatemala'),
+(103, 'Guinea'),
+(104, 'Guinea-Bissau'),
+(105, 'Guyana'),
+(106, 'Haiti'),
+(107, 'Holy See'),
+(108, 'Honduras'),
+(109, 'Hong Kong'),
+(110, 'Hungary'),
+(111, 'Iceland'),
+(112, 'India'),
+(113, 'Indonesia'),
+(114, 'Iran'),
+(115, 'Iraq'),
+(116, 'Ireland'),
+(117, 'Israel'),
+(118, 'Italy'),
+(119, 'Jamaica'),
+(120, 'Japan'),
+(121, 'Jordan'),
+(122, 'Kazakhstan'),
+(123, 'Kenya'),
+(124, 'Kiribati'),
+(125, 'Korea, North'),
+(126, 'Korea, South'),
+(127, 'Kosovo'),
+(128, 'Kuwait'),
+(129, 'Kyrgyzstan'),
+(130, 'Laos'),
+(131, 'Latvia'),
+(132, 'Lebanon'),
+(133, 'Lesotho'),
+(134, 'Liberia'),
+(135, 'Libya'),
+(136, 'Liechtenstein'),
+(137, 'Lithuania'),
+(138, 'Luxembourg'),
+(139, 'Macau'),
+(140, 'Macedonia'),
+(141, 'Madagascar'),
+(142, 'Malawi'),
+(143, 'Malaysia'),
+(144, 'Maldives'),
+(145, 'Mali'),
+(146, 'Malta'),
+(147, 'Marshall Islands'),
+(148, 'Mauritania'),
+(149, 'Mauritius'),
+(150, 'Mexico'),
+(151, 'Micronesia'),
+(152, 'Moldova'),
+(153, 'Monaco'),
+(154, 'Mongolia'),
+(155, 'Montenegro'),
+(156, 'Morocco'),
+(157, 'Mozambique'),
+(158, 'Namibia'),
+(159, 'Nauru'),
+(160, 'Nepal'),
+(161, 'Netherlands'),
+(162, 'Netherlands Antilles'),
+(163, 'New Zealand'),
+(164, 'Nicaragua'),
+(165, 'Niger'),
+(166, 'Nigeria'),
+(167, 'North Korea'),
+(168, 'Norway'),
+(169, 'Oman'),
+(170, 'Pakistan'),
+(171, 'Palau'),
+(172, 'Palestinian Territories'),
+(173, 'Panama'),
+(174, 'Papua New Guinea'),
+(175, 'Paraguay'),
+(176, 'Peru'),
+(177, 'Philippines'),
+(178, 'Poland'),
+(179, 'Portugal'),
+(180, 'Qatar'),
+(181, 'Romania'),
+(182, 'Russia'),
+(183, 'Rwanda'),
+(184, 'Saint Kitts and Nevis'),
+(185, 'Saint Lucia'),
+(186, 'Saint Vincent and the Grenadines'),
+(187, 'Samoa '),
+(188, 'San Marino'),
+(189, 'Sao Tome and Principe'),
+(190, 'Saudi Arabia'),
+(191, 'Senegal'),
+(192, 'Serbia'),
+(193, 'Seychelles'),
+(194, 'Sierra Leone'),
+(195, 'Singapore'),
+(196, 'Slovakia'),
+(197, 'Slovenia'),
+(198, 'Solomon Islands'),
+(199, 'Somalia'),
+(200, 'South Africa'),
+(201, 'South Korea'),
+(202, 'South Sudan'),
+(203, 'Spain'),
+(204, 'Sri Lanka'),
+(205, 'Sudan'),
+(206, 'Suriname'),
+(207, 'Swaziland'),
+(208, 'Sweden'),
+(209, 'Switzerland'),
+(210, 'Syria'),
+(211, 'Taiwan'),
+(212, 'Tajikistan'),
+(213, 'Tanzania'),
+(214, 'Thailand '),
+(215, 'Timor-Leste'),
+(216, 'Togo'),
+(217, 'Tonga'),
+(218, 'Trinidad and Tobago'),
+(219, 'Tunisia'),
+(220, 'Turkey'),
+(221, 'Turkmenistan'),
+(222, 'Tuvalu'),
+(223, 'Uganda'),
+(224, 'Ukraine'),
+(225, 'United Arab Emirates'),
+(226, 'United Kingdom'),
+(227, 'United States Of America'),
+(228, 'Uruguay'),
+(229, 'Uzbekistan'),
+(230, 'Vanuatu'),
+(231, 'Venezuela'),
+(232, 'Vietnam'),
+(233, 'Yemen'),
+(234, 'Zambia'),
+(235, 'Zimbabwe');
+
 UNLOCK TABLES;
 
 --
@@ -41,7 +298,13 @@ UNLOCK TABLES;
 
 LOCK TABLES `giants` WRITE;
 /*!40000 ALTER TABLE `giants` DISABLE KEYS */;
-INSERT INTO `giants` VALUES (1,'Isolationism','USA'),(2,'Dichotomy','USA'),(3,'Unemployment','USA'),(4,'Poverty','USA');
+INSERT INTO `giants` (`id`, `giant`, `country`) VALUES
+(1, 'Isolationism', 'USA'),
+(2, 'Dichotomy', 'USA'),
+(3, 'Unemployment', 'USA'),
+(4, 'Poverty', 'USA'),
+(5, 'Mediocrity', 'USA'),
+(6, 'Poverty', 'India');
 /*!40000 ALTER TABLE `giants` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,19 +314,31 @@ UNLOCK TABLES;
 
 LOCK TABLES `industry` WRITE;
 /*!40000 ALTER TABLE `industry` DISABLE KEYS */;
-INSERT INTO `industry` VALUES (1,'Agriculture'),(2,'forestry and fishing'),(3,'Arts'),(4,'sports and recreation'),(5,'Catering and accommodation'),(6,'Construction'),(7,'Education'),(8,'Health and social care services'),(9,'IT and telecommunications services'),(10,'Manufacturing'),(11,'Media and creative services'),(12,'Mining'),(13,'energy and utilities'),(14,'Personal services'),(15,'Professional and business services'),(16,'Retail'),(17,'Wholesale'),(18,'Human Resources');
+INSERT INTO `industry` (`id`, `value`) VALUES
+(1, 'Agriculture'),
+(2, 'forestry and fishing'),
+(3, 'Arts'),
+(4, 'sports and recreation'),
+(5, 'Catering and accommodation'),
+(6, 'Construction'),
+(7, 'Education'),
+(8, 'Health and social care services'),
+(9, 'IT and telecommunications services'),
+(10, 'Manufacturing'),
+(11, 'Media and creative services'),
+(12, 'Mining'),
+(13, 'energy and utilities'),
+(14, 'Personal services'),
+(15, 'Professional and business services'),
+(16, 'Retail'),
+(17, 'Wholesale'),
+(18, 'Human Resources');
 /*!40000 ALTER TABLE `industry` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping data for table `kingdom_business_assessment`
 --
-
-LOCK TABLES `kingdom_business_assessment` WRITE;
-/*!40000 ALTER TABLE `kingdom_business_assessment` DISABLE KEYS */;
-INSERT INTO `kingdom_business_assessment` VALUES (1,2,4,1,2),(2,NULL,4,3,1),(5,2,4,2,1),(6,NULL,4,5,1),(7,NULL,4,4,1);
-/*!40000 ALTER TABLE `kingdom_business_assessment` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Dumping data for table `kingdom_business_questions`
@@ -75,42 +350,7 @@ INSERT INTO `kingdom_business_questions` VALUES (1,1,'The purpose of our busines
 /*!40000 ALTER TABLE `kingdom_business_questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Dumping data for table `kingdom_business_results`
---
 
-LOCK TABLES `kingdom_business_results` WRITE;
-/*!40000 ALTER TABLE `kingdom_business_results` DISABLE KEYS */;
-INSERT INTO `kingdom_business_results` VALUES (202,1,1,6,7),(203,2,1,5,7),(204,3,1,3,7),(205,4,1,5,7),(206,5,1,5,7),(207,6,1,3,4),(208,7,1,2,1),(209,8,1,6,4),(210,9,1,6,6),(211,10,1,3,3),(212,11,1,5,3),(213,12,1,1,1),(214,13,1,3,5),(215,14,1,1,3),(216,15,1,5,5),(217,16,1,5,5),(218,17,1,5,3),(219,18,1,3,5),(220,19,1,2,5),(221,20,1,1,2),(222,21,1,1,3),(223,22,1,1,3),(224,23,1,1,5),(225,24,1,5,6),(226,25,1,4,6),(227,26,1,3,4),(228,27,1,2,2),(229,28,1,4,1),(230,29,1,6,5),(231,30,1,6,6),(232,31,1,5,6),(233,32,1,4,4),(234,33,1,4,4),(235,34,1,3,3),(236,35,1,5,1),(237,36,1,3,3),(238,37,1,1,4),(239,38,1,1,4),(240,39,1,1,1),(241,40,1,1,1);
-/*!40000 ALTER TABLE `kingdom_business_results` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `lemon_assessment`
---
-
-LOCK TABLES `lemon_assessment` WRITE;
-/*!40000 ALTER TABLE `lemon_assessment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lemon_assessment` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `lemon_assessment_questions`
---
-
-LOCK TABLES `lemon_assessment_questions` WRITE;
-/*!40000 ALTER TABLE `lemon_assessment_questions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lemon_assessment_questions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `lemon_assessment_results`
---
-
-LOCK TABLES `lemon_assessment_results` WRITE;
-/*!40000 ALTER TABLE `lemon_assessment_results` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lemon_assessment_results` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Dumping data for table `lemon_type`
@@ -119,25 +359,22 @@ UNLOCK TABLES;
 LOCK TABLES `lemon_type` WRITE;
 /*!40000 ALTER TABLE `lemon_type` DISABLE KEYS */;
 /*!40000 ALTER TABLE `lemon_type` ENABLE KEYS */;
+INSERT INTO `lemon_type` (`id`, `name`) VALUES
+(2, 'Entrepreneur'),
+(1, 'Luminary'),
+(3, 'Manager'),
+(5, 'Networker'),
+(4, 'Organizer');
+
 UNLOCK TABLES;
 
---
--- Dumping data for table `login`
---
 
-LOCK TABLES `login` WRITE;
-/*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('gseeto','gseeto',1,1),('lwidjaja','lwidjaja',2,2),('bjohnson','bjohnson',3,1),('lwidjaja','lwidjaja',4,2),('lwidjaja','lwidjaja',5,2),('linhly','linhly',6,4),('dandrews','dandrews',7,2),('ljohnson','ljohnson',8,4);
-/*!40000 ALTER TABLE `login` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `resource`
 --
 
 LOCK TABLES `resource` WRITE;
 /*!40000 ALTER TABLE `resource` DISABLE KEYS */;
-INSERT INTO `resource` VALUES (1,'Scorecard'),(2,'10-P Assessment'),(3,'10-F Assessment'),(4,'Kingdom Business Assessment'),(5,'LEMON Assessment');
+INSERT INTO `resource` VALUES (1,'Scorecard'),(2,'10-P Assessment'),(3,'10-F Assessment'),(4,'Kingdom Business Assessment'),(5,'LEMON Assessment'),(6,'Integration Assessment'),(7,'Seasonal Assessment'),(8,'Where Does The Time Go Assessment'),(9,'Leadership Readiness Assessment');
 /*!40000 ALTER TABLE `resource` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,16 +404,6 @@ INSERT INTO `resource_status` VALUES (1,'Untouched'),(2,'Touched'),(3,'Disabled'
 UNLOCK TABLES;
 
 --
--- Dumping data for table `resource_user_assn`
---
-
-LOCK TABLES `resource_user_assn` WRITE;
-/*!40000 ALTER TABLE `resource_user_assn` DISABLE KEYS */;
-INSERT INTO `resource_user_assn` VALUES (4,1),(4,3),(4,2),(4,2),(2,1),(2,1),(2,2),(2,4),(2,5),(4,5),(4,4),(2,3);
-/*!40000 ALTER TABLE `resource_user_assn` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `role`
 --
 
@@ -186,25 +413,6 @@ INSERT INTO `role` VALUES (1,'Administrator'),(2,'Manager'),(3,'Company Manager'
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Dumping data for table `scorecard`
---
-
-LOCK TABLES `scorecard` WRITE;
-/*!40000 ALTER TABLE `scorecard` DISABLE KEYS */;
-INSERT INTO `scorecard` VALUES (1,2,'institute',1),(2,3,'alcf',1);
-/*!40000 ALTER TABLE `scorecard` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `scorecard_user_assn`
---
-
-LOCK TABLES `scorecard_user_assn` WRITE;
-/*!40000 ALTER TABLE `scorecard_user_assn` DISABLE KEYS */;
-INSERT INTO `scorecard_user_assn` VALUES (1,1),(2,1),(5,1),(1,2),(3,1),(4,1),(6,1);
-/*!40000 ALTER TABLE `scorecard_user_assn` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Dumping data for table `spheres`
@@ -214,15 +422,6 @@ LOCK TABLES `spheres` WRITE;
 /*!40000 ALTER TABLE `spheres` DISABLE KEYS */;
 INSERT INTO `spheres` VALUES (1,'Business'),(2,'Education'),(3,'Government'),(4,'Media'),(5,'NGO'),(6,'Law'),(7,'Healthcare'),(8,'Capital'),(9,'Religion'),(10,'Family');
 /*!40000 ALTER TABLE `spheres` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `statement`
---
-
-LOCK TABLES `statement` WRITE;
-/*!40000 ALTER TABLE `statement` DISABLE KEYS */;
-/*!40000 ALTER TABLE `statement` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -236,44 +435,50 @@ INSERT INTO `status_type` VALUES (1,'0%'),(5,'100%'),(2,'25%'),(3,'50%'),(4,'75%
 UNLOCK TABLES;
 
 --
--- Dumping data for table `ten_p_assessment`
+-- Dumping data for table `tenure_list`
 --
 
-LOCK TABLES `ten_p_assessment` WRITE;
-/*!40000 ALTER TABLE `ten_p_assessment` DISABLE KEYS */;
-INSERT INTO `ten_p_assessment` VALUES (1,2,2,2,1),(2,1,2,2,2),(3,1,NULL,2,4),(4,1,NULL,2,5),(5,1,NULL,2,3);
-/*!40000 ALTER TABLE `ten_p_assessment` ENABLE KEYS */;
+INSERT INTO `tenure_list` (`id`, `range`) VALUES
+(1, '0-3 Years'),
+(2, '4-7 Years'),
+(3, '> 7 Years');
+--
+-- Dumping data for table `title_list`
+--
+LOCK TABLES `title_list` WRITE;
+INSERT INTO `title_list` (`id`, `name`) VALUES
+(1, 'Executive'),
+(2, 'Manager'),
+(3, 'Other');
 UNLOCK TABLES;
 
 --
--- Dumping data for table `ten_p_questions`
+-- Dumping data for table `f_category_type`
 --
 
-LOCK TABLES `ten_p_questions` WRITE;
-/*!40000 ALTER TABLE `ten_p_questions` DISABLE KEYS */;
-INSERT INTO `ten_p_questions` VALUES (1,1,'My organization\'s primary Purpose is well understood.',1),(2,2,'My organization\'s Purpose is consistent with its core business.',1),(3,3,'There is alignment in the Purpose of the organization.',1),(4,4,'Buy-in to purpose is expanded beyond the founders of the organization.',1),(5,5,'Our Products reflect the Purpose of the organization.',2),(6,6,'There is a systematic approach to developing our Products.',2),(7,7,'The impact of our Products on customers is measured.',2),(8,8,'Our customers look to the corporation primarily for its products.',2),(9,9,'My organization\'s distinctive Positioning relative to its competitors is well understood inside the company.',3),(10,10,'My organization\'s Positioning relative to its competitors is well understood outside the company.',3),(11,11,'My organization\'s Positioning - how we stack up against others - is effective.',3),(12,12,'Our Positioning has attracted potential Partners.',3),(13,13,'My organization has a clear Presence in the marketplace.',4),(14,14,'My organization\'s Presence in the marketplace is inspiring.',4),(15,15,'My organization has a defined marketing strategy.',4),(16,16,'Our strategy for building Presence is measurable.',4),(17,17,'My organization has a well-articulated Partnering strategy.',5),(18,18,'The existing Partnering relationships are working as designed.',5),(19,19,'My organization leverages its Partners optimally.',5),(20,20,'My organization\'s existing partnerships fit its strategic needs.',5),(21,21,'Business Processes are well defined.',6),(22,22,'Cross-functional (inter-departmental) Processes are well defined.',6),(23,23,'Processes are aligned/consistent with the organization\'s Purpose.',6),(24,24,'Communication processes are well defined and implemented.',6),(25,25,'My organization values its people.',7),(26,26,'People are able to have impact in the organization.',7),(27,27,'How we are organized is consistent with our Purpose.',7),(28,28,'Compensation structures are consistent with Purpose and Profit models.',7),(29,29,'Location is optimal with regard to key infrastructure components.',8),(30,30,'Proximity to network/Partners is well thought through and leads to conscious decisions on where work should take place.',8),(31,31,'We leverage the strengths of physical and virtual Place to create impact.',8),(32,32,'Our Place reveals a deliberate attempt to capture our ethos and corporate story.',8),(33,33,'There is a clear Planning framework.',9),(34,34,'Planning involves people from all levels of the organization (with their buy-in).',9),(35,35,'Customer feedback is fed into the Planning process.',9),(36,36,'Planning covers all drivers of Impact (all 10-Ps).',9),(37,37,'My organization\'s economic (Profit) objectives are consistent with its core values.',10),(38,38,'My organization\'s Profit objectives and economic model are known internally.',10),(39,39,'My organization\'s theoretical economic model translates to day-to-day operations.',10),(40,40,'My organization\'s Profit model is in alignment with the strategic objectives.',10);
-/*!40000 ALTER TABLE `ten_p_questions` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `lra_category_type` (`id`, `value`) VALUES
+(1, 'Purpose'),
+(2, 'Product'),
+(3, 'Positioning'),
+(4, 'Presence'),
+(5, 'Partnering'),
+(6, 'Profit'),
+(7, 'Process'),
+(8, 'People'),
+(9, 'Planning'),
+(10, 'Place'),
+(11, 'Fresh Thinking'),
+(12, 'Friendships'),
+(13, 'Feelings'),
+(14, 'Family'),
+(15, 'Faith'),
+(16, 'Fun'),
+(17, 'Fitness'),
+(18, 'Finances'),
+(19, 'Fulfilment At Work'),
+(20, 'Function In Society');
 
---
--- Dumping data for table `ten_p_results`
---
 
-LOCK TABLES `ten_p_results` WRITE;
-/*!40000 ALTER TABLE `ten_p_results` DISABLE KEYS */;
-INSERT INTO `ten_p_results` VALUES (1,1,1,5,6),(2,2,1,5,7),(3,3,1,4,7),(4,4,1,6,7),(5,5,1,2,7),(6,6,1,2,6),(7,7,1,7,6),(8,8,1,4,5),(9,9,1,3,4),(10,10,1,1,1),(11,11,1,1,1),(12,12,1,2,2),(13,13,1,4,3),(14,14,1,3,4),(15,15,1,4,4),(16,16,1,2,3),(17,17,1,2,2),(18,18,1,4,2),(19,19,1,2,4),(20,20,1,2,2),(21,21,1,4,4),(22,22,1,2,4),(23,23,1,1,2),(24,24,1,4,4),(25,25,1,4,5),(26,26,1,5,5),(27,27,1,5,5),(28,28,1,6,6),(29,29,1,6,6),(30,30,1,1,6),(31,31,1,7,7),(32,32,1,6,6),(33,33,1,1,5),(34,34,1,5,5),(35,35,1,1,4),(36,36,1,1,3),(37,37,1,7,2),(38,38,1,7,5),(39,39,1,7,4),(40,40,1,7,5);
-/*!40000 ALTER TABLE `ten_p_results` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,1,'Gareth','Seeto','gareth.seeto@gmail.com',1,'USA','','',NULL,NULL),(2,3,'Brett','Johnson','brettj@inst.net',1,'USA',NULL,NULL,NULL,NULL),(3,5,'Linda','Widjaja','lwidjaja@inst.net',0,'USA',NULL,NULL,NULL,NULL),(4,6,'Linh','Ly','linhl@inst.net',0,'USA',NULL,NULL,NULL,NULL),(5,7,'Dena','Andrews','denaa@inst.net',0,'',NULL,NULL,NULL,NULL),(6,8,'Lyn','Johnson','lynj@inst.net',0,'USA',NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

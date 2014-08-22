@@ -6,7 +6,7 @@ class NewTenFAssessmentForm extends InstituteForm {
 	protected $strPageTitle = '10-P Assessment';
 	protected $intNavSectionId = InstituteForm::NavSectionAssessments;
 	protected $objTenFAssessment;
-	protected $dtgAssessmentQuestions;
+	protected $dtgAssessmentQuestionArray;
 	protected $btnSubmit;
 	protected $btnCancel;
 	protected $arrayImportance;
@@ -16,7 +16,7 @@ class NewTenFAssessmentForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {		
@@ -34,33 +34,35 @@ class NewTenFAssessmentForm extends InstituteForm {
 		$this->arrayImportance = array();
 	 	$this->arrayPerformance = array();
 		
-		// Check status of Assessment. See if untouched, taken or inactive
-		//$this->objTenFAssessment->ResourceStatusId
-		$this->dtgAssessmentQuestions = new TenFQuestionsDataGrid($this);
-		$this->dtgAssessmentQuestions->MetaAddTypeColumn('CategoryId', 'FCategoryType');
-		$this->dtgAssessmentQuestions->AddColumn(new QDataGridColumn('', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=30px' ));
-		$this->dtgAssessmentQuestions->AddColumn(new QDataGridColumn('Question', '<?= $_ITEM->Text ?>', 'HtmlEntities=false', 'Width=450px' ));			
-		$this->dtgAssessmentQuestions->AddColumn(new QDataGridColumn('Importance', '<?= $_FORM->lstImportance_Render($_ITEM) ?>','HtmlEntities=false'));
-		$this->dtgAssessmentQuestions->AddColumn(new QDataGridColumn('Performance', '<?= $_FORM->lstPerformance_Render($_ITEM) ?>','HtmlEntities=false'));
-		$this->dtgAssessmentQuestions->CellPadding = 5;
-		$this->dtgAssessmentQuestions->SetDataBinder('dtgAssessmentQuestions_Bind',$this);
-		$this->dtgAssessmentQuestions->UseAjax = true;
-		
-		$objStyle = $this->dtgAssessmentQuestions->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
+	 	$this->dtgAssessmentQuestionArray = array();
+		for($i=0; $i<10;$i++) {
+	 		$this->dtgAssessmentQuestionArray[$i] = new TenFQuestionsDataGrid($this);
+			$this->dtgAssessmentQuestionArray[$i]->AddColumn(new QDataGridColumn('', '<?= $_FORM->RenderQuestionId($_ITEM->Count) ?>', 'HtmlEntities=false', 'Width=30px' ));
+			$this->dtgAssessmentQuestionArray[$i]->AddColumn(new QDataGridColumn('Question', '<?= $_ITEM->Text ?>', 'HtmlEntities=false', 'Width=450px' ));			
+			$this->dtgAssessmentQuestionArray[$i]->AddColumn(new QDataGridColumn('Importance', '<?= $_FORM->lstImportance_Render($_ITEM) ?>','HtmlEntities=false'));
+			$this->dtgAssessmentQuestionArray[$i]->AddColumn(new QDataGridColumn('Performance', '<?= $_FORM->lstPerformance_Render($_ITEM) ?>','HtmlEntities=false'));
+			$this->dtgAssessmentQuestionArray[$i]->CellPadding = 5;
+			$this->dtgAssessmentQuestionArray[$i]->UseAjax = true;
+	
+			$assessmentArray = TenFQuestions::LoadArrayByCategoryId($i+1);					
+			$this->dtgAssessmentQuestionArray[$i]->DataSource = $assessmentArray; 
+			
+			$objStyle = $this->dtgAssessmentQuestionArray[$i]->RowStyle;
+	        $objStyle->BackColor = '#ffffff';
+	        $objStyle->FontSize = 12;
+	
+	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->AlternateRowStyle;
+	        $objStyle->BackColor = '#CCCCCC';
+	
+	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->HeaderRowStyle;
+	        $objStyle->ForeColor = '#ffffff';
+	        $objStyle->BackColor = '#0098c3'; 
+	        
+	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->HeaderLinkStyle;
+	        $objStyle->ForeColor = '#ffffff';
+	        $objStyle->BackColor = '#0098c3'; 		
+		 }
 
-        $objStyle = $this->dtgAssessmentQuestions->AlternateRowStyle;
-        $objStyle->BackColor = '#CCCCCC';
-
-        $objStyle = $this->dtgAssessmentQuestions->HeaderRowStyle;
-        $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
-        
-        $objStyle = $this->dtgAssessmentQuestions->HeaderLinkStyle;
-        $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
-        
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = 'Submit';
 	 	$this->btnSubmit->CssClass = 'primary';
@@ -73,7 +75,7 @@ class NewTenFAssessmentForm extends InstituteForm {
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect('/resources/assessments/tenf/index.php');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/tenf/index.php');
 	}
 	
 	protected function btnSubmit_Click() {	
@@ -93,21 +95,18 @@ class NewTenFAssessmentForm extends InstituteForm {
 	        $this->objTenFAssessment->ResourceStatusId = 2;
 	        $this->objTenFAssessment->Save();
         }
-		QApplication::Redirect('/resources/assessments/tenf/viewAssessment.php');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/tenf/viewAssessment.php');
 	}
-	
-	public function dtgAssessmentQuestions_Bind() {
-		$objConditions = QQ::All();
-		$objClauses = array();
 
-		$assessmentArray = TenFQuestions::QueryArray($objConditions,$objClauses);		
-		$this->dtgAssessmentQuestions->DataSource = $assessmentArray; 
-	}
-	
+	public function RenderQuestionId($intQuestionId) {
+    	$txtReturn = sprintf('<div style="color:#888888">%s</div>',$intQuestionId);
+    	return $txtReturn;
+    }
+    	
     public function lstImportance_Render(TenFQuestions $objQuestions) {
         // In order to keep track we will use explicitly defined control ids.
         $strControlId = 'importance' . $objQuestions->Id;
-
+		$index = $objQuestions->CategoryId - 1;
         // Let's see if the Checkbox exists already
         $lstImportance = $this->GetControl($strControlId);
             
@@ -115,7 +114,7 @@ class NewTenFAssessmentForm extends InstituteForm {
             // Define the ListBox -- it's parent is the Datagrid (b/c the datagrid is the one calling
             // this method which is responsible for rendering the listbox.  Also, we must
             // explicitly specify the control ID
-            $lstImportance = new QListBox($this->dtgAssessmentQuestions, $strControlId);
+            $lstImportance = new QListBox($this->dtgAssessmentQuestionArray[$index], $strControlId);
             $lstImportance->Width = 100;
             $lstImportance->ForeColor = '#F90949';
         	// Initialize values from previous assessment
@@ -147,7 +146,8 @@ class NewTenFAssessmentForm extends InstituteForm {
 	public function lstPerformance_Render(TenFQuestions $objQuestions) {
         // In order to keep track we will use explicitly defined control ids.
         $strControlId = 'performance' . $objQuestions->Id;
-
+		$index = $objQuestions->CategoryId - 1;
+		
         // Let's see if the Checkbox exists already
         $lstPerformance = $this->GetControl($strControlId);
             
@@ -155,7 +155,7 @@ class NewTenFAssessmentForm extends InstituteForm {
             // Define the ListBox -- it's parent is the Datagrid (b/c the datagrid is the one calling
             // this method which is responsible for rendering the listbox.  Also, we must
             // explicitly specify the control ID
-            $lstPerformance = new QListBox($this->dtgAssessmentQuestions, $strControlId);
+            $lstPerformance = new QListBox($this->dtgAssessmentQuestionArray[$index], $strControlId);
             $lstPerformance->Width = 100;
             $lstPerformance->ForeColor = '#131BF9';
             

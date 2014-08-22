@@ -5,9 +5,6 @@ require(dirname(__FILE__) . '/../../../includes/prepend.inc.php');
 require_once __INCLUDES__.'/Classes/PHPExcel.php';
 require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 
-//require_once '/var/www/includes/Classes/PHPExcel.php';
-//require_once '/var/www/includes/Classes/PHPExcel/IOFactory.php';
-
 	$strParameter = QApplication::PathInfo(0);
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->getProperties()->setCreator("inst.net")

@@ -21,6 +21,12 @@
 	 * @property integer $ResourceId the value for intResourceId 
 	 * @property integer $ResourceStatusId the value for intResourceStatusId 
 	 * @property integer $GroupId the value for intGroupId 
+	 * @property integer $L the value for intL 
+	 * @property integer $E the value for intE 
+	 * @property integer $M the value for intM 
+	 * @property integer $O the value for intO 
+	 * @property integer $N the value for intN 
+	 * @property QDateTime $DateModified the value for dttDateModified 
 	 * @property User $User the value for the User object referenced by intUserId 
 	 * @property Company $Company the value for the Company object referenced by intCompanyId 
 	 * @property Resource $Resource the value for the Resource object referenced by intResourceId 
@@ -81,6 +87,54 @@
 		 */
 		protected $intGroupId;
 		const GroupIdDefault = null;
+
+
+		/**
+		 * Protected member variable that maps to the database column lemon_assessment.l
+		 * @var integer intL
+		 */
+		protected $intL;
+		const LDefault = null;
+
+
+		/**
+		 * Protected member variable that maps to the database column lemon_assessment.e
+		 * @var integer intE
+		 */
+		protected $intE;
+		const EDefault = null;
+
+
+		/**
+		 * Protected member variable that maps to the database column lemon_assessment.m
+		 * @var integer intM
+		 */
+		protected $intM;
+		const MDefault = null;
+
+
+		/**
+		 * Protected member variable that maps to the database column lemon_assessment.o
+		 * @var integer intO
+		 */
+		protected $intO;
+		const ODefault = null;
+
+
+		/**
+		 * Protected member variable that maps to the database column lemon_assessment.n
+		 * @var integer intN
+		 */
+		protected $intN;
+		const NDefault = null;
+
+
+		/**
+		 * Protected member variable that maps to the database column lemon_assessment.date_modified
+		 * @var QDateTime dttDateModified
+		 */
+		protected $dttDateModified;
+		const DateModifiedDefault = null;
 
 
 		/**
@@ -477,6 +531,12 @@
 			$objBuilder->AddSelectItem($strTableName, 'resource_id', $strAliasPrefix . 'resource_id');
 			$objBuilder->AddSelectItem($strTableName, 'resource_status_id', $strAliasPrefix . 'resource_status_id');
 			$objBuilder->AddSelectItem($strTableName, 'group_id', $strAliasPrefix . 'group_id');
+			$objBuilder->AddSelectItem($strTableName, 'l', $strAliasPrefix . 'l');
+			$objBuilder->AddSelectItem($strTableName, 'e', $strAliasPrefix . 'e');
+			$objBuilder->AddSelectItem($strTableName, 'm', $strAliasPrefix . 'm');
+			$objBuilder->AddSelectItem($strTableName, 'o', $strAliasPrefix . 'o');
+			$objBuilder->AddSelectItem($strTableName, 'n', $strAliasPrefix . 'n');
+			$objBuilder->AddSelectItem($strTableName, 'date_modified', $strAliasPrefix . 'date_modified');
 		}
 
 
@@ -552,6 +612,18 @@
 			$objToReturn->intResourceStatusId = $objDbRow->GetColumn($strAliasName, 'Integer');
 			$strAliasName = array_key_exists($strAliasPrefix . 'group_id', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'group_id'] : $strAliasPrefix . 'group_id';
 			$objToReturn->intGroupId = $objDbRow->GetColumn($strAliasName, 'Integer');
+			$strAliasName = array_key_exists($strAliasPrefix . 'l', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'l'] : $strAliasPrefix . 'l';
+			$objToReturn->intL = $objDbRow->GetColumn($strAliasName, 'Integer');
+			$strAliasName = array_key_exists($strAliasPrefix . 'e', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'e'] : $strAliasPrefix . 'e';
+			$objToReturn->intE = $objDbRow->GetColumn($strAliasName, 'Integer');
+			$strAliasName = array_key_exists($strAliasPrefix . 'm', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'm'] : $strAliasPrefix . 'm';
+			$objToReturn->intM = $objDbRow->GetColumn($strAliasName, 'Integer');
+			$strAliasName = array_key_exists($strAliasPrefix . 'o', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'o'] : $strAliasPrefix . 'o';
+			$objToReturn->intO = $objDbRow->GetColumn($strAliasName, 'Integer');
+			$strAliasName = array_key_exists($strAliasPrefix . 'n', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'n'] : $strAliasPrefix . 'n';
+			$objToReturn->intN = $objDbRow->GetColumn($strAliasName, 'Integer');
+			$strAliasName = array_key_exists($strAliasPrefix . 'date_modified', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'date_modified'] : $strAliasPrefix . 'date_modified';
+			$objToReturn->dttDateModified = $objDbRow->GetColumn($strAliasName, 'Date');
 
 			// Instantiate Virtual Attributes
 			foreach ($objDbRow->GetColumnNameArray() as $strColumnName => $mixValue) {
@@ -856,13 +928,25 @@
 							`company_id`,
 							`resource_id`,
 							`resource_status_id`,
-							`group_id`
+							`group_id`,
+							`l`,
+							`e`,
+							`m`,
+							`o`,
+							`n`,
+							`date_modified`
 						) VALUES (
 							' . $objDatabase->SqlVariable($this->intUserId) . ',
 							' . $objDatabase->SqlVariable($this->intCompanyId) . ',
 							' . $objDatabase->SqlVariable($this->intResourceId) . ',
 							' . $objDatabase->SqlVariable($this->intResourceStatusId) . ',
-							' . $objDatabase->SqlVariable($this->intGroupId) . '
+							' . $objDatabase->SqlVariable($this->intGroupId) . ',
+							' . $objDatabase->SqlVariable($this->intL) . ',
+							' . $objDatabase->SqlVariable($this->intE) . ',
+							' . $objDatabase->SqlVariable($this->intM) . ',
+							' . $objDatabase->SqlVariable($this->intO) . ',
+							' . $objDatabase->SqlVariable($this->intN) . ',
+							' . $objDatabase->SqlVariable($this->dttDateModified) . '
 						)
 					');
 
@@ -886,7 +970,13 @@
 							`company_id` = ' . $objDatabase->SqlVariable($this->intCompanyId) . ',
 							`resource_id` = ' . $objDatabase->SqlVariable($this->intResourceId) . ',
 							`resource_status_id` = ' . $objDatabase->SqlVariable($this->intResourceStatusId) . ',
-							`group_id` = ' . $objDatabase->SqlVariable($this->intGroupId) . '
+							`group_id` = ' . $objDatabase->SqlVariable($this->intGroupId) . ',
+							`l` = ' . $objDatabase->SqlVariable($this->intL) . ',
+							`e` = ' . $objDatabase->SqlVariable($this->intE) . ',
+							`m` = ' . $objDatabase->SqlVariable($this->intM) . ',
+							`o` = ' . $objDatabase->SqlVariable($this->intO) . ',
+							`n` = ' . $objDatabase->SqlVariable($this->intN) . ',
+							`date_modified` = ' . $objDatabase->SqlVariable($this->dttDateModified) . '
 						WHERE
 							`id` = ' . $objDatabase->SqlVariable($this->intId) . '
 					');
@@ -976,6 +1066,12 @@
 			$this->ResourceId = $objReloaded->ResourceId;
 			$this->intResourceStatusId = $objReloaded->intResourceStatusId;
 			$this->GroupId = $objReloaded->GroupId;
+			$this->intL = $objReloaded->intL;
+			$this->intE = $objReloaded->intE;
+			$this->intM = $objReloaded->intM;
+			$this->intO = $objReloaded->intO;
+			$this->intN = $objReloaded->intN;
+			$this->dttDateModified = $objReloaded->dttDateModified;
 		}
 
 		/**
@@ -994,6 +1090,12 @@
 					`resource_id`,
 					`resource_status_id`,
 					`group_id`,
+					`l`,
+					`e`,
+					`m`,
+					`o`,
+					`n`,
+					`date_modified`,
 					__sys_login_id,
 					__sys_action,
 					__sys_date
@@ -1004,6 +1106,12 @@
 					' . $objDatabase->SqlVariable($this->intResourceId) . ',
 					' . $objDatabase->SqlVariable($this->intResourceStatusId) . ',
 					' . $objDatabase->SqlVariable($this->intGroupId) . ',
+					' . $objDatabase->SqlVariable($this->intL) . ',
+					' . $objDatabase->SqlVariable($this->intE) . ',
+					' . $objDatabase->SqlVariable($this->intM) . ',
+					' . $objDatabase->SqlVariable($this->intO) . ',
+					' . $objDatabase->SqlVariable($this->intN) . ',
+					' . $objDatabase->SqlVariable($this->dttDateModified) . ',
 					' . (($objDatabase->JournaledById) ? $objDatabase->JournaledById : 'NULL') . ',
 					' . $objDatabase->SqlVariable($strJournalCommand) . ',
 					NOW()
@@ -1083,6 +1191,36 @@
 					// Gets the value for intGroupId 
 					// @return integer
 					return $this->intGroupId;
+
+				case 'L':
+					// Gets the value for intL 
+					// @return integer
+					return $this->intL;
+
+				case 'E':
+					// Gets the value for intE 
+					// @return integer
+					return $this->intE;
+
+				case 'M':
+					// Gets the value for intM 
+					// @return integer
+					return $this->intM;
+
+				case 'O':
+					// Gets the value for intO 
+					// @return integer
+					return $this->intO;
+
+				case 'N':
+					// Gets the value for intN 
+					// @return integer
+					return $this->intN;
+
+				case 'DateModified':
+					// Gets the value for dttDateModified 
+					// @return QDateTime
+					return $this->dttDateModified;
 
 
 				///////////////////
@@ -1235,6 +1373,72 @@
 					try {
 						$this->objGroup = null;
 						return ($this->intGroupId = QType::Cast($mixValue, QType::Integer));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'L':
+					// Sets the value for intL 
+					// @param integer $mixValue
+					// @return integer
+					try {
+						return ($this->intL = QType::Cast($mixValue, QType::Integer));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'E':
+					// Sets the value for intE 
+					// @param integer $mixValue
+					// @return integer
+					try {
+						return ($this->intE = QType::Cast($mixValue, QType::Integer));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'M':
+					// Sets the value for intM 
+					// @param integer $mixValue
+					// @return integer
+					try {
+						return ($this->intM = QType::Cast($mixValue, QType::Integer));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'O':
+					// Sets the value for intO 
+					// @param integer $mixValue
+					// @return integer
+					try {
+						return ($this->intO = QType::Cast($mixValue, QType::Integer));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'N':
+					// Sets the value for intN 
+					// @param integer $mixValue
+					// @return integer
+					try {
+						return ($this->intN = QType::Cast($mixValue, QType::Integer));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'DateModified':
+					// Sets the value for dttDateModified 
+					// @param QDateTime $mixValue
+					// @return QDateTime
+					try {
+						return ($this->dttDateModified = QType::Cast($mixValue, QType::DateTime));
 					} catch (QCallerException $objExc) {
 						$objExc->IncrementOffset();
 						throw $objExc;
@@ -1589,6 +1793,12 @@
 			$strToReturn .= '<element name="Resource" type="xsd1:Resource"/>';
 			$strToReturn .= '<element name="ResourceStatusId" type="xsd:int"/>';
 			$strToReturn .= '<element name="Group" type="xsd1:GroupAssessmentList"/>';
+			$strToReturn .= '<element name="L" type="xsd:int"/>';
+			$strToReturn .= '<element name="E" type="xsd:int"/>';
+			$strToReturn .= '<element name="M" type="xsd:int"/>';
+			$strToReturn .= '<element name="O" type="xsd:int"/>';
+			$strToReturn .= '<element name="N" type="xsd:int"/>';
+			$strToReturn .= '<element name="DateModified" type="xsd:dateTime"/>';
 			$strToReturn .= '<element name="__blnRestored" type="xsd:boolean"/>';
 			$strToReturn .= '</sequence></complexType>';
 			return $strToReturn;
@@ -1631,6 +1841,18 @@
 			if ((property_exists($objSoapObject, 'Group')) &&
 				($objSoapObject->Group))
 				$objToReturn->Group = GroupAssessmentList::GetObjectFromSoapObject($objSoapObject->Group);
+			if (property_exists($objSoapObject, 'L'))
+				$objToReturn->intL = $objSoapObject->L;
+			if (property_exists($objSoapObject, 'E'))
+				$objToReturn->intE = $objSoapObject->E;
+			if (property_exists($objSoapObject, 'M'))
+				$objToReturn->intM = $objSoapObject->M;
+			if (property_exists($objSoapObject, 'O'))
+				$objToReturn->intO = $objSoapObject->O;
+			if (property_exists($objSoapObject, 'N'))
+				$objToReturn->intN = $objSoapObject->N;
+			if (property_exists($objSoapObject, 'DateModified'))
+				$objToReturn->dttDateModified = new QDateTime($objSoapObject->DateModified);
 			if (property_exists($objSoapObject, '__blnRestored'))
 				$objToReturn->__blnRestored = $objSoapObject->__blnRestored;
 			return $objToReturn;
@@ -1665,6 +1887,8 @@
 				$objObject->objGroup = GroupAssessmentList::GetSoapObjectFromObject($objObject->objGroup, false);
 			else if (!$blnBindRelatedObjects)
 				$objObject->intGroupId = null;
+			if ($objObject->dttDateModified)
+				$objObject->dttDateModified = $objObject->dttDateModified->__toString(QDateTime::FormatSoap);
 			return $objObject;
 		}
 
@@ -1690,6 +1914,12 @@
 	 * @property-read QQNode $ResourceStatusId
 	 * @property-read QQNode $GroupId
 	 * @property-read QQNodeGroupAssessmentList $Group
+	 * @property-read QQNode $L
+	 * @property-read QQNode $E
+	 * @property-read QQNode $M
+	 * @property-read QQNode $O
+	 * @property-read QQNode $N
+	 * @property-read QQNode $DateModified
 	 * @property-read QQReverseReferenceNodeLemonAssessmentResults $LemonAssessmentResultsAsAssessment
 	 */
 	class QQNodeLemonAssessment extends QQNode {
@@ -1718,6 +1948,18 @@
 					return new QQNode('group_id', 'GroupId', 'integer', $this);
 				case 'Group':
 					return new QQNodeGroupAssessmentList('group_id', 'Group', 'integer', $this);
+				case 'L':
+					return new QQNode('l', 'L', 'integer', $this);
+				case 'E':
+					return new QQNode('e', 'E', 'integer', $this);
+				case 'M':
+					return new QQNode('m', 'M', 'integer', $this);
+				case 'O':
+					return new QQNode('o', 'O', 'integer', $this);
+				case 'N':
+					return new QQNode('n', 'N', 'integer', $this);
+				case 'DateModified':
+					return new QQNode('date_modified', 'DateModified', 'QDateTime', $this);
 				case 'LemonAssessmentResultsAsAssessment':
 					return new QQReverseReferenceNodeLemonAssessmentResults($this, 'lemonassessmentresultsasassessment', 'reverse_reference', 'assessment_id');
 
@@ -1745,6 +1987,12 @@
 	 * @property-read QQNode $ResourceStatusId
 	 * @property-read QQNode $GroupId
 	 * @property-read QQNodeGroupAssessmentList $Group
+	 * @property-read QQNode $L
+	 * @property-read QQNode $E
+	 * @property-read QQNode $M
+	 * @property-read QQNode $O
+	 * @property-read QQNode $N
+	 * @property-read QQNode $DateModified
 	 * @property-read QQReverseReferenceNodeLemonAssessmentResults $LemonAssessmentResultsAsAssessment
 	 * @property-read QQNode $_PrimaryKeyNode
 	 */
@@ -1774,6 +2022,18 @@
 					return new QQNode('group_id', 'GroupId', 'integer', $this);
 				case 'Group':
 					return new QQNodeGroupAssessmentList('group_id', 'Group', 'integer', $this);
+				case 'L':
+					return new QQNode('l', 'L', 'integer', $this);
+				case 'E':
+					return new QQNode('e', 'E', 'integer', $this);
+				case 'M':
+					return new QQNode('m', 'M', 'integer', $this);
+				case 'O':
+					return new QQNode('o', 'O', 'integer', $this);
+				case 'N':
+					return new QQNode('n', 'N', 'integer', $this);
+				case 'DateModified':
+					return new QQNode('date_modified', 'DateModified', 'QDateTime', $this);
 				case 'LemonAssessmentResultsAsAssessment':
 					return new QQReverseReferenceNodeLemonAssessmentResults($this, 'lemonassessmentresultsasassessment', 'reverse_reference', 'assessment_id');
 

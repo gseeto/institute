@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `institute`
 --
-use brettj_institute;
+use institute;
 
 --
 -- Dumping data for table `action_items`

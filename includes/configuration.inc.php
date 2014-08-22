@@ -16,6 +16,7 @@
 			define ('__DOCROOT__', '/var/www');
 			define ('__VIRTUAL_DIRECTORY__', '');
 			define ('__SUBDIRECTORY__', '/resources');
+			define ('__UPLOAD_DIR__',__DOCROOT__ . '/inst/assets/uploads');
 
 			define('DB_CONNECTION_1', serialize(array(
 				'adapter' => 'MySqli5',
@@ -25,6 +26,7 @@
 				'username' => 'root',
 				'password' => 'test',
 				'profiling' => false)));
+			define ('MAIL_SERVER', 'localhost');
 			break;
 
 		case 'test':
@@ -37,6 +39,7 @@
 			define ('__DOCROOT__', getenv("DOCUMENT_ROOT"));
 			define ('__VIRTUAL_DIRECTORY__', '');
 			define ('__SUBDIRECTORY__', '/resources');
+			define ('__UPLOAD_DIR__',__DOCROOT__ . __SUBDIRECTORY__.'/assets/uploads');
 
 			define('DB_CONNECTION_1', serialize(array(
 				'adapter' => 'MySqli5',
@@ -46,6 +49,7 @@
 				'username' => 'brettj_institute',
 				'password' => 'basketful12',
 				'profiling' => false)));
+			define ('MAIL_SERVER', 'mail.supremecluster.com');
 			break;
 	}
 

@@ -21,12 +21,15 @@
 	 * @property string $LastName the value for strLastName 
 	 * @property string $Email the value for strEmail 
 	 * @property boolean $Gender the value for blnGender 
-	 * @property string $Country the value for strCountry 
+	 * @property integer $CountryId the value for intCountryId 
 	 * @property string $Department the value for strDepartment 
-	 * @property string $Title the value for strTitle 
-	 * @property integer $Tenure the value for intTenure 
+	 * @property integer $TitleId the value for intTitleId 
+	 * @property integer $TenureId the value for intTenureId 
 	 * @property integer $CareerLength the value for intCareerLength 
 	 * @property Login $Login the value for the Login object referenced by intLoginId 
+	 * @property CountryList $Country the value for the CountryList object referenced by intCountryId 
+	 * @property TitleList $Title the value for the TitleList object referenced by intTitleId 
+	 * @property TenureList $Tenure the value for the TenureList object referenced by intTenureId 
 	 * @property GroupAssessmentList $_GroupAssessmentListAsAssessmentManager the value for the private _objGroupAssessmentListAsAssessmentManager (Read-Only) if set due to an expansion on the assessment_manager_assn association table
 	 * @property GroupAssessmentList[] $_GroupAssessmentListAsAssessmentManagerArray the value for the private _objGroupAssessmentListAsAssessmentManagerArray (Read-Only) if set due to an ExpandAsArray on the assessment_manager_assn association table
 	 * @property Company $_Company the value for the private _objCompany (Read-Only) if set due to an expansion on the company_user_assn association table
@@ -39,12 +42,18 @@
 	 * @property ActionItems[] $_ActionItemsAsModifiedByArray the value for the private _objActionItemsAsModifiedByArray (Read-Only) if set due to an ExpandAsArray on the action_items.modified_by reverse relationship
 	 * @property ActionItems $_ActionItemsAsWho the value for the private _objActionItemsAsWho (Read-Only) if set due to an expansion on the action_items.who reverse relationship
 	 * @property ActionItems[] $_ActionItemsAsWhoArray the value for the private _objActionItemsAsWhoArray (Read-Only) if set due to an ExpandAsArray on the action_items.who reverse relationship
+	 * @property IntegrationAssessment $_IntegrationAssessment the value for the private _objIntegrationAssessment (Read-Only) if set due to an expansion on the integration_assessment.user_id reverse relationship
+	 * @property IntegrationAssessment[] $_IntegrationAssessmentArray the value for the private _objIntegrationAssessmentArray (Read-Only) if set due to an ExpandAsArray on the integration_assessment.user_id reverse relationship
 	 * @property KingdomBusinessAssessment $_KingdomBusinessAssessment the value for the private _objKingdomBusinessAssessment (Read-Only) if set due to an expansion on the kingdom_business_assessment.user_id reverse relationship
 	 * @property KingdomBusinessAssessment[] $_KingdomBusinessAssessmentArray the value for the private _objKingdomBusinessAssessmentArray (Read-Only) if set due to an ExpandAsArray on the kingdom_business_assessment.user_id reverse relationship
 	 * @property Kpis $_KpisAsModifiedBy the value for the private _objKpisAsModifiedBy (Read-Only) if set due to an expansion on the kpis.modified_by reverse relationship
 	 * @property Kpis[] $_KpisAsModifiedByArray the value for the private _objKpisAsModifiedByArray (Read-Only) if set due to an ExpandAsArray on the kpis.modified_by reverse relationship
 	 * @property LemonAssessment $_LemonAssessment the value for the private _objLemonAssessment (Read-Only) if set due to an expansion on the lemon_assessment.user_id reverse relationship
 	 * @property LemonAssessment[] $_LemonAssessmentArray the value for the private _objLemonAssessmentArray (Read-Only) if set due to an ExpandAsArray on the lemon_assessment.user_id reverse relationship
+	 * @property LraAssessment $_LraAssessment the value for the private _objLraAssessment (Read-Only) if set due to an expansion on the lra_assessment.user_id reverse relationship
+	 * @property LraAssessment[] $_LraAssessmentArray the value for the private _objLraAssessmentArray (Read-Only) if set due to an ExpandAsArray on the lra_assessment.user_id reverse relationship
+	 * @property SeasonalAssessment $_SeasonalAssessment the value for the private _objSeasonalAssessment (Read-Only) if set due to an expansion on the seasonal_assessment.user_id reverse relationship
+	 * @property SeasonalAssessment[] $_SeasonalAssessmentArray the value for the private _objSeasonalAssessmentArray (Read-Only) if set due to an ExpandAsArray on the seasonal_assessment.user_id reverse relationship
 	 * @property Statement $_StatementAsModifiedBy the value for the private _objStatementAsModifiedBy (Read-Only) if set due to an expansion on the statement.modified_by reverse relationship
 	 * @property Statement[] $_StatementAsModifiedByArray the value for the private _objStatementAsModifiedByArray (Read-Only) if set due to an ExpandAsArray on the statement.modified_by reverse relationship
 	 * @property Strategy $_StrategyAsModifiedBy the value for the private _objStrategyAsModifiedBy (Read-Only) if set due to an expansion on the strategy.modified_by reverse relationship
@@ -53,6 +62,8 @@
 	 * @property TenFAssessment[] $_TenFAssessmentArray the value for the private _objTenFAssessmentArray (Read-Only) if set due to an ExpandAsArray on the ten_f_assessment.user_id reverse relationship
 	 * @property TenPAssessment $_TenPAssessment the value for the private _objTenPAssessment (Read-Only) if set due to an expansion on the ten_p_assessment.user_id reverse relationship
 	 * @property TenPAssessment[] $_TenPAssessmentArray the value for the private _objTenPAssessmentArray (Read-Only) if set due to an ExpandAsArray on the ten_p_assessment.user_id reverse relationship
+	 * @property TimeAssessment $_TimeAssessment the value for the private _objTimeAssessment (Read-Only) if set due to an expansion on the time_assessment.user_id reverse relationship
+	 * @property TimeAssessment[] $_TimeAssessmentArray the value for the private _objTimeAssessmentArray (Read-Only) if set due to an ExpandAsArray on the time_assessment.user_id reverse relationship
 	 * @property boolean $__Restored whether or not this object was restored from the database (as opposed to created new)
 	 */
 	class UserGen extends QBaseClass {
@@ -110,12 +121,11 @@
 
 
 		/**
-		 * Protected member variable that maps to the database column user.country
-		 * @var string strCountry
+		 * Protected member variable that maps to the database column user.country_id
+		 * @var integer intCountryId
 		 */
-		protected $strCountry;
-		const CountryMaxLength = 255;
-		const CountryDefault = null;
+		protected $intCountryId;
+		const CountryIdDefault = null;
 
 
 		/**
@@ -128,20 +138,19 @@
 
 
 		/**
-		 * Protected member variable that maps to the database column user.title
-		 * @var string strTitle
+		 * Protected member variable that maps to the database column user.title_id
+		 * @var integer intTitleId
 		 */
-		protected $strTitle;
-		const TitleMaxLength = 255;
-		const TitleDefault = null;
+		protected $intTitleId;
+		const TitleIdDefault = null;
 
 
 		/**
-		 * Protected member variable that maps to the database column user.tenure
-		 * @var integer intTenure
+		 * Protected member variable that maps to the database column user.tenure_id
+		 * @var integer intTenureId
 		 */
-		protected $intTenure;
-		const TenureDefault = null;
+		protected $intTenureId;
+		const TenureIdDefault = null;
 
 
 		/**
@@ -249,6 +258,22 @@
 		private $_objActionItemsAsWhoArray = array();
 
 		/**
+		 * Private member variable that stores a reference to a single IntegrationAssessment object
+		 * (of type IntegrationAssessment), if this User object was restored with
+		 * an expansion on the integration_assessment association table.
+		 * @var IntegrationAssessment _objIntegrationAssessment;
+		 */
+		private $_objIntegrationAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of IntegrationAssessment objects
+		 * (of type IntegrationAssessment[]), if this User object was restored with
+		 * an ExpandAsArray on the integration_assessment association table.
+		 * @var IntegrationAssessment[] _objIntegrationAssessmentArray;
+		 */
+		private $_objIntegrationAssessmentArray = array();
+
+		/**
 		 * Private member variable that stores a reference to a single KingdomBusinessAssessment object
 		 * (of type KingdomBusinessAssessment), if this User object was restored with
 		 * an expansion on the kingdom_business_assessment association table.
@@ -295,6 +320,38 @@
 		 * @var LemonAssessment[] _objLemonAssessmentArray;
 		 */
 		private $_objLemonAssessmentArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single LraAssessment object
+		 * (of type LraAssessment), if this User object was restored with
+		 * an expansion on the lra_assessment association table.
+		 * @var LraAssessment _objLraAssessment;
+		 */
+		private $_objLraAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of LraAssessment objects
+		 * (of type LraAssessment[]), if this User object was restored with
+		 * an ExpandAsArray on the lra_assessment association table.
+		 * @var LraAssessment[] _objLraAssessmentArray;
+		 */
+		private $_objLraAssessmentArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single SeasonalAssessment object
+		 * (of type SeasonalAssessment), if this User object was restored with
+		 * an expansion on the seasonal_assessment association table.
+		 * @var SeasonalAssessment _objSeasonalAssessment;
+		 */
+		private $_objSeasonalAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of SeasonalAssessment objects
+		 * (of type SeasonalAssessment[]), if this User object was restored with
+		 * an ExpandAsArray on the seasonal_assessment association table.
+		 * @var SeasonalAssessment[] _objSeasonalAssessmentArray;
+		 */
+		private $_objSeasonalAssessmentArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single StatementAsModifiedBy object
@@ -361,6 +418,22 @@
 		private $_objTenPAssessmentArray = array();
 
 		/**
+		 * Private member variable that stores a reference to a single TimeAssessment object
+		 * (of type TimeAssessment), if this User object was restored with
+		 * an expansion on the time_assessment association table.
+		 * @var TimeAssessment _objTimeAssessment;
+		 */
+		private $_objTimeAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of TimeAssessment objects
+		 * (of type TimeAssessment[]), if this User object was restored with
+		 * an ExpandAsArray on the time_assessment association table.
+		 * @var TimeAssessment[] _objTimeAssessmentArray;
+		 */
+		private $_objTimeAssessmentArray = array();
+
+		/**
 		 * Protected array of virtual attributes for this object (e.g. extra/other calculated and/or non-object bound
 		 * columns from the run-time database query result for this object).  Used by InstantiateDbRow and
 		 * GetVirtualAttribute.
@@ -391,6 +464,36 @@
 		 * @var Login objLogin
 		 */
 		protected $objLogin;
+
+		/**
+		 * Protected member variable that contains the object pointed by the reference
+		 * in the database column user.country_id.
+		 *
+		 * NOTE: Always use the Country property getter to correctly retrieve this CountryList object.
+		 * (Because this class implements late binding, this variable reference MAY be null.)
+		 * @var CountryList objCountry
+		 */
+		protected $objCountry;
+
+		/**
+		 * Protected member variable that contains the object pointed by the reference
+		 * in the database column user.title_id.
+		 *
+		 * NOTE: Always use the Title property getter to correctly retrieve this TitleList object.
+		 * (Because this class implements late binding, this variable reference MAY be null.)
+		 * @var TitleList objTitle
+		 */
+		protected $objTitle;
+
+		/**
+		 * Protected member variable that contains the object pointed by the reference
+		 * in the database column user.tenure_id.
+		 *
+		 * NOTE: Always use the Tenure property getter to correctly retrieve this TenureList object.
+		 * (Because this class implements late binding, this variable reference MAY be null.)
+		 * @var TenureList objTenure
+		 */
+		protected $objTenure;
 
 
 
@@ -708,10 +811,10 @@
 			$objBuilder->AddSelectItem($strTableName, 'last_name', $strAliasPrefix . 'last_name');
 			$objBuilder->AddSelectItem($strTableName, 'email', $strAliasPrefix . 'email');
 			$objBuilder->AddSelectItem($strTableName, 'gender', $strAliasPrefix . 'gender');
-			$objBuilder->AddSelectItem($strTableName, 'country', $strAliasPrefix . 'country');
+			$objBuilder->AddSelectItem($strTableName, 'country_id', $strAliasPrefix . 'country_id');
 			$objBuilder->AddSelectItem($strTableName, 'department', $strAliasPrefix . 'department');
-			$objBuilder->AddSelectItem($strTableName, 'title', $strAliasPrefix . 'title');
-			$objBuilder->AddSelectItem($strTableName, 'tenure', $strAliasPrefix . 'tenure');
+			$objBuilder->AddSelectItem($strTableName, 'title_id', $strAliasPrefix . 'title_id');
+			$objBuilder->AddSelectItem($strTableName, 'tenure_id', $strAliasPrefix . 'tenure_id');
 			$objBuilder->AddSelectItem($strTableName, 'career_length', $strAliasPrefix . 'career_length');
 		}
 
@@ -835,6 +938,20 @@
 					$blnExpandedViaArray = true;
 				}
 
+				$strAlias = $strAliasPrefix . 'integrationassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objIntegrationAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objIntegrationAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = IntegrationAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'integrationassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objIntegrationAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objIntegrationAssessmentArray[] = IntegrationAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'integrationassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'kingdombusinessassessment__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -874,6 +991,34 @@
 							$objPreviousItem->_objLemonAssessmentArray[] = $objChildItem;
 					} else
 						$objPreviousItem->_objLemonAssessmentArray[] = LemonAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
+				$strAlias = $strAliasPrefix . 'lraassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objLraAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objLraAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objLraAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objLraAssessmentArray[] = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
+				$strAlias = $strAliasPrefix . 'seasonalassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objSeasonalAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objSeasonalAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = SeasonalAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'seasonalassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objSeasonalAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objSeasonalAssessmentArray[] = SeasonalAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'seasonalassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 					$blnExpandedViaArray = true;
 				}
 
@@ -933,6 +1078,20 @@
 					$blnExpandedViaArray = true;
 				}
 
+				$strAlias = $strAliasPrefix . 'timeassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objTimeAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objTimeAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objTimeAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objTimeAssessmentArray[] = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				// Either return false to signal array expansion, or check-to-reset the Alias prefix and move on
 				if ($blnExpandedViaArray)
 					return false;
@@ -956,14 +1115,14 @@
 			$objToReturn->strEmail = $objDbRow->GetColumn($strAliasName, 'Blob');
 			$strAliasName = array_key_exists($strAliasPrefix . 'gender', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'gender'] : $strAliasPrefix . 'gender';
 			$objToReturn->blnGender = $objDbRow->GetColumn($strAliasName, 'Bit');
-			$strAliasName = array_key_exists($strAliasPrefix . 'country', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'country'] : $strAliasPrefix . 'country';
-			$objToReturn->strCountry = $objDbRow->GetColumn($strAliasName, 'VarChar');
+			$strAliasName = array_key_exists($strAliasPrefix . 'country_id', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'country_id'] : $strAliasPrefix . 'country_id';
+			$objToReturn->intCountryId = $objDbRow->GetColumn($strAliasName, 'Integer');
 			$strAliasName = array_key_exists($strAliasPrefix . 'department', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'department'] : $strAliasPrefix . 'department';
 			$objToReturn->strDepartment = $objDbRow->GetColumn($strAliasName, 'VarChar');
-			$strAliasName = array_key_exists($strAliasPrefix . 'title', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'title'] : $strAliasPrefix . 'title';
-			$objToReturn->strTitle = $objDbRow->GetColumn($strAliasName, 'VarChar');
-			$strAliasName = array_key_exists($strAliasPrefix . 'tenure', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'tenure'] : $strAliasPrefix . 'tenure';
-			$objToReturn->intTenure = $objDbRow->GetColumn($strAliasName, 'Integer');
+			$strAliasName = array_key_exists($strAliasPrefix . 'title_id', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'title_id'] : $strAliasPrefix . 'title_id';
+			$objToReturn->intTitleId = $objDbRow->GetColumn($strAliasName, 'Integer');
+			$strAliasName = array_key_exists($strAliasPrefix . 'tenure_id', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'tenure_id'] : $strAliasPrefix . 'tenure_id';
+			$objToReturn->intTenureId = $objDbRow->GetColumn($strAliasName, 'Integer');
 			$strAliasName = array_key_exists($strAliasPrefix . 'career_length', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'career_length'] : $strAliasPrefix . 'career_length';
 			$objToReturn->intCareerLength = $objDbRow->GetColumn($strAliasName, 'Integer');
 
@@ -984,6 +1143,24 @@
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 			if (!is_null($objDbRow->GetColumn($strAliasName)))
 				$objToReturn->objLogin = Login::InstantiateDbRow($objDbRow, $strAliasPrefix . 'login_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+
+			// Check for Country Early Binding
+			$strAlias = $strAliasPrefix . 'country_id__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName)))
+				$objToReturn->objCountry = CountryList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'country_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+
+			// Check for Title Early Binding
+			$strAlias = $strAliasPrefix . 'title_id__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName)))
+				$objToReturn->objTitle = TitleList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'title_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+
+			// Check for Tenure Early Binding
+			$strAlias = $strAliasPrefix . 'tenure_id__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName)))
+				$objToReturn->objTenure = TenureList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenure_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 
 
 
@@ -1048,6 +1225,16 @@
 					$objToReturn->_objActionItemsAsWho = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsaswho__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
+			// Check for IntegrationAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'integrationassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objIntegrationAssessmentArray[] = IntegrationAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'integrationassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objIntegrationAssessment = IntegrationAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'integrationassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
 			// Check for KingdomBusinessAssessment Virtual Binding
 			$strAlias = $strAliasPrefix . 'kingdombusinessassessment__id';
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
@@ -1076,6 +1263,26 @@
 					$objToReturn->_objLemonAssessmentArray[] = LemonAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objLemonAssessment = LemonAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for LraAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'lraassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objLraAssessmentArray[] = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objLraAssessment = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for SeasonalAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'seasonalassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objSeasonalAssessmentArray[] = SeasonalAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'seasonalassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objSeasonalAssessment = SeasonalAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'seasonalassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			// Check for StatementAsModifiedBy Virtual Binding
@@ -1116,6 +1323,16 @@
 					$objToReturn->_objTenPAssessmentArray[] = TenPAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenpassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objTenPAssessment = TenPAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenpassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for TimeAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'timeassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objTimeAssessmentArray[] = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objTimeAssessment = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			return $objToReturn;
@@ -1232,6 +1449,108 @@
 			// Call User::QueryCount to perform the CountByLoginId query
 			return User::QueryCount(
 				QQ::Equal(QQN::User()->LoginId, $intLoginId)
+			, $objOptionalClauses
+			);
+		}
+			
+		/**
+		 * Load an array of User objects,
+		 * by CountryId Index(es)
+		 * @param integer $intCountryId
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return User[]
+		*/
+		public static function LoadArrayByCountryId($intCountryId, $objOptionalClauses = null) {
+			// Call User::QueryArray to perform the LoadArrayByCountryId query
+			try {
+				return User::QueryArray(
+					QQ::Equal(QQN::User()->CountryId, $intCountryId),
+					$objOptionalClauses
+					);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Count Users
+		 * by CountryId Index(es)
+		 * @param integer $intCountryId
+		 * @return int
+		*/
+		public static function CountByCountryId($intCountryId, $objOptionalClauses = null) {
+			// Call User::QueryCount to perform the CountByCountryId query
+			return User::QueryCount(
+				QQ::Equal(QQN::User()->CountryId, $intCountryId)
+			, $objOptionalClauses
+			);
+		}
+			
+		/**
+		 * Load an array of User objects,
+		 * by TitleId Index(es)
+		 * @param integer $intTitleId
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return User[]
+		*/
+		public static function LoadArrayByTitleId($intTitleId, $objOptionalClauses = null) {
+			// Call User::QueryArray to perform the LoadArrayByTitleId query
+			try {
+				return User::QueryArray(
+					QQ::Equal(QQN::User()->TitleId, $intTitleId),
+					$objOptionalClauses
+					);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Count Users
+		 * by TitleId Index(es)
+		 * @param integer $intTitleId
+		 * @return int
+		*/
+		public static function CountByTitleId($intTitleId, $objOptionalClauses = null) {
+			// Call User::QueryCount to perform the CountByTitleId query
+			return User::QueryCount(
+				QQ::Equal(QQN::User()->TitleId, $intTitleId)
+			, $objOptionalClauses
+			);
+		}
+			
+		/**
+		 * Load an array of User objects,
+		 * by TenureId Index(es)
+		 * @param integer $intTenureId
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return User[]
+		*/
+		public static function LoadArrayByTenureId($intTenureId, $objOptionalClauses = null) {
+			// Call User::QueryArray to perform the LoadArrayByTenureId query
+			try {
+				return User::QueryArray(
+					QQ::Equal(QQN::User()->TenureId, $intTenureId),
+					$objOptionalClauses
+					);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Count Users
+		 * by TenureId Index(es)
+		 * @param integer $intTenureId
+		 * @return int
+		*/
+		public static function CountByTenureId($intTenureId, $objOptionalClauses = null) {
+			// Call User::QueryCount to perform the CountByTenureId query
+			return User::QueryCount(
+				QQ::Equal(QQN::User()->TenureId, $intTenureId)
 			, $objOptionalClauses
 			);
 		}
@@ -1399,10 +1718,10 @@
 							`last_name`,
 							`email`,
 							`gender`,
-							`country`,
+							`country_id`,
 							`department`,
-							`title`,
-							`tenure`,
+							`title_id`,
+							`tenure_id`,
 							`career_length`
 						) VALUES (
 							' . $objDatabase->SqlVariable($this->intLoginId) . ',
@@ -1410,10 +1729,10 @@
 							' . $objDatabase->SqlVariable($this->strLastName) . ',
 							' . $objDatabase->SqlVariable($this->strEmail) . ',
 							' . $objDatabase->SqlVariable($this->blnGender) . ',
-							' . $objDatabase->SqlVariable($this->strCountry) . ',
+							' . $objDatabase->SqlVariable($this->intCountryId) . ',
 							' . $objDatabase->SqlVariable($this->strDepartment) . ',
-							' . $objDatabase->SqlVariable($this->strTitle) . ',
-							' . $objDatabase->SqlVariable($this->intTenure) . ',
+							' . $objDatabase->SqlVariable($this->intTitleId) . ',
+							' . $objDatabase->SqlVariable($this->intTenureId) . ',
 							' . $objDatabase->SqlVariable($this->intCareerLength) . '
 						)
 					');
@@ -1439,10 +1758,10 @@
 							`last_name` = ' . $objDatabase->SqlVariable($this->strLastName) . ',
 							`email` = ' . $objDatabase->SqlVariable($this->strEmail) . ',
 							`gender` = ' . $objDatabase->SqlVariable($this->blnGender) . ',
-							`country` = ' . $objDatabase->SqlVariable($this->strCountry) . ',
+							`country_id` = ' . $objDatabase->SqlVariable($this->intCountryId) . ',
 							`department` = ' . $objDatabase->SqlVariable($this->strDepartment) . ',
-							`title` = ' . $objDatabase->SqlVariable($this->strTitle) . ',
-							`tenure` = ' . $objDatabase->SqlVariable($this->intTenure) . ',
+							`title_id` = ' . $objDatabase->SqlVariable($this->intTitleId) . ',
+							`tenure_id` = ' . $objDatabase->SqlVariable($this->intTenureId) . ',
 							`career_length` = ' . $objDatabase->SqlVariable($this->intCareerLength) . '
 						WHERE
 							`id` = ' . $objDatabase->SqlVariable($this->intId) . '
@@ -1533,10 +1852,10 @@
 			$this->strLastName = $objReloaded->strLastName;
 			$this->strEmail = $objReloaded->strEmail;
 			$this->blnGender = $objReloaded->blnGender;
-			$this->strCountry = $objReloaded->strCountry;
+			$this->CountryId = $objReloaded->CountryId;
 			$this->strDepartment = $objReloaded->strDepartment;
-			$this->strTitle = $objReloaded->strTitle;
-			$this->intTenure = $objReloaded->intTenure;
+			$this->TitleId = $objReloaded->TitleId;
+			$this->TenureId = $objReloaded->TenureId;
 			$this->intCareerLength = $objReloaded->intCareerLength;
 		}
 
@@ -1556,10 +1875,10 @@
 					`last_name`,
 					`email`,
 					`gender`,
-					`country`,
+					`country_id`,
 					`department`,
-					`title`,
-					`tenure`,
+					`title_id`,
+					`tenure_id`,
 					`career_length`,
 					__sys_login_id,
 					__sys_action,
@@ -1571,10 +1890,10 @@
 					' . $objDatabase->SqlVariable($this->strLastName) . ',
 					' . $objDatabase->SqlVariable($this->strEmail) . ',
 					' . $objDatabase->SqlVariable($this->blnGender) . ',
-					' . $objDatabase->SqlVariable($this->strCountry) . ',
+					' . $objDatabase->SqlVariable($this->intCountryId) . ',
 					' . $objDatabase->SqlVariable($this->strDepartment) . ',
-					' . $objDatabase->SqlVariable($this->strTitle) . ',
-					' . $objDatabase->SqlVariable($this->intTenure) . ',
+					' . $objDatabase->SqlVariable($this->intTitleId) . ',
+					' . $objDatabase->SqlVariable($this->intTenureId) . ',
 					' . $objDatabase->SqlVariable($this->intCareerLength) . ',
 					' . (($objDatabase->JournaledById) ? $objDatabase->JournaledById : 'NULL') . ',
 					' . $objDatabase->SqlVariable($strJournalCommand) . ',
@@ -1656,25 +1975,25 @@
 					// @return boolean
 					return $this->blnGender;
 
-				case 'Country':
-					// Gets the value for strCountry 
-					// @return string
-					return $this->strCountry;
+				case 'CountryId':
+					// Gets the value for intCountryId 
+					// @return integer
+					return $this->intCountryId;
 
 				case 'Department':
 					// Gets the value for strDepartment 
 					// @return string
 					return $this->strDepartment;
 
-				case 'Title':
-					// Gets the value for strTitle 
-					// @return string
-					return $this->strTitle;
-
-				case 'Tenure':
-					// Gets the value for intTenure 
+				case 'TitleId':
+					// Gets the value for intTitleId 
 					// @return integer
-					return $this->intTenure;
+					return $this->intTitleId;
+
+				case 'TenureId':
+					// Gets the value for intTenureId 
+					// @return integer
+					return $this->intTenureId;
 
 				case 'CareerLength':
 					// Gets the value for intCareerLength 
@@ -1692,6 +2011,42 @@
 						if ((!$this->objLogin) && (!is_null($this->intLoginId)))
 							$this->objLogin = Login::Load($this->intLoginId);
 						return $this->objLogin;
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'Country':
+					// Gets the value for the CountryList object referenced by intCountryId 
+					// @return CountryList
+					try {
+						if ((!$this->objCountry) && (!is_null($this->intCountryId)))
+							$this->objCountry = CountryList::Load($this->intCountryId);
+						return $this->objCountry;
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'Title':
+					// Gets the value for the TitleList object referenced by intTitleId 
+					// @return TitleList
+					try {
+						if ((!$this->objTitle) && (!is_null($this->intTitleId)))
+							$this->objTitle = TitleList::Load($this->intTitleId);
+						return $this->objTitle;
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'Tenure':
+					// Gets the value for the TenureList object referenced by intTenureId 
+					// @return TenureList
+					try {
+						if ((!$this->objTenure) && (!is_null($this->intTenureId)))
+							$this->objTenure = TenureList::Load($this->intTenureId);
+						return $this->objTenure;
 					} catch (QCallerException $objExc) {
 						$objExc->IncrementOffset();
 						throw $objExc;
@@ -1775,6 +2130,18 @@
 					// @return ActionItems[]
 					return (array) $this->_objActionItemsAsWhoArray;
 
+				case '_IntegrationAssessment':
+					// Gets the value for the private _objIntegrationAssessment (Read-Only)
+					// if set due to an expansion on the integration_assessment.user_id reverse relationship
+					// @return IntegrationAssessment
+					return $this->_objIntegrationAssessment;
+
+				case '_IntegrationAssessmentArray':
+					// Gets the value for the private _objIntegrationAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the integration_assessment.user_id reverse relationship
+					// @return IntegrationAssessment[]
+					return (array) $this->_objIntegrationAssessmentArray;
+
 				case '_KingdomBusinessAssessment':
 					// Gets the value for the private _objKingdomBusinessAssessment (Read-Only)
 					// if set due to an expansion on the kingdom_business_assessment.user_id reverse relationship
@@ -1810,6 +2177,30 @@
 					// if set due to an ExpandAsArray on the lemon_assessment.user_id reverse relationship
 					// @return LemonAssessment[]
 					return (array) $this->_objLemonAssessmentArray;
+
+				case '_LraAssessment':
+					// Gets the value for the private _objLraAssessment (Read-Only)
+					// if set due to an expansion on the lra_assessment.user_id reverse relationship
+					// @return LraAssessment
+					return $this->_objLraAssessment;
+
+				case '_LraAssessmentArray':
+					// Gets the value for the private _objLraAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the lra_assessment.user_id reverse relationship
+					// @return LraAssessment[]
+					return (array) $this->_objLraAssessmentArray;
+
+				case '_SeasonalAssessment':
+					// Gets the value for the private _objSeasonalAssessment (Read-Only)
+					// if set due to an expansion on the seasonal_assessment.user_id reverse relationship
+					// @return SeasonalAssessment
+					return $this->_objSeasonalAssessment;
+
+				case '_SeasonalAssessmentArray':
+					// Gets the value for the private _objSeasonalAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the seasonal_assessment.user_id reverse relationship
+					// @return SeasonalAssessment[]
+					return (array) $this->_objSeasonalAssessmentArray;
 
 				case '_StatementAsModifiedBy':
 					// Gets the value for the private _objStatementAsModifiedBy (Read-Only)
@@ -1858,6 +2249,18 @@
 					// if set due to an ExpandAsArray on the ten_p_assessment.user_id reverse relationship
 					// @return TenPAssessment[]
 					return (array) $this->_objTenPAssessmentArray;
+
+				case '_TimeAssessment':
+					// Gets the value for the private _objTimeAssessment (Read-Only)
+					// if set due to an expansion on the time_assessment.user_id reverse relationship
+					// @return TimeAssessment
+					return $this->_objTimeAssessment;
+
+				case '_TimeAssessmentArray':
+					// Gets the value for the private _objTimeAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the time_assessment.user_id reverse relationship
+					// @return TimeAssessment[]
+					return (array) $this->_objTimeAssessmentArray;
 
 
 				case '__Restored':
@@ -1942,12 +2345,13 @@
 						throw $objExc;
 					}
 
-				case 'Country':
-					// Sets the value for strCountry 
-					// @param string $mixValue
-					// @return string
+				case 'CountryId':
+					// Sets the value for intCountryId 
+					// @param integer $mixValue
+					// @return integer
 					try {
-						return ($this->strCountry = QType::Cast($mixValue, QType::String));
+						$this->objCountry = null;
+						return ($this->intCountryId = QType::Cast($mixValue, QType::Integer));
 					} catch (QCallerException $objExc) {
 						$objExc->IncrementOffset();
 						throw $objExc;
@@ -1964,23 +2368,25 @@
 						throw $objExc;
 					}
 
-				case 'Title':
-					// Sets the value for strTitle 
-					// @param string $mixValue
-					// @return string
+				case 'TitleId':
+					// Sets the value for intTitleId 
+					// @param integer $mixValue
+					// @return integer
 					try {
-						return ($this->strTitle = QType::Cast($mixValue, QType::String));
+						$this->objTitle = null;
+						return ($this->intTitleId = QType::Cast($mixValue, QType::Integer));
 					} catch (QCallerException $objExc) {
 						$objExc->IncrementOffset();
 						throw $objExc;
 					}
 
-				case 'Tenure':
-					// Sets the value for intTenure 
+				case 'TenureId':
+					// Sets the value for intTenureId 
 					// @param integer $mixValue
 					// @return integer
 					try {
-						return ($this->intTenure = QType::Cast($mixValue, QType::Integer));
+						$this->objTenure = null;
+						return ($this->intTenureId = QType::Cast($mixValue, QType::Integer));
 					} catch (QCallerException $objExc) {
 						$objExc->IncrementOffset();
 						throw $objExc;
@@ -2025,6 +2431,96 @@
 						// Update Local Member Variables
 						$this->objLogin = $mixValue;
 						$this->intLoginId = $mixValue->Id;
+
+						// Return $mixValue
+						return $mixValue;
+					}
+					break;
+
+				case 'Country':
+					// Sets the value for the CountryList object referenced by intCountryId 
+					// @param CountryList $mixValue
+					// @return CountryList
+					if (is_null($mixValue)) {
+						$this->intCountryId = null;
+						$this->objCountry = null;
+						return null;
+					} else {
+						// Make sure $mixValue actually is a CountryList object
+						try {
+							$mixValue = QType::Cast($mixValue, 'CountryList');
+						} catch (QInvalidCastException $objExc) {
+							$objExc->IncrementOffset();
+							throw $objExc;
+						} 
+
+						// Make sure $mixValue is a SAVED CountryList object
+						if (is_null($mixValue->Id))
+							throw new QCallerException('Unable to set an unsaved Country for this User');
+
+						// Update Local Member Variables
+						$this->objCountry = $mixValue;
+						$this->intCountryId = $mixValue->Id;
+
+						// Return $mixValue
+						return $mixValue;
+					}
+					break;
+
+				case 'Title':
+					// Sets the value for the TitleList object referenced by intTitleId 
+					// @param TitleList $mixValue
+					// @return TitleList
+					if (is_null($mixValue)) {
+						$this->intTitleId = null;
+						$this->objTitle = null;
+						return null;
+					} else {
+						// Make sure $mixValue actually is a TitleList object
+						try {
+							$mixValue = QType::Cast($mixValue, 'TitleList');
+						} catch (QInvalidCastException $objExc) {
+							$objExc->IncrementOffset();
+							throw $objExc;
+						} 
+
+						// Make sure $mixValue is a SAVED TitleList object
+						if (is_null($mixValue->Id))
+							throw new QCallerException('Unable to set an unsaved Title for this User');
+
+						// Update Local Member Variables
+						$this->objTitle = $mixValue;
+						$this->intTitleId = $mixValue->Id;
+
+						// Return $mixValue
+						return $mixValue;
+					}
+					break;
+
+				case 'Tenure':
+					// Sets the value for the TenureList object referenced by intTenureId 
+					// @param TenureList $mixValue
+					// @return TenureList
+					if (is_null($mixValue)) {
+						$this->intTenureId = null;
+						$this->objTenure = null;
+						return null;
+					} else {
+						// Make sure $mixValue actually is a TenureList object
+						try {
+							$mixValue = QType::Cast($mixValue, 'TenureList');
+						} catch (QInvalidCastException $objExc) {
+							$objExc->IncrementOffset();
+							throw $objExc;
+						} 
+
+						// Make sure $mixValue is a SAVED TenureList object
+						if (is_null($mixValue->Id))
+							throw new QCallerException('Unable to set an unsaved Tenure for this User');
+
+						// Update Local Member Variables
+						$this->objTenure = $mixValue;
+						$this->intTenureId = $mixValue->Id;
 
 						// Return $mixValue
 						return $mixValue;
@@ -2419,6 +2915,188 @@
 					`action_items`
 				WHERE
 					`who` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for IntegrationAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated IntegrationAssessments as an array of IntegrationAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return IntegrationAssessment[]
+		*/ 
+		public function GetIntegrationAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return IntegrationAssessment::LoadArrayByUserId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated IntegrationAssessments
+		 * @return int
+		*/ 
+		public function CountIntegrationAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return IntegrationAssessment::CountByUserId($this->intId);
+		}
+
+		/**
+		 * Associates a IntegrationAssessment
+		 * @param IntegrationAssessment $objIntegrationAssessment
+		 * @return void
+		*/ 
+		public function AssociateIntegrationAssessment(IntegrationAssessment $objIntegrationAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateIntegrationAssessment on this unsaved User.');
+			if ((is_null($objIntegrationAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateIntegrationAssessment on this User with an unsaved IntegrationAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`integration_assessment`
+				SET
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objIntegrationAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objIntegrationAssessment->UserId = $this->intId;
+				$objIntegrationAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a IntegrationAssessment
+		 * @param IntegrationAssessment $objIntegrationAssessment
+		 * @return void
+		*/ 
+		public function UnassociateIntegrationAssessment(IntegrationAssessment $objIntegrationAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessment on this unsaved User.');
+			if ((is_null($objIntegrationAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessment on this User with an unsaved IntegrationAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`integration_assessment`
+				SET
+					`user_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objIntegrationAssessment->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objIntegrationAssessment->UserId = null;
+				$objIntegrationAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all IntegrationAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllIntegrationAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessment on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (IntegrationAssessment::LoadArrayByUserId($this->intId) as $objIntegrationAssessment) {
+					$objIntegrationAssessment->UserId = null;
+					$objIntegrationAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`integration_assessment`
+				SET
+					`user_id` = null
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated IntegrationAssessment
+		 * @param IntegrationAssessment $objIntegrationAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedIntegrationAssessment(IntegrationAssessment $objIntegrationAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessment on this unsaved User.');
+			if ((is_null($objIntegrationAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessment on this User with an unsaved IntegrationAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`integration_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objIntegrationAssessment->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objIntegrationAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated IntegrationAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllIntegrationAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessment on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (IntegrationAssessment::LoadArrayByUserId($this->intId) as $objIntegrationAssessment) {
+					$objIntegrationAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`integration_assessment`
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
 		}
 
@@ -2963,6 +3641,370 @@
 			$objDatabase->NonQuery('
 				DELETE FROM
 					`lemon_assessment`
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for LraAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated LraAssessments as an array of LraAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return LraAssessment[]
+		*/ 
+		public function GetLraAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return LraAssessment::LoadArrayByUserId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated LraAssessments
+		 * @return int
+		*/ 
+		public function CountLraAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return LraAssessment::CountByUserId($this->intId);
+		}
+
+		/**
+		 * Associates a LraAssessment
+		 * @param LraAssessment $objLraAssessment
+		 * @return void
+		*/ 
+		public function AssociateLraAssessment(LraAssessment $objLraAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateLraAssessment on this unsaved User.');
+			if ((is_null($objLraAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateLraAssessment on this User with an unsaved LraAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lra_assessment`
+				SET
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLraAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objLraAssessment->UserId = $this->intId;
+				$objLraAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a LraAssessment
+		 * @param LraAssessment $objLraAssessment
+		 * @return void
+		*/ 
+		public function UnassociateLraAssessment(LraAssessment $objLraAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessment on this unsaved User.');
+			if ((is_null($objLraAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessment on this User with an unsaved LraAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lra_assessment`
+				SET
+					`user_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLraAssessment->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objLraAssessment->UserId = null;
+				$objLraAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all LraAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllLraAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessment on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (LraAssessment::LoadArrayByUserId($this->intId) as $objLraAssessment) {
+					$objLraAssessment->UserId = null;
+					$objLraAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lra_assessment`
+				SET
+					`user_id` = null
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated LraAssessment
+		 * @param LraAssessment $objLraAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedLraAssessment(LraAssessment $objLraAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessment on this unsaved User.');
+			if ((is_null($objLraAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessment on this User with an unsaved LraAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`lra_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLraAssessment->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objLraAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated LraAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllLraAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessment on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (LraAssessment::LoadArrayByUserId($this->intId) as $objLraAssessment) {
+					$objLraAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`lra_assessment`
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for SeasonalAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated SeasonalAssessments as an array of SeasonalAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return SeasonalAssessment[]
+		*/ 
+		public function GetSeasonalAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return SeasonalAssessment::LoadArrayByUserId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated SeasonalAssessments
+		 * @return int
+		*/ 
+		public function CountSeasonalAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return SeasonalAssessment::CountByUserId($this->intId);
+		}
+
+		/**
+		 * Associates a SeasonalAssessment
+		 * @param SeasonalAssessment $objSeasonalAssessment
+		 * @return void
+		*/ 
+		public function AssociateSeasonalAssessment(SeasonalAssessment $objSeasonalAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateSeasonalAssessment on this unsaved User.');
+			if ((is_null($objSeasonalAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateSeasonalAssessment on this User with an unsaved SeasonalAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`seasonal_assessment`
+				SET
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objSeasonalAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objSeasonalAssessment->UserId = $this->intId;
+				$objSeasonalAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a SeasonalAssessment
+		 * @param SeasonalAssessment $objSeasonalAssessment
+		 * @return void
+		*/ 
+		public function UnassociateSeasonalAssessment(SeasonalAssessment $objSeasonalAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessment on this unsaved User.');
+			if ((is_null($objSeasonalAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessment on this User with an unsaved SeasonalAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`seasonal_assessment`
+				SET
+					`user_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objSeasonalAssessment->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objSeasonalAssessment->UserId = null;
+				$objSeasonalAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all SeasonalAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllSeasonalAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessment on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (SeasonalAssessment::LoadArrayByUserId($this->intId) as $objSeasonalAssessment) {
+					$objSeasonalAssessment->UserId = null;
+					$objSeasonalAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`seasonal_assessment`
+				SET
+					`user_id` = null
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated SeasonalAssessment
+		 * @param SeasonalAssessment $objSeasonalAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedSeasonalAssessment(SeasonalAssessment $objSeasonalAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessment on this unsaved User.');
+			if ((is_null($objSeasonalAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessment on this User with an unsaved SeasonalAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`seasonal_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objSeasonalAssessment->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objSeasonalAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated SeasonalAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllSeasonalAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessment on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (SeasonalAssessment::LoadArrayByUserId($this->intId) as $objSeasonalAssessment) {
+					$objSeasonalAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`seasonal_assessment`
 				WHERE
 					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
@@ -3691,6 +4733,188 @@
 			$objDatabase->NonQuery('
 				DELETE FROM
 					`ten_p_assessment`
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for TimeAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated TimeAssessments as an array of TimeAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return TimeAssessment[]
+		*/ 
+		public function GetTimeAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return TimeAssessment::LoadArrayByUserId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated TimeAssessments
+		 * @return int
+		*/ 
+		public function CountTimeAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return TimeAssessment::CountByUserId($this->intId);
+		}
+
+		/**
+		 * Associates a TimeAssessment
+		 * @param TimeAssessment $objTimeAssessment
+		 * @return void
+		*/ 
+		public function AssociateTimeAssessment(TimeAssessment $objTimeAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateTimeAssessment on this unsaved User.');
+			if ((is_null($objTimeAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateTimeAssessment on this User with an unsaved TimeAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`time_assessment`
+				SET
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objTimeAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objTimeAssessment->UserId = $this->intId;
+				$objTimeAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a TimeAssessment
+		 * @param TimeAssessment $objTimeAssessment
+		 * @return void
+		*/ 
+		public function UnassociateTimeAssessment(TimeAssessment $objTimeAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessment on this unsaved User.');
+			if ((is_null($objTimeAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessment on this User with an unsaved TimeAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`time_assessment`
+				SET
+					`user_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objTimeAssessment->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objTimeAssessment->UserId = null;
+				$objTimeAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all TimeAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllTimeAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessment on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (TimeAssessment::LoadArrayByUserId($this->intId) as $objTimeAssessment) {
+					$objTimeAssessment->UserId = null;
+					$objTimeAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`time_assessment`
+				SET
+					`user_id` = null
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated TimeAssessment
+		 * @param TimeAssessment $objTimeAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedTimeAssessment(TimeAssessment $objTimeAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessment on this unsaved User.');
+			if ((is_null($objTimeAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessment on this User with an unsaved TimeAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`time_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objTimeAssessment->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objTimeAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated TimeAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllTimeAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessment on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (TimeAssessment::LoadArrayByUserId($this->intId) as $objTimeAssessment) {
+					$objTimeAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`time_assessment`
 				WHERE
 					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
@@ -4444,10 +5668,10 @@
 			$strToReturn .= '<element name="LastName" type="xsd:string"/>';
 			$strToReturn .= '<element name="Email" type="xsd:string"/>';
 			$strToReturn .= '<element name="Gender" type="xsd:boolean"/>';
-			$strToReturn .= '<element name="Country" type="xsd:string"/>';
+			$strToReturn .= '<element name="Country" type="xsd1:CountryList"/>';
 			$strToReturn .= '<element name="Department" type="xsd:string"/>';
-			$strToReturn .= '<element name="Title" type="xsd:string"/>';
-			$strToReturn .= '<element name="Tenure" type="xsd:int"/>';
+			$strToReturn .= '<element name="Title" type="xsd1:TitleList"/>';
+			$strToReturn .= '<element name="Tenure" type="xsd1:TenureList"/>';
 			$strToReturn .= '<element name="CareerLength" type="xsd:int"/>';
 			$strToReturn .= '<element name="__blnRestored" type="xsd:boolean"/>';
 			$strToReturn .= '</sequence></complexType>';
@@ -4458,6 +5682,9 @@
 			if (!array_key_exists('User', $strComplexTypeArray)) {
 				$strComplexTypeArray['User'] = User::GetSoapComplexTypeXml();
 				Login::AlterSoapComplexTypeArray($strComplexTypeArray);
+				CountryList::AlterSoapComplexTypeArray($strComplexTypeArray);
+				TitleList::AlterSoapComplexTypeArray($strComplexTypeArray);
+				TenureList::AlterSoapComplexTypeArray($strComplexTypeArray);
 			}
 		}
 
@@ -4485,14 +5712,17 @@
 				$objToReturn->strEmail = $objSoapObject->Email;
 			if (property_exists($objSoapObject, 'Gender'))
 				$objToReturn->blnGender = $objSoapObject->Gender;
-			if (property_exists($objSoapObject, 'Country'))
-				$objToReturn->strCountry = $objSoapObject->Country;
+			if ((property_exists($objSoapObject, 'Country')) &&
+				($objSoapObject->Country))
+				$objToReturn->Country = CountryList::GetObjectFromSoapObject($objSoapObject->Country);
 			if (property_exists($objSoapObject, 'Department'))
 				$objToReturn->strDepartment = $objSoapObject->Department;
-			if (property_exists($objSoapObject, 'Title'))
-				$objToReturn->strTitle = $objSoapObject->Title;
-			if (property_exists($objSoapObject, 'Tenure'))
-				$objToReturn->intTenure = $objSoapObject->Tenure;
+			if ((property_exists($objSoapObject, 'Title')) &&
+				($objSoapObject->Title))
+				$objToReturn->Title = TitleList::GetObjectFromSoapObject($objSoapObject->Title);
+			if ((property_exists($objSoapObject, 'Tenure')) &&
+				($objSoapObject->Tenure))
+				$objToReturn->Tenure = TenureList::GetObjectFromSoapObject($objSoapObject->Tenure);
 			if (property_exists($objSoapObject, 'CareerLength'))
 				$objToReturn->intCareerLength = $objSoapObject->CareerLength;
 			if (property_exists($objSoapObject, '__blnRestored'))
@@ -4517,6 +5747,18 @@
 				$objObject->objLogin = Login::GetSoapObjectFromObject($objObject->objLogin, false);
 			else if (!$blnBindRelatedObjects)
 				$objObject->intLoginId = null;
+			if ($objObject->objCountry)
+				$objObject->objCountry = CountryList::GetSoapObjectFromObject($objObject->objCountry, false);
+			else if (!$blnBindRelatedObjects)
+				$objObject->intCountryId = null;
+			if ($objObject->objTitle)
+				$objObject->objTitle = TitleList::GetSoapObjectFromObject($objObject->objTitle, false);
+			else if (!$blnBindRelatedObjects)
+				$objObject->intTitleId = null;
+			if ($objObject->objTenure)
+				$objObject->objTenure = TenureList::GetSoapObjectFromObject($objObject->objTenure, false);
+			else if (!$blnBindRelatedObjects)
+				$objObject->intTenureId = null;
 			return $objObject;
 		}
 
@@ -4667,10 +5909,13 @@
 	 * @property-read QQNode $LastName
 	 * @property-read QQNode $Email
 	 * @property-read QQNode $Gender
-	 * @property-read QQNode $Country
+	 * @property-read QQNode $CountryId
+	 * @property-read QQNodeCountryList $Country
 	 * @property-read QQNode $Department
-	 * @property-read QQNode $Title
-	 * @property-read QQNode $Tenure
+	 * @property-read QQNode $TitleId
+	 * @property-read QQNodeTitleList $Title
+	 * @property-read QQNode $TenureId
+	 * @property-read QQNodeTenureList $Tenure
 	 * @property-read QQNode $CareerLength
 	 * @property-read QQNodeUserGroupAssessmentListAsAssessmentManager $GroupAssessmentListAsAssessmentManager
 	 * @property-read QQNodeUserCompany $Company
@@ -4678,13 +5923,17 @@
 	 * @property-read QQNodeUserScorecard $Scorecard
 	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsModifiedBy
 	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsWho
+	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessment
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeKpis $KpisAsModifiedBy
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
+	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessment
+	 * @property-read QQReverseReferenceNodeSeasonalAssessment $SeasonalAssessment
 	 * @property-read QQReverseReferenceNodeStatement $StatementAsModifiedBy
 	 * @property-read QQReverseReferenceNodeStrategy $StrategyAsModifiedBy
 	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessment
 	 * @property-read QQReverseReferenceNodeTenPAssessment $TenPAssessment
+	 * @property-read QQReverseReferenceNodeTimeAssessment $TimeAssessment
 	 */
 	class QQNodeUser extends QQNode {
 		protected $strTableName = 'user';
@@ -4706,14 +5955,20 @@
 					return new QQNode('email', 'Email', 'string', $this);
 				case 'Gender':
 					return new QQNode('gender', 'Gender', 'boolean', $this);
+				case 'CountryId':
+					return new QQNode('country_id', 'CountryId', 'integer', $this);
 				case 'Country':
-					return new QQNode('country', 'Country', 'string', $this);
+					return new QQNodeCountryList('country_id', 'Country', 'integer', $this);
 				case 'Department':
 					return new QQNode('department', 'Department', 'string', $this);
+				case 'TitleId':
+					return new QQNode('title_id', 'TitleId', 'integer', $this);
 				case 'Title':
-					return new QQNode('title', 'Title', 'string', $this);
+					return new QQNodeTitleList('title_id', 'Title', 'integer', $this);
+				case 'TenureId':
+					return new QQNode('tenure_id', 'TenureId', 'integer', $this);
 				case 'Tenure':
-					return new QQNode('tenure', 'Tenure', 'integer', $this);
+					return new QQNodeTenureList('tenure_id', 'Tenure', 'integer', $this);
 				case 'CareerLength':
 					return new QQNode('career_length', 'CareerLength', 'integer', $this);
 				case 'GroupAssessmentListAsAssessmentManager':
@@ -4728,12 +5983,18 @@
 					return new QQReverseReferenceNodeActionItems($this, 'actionitemsasmodifiedby', 'reverse_reference', 'modified_by');
 				case 'ActionItemsAsWho':
 					return new QQReverseReferenceNodeActionItems($this, 'actionitemsaswho', 'reverse_reference', 'who');
+				case 'IntegrationAssessment':
+					return new QQReverseReferenceNodeIntegrationAssessment($this, 'integrationassessment', 'reverse_reference', 'user_id');
 				case 'KingdomBusinessAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'user_id');
 				case 'KpisAsModifiedBy':
 					return new QQReverseReferenceNodeKpis($this, 'kpisasmodifiedby', 'reverse_reference', 'modified_by');
 				case 'LemonAssessment':
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessment', 'reverse_reference', 'user_id');
+				case 'LraAssessment':
+					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessment', 'reverse_reference', 'user_id');
+				case 'SeasonalAssessment':
+					return new QQReverseReferenceNodeSeasonalAssessment($this, 'seasonalassessment', 'reverse_reference', 'user_id');
 				case 'StatementAsModifiedBy':
 					return new QQReverseReferenceNodeStatement($this, 'statementasmodifiedby', 'reverse_reference', 'modified_by');
 				case 'StrategyAsModifiedBy':
@@ -4742,6 +6003,8 @@
 					return new QQReverseReferenceNodeTenFAssessment($this, 'tenfassessment', 'reverse_reference', 'user_id');
 				case 'TenPAssessment':
 					return new QQReverseReferenceNodeTenPAssessment($this, 'tenpassessment', 'reverse_reference', 'user_id');
+				case 'TimeAssessment':
+					return new QQReverseReferenceNodeTimeAssessment($this, 'timeassessment', 'reverse_reference', 'user_id');
 
 				case '_PrimaryKeyNode':
 					return new QQNode('id', 'Id', 'integer', $this);
@@ -4764,10 +6027,13 @@
 	 * @property-read QQNode $LastName
 	 * @property-read QQNode $Email
 	 * @property-read QQNode $Gender
-	 * @property-read QQNode $Country
+	 * @property-read QQNode $CountryId
+	 * @property-read QQNodeCountryList $Country
 	 * @property-read QQNode $Department
-	 * @property-read QQNode $Title
-	 * @property-read QQNode $Tenure
+	 * @property-read QQNode $TitleId
+	 * @property-read QQNodeTitleList $Title
+	 * @property-read QQNode $TenureId
+	 * @property-read QQNodeTenureList $Tenure
 	 * @property-read QQNode $CareerLength
 	 * @property-read QQNodeUserGroupAssessmentListAsAssessmentManager $GroupAssessmentListAsAssessmentManager
 	 * @property-read QQNodeUserCompany $Company
@@ -4775,13 +6041,17 @@
 	 * @property-read QQNodeUserScorecard $Scorecard
 	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsModifiedBy
 	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsWho
+	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessment
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeKpis $KpisAsModifiedBy
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
+	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessment
+	 * @property-read QQReverseReferenceNodeSeasonalAssessment $SeasonalAssessment
 	 * @property-read QQReverseReferenceNodeStatement $StatementAsModifiedBy
 	 * @property-read QQReverseReferenceNodeStrategy $StrategyAsModifiedBy
 	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessment
 	 * @property-read QQReverseReferenceNodeTenPAssessment $TenPAssessment
+	 * @property-read QQReverseReferenceNodeTimeAssessment $TimeAssessment
 	 * @property-read QQNode $_PrimaryKeyNode
 	 */
 	class QQReverseReferenceNodeUser extends QQReverseReferenceNode {
@@ -4804,14 +6074,20 @@
 					return new QQNode('email', 'Email', 'string', $this);
 				case 'Gender':
 					return new QQNode('gender', 'Gender', 'boolean', $this);
+				case 'CountryId':
+					return new QQNode('country_id', 'CountryId', 'integer', $this);
 				case 'Country':
-					return new QQNode('country', 'Country', 'string', $this);
+					return new QQNodeCountryList('country_id', 'Country', 'integer', $this);
 				case 'Department':
 					return new QQNode('department', 'Department', 'string', $this);
+				case 'TitleId':
+					return new QQNode('title_id', 'TitleId', 'integer', $this);
 				case 'Title':
-					return new QQNode('title', 'Title', 'string', $this);
+					return new QQNodeTitleList('title_id', 'Title', 'integer', $this);
+				case 'TenureId':
+					return new QQNode('tenure_id', 'TenureId', 'integer', $this);
 				case 'Tenure':
-					return new QQNode('tenure', 'Tenure', 'integer', $this);
+					return new QQNodeTenureList('tenure_id', 'Tenure', 'integer', $this);
 				case 'CareerLength':
 					return new QQNode('career_length', 'CareerLength', 'integer', $this);
 				case 'GroupAssessmentListAsAssessmentManager':
@@ -4826,12 +6102,18 @@
 					return new QQReverseReferenceNodeActionItems($this, 'actionitemsasmodifiedby', 'reverse_reference', 'modified_by');
 				case 'ActionItemsAsWho':
 					return new QQReverseReferenceNodeActionItems($this, 'actionitemsaswho', 'reverse_reference', 'who');
+				case 'IntegrationAssessment':
+					return new QQReverseReferenceNodeIntegrationAssessment($this, 'integrationassessment', 'reverse_reference', 'user_id');
 				case 'KingdomBusinessAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'user_id');
 				case 'KpisAsModifiedBy':
 					return new QQReverseReferenceNodeKpis($this, 'kpisasmodifiedby', 'reverse_reference', 'modified_by');
 				case 'LemonAssessment':
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessment', 'reverse_reference', 'user_id');
+				case 'LraAssessment':
+					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessment', 'reverse_reference', 'user_id');
+				case 'SeasonalAssessment':
+					return new QQReverseReferenceNodeSeasonalAssessment($this, 'seasonalassessment', 'reverse_reference', 'user_id');
 				case 'StatementAsModifiedBy':
 					return new QQReverseReferenceNodeStatement($this, 'statementasmodifiedby', 'reverse_reference', 'modified_by');
 				case 'StrategyAsModifiedBy':
@@ -4840,6 +6122,8 @@
 					return new QQReverseReferenceNodeTenFAssessment($this, 'tenfassessment', 'reverse_reference', 'user_id');
 				case 'TenPAssessment':
 					return new QQReverseReferenceNodeTenPAssessment($this, 'tenpassessment', 'reverse_reference', 'user_id');
+				case 'TimeAssessment':
+					return new QQReverseReferenceNodeTimeAssessment($this, 'timeassessment', 'reverse_reference', 'user_id');
 
 				case '_PrimaryKeyNode':
 					return new QQNode('id', 'Id', 'integer', $this);

@@ -17,6 +17,18 @@
 
 		<?php $_CONTROL->lstGroup->RenderWithName(); ?>
 
+		<?php $_CONTROL->txtL->RenderWithName(); ?>
+
+		<?php $_CONTROL->txtE->RenderWithName(); ?>
+
+		<?php $_CONTROL->txtM->RenderWithName(); ?>
+
+		<?php $_CONTROL->txtO->RenderWithName(); ?>
+
+		<?php $_CONTROL->txtN->RenderWithName(); ?>
+
+		<?php $_CONTROL->calDateModified->RenderWithName(); ?>
+
 	</div>
 
 	<div id="formActions">

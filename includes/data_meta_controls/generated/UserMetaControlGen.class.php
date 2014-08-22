@@ -28,14 +28,14 @@
 	 * property-read QLabel $EmailLabel
 	 * property QCheckBox $GenderControl
 	 * property-read QLabel $GenderLabel
-	 * property QTextBox $CountryControl
-	 * property-read QLabel $CountryLabel
+	 * property QListBox $CountryIdControl
+	 * property-read QLabel $CountryIdLabel
 	 * property QTextBox $DepartmentControl
 	 * property-read QLabel $DepartmentLabel
-	 * property QTextBox $TitleControl
-	 * property-read QLabel $TitleLabel
-	 * property QIntegerTextBox $TenureControl
-	 * property-read QLabel $TenureLabel
+	 * property QListBox $TitleIdControl
+	 * property-read QLabel $TitleIdLabel
+	 * property QListBox $TenureIdControl
+	 * property-read QLabel $TenureIdLabel
 	 * property QIntegerTextBox $CareerLengthControl
 	 * property-read QLabel $CareerLengthLabel
 	 * property QListBox $GroupAssessmentListAsAssessmentManagerControl
@@ -114,10 +114,10 @@
 		protected $chkGender;
 
         /**
-         * @var QTextBox txtCountry;
+         * @var QListBox lstCountry;
          * @access protected
          */
-		protected $txtCountry;
+		protected $lstCountry;
 
         /**
          * @var QTextBox txtDepartment;
@@ -126,16 +126,16 @@
 		protected $txtDepartment;
 
         /**
-         * @var QTextBox txtTitle;
+         * @var QListBox lstTitle;
          * @access protected
          */
-		protected $txtTitle;
+		protected $lstTitle;
 
         /**
-         * @var QIntegerTextBox txtTenure;
+         * @var QListBox lstTenure;
          * @access protected
          */
-		protected $txtTenure;
+		protected $lstTenure;
 
         /**
          * @var QIntegerTextBox txtCareerLength;
@@ -176,10 +176,10 @@
 		protected $lblGender;
 
         /**
-         * @var QLabel lblCountry
+         * @var QLabel lblCountryId
          * @access protected
          */
-		protected $lblCountry;
+		protected $lblCountryId;
 
         /**
          * @var QLabel lblDepartment
@@ -188,16 +188,16 @@
 		protected $lblDepartment;
 
         /**
-         * @var QLabel lblTitle
+         * @var QLabel lblTitleId
          * @access protected
          */
-		protected $lblTitle;
+		protected $lblTitleId;
 
         /**
-         * @var QLabel lblTenure
+         * @var QLabel lblTenureId
          * @access protected
          */
-		protected $lblTenure;
+		protected $lblTenureId;
 
         /**
          * @var QLabel lblCareerLength
@@ -474,28 +474,43 @@
 		}
 
 		/**
-		 * Create and setup QTextBox txtCountry
+		 * Create and setup QListBox lstCountry
 		 * @param string $strControlId optional ControlId to use
-		 * @return QTextBox
+		 * @param QQCondition $objConditions override the default condition of QQ::All() to the query, itself
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause object or array of QQClause objects for the query
+		 * @return QListBox
 		 */
-		public function txtCountry_Create($strControlId = null) {
-			$this->txtCountry = new QTextBox($this->objParentObject, $strControlId);
-			$this->txtCountry->Name = QApplication::Translate('Country');
-			$this->txtCountry->Text = $this->objUser->Country;
-			$this->txtCountry->MaxLength = User::CountryMaxLength;
-			return $this->txtCountry;
+		public function lstCountry_Create($strControlId = null, QQCondition $objCondition = null, $objOptionalClauses = null) {
+			$this->lstCountry = new QListBox($this->objParentObject, $strControlId);
+			$this->lstCountry->Name = QApplication::Translate('Country');
+			$this->lstCountry->AddItem(QApplication::Translate('- Select One -'), null);
+
+			// Setup and perform the Query
+			if (is_null($objCondition)) $objCondition = QQ::All();
+			$objCountryCursor = CountryList::QueryCursor($objCondition, $objOptionalClauses);
+
+			// Iterate through the Cursor
+			while ($objCountry = CountryList::InstantiateCursor($objCountryCursor)) {
+				$objListItem = new QListItem($objCountry->__toString(), $objCountry->Id);
+				if (($this->objUser->Country) && ($this->objUser->Country->Id == $objCountry->Id))
+					$objListItem->Selected = true;
+				$this->lstCountry->AddItem($objListItem);
+			}
+
+			// Return the QListBox
+			return $this->lstCountry;
 		}
 
 		/**
-		 * Create and setup QLabel lblCountry
+		 * Create and setup QLabel lblCountryId
 		 * @param string $strControlId optional ControlId to use
 		 * @return QLabel
 		 */
-		public function lblCountry_Create($strControlId = null) {
-			$this->lblCountry = new QLabel($this->objParentObject, $strControlId);
-			$this->lblCountry->Name = QApplication::Translate('Country');
-			$this->lblCountry->Text = $this->objUser->Country;
-			return $this->lblCountry;
+		public function lblCountryId_Create($strControlId = null) {
+			$this->lblCountryId = new QLabel($this->objParentObject, $strControlId);
+			$this->lblCountryId->Name = QApplication::Translate('Country');
+			$this->lblCountryId->Text = ($this->objUser->Country) ? $this->objUser->Country->__toString() : null;
+			return $this->lblCountryId;
 		}
 
 		/**
@@ -524,54 +539,83 @@
 		}
 
 		/**
-		 * Create and setup QTextBox txtTitle
+		 * Create and setup QListBox lstTitle
 		 * @param string $strControlId optional ControlId to use
-		 * @return QTextBox
+		 * @param QQCondition $objConditions override the default condition of QQ::All() to the query, itself
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause object or array of QQClause objects for the query
+		 * @return QListBox
 		 */
-		public function txtTitle_Create($strControlId = null) {
-			$this->txtTitle = new QTextBox($this->objParentObject, $strControlId);
-			$this->txtTitle->Name = QApplication::Translate('Title');
-			$this->txtTitle->Text = $this->objUser->Title;
-			$this->txtTitle->MaxLength = User::TitleMaxLength;
-			return $this->txtTitle;
+		public function lstTitle_Create($strControlId = null, QQCondition $objCondition = null, $objOptionalClauses = null) {
+			$this->lstTitle = new QListBox($this->objParentObject, $strControlId);
+			$this->lstTitle->Name = QApplication::Translate('Title');
+			$this->lstTitle->AddItem(QApplication::Translate('- Select One -'), null);
+
+			// Setup and perform the Query
+			if (is_null($objCondition)) $objCondition = QQ::All();
+			$objTitleCursor = TitleList::QueryCursor($objCondition, $objOptionalClauses);
+
+			// Iterate through the Cursor
+			while ($objTitle = TitleList::InstantiateCursor($objTitleCursor)) {
+				$objListItem = new QListItem($objTitle->__toString(), $objTitle->Id);
+				if (($this->objUser->Title) && ($this->objUser->Title->Id == $objTitle->Id))
+					$objListItem->Selected = true;
+				$this->lstTitle->AddItem($objListItem);
+			}
+
+			// Return the QListBox
+			return $this->lstTitle;
 		}
 
 		/**
-		 * Create and setup QLabel lblTitle
+		 * Create and setup QLabel lblTitleId
 		 * @param string $strControlId optional ControlId to use
 		 * @return QLabel
 		 */
-		public function lblTitle_Create($strControlId = null) {
-			$this->lblTitle = new QLabel($this->objParentObject, $strControlId);
-			$this->lblTitle->Name = QApplication::Translate('Title');
-			$this->lblTitle->Text = $this->objUser->Title;
-			return $this->lblTitle;
+		public function lblTitleId_Create($strControlId = null) {
+			$this->lblTitleId = new QLabel($this->objParentObject, $strControlId);
+			$this->lblTitleId->Name = QApplication::Translate('Title');
+			$this->lblTitleId->Text = ($this->objUser->Title) ? $this->objUser->Title->__toString() : null;
+			return $this->lblTitleId;
 		}
 
 		/**
-		 * Create and setup QIntegerTextBox txtTenure
+		 * Create and setup QListBox lstTenure
 		 * @param string $strControlId optional ControlId to use
-		 * @return QIntegerTextBox
+		 * @param QQCondition $objConditions override the default condition of QQ::All() to the query, itself
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause object or array of QQClause objects for the query
+		 * @return QListBox
 		 */
-		public function txtTenure_Create($strControlId = null) {
-			$this->txtTenure = new QIntegerTextBox($this->objParentObject, $strControlId);
-			$this->txtTenure->Name = QApplication::Translate('Tenure');
-			$this->txtTenure->Text = $this->objUser->Tenure;
-			return $this->txtTenure;
+		public function lstTenure_Create($strControlId = null, QQCondition $objCondition = null, $objOptionalClauses = null) {
+			$this->lstTenure = new QListBox($this->objParentObject, $strControlId);
+			$this->lstTenure->Name = QApplication::Translate('Tenure');
+			$this->lstTenure->AddItem(QApplication::Translate('- Select One -'), null);
+
+			// Setup and perform the Query
+			if (is_null($objCondition)) $objCondition = QQ::All();
+			$objTenureCursor = TenureList::QueryCursor($objCondition, $objOptionalClauses);
+
+			// Iterate through the Cursor
+			while ($objTenure = TenureList::InstantiateCursor($objTenureCursor)) {
+				$objListItem = new QListItem($objTenure->__toString(), $objTenure->Id);
+				if (($this->objUser->Tenure) && ($this->objUser->Tenure->Id == $objTenure->Id))
+					$objListItem->Selected = true;
+				$this->lstTenure->AddItem($objListItem);
+			}
+
+			// Return the QListBox
+			return $this->lstTenure;
 		}
 
 		/**
-		 * Create and setup QLabel lblTenure
+		 * Create and setup QLabel lblTenureId
 		 * @param string $strControlId optional ControlId to use
-		 * @param string $strFormat optional sprintf format to use
 		 * @return QLabel
 		 */
-		public function lblTenure_Create($strControlId = null, $strFormat = null) {
-			$this->lblTenure = new QLabel($this->objParentObject, $strControlId);
-			$this->lblTenure->Name = QApplication::Translate('Tenure');
-			$this->lblTenure->Text = $this->objUser->Tenure;
-			$this->lblTenure->Format = $strFormat;
-			return $this->lblTenure;
+		public function lblTenureId_Create($strControlId = null) {
+			$this->lblTenureId = new QLabel($this->objParentObject, $strControlId);
+			$this->lblTenureId->Name = QApplication::Translate('Tenure');
+			$this->lblTenureId->Text = ($this->objUser->Tenure) ? $this->objUser->Tenure->__toString() : null;
+			return $this->lblTenureId;
 		}
 
 		/**
@@ -842,17 +886,47 @@
 			if ($this->chkGender) $this->chkGender->Checked = $this->objUser->Gender;
 			if ($this->lblGender) $this->lblGender->Text = ($this->objUser->Gender) ? QApplication::Translate('Yes') : QApplication::Translate('No');
 
-			if ($this->txtCountry) $this->txtCountry->Text = $this->objUser->Country;
-			if ($this->lblCountry) $this->lblCountry->Text = $this->objUser->Country;
+			if ($this->lstCountry) {
+					$this->lstCountry->RemoveAllItems();
+				$this->lstCountry->AddItem(QApplication::Translate('- Select One -'), null);
+				$objCountryArray = CountryList::LoadAll();
+				if ($objCountryArray) foreach ($objCountryArray as $objCountry) {
+					$objListItem = new QListItem($objCountry->__toString(), $objCountry->Id);
+					if (($this->objUser->Country) && ($this->objUser->Country->Id == $objCountry->Id))
+						$objListItem->Selected = true;
+					$this->lstCountry->AddItem($objListItem);
+				}
+			}
+			if ($this->lblCountryId) $this->lblCountryId->Text = ($this->objUser->Country) ? $this->objUser->Country->__toString() : null;
 
 			if ($this->txtDepartment) $this->txtDepartment->Text = $this->objUser->Department;
 			if ($this->lblDepartment) $this->lblDepartment->Text = $this->objUser->Department;
 
-			if ($this->txtTitle) $this->txtTitle->Text = $this->objUser->Title;
-			if ($this->lblTitle) $this->lblTitle->Text = $this->objUser->Title;
+			if ($this->lstTitle) {
+					$this->lstTitle->RemoveAllItems();
+				$this->lstTitle->AddItem(QApplication::Translate('- Select One -'), null);
+				$objTitleArray = TitleList::LoadAll();
+				if ($objTitleArray) foreach ($objTitleArray as $objTitle) {
+					$objListItem = new QListItem($objTitle->__toString(), $objTitle->Id);
+					if (($this->objUser->Title) && ($this->objUser->Title->Id == $objTitle->Id))
+						$objListItem->Selected = true;
+					$this->lstTitle->AddItem($objListItem);
+				}
+			}
+			if ($this->lblTitleId) $this->lblTitleId->Text = ($this->objUser->Title) ? $this->objUser->Title->__toString() : null;
 
-			if ($this->txtTenure) $this->txtTenure->Text = $this->objUser->Tenure;
-			if ($this->lblTenure) $this->lblTenure->Text = $this->objUser->Tenure;
+			if ($this->lstTenure) {
+					$this->lstTenure->RemoveAllItems();
+				$this->lstTenure->AddItem(QApplication::Translate('- Select One -'), null);
+				$objTenureArray = TenureList::LoadAll();
+				if ($objTenureArray) foreach ($objTenureArray as $objTenure) {
+					$objListItem = new QListItem($objTenure->__toString(), $objTenure->Id);
+					if (($this->objUser->Tenure) && ($this->objUser->Tenure->Id == $objTenure->Id))
+						$objListItem->Selected = true;
+					$this->lstTenure->AddItem($objListItem);
+				}
+			}
+			if ($this->lblTenureId) $this->lblTenureId->Text = ($this->objUser->Tenure) ? $this->objUser->Tenure->__toString() : null;
 
 			if ($this->txtCareerLength) $this->txtCareerLength->Text = $this->objUser->CareerLength;
 			if ($this->lblCareerLength) $this->lblCareerLength->Text = $this->objUser->CareerLength;
@@ -1009,10 +1083,10 @@
 				if ($this->txtLastName) $this->objUser->LastName = $this->txtLastName->Text;
 				if ($this->txtEmail) $this->objUser->Email = $this->txtEmail->Text;
 				if ($this->chkGender) $this->objUser->Gender = $this->chkGender->Checked;
-				if ($this->txtCountry) $this->objUser->Country = $this->txtCountry->Text;
+				if ($this->lstCountry) $this->objUser->CountryId = $this->lstCountry->SelectedValue;
 				if ($this->txtDepartment) $this->objUser->Department = $this->txtDepartment->Text;
-				if ($this->txtTitle) $this->objUser->Title = $this->txtTitle->Text;
-				if ($this->txtTenure) $this->objUser->Tenure = $this->txtTenure->Text;
+				if ($this->lstTitle) $this->objUser->TitleId = $this->lstTitle->SelectedValue;
+				if ($this->lstTenure) $this->objUser->TenureId = $this->lstTenure->SelectedValue;
 				if ($this->txtCareerLength) $this->objUser->CareerLength = $this->txtCareerLength->Text;
 
 				// Update any UniqueReverseReferences (if any) for controls that have been created for it
@@ -1100,30 +1174,30 @@
 				case 'GenderLabel':
 					if (!$this->lblGender) return $this->lblGender_Create();
 					return $this->lblGender;
-				case 'CountryControl':
-					if (!$this->txtCountry) return $this->txtCountry_Create();
-					return $this->txtCountry;
-				case 'CountryLabel':
-					if (!$this->lblCountry) return $this->lblCountry_Create();
-					return $this->lblCountry;
+				case 'CountryIdControl':
+					if (!$this->lstCountry) return $this->lstCountry_Create();
+					return $this->lstCountry;
+				case 'CountryIdLabel':
+					if (!$this->lblCountryId) return $this->lblCountryId_Create();
+					return $this->lblCountryId;
 				case 'DepartmentControl':
 					if (!$this->txtDepartment) return $this->txtDepartment_Create();
 					return $this->txtDepartment;
 				case 'DepartmentLabel':
 					if (!$this->lblDepartment) return $this->lblDepartment_Create();
 					return $this->lblDepartment;
-				case 'TitleControl':
-					if (!$this->txtTitle) return $this->txtTitle_Create();
-					return $this->txtTitle;
-				case 'TitleLabel':
-					if (!$this->lblTitle) return $this->lblTitle_Create();
-					return $this->lblTitle;
-				case 'TenureControl':
-					if (!$this->txtTenure) return $this->txtTenure_Create();
-					return $this->txtTenure;
-				case 'TenureLabel':
-					if (!$this->lblTenure) return $this->lblTenure_Create();
-					return $this->lblTenure;
+				case 'TitleIdControl':
+					if (!$this->lstTitle) return $this->lstTitle_Create();
+					return $this->lstTitle;
+				case 'TitleIdLabel':
+					if (!$this->lblTitleId) return $this->lblTitleId_Create();
+					return $this->lblTitleId;
+				case 'TenureIdControl':
+					if (!$this->lstTenure) return $this->lstTenure_Create();
+					return $this->lstTenure;
+				case 'TenureIdLabel':
+					if (!$this->lblTenureId) return $this->lblTenureId_Create();
+					return $this->lblTenureId;
 				case 'CareerLengthControl':
 					if (!$this->txtCareerLength) return $this->txtCareerLength_Create();
 					return $this->txtCareerLength;
@@ -1188,14 +1262,14 @@
 						return ($this->txtEmail = QType::Cast($mixValue, 'QControl'));
 					case 'GenderControl':
 						return ($this->chkGender = QType::Cast($mixValue, 'QControl'));
-					case 'CountryControl':
-						return ($this->txtCountry = QType::Cast($mixValue, 'QControl'));
+					case 'CountryIdControl':
+						return ($this->lstCountry = QType::Cast($mixValue, 'QControl'));
 					case 'DepartmentControl':
 						return ($this->txtDepartment = QType::Cast($mixValue, 'QControl'));
-					case 'TitleControl':
-						return ($this->txtTitle = QType::Cast($mixValue, 'QControl'));
-					case 'TenureControl':
-						return ($this->txtTenure = QType::Cast($mixValue, 'QControl'));
+					case 'TitleIdControl':
+						return ($this->lstTitle = QType::Cast($mixValue, 'QControl'));
+					case 'TenureIdControl':
+						return ($this->lstTenure = QType::Cast($mixValue, 'QControl'));
 					case 'CareerLengthControl':
 						return ($this->txtCareerLength = QType::Cast($mixValue, 'QControl'));
 					case 'GroupAssessmentListAsAssessmentManagerControl':

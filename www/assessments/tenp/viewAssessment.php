@@ -9,15 +9,20 @@ class ViewTenPAssessmentForm extends InstituteForm {
 	protected $dtgAssessmentResultsArray;
 	protected $btnReturn;
 	protected $lblIntroduction;
+	protected $lblDelta;
+	protected $lblImportance;
 	
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
-	protected function Form_Create() {	
-	$this->lblIntroduction = new QLabel($this);
+	protected function Form_Create() {
+		$this->lblDelta = new QLabel($this);
+		$this->lblImportance  = new QLabel($this);
+		$this->lblIntroduction = new QLabel($this);
 		$intUserId = QApplication::PathInfo(0);
+		
 		if($intUserId) { //show the assessment specified
 			$assessmentArray = TenPAssessment::LoadArrayByUserId($intUserId);
 			$this->objTenPAssessment = $assessmentArray[0];
@@ -32,6 +37,7 @@ Your results are provided below.';
 			$assessmentArray = TenPAssessment::LoadArrayByUserId($intUserId);
 			$this->objTenPAssessment = $assessmentArray[0];
 		}
+		$this->initializeChart();
 		$this->dtgAssessmentResultsArray = array();
 		for($i=0; $i<10;$i++) {
 	 		$this->dtgAssessmentResultsArray[$i] = new TenPResultsDataGrid($this);
@@ -55,11 +61,11 @@ Your results are provided below.';
 	
 	        $objStyle = $this->dtgAssessmentResultsArray[$i]->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        
 	        $objStyle = $this->dtgAssessmentResultsArray[$i]->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366';  		
+	        $objStyle->BackColor = '#0098c3';  		
 	 	}
 	 			        
         $this->btnReturn = new QButton($this);
@@ -72,7 +78,7 @@ Your results are provided below.';
 	}
 	
 	protected function btnReturn_Click() {
-		QApplication::Redirect('/resources/assessments/tenp/index.php');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/tenp/index.php');
 	}
 	
     public function RenderQuestion($intQuestionId) {
@@ -84,8 +90,36 @@ Your results are provided below.';
     	$txtReturn = sprintf('<div style="color:#888888">%s</div>',$intQuestionId);
     	return $txtReturn;
     } 
-    
+
+	protected function initializeChart() {
+		$associatedArray = array(); 
+		$delta = array();
+		$amount = array();
+		foreach(CategoryType::$NameArray as $key=>$value) {			
+			$resultArray = TenPResults::LoadArrayByAssessmentIdAndCategory($this->objTenPAssessment->Id,$key);
+			$ptotal = $itotal = 0;
+			foreach( $resultArray as $objResult) {
+				$ptotal += $objResult->Performance;
+				$itotal += $objResult->Importance;
+			}
+			$objItem = new tenPArray();
+			$objItem->P = $value;
+			$objItem->performance = (count($resultArray))? $ptotal/count($resultArray) : 0;	
+			$objItem->importance = (count($resultArray)) ? $itotal/count($resultArray) :0;
+			$associatedArray[] = $objItem;
+			$delta[$value] = abs($objItem->importance - $objItem->performance);
+			$amount[$value] = $objItem->importance;
+		}
+		$this->lblDelta->Text = array_search(max($delta), $delta);
+		$this->lblImportance->Text = array_search(min($amount), $amount);
+		QApplication::ExecuteJavaScript('DisplayChart('.json_encode($associatedArray).');');	
+	}
 }
 
 ViewTenPAssessmentForm::Run('ViewTenPAssessmentForm');
+class tenPArray {
+			public $P;
+			public $importance;
+			public $performance;
+		}
 ?>

@@ -62,11 +62,11 @@
 	
 	        $objStyle = $this->dtgUsers->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        
 	        $objStyle = $this->dtgUsers->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	
 			$this->strFirstName = new QTextBox($this);
 			$this->strFirstName->Name = 'First Name';
@@ -164,7 +164,7 @@
         
 	public function dtgUsers_Bind() {
 		$objConditions = QQ::All();
-		$objClauses = array();
+		$objClauses = QQ::Clause($this->dtgUsers->LimitClause);
 
 		if ($strName = trim($this->strFirstName->Text)) {
 			$objConditions = QQ::AndCondition($objConditions,
@@ -190,7 +190,7 @@
 			);
 			} 
 		}
-		
+		$this->dtgUsers->TotalItemCount = User::CountAll();
 		$userArray = User::QueryArray($objConditions,$objClauses);	
 		$this->dtgUsers->DataSource = $userArray; 
 	}

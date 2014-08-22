@@ -26,10 +26,10 @@
 		public $txtLastName;
 		public $txtEmail;
 		public $chkGender;
-		public $txtCountry;
+		public $lstCountry;
 		public $txtDepartment;
-		public $txtTitle;
-		public $txtTenure;
+		public $lstTitle;
+		public $lstTenure;
 		public $txtCareerLength;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
@@ -70,10 +70,10 @@
 			$this->txtLastName = $this->mctUser->txtLastName_Create();
 			$this->txtEmail = $this->mctUser->txtEmail_Create();
 			$this->chkGender = $this->mctUser->chkGender_Create();
-			$this->txtCountry = $this->mctUser->txtCountry_Create();
+			$this->lstCountry = $this->mctUser->lstCountry_Create();
 			$this->txtDepartment = $this->mctUser->txtDepartment_Create();
-			$this->txtTitle = $this->mctUser->txtTitle_Create();
-			$this->txtTenure = $this->mctUser->txtTenure_Create();
+			$this->lstTitle = $this->mctUser->lstTitle_Create();
+			$this->lstTenure = $this->mctUser->lstTenure_Create();
 			$this->txtCareerLength = $this->mctUser->txtCareerLength_Create();
 			$this->lstGroupAssessmentListsAsAssessmentManager = $this->mctUser->lstGroupAssessmentListsAsAssessmentManager_Create();
 			$this->lstCompanies = $this->mctUser->lstCompanies_Create();

@@ -28,6 +28,18 @@
 	 * property-read QLabel $ResourceStatusIdLabel
 	 * property QListBox $GroupIdControl
 	 * property-read QLabel $GroupIdLabel
+	 * property QIntegerTextBox $LControl
+	 * property-read QLabel $LLabel
+	 * property QIntegerTextBox $EControl
+	 * property-read QLabel $ELabel
+	 * property QIntegerTextBox $MControl
+	 * property-read QLabel $MLabel
+	 * property QIntegerTextBox $OControl
+	 * property-read QLabel $OLabel
+	 * property QIntegerTextBox $NControl
+	 * property-read QLabel $NLabel
+	 * property QDateTimePicker $DateModifiedControl
+	 * property-read QLabel $DateModifiedLabel
 	 * property-read string $TitleVerb a verb indicating whether or not this is being edited or created
 	 * property-read boolean $EditMode a boolean indicating whether or not this is being edited or created
 	 */
@@ -95,6 +107,42 @@
          */
 		protected $lstGroup;
 
+        /**
+         * @var QIntegerTextBox txtL;
+         * @access protected
+         */
+		protected $txtL;
+
+        /**
+         * @var QIntegerTextBox txtE;
+         * @access protected
+         */
+		protected $txtE;
+
+        /**
+         * @var QIntegerTextBox txtM;
+         * @access protected
+         */
+		protected $txtM;
+
+        /**
+         * @var QIntegerTextBox txtO;
+         * @access protected
+         */
+		protected $txtO;
+
+        /**
+         * @var QIntegerTextBox txtN;
+         * @access protected
+         */
+		protected $txtN;
+
+        /**
+         * @var QDateTimePicker calDateModified;
+         * @access protected
+         */
+		protected $calDateModified;
+
 
 		// Controls that allow the viewing of LemonAssessment's individual data fields
         /**
@@ -126,6 +174,42 @@
          * @access protected
          */
 		protected $lblGroupId;
+
+        /**
+         * @var QLabel lblL
+         * @access protected
+         */
+		protected $lblL;
+
+        /**
+         * @var QLabel lblE
+         * @access protected
+         */
+		protected $lblE;
+
+        /**
+         * @var QLabel lblM
+         * @access protected
+         */
+		protected $lblM;
+
+        /**
+         * @var QLabel lblO
+         * @access protected
+         */
+		protected $lblO;
+
+        /**
+         * @var QLabel lblN
+         * @access protected
+         */
+		protected $lblN;
+
+        /**
+         * @var QLabel lblDateModified
+         * @access protected
+         */
+		protected $lblDateModified;
 
 
 		// QListBox Controls (if applicable) to edit Unique ReverseReferences and ManyToMany References
@@ -426,6 +510,165 @@
 			return $this->lblGroupId;
 		}
 
+		/**
+		 * Create and setup QIntegerTextBox txtL
+		 * @param string $strControlId optional ControlId to use
+		 * @return QIntegerTextBox
+		 */
+		public function txtL_Create($strControlId = null) {
+			$this->txtL = new QIntegerTextBox($this->objParentObject, $strControlId);
+			$this->txtL->Name = QApplication::Translate('L');
+			$this->txtL->Text = $this->objLemonAssessment->L;
+			return $this->txtL;
+		}
+
+		/**
+		 * Create and setup QLabel lblL
+		 * @param string $strControlId optional ControlId to use
+		 * @param string $strFormat optional sprintf format to use
+		 * @return QLabel
+		 */
+		public function lblL_Create($strControlId = null, $strFormat = null) {
+			$this->lblL = new QLabel($this->objParentObject, $strControlId);
+			$this->lblL->Name = QApplication::Translate('L');
+			$this->lblL->Text = $this->objLemonAssessment->L;
+			$this->lblL->Format = $strFormat;
+			return $this->lblL;
+		}
+
+		/**
+		 * Create and setup QIntegerTextBox txtE
+		 * @param string $strControlId optional ControlId to use
+		 * @return QIntegerTextBox
+		 */
+		public function txtE_Create($strControlId = null) {
+			$this->txtE = new QIntegerTextBox($this->objParentObject, $strControlId);
+			$this->txtE->Name = QApplication::Translate('E');
+			$this->txtE->Text = $this->objLemonAssessment->E;
+			return $this->txtE;
+		}
+
+		/**
+		 * Create and setup QLabel lblE
+		 * @param string $strControlId optional ControlId to use
+		 * @param string $strFormat optional sprintf format to use
+		 * @return QLabel
+		 */
+		public function lblE_Create($strControlId = null, $strFormat = null) {
+			$this->lblE = new QLabel($this->objParentObject, $strControlId);
+			$this->lblE->Name = QApplication::Translate('E');
+			$this->lblE->Text = $this->objLemonAssessment->E;
+			$this->lblE->Format = $strFormat;
+			return $this->lblE;
+		}
+
+		/**
+		 * Create and setup QIntegerTextBox txtM
+		 * @param string $strControlId optional ControlId to use
+		 * @return QIntegerTextBox
+		 */
+		public function txtM_Create($strControlId = null) {
+			$this->txtM = new QIntegerTextBox($this->objParentObject, $strControlId);
+			$this->txtM->Name = QApplication::Translate('M');
+			$this->txtM->Text = $this->objLemonAssessment->M;
+			return $this->txtM;
+		}
+
+		/**
+		 * Create and setup QLabel lblM
+		 * @param string $strControlId optional ControlId to use
+		 * @param string $strFormat optional sprintf format to use
+		 * @return QLabel
+		 */
+		public function lblM_Create($strControlId = null, $strFormat = null) {
+			$this->lblM = new QLabel($this->objParentObject, $strControlId);
+			$this->lblM->Name = QApplication::Translate('M');
+			$this->lblM->Text = $this->objLemonAssessment->M;
+			$this->lblM->Format = $strFormat;
+			return $this->lblM;
+		}
+
+		/**
+		 * Create and setup QIntegerTextBox txtO
+		 * @param string $strControlId optional ControlId to use
+		 * @return QIntegerTextBox
+		 */
+		public function txtO_Create($strControlId = null) {
+			$this->txtO = new QIntegerTextBox($this->objParentObject, $strControlId);
+			$this->txtO->Name = QApplication::Translate('O');
+			$this->txtO->Text = $this->objLemonAssessment->O;
+			return $this->txtO;
+		}
+
+		/**
+		 * Create and setup QLabel lblO
+		 * @param string $strControlId optional ControlId to use
+		 * @param string $strFormat optional sprintf format to use
+		 * @return QLabel
+		 */
+		public function lblO_Create($strControlId = null, $strFormat = null) {
+			$this->lblO = new QLabel($this->objParentObject, $strControlId);
+			$this->lblO->Name = QApplication::Translate('O');
+			$this->lblO->Text = $this->objLemonAssessment->O;
+			$this->lblO->Format = $strFormat;
+			return $this->lblO;
+		}
+
+		/**
+		 * Create and setup QIntegerTextBox txtN
+		 * @param string $strControlId optional ControlId to use
+		 * @return QIntegerTextBox
+		 */
+		public function txtN_Create($strControlId = null) {
+			$this->txtN = new QIntegerTextBox($this->objParentObject, $strControlId);
+			$this->txtN->Name = QApplication::Translate('N');
+			$this->txtN->Text = $this->objLemonAssessment->N;
+			return $this->txtN;
+		}
+
+		/**
+		 * Create and setup QLabel lblN
+		 * @param string $strControlId optional ControlId to use
+		 * @param string $strFormat optional sprintf format to use
+		 * @return QLabel
+		 */
+		public function lblN_Create($strControlId = null, $strFormat = null) {
+			$this->lblN = new QLabel($this->objParentObject, $strControlId);
+			$this->lblN->Name = QApplication::Translate('N');
+			$this->lblN->Text = $this->objLemonAssessment->N;
+			$this->lblN->Format = $strFormat;
+			return $this->lblN;
+		}
+
+		/**
+		 * Create and setup QDateTimePicker calDateModified
+		 * @param string $strControlId optional ControlId to use
+		 * @return QDateTimePicker
+		 */
+		public function calDateModified_Create($strControlId = null) {
+			$this->calDateModified = new QDateTimePicker($this->objParentObject, $strControlId);
+			$this->calDateModified->Name = QApplication::Translate('Date Modified');
+			$this->calDateModified->DateTime = $this->objLemonAssessment->DateModified;
+			$this->calDateModified->DateTimePickerType = QDateTimePickerType::Date;
+			return $this->calDateModified;
+		}
+
+		/**
+		 * Create and setup QLabel lblDateModified
+		 * @param string $strControlId optional ControlId to use
+		 * @param string $strDateTimeFormat optional DateTimeFormat to use
+		 * @return QLabel
+		 */
+		public function lblDateModified_Create($strControlId = null, $strDateTimeFormat = null) {
+			$this->lblDateModified = new QLabel($this->objParentObject, $strControlId);
+			$this->lblDateModified->Name = QApplication::Translate('Date Modified');
+			$this->strDateModifiedDateTimeFormat = $strDateTimeFormat;
+			$this->lblDateModified->Text = sprintf($this->objLemonAssessment->DateModified) ? $this->objLemonAssessment->DateModified->__toString($this->strDateModifiedDateTimeFormat) : null;
+			return $this->lblDateModified;
+		}
+
+		protected $strDateModifiedDateTimeFormat;
+
 
 
 		/**
@@ -494,6 +737,24 @@
 			}
 			if ($this->lblGroupId) $this->lblGroupId->Text = ($this->objLemonAssessment->Group) ? $this->objLemonAssessment->Group->__toString() : null;
 
+			if ($this->txtL) $this->txtL->Text = $this->objLemonAssessment->L;
+			if ($this->lblL) $this->lblL->Text = $this->objLemonAssessment->L;
+
+			if ($this->txtE) $this->txtE->Text = $this->objLemonAssessment->E;
+			if ($this->lblE) $this->lblE->Text = $this->objLemonAssessment->E;
+
+			if ($this->txtM) $this->txtM->Text = $this->objLemonAssessment->M;
+			if ($this->lblM) $this->lblM->Text = $this->objLemonAssessment->M;
+
+			if ($this->txtO) $this->txtO->Text = $this->objLemonAssessment->O;
+			if ($this->lblO) $this->lblO->Text = $this->objLemonAssessment->O;
+
+			if ($this->txtN) $this->txtN->Text = $this->objLemonAssessment->N;
+			if ($this->lblN) $this->lblN->Text = $this->objLemonAssessment->N;
+
+			if ($this->calDateModified) $this->calDateModified->DateTime = $this->objLemonAssessment->DateModified;
+			if ($this->lblDateModified) $this->lblDateModified->Text = sprintf($this->objLemonAssessment->DateModified) ? $this->objLemonAssessment->__toString($this->strDateModifiedDateTimeFormat) : null;
+
 		}
 
 
@@ -522,6 +783,12 @@
 				if ($this->lstResource) $this->objLemonAssessment->ResourceId = $this->lstResource->SelectedValue;
 				if ($this->txtResourceStatusId) $this->objLemonAssessment->ResourceStatusId = $this->txtResourceStatusId->Text;
 				if ($this->lstGroup) $this->objLemonAssessment->GroupId = $this->lstGroup->SelectedValue;
+				if ($this->txtL) $this->objLemonAssessment->L = $this->txtL->Text;
+				if ($this->txtE) $this->objLemonAssessment->E = $this->txtE->Text;
+				if ($this->txtM) $this->objLemonAssessment->M = $this->txtM->Text;
+				if ($this->txtO) $this->objLemonAssessment->O = $this->txtO->Text;
+				if ($this->txtN) $this->objLemonAssessment->N = $this->txtN->Text;
+				if ($this->calDateModified) $this->objLemonAssessment->DateModified = $this->calDateModified->DateTime;
 
 				// Update any UniqueReverseReferences (if any) for controls that have been created for it
 
@@ -600,6 +867,42 @@
 				case 'GroupIdLabel':
 					if (!$this->lblGroupId) return $this->lblGroupId_Create();
 					return $this->lblGroupId;
+				case 'LControl':
+					if (!$this->txtL) return $this->txtL_Create();
+					return $this->txtL;
+				case 'LLabel':
+					if (!$this->lblL) return $this->lblL_Create();
+					return $this->lblL;
+				case 'EControl':
+					if (!$this->txtE) return $this->txtE_Create();
+					return $this->txtE;
+				case 'ELabel':
+					if (!$this->lblE) return $this->lblE_Create();
+					return $this->lblE;
+				case 'MControl':
+					if (!$this->txtM) return $this->txtM_Create();
+					return $this->txtM;
+				case 'MLabel':
+					if (!$this->lblM) return $this->lblM_Create();
+					return $this->lblM;
+				case 'OControl':
+					if (!$this->txtO) return $this->txtO_Create();
+					return $this->txtO;
+				case 'OLabel':
+					if (!$this->lblO) return $this->lblO_Create();
+					return $this->lblO;
+				case 'NControl':
+					if (!$this->txtN) return $this->txtN_Create();
+					return $this->txtN;
+				case 'NLabel':
+					if (!$this->lblN) return $this->lblN_Create();
+					return $this->lblN;
+				case 'DateModifiedControl':
+					if (!$this->calDateModified) return $this->calDateModified_Create();
+					return $this->calDateModified;
+				case 'DateModifiedLabel':
+					if (!$this->lblDateModified) return $this->lblDateModified_Create();
+					return $this->lblDateModified;
 				default:
 					try {
 						return parent::__get($strName);
@@ -634,6 +937,18 @@
 						return ($this->txtResourceStatusId = QType::Cast($mixValue, 'QControl'));
 					case 'GroupIdControl':
 						return ($this->lstGroup = QType::Cast($mixValue, 'QControl'));
+					case 'LControl':
+						return ($this->txtL = QType::Cast($mixValue, 'QControl'));
+					case 'EControl':
+						return ($this->txtE = QType::Cast($mixValue, 'QControl'));
+					case 'MControl':
+						return ($this->txtM = QType::Cast($mixValue, 'QControl'));
+					case 'OControl':
+						return ($this->txtO = QType::Cast($mixValue, 'QControl'));
+					case 'NControl':
+						return ($this->txtN = QType::Cast($mixValue, 'QControl'));
+					case 'DateModifiedControl':
+						return ($this->calDateModified = QType::Cast($mixValue, 'QControl'));
 					default:
 						return parent::__set($strName, $mixValue);
 				}

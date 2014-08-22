@@ -17,12 +17,20 @@
 	 * @subpackage GeneratedDataObjects
 	 * @property integer $Id the value for intId (Read-Only PK)
 	 * @property string $Value the value for strValue 
+	 * @property IntegrationAssessment $_IntegrationAssessment the value for the private _objIntegrationAssessment (Read-Only) if set due to an expansion on the integration_assessment.resource_status_id reverse relationship
+	 * @property IntegrationAssessment[] $_IntegrationAssessmentArray the value for the private _objIntegrationAssessmentArray (Read-Only) if set due to an ExpandAsArray on the integration_assessment.resource_status_id reverse relationship
 	 * @property KingdomBusinessAssessment $_KingdomBusinessAssessment the value for the private _objKingdomBusinessAssessment (Read-Only) if set due to an expansion on the kingdom_business_assessment.resource_status_id reverse relationship
 	 * @property KingdomBusinessAssessment[] $_KingdomBusinessAssessmentArray the value for the private _objKingdomBusinessAssessmentArray (Read-Only) if set due to an ExpandAsArray on the kingdom_business_assessment.resource_status_id reverse relationship
+	 * @property LraAssessment $_LraAssessment the value for the private _objLraAssessment (Read-Only) if set due to an expansion on the lra_assessment.resource_status_id reverse relationship
+	 * @property LraAssessment[] $_LraAssessmentArray the value for the private _objLraAssessmentArray (Read-Only) if set due to an ExpandAsArray on the lra_assessment.resource_status_id reverse relationship
+	 * @property SeasonalAssessment $_SeasonalAssessment the value for the private _objSeasonalAssessment (Read-Only) if set due to an expansion on the seasonal_assessment.resource_status_id reverse relationship
+	 * @property SeasonalAssessment[] $_SeasonalAssessmentArray the value for the private _objSeasonalAssessmentArray (Read-Only) if set due to an ExpandAsArray on the seasonal_assessment.resource_status_id reverse relationship
 	 * @property TenFAssessment $_TenFAssessment the value for the private _objTenFAssessment (Read-Only) if set due to an expansion on the ten_f_assessment.resource_status_id reverse relationship
 	 * @property TenFAssessment[] $_TenFAssessmentArray the value for the private _objTenFAssessmentArray (Read-Only) if set due to an ExpandAsArray on the ten_f_assessment.resource_status_id reverse relationship
 	 * @property TenPAssessment $_TenPAssessment the value for the private _objTenPAssessment (Read-Only) if set due to an expansion on the ten_p_assessment.resource_status_id reverse relationship
 	 * @property TenPAssessment[] $_TenPAssessmentArray the value for the private _objTenPAssessmentArray (Read-Only) if set due to an ExpandAsArray on the ten_p_assessment.resource_status_id reverse relationship
+	 * @property TimeAssessment $_TimeAssessment the value for the private _objTimeAssessment (Read-Only) if set due to an expansion on the time_assessment.resource_status_id reverse relationship
+	 * @property TimeAssessment[] $_TimeAssessmentArray the value for the private _objTimeAssessmentArray (Read-Only) if set due to an ExpandAsArray on the time_assessment.resource_status_id reverse relationship
 	 * @property boolean $__Restored whether or not this object was restored from the database (as opposed to created new)
 	 */
 	class ResourceStatusGen extends QBaseClass {
@@ -49,6 +57,22 @@
 
 
 		/**
+		 * Private member variable that stores a reference to a single IntegrationAssessment object
+		 * (of type IntegrationAssessment), if this ResourceStatus object was restored with
+		 * an expansion on the integration_assessment association table.
+		 * @var IntegrationAssessment _objIntegrationAssessment;
+		 */
+		private $_objIntegrationAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of IntegrationAssessment objects
+		 * (of type IntegrationAssessment[]), if this ResourceStatus object was restored with
+		 * an ExpandAsArray on the integration_assessment association table.
+		 * @var IntegrationAssessment[] _objIntegrationAssessmentArray;
+		 */
+		private $_objIntegrationAssessmentArray = array();
+
+		/**
 		 * Private member variable that stores a reference to a single KingdomBusinessAssessment object
 		 * (of type KingdomBusinessAssessment), if this ResourceStatus object was restored with
 		 * an expansion on the kingdom_business_assessment association table.
@@ -63,6 +87,38 @@
 		 * @var KingdomBusinessAssessment[] _objKingdomBusinessAssessmentArray;
 		 */
 		private $_objKingdomBusinessAssessmentArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single LraAssessment object
+		 * (of type LraAssessment), if this ResourceStatus object was restored with
+		 * an expansion on the lra_assessment association table.
+		 * @var LraAssessment _objLraAssessment;
+		 */
+		private $_objLraAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of LraAssessment objects
+		 * (of type LraAssessment[]), if this ResourceStatus object was restored with
+		 * an ExpandAsArray on the lra_assessment association table.
+		 * @var LraAssessment[] _objLraAssessmentArray;
+		 */
+		private $_objLraAssessmentArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single SeasonalAssessment object
+		 * (of type SeasonalAssessment), if this ResourceStatus object was restored with
+		 * an expansion on the seasonal_assessment association table.
+		 * @var SeasonalAssessment _objSeasonalAssessment;
+		 */
+		private $_objSeasonalAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of SeasonalAssessment objects
+		 * (of type SeasonalAssessment[]), if this ResourceStatus object was restored with
+		 * an ExpandAsArray on the seasonal_assessment association table.
+		 * @var SeasonalAssessment[] _objSeasonalAssessmentArray;
+		 */
+		private $_objSeasonalAssessmentArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single TenFAssessment object
@@ -95,6 +151,22 @@
 		 * @var TenPAssessment[] _objTenPAssessmentArray;
 		 */
 		private $_objTenPAssessmentArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single TimeAssessment object
+		 * (of type TimeAssessment), if this ResourceStatus object was restored with
+		 * an expansion on the time_assessment association table.
+		 * @var TimeAssessment _objTimeAssessment;
+		 */
+		private $_objTimeAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of TimeAssessment objects
+		 * (of type TimeAssessment[]), if this ResourceStatus object was restored with
+		 * an ExpandAsArray on the time_assessment association table.
+		 * @var TimeAssessment[] _objTimeAssessmentArray;
+		 */
+		private $_objTimeAssessmentArray = array();
 
 		/**
 		 * Protected array of virtual attributes for this object (e.g. extra/other calculated and/or non-object bound
@@ -468,6 +540,20 @@
 					$strAliasPrefix = 'resource_status__';
 
 
+				$strAlias = $strAliasPrefix . 'integrationassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objIntegrationAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objIntegrationAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = IntegrationAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'integrationassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objIntegrationAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objIntegrationAssessmentArray[] = IntegrationAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'integrationassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'kingdombusinessassessment__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -479,6 +565,34 @@
 							$objPreviousItem->_objKingdomBusinessAssessmentArray[] = $objChildItem;
 					} else
 						$objPreviousItem->_objKingdomBusinessAssessmentArray[] = KingdomBusinessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'kingdombusinessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
+				$strAlias = $strAliasPrefix . 'lraassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objLraAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objLraAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objLraAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objLraAssessmentArray[] = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
+				$strAlias = $strAliasPrefix . 'seasonalassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objSeasonalAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objSeasonalAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = SeasonalAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'seasonalassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objSeasonalAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objSeasonalAssessmentArray[] = SeasonalAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'seasonalassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 					$blnExpandedViaArray = true;
 				}
 
@@ -507,6 +621,20 @@
 							$objPreviousItem->_objTenPAssessmentArray[] = $objChildItem;
 					} else
 						$objPreviousItem->_objTenPAssessmentArray[] = TenPAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenpassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
+				$strAlias = $strAliasPrefix . 'timeassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objTimeAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objTimeAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objTimeAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objTimeAssessmentArray[] = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 					$blnExpandedViaArray = true;
 				}
 
@@ -541,6 +669,16 @@
 
 
 
+			// Check for IntegrationAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'integrationassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objIntegrationAssessmentArray[] = IntegrationAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'integrationassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objIntegrationAssessment = IntegrationAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'integrationassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
 			// Check for KingdomBusinessAssessment Virtual Binding
 			$strAlias = $strAliasPrefix . 'kingdombusinessassessment__id';
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
@@ -549,6 +687,26 @@
 					$objToReturn->_objKingdomBusinessAssessmentArray[] = KingdomBusinessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'kingdombusinessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objKingdomBusinessAssessment = KingdomBusinessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'kingdombusinessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for LraAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'lraassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objLraAssessmentArray[] = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objLraAssessment = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for SeasonalAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'seasonalassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objSeasonalAssessmentArray[] = SeasonalAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'seasonalassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objSeasonalAssessment = SeasonalAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'seasonalassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			// Check for TenFAssessment Virtual Binding
@@ -569,6 +727,16 @@
 					$objToReturn->_objTenPAssessmentArray[] = TenPAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenpassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objTenPAssessment = TenPAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'tenpassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for TimeAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'timeassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objTimeAssessmentArray[] = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objTimeAssessment = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			return $objToReturn;
@@ -883,6 +1051,18 @@
 				// (If restored via a "Many-to" expansion)
 				////////////////////////////
 
+				case '_IntegrationAssessment':
+					// Gets the value for the private _objIntegrationAssessment (Read-Only)
+					// if set due to an expansion on the integration_assessment.resource_status_id reverse relationship
+					// @return IntegrationAssessment
+					return $this->_objIntegrationAssessment;
+
+				case '_IntegrationAssessmentArray':
+					// Gets the value for the private _objIntegrationAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the integration_assessment.resource_status_id reverse relationship
+					// @return IntegrationAssessment[]
+					return (array) $this->_objIntegrationAssessmentArray;
+
 				case '_KingdomBusinessAssessment':
 					// Gets the value for the private _objKingdomBusinessAssessment (Read-Only)
 					// if set due to an expansion on the kingdom_business_assessment.resource_status_id reverse relationship
@@ -894,6 +1074,30 @@
 					// if set due to an ExpandAsArray on the kingdom_business_assessment.resource_status_id reverse relationship
 					// @return KingdomBusinessAssessment[]
 					return (array) $this->_objKingdomBusinessAssessmentArray;
+
+				case '_LraAssessment':
+					// Gets the value for the private _objLraAssessment (Read-Only)
+					// if set due to an expansion on the lra_assessment.resource_status_id reverse relationship
+					// @return LraAssessment
+					return $this->_objLraAssessment;
+
+				case '_LraAssessmentArray':
+					// Gets the value for the private _objLraAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the lra_assessment.resource_status_id reverse relationship
+					// @return LraAssessment[]
+					return (array) $this->_objLraAssessmentArray;
+
+				case '_SeasonalAssessment':
+					// Gets the value for the private _objSeasonalAssessment (Read-Only)
+					// if set due to an expansion on the seasonal_assessment.resource_status_id reverse relationship
+					// @return SeasonalAssessment
+					return $this->_objSeasonalAssessment;
+
+				case '_SeasonalAssessmentArray':
+					// Gets the value for the private _objSeasonalAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the seasonal_assessment.resource_status_id reverse relationship
+					// @return SeasonalAssessment[]
+					return (array) $this->_objSeasonalAssessmentArray;
 
 				case '_TenFAssessment':
 					// Gets the value for the private _objTenFAssessment (Read-Only)
@@ -918,6 +1122,18 @@
 					// if set due to an ExpandAsArray on the ten_p_assessment.resource_status_id reverse relationship
 					// @return TenPAssessment[]
 					return (array) $this->_objTenPAssessmentArray;
+
+				case '_TimeAssessment':
+					// Gets the value for the private _objTimeAssessment (Read-Only)
+					// if set due to an expansion on the time_assessment.resource_status_id reverse relationship
+					// @return TimeAssessment
+					return $this->_objTimeAssessment;
+
+				case '_TimeAssessmentArray':
+					// Gets the value for the private _objTimeAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the time_assessment.resource_status_id reverse relationship
+					// @return TimeAssessment[]
+					return (array) $this->_objTimeAssessmentArray;
 
 
 				case '__Restored':
@@ -987,6 +1203,188 @@
 		///////////////////////////////
 		// ASSOCIATED OBJECTS' METHODS
 		///////////////////////////////
+
+			
+		
+		// Related Objects' Methods for IntegrationAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated IntegrationAssessments as an array of IntegrationAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return IntegrationAssessment[]
+		*/ 
+		public function GetIntegrationAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return IntegrationAssessment::LoadArrayByResourceStatusId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated IntegrationAssessments
+		 * @return int
+		*/ 
+		public function CountIntegrationAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return IntegrationAssessment::CountByResourceStatusId($this->intId);
+		}
+
+		/**
+		 * Associates a IntegrationAssessment
+		 * @param IntegrationAssessment $objIntegrationAssessment
+		 * @return void
+		*/ 
+		public function AssociateIntegrationAssessment(IntegrationAssessment $objIntegrationAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateIntegrationAssessment on this unsaved ResourceStatus.');
+			if ((is_null($objIntegrationAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateIntegrationAssessment on this ResourceStatus with an unsaved IntegrationAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`integration_assessment`
+				SET
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objIntegrationAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objIntegrationAssessment->ResourceStatusId = $this->intId;
+				$objIntegrationAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a IntegrationAssessment
+		 * @param IntegrationAssessment $objIntegrationAssessment
+		 * @return void
+		*/ 
+		public function UnassociateIntegrationAssessment(IntegrationAssessment $objIntegrationAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessment on this unsaved ResourceStatus.');
+			if ((is_null($objIntegrationAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessment on this ResourceStatus with an unsaved IntegrationAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`integration_assessment`
+				SET
+					`resource_status_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objIntegrationAssessment->Id) . ' AND
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objIntegrationAssessment->ResourceStatusId = null;
+				$objIntegrationAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all IntegrationAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllIntegrationAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessment on this unsaved ResourceStatus.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (IntegrationAssessment::LoadArrayByResourceStatusId($this->intId) as $objIntegrationAssessment) {
+					$objIntegrationAssessment->ResourceStatusId = null;
+					$objIntegrationAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`integration_assessment`
+				SET
+					`resource_status_id` = null
+				WHERE
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated IntegrationAssessment
+		 * @param IntegrationAssessment $objIntegrationAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedIntegrationAssessment(IntegrationAssessment $objIntegrationAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessment on this unsaved ResourceStatus.');
+			if ((is_null($objIntegrationAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessment on this ResourceStatus with an unsaved IntegrationAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`integration_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objIntegrationAssessment->Id) . ' AND
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objIntegrationAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated IntegrationAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllIntegrationAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateIntegrationAssessment on this unsaved ResourceStatus.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (IntegrationAssessment::LoadArrayByResourceStatusId($this->intId) as $objIntegrationAssessment) {
+					$objIntegrationAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`integration_assessment`
+				WHERE
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
 
 			
 		
@@ -1165,6 +1563,370 @@
 			$objDatabase->NonQuery('
 				DELETE FROM
 					`kingdom_business_assessment`
+				WHERE
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for LraAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated LraAssessments as an array of LraAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return LraAssessment[]
+		*/ 
+		public function GetLraAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return LraAssessment::LoadArrayByResourceStatusId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated LraAssessments
+		 * @return int
+		*/ 
+		public function CountLraAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return LraAssessment::CountByResourceStatusId($this->intId);
+		}
+
+		/**
+		 * Associates a LraAssessment
+		 * @param LraAssessment $objLraAssessment
+		 * @return void
+		*/ 
+		public function AssociateLraAssessment(LraAssessment $objLraAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateLraAssessment on this unsaved ResourceStatus.');
+			if ((is_null($objLraAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateLraAssessment on this ResourceStatus with an unsaved LraAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lra_assessment`
+				SET
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLraAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objLraAssessment->ResourceStatusId = $this->intId;
+				$objLraAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a LraAssessment
+		 * @param LraAssessment $objLraAssessment
+		 * @return void
+		*/ 
+		public function UnassociateLraAssessment(LraAssessment $objLraAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessment on this unsaved ResourceStatus.');
+			if ((is_null($objLraAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessment on this ResourceStatus with an unsaved LraAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lra_assessment`
+				SET
+					`resource_status_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLraAssessment->Id) . ' AND
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objLraAssessment->ResourceStatusId = null;
+				$objLraAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all LraAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllLraAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessment on this unsaved ResourceStatus.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (LraAssessment::LoadArrayByResourceStatusId($this->intId) as $objLraAssessment) {
+					$objLraAssessment->ResourceStatusId = null;
+					$objLraAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lra_assessment`
+				SET
+					`resource_status_id` = null
+				WHERE
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated LraAssessment
+		 * @param LraAssessment $objLraAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedLraAssessment(LraAssessment $objLraAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessment on this unsaved ResourceStatus.');
+			if ((is_null($objLraAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessment on this ResourceStatus with an unsaved LraAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`lra_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLraAssessment->Id) . ' AND
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objLraAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated LraAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllLraAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLraAssessment on this unsaved ResourceStatus.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (LraAssessment::LoadArrayByResourceStatusId($this->intId) as $objLraAssessment) {
+					$objLraAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`lra_assessment`
+				WHERE
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for SeasonalAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated SeasonalAssessments as an array of SeasonalAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return SeasonalAssessment[]
+		*/ 
+		public function GetSeasonalAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return SeasonalAssessment::LoadArrayByResourceStatusId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated SeasonalAssessments
+		 * @return int
+		*/ 
+		public function CountSeasonalAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return SeasonalAssessment::CountByResourceStatusId($this->intId);
+		}
+
+		/**
+		 * Associates a SeasonalAssessment
+		 * @param SeasonalAssessment $objSeasonalAssessment
+		 * @return void
+		*/ 
+		public function AssociateSeasonalAssessment(SeasonalAssessment $objSeasonalAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateSeasonalAssessment on this unsaved ResourceStatus.');
+			if ((is_null($objSeasonalAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateSeasonalAssessment on this ResourceStatus with an unsaved SeasonalAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`seasonal_assessment`
+				SET
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objSeasonalAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objSeasonalAssessment->ResourceStatusId = $this->intId;
+				$objSeasonalAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a SeasonalAssessment
+		 * @param SeasonalAssessment $objSeasonalAssessment
+		 * @return void
+		*/ 
+		public function UnassociateSeasonalAssessment(SeasonalAssessment $objSeasonalAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessment on this unsaved ResourceStatus.');
+			if ((is_null($objSeasonalAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessment on this ResourceStatus with an unsaved SeasonalAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`seasonal_assessment`
+				SET
+					`resource_status_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objSeasonalAssessment->Id) . ' AND
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objSeasonalAssessment->ResourceStatusId = null;
+				$objSeasonalAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all SeasonalAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllSeasonalAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessment on this unsaved ResourceStatus.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (SeasonalAssessment::LoadArrayByResourceStatusId($this->intId) as $objSeasonalAssessment) {
+					$objSeasonalAssessment->ResourceStatusId = null;
+					$objSeasonalAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`seasonal_assessment`
+				SET
+					`resource_status_id` = null
+				WHERE
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated SeasonalAssessment
+		 * @param SeasonalAssessment $objSeasonalAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedSeasonalAssessment(SeasonalAssessment $objSeasonalAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessment on this unsaved ResourceStatus.');
+			if ((is_null($objSeasonalAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessment on this ResourceStatus with an unsaved SeasonalAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`seasonal_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objSeasonalAssessment->Id) . ' AND
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objSeasonalAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated SeasonalAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllSeasonalAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSeasonalAssessment on this unsaved ResourceStatus.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (SeasonalAssessment::LoadArrayByResourceStatusId($this->intId) as $objSeasonalAssessment) {
+					$objSeasonalAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`seasonal_assessment`
 				WHERE
 					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
@@ -1534,6 +2296,188 @@
 			');
 		}
 
+			
+		
+		// Related Objects' Methods for TimeAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated TimeAssessments as an array of TimeAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return TimeAssessment[]
+		*/ 
+		public function GetTimeAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return TimeAssessment::LoadArrayByResourceStatusId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated TimeAssessments
+		 * @return int
+		*/ 
+		public function CountTimeAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return TimeAssessment::CountByResourceStatusId($this->intId);
+		}
+
+		/**
+		 * Associates a TimeAssessment
+		 * @param TimeAssessment $objTimeAssessment
+		 * @return void
+		*/ 
+		public function AssociateTimeAssessment(TimeAssessment $objTimeAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateTimeAssessment on this unsaved ResourceStatus.');
+			if ((is_null($objTimeAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateTimeAssessment on this ResourceStatus with an unsaved TimeAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`time_assessment`
+				SET
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objTimeAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objTimeAssessment->ResourceStatusId = $this->intId;
+				$objTimeAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a TimeAssessment
+		 * @param TimeAssessment $objTimeAssessment
+		 * @return void
+		*/ 
+		public function UnassociateTimeAssessment(TimeAssessment $objTimeAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessment on this unsaved ResourceStatus.');
+			if ((is_null($objTimeAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessment on this ResourceStatus with an unsaved TimeAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`time_assessment`
+				SET
+					`resource_status_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objTimeAssessment->Id) . ' AND
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objTimeAssessment->ResourceStatusId = null;
+				$objTimeAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all TimeAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllTimeAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessment on this unsaved ResourceStatus.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (TimeAssessment::LoadArrayByResourceStatusId($this->intId) as $objTimeAssessment) {
+					$objTimeAssessment->ResourceStatusId = null;
+					$objTimeAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`time_assessment`
+				SET
+					`resource_status_id` = null
+				WHERE
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated TimeAssessment
+		 * @param TimeAssessment $objTimeAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedTimeAssessment(TimeAssessment $objTimeAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessment on this unsaved ResourceStatus.');
+			if ((is_null($objTimeAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessment on this ResourceStatus with an unsaved TimeAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`time_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objTimeAssessment->Id) . ' AND
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objTimeAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated TimeAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllTimeAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateTimeAssessment on this unsaved ResourceStatus.');
+
+			// Get the Database Object for this Class
+			$objDatabase = ResourceStatus::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (TimeAssessment::LoadArrayByResourceStatusId($this->intId) as $objTimeAssessment) {
+					$objTimeAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`time_assessment`
+				WHERE
+					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
 
 
 
@@ -1607,9 +2551,13 @@
 	/**
 	 * @property-read QQNode $Id
 	 * @property-read QQNode $Value
+	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessment
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
+	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessment
+	 * @property-read QQReverseReferenceNodeSeasonalAssessment $SeasonalAssessment
 	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessment
 	 * @property-read QQReverseReferenceNodeTenPAssessment $TenPAssessment
+	 * @property-read QQReverseReferenceNodeTimeAssessment $TimeAssessment
 	 */
 	class QQNodeResourceStatus extends QQNode {
 		protected $strTableName = 'resource_status';
@@ -1621,12 +2569,20 @@
 					return new QQNode('id', 'Id', 'integer', $this);
 				case 'Value':
 					return new QQNode('value', 'Value', 'string', $this);
+				case 'IntegrationAssessment':
+					return new QQReverseReferenceNodeIntegrationAssessment($this, 'integrationassessment', 'reverse_reference', 'resource_status_id');
 				case 'KingdomBusinessAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'resource_status_id');
+				case 'LraAssessment':
+					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessment', 'reverse_reference', 'resource_status_id');
+				case 'SeasonalAssessment':
+					return new QQReverseReferenceNodeSeasonalAssessment($this, 'seasonalassessment', 'reverse_reference', 'resource_status_id');
 				case 'TenFAssessment':
 					return new QQReverseReferenceNodeTenFAssessment($this, 'tenfassessment', 'reverse_reference', 'resource_status_id');
 				case 'TenPAssessment':
 					return new QQReverseReferenceNodeTenPAssessment($this, 'tenpassessment', 'reverse_reference', 'resource_status_id');
+				case 'TimeAssessment':
+					return new QQReverseReferenceNodeTimeAssessment($this, 'timeassessment', 'reverse_reference', 'resource_status_id');
 
 				case '_PrimaryKeyNode':
 					return new QQNode('id', 'Id', 'integer', $this);
@@ -1644,9 +2600,13 @@
 	/**
 	 * @property-read QQNode $Id
 	 * @property-read QQNode $Value
+	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessment
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
+	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessment
+	 * @property-read QQReverseReferenceNodeSeasonalAssessment $SeasonalAssessment
 	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessment
 	 * @property-read QQReverseReferenceNodeTenPAssessment $TenPAssessment
+	 * @property-read QQReverseReferenceNodeTimeAssessment $TimeAssessment
 	 * @property-read QQNode $_PrimaryKeyNode
 	 */
 	class QQReverseReferenceNodeResourceStatus extends QQReverseReferenceNode {
@@ -1659,12 +2619,20 @@
 					return new QQNode('id', 'Id', 'integer', $this);
 				case 'Value':
 					return new QQNode('value', 'Value', 'string', $this);
+				case 'IntegrationAssessment':
+					return new QQReverseReferenceNodeIntegrationAssessment($this, 'integrationassessment', 'reverse_reference', 'resource_status_id');
 				case 'KingdomBusinessAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'resource_status_id');
+				case 'LraAssessment':
+					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessment', 'reverse_reference', 'resource_status_id');
+				case 'SeasonalAssessment':
+					return new QQReverseReferenceNodeSeasonalAssessment($this, 'seasonalassessment', 'reverse_reference', 'resource_status_id');
 				case 'TenFAssessment':
 					return new QQReverseReferenceNodeTenFAssessment($this, 'tenfassessment', 'reverse_reference', 'resource_status_id');
 				case 'TenPAssessment':
 					return new QQReverseReferenceNodeTenPAssessment($this, 'tenpassessment', 'reverse_reference', 'resource_status_id');
+				case 'TimeAssessment':
+					return new QQReverseReferenceNodeTimeAssessment($this, 'timeassessment', 'reverse_reference', 'resource_status_id');
 
 				case '_PrimaryKeyNode':
 					return new QQNode('id', 'Id', 'integer', $this);

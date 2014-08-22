@@ -19,7 +19,9 @@
 	<?php $this->txtEmail->RenderWithName(); ?>
 	<?php $this->txtNewUser->RenderWithName(); ?>
 	<?php $this->txtNewPassword->RenderWithName(); ?>
-	<?php $this->txtCountry->RenderWithName(); ?>
+	<?php $this->lstCountry->RenderWithName(); ?>
+	<?php $this->lstLevel->RenderWithName(); ?> 
+	<?php $this->lstTenure->RenderWithName(); ?> 
 	<?php $this->lstGender->RenderWithName(); ?> 
 	&nbsp;&nbsp;
 	<?php $this->btnSubmit->Render(); ?>

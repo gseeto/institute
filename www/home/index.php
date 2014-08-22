@@ -14,16 +14,16 @@ class HomeForm extends InstituteForm {
 	protected $lblLastName;
 	protected $txtEmail;
 	protected $lblEmail;
-	protected $txtCountry;
+	protected $lstCountry;
 	protected $lblCountry;
 	protected $chkGender;
 	protected $chkGenderDisplay;
 	protected $lblGender;
 	protected $txtDepartment;
 	protected $lblDepartment;
-	protected $txtTitle;
+	protected $lstTitle;
 	protected $lblTitle;
-	protected $intTenure;
+	protected $lstTenure;
 	protected $lblTenure;
 	protected $txtCareerLength;
 	protected $lblCareerLength;
@@ -49,10 +49,12 @@ class HomeForm extends InstituteForm {
 	
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {
+		$this->lblDebug = new QLabel($this);
+			
 		$objUserArray = User::LoadArrayByLoginId(QApplication::$LoginId);
 		$objUser = $objUserArray[0];
 		$this->mcUser = new UserMetaControl($this,$objUser);
@@ -68,10 +70,10 @@ class HomeForm extends InstituteForm {
 		$this->txtEmail->Height = 20;
 		$this->txtEmail->Visible = false;
 		$this->lblEmail = $this->mcUser->lblEmail_Create();
-		$this->txtCountry = $this->mcUser->txtCountry_Create();
-		$this->txtCountry->Height = 20;
-		$this->txtCountry->Visible = false;
-		$this->lblCountry = $this->mcUser->lblCountry_Create();
+		$this->lstCountry = $this->mcUser->lstCountry_Create();
+		$this->lstCountry->Height = 20;
+		$this->lstCountry->Visible = false;
+		$this->lblCountry = $this->mcUser->lblCountryId_Create();
 		$this->chkGender = $this->mcUser->chkGender_Create();
 		$this->chkGender->Visible = false;
 		$this->chkGenderDisplay = new QRadioButtonList($this);
@@ -83,17 +85,15 @@ class HomeForm extends InstituteForm {
 		$this->txtDepartment->Height = 20;
 		$this->txtDepartment->Visible = false;
 		$this->lblDepartment = $this->mcUser->lblDepartment_Create();
-		$this->txtTitle = $this->mcUser->txtTitle_Create();
-		$this->txtTitle->Height = 20;
-		$this->txtTitle->Visible = false;
-		$this->lblTitle = $this->mcUser->lblTitle_Create();
-		$this->intTenure = $this->mcUser->txtTenure_Create();
-		$this->intTenure->Height = 20;	
-		$this->intTenure->Width = 30;
-		$this->intTenure->HtmlAfter = ' Years';
-		$this->intTenure->Visible = false;
-		$this->lblTenure = $this->mcUser->lblTenure_Create();
-		$this->lblTenure->HtmlAfter = ' Years';
+		$this->lstTitle = $this->mcUser->lstTitle_Create();
+		$this->lstTitle->Height = 20;
+		$this->lstTitle->Visible = false;
+		$this->lblTitle = $this->mcUser->lblTitleId_Create();
+		$this->lstTenure = $this->mcUser->lstTenure_Create();
+		$this->lstTenure->Height = 20;	
+		$this->lstTenure->Width = 100;
+		$this->lstTenure->Visible = false;
+		$this->lblTenure = $this->mcUser->lblTenureId_Create();
 		$this->txtCareerLength = $this->mcUser->txtCareerLength_Create();
 		$this->txtCareerLength->Visible = false;
 		$this->txtCareerLength->Height = 20;
@@ -165,30 +165,42 @@ class HomeForm extends InstituteForm {
 				if($objUser->IsResourceAssociated($objResource)) {
 					switch ($objResource->Name) {
 						case 'Kingdom Business Assessment':
-							$lblAssessmentLink->Text = '<li><a href=\'/resources/assessments/kingdom/\'>Kingdom Business Assessment</a></li>';	
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/kingdom/\'>Kingdom Business Assessment</a></li>';	
 							break;
 						case '10-P Assessment':
-							$lblAssessmentLink->Text = '<li><a href=\'/resources/assessments/tenp/\'>10-P Assessment</a></li>';	
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/tenp/\'>10-P Assessment</a></li>';	
 							break;
 						case '10-F Assessment':
-							$lblAssessmentLink->Text = '<li><a href=\'/resources/assessments/tenf/\'>10-F Assessment</a></li>';	
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/tenf/\'>10-F Assessment</a></li>';	
 							break;
 						case 'LEMON Assessment':
-							$lblAssessmentLink->Text = '<li><a href=\'/resources/assessments/lemon/\'>LEMON Assessment</a></li>';	
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/lemon/\'>LEMON Assessment</a></li>';	
+							break;
+						case 'Integration Assessment':
+								$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/integration/\'>Integration Assessment</a></li>';
+								break;
+						case 'Seasonal Assessment':
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/seasonal/\'>Seasonal Assessment</a></li>';	
+							break;
+						case 'Where Does The Time Go Assessment':
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/time/\'>Where Does The Time Go Assessment</a></li>';
+							break;
+						case 'Leadership Readiness Assessment':
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/lra/\'>Leadership Readiness Assessment</a></li>';
 							break;
 					}
 					$this->lblAssessments[] = $lblAssessmentLink;						
 				} 
 			} 
 		}
-		
+
 		$this->lblScorecards = array();
 		$objScorecardArray = $objUser->GetScorecardArray();
 		foreach($objScorecardArray as $objScorecard) {
 			$lblScorecardLink = new QLabel($this);
 			$lblScorecardLink->Name = $objScorecard->Id;
 			$lblScorecardLink->HtmlEntities = false;
-			$lblScorecardLink->Text = '<li><a href=\'/resources/scorecard/scorecard.php/'.$objScorecard->Id. '\'>'.$objScorecard->Name.'</a></li>';
+			$lblScorecardLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/scorecard/scorecard.php/'.$objScorecard->Id. '\'>'.$objScorecard->Name.'</a></li>';
 			$this->lblScorecards[] = $lblScorecardLink;
 		}
 	}
@@ -234,16 +246,16 @@ class HomeForm extends InstituteForm {
 			$this->lblLastName->Visible = false;
 			$this->txtEmail->Visible = true;
 			$this->lblEmail->Visible = false;
-			$this->txtCountry->Visible = true;
+			$this->lstCountry->Visible = true;
 			$this->lblCountry->Visible = false;
 			$this->chkGender->Visible = true;
 			$this->chkGenderDisplay->Visible= true;
 			$this->lblGender->Visible = false;
 			$this->txtDepartment->Visible = true;
 			$this->lblDepartment->Visible = false;
-			$this->txtTitle->Visible = true;
+			$this->lstTitle->Visible = true;
 			$this->lblTitle->Visible = false;
-			$this->intTenure->Visible = true;
+			$this->lstTenure->Visible = true;
 			$this->lblTenure->Visible = false;	
 			$this->txtCareerLength->Visible = true;
 			$this->lblCareerLength->Visible = false;
@@ -263,16 +275,16 @@ class HomeForm extends InstituteForm {
 			$this->lblLastName->Visible = true;
 			$this->txtEmail->Visible = false;
 			$this->lblEmail->Visible = true;
-			$this->txtCountry->Visible = false;
+			$this->lstCountry->Visible = false;
 			$this->lblCountry->Visible = true;
 			$this->chkGender->Visible = false;
 			$this->chkGenderDisplay->Visible = false;
 			$this->lblGender->Visible = true;
 			$this->txtDepartment->Visible = false;
 			$this->lblDepartment->Visible = true;
-			$this->txtTitle->Visible = false;
+			$this->lstTitle->Visible = false;
 			$this->lblTitle->Visible = true;
-			$this->intTenure->Visible = false;
+			$this->lstTenure->Visible = false;
 			$this->lblTenure->Visible = true;	
 			$this->txtCareerLength->Visible = false;
 			$this->lblCareerLength->Visible = true;	
@@ -287,16 +299,16 @@ class HomeForm extends InstituteForm {
 			$this->lblLastName->Visible = true;
 			$this->txtEmail->Visible = false;
 			$this->lblEmail->Visible = true;
-			$this->txtCountry->Visible = false;
+			$this->lstCountry->Visible = false;
 			$this->lblCountry->Visible = true;
 			$this->chkGender->Visible = false;
 			$this->chkGenderDisplay->Visible = false;
 			$this->lblGender->Visible = true;
 			$this->txtDepartment->Visible = false;
 			$this->lblDepartment->Visible = true;
-			$this->txtTitle->Visible = false;
+			$this->lstTitle->Visible = false;
 			$this->lblTitle->Visible = true;
-			$this->intTenure->Visible = false;
+			$this->lstTenure->Visible = false;
 			$this->lblTenure->Visible = true;	
 			$this->txtCareerLength->Visible = false;
 			$this->lblCareerLength->Visible = true;			

@@ -23,17 +23,32 @@ class ScorecardForm extends InstituteForm {
 	protected $btnSaveStatement;
 	protected $btnCancelStatement;
 	
+	protected $mylblStatement;
+	
 	protected $intStatementId;
 	protected $intUserId;
 	protected $lblDebug;
 
+protected $mydebug;
+protected $myFile;
+protected $fh;
+
+public function writeToLogFile($stringData) {
+	if($this->mydebug) {
+		fwrite($this->fh, $stringData);
+	}
+}
+
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {
 		$this->lblDebug = new QLabel($this);
+		$this->mydebug = false;
+		$this->myFile = "logFile.txt";
+		$this->fh = fopen($this->myFile, 'a') or die("can't open file");
 		
 		$this->objScorecard = Scorecard::Load(QApplication::PathInfo(0));
 		$this->intCategoryTypeId = QApplication::PathInfo(1);
@@ -64,42 +79,37 @@ class ScorecardForm extends InstituteForm {
 			$this->btnCategoryArray[] = $btnCategory;
 		}
 
-		// Display Statement if Category is Purpose or Positioning
-		$this->imgStatement = new QLabel($this);
-		$this->imgStatement->HtmlEntities = false;
-		$this->imgStatement->Visible = false;
-		$this->imgStatement->Text = '<img style="position:relative; cursor:pointer; float:right; left:-180px; top:-20px;" src="/resources/assets/images/icons/page_edit.png" />';
-		
-		$this->lblStatement = new QLabel($this);
+		// Display Statement if Category is Purpose or Positioning		
+		$this->lblStatement = new QLabel($this,'lblStatement');
 		$this->lblStatement->Width = 800;
-		$this->lblStatement->CssClass = 'statement';
+		$this->lblStatement->Padding = '10px 25px';
+		$this->lblStatement->CssClass = 'statement editIcon';
 		$this->lblStatement->Cursor = 'pointer';
-		$this->lblStatement->AddAction(new QMouseOverEvent(), new QAjaxAction('lblStatement_MouseOver'));
-		$this->lblStatement->AddAction(new QMouseOutEvent(), new QAjaxAction('lblStatement_MouseOut'));
+		$this->lblStatement->HtmlEntities = false;
 		
-		$this->btnSaveStatement = new QButton($this);
+		$this->btnSaveStatement = new QButton($this,'btnSaveStatement');
         $this->btnSaveStatement->Text = 'Save';
         $this->btnSaveStatement->AddAction(new QClickEvent(), new QAjaxAction('btnSaveStatement_Click'));
         $this->btnSaveStatement->PrimaryButton = true;
         $this->btnSaveStatement->CausesValidation = true;
-        $this->btnSaveStatement->CssClass = 'ui-theme-button';
-        $this->btnSaveStatement->Visible = false;
+        $this->btnSaveStatement->CssClass = 'ui-button';
+        $this->btnSaveStatement->Display = false;
 
         // Make sure we turn off validation on the Cancel button
-        $this->btnCancelStatement = new QButton($this);
+        $this->btnCancelStatement = new QButton($this,'btnCancelStatement');
         $this->btnCancelStatement->Text = 'Cancel';
-     	$this->btnCancelStatement->AddAction(new QClickEvent(), new QAjaxAction('btnCancelStatement_Click'));        
+     	$this->btnCancelStatement->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelStatement_Click(this)'));        
        	$this->btnCancelStatement->CausesValidation = false;
-       	$this->btnCancelStatement->CssClass = 'ui-theme-button';
-       	$this->btnCancelStatement->Visible = false;
+       	$this->btnCancelStatement->CssClass = 'ui-button';
+        $this->btnCancelStatement->Display = false;
             
-		$this->txtStatement = new QTextBox($this);
+		$this->txtStatement = new QTextBox($this,'txtStatement');
 		$this->txtStatement->CssClass = 'statement';
 		$this->txtStatement->Width = 800;
 		$this->txtStatement->TextMode = QTextMode::MultiLine;
         $this->txtStatement->Height = 50;
 		$this->txtStatement->Columns = 5;
-		$this->txtStatement->Visible = false;
+		$this->txtStatement->Display = false;
  		if(($this->intCategoryTypeId == CategoryType::Purpose) ||($this->intCategoryTypeId == CategoryType::Positioning)) {
  			$objStatementArray = Statement::LoadArrayByScorecardId($this->objScorecard->Id);
  			foreach($objStatementArray as $objStatement) {
@@ -116,9 +126,9 @@ class ScorecardForm extends InstituteForm {
  					break;
  				}
  			}
- 			$this->lblStatement->AddAction(new QClickEvent(), new QAjaxAction('lblStatement_Clicked'));
+ 			$this->lblStatement->AddAction(new QClickEvent(), new QJavaScriptAction('lblStatement_Clicked()'));
   		} else {
- 			$this->lblStatement->Visible = false;
+ 			$this->lblStatement->Display = false;
  		}
 		// Generate a summary of the P Strategys
 		$this->dtgStrategySummary = new StrategyDataGrid($this);
@@ -133,10 +143,10 @@ class ScorecardForm extends InstituteForm {
 		$this->dtgStrategySummary->UseAjax = true;
 		$objStyle = $this->dtgStrategySummary->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 	        
+        $objStyle->BackColor = '#0098c3'; 	        
         $objStyle = $this->dtgStrategySummary->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 	
+        $objStyle->BackColor = '#0098c3'; 	
 
         $this->btnAddStrategy = new QButton($this);
         $this->btnAddStrategy->Name = 'Add Strategy';
@@ -164,10 +174,10 @@ class ScorecardForm extends InstituteForm {
 			$dtgStrategy->UseAjax = true;
 			$objStyle = $dtgStrategy->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 	        
+	        $objStyle->BackColor = '#0098c3'; 	        
 	        $objStyle = $dtgStrategy->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        $this->dtgStrategyArray[] = $dtgStrategy;	        
 	        
 	        $dtgActionItem = new ActionItemsDataGrid($this);
@@ -187,10 +197,10 @@ class ScorecardForm extends InstituteForm {
 			$dtgActionItem->CssClass = 'scorecard_table';
 			$objStyle = $dtgActionItem->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 	        
+	        $objStyle->BackColor = '#0098c3'; 	        
 	        $objStyle = $dtgActionItem->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        $this->dtgActionItems[] = $dtgActionItem;
 			
 	        $btnAddAction = new QButton($this);
@@ -216,10 +226,10 @@ class ScorecardForm extends InstituteForm {
 			$dtgKPI->CssClass = 'scorecard_table';
 			$objStyle = $dtgKPI->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 	        
+	        $objStyle->BackColor = '#0098c3'; 	        
 	        $objStyle = $dtgKPI->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        $this->dtgKPIs[] = $dtgKPI;
 	        
 	        $btnAddKpi = new QButton($this);
@@ -234,20 +244,6 @@ class ScorecardForm extends InstituteForm {
         }
 	}
 
-	public function lblStatement_MouseOver($strFormId, $strControlId, $strParameter) {
-		$this->imgStatement->Visible = true;
-	}
-	public function lblStatement_MouseOut($strFormId, $strControlId, $strParameter) {
-		$this->imgStatement->Visible = false;
-	}
-	public function lblStatement_Clicked($strFormId, $strControlId, $strParameter) {
-		$this->lblStatement->Visible = false;
-		$this->imgStatement->Visible = false;
-		$this->btnCancelStatement->Visible = true;
-		$this->btnSaveStatement->Visible = true;
-		$this->txtStatement->Visible = true;
-	}
-	
 	public function btnSaveStatement_Click($strFormId, $strControlId, $strParameter) {
 		$objStatement = Statement::Load($this->intStatementId);
 		if (null == $objStatement) {
@@ -260,26 +256,18 @@ class ScorecardForm extends InstituteForm {
 		$objStatement->ModifiedBy = $this->intUserId;
 		$objStatement->Save();
 		$this->lblStatement->Text =  $this->txtStatement->Text;
-		$this->lblStatement->Visible = true;
-		$this->txtStatement->Visible = false;
-		$this->btnCancelStatement->Visible = false;
-		$this->btnSaveStatement->Visible = false;
-	}
-	
-	public function btnCancelStatement_Click($strFormId, $strControlId, $strParameter) {		
-		$this->txtStatement->Text = $this->lblStatement->Text; // revert back
-		$this->lblStatement->Visible = true;
-		$this->txtStatement->Visible = false;
-		$this->btnCancelStatement->Visible = false;
-		$this->btnSaveStatement->Visible = false;
+		$this->lblStatement->Display = true;
+		$this->txtStatement->Display = false;
+		$this->btnCancelStatement->Display = false;
+		$this->btnSaveStatement->Display = false;
 	}
 	
 	public function btnCategory_Clicked($strFormId, $strControlId, $strParameter) {
 		if ($strParameter == 'Summary') {
-			QApplication::Redirect('/resources/scorecard/scorecard.php/'.$this->objScorecard->Id);
+			QApplication::Redirect(__SUBDIRECTORY__.'/scorecard/scorecard.php/'.$this->objScorecard->Id);
 		} else { 
 			$intCategoryId = $strParameter;
-			QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$intCategoryId );
+			QApplication::Redirect(__SUBDIRECTORY__.'/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$intCategoryId );
 		}
     }
     
@@ -302,7 +290,7 @@ class ScorecardForm extends InstituteForm {
     
  	public function btnSubmit_Click() {
 		// redirect to appropriate scorecard
-		QApplication::Redirect('/resources/scorecard/scorecard.php/'.$this->rbnScorecards->SelectedValue);
+		QApplication::Redirect(__SUBDIRECTORY__.'/scorecard/scorecard.php/'.$this->rbnScorecards->SelectedValue);
 	}
 	
 	public function btnAddAction_Clicked($strFormId, $strControlId, $strParameter) {
@@ -320,7 +308,6 @@ class ScorecardForm extends InstituteForm {
 			$intIndex = $objStrategy->Count - 1;
 			$this->dtgActionItems[$intIndex]->DataSource = ActionItems::LoadArrayByStrategyId($strParameter);
 			$this->dtgActionItems[$intIndex]->Refresh();
-			//QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
 		}
 	}
 	
@@ -334,9 +321,11 @@ class ScorecardForm extends InstituteForm {
 		$objKpi->Count = Kpis::GetNextCount($objStrategy->Id);
 		$objKpi->ModifiedBy = $this->intUserId;
 		$objKpi->Save();
-		$intIndex = $objStrategy->Count-1;
-		$this->dtgKPIs[$intIndex]->DataSource = Kpis::LoadArrayByStrategyId($objStrategy->Id);
-		$this->dtgKPIs[$intIndex]->Refresh();
+		if($objStrategy != null) {
+			$intIndex = $objStrategy->Count-1;
+			$this->dtgKPIs[$intIndex]->DataSource = Kpis::LoadArrayByStrategyId($objStrategy->Id);
+			$this->dtgKPIs[$intIndex]->Refresh();
+		}
 	}
 	
 	public function btnAddStrategy_Clicked() {
@@ -362,7 +351,7 @@ class ScorecardForm extends InstituteForm {
             $txtKPI->Width = 450;
             $txtKPI->TextMode = QTextMode::MultiLine;
             $txtKPI->Height = 50;
-            $txtKPI->Visible = false;          
+            $txtKPI->Display = false;          
         }
 		$strKpiSave = 'btnKpiSave' . $objKPI->Id;
         $btnSave = $this->GetControl($strKpiSave); 
@@ -373,8 +362,8 @@ class ScorecardForm extends InstituteForm {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveKpi_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-theme-button';
-	        $btnSave->Visible = false;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
         
         $strKpiCancel = 'btnKpiCancel' . $objKPI->Id;
@@ -383,18 +372,10 @@ class ScorecardForm extends InstituteForm {
 	        $btnCancel = new QButton($this->dtgKPIs[$objStrategy->Count-1],$strKpiCancel);
 	        $btnCancel->Text = 'Cancel';
 	        $btnCancel->ActionParameter = $objKPI->Id;
-	     	$btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancelKpi_Click'));        
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelKpi_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-theme-button';
-	       	$btnCancel->Visible = false;
-        }
-		$strImgEdit = 'imgEditKpi' . $objKPI->Id;
-        $imgEdit = $this->GetControl($strImgEdit); 
-        if(!$imgEdit) {
-	        $imgEdit = new QLabel($this->dtgKPIs[$objStrategy->Count-1],$strImgEdit);
-			$imgEdit->HtmlEntities = false;
-			$imgEdit->Visible = false;
-			$imgEdit->Text = '<img style="position:relative; cursor:pointer; float:right; left:0px; top:0px;" src="/resources/assets/images/icons/page_edit.png" />';
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
         }
         $strLblControlId = 'lblKpi' .  $objKPI->Id;
         $lblKpi = $this->GetControl($strLblControlId);     
@@ -404,41 +385,13 @@ class ScorecardForm extends InstituteForm {
         	$lblKpi->ActionParameter = $objKPI->Id;
         	$lblKpi->CssClass = 'tablecell';
         	$lblKpi->Width = 450;
-        	//$lblKpi->Height = 20;
         	$lblKpi->Cursor = 'pointer';
-        	$lblKpi->AddAction(new QMouseOverEvent(), new QAjaxAction('lblKpi_MouseOver'));
-        	$lblKpi->AddAction(new QMouseOutEvent(), new QAjaxAction('lblKpi_MouseOut'));
-			$lblKpi->AddAction(new QClickEvent(), new QAjaxAction('lblKpi_Clicked'));
+        	$lblKpi->HtmlEntities = false;
+        	$lblKpi->Padding = '10px 20px';
+        	$lblKpi->CssClass = 'editIcon'; 
+   			$lblKpi->AddAction(new QClickEvent(), new QJavaScriptAction('lblKpi_Clicked(this)'));
         }
-        return ($txtKPI->Render(false) .$btnSave->Render(false). $btnCancel->Render(false). $lblKpi->Render(false). $imgEdit->Render(false));
-	}
-	
-	public function lblKpi_Clicked($strFormId, $strControlId, $strParameter) {
-		$strTextKpiId = 'txtKpi' . $strParameter;
-		$txtKpi = $this->GetControl($strTextKpiId);
-		$txtKpi->Visible = true; 
-		$strKpiSave = 'btnKpiSave' . $strParameter;
-        $btnSave = $this->GetControl($strKpiSave); 
-        $btnSave->Visible = true;
-        $strKpiCancel = 'btnKpiCancel' . $strParameter;
-        $btnCancel = $this->GetControl($strKpiCancel); 
-        $btnCancel->Visible = true;
-       
-		$lblKpi = $this->GetControl($strControlId);
-		$lblKpi->Visible = false;
-		$strImgEdit = 'imgEditKpi' . $strParameter;
-		$imgEditKpi = $this->GetControl($strImgEdit);
-		$imgEditKpi->Visible = false;
-	}
-	public function lblKpi_MouseOver($strFormId, $strControlId, $strParameter) {
-		$strImgEdit = 'imgEditKpi' . $strParameter;
-		$imgEditKpi = $this->GetControl($strImgEdit);
-		$imgEditKpi->Visible = true;
-	}
-	public function lblKpi_MouseOut($strFormId, $strControlId, $strParameter) {
-		$strImgEdit = 'imgEditKpi' . $strParameter;
-		$imgEditKpi = $this->GetControl($strImgEdit);
-		$imgEditKpi->Visible = false;
+        return ($txtKPI->Render(false) .$btnSave->Render(false). $btnCancel->Render(false). $lblKpi->RenderWithName(false));
 	}
 	
 	public function btnSaveKpi_Click($strFormId, $strControlId, $strParameter) {
@@ -449,37 +402,37 @@ class ScorecardForm extends InstituteForm {
         $objKPI->Kpi = $txtKpi->Text;
         $objKPI->ModifiedBy = $this->intUserId;
         $objKPI->Save();
-        $txtKpi->Visible = false;
+        $txtKpi->Display = false;
         
         $strKpiSave = 'btnKpiSave' . $KpiId;
         $btnSave = $this->GetControl($strKpiSave); 
-        $btnSave->Visible = false;
+        $btnSave->Display = false;
         $strKpiCancel = 'btnKpiCancel' . $KpiId;
         $btnCancel = $this->GetControl($strKpiCancel); 
-        $btnCancel->Visible = false;
+        $btnCancel->Display = false;
         
         $strLblControlId = 'lblKpi' .  $KpiId;
         $lblKpi = $this->GetControl($strLblControlId); 
         $lblKpi->Text = $txtKpi->Text;
-        $lblKpi->Visible = true;
+        $lblKpi->Display = true;
 	}
 
 	public function btnCancelKpi_Click($strFormId, $strControlId, $strParameter) {
 		$KpiId = $strParameter;	
 		$strControlId = 'txtKpi' . $KpiId;
         $txtKpi = $this->GetControl($strControlId);    
-        $txtKpi->Visible = false;
+        $txtKpi->Display = false;
         
         $strKpiSave = 'btnKpiSave' . $KpiId;
         $btnSave = $this->GetControl($strKpiSave); 
-        $btnSave->Visible = false;
+        $btnSave->Display = false;
         $strKpiCancel = 'btnKpiCancel' . $KpiId;
         $btnCancel = $this->GetControl($strKpiCancel); 
-        $btnCancel->Visible = false;
+        $btnCancel->Display = false;
         
         $strLblControlId = 'lblKpi' .  $KpiId;
         $lblKpi = $this->GetControl($strLblControlId); 
-        $lblKpi->Visible = true;
+        $lblKpi->Display = true;
 	}
 
 	public function RenderRating($objKPI) {
@@ -521,10 +474,10 @@ class ScorecardForm extends InstituteForm {
             $txtComment = new QTextBox($this->dtgKPIs[$intIndex], $strControlId);
             $txtComment->Text = $objKpi->Comments;
             $txtComment->ActionParameter = $objKpi->Id;
-            $txtComment->Width = 150;
+            $txtComment->Width = 200;
             $txtComment->Height = 50;
             $txtComment->TextMode = QTextMode::MultiLine;
-            $txtComment->Visible = false;
+            $txtComment->Display = false;
         }
 		$strCommentSave = 'btnKPICommentSave' . $objKpi->Id;
         $btnSave = $this->GetControl($strCommentSave); 
@@ -535,8 +488,8 @@ class ScorecardForm extends InstituteForm {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveKpiComment_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-theme-button';
-	        $btnSave->Visible = false;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
         
         $strCommentCancel = 'btnKPICommentCancel' . $objKpi->Id;
@@ -545,19 +498,12 @@ class ScorecardForm extends InstituteForm {
 	        $btnCancel = new QButton($this->dtgKPIs[$intIndex],$strCommentCancel);
 	        $btnCancel->Text = 'Cancel';
 	        $btnCancel->ActionParameter = $objKpi->Id;
-	     	$btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancelKpiComment_Click'));        
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelKpiComment_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-theme-button';
-	       	$btnCancel->Visible = false;
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
         }
 		$strImgEdit = 'imgEditKPIComment' . $objKpi->Id;
-        $imgEdit = $this->GetControl($strImgEdit); 
-        if(!$imgEdit) {
-	        $imgEdit = new QLabel($this->dtgActionItems[$intIndex],$strImgEdit);
-			$imgEdit->HtmlEntities = false;
-			$imgEdit->Visible = false;
-			$imgEdit->Text = '<img style="position:relative; cursor:pointer; float:right; left:0px; top:0px;" src="/resources/assets/images/icons/page_edit.png" />';
-        }
         $strLblControlId = 'lblKPIComment' .  $objKpi->Id;
         $lblComment = $this->GetControl($strLblControlId);     
         if (!$lblComment) {
@@ -568,42 +514,15 @@ class ScorecardForm extends InstituteForm {
         	$lblComment->Width = 150;
         	//$lblComment->Height = 20;
         	$lblComment->Cursor = 'pointer';
-        	$lblComment->AddAction(new QMouseOverEvent(), new QAjaxAction('lblKpiComment_MouseOver'));
-        	$lblComment->AddAction(new QMouseOutEvent(), new QAjaxAction('lblKpiComment_MouseOut'));
-        	$lblComment->AddAction(new QClickEvent(), new QAjaxAction('lblKpiComment_Clicked'));
+        	$lblComment->HtmlEntities = false;
+        	$lblComment->Padding = '10px 20px';
+        	$lblComment->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/resources/assets/images/icons/page_edit.png" />';
+          	$lblComment->AddAction(new QClickEvent(), new QJavaScriptAction('lblKpiComment_Clicked(this)'));
         }
-        return ($txtComment->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblComment->Render(false) . $imgEdit->Render(false));
+        return ($txtComment->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblComment->RenderWithName(false));
         
 	}
 
-	public function lblKpiComment_MouseOver($strFormId, $strControlId, $strParameter) {
-		$strImgEdit = 'imgEditKPIComment' . $strParameter;
-		$imgEditAction = $this->GetControl($strImgEdit);
-		$imgEditAction->Visible = true;
-	}
-	public function lblKpiComment_MouseOut($strFormId, $strControlId, $strParameter) {
-		$strImgEdit = 'imgEditKPIComment' . $strParameter;
-		$imgEditStrategy = $this->GetControl($strImgEdit);
-		$imgEditStrategy->Visible = false;
-	}
-	
-	public function lblKpiComment_Clicked($strFormId, $strControlId, $strParameter) {
-		$strCommentId = 'txtKPIComment' . $strParameter;
-		$txtComment = $this->GetControl($strCommentId);
-		$txtComment->Visible = true;
-		$strCommentSave = 'btnKPICommentSave' . $strParameter;
-        $btnSave = $this->GetControl($strCommentSave); 
-        $btnSave->Visible = true;
-        $strCommentCancel = 'btnKPICommentCancel' . $strParameter;
-        $btnCancel = $this->GetControl($strCommentCancel); 
-        $btnCancel->Visible = true;
-        
-		$lblComment = $this->GetControl($strControlId);
-		$lblComment->Visible = false;
-		$strImgEdit = 'imgEditKPIComment' . $strParameter;
-		$imgEditComment = $this->GetControl($strImgEdit);
-		$imgEditComment->Visible = false;
-	}
 	public function btnSaveKpiComment_Click($strFormId, $strControlId, $strParameter) {
 		$KpiId = $strParameter;	
 		$strControlId = 'txtKPIComment' . $KpiId;
@@ -612,39 +531,21 @@ class ScorecardForm extends InstituteForm {
         $objKpi->Comments = $txtComment->Text;
         $objKpi->ModifiedBy = $this->intUserId;
         $objKpi->Save();
-        $txtComment->Visible = false;
+        $txtComment->Display = false;
         
         $strCommentSave = 'btnKPICommentSave' . $KpiId;
         $btnSave = $this->GetControl($strCommentSave); 
-        $btnSave->Visible = false;
+        $btnSave->Display = false;
         $strCommentCancel = 'btnKPICommentCancel' . $KpiId;
         $btnCancel = $this->GetControl($strCommentCancel); 
-        $btnCancel->Visible = false;
+        $btnCancel->Display = false;
         
         $strLblControlId = 'lblKPIComment' .  $KpiId;
         $lblComment = $this->GetControl($strLblControlId); 
         $lblComment->Text = $txtComment->Text;
-        $lblComment->Visible = true;
+        $lblComment->Display = true;
 	}
 
-	public function btnCancelKpiComment_Click($strFormId, $strControlId, $strParameter) {
-		$KpiId = $strParameter;	
-		$strControlId = 'txtKPIComment' . $KpiId;
-        $txtAction = $this->GetControl($strControlId);    
-        $txtAction->Visible = false;
-        
-        $strCommentSave = 'btnKPICommentSave' . $KpiId;
-        $btnSave = $this->GetControl($strCommentSave); 
-        $btnSave->Visible = false;
-        $strCommentCancel = 'btnKPICommentCancel' . $KpiId;
-        $btnCancel = $this->GetControl($strCommentCancel); 
-        $btnCancel->Visible = false;
-        
-        $strLblControlId = 'lblKPIComment' .  $KpiId;
-        $lblComment = $this->GetControl($strLblControlId); 
-        $lblComment->Visible = true;
-	}
-	
 	public function RenderAction($objAction) {
 		$strControlId = 'txtAction' . $objAction->Id;
 		$objStrategy = Strategy::Load($objAction->StrategyId);
@@ -657,7 +558,7 @@ class ScorecardForm extends InstituteForm {
             $txtActionItem->Width = 400;
             $txtActionItem->TextMode = QTextMode::MultiLine;
             $txtActionItem->Height = 50;
-            $txtActionItem->Visible = false;
+            $txtActionItem->Display = false;
         }
 		$strActionSave = 'btnActionSave' . $objAction->Id;
         $btnSave = $this->GetControl($strActionSave); 
@@ -668,8 +569,8 @@ class ScorecardForm extends InstituteForm {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveAction_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-theme-button';
-	        $btnSave->Visible = false;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
         
         $strActionCancel = 'btnActionCancel' . $objAction->Id;
@@ -678,18 +579,10 @@ class ScorecardForm extends InstituteForm {
 	        $btnCancel = new QButton($this->dtgActionItems[$objStrategy->Count-1],$strActionCancel);
 	        $btnCancel->Text = 'Cancel';
 	        $btnCancel->ActionParameter = $objAction->Id;
-	     	$btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancelAction_Click'));        
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelAction_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-theme-button';
-	       	$btnCancel->Visible = false;
-        }
-		$strImgEdit = 'imgEditAction' . $objAction->Id;
-        $imgEdit = $this->GetControl($strImgEdit); 
-        if(!$imgEdit) {
-	        $imgEdit = new QLabel($this->dtgActionItems[$objStrategy->Count-1],$strImgEdit);
-			$imgEdit->HtmlEntities = false;
-			$imgEdit->Visible = false;
-			$imgEdit->Text = '<img style="position:relative; cursor:pointer; float:right; left:0px; top:0px;" src="/resources/assets/images/icons/page_edit.png" />';
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
         }
         $strLblControlId = 'lblAction' .  $objAction->Id;
         $lblAction = $this->GetControl($strLblControlId);     
@@ -699,82 +592,41 @@ class ScorecardForm extends InstituteForm {
         	$lblAction->ActionParameter = $objAction->Id;
         	$lblAction->Cursor = 'pointer';
         	$lblAction->Width = 400;
-        	//$lblAction->Height = 20;
-        	$lblAction->AddAction(new QMouseOverEvent(), new QAjaxAction('lblAction_MouseOver'));
-        	$lblAction->AddAction(new QMouseOutEvent(), new QAjaxAction('lblAction_MouseOut'));
-			$lblAction->AddAction(new QClickEvent(), new QAjaxAction('lblAction_Clicked'));	
+        	$lblAction->HtmlEntities = false;
+        	$lblAction->Padding = '5px 15px';
+        	$lblAction->CssClass = 'editIcon';        	
+  			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblAction_Clicked(this)'));	
         }
-        return ($txtActionItem->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblAction->Render(false).$imgEdit->render(false));
-	}
-	
-	public function lblAction_Clicked($strFormId, $strControlId, $strParameter) {
-		$strTextActionId = 'txtAction' . $strParameter;
-		$txtAction = $this->GetControl($strTextActionId);
-		$txtAction->Visible = true;
-		$strActionSave = 'btnActionSave' . $strParameter;
-        $btnSave = $this->GetControl($strActionSave); 
-        $btnSave->Visible = true;
-        $strActionCancel = 'btnActionCancel' . $strParameter;
-        $btnCancel = $this->GetControl($strActionCancel); 
-        $btnCancel->Visible = true;
-        
-		$lblAction = $this->GetControl($strControlId);
-		$lblAction->Visible = false;
-		$strImgEdit = 'imgEditAction' . $strParameter;
-		$imgEditStrategy = $this->GetControl($strImgEdit);
-		$imgEditStrategy->Visible = false;
-	}
-	public function lblAction_MouseOver($strFormId, $strControlId, $strParameter) {
-		$strImgEdit = 'imgEditAction' . $strParameter;
-		$imgEditAction = $this->GetControl($strImgEdit);
-		$imgEditAction->Visible = true;
-	}
-	public function lblAction_MouseOut($strFormId, $strControlId, $strParameter) {
-		$strImgEdit = 'imgEditAction' . $strParameter;
-		$imgEditStrategy = $this->GetControl($strImgEdit);
-		$imgEditStrategy->Visible = false;
+        return ($txtActionItem->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblAction->RenderWithName(false));
 	}
 	
 	public function btnSaveAction_Click($strFormId, $strControlId, $strParameter) {
+		//xdebug_start_trace('tmp/trace.xt');
 		$ActionId = $strParameter;	
 		$strControlId = 'txtAction' . $ActionId;
         $txtAction = $this->GetControl($strControlId);
         $objAction = ActionItems::Load($ActionId);
-        $objAction->Action = $txtAction->Text;
-        $objAction->ModifiedBy = $this->intUserId;
-        $objAction->Save();
-        $txtAction->Visible = false;
-        
+        if($objAction) {
+	        $objAction->Action = $txtAction->Text;
+	        $objAction->ModifiedBy = $this->intUserId;
+	        $objAction->Save();
+	        $txtAction->Display = false;  
+        } 
+       
         $strActionSave = 'btnActionSave' . $ActionId;
         $btnSave = $this->GetControl($strActionSave); 
-        $btnSave->Visible = false;
+        $btnSave->Display = false;
         $strActionCancel = 'btnActionCancel' . $ActionId;
         $btnCancel = $this->GetControl($strActionCancel); 
-        $btnCancel->Visible = false;
+        $btnCancel->Display = false;
         
         $strLblControlId = 'lblAction' .  $objAction->Id;
         $lblAction = $this->GetControl($strLblControlId); 
         $lblAction->Text = $txtAction->Text;
-        $lblAction->Visible = true;
+        $lblAction->Display = true;
+       // xdebug_stop_trace();
 	}
 
-	public function btnCancelAction_Click($strFormId, $strControlId, $strParameter) {
-		$ActionId = $strParameter;	
-		$strControlId = 'txtAction' . $ActionId;
-        $txtAction = $this->GetControl($strControlId);    
-        $txtAction->Visible = false;
-        
-        $strActionSave = 'btnActionSave' . $ActionId;
-        $btnSave = $this->GetControl($strActionSave); 
-        $btnSave->Visible = false;
-        $strActionCancel = 'btnActionCancel' . $ActionId;
-        $btnCancel = $this->GetControl($strActionCancel); 
-        $btnCancel->Visible = false;
-        
-        $strLblControlId = 'lblAction' .  $ActionId;
-        $lblAction = $this->GetControl($strLblControlId); 
-        $lblAction->Visible = true;
-	}
 	public function RenderPriority($objStrategy) {
 		$intPriority = ($objStrategy->Priority!=null) ? $objStrategy->Priority : 0;
 		$strImgPriorityCtrl = 'imgPriority' .$objStrategy->Id; 
@@ -810,7 +662,7 @@ class ScorecardForm extends InstituteForm {
 		$lstPriority->AddItem('Top',1);
 		$lstPriority->AddItem('Medium',2);
 		$lstPriority->AddItem('Low',3);
-		$lstPriority->Visible = false;
+		$lstPriority->Display = false;
 		$lstPriority->AddAction(new QChangeEvent(), new QAjaxAction('lstPriority_Change'));
 		
 		$strReturn = $imgPriority->Render(false) . $lstPriority->Render(false);
@@ -818,9 +670,9 @@ class ScorecardForm extends InstituteForm {
 	}
 	public function imgPriority_Click($strFormId, $strControlId, $strParameter) {
 		$lstPriority = $this->GetControl($strParameter); 
-		$lstPriority->Visible = true;
+		$lstPriority->Display = true;
 		$imgPriority = $this->GetControl($strControlId);
-		$imgPriority->Visible = false;	
+		$imgPriority->Display = false;	
 	}
 	
 	public function lstPriority_Change($strFormId, $strControlId, $strParameter) {
@@ -830,7 +682,7 @@ class ScorecardForm extends InstituteForm {
 		$objStrategy->ModifiedBy = $this->intUserId;
 		$objStrategy->Save();
 		
-		$lstPriority->Visible = false;
+		$lstPriority->Display = false;
 		$strImgCtrl = 'imgPriority' .$objStrategy->Id; 
 		$imgPriority = $this->GetControl($strImgCtrl);
 		switch ($lstPriority->SelectedValue) {
@@ -850,7 +702,7 @@ class ScorecardForm extends InstituteForm {
 				$imgPriority->ImagePath = dirname(__FILE__) .'/../../assets/images/priority-0.png'; 
 				break;				
 		}	
-		$imgPriority->Visible = true;
+		$imgPriority->Display = true;
 		$imgPriority->Refresh();
 	}
 	
@@ -864,7 +716,7 @@ class ScorecardForm extends InstituteForm {
             $txtStrategy->Width = 700;
             $txtStrategy->Height = 50;
             $txtStrategy->TextMode = QTextMode::MultiLine;
-            $txtStrategy->Visible = false;
+            $txtStrategy->Display = false;
         }
         $strStrategySave = 'btnStrategySave' . $objStrategy->Id;
         $btnSave = $this->GetControl($strStrategySave); 
@@ -875,8 +727,8 @@ class ScorecardForm extends InstituteForm {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveStrategy_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-theme-button';
-	        $btnSave->Visible = false;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
         
         $strStrategyCancel = 'btnStrategyCancel' . $objStrategy->Id;
@@ -885,18 +737,10 @@ class ScorecardForm extends InstituteForm {
 	        $btnCancel = new QButton($this->dtgStrategyArray[$objStrategy->Count -1],$strStrategyCancel);
 	        $btnCancel->Text = 'Cancel';
 	        $btnCancel->ActionParameter = $objStrategy->Id;
-	     	$btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancelStrategy_Click'));        
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelStrategy_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-theme-button';
-	       	$btnCancel->Visible = false;
-        }
-		$strImgEdit = 'imgEditStrategy' . $objStrategy->Id;
-        $imgEdit = $this->GetControl($strImgEdit); 
-        if(!$imgEdit) {
-	        $imgEdit = new QLabel($this->dtgStrategyArray[$objStrategy->Count -1],$strImgEdit);
-			$imgEdit->HtmlEntities = false;
-			$imgEdit->Visible = false;
-			$imgEdit->Text = '<img style="position:relative; cursor:pointer; float:right; left:-40px; top:-20px;" src="/resources/assets/images/icons/page_edit.png" />';
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
         }
         $strLblControlId = 'lblStrategy' . $objStrategy->Id;
         $lblStrategy = $this->GetControl($strLblControlId);     
@@ -905,86 +749,38 @@ class ScorecardForm extends InstituteForm {
         	$lblStrategy->Text = $objStrategy->Strategy;
         	$lblStrategy->ActionParameter = $objStrategy->Id;
         	$lblStrategy->Width = 700;
-        	//$lblStrategy->Height = 20;
         	$lblStrategy->CssClass = 'tablecell';
         	$lblStrategy->Cursor = 'pointer';
-        	$lblStrategy->AddAction(new QMouseOverEvent(), new QAjaxAction('lblStrategy_MouseOver'));
-        	$lblStrategy->AddAction(new QMouseOutEvent(), new QAjaxAction('lblStrategy_MouseOut'));
-			$lblStrategy->AddAction(new QClickEvent(), new QAjaxAction('lblStrategy_Clicked'));	
+        	$lblStrategy->Padding = '10px 25px';
+        	$lblStrategy->HtmlEntities = false;
+        	$lblStrategy->CssClass = 'editIcon'; 
+			$lblStrategy->AddAction(new QClickEvent(), new QJavaScriptAction('lblStrategy_Clicked(this)'));	
         }
         
-        return ($txtStrategy->Render(false) . $btnSave->Render(false). $btnCancel->Render(false). $lblStrategy->Render(false). $imgEdit->Render(false));
-	}
-	
-	public function lblStrategy_Clicked($strFormId, $strControlId, $strParameter) {
-		$strTextStrategyId = 'txtStrategy' . $strParameter;
-		$txtStrategy = $this->GetControl($strTextStrategyId);
-		$txtStrategy->Visible = true;
-		$strStrategySave = 'btnStrategySave' . $strParameter;
-        $btnSave = $this->GetControl($strStrategySave); 
-        $btnSave->Visible = true;
-        $strStrategyCancel = 'btnStrategyCancel' . $strParameter;
-        $btnCancel = $this->GetControl($strStrategyCancel); 
-        $btnCancel->Visible = true;
-        
-		$lblStrategy = $this->GetControl($strControlId);
-		$lblStrategy->Visible = false;
-		$strImgEdit = 'imgEditStrategy' . $strParameter;
-		$imgEditStrategy = $this->GetControl($strImgEdit);
-		$imgEditStrategy->Visible = false;
-	}
-	public function lblStrategy_MouseOver($strFormId, $strControlId, $strParameter) {
-		$strImgEdit = 'imgEditStrategy' . $strParameter;
-		$imgEditStrategy = $this->GetControl($strImgEdit);
-		$imgEditStrategy->Visible = true;
-	}
-	public function lblStrategy_MouseOut($strFormId, $strControlId, $strParameter) {
-		$strImgEdit = 'imgEditStrategy' . $strParameter;
-		$imgEditStrategy = $this->GetControl($strImgEdit);
-		$imgEditStrategy->Visible = false;
+        return ($txtStrategy->Render(false) . $btnSave->Render(false). $btnCancel->Render(false). $lblStrategy->RenderWithName(false));
 	}
 	
 	public function btnSaveStrategy_Click($strFormId, $strControlId, $strParameter) {
 		$StrategyId = $strParameter;
         $objStrategy = Strategy::Load($StrategyId);
         $strTextStrategyId = 'txtStrategy' . $strParameter;
-		$txtStrategy = $this->GetControl($strTextStrategyId);		
-        $objStrategy->Strategy = $txtStrategy->Text;
-        $objStrategy->ModifiedBy = $this->intUserId;
-        $objStrategy->Save();
-        $txtStrategy->Visible = false;
+		$txtStrategy = $this->GetControl($strTextStrategyId);
+		if(null != $txtStrategy) {		
+	        $objStrategy->Strategy = $txtStrategy->Text;
+	        $objStrategy->ModifiedBy = $this->intUserId;
+	        $objStrategy->Save();
+	        $txtStrategy->Display = false;
+		}
         $strStrategySave = 'btnStrategySave' . $objStrategy->Id;
         $btnSave = $this->GetControl($strStrategySave); 
-        $btnSave->Visible = false;
+        $btnSave->Display = false;
         $strStrategyCancel = 'btnStrategyCancel' . $objStrategy->Id;
         $btnCancel = $this->GetControl($strStrategyCancel); 
-        $btnCancel->Visible = false;
+        $btnCancel->Display = false;
         $strLblControlId = 'lblStrategy' . $objStrategy->Id;
         $lblStrategy = $this->GetControl($strLblControlId); 
         $lblStrategy->Text = $txtStrategy->Text;
-        $lblStrategy->Visible = true;
-        $this->dtgStrategySummary->Refresh();
-	}
-	
-	public function btnCancelStrategy_Click($strFormId, $strControlId, $strParameter) {
-		$StrategyId = $strParameter;
-        $objStrategy = Strategy::Load($StrategyId);
-        
-        $strStrategySave = 'btnStrategySave' . $strParameter;
-        $btnSave = $this->GetControl($strStrategySave); 
-        $btnSave->Visible = false;
-        $strStrategyCancel = 'btnStrategyCancel' . $strParameter;
-        $btnCancel = $this->GetControl($strStrategyCancel); 
-        $btnCancel->Visible = false;
-        $strLblControlId = 'lblStrategy' . $strParameter;
-        $lblStrategy = $this->GetControl($strLblControlId); 
-        $lblStrategy->Visible = true;
-        
-        $strTextStrategyId = 'txtStrategy' . $strParameter;
-		$txtStrategy = $this->GetControl($strTextStrategyId);	
-        $txtStrategy->Text = $lblStrategy->Text;
-        $txtStrategy->Visible = false;
-        
+        $lblStrategy->Display = true;
         $this->dtgStrategySummary->Refresh();
 	}
 	
@@ -1010,6 +806,7 @@ class ScorecardForm extends InstituteForm {
             
             $lstActionWho->ActionParameter = $objAction->Id;
             $lstActionWho->Width = 110;
+            $lstActionWho->CssClass = 'paddedControl';
             $lstActionWho->AddAction(new QChangeEvent(), new QAjaxAction('lstActionWho_KeyPressed'));
         }
         return $lstActionWho->Render(false);
@@ -1033,8 +830,8 @@ class ScorecardForm extends InstituteForm {
             $txtComment = new QTextBox($this->dtgActionItems[$intIndex], $strControlId);
             $txtComment->Text = ($objAction->Comments != null)? $objAction->Comments : ' ';
             $txtComment->ActionParameter = $objAction->Id;
-            $txtComment->Width = 150;
-            $txtComment->Visible = false;
+            $txtComment->Width = 200;
+            $txtComment->Display = false;
             $txtComment->Height = 50;
             $txtComment->TextMode = QTextMode::MultiLine;
         }
@@ -1047,8 +844,8 @@ class ScorecardForm extends InstituteForm {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveComment_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-theme-button';
-	        $btnSave->Visible = false;
+	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->Display = false;
         }
         
         $strCommentCancel = 'btnCommentCancel' . $objAction->Id;
@@ -1057,19 +854,12 @@ class ScorecardForm extends InstituteForm {
 	        $btnCancel = new QButton($this->dtgActionItems[$intIndex],$strCommentCancel);
 	        $btnCancel->Text = 'Cancel';
 	        $btnCancel->ActionParameter = $objAction->Id;
-	     	$btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancelComment_Click'));        
+	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelComment_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-theme-button';
-	       	$btnCancel->Visible = false;
+	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->Display = false;
         }
-		$strImgEdit = 'imgEditComment' . $objAction->Id;
-        $imgEdit = $this->GetControl($strImgEdit); 
-        if(!$imgEdit) {
-	        $imgEdit = new QLabel($this->dtgActionItems[$intIndex],$strImgEdit);
-			$imgEdit->HtmlEntities = false;
-			$imgEdit->Visible = false;
-			$imgEdit->Text = '<img style="position:relative; cursor:pointer; float:right; left:0px; top:0px;" src="/resources/assets/images/icons/page_edit.png" />';
-        }
+	 
         $strLblControlId = 'lblComment' . $objAction->Id;
         $lblComment = $this->GetControl($strLblControlId);     
         if (!$lblComment) {
@@ -1077,44 +867,16 @@ class ScorecardForm extends InstituteForm {
         	$lblComment->Text = ($objAction->Comments != null)? $objAction->Comments : ' ';
         	$lblComment->ActionParameter = $objAction->Id;
         	$lblComment->Width = 150;
-        	//$lblComment->Height = 20;
         	$lblComment->CssClass = 'tablecell';
         	$lblComment->Cursor = 'pointer';
-        	$lblComment->AddAction(new QMouseOverEvent(), new QAjaxAction('lblComment_MouseOver'));
-        	$lblComment->AddAction(new QMouseOutEvent(), new QAjaxAction('lblComment_MouseOut'));
-        	$lblComment->AddAction(new QClickEvent(), new QAjaxAction('lblComment_Clicked'));
+        	$lblComment->HtmlEntities = false;
+        	$lblComment->Padding = '10px 30px';
+        	$lblComment->CssClass = 'editIcon';        	
+         	$lblComment->AddAction(new QClickEvent(), new QJavaScriptAction('lblComment_Clicked(this)'));
         }
-        return ($txtComment->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblComment->Render(false) . $imgEdit->Render(false));
+        return ($txtComment->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblComment->RenderWithName(false));
 	}
 	
-	public function lblComment_MouseOver($strFormId, $strControlId, $strParameter) {
-		$strImgEdit = 'imgEditComment' . $strParameter;
-		$imgEditAction = $this->GetControl($strImgEdit);
-		$imgEditAction->Visible = true;
-	}
-	public function lblComment_MouseOut($strFormId, $strControlId, $strParameter) {
-		$strImgEdit = 'imgEditComment' . $strParameter;
-		$imgEditStrategy = $this->GetControl($strImgEdit);
-		$imgEditStrategy->Visible = false;
-	}
-	
-	public function lblComment_Clicked($strFormId, $strControlId, $strParameter) {
-		$strCommentId = 'txtComment' . $strParameter;
-		$txtComment = $this->GetControl($strCommentId);
-		$txtComment->Visible = true;
-		$strCommentSave = 'btnCommentSave' . $strParameter;
-        $btnSave = $this->GetControl($strCommentSave); 
-        $btnSave->Visible = true;
-        $strCommentCancel = 'btnCommentCancel' . $strParameter;
-        $btnCancel = $this->GetControl($strCommentCancel); 
-        $btnCancel->Visible = true;
-        
-		$lblComment = $this->GetControl($strControlId);
-		$lblComment->Visible = false;
-		$strImgEdit = 'imgEditComment' . $strParameter;
-		$imgEditComment = $this->GetControl($strImgEdit);
-		$imgEditComment->Visible = false;
-	}
 	public function btnSaveComment_Click($strFormId, $strControlId, $strParameter) {
 		$ActionId = $strParameter;	
 		$strControlId = 'txtComment' . $ActionId;
@@ -1123,37 +885,37 @@ class ScorecardForm extends InstituteForm {
         $objAction->Comments = $txtComment->Text;
         $objAction->ModifiedBy = $this->intUserId;
         $objAction->Save();
-        $txtComment->Visible = false;
+        $txtComment->Display = false;
         
         $strCommentSave = 'btnCommentSave' . $ActionId;
         $btnSave = $this->GetControl($strCommentSave); 
-        $btnSave->Visible = false;
+        $btnSave->Display = false;
         $strCommentCancel = 'btnCommentCancel' . $ActionId;
         $btnCancel = $this->GetControl($strCommentCancel); 
-        $btnCancel->Visible = false;
+        $btnCancel->Display = false;
         
         $strLblControlId = 'lblComment' .  $ActionId;
         $lblComment = $this->GetControl($strLblControlId); 
         $lblComment->Text = $txtComment->Text;
-        $lblComment->Visible = true;
+        $lblComment->Display = true;
 	}
 
 	public function btnCancelComment_Click($strFormId, $strControlId, $strParameter) {
 		$ActionId = $strParameter;	
 		$strControlId = 'txtComment' . $ActionId;
         $txtAction = $this->GetControl($strControlId);    
-        $txtAction->Visible = false;
+        $txtAction->Display = false;
         
         $strCommentSave = 'btnCommentSave' . $ActionId;
         $btnSave = $this->GetControl($strCommentSave); 
-        $btnSave->Visible = false;
+        $btnSave->Display = false;
         $strCommentCancel = 'btnCommentCancel' . $ActionId;
         $btnCancel = $this->GetControl($strCommentCancel); 
-        $btnCancel->Visible = false;
+        $btnCancel->Display = false;
         
         $strLblControlId = 'lblComment' .  $ActionId;
         $lblComment = $this->GetControl($strLblControlId); 
-        $lblComment->Visible = true;
+        $lblComment->Display = true;
 	}
 		
 	public function RenderStatus($objAction) {
@@ -1170,6 +932,7 @@ class ScorecardForm extends InstituteForm {
             	}	
             }           
             $lstActionStatus->ActionParameter = $objAction->Id;
+            $lstActionStatus->CssClass = 'paddedControl';
             $lstActionStatus->Width = 60;
             $lstActionStatus->AddAction(new QChangeEvent(), new QAjaxAction('lstActionStatus_Changed'));
         }
@@ -1195,6 +958,7 @@ class ScorecardForm extends InstituteForm {
         	$dtxActionWhen->ActionParameter = $objAction->Id;
 			$dtxActionWhen->Name = 'When';
 			$dtxActionWhen->Width = 80;
+			$dtxActionWhen->CssClass = 'paddedControl tweak';
 			$dtxActionWhen->Text = ($objAction->When) ? $objAction->When->__toString() : null;
 			$calActionWhen = new QCalendar($this->dtgActionItems[$intIndex], $dtxActionWhen);			
             $dtxActionWhen->AddAction(new QChangeEvent(), new QAjaxAction('dtxActionWhen_KeyPressed'));
@@ -1246,7 +1010,7 @@ class ScorecardForm extends InstituteForm {
 			$i++;
 		}
 		// Then refresh the page
-		QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
+		QApplication::Redirect(__SUBDIRECTORY__.'/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
 	}
 	
 	public function RenderDeleteAction(ActionItems $objAction) {
@@ -1276,7 +1040,6 @@ class ScorecardForm extends InstituteForm {
 		// Then refresh
 		$this->dtgActionItems[$intIndex]->DataSource = ActionItems::LoadArrayByStrategyId($objStrategy->Id);
 		$this->dtgActionItems[$intIndex]->Refresh();
-		//QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
 	}
 	
 	public function RenderDeleteKpi(Kpis $objKpi) {

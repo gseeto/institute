@@ -12,9 +12,12 @@ class AdminForm extends InstituteForm {
 
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
+		$jscript = new QJavaScriptAction('alert("called this")');
 	}
-	
+	protected function Form_Exit() {
+		
+	}
 	protected function Form_Create() {
 		$this->pnlSideNav = new QPanel($this);
         $this->pnlSideNav->Position = QPosition::Relative;
@@ -29,10 +32,11 @@ class AdminForm extends InstituteForm {
         // Initialize a new SideNavPanel, and set its parent to pnlSideNav
         $strPanel = QApplication::PathInfo(0);
         $pnlNavView = new AdminNavView($this->pnlSideNav, $strPanel, $this->pnlMainContent->ControlId);
+        $this->objDefaultWaitIcon = new QWaitIcon($this);
 	}
 	
-	public function btnAddTenPAssessment_Click($strFormId, $strControlId, $strParameter) {
-	}
+	//public function btnAddTenPAssessment_Click($strFormId, $strControlId, $strParameter) {
+	//}
 
 }
 

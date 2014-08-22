@@ -58,14 +58,15 @@
 	
 	        $objStyle = $this->dtgUsers->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	        
 	        $objStyle = $this->dtgUsers->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#003366'; 
+	        $objStyle->BackColor = '#0098c3'; 
 	
 			$this->strFirstName = new QTextBox($this);
 			$this->strFirstName->Name = 'First Name';
+			$this->strFirstName->Width = 150;
 			$this->strFirstName->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strFirstName->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strFirstName->AddAction(new QEnterKeyEvent(), new QTerminateAction());
@@ -73,6 +74,7 @@
 			
 			$this->strLastName = new QTextBox($this);
 			$this->strLastName->Name = 'Last Name';
+			$this->strLastName->Width = 150;
 			$this->strLastName->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strLastName->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strLastName->AddAction(new QEnterKeyEvent(), new QTerminateAction());
@@ -80,7 +82,7 @@
 			
 			$this->strUsername = new QTextBox($this);
 			$this->strUsername->Name = 'Username';
-			$this->strUsername->Width = 50;
+			$this->strUsername->Width = 150;
 			$this->strUsername->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strUsername->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strUsername->AddAction(new QEnterKeyEvent(), new QTerminateAction());
@@ -114,6 +116,7 @@
 	     	$objAssessment->UserId = $intUserId;
 	     	$objAssessment->ResourceId = 5; //LemonAssessment - going to have to find a nicer way of doing this
 	     	$objAssessment->ResourceStatusId = 1; // initial state is untouched
+	     	$objAssessment->DateModified = new QDateTime('Now');
 	     	$objUser = User::Load($intUserId);
 	     	$companyArray = Company::LoadAll();
 	     	foreach($companyArray as $objCompany){
@@ -123,6 +126,7 @@
 	     		}
 	     	}
 	     	$objUser->AssociateResource(Resource::Load(5));
+	     	$objUser->Save();
 			$objAssessment->Save();
 		}
 		$this->Visible = false;
@@ -161,7 +165,7 @@
         
 	public function dtgUsers_Bind() {
 		$objConditions = QQ::All();
-		$objClauses = array();
+		$objClauses = QQ::Clause($this->dtgUsers->LimitClause);
 
 		if ($strName = trim($this->strFirstName->Text)) {
 			$objConditions = QQ::AndCondition($objConditions,
@@ -189,6 +193,7 @@
 		}
 		
 		$userArray = User::QueryArray($objConditions,$objClauses);	
+		$this->dtgUsers->TotalItemCount = User::CountAll();
 		$this->dtgUsers->DataSource = $userArray; 
 	}
 

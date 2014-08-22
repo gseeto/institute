@@ -41,6 +41,13 @@
 		QApplicationBase::$ClassFile['companymetacontrol'] = __DATA_META_CONTROLS__ . '/CompanyMetaControl.class.php';
 		QApplicationBase::$ClassFile['companydatagrid'] = __DATA_META_CONTROLS__ . '/CompanyDataGrid.class.php';
 
+	// ClassPaths for the CountryList class
+		QApplicationBase::$ClassFile['countrylist'] = __DATA_CLASSES__ . '/CountryList.class.php';
+		QApplicationBase::$ClassFile['qqnodecountrylist'] = __DATA_CLASSES__ . '/CountryList.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodecountrylist'] = __DATA_CLASSES__ . '/CountryList.class.php';
+		QApplicationBase::$ClassFile['countrylistmetacontrol'] = __DATA_META_CONTROLS__ . '/CountryListMetaControl.class.php';
+		QApplicationBase::$ClassFile['countrylistdatagrid'] = __DATA_META_CONTROLS__ . '/CountryListDataGrid.class.php';
+
 	// ClassPaths for the Giants class
 		QApplicationBase::$ClassFile['giants'] = __DATA_CLASSES__ . '/Giants.class.php';
 		QApplicationBase::$ClassFile['qqnodegiants'] = __DATA_CLASSES__ . '/Giants.class.php';
@@ -61,6 +68,27 @@
 		QApplicationBase::$ClassFile['qqreversereferencenodeindustry'] = __DATA_CLASSES__ . '/Industry.class.php';
 		QApplicationBase::$ClassFile['industrymetacontrol'] = __DATA_META_CONTROLS__ . '/IndustryMetaControl.class.php';
 		QApplicationBase::$ClassFile['industrydatagrid'] = __DATA_META_CONTROLS__ . '/IndustryDataGrid.class.php';
+
+	// ClassPaths for the IntegrationAssessment class
+		QApplicationBase::$ClassFile['integrationassessment'] = __DATA_CLASSES__ . '/IntegrationAssessment.class.php';
+		QApplicationBase::$ClassFile['qqnodeintegrationassessment'] = __DATA_CLASSES__ . '/IntegrationAssessment.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodeintegrationassessment'] = __DATA_CLASSES__ . '/IntegrationAssessment.class.php';
+		QApplicationBase::$ClassFile['integrationassessmentmetacontrol'] = __DATA_META_CONTROLS__ . '/IntegrationAssessmentMetaControl.class.php';
+		QApplicationBase::$ClassFile['integrationassessmentdatagrid'] = __DATA_META_CONTROLS__ . '/IntegrationAssessmentDataGrid.class.php';
+
+	// ClassPaths for the IntegrationQuestions class
+		QApplicationBase::$ClassFile['integrationquestions'] = __DATA_CLASSES__ . '/IntegrationQuestions.class.php';
+		QApplicationBase::$ClassFile['qqnodeintegrationquestions'] = __DATA_CLASSES__ . '/IntegrationQuestions.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodeintegrationquestions'] = __DATA_CLASSES__ . '/IntegrationQuestions.class.php';
+		QApplicationBase::$ClassFile['integrationquestionsmetacontrol'] = __DATA_META_CONTROLS__ . '/IntegrationQuestionsMetaControl.class.php';
+		QApplicationBase::$ClassFile['integrationquestionsdatagrid'] = __DATA_META_CONTROLS__ . '/IntegrationQuestionsDataGrid.class.php';
+
+	// ClassPaths for the IntegrationResults class
+		QApplicationBase::$ClassFile['integrationresults'] = __DATA_CLASSES__ . '/IntegrationResults.class.php';
+		QApplicationBase::$ClassFile['qqnodeintegrationresults'] = __DATA_CLASSES__ . '/IntegrationResults.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodeintegrationresults'] = __DATA_CLASSES__ . '/IntegrationResults.class.php';
+		QApplicationBase::$ClassFile['integrationresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/IntegrationResultsMetaControl.class.php';
+		QApplicationBase::$ClassFile['integrationresultsdatagrid'] = __DATA_META_CONTROLS__ . '/IntegrationResultsDataGrid.class.php';
 
 	// ClassPaths for the KingdomBusinessAssessment class
 		QApplicationBase::$ClassFile['kingdombusinessassessment'] = __DATA_CLASSES__ . '/KingdomBusinessAssessment.class.php';
@@ -118,6 +146,27 @@
 		QApplicationBase::$ClassFile['loginmetacontrol'] = __DATA_META_CONTROLS__ . '/LoginMetaControl.class.php';
 		QApplicationBase::$ClassFile['logindatagrid'] = __DATA_META_CONTROLS__ . '/LoginDataGrid.class.php';
 
+	// ClassPaths for the LraAssessment class
+		QApplicationBase::$ClassFile['lraassessment'] = __DATA_CLASSES__ . '/LraAssessment.class.php';
+		QApplicationBase::$ClassFile['qqnodelraassessment'] = __DATA_CLASSES__ . '/LraAssessment.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodelraassessment'] = __DATA_CLASSES__ . '/LraAssessment.class.php';
+		QApplicationBase::$ClassFile['lraassessmentmetacontrol'] = __DATA_META_CONTROLS__ . '/LraAssessmentMetaControl.class.php';
+		QApplicationBase::$ClassFile['lraassessmentdatagrid'] = __DATA_META_CONTROLS__ . '/LraAssessmentDataGrid.class.php';
+
+	// ClassPaths for the LraQuestions class
+		QApplicationBase::$ClassFile['lraquestions'] = __DATA_CLASSES__ . '/LraQuestions.class.php';
+		QApplicationBase::$ClassFile['qqnodelraquestions'] = __DATA_CLASSES__ . '/LraQuestions.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodelraquestions'] = __DATA_CLASSES__ . '/LraQuestions.class.php';
+		QApplicationBase::$ClassFile['lraquestionsmetacontrol'] = __DATA_META_CONTROLS__ . '/LraQuestionsMetaControl.class.php';
+		QApplicationBase::$ClassFile['lraquestionsdatagrid'] = __DATA_META_CONTROLS__ . '/LraQuestionsDataGrid.class.php';
+
+	// ClassPaths for the LraResults class
+		QApplicationBase::$ClassFile['lraresults'] = __DATA_CLASSES__ . '/LraResults.class.php';
+		QApplicationBase::$ClassFile['qqnodelraresults'] = __DATA_CLASSES__ . '/LraResults.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodelraresults'] = __DATA_CLASSES__ . '/LraResults.class.php';
+		QApplicationBase::$ClassFile['lraresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/LraResultsMetaControl.class.php';
+		QApplicationBase::$ClassFile['lraresultsdatagrid'] = __DATA_META_CONTROLS__ . '/LraResultsDataGrid.class.php';
+
 	// ClassPaths for the Resource class
 		QApplicationBase::$ClassFile['resource'] = __DATA_CLASSES__ . '/Resource.class.php';
 		QApplicationBase::$ClassFile['qqnoderesource'] = __DATA_CLASSES__ . '/Resource.class.php';
@@ -145,6 +194,27 @@
 		QApplicationBase::$ClassFile['qqreversereferencenodescorecard'] = __DATA_CLASSES__ . '/Scorecard.class.php';
 		QApplicationBase::$ClassFile['scorecardmetacontrol'] = __DATA_META_CONTROLS__ . '/ScorecardMetaControl.class.php';
 		QApplicationBase::$ClassFile['scorecarddatagrid'] = __DATA_META_CONTROLS__ . '/ScorecardDataGrid.class.php';
+
+	// ClassPaths for the SeasonalAssessment class
+		QApplicationBase::$ClassFile['seasonalassessment'] = __DATA_CLASSES__ . '/SeasonalAssessment.class.php';
+		QApplicationBase::$ClassFile['qqnodeseasonalassessment'] = __DATA_CLASSES__ . '/SeasonalAssessment.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodeseasonalassessment'] = __DATA_CLASSES__ . '/SeasonalAssessment.class.php';
+		QApplicationBase::$ClassFile['seasonalassessmentmetacontrol'] = __DATA_META_CONTROLS__ . '/SeasonalAssessmentMetaControl.class.php';
+		QApplicationBase::$ClassFile['seasonalassessmentdatagrid'] = __DATA_META_CONTROLS__ . '/SeasonalAssessmentDataGrid.class.php';
+
+	// ClassPaths for the SeasonalQuestions class
+		QApplicationBase::$ClassFile['seasonalquestions'] = __DATA_CLASSES__ . '/SeasonalQuestions.class.php';
+		QApplicationBase::$ClassFile['qqnodeseasonalquestions'] = __DATA_CLASSES__ . '/SeasonalQuestions.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodeseasonalquestions'] = __DATA_CLASSES__ . '/SeasonalQuestions.class.php';
+		QApplicationBase::$ClassFile['seasonalquestionsmetacontrol'] = __DATA_META_CONTROLS__ . '/SeasonalQuestionsMetaControl.class.php';
+		QApplicationBase::$ClassFile['seasonalquestionsdatagrid'] = __DATA_META_CONTROLS__ . '/SeasonalQuestionsDataGrid.class.php';
+
+	// ClassPaths for the SeasonalResults class
+		QApplicationBase::$ClassFile['seasonalresults'] = __DATA_CLASSES__ . '/SeasonalResults.class.php';
+		QApplicationBase::$ClassFile['qqnodeseasonalresults'] = __DATA_CLASSES__ . '/SeasonalResults.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodeseasonalresults'] = __DATA_CLASSES__ . '/SeasonalResults.class.php';
+		QApplicationBase::$ClassFile['seasonalresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/SeasonalResultsMetaControl.class.php';
+		QApplicationBase::$ClassFile['seasonalresultsdatagrid'] = __DATA_META_CONTROLS__ . '/SeasonalResultsDataGrid.class.php';
 
 	// ClassPaths for the Spheres class
 		QApplicationBase::$ClassFile['spheres'] = __DATA_CLASSES__ . '/Spheres.class.php';
@@ -215,6 +285,34 @@
 		QApplicationBase::$ClassFile['qqreversereferencenodetenpresults'] = __DATA_CLASSES__ . '/TenPResults.class.php';
 		QApplicationBase::$ClassFile['tenpresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/TenPResultsMetaControl.class.php';
 		QApplicationBase::$ClassFile['tenpresultsdatagrid'] = __DATA_META_CONTROLS__ . '/TenPResultsDataGrid.class.php';
+
+	// ClassPaths for the TenureList class
+		QApplicationBase::$ClassFile['tenurelist'] = __DATA_CLASSES__ . '/TenureList.class.php';
+		QApplicationBase::$ClassFile['qqnodetenurelist'] = __DATA_CLASSES__ . '/TenureList.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodetenurelist'] = __DATA_CLASSES__ . '/TenureList.class.php';
+		QApplicationBase::$ClassFile['tenurelistmetacontrol'] = __DATA_META_CONTROLS__ . '/TenureListMetaControl.class.php';
+		QApplicationBase::$ClassFile['tenurelistdatagrid'] = __DATA_META_CONTROLS__ . '/TenureListDataGrid.class.php';
+
+	// ClassPaths for the TimeAssessment class
+		QApplicationBase::$ClassFile['timeassessment'] = __DATA_CLASSES__ . '/TimeAssessment.class.php';
+		QApplicationBase::$ClassFile['qqnodetimeassessment'] = __DATA_CLASSES__ . '/TimeAssessment.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodetimeassessment'] = __DATA_CLASSES__ . '/TimeAssessment.class.php';
+		QApplicationBase::$ClassFile['timeassessmentmetacontrol'] = __DATA_META_CONTROLS__ . '/TimeAssessmentMetaControl.class.php';
+		QApplicationBase::$ClassFile['timeassessmentdatagrid'] = __DATA_META_CONTROLS__ . '/TimeAssessmentDataGrid.class.php';
+
+	// ClassPaths for the TimeResults class
+		QApplicationBase::$ClassFile['timeresults'] = __DATA_CLASSES__ . '/TimeResults.class.php';
+		QApplicationBase::$ClassFile['qqnodetimeresults'] = __DATA_CLASSES__ . '/TimeResults.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodetimeresults'] = __DATA_CLASSES__ . '/TimeResults.class.php';
+		QApplicationBase::$ClassFile['timeresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/TimeResultsMetaControl.class.php';
+		QApplicationBase::$ClassFile['timeresultsdatagrid'] = __DATA_META_CONTROLS__ . '/TimeResultsDataGrid.class.php';
+
+	// ClassPaths for the TitleList class
+		QApplicationBase::$ClassFile['titlelist'] = __DATA_CLASSES__ . '/TitleList.class.php';
+		QApplicationBase::$ClassFile['qqnodetitlelist'] = __DATA_CLASSES__ . '/TitleList.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodetitlelist'] = __DATA_CLASSES__ . '/TitleList.class.php';
+		QApplicationBase::$ClassFile['titlelistmetacontrol'] = __DATA_META_CONTROLS__ . '/TitleListMetaControl.class.php';
+		QApplicationBase::$ClassFile['titlelistdatagrid'] = __DATA_META_CONTROLS__ . '/TitleListDataGrid.class.php';
 
 	// ClassPaths for the User class
 		QApplicationBase::$ClassFile['user'] = __DATA_CLASSES__ . '/User.class.php';

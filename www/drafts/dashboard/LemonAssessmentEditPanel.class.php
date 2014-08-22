@@ -26,6 +26,12 @@
 		public $lstResource;
 		public $txtResourceStatusId;
 		public $lstGroup;
+		public $txtL;
+		public $txtE;
+		public $txtM;
+		public $txtO;
+		public $txtN;
+		public $calDateModified;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
 
@@ -61,6 +67,12 @@
 			$this->lstResource = $this->mctLemonAssessment->lstResource_Create();
 			$this->txtResourceStatusId = $this->mctLemonAssessment->txtResourceStatusId_Create();
 			$this->lstGroup = $this->mctLemonAssessment->lstGroup_Create();
+			$this->txtL = $this->mctLemonAssessment->txtL_Create();
+			$this->txtE = $this->mctLemonAssessment->txtE_Create();
+			$this->txtM = $this->mctLemonAssessment->txtM_Create();
+			$this->txtO = $this->mctLemonAssessment->txtO_Create();
+			$this->txtN = $this->mctLemonAssessment->txtN_Create();
+			$this->calDateModified = $this->mctLemonAssessment->calDateModified_Create();
 
 			// Create Buttons and Actions on this Form
 			$this->btnSave = new QButton($this);

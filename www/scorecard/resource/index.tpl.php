@@ -21,7 +21,84 @@
 	}
 ?>
 </ul></div>
-<img src='/resources/scorecard/resource/resourceImg.php/<?php _p($this->objScorecard->Id);?>' style='margin:20px;'>
+
+ <script type="text/javascript">
+
+       function DisplayChart(userData) {
+            var chart = new AmCharts.AmSerialChart();
+            chart.dataProvider = userData;
+            chart.categoryField = "name";
+            chart.marginTop = 20;
+            chart.marginLeft = 55;
+            chart.marginRight = 15;
+            chart.marginBottom = 80;
+            chart.angle = 30;
+            chart.depth3D = 15;
+            //chart.color = "#AAAAAA";
+
+            var catAxis = chart.categoryAxis;
+            catAxis.gridCount = userData.length;
+            catAxis.labelRotation = 90;
+
+            // value
+            var valueAxis = new AmCharts.ValueAxis();
+            valueAxis.title = "# of Action Items";
+            valueAxis.dashLength = 5;
+            chart.addValueAxis(valueAxis);
+
+            var graph = new AmCharts.AmGraph();
+            graph.balloonText = "[[category]]: [[value]] Action Items";
+            graph.valueField = "Actions"
+            graph.type = "column";
+            graph.lineAlpha = 0;
+            graph.fillAlphas = 0.8;
+            graph.fillColor = "#3a81ec";
+            graph.lineColor = "#3a81ec";
+            chart.addGraph(graph);
+
+            chart.write('chartContainer');
+        }
+
+       	function DisplayAllocation(userData) {
+           	var chart;
+
+       	// SERIAL CHART
+            chart = new AmCharts.AmSerialChart();
+            chart.dataProvider = userData;
+            chart.categoryField = "P";
+            // the following two lines makes chart 3D
+            chart.depth3D = 20;
+            chart.angle = 30;
+
+            // AXES
+            // category
+            var categoryAxis = chart.categoryAxis;
+            categoryAxis.labelRotation = 90;
+            categoryAxis.dashLength = 5;
+            categoryAxis.gridPosition = "start";
+
+            // value
+            var valueAxis = new AmCharts.ValueAxis();
+            valueAxis.title = "# of Action Items";
+            valueAxis.dashLength = 5;
+            chart.addValueAxis(valueAxis);
+
+            // GRAPH            
+            var graph = new AmCharts.AmGraph();
+            graph.valueField = "Actions";
+            graph.colorField = "color";
+            graph.balloonText = "[[category]]: [[value]] Action Items";
+            graph.type = "column";
+            graph.lineAlpha = 0;
+            graph.fillAlphas = 1;
+            chart.addGraph(graph);
+
+            // WRITE
+            chart.write("allocationContainer");
+       	}
+    </script>
+<div id="chartContainer" style="width: 800px; height: 400px;"></div>
+
 <div class="section">
 <h2>Individual Information</h2>
 <?php  $this->lstIndividuals->RenderWithName();?>
@@ -64,9 +141,9 @@
 	$this->lblForecastThirtyDay->Render();
 	$this->dtgForecastThirtyDay->Render();
 	
-	$this->imgResourceAllocation->Render();
 	$this->lblDebug->Render();
 ?>
+<div id="allocationContainer" style="width: 640px; height: 400px;"></div>
 <br>
 </div>
 <?php require('/../..'.__INCLUDES__ . '/footer.inc.php'); ?>

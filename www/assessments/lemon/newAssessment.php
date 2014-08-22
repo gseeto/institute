@@ -12,10 +12,9 @@ class NewLemonAssessmentForm extends InstituteForm {
 	protected $arrayValue;
 	protected $bEditing;
 
-
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect('/resources/index.php');
+		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 	}
 	
 	protected function Form_Create() {		
@@ -28,7 +27,12 @@ class NewLemonAssessmentForm extends InstituteForm {
 		$intUserId = $userArray[0]->Id;
 		
 		$assessmentArray = LemonAssessment::LoadArrayByUserId($intUserId);
-		$this->objLemonAssessment = $assessmentArray[0];
+		if($assessmentArray)
+			$this->objLemonAssessment = $assessmentArray[0];
+		else {
+			$this->objLemonAssessment = new LemonAssessment();
+			$this->objLemonAssessment->ResourceStatusId = 1;
+		}
 		
 		$this->arrayValue = array();
 		
@@ -51,11 +55,11 @@ class NewLemonAssessmentForm extends InstituteForm {
 
         $objStyle = $this->dtgAssessmentQuestions->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
+        $objStyle->BackColor = '#0098c3'; 
         
         $objStyle = $this->dtgAssessmentQuestions->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#003366'; 
+        $objStyle->BackColor = '#0098c3'; 
         
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = 'Submit';
@@ -69,7 +73,7 @@ class NewLemonAssessmentForm extends InstituteForm {
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect('/resources/assessments/lemon/index.php');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/index.php');
 	}
 	
 	protected function btnSubmit_Click() {	
@@ -86,9 +90,25 @@ class NewLemonAssessmentForm extends InstituteForm {
         }
         if(!$this->bEditing) {
 	        $this->objLemonAssessment->ResourceStatusId = 2;
+	        $this->objLemonAssessment->DateModified = new QDateTime('Now');
 	        $this->objLemonAssessment->Save();
+        } else {
+        	$resultArray = LemonAssessmentResults::LoadArrayByAssessmentId($this->objLemonAssessment->Id);
+			$lemonValues = array(0,0,0,0,0);
+        	foreach($resultArray as $objResult) {
+				$intIndex = $objResult->Question->LemonTypeId - 1;
+				$lemonValues[$intIndex] += $objResult->Value;
+			}
+			// Save the values if they haven't already been saved.
+			$this->objLemonAssessment->L = $lemonValues[0];
+			$this->objLemonAssessment->E = $lemonValues[1];
+			$this->objLemonAssessment->M = $lemonValues[2];
+			$this->objLemonAssessment->O = $lemonValues[3];
+			$this->objLemonAssessment->N = $lemonValues[4];
+			$this->objLemonAssessment->DateModified = new QDateTime('Now');
+			$this->objLemonAssessment->Save();	
         }
-		QApplication::Redirect('/resources/assessments/lemon/viewAssessment.php');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/viewAssessment.php');
 	}
 	
 	public function dtgAssessmentQuestions_Bind() {

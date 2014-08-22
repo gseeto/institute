@@ -58,4 +58,156 @@ assigned to a particular individual.
 
 <?php $this->dtgUserActions->Render();?>
 </div>
+<script type="text/javascript">
+function btnCancelAction_Click(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("btnActionCancel".length);
+	$("#lblAction"+intIndex+"_ctl").show();	
+	var oldText = $("#lblAction"+intIndex).text();
+	$("#txtAction"+intIndex).text(oldText);
+	$("#txtAction"+intIndex+"_ctl").hide();
+	$("#btnActionSave"+intIndex+"_ctl").hide();
+	$("#btnActionCancel"+intIndex+"_ctl").hide();
+}
+function lblAction_Clicked(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("lblAction".length);
+    $("#lblAction"+intIndex+"_ctl").hide();
+	$("#txtAction"+intIndex+"_ctl").show();
+	$("#btnActionSave"+intIndex+"_ctl").show();
+	$("#btnActionCancel"+intIndex+"_ctl").show();
+}
+function btnCancelUserAction_Click(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("btnUserActionCancel".length);
+	$("#lblUserAction"+intIndex+"_ctl").show();	
+	var oldText = $("#lblUserAction"+intIndex).text();
+	$("#txtUserAction"+intIndex).text(oldText);
+	$("#txtUserAction"+intIndex+"_ctl").hide();
+	$("#btnUserActionSave"+intIndex+"_ctl").hide();
+	$("#btnUserActionCancel"+intIndex+"_ctl").hide();
+}
+function lblUserAction_Clicked(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("lblUserAction".length);
+    $("#lblUserAction"+intIndex+"_ctl").hide();
+	$("#txtUserAction"+intIndex+"_ctl").show();
+	$("#btnUserActionSave"+intIndex+"_ctl").show();
+	$("#btnUserActionCancel"+intIndex+"_ctl").show();
+}
+
+function btnCancelUserComment_Click(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("btnUserCommentCancel".length);
+	$("#lblUserComment"+intIndex+"_ctl").show();	
+	var oldText = $("#lblUserComment"+intIndex).text();
+	$("#txtUserComment"+intIndex).text(oldText);
+	$("#txtUserComment"+intIndex+"_ctl").hide();
+	$("#btnUserCommentSave"+intIndex+"_ctl").hide();
+	$("#btnUserCommentCancel"+intIndex+"_ctl").hide();
+}
+function lblUserComment_Clicked(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("lblUserComment".length);
+    $("#lblUserComment"+intIndex+"_ctl").hide();
+	$("#txtUserComment"+intIndex+"_ctl").show();
+	$("#btnUserCommentSave"+intIndex+"_ctl").show();
+	$("#btnUserCommentCancel"+intIndex+"_ctl").show();
+}
+
+function btnCancelLatestAction_Click(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("btnLatestActionCancel".length);
+	$("#lblLatestAction"+intIndex+"_ctl").show();	
+	var oldText = $("#lblLatestAction"+intIndex).text();
+	$("#txLatestAction"+intIndex).text(oldText);
+	$("#txtLatestAction"+intIndex+"_ctl").hide();
+	$("#btnLatestActionSave"+intIndex+"_ctl").hide();
+	$("#btnLatestActionCancel"+intIndex+"_ctl").hide();
+}
+function lblLatestAction_Clicked(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("lblLatestAction".length);
+    $("#lblLatestAction"+intIndex+"_ctl").hide();
+	$("#txtLatestAction"+intIndex+"_ctl").show();
+	$("#btnLatestActionSave"+intIndex+"_ctl").show();
+	$("#btnLatestActionCancel"+intIndex+"_ctl").show();
+}
+
+function btnCancelLatestComment_Click(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("btnLatestCommentCancel".length);
+	$("#lblLatestComment"+intIndex+"_ctl").show();	
+	var oldText = $("#lblLatestComment"+intIndex).text();
+	$("#txtLatestComment"+intIndex).text(oldText);
+	$("#txtLatestComment"+intIndex+"_ctl").hide();
+	$("#btnLatestCommentSave"+intIndex+"_ctl").hide();
+	$("#btnLatestCommentCancel"+intIndex+"_ctl").hide();
+}
+function lblLatestComment_Clicked(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("lblLatestComment".length);
+    $("#lblLatestComment"+intIndex+"_ctl").hide();
+	$("#txtLatestComment"+intIndex+"_ctl").show();
+	$("#btnLatestCommentSave"+intIndex+"_ctl").show();
+	$("#btnLatestCommentCancel"+intIndex+"_ctl").show();
+}
+
+function btnCancelLatestStrategy_Click(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("btnLatestStrategyCancel".length);
+	$("#lblLatestStrategy"+intIndex+"_ctl").show();	
+	var oldText = $("#lblLatestStrategy"+intIndex).text();
+	$("#txLatestStrategy"+intIndex).text(oldText);
+	$("#txtLatestStrategy"+intIndex+"_ctl").hide();
+	$("#btnLatestStrategySave"+intIndex+"_ctl").hide();
+	$("#btnLatestStrategyCancel"+intIndex+"_ctl").hide();
+}
+function lblLatestStrategy_Clicked(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("lblLatestStrategy".length);
+    $("#lblLatestStrategy"+intIndex+"_ctl").hide();
+	$("#txtLatestStrategy"+intIndex+"_ctl").show();
+	$("#btnLatestStrategySave"+intIndex+"_ctl").show();
+	$("#btnLatestStrategyCancel"+intIndex+"_ctl").show();
+}
+
+function btnCancelLatestKpi_Click(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("btnLatestKpiCancel".length);
+	$("#lblLatestKpi"+intIndex+"_ctl").show();	
+	var oldText = $("#lblLatestKpi"+intIndex).text();
+	$("#txLatestKpi"+intIndex).text(oldText);
+	$("#txtLatestKpi"+intIndex+"_ctl").hide();
+	$("#btnLatestKpiSave"+intIndex+"_ctl").hide();
+	$("#btnLatestKpiCancel"+intIndex+"_ctl").hide();
+}
+function lblLatestKpi_Clicked(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("lblLatestKpi".length);
+    $("#lblLatestKpi"+intIndex+"_ctl").hide();
+	$("#txtLatestKpi"+intIndex+"_ctl").show();
+	$("#btnLatestKpiSave"+intIndex+"_ctl").show();
+	$("#btnLatestKpiCancel"+intIndex+"_ctl").show();
+}
+
+function btnCancelLatestKpiComment_Click(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("btnLatestKpiCommentCancel".length);
+	$("#lblLatestKpiComment"+intIndex+"_ctl").show();	
+	var oldText = $("#lblLatestKpiComment"+intIndex).text();
+	$("#txLatestKpiComment"+intIndex).text(oldText);
+	$("#txtLatestKpiComment"+intIndex+"_ctl").hide();
+	$("#btnLatestKpiCommentSave"+intIndex+"_ctl").hide();
+	$("#btnLatestKpiCommentCancel"+intIndex+"_ctl").hide();
+}
+function lblLatestKpiComment_Clicked(objControl) {
+	var strControlId = objControl.id;
+    var intIndex = strControlId.substr("lblLatestKpiComment".length);
+    $("#lblLatestKpiComment"+intIndex+"_ctl").hide();
+	$("#txtLatestKpiComment"+intIndex+"_ctl").show();
+	$("#btnLatestKpiCommentSave"+intIndex+"_ctl").show();
+	$("#btnLatestKpiCommentCancel"+intIndex+"_ctl").show();
+}
+</script>
 <?php require('/../..'.__INCLUDES__ . '/footer.inc.php'); ?>

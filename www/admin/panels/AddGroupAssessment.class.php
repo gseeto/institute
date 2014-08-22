@@ -53,7 +53,7 @@
 
 			$this->txtKeysLeft = new QIntegerTextBox($this);
 			$this->txtKeysLeft->Name = 'Keys Left';
-			
+			$this->txtKeysLeft->Width = 50;
 			$this->lstAssessmentType = new QListBox($this);
 			$this->lstAssessmentType->Name = 'AssessmentType';
 			foreach(Resource::LoadAll() as $objResource) {
@@ -77,17 +77,22 @@
 	}
 	
      public function btnSubmit_Click($strFormId, $strControlId, $strParameter) {
-		$objAssessment = new GroupAssessmentList();
-		$objAssessment->KeyCode = $this->txtKeyCode->Text;
-		$objAssessment->Description = $this->txtDescription->Text;
-		$objAssessment->TotalKeys = $this->txtTotalKeys->Text;
-		$objAssessment->KeysLeft = $this->txtKeysLeft->Text;
-		$objAssessment->ResourceId = $this->lstAssessmentType->SelectedValue;
-		$objAssessment->Save();
-		$this->Visible = false;
-		// And call the Form's Method CallBack, passing in "true" to state that we've made an update
-        $strMethodCallBack = $this->strMethodCallBack;
-        $this->objParent->$strMethodCallBack(true);
+     	if(GroupAssessmentList::LoadByKeyCode($this->txtKeyCode->Text)) {
+     		$this->txtKeyCode->HtmlAfter = '<br><span style="color:red;">Duplicate Keycode. Please select another.</span>';
+     	} else {
+     		$this->txtKeyCode->HtmlAfter = '';
+			$objAssessment = new GroupAssessmentList();
+			$objAssessment->KeyCode = $this->txtKeyCode->Text;
+			$objAssessment->Description = $this->txtDescription->Text;
+			$objAssessment->TotalKeys = ($this->txtTotalKeys->Text!= null)? $this->txtTotalKeys->Text : 1;
+			$objAssessment->KeysLeft = ($this->txtKeysLeft->Text != null) ?$this->txtKeysLeft->Text : 1;
+			$objAssessment->ResourceId = $this->lstAssessmentType->SelectedValue;
+			$objAssessment->Save();
+			$this->Visible = false;
+			// And call the Form's Method CallBack, passing in "true" to state that we've made an update
+	        $strMethodCallBack = $this->strMethodCallBack;
+	        $this->objParent->$strMethodCallBack(true);
+     	}
 	}
 	
 
