@@ -1,0 +1,142 @@
+<?php
+	// Load the Qcodo Development Framework
+	require(dirname(__FILE__) . '/../../includes/prepend.inc.php');
+
+	/**
+	 * This is a quick-and-dirty draft QForm object to do Create, Edit, and Delete functionality
+	 * of the TimeResults class.  It uses the code-generated
+	 * TimeResultsMetaControl class, which has meta-methods to help with
+	 * easily creating/defining controls to modify the fields of a TimeResults columns.
+	 *
+	 * Any display customizations and presentation-tier logic can be implemented
+	 * here by overriding existing or implementing new methods, properties and variables.
+	 * 
+	 * NOTE: This file is overwritten on any code regenerations.  If you want to make
+	 * permanent changes, it is STRONGLY RECOMMENDED to move both time_results_edit.php AND
+	 * time_results_edit.tpl.php out of this Form Drafts directory.
+	 *
+	 * @package My Application
+	 * @subpackage Drafts
+	 */
+	class TimeResultsEditForm extends QForm {
+		// Local instance of the TimeResultsMetaControl
+		protected $mctTimeResults;
+
+		// Controls for TimeResults's Data Fields
+		protected $lblId;
+		protected $lstAssessment;
+		protected $txtTime;
+		protected $txtActivity;
+		protected $chkCareer;
+		protected $chkCalling;
+		protected $chkCommunity;
+		protected $chkCreativity;
+		protected $chkMargin;
+
+		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
+
+		// Other Controls
+		protected $btnSave;
+		protected $btnDelete;
+		protected $btnCancel;
+
+		// Create QForm Event Handlers as Needed
+
+//		protected function Form_Exit() {}
+//		protected function Form_Load() {}
+//		protected function Form_PreRender() {}
+
+		protected function Form_Run() {
+			// Security check for ALLOW_REMOTE_ADMIN
+			// To allow access REGARDLESS of ALLOW_REMOTE_ADMIN, simply remove the line below
+			QApplication::CheckRemoteAdmin();
+		}
+
+		protected function Form_Create() {
+			// Use the CreateFromPathInfo shortcut (this can also be done manually using the TimeResultsMetaControl constructor)
+			// MAKE SURE we specify "$this" as the MetaControl's (and thus all subsequent controls') parent
+			$this->mctTimeResults = TimeResultsMetaControl::CreateFromPathInfo($this);
+
+			// Call MetaControl's methods to create qcontrols based on TimeResults's data fields
+			$this->lblId = $this->mctTimeResults->lblId_Create();
+			$this->lstAssessment = $this->mctTimeResults->lstAssessment_Create();
+			$this->txtTime = $this->mctTimeResults->txtTime_Create();
+			$this->txtActivity = $this->mctTimeResults->txtActivity_Create();
+			$this->chkCareer = $this->mctTimeResults->chkCareer_Create();
+			$this->chkCalling = $this->mctTimeResults->chkCalling_Create();
+			$this->chkCommunity = $this->mctTimeResults->chkCommunity_Create();
+			$this->chkCreativity = $this->mctTimeResults->chkCreativity_Create();
+			$this->chkMargin = $this->mctTimeResults->chkMargin_Create();
+
+			// Create Buttons and Actions on this Form
+			$this->btnSave = new QButton($this);
+			$this->btnSave->Text = QApplication::Translate('Save');
+			$this->btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSave_Click'));
+			$this->btnSave->CausesValidation = true;
+
+			$this->btnCancel = new QButton($this);
+			$this->btnCancel->Text = QApplication::Translate('Cancel');
+			$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));
+
+			$this->btnDelete = new QButton($this);
+			$this->btnDelete->Text = QApplication::Translate('Delete');
+			$this->btnDelete->AddAction(new QClickEvent(), new QConfirmAction(QApplication::Translate('Are you SURE you want to DELETE this') . ' ' . QApplication::Translate('TimeResults') . '?'));
+			$this->btnDelete->AddAction(new QClickEvent(), new QAjaxAction('btnDelete_Click'));
+			$this->btnDelete->Visible = $this->mctTimeResults->EditMode;
+		}
+
+		/**
+		 * This Form_Validate event handler allows you to specify any custom Form Validation rules.
+		 * It will also Blink() on all invalid controls, as well as Focus() on the top-most invalid control.
+		 */
+		protected function Form_Validate() {
+			// By default, we report that Custom Validations passed
+			$blnToReturn = true;
+
+			// Custom validation rules goes here 
+			// Be sure to set $blnToReturn to false if any custom validation fails!
+
+			$blnFocused = false;
+			foreach ($this->GetErrorControls() as $objControl) {
+				// Set Focus to the top-most invalid control
+				if (!$blnFocused) {
+					$objControl->Focus();
+					$blnFocused = true;
+				}
+
+				// Blink on ALL invalid controls
+				$objControl->Blink();
+			}
+
+			return $blnToReturn;
+		}
+
+		// Button Event Handlers
+
+		protected function btnSave_Click($strFormId, $strControlId, $strParameter) {
+			// Delegate "Save" processing to the TimeResultsMetaControl
+			$this->mctTimeResults->SaveTimeResults();
+			$this->RedirectToListPage();
+		}
+
+		protected function btnDelete_Click($strFormId, $strControlId, $strParameter) {
+			// Delegate "Delete" processing to the TimeResultsMetaControl
+			$this->mctTimeResults->DeleteTimeResults();
+			$this->RedirectToListPage();
+		}
+
+		protected function btnCancel_Click($strFormId, $strControlId, $strParameter) {
+			$this->RedirectToListPage();
+		}
+
+		// Other Methods
+		
+		protected function RedirectToListPage() {
+			QApplication::Redirect(__VIRTUAL_DIRECTORY__ . __FORM_DRAFTS__ . '/time_results_list.php');
+		}
+	}
+
+	// Go ahead and run this form object to render the page and its event handlers, implicitly using
+	// time_results_edit.tpl.php as the included HTML template file
+	TimeResultsEditForm::Run('TimeResultsEditForm');
+?>
