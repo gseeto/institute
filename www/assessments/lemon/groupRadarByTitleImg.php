@@ -24,7 +24,7 @@ $graph->HideTickMarks();
 		
 // Setup graph titles
 $graph->title->Set("Group Radar");
-$graph->SetUserFont('ttf-dejavu/DejaVuSans.ttf');
+$graph->SetUserFont('dejavu/DejaVuSans.ttf');
 $graph->title->SetFont(FF_USERFONT,FS_NORMAL,18);
 
 $categoriesArray = array();

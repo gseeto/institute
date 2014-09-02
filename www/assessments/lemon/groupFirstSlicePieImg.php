@@ -82,7 +82,7 @@ $graph = new PieGraph(400,400);
 $graph->SetShadow();
 
 $graph->title->Set("Group First Slice Pie Chart");
-$graph->SetUserFont('ttf-dejavu/DejaVuSans.ttf');
+$graph->SetUserFont('dejavu/DejaVuSans.ttf');
 $graph->title->SetFont(FF_USERFONT,FS_NORMAL,18);
 
 

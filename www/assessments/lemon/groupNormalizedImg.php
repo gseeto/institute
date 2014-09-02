@@ -108,7 +108,7 @@ $graph->title->Set("Normalized Asssessments");
 $graph->xaxis->SetTickLabels($labels);
 $graph->xaxis->SetLabelAngle(40); // 45 degrees angle
 
-$graph->SetUserFont('ttf-dejavu/DejaVuSans.ttf');
+$graph->SetUserFont('dejavu/DejaVuSans.ttf');
 $graph->title->SetFont(FF_USERFONT,FS_NORMAL,16);
 $graph->yaxis->title->SetFont(FF_USERFONT,FS_NORMAL);
 $graph->xaxis->title->SetFont(FF_USERFONT,FS_NORMAL);

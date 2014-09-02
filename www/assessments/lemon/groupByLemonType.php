@@ -100,7 +100,7 @@ $graph->SetScale("textlin");
 $graph->SetMarginColor('white');
 
 // Setup titles and fonts
-$graph->SetUserFont('ttf-dejavu/DejaVuSans.ttf');
+$graph->SetUserFont('dejavu/DejaVuSans.ttf');
 $graph->title->SetFont(FF_USERFONT,FS_NORMAL,16);
 $graph->title->Set('The Top 10 '.LemonType::ToString($lemonType+1));
 $graph->xaxis->SetTickLabels($labelArray);

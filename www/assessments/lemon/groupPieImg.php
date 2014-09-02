@@ -31,7 +31,7 @@ $graph = new PieGraph(400,400);
 $graph->SetShadow();
 
 $graph->title->Set("Group Pie Chart");
-$graph->SetUserFont('ttf-dejavu/DejaVuSans.ttf');
+$graph->SetUserFont('dejavu/DejaVuSans.ttf');
 $graph->title->SetFont(FF_USERFONT,FS_NORMAL,18);
 
 $pieColors = array('#6C98B0','#8AC16E','#FFD43F','#FCA343','#E66E24');

@@ -70,7 +70,7 @@ if ($intGender == 0) {
 } else {
 	$graph->title->Set('MALE');
 }
-$graph->SetUserFont('ttf-dejavu/DejaVuSans.ttf');
+$graph->SetUserFont('dejavu/DejaVuSans.ttf');
 $graph->title->SetFont(FF_USERFONT,FS_NORMAL,18);
 $graph->xaxis->HideLabels();
 

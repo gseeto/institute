@@ -10,7 +10,7 @@ $graph = new RadarGraph(700,500);
 // Set background color and shadow
 $graph->SetColor("white");
 $graph->SetShadow();
-$graph->SetUserFont('ttf-dejavu/DejaVuSans.ttf');
+$graph->SetUserFont('dejavu/DejaVuSans.ttf');
 
 // Position the graph
 $graph->SetCenter(0.4,0.55);

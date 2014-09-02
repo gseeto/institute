@@ -108,7 +108,7 @@ $graph->SetShadow();
 //$graph->SetMarginColor('silver');
 
 $graph->title->Set($txtTitle);
-$graph->SetUserFont('ttf-dejavu/DejaVuSans.ttf');
+$graph->SetUserFont('dejavu/DejaVuSans.ttf');
 $graph->title->SetFont(FF_USERFONT,FS_NORMAL,16);
 
 $pieColors = array('#6C98B0','#8AC16E','#FFD43F','#FCA343','#E66E24');
