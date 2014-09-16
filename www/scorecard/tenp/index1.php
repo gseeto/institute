@@ -69,7 +69,7 @@ class ScorecardForm extends InstituteForm {
 		// Display Statement if Category is Purpose or Positioning
 		$this->imgStatement = new QLabel($this);
 		$this->imgStatement->HtmlEntities = false;
-		$this->imgStatement->Text = '<img id="imgStatement" style="display:inline; margin-right:10px; cursor:pointer;" src="/resources/assets/images/icons/page_edit.png" />';
+		$this->imgStatement->Text = '<img id="imgStatement" style="display:inline; margin-right:10px; cursor:pointer;" src="/assets/images/icons/page_edit.png" />';
 		
 		$this->lblStatement = new QLabel($this,'lblStatement');
 		$this->lblStatement->Width = 800;
@@ -77,7 +77,7 @@ class ScorecardForm extends InstituteForm {
 		$this->lblStatement->CssClass = 'statement';
 		$this->lblStatement->Cursor = 'pointer';
 		$this->lblStatement->HtmlEntities = false;
-		$this->lblStatement->HtmlBefore =  '<img id="imgStatement" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/resources/assets/images/icons/page_edit.png" />';
+		$this->lblStatement->HtmlBefore =  '<img id="imgStatement" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/assets/images/icons/page_edit.png" />';
 		//$this->lblStatement->AddAction(new QMouseOverEvent(), new QJavaScriptAction('lblStatement_MouseOver(this)'));
 		//$this->lblStatement->AddAction(new QMouseOutEvent(), new QJavaScriptAction('lblStatement_MouseOut(this)'));
 		
@@ -328,7 +328,7 @@ class ScorecardForm extends InstituteForm {
 		$objStrategy->Count = Strategy::GetNextCount( $this->objScorecard->Id,$this->intCategoryTypeId);
 		$objStrategy->ModifiedBy = $this->intUserId;
 		$objStrategy->Save();
-		QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
+		QApplication::Redirect('/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
 	}
 
 	public function RenderKPI($objKPI) {
@@ -382,7 +382,7 @@ class ScorecardForm extends InstituteForm {
         	$lblKpi->Cursor = 'pointer';
         	$lblKpi->HtmlEntities = false;
         	$lblKpi->Padding = '10px 20px';
-        	$lblKpi->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/resources/assets/images/icons/page_edit.png" />';     	
+        	$lblKpi->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/assets/images/icons/page_edit.png" />';     	
    			$lblKpi->AddAction(new QClickEvent(), new QJavaScriptAction('lblKpi_Clicked(this)'));
         }
         return ($txtKPI->Render(false) .$btnSave->Render(false). $btnCancel->Render(false). $lblKpi->RenderWithName(false));
@@ -510,7 +510,7 @@ class ScorecardForm extends InstituteForm {
         	$lblComment->Cursor = 'pointer';
         	$lblComment->HtmlEntities = false;
         	$lblComment->Padding = '10px 20px';
-        	$lblComment->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblComment->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/assets/images/icons/page_edit.png" />';
           	$lblComment->AddAction(new QClickEvent(), new QJavaScriptAction('lblKpiComment_Clicked(this)'));
         }
         return ($txtComment->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblComment->RenderWithName(false));
@@ -590,7 +590,7 @@ class ScorecardForm extends InstituteForm {
         	//$lblAction->Height = 20;
         	$lblAction->HtmlEntities = false;
         	$lblAction->Padding = '5px 15px';
-        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/assets/images/icons/page_edit.png" />';
         	
   			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblAction_Clicked(this)'));	
         }
@@ -748,7 +748,7 @@ class ScorecardForm extends InstituteForm {
         	$lblStrategy->Cursor = 'pointer';
         	$lblStrategy->Padding = '10px 25px';
         	$lblStrategy->HtmlEntities = false;
-        	$lblStrategy->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblStrategy->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/assets/images/icons/page_edit.png" />';
 			$lblStrategy->AddAction(new QClickEvent(), new QJavaScriptAction('lblStrategy_Clicked(this)'));	
         }
         
@@ -867,7 +867,7 @@ class ScorecardForm extends InstituteForm {
         	$lblComment->Cursor = 'pointer';
         	$lblComment->HtmlEntities = false;
         	$lblComment->Padding = '10px 30px';
-        	$lblComment->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblComment->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/assets/images/icons/page_edit.png" />';
         	
          	$lblComment->AddAction(new QClickEvent(), new QJavaScriptAction('lblComment_Clicked(this)'));
         }

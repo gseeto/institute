@@ -456,7 +456,7 @@ class ToolslForm extends InstituteForm {
         	$lblAction->Width = 400;
         	$lblAction->HtmlEntities = false;
         	$lblAction->Padding = '5px 15px';
-        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/assets/images/icons/page_edit.png" />';
         	
   			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblLatestKpiComment_Clicked(this)'));	
         }
@@ -534,7 +534,7 @@ class ToolslForm extends InstituteForm {
         	$lblAction->Width = 200;
         	$lblAction->HtmlEntities = false;
         	$lblAction->Padding = '5px 15px';
-        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/assets/images/icons/page_edit.png" />';
         	
   			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblLatestComment_Clicked(this)'));	
         }
@@ -611,7 +611,7 @@ class ToolslForm extends InstituteForm {
         	$lblAction->Width = 200;
         	$lblAction->HtmlEntities = false;
         	$lblAction->Padding = '5px 15px';
-        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/assets/images/icons/page_edit.png" />';
         	
   			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblUserComment_Clicked(this)'));	
         }
@@ -818,7 +818,7 @@ class ToolslForm extends InstituteForm {
         	$lblAction->Width = 400;
         	$lblAction->HtmlEntities = false;
         	$lblAction->Padding = '5px 15px';
-        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/assets/images/icons/page_edit.png" />';
         	
   			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblLatestKpi_Clicked(this)'));	
         }
@@ -896,7 +896,7 @@ class ToolslForm extends InstituteForm {
         	$lblAction->Width = 400;
         	$lblAction->HtmlEntities = false;
         	$lblAction->Padding = '5px 15px';
-        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/assets/images/icons/page_edit.png" />';
         	
   			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblLatestAction_Clicked(this)'));	
         }
@@ -974,7 +974,7 @@ class ToolslForm extends InstituteForm {
         	$lblAction->Width = 400;
         	$lblAction->HtmlEntities = false;
         	$lblAction->Padding = '5px 15px';
-        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/assets/images/icons/page_edit.png" />';
         	
   			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblAction_Clicked(this)'));	
         }
@@ -1052,7 +1052,7 @@ class ToolslForm extends InstituteForm {
         	$lblAction->Width = 400;
         	$lblAction->HtmlEntities = false;
         	$lblAction->Padding = '5px 15px';
-        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/assets/images/icons/page_edit.png" />';
         	
   			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblUserAction_Clicked(this)'));	
         }
@@ -1165,7 +1165,7 @@ class ToolslForm extends InstituteForm {
         	$lblAction->Width = 400;
         	$lblAction->HtmlEntities = false;
         	$lblAction->Padding = '5px 15px';
-        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblAction->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin:10px; cursor:pointer; position:relative; top:5px; left:2px;" src="/assets/images/icons/page_edit.png" />';
         	
   			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblLatestStrategy_Clicked(this)'));	
         }

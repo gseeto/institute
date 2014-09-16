@@ -336,7 +336,7 @@ public function writeToLogFile($stringData) {
 		$objStrategy->Count = Strategy::GetNextCount( $this->objScorecard->Id,$this->intCategoryTypeId);
 		$objStrategy->ModifiedBy = $this->intUserId;
 		$objStrategy->Save();
-		QApplication::Redirect('/resources/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
+		QApplication::Redirect('/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
 	}
 
 	public function RenderKPI($objKPI) {
@@ -516,7 +516,7 @@ public function writeToLogFile($stringData) {
         	$lblComment->Cursor = 'pointer';
         	$lblComment->HtmlEntities = false;
         	$lblComment->Padding = '10px 20px';
-        	$lblComment->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/resources/assets/images/icons/page_edit.png" />';
+        	$lblComment->HtmlBefore = '<img id="'.$strImgEdit.'" style="display:inline; margin-right:10px; cursor:pointer; position:relative; top:25px; left:5px;" src="/assets/images/icons/page_edit.png" />';
           	$lblComment->AddAction(new QClickEvent(), new QJavaScriptAction('lblKpiComment_Clicked(this)'));
         }
         return ($txtComment->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblComment->RenderWithName(false));
