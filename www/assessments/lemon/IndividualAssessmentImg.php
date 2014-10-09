@@ -56,7 +56,7 @@ $graph->SetMarginColor('white');
 // Setup titles and fonts
 $graph->title->Set($title);
 
-$graph->SetUserFont('ttf-dejavu/DejaVuSans.ttf');
+$graph->SetUserFont('dejavu/DejaVuSans.ttf');
 $graph->title->SetFont(FF_USERFONT,FS_NORMAL,18);
 $graph->xaxis->HideLabels();
 
