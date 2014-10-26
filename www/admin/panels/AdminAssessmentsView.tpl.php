@@ -10,7 +10,8 @@
     <li><a href="#tabs-6">Time</a></li>
     <li><a href="#tabs-7">LEMON</a></li>
     <li><a href="#tabs-8">LRA</a></li>
-    <li><a href="#tabs-9">Group Assessments</a></li>
+    <li><a href="#tabs-9">Upward</a></li>
+    <li><a href="#tabs-10">Group Assessments</a></li>
   </ul>
   <div id="tabs-1">
     <h3>Kingdom Business Impact Assessments</h3> 
@@ -108,7 +109,14 @@
 	<?php $_CONTROL->btnAddLRAAssessment->Render(); ?> 
 	<?php $_CONTROL->pnlAddLRAAssessment->Render(); ?>
   </div>
-  <div id="tabs-9">
+   <div id="tabs-9">
+    <h3>Education 8-P Assessment</h3>
+	<?php $_CONTROL->dtgUpwardAssessments->Render(); ?> 
+	<br>
+	<?php $_CONTROL->btnAddUpwardAssessment->Render(); ?> 
+	<?php $_CONTROL->pnlAddUpwardAssessment->Render(); ?>
+  </div>
+  <div id="tabs-10">
     <h3>Group Assessment</h3>
 	<p>Add a group assessment. This allows you to set up a key code (typically for companies) so that a number of people can use the same key code to access an assessment.</p>
 	<p>As the individuals take the assessment, separate individual accounts will be created for them that they can use to access their assessments in future.</p>  

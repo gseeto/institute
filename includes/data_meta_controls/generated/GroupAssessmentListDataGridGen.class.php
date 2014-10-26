@@ -300,6 +300,7 @@
 				case 'Resource': return QQN::GroupAssessmentList()->Resource;
 				case 'KeyCode': return QQN::GroupAssessmentList()->KeyCode;
 				case 'Description': return QQN::GroupAssessmentList()->Description;
+				case 'DateModified': return QQN::GroupAssessmentList()->DateModified;
 				default: throw new QCallerException('Simple Property not found in GroupAssessmentListDataGrid content: ' . $mixContent);
 			} else if ($mixContent instanceof QQAssociationNode)
 				throw new QCallerException('Content QQNode cannot go through any "To Many" association nodes.');

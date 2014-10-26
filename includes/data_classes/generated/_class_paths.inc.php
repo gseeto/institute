@@ -314,6 +314,27 @@
 		QApplicationBase::$ClassFile['titlelistmetacontrol'] = __DATA_META_CONTROLS__ . '/TitleListMetaControl.class.php';
 		QApplicationBase::$ClassFile['titlelistdatagrid'] = __DATA_META_CONTROLS__ . '/TitleListDataGrid.class.php';
 
+	// ClassPaths for the UpwardAssessment class
+		QApplicationBase::$ClassFile['upwardassessment'] = __DATA_CLASSES__ . '/UpwardAssessment.class.php';
+		QApplicationBase::$ClassFile['qqnodeupwardassessment'] = __DATA_CLASSES__ . '/UpwardAssessment.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodeupwardassessment'] = __DATA_CLASSES__ . '/UpwardAssessment.class.php';
+		QApplicationBase::$ClassFile['upwardassessmentmetacontrol'] = __DATA_META_CONTROLS__ . '/UpwardAssessmentMetaControl.class.php';
+		QApplicationBase::$ClassFile['upwardassessmentdatagrid'] = __DATA_META_CONTROLS__ . '/UpwardAssessmentDataGrid.class.php';
+
+	// ClassPaths for the UpwardQuestions class
+		QApplicationBase::$ClassFile['upwardquestions'] = __DATA_CLASSES__ . '/UpwardQuestions.class.php';
+		QApplicationBase::$ClassFile['qqnodeupwardquestions'] = __DATA_CLASSES__ . '/UpwardQuestions.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodeupwardquestions'] = __DATA_CLASSES__ . '/UpwardQuestions.class.php';
+		QApplicationBase::$ClassFile['upwardquestionsmetacontrol'] = __DATA_META_CONTROLS__ . '/UpwardQuestionsMetaControl.class.php';
+		QApplicationBase::$ClassFile['upwardquestionsdatagrid'] = __DATA_META_CONTROLS__ . '/UpwardQuestionsDataGrid.class.php';
+
+	// ClassPaths for the UpwardResults class
+		QApplicationBase::$ClassFile['upwardresults'] = __DATA_CLASSES__ . '/UpwardResults.class.php';
+		QApplicationBase::$ClassFile['qqnodeupwardresults'] = __DATA_CLASSES__ . '/UpwardResults.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodeupwardresults'] = __DATA_CLASSES__ . '/UpwardResults.class.php';
+		QApplicationBase::$ClassFile['upwardresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/UpwardResultsMetaControl.class.php';
+		QApplicationBase::$ClassFile['upwardresultsdatagrid'] = __DATA_META_CONTROLS__ . '/UpwardResultsDataGrid.class.php';
+
 	// ClassPaths for the User class
 		QApplicationBase::$ClassFile['user'] = __DATA_CLASSES__ . '/User.class.php';
 		QApplicationBase::$ClassFile['qqnodeuser'] = __DATA_CLASSES__ . '/User.class.php';

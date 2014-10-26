@@ -29,6 +29,8 @@
 
 		<?php $this->txtDescription->RenderWithName(); ?>
 
+		<?php $this->calDateModified->RenderWithName(); ?>
+
 		<?php $this->lstUsersAsAssessmentManager->RenderWithName(true, "Rows=7"); ?>
 
 	</div>

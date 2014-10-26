@@ -271,6 +271,24 @@
 			return new QQNodeTitleList('title_list', null, null);
 		}
 		/**
+		 * @return QQNodeUpwardAssessment
+		 */
+		static public function UpwardAssessment() {
+			return new QQNodeUpwardAssessment('upward_assessment', null, null);
+		}
+		/**
+		 * @return QQNodeUpwardQuestions
+		 */
+		static public function UpwardQuestions() {
+			return new QQNodeUpwardQuestions('upward_questions', null, null);
+		}
+		/**
+		 * @return QQNodeUpwardResults
+		 */
+		static public function UpwardResults() {
+			return new QQNodeUpwardResults('upward_results', null, null);
+		}
+		/**
 		 * @return QQNodeUser
 		 */
 		static public function User() {

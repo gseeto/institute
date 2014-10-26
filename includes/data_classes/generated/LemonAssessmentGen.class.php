@@ -26,7 +26,7 @@
 	 * @property integer $M the value for intM 
 	 * @property integer $O the value for intO 
 	 * @property integer $N the value for intN 
-	 * @property QDateTime $DateModified the value for dttDateModified 
+	 * @property QDateTime $DateModified the value for dttDateModified (Not Null)
 	 * @property User $User the value for the User object referenced by intUserId 
 	 * @property Company $Company the value for the Company object referenced by intCompanyId 
 	 * @property Resource $Resource the value for the Resource object referenced by intResourceId 
@@ -1218,7 +1218,7 @@
 					return $this->intN;
 
 				case 'DateModified':
-					// Gets the value for dttDateModified 
+					// Gets the value for dttDateModified (Not Null)
 					// @return QDateTime
 					return $this->dttDateModified;
 
@@ -1434,7 +1434,7 @@
 					}
 
 				case 'DateModified':
-					// Sets the value for dttDateModified 
+					// Sets the value for dttDateModified (Not Null)
 					// @param QDateTime $mixValue
 					// @return QDateTime
 					try {

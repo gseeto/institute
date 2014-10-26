@@ -650,6 +650,7 @@
 			$this->calDateModified->Name = QApplication::Translate('Date Modified');
 			$this->calDateModified->DateTime = $this->objLemonAssessment->DateModified;
 			$this->calDateModified->DateTimePickerType = QDateTimePickerType::Date;
+			$this->calDateModified->Required = true;
 			return $this->calDateModified;
 		}
 
@@ -664,6 +665,7 @@
 			$this->lblDateModified->Name = QApplication::Translate('Date Modified');
 			$this->strDateModifiedDateTimeFormat = $strDateTimeFormat;
 			$this->lblDateModified->Text = sprintf($this->objLemonAssessment->DateModified) ? $this->objLemonAssessment->DateModified->__toString($this->strDateModifiedDateTimeFormat) : null;
+			$this->lblDateModified->Required = true;
 			return $this->lblDateModified;
 		}
 

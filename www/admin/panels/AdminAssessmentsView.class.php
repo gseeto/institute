@@ -50,6 +50,10 @@
 		public $btnAddLRAAssessment;
 		public $pnlAddLRAAssessment;
 		
+		public $dtgUpwardAssessments;
+		public $btnAddUpwardAssessment;
+		public $pnlAddUpwardAssessment;
+		
 		public $txtKeyCode;
 		public $lblKeyCode;
 		public $txtDescription;
@@ -496,6 +500,45 @@
 	        $this->pnlAddLRAAssessment->Position = QPosition::Relative;
 	        $this->pnlAddLRAAssessment->Visible = false;
 	        $this->pnlAddLRAAssessment->AutoRenderChildren = true;
+	        
+	        /***************************************************************/
+	        $this->dtgUpwardAssessments = new UpwardAssessmentDataGrid($this);
+            $this->dtgUpwardAssessments->Paginator = new QPaginator($this->dtgUpwardAssessments);
+            $this->dtgUpwardAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkUpward($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
+            $this->dtgUpwardAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px' ));
+                      
+            $this->dtgUpwardAssessments->CellPadding = 5;
+			$this->dtgUpwardAssessments->SetDataBinder('dtgUpwardAssessments_Bind',$this);
+			$this->dtgUpwardAssessments->NoDataHtml = 'No Education 8-P Assessments have been assigned.';
+			$this->dtgUpwardAssessments->UseAjax = true;
+			
+			$this->dtgUpwardAssessments->SortColumnIndex = 1;
+			$this->dtgUpwardAssessments->ItemsPerPage = 20;
+			
+			$objStyle = $this->dtgUpwardAssessments->RowStyle;
+	        $objStyle->BackColor = '#ffffff';
+	        $objStyle->FontSize = 12;
+	
+	        $objStyle = $this->dtgUpwardAssessments->AlternateRowStyle;
+	        $objStyle->BackColor = '#CCCCCC';
+	
+	        $objStyle = $this->dtgUpwardAssessments->HeaderRowStyle;
+	        $objStyle->ForeColor = '#ffffff';
+	        $objStyle->BackColor = '#0098c3'; 
+	        
+	        $objStyle = $this->dtgUpwardAssessments->HeaderLinkStyle;
+	        $objStyle->ForeColor = '#ffffff';
+	        $objStyle->BackColor = '#0098c3'; 
+	        
+	        $this->btnAddUpwardAssessment = new QButton($this);
+	        $this->btnAddUpwardAssessment->Text = 'Add A User';
+	        $this->btnAddUpwardAssessment->CssClass = 'primary';
+	        $this->btnAddUpwardAssessment->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnAddUpwardAssessment_Click'));
+          
+	        $this->pnlAddUpwardAssessment = new QPanel($this);
+	        $this->pnlAddUpwardAssessment->Position = QPosition::Relative;
+	        $this->pnlAddUpwardAssessment->Visible = false;
+	        $this->pnlAddUpwardAssessment->AutoRenderChildren = true;
 	        /***************************************************************/
 	        
 	        $this->strKeycode = new QTextBox($this);
@@ -1252,6 +1295,14 @@
 			$this->dtgLRAAssessments->DataSource = $lraArray; 
 		}
 		
+    	public function dtgUpwardAssessments_Bind() {
+			$this->dtgUpwardAssessments->TotalItemCount = UpwardAssessment::CountAll();
+    		$objConditions = QQ::All();
+			$objClauses = array();
+			$UpwardArray = UpwardAssessment::QueryArray($objConditions,$objClauses);		
+			$this->dtgUpwardAssessments->DataSource = $UpwardArray; 
+		}
+		
     	public function dtgIntegrationAssessments_Bind() {
 			$this->dtgIntegrationAssessments->TotalItemCount = IntegrationAssessment::CountAll();
     		$objConditions = QQ::All();	
@@ -1560,6 +1611,17 @@
     		}
 		}
 		
+    	public function RenderUserLinkUpward($objAssessment) {
+    		$intUserId = $objAssessment->UserId;
+    		$objUser = User::Load($intUserId);
+    		// Only display link if there is an assessment to display
+    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
+				return sprintf("<a href='%s/assessments/upward/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
+    		} else {
+    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
+    		}
+		}
+		
     	public function RenderUserLinkIntegration($objAssessment) {
     		$intUserId = $objAssessment->UserId;
     		$objUser = User::Load($intUserId);
@@ -1587,6 +1649,7 @@
 	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
 	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
 	        $this->pnlAddLRAAssessment->RemoveChildControls(true);
+	        $this->pnlAddUpwardAssessment->RemoveChildControls(true);
 	        $pnlAddKingdomView = new AddKingdomAssessment($this->pnlAddKingdomAssessment,'UpdateAssessmentList',$this);
 		
 		}
@@ -1608,6 +1671,7 @@
 	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
 	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
 	        $this->pnlAddLRAAssessment->RemoveChildControls(true);
+	        $this->pnlAddUpwardAssessment->RemoveChildControls(true);
 	        $pnlAddTenPView = new AddTenPAssessment($this->pnlAddTenPAssessment,'UpdateTenPAssessmentList',$this);
 		
 		}
@@ -1629,6 +1693,7 @@
 	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
 	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
 	        $this->pnlAddLRAAssessment->RemoveChildControls(true);
+	        $this->pnlAddUpwardAssessment->RemoveChildControls(true);
 	        $pnlAddTenFView = new AddTenFAssessment($this->pnlAddTenFAssessment,'UpdateTenFAssessmentList',$this);		
 		}
 		
@@ -1643,14 +1708,35 @@
 	        $this->pnlAddSeasonalAssessment->RemoveChildControls(true);
 	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
 	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
+	        $this->pnlAddUpwardAssessment->RemoveChildControls(true);
 	        $pnlAddLRAView = new AddLRAAssessment($this->pnlAddLRAAssessment,'UpdateLRAAssessmentList',$this);
 		
 		}
 		
+    	public function btnAddUpwardAssessment_Click($strFormId, $strControlId, $strParameter) {
+			// Open up the panel and allow the adding of members to the company
+	        $this->pnlAddUpwardAssessment->Visible = true;
+	        $this->pnlAddLRAAssessment->RemoveChildControls(true);
+	        $this->pnlAddTenFAssessment->RemoveChildControls(true);
+	        $this->pnlAddLemonAssessment->RemoveChildControls(true);
+	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
+	        $this->pnlAddTenPAssessment->RemoveChildControls(true);
+	        $this->pnlAddSeasonalAssessment->RemoveChildControls(true);
+	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
+	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
+	        $this->pnlAddUpwardAssessment->RemoveChildControls(true);
+	        $pnlAddUpwardView = new AddUpwardAssessment($this->pnlAddUpwardAssessment,'UpdateUpwardAssessmentList',$this);
+		
+		}
    	 // Method Call back for the  panels 
 	    public function UpdateLRAAssessmentList($blnUpdatesMade) {
 	    	$this->dtgLRAAssessments->PageNumber = 1;
 			$this->dtgLRAAssessments->Refresh();
+	    }
+	    
+    	public function UpdateUpwardAssessmentList($blnUpdatesMade) {
+	    	$this->dtgUpwardAssessments->PageNumber = 1;
+			$this->dtgUpwardAssessments->Refresh();
 	    }
 	    
 	    // Method Call back for the  panels 

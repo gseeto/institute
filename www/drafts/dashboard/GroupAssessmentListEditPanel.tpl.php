@@ -17,6 +17,8 @@
 
 		<?php $_CONTROL->txtDescription->RenderWithName(); ?>
 
+		<?php $_CONTROL->calDateModified->RenderWithName(); ?>
+
 		<?php $_CONTROL->lstUsersAsAssessmentManager->RenderWithName(true, "Rows=7"); ?>
 
 	</div>

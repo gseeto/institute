@@ -15,4 +15,6 @@
 		QApplicationBase::$ClassFile['seasonalcategorytype'] = __DATA_CLASSES__ . '/SeasonalCategoryType.class.php';
 	// ClassPaths for the StatusType type class
 		QApplicationBase::$ClassFile['statustype'] = __DATA_CLASSES__ . '/StatusType.class.php';
+	// ClassPaths for the UpwardCategoryType type class
+		QApplicationBase::$ClassFile['upwardcategorytype'] = __DATA_CLASSES__ . '/UpwardCategoryType.class.php';
 ?>

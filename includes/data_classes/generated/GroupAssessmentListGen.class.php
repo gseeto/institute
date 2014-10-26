@@ -16,11 +16,12 @@
 	 * @package My Application
 	 * @subpackage GeneratedDataObjects
 	 * @property integer $Id the value for intId (Read-Only PK)
-	 * @property integer $TotalKeys the value for intTotalKeys 
-	 * @property integer $KeysLeft the value for intKeysLeft 
+	 * @property integer $TotalKeys the value for intTotalKeys (Not Null)
+	 * @property integer $KeysLeft the value for intKeysLeft (Not Null)
 	 * @property integer $ResourceId the value for intResourceId 
 	 * @property string $KeyCode the value for strKeyCode (Unique)
 	 * @property string $Description the value for strDescription 
+	 * @property QDateTime $DateModified the value for dttDateModified 
 	 * @property Resource $Resource the value for the Resource object referenced by intResourceId 
 	 * @property User $_UserAsAssessmentManager the value for the private _objUserAsAssessmentManager (Read-Only) if set due to an expansion on the assessment_manager_assn association table
 	 * @property User[] $_UserAsAssessmentManagerArray the value for the private _objUserAsAssessmentManagerArray (Read-Only) if set due to an ExpandAsArray on the assessment_manager_assn association table
@@ -40,6 +41,8 @@
 	 * @property TenPAssessment[] $_TenPAssessmentAsGroupArray the value for the private _objTenPAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the ten_p_assessment.group_id reverse relationship
 	 * @property TimeAssessment $_TimeAssessmentAsGroup the value for the private _objTimeAssessmentAsGroup (Read-Only) if set due to an expansion on the time_assessment.group_id reverse relationship
 	 * @property TimeAssessment[] $_TimeAssessmentAsGroupArray the value for the private _objTimeAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the time_assessment.group_id reverse relationship
+	 * @property UpwardAssessment $_UpwardAssessmentAsGroup the value for the private _objUpwardAssessmentAsGroup (Read-Only) if set due to an expansion on the upward_assessment.group_id reverse relationship
+	 * @property UpwardAssessment[] $_UpwardAssessmentAsGroupArray the value for the private _objUpwardAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the upward_assessment.group_id reverse relationship
 	 * @property boolean $__Restored whether or not this object was restored from the database (as opposed to created new)
 	 */
 	class GroupAssessmentListGen extends QBaseClass {
@@ -96,6 +99,14 @@
 		protected $strDescription;
 		const DescriptionMaxLength = 255;
 		const DescriptionDefault = null;
+
+
+		/**
+		 * Protected member variable that maps to the database column group_assessment_list.date_modified
+		 * @var QDateTime dttDateModified
+		 */
+		protected $dttDateModified;
+		const DateModifiedDefault = null;
 
 
 		/**
@@ -241,6 +252,22 @@
 		 * @var TimeAssessment[] _objTimeAssessmentAsGroupArray;
 		 */
 		private $_objTimeAssessmentAsGroupArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single UpwardAssessmentAsGroup object
+		 * (of type UpwardAssessment), if this GroupAssessmentList object was restored with
+		 * an expansion on the upward_assessment association table.
+		 * @var UpwardAssessment _objUpwardAssessmentAsGroup;
+		 */
+		private $_objUpwardAssessmentAsGroup;
+
+		/**
+		 * Private member variable that stores a reference to an array of UpwardAssessmentAsGroup objects
+		 * (of type UpwardAssessment[]), if this GroupAssessmentList object was restored with
+		 * an ExpandAsArray on the upward_assessment association table.
+		 * @var UpwardAssessment[] _objUpwardAssessmentAsGroupArray;
+		 */
+		private $_objUpwardAssessmentAsGroupArray = array();
 
 		/**
 		 * Protected array of virtual attributes for this object (e.g. extra/other calculated and/or non-object bound
@@ -590,6 +617,7 @@
 			$objBuilder->AddSelectItem($strTableName, 'resource_id', $strAliasPrefix . 'resource_id');
 			$objBuilder->AddSelectItem($strTableName, 'key_code', $strAliasPrefix . 'key_code');
 			$objBuilder->AddSelectItem($strTableName, 'description', $strAliasPrefix . 'description');
+			$objBuilder->AddSelectItem($strTableName, 'date_modified', $strAliasPrefix . 'date_modified');
 		}
 
 
@@ -754,6 +782,20 @@
 					$blnExpandedViaArray = true;
 				}
 
+				$strAlias = $strAliasPrefix . 'upwardassessmentasgroup__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objUpwardAssessmentAsGroupArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objUpwardAssessmentAsGroupArray[$intPreviousChildItemCount - 1];
+						$objChildItem = UpwardAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'upwardassessmentasgroup__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objUpwardAssessmentAsGroupArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objUpwardAssessmentAsGroupArray[] = UpwardAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'upwardassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				// Either return false to signal array expansion, or check-to-reset the Alias prefix and move on
 				if ($blnExpandedViaArray)
 					return false;
@@ -777,6 +819,8 @@
 			$objToReturn->strKeyCode = $objDbRow->GetColumn($strAliasName, 'VarChar');
 			$strAliasName = array_key_exists($strAliasPrefix . 'description', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'description'] : $strAliasPrefix . 'description';
 			$objToReturn->strDescription = $objDbRow->GetColumn($strAliasName, 'VarChar');
+			$strAliasName = array_key_exists($strAliasPrefix . 'date_modified', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'date_modified'] : $strAliasPrefix . 'date_modified';
+			$objToReturn->dttDateModified = $objDbRow->GetColumn($strAliasName, 'Date');
 
 			// Instantiate Virtual Attributes
 			foreach ($objDbRow->GetColumnNameArray() as $strColumnName => $mixValue) {
@@ -887,6 +931,16 @@
 					$objToReturn->_objTimeAssessmentAsGroupArray[] = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objTimeAssessmentAsGroup = TimeAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'timeassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for UpwardAssessmentAsGroup Virtual Binding
+			$strAlias = $strAliasPrefix . 'upwardassessmentasgroup__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objUpwardAssessmentAsGroupArray[] = UpwardAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'upwardassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objUpwardAssessmentAsGroup = UpwardAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'upwardassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			return $objToReturn;
@@ -1086,13 +1140,15 @@
 							`keys_left`,
 							`resource_id`,
 							`key_code`,
-							`description`
+							`description`,
+							`date_modified`
 						) VALUES (
 							' . $objDatabase->SqlVariable($this->intTotalKeys) . ',
 							' . $objDatabase->SqlVariable($this->intKeysLeft) . ',
 							' . $objDatabase->SqlVariable($this->intResourceId) . ',
 							' . $objDatabase->SqlVariable($this->strKeyCode) . ',
-							' . $objDatabase->SqlVariable($this->strDescription) . '
+							' . $objDatabase->SqlVariable($this->strDescription) . ',
+							' . $objDatabase->SqlVariable($this->dttDateModified) . '
 						)
 					');
 
@@ -1116,7 +1172,8 @@
 							`keys_left` = ' . $objDatabase->SqlVariable($this->intKeysLeft) . ',
 							`resource_id` = ' . $objDatabase->SqlVariable($this->intResourceId) . ',
 							`key_code` = ' . $objDatabase->SqlVariable($this->strKeyCode) . ',
-							`description` = ' . $objDatabase->SqlVariable($this->strDescription) . '
+							`description` = ' . $objDatabase->SqlVariable($this->strDescription) . ',
+							`date_modified` = ' . $objDatabase->SqlVariable($this->dttDateModified) . '
 						WHERE
 							`id` = ' . $objDatabase->SqlVariable($this->intId) . '
 					');
@@ -1206,6 +1263,7 @@
 			$this->ResourceId = $objReloaded->ResourceId;
 			$this->strKeyCode = $objReloaded->strKeyCode;
 			$this->strDescription = $objReloaded->strDescription;
+			$this->dttDateModified = $objReloaded->dttDateModified;
 		}
 
 		/**
@@ -1224,6 +1282,7 @@
 					`resource_id`,
 					`key_code`,
 					`description`,
+					`date_modified`,
 					__sys_login_id,
 					__sys_action,
 					__sys_date
@@ -1234,6 +1293,7 @@
 					' . $objDatabase->SqlVariable($this->intResourceId) . ',
 					' . $objDatabase->SqlVariable($this->strKeyCode) . ',
 					' . $objDatabase->SqlVariable($this->strDescription) . ',
+					' . $objDatabase->SqlVariable($this->dttDateModified) . ',
 					' . (($objDatabase->JournaledById) ? $objDatabase->JournaledById : 'NULL') . ',
 					' . $objDatabase->SqlVariable($strJournalCommand) . ',
 					NOW()
@@ -1290,12 +1350,12 @@
 					return $this->intId;
 
 				case 'TotalKeys':
-					// Gets the value for intTotalKeys 
+					// Gets the value for intTotalKeys (Not Null)
 					// @return integer
 					return $this->intTotalKeys;
 
 				case 'KeysLeft':
-					// Gets the value for intKeysLeft 
+					// Gets the value for intKeysLeft (Not Null)
 					// @return integer
 					return $this->intKeysLeft;
 
@@ -1313,6 +1373,11 @@
 					// Gets the value for strDescription 
 					// @return string
 					return $this->strDescription;
+
+				case 'DateModified':
+					// Gets the value for dttDateModified 
+					// @return QDateTime
+					return $this->dttDateModified;
 
 
 				///////////////////
@@ -1444,6 +1509,18 @@
 					// @return TimeAssessment[]
 					return (array) $this->_objTimeAssessmentAsGroupArray;
 
+				case '_UpwardAssessmentAsGroup':
+					// Gets the value for the private _objUpwardAssessmentAsGroup (Read-Only)
+					// if set due to an expansion on the upward_assessment.group_id reverse relationship
+					// @return UpwardAssessment
+					return $this->_objUpwardAssessmentAsGroup;
+
+				case '_UpwardAssessmentAsGroupArray':
+					// Gets the value for the private _objUpwardAssessmentAsGroupArray (Read-Only)
+					// if set due to an ExpandAsArray on the upward_assessment.group_id reverse relationship
+					// @return UpwardAssessment[]
+					return (array) $this->_objUpwardAssessmentAsGroupArray;
+
 
 				case '__Restored':
 					return $this->__blnRestored;
@@ -1472,7 +1549,7 @@
 				// Member Variables
 				///////////////////
 				case 'TotalKeys':
-					// Sets the value for intTotalKeys 
+					// Sets the value for intTotalKeys (Not Null)
 					// @param integer $mixValue
 					// @return integer
 					try {
@@ -1483,7 +1560,7 @@
 					}
 
 				case 'KeysLeft':
-					// Sets the value for intKeysLeft 
+					// Sets the value for intKeysLeft (Not Null)
 					// @param integer $mixValue
 					// @return integer
 					try {
@@ -1522,6 +1599,17 @@
 					// @return string
 					try {
 						return ($this->strDescription = QType::Cast($mixValue, QType::String));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'DateModified':
+					// Sets the value for dttDateModified 
+					// @param QDateTime $mixValue
+					// @return QDateTime
+					try {
+						return ($this->dttDateModified = QType::Cast($mixValue, QType::DateTime));
 					} catch (QCallerException $objExc) {
 						$objExc->IncrementOffset();
 						throw $objExc;
@@ -3045,6 +3133,188 @@
 		}
 
 			
+		
+		// Related Objects' Methods for UpwardAssessmentAsGroup
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated UpwardAssessmentsAsGroup as an array of UpwardAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return UpwardAssessment[]
+		*/ 
+		public function GetUpwardAssessmentAsGroupArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return UpwardAssessment::LoadArrayByGroupId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated UpwardAssessmentsAsGroup
+		 * @return int
+		*/ 
+		public function CountUpwardAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return UpwardAssessment::CountByGroupId($this->intId);
+		}
+
+		/**
+		 * Associates a UpwardAssessmentAsGroup
+		 * @param UpwardAssessment $objUpwardAssessment
+		 * @return void
+		*/ 
+		public function AssociateUpwardAssessmentAsGroup(UpwardAssessment $objUpwardAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateUpwardAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objUpwardAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateUpwardAssessmentAsGroup on this GroupAssessmentList with an unsaved UpwardAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`upward_assessment`
+				SET
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objUpwardAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objUpwardAssessment->GroupId = $this->intId;
+				$objUpwardAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a UpwardAssessmentAsGroup
+		 * @param UpwardAssessment $objUpwardAssessment
+		 * @return void
+		*/ 
+		public function UnassociateUpwardAssessmentAsGroup(UpwardAssessment $objUpwardAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateUpwardAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objUpwardAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateUpwardAssessmentAsGroup on this GroupAssessmentList with an unsaved UpwardAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`upward_assessment`
+				SET
+					`group_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objUpwardAssessment->Id) . ' AND
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objUpwardAssessment->GroupId = null;
+				$objUpwardAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all UpwardAssessmentsAsGroup
+		 * @return void
+		*/ 
+		public function UnassociateAllUpwardAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateUpwardAssessmentAsGroup on this unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (UpwardAssessment::LoadArrayByGroupId($this->intId) as $objUpwardAssessment) {
+					$objUpwardAssessment->GroupId = null;
+					$objUpwardAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`upward_assessment`
+				SET
+					`group_id` = null
+				WHERE
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated UpwardAssessmentAsGroup
+		 * @param UpwardAssessment $objUpwardAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedUpwardAssessmentAsGroup(UpwardAssessment $objUpwardAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateUpwardAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objUpwardAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateUpwardAssessmentAsGroup on this GroupAssessmentList with an unsaved UpwardAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`upward_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objUpwardAssessment->Id) . ' AND
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objUpwardAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated UpwardAssessmentsAsGroup
+		 * @return void
+		*/ 
+		public function DeleteAllUpwardAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateUpwardAssessmentAsGroup on this unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (UpwardAssessment::LoadArrayByGroupId($this->intId) as $objUpwardAssessment) {
+					$objUpwardAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`upward_assessment`
+				WHERE
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
 		// Related Many-to-Many Objects' Methods for UserAsAssessmentManager
 		//-------------------------------------------------------------------
 
@@ -3243,6 +3513,7 @@
 			$strToReturn .= '<element name="Resource" type="xsd1:Resource"/>';
 			$strToReturn .= '<element name="KeyCode" type="xsd:string"/>';
 			$strToReturn .= '<element name="Description" type="xsd:string"/>';
+			$strToReturn .= '<element name="DateModified" type="xsd:dateTime"/>';
 			$strToReturn .= '<element name="__blnRestored" type="xsd:boolean"/>';
 			$strToReturn .= '</sequence></complexType>';
 			return $strToReturn;
@@ -3279,6 +3550,8 @@
 				$objToReturn->strKeyCode = $objSoapObject->KeyCode;
 			if (property_exists($objSoapObject, 'Description'))
 				$objToReturn->strDescription = $objSoapObject->Description;
+			if (property_exists($objSoapObject, 'DateModified'))
+				$objToReturn->dttDateModified = new QDateTime($objSoapObject->DateModified);
 			if (property_exists($objSoapObject, '__blnRestored'))
 				$objToReturn->__blnRestored = $objSoapObject->__blnRestored;
 			return $objToReturn;
@@ -3301,6 +3574,8 @@
 				$objObject->objResource = Resource::GetSoapObjectFromObject($objObject->objResource, false);
 			else if (!$blnBindRelatedObjects)
 				$objObject->intResourceId = null;
+			if ($objObject->dttDateModified)
+				$objObject->dttDateModified = $objObject->dttDateModified->__toString(QDateTime::FormatSoap);
 			return $objObject;
 		}
 
@@ -3355,6 +3630,7 @@
 	 * @property-read QQNodeResource $Resource
 	 * @property-read QQNode $KeyCode
 	 * @property-read QQNode $Description
+	 * @property-read QQNode $DateModified
 	 * @property-read QQNodeGroupAssessmentListUserAsAssessmentManager $UserAsAssessmentManager
 	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessmentAsGroup
@@ -3364,6 +3640,7 @@
 	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeTenPAssessment $TenPAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeTimeAssessment $TimeAssessmentAsGroup
+	 * @property-read QQReverseReferenceNodeUpwardAssessment $UpwardAssessmentAsGroup
 	 */
 	class QQNodeGroupAssessmentList extends QQNode {
 		protected $strTableName = 'group_assessment_list';
@@ -3385,6 +3662,8 @@
 					return new QQNode('key_code', 'KeyCode', 'string', $this);
 				case 'Description':
 					return new QQNode('description', 'Description', 'string', $this);
+				case 'DateModified':
+					return new QQNode('date_modified', 'DateModified', 'QDateTime', $this);
 				case 'UserAsAssessmentManager':
 					return new QQNodeGroupAssessmentListUserAsAssessmentManager($this);
 				case 'IntegrationAssessmentAsGroup':
@@ -3403,6 +3682,8 @@
 					return new QQReverseReferenceNodeTenPAssessment($this, 'tenpassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'TimeAssessmentAsGroup':
 					return new QQReverseReferenceNodeTimeAssessment($this, 'timeassessmentasgroup', 'reverse_reference', 'group_id');
+				case 'UpwardAssessmentAsGroup':
+					return new QQReverseReferenceNodeUpwardAssessment($this, 'upwardassessmentasgroup', 'reverse_reference', 'group_id');
 
 				case '_PrimaryKeyNode':
 					return new QQNode('id', 'Id', 'integer', $this);
@@ -3425,6 +3706,7 @@
 	 * @property-read QQNodeResource $Resource
 	 * @property-read QQNode $KeyCode
 	 * @property-read QQNode $Description
+	 * @property-read QQNode $DateModified
 	 * @property-read QQNodeGroupAssessmentListUserAsAssessmentManager $UserAsAssessmentManager
 	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessmentAsGroup
@@ -3434,6 +3716,7 @@
 	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeTenPAssessment $TenPAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeTimeAssessment $TimeAssessmentAsGroup
+	 * @property-read QQReverseReferenceNodeUpwardAssessment $UpwardAssessmentAsGroup
 	 * @property-read QQNode $_PrimaryKeyNode
 	 */
 	class QQReverseReferenceNodeGroupAssessmentList extends QQReverseReferenceNode {
@@ -3456,6 +3739,8 @@
 					return new QQNode('key_code', 'KeyCode', 'string', $this);
 				case 'Description':
 					return new QQNode('description', 'Description', 'string', $this);
+				case 'DateModified':
+					return new QQNode('date_modified', 'DateModified', 'QDateTime', $this);
 				case 'UserAsAssessmentManager':
 					return new QQNodeGroupAssessmentListUserAsAssessmentManager($this);
 				case 'IntegrationAssessmentAsGroup':
@@ -3474,6 +3759,8 @@
 					return new QQReverseReferenceNodeTenPAssessment($this, 'tenpassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'TimeAssessmentAsGroup':
 					return new QQReverseReferenceNodeTimeAssessment($this, 'timeassessmentasgroup', 'reverse_reference', 'group_id');
+				case 'UpwardAssessmentAsGroup':
+					return new QQReverseReferenceNodeUpwardAssessment($this, 'upwardassessmentasgroup', 'reverse_reference', 'group_id');
 
 				case '_PrimaryKeyNode':
 					return new QQNode('id', 'Id', 'integer', $this);

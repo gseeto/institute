@@ -71,6 +71,7 @@
 			$this->dtgGroupAssessmentLists->MetaAddColumn(QQN::GroupAssessmentList()->Resource);
 			$this->dtgGroupAssessmentLists->MetaAddColumn('KeyCode');
 			$this->dtgGroupAssessmentLists->MetaAddColumn('Description');
+			$this->dtgGroupAssessmentLists->MetaAddColumn('DateModified');
 
 			// Setup the Create New button
 			$this->btnCreateNew = new QButton($this);

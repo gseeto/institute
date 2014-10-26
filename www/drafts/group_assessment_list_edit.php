@@ -29,6 +29,7 @@
 		protected $lstResource;
 		protected $txtKeyCode;
 		protected $txtDescription;
+		protected $calDateModified;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
 		protected $lstUsersAsAssessmentManager;
@@ -62,6 +63,7 @@
 			$this->lstResource = $this->mctGroupAssessmentList->lstResource_Create();
 			$this->txtKeyCode = $this->mctGroupAssessmentList->txtKeyCode_Create();
 			$this->txtDescription = $this->mctGroupAssessmentList->txtDescription_Create();
+			$this->calDateModified = $this->mctGroupAssessmentList->calDateModified_Create();
 			$this->lstUsersAsAssessmentManager = $this->mctGroupAssessmentList->lstUsersAsAssessmentManager_Create();
 
 			// Create Buttons and Actions on this Form

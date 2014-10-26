@@ -28,6 +28,8 @@
 	 * property-read QLabel $KeyCodeLabel
 	 * property QTextBox $DescriptionControl
 	 * property-read QLabel $DescriptionLabel
+	 * property QDateTimePicker $DateModifiedControl
+	 * property-read QLabel $DateModifiedLabel
 	 * property QListBox $UserAsAssessmentManagerControl
 	 * property-read QLabel $UserAsAssessmentManagerLabel
 	 * property-read string $TitleVerb a verb indicating whether or not this is being edited or created
@@ -97,6 +99,12 @@
          */
 		protected $txtDescription;
 
+        /**
+         * @var QDateTimePicker calDateModified;
+         * @access protected
+         */
+		protected $calDateModified;
+
 
 		// Controls that allow the viewing of GroupAssessmentList's individual data fields
         /**
@@ -128,6 +136,12 @@
          * @access protected
          */
 		protected $lblDescription;
+
+        /**
+         * @var QLabel lblDateModified
+         * @access protected
+         */
+		protected $lblDateModified;
 
 
 		// QListBox Controls (if applicable) to edit Unique ReverseReferences and ManyToMany References
@@ -255,6 +269,7 @@
 			$this->txtTotalKeys = new QIntegerTextBox($this->objParentObject, $strControlId);
 			$this->txtTotalKeys->Name = QApplication::Translate('Total Keys');
 			$this->txtTotalKeys->Text = $this->objGroupAssessmentList->TotalKeys;
+			$this->txtTotalKeys->Required = true;
 			return $this->txtTotalKeys;
 		}
 
@@ -268,6 +283,7 @@
 			$this->lblTotalKeys = new QLabel($this->objParentObject, $strControlId);
 			$this->lblTotalKeys->Name = QApplication::Translate('Total Keys');
 			$this->lblTotalKeys->Text = $this->objGroupAssessmentList->TotalKeys;
+			$this->lblTotalKeys->Required = true;
 			$this->lblTotalKeys->Format = $strFormat;
 			return $this->lblTotalKeys;
 		}
@@ -281,6 +297,7 @@
 			$this->txtKeysLeft = new QIntegerTextBox($this->objParentObject, $strControlId);
 			$this->txtKeysLeft->Name = QApplication::Translate('Keys Left');
 			$this->txtKeysLeft->Text = $this->objGroupAssessmentList->KeysLeft;
+			$this->txtKeysLeft->Required = true;
 			return $this->txtKeysLeft;
 		}
 
@@ -294,6 +311,7 @@
 			$this->lblKeysLeft = new QLabel($this->objParentObject, $strControlId);
 			$this->lblKeysLeft->Name = QApplication::Translate('Keys Left');
 			$this->lblKeysLeft->Text = $this->objGroupAssessmentList->KeysLeft;
+			$this->lblKeysLeft->Required = true;
 			$this->lblKeysLeft->Format = $strFormat;
 			return $this->lblKeysLeft;
 		}
@@ -389,6 +407,35 @@
 		}
 
 		/**
+		 * Create and setup QDateTimePicker calDateModified
+		 * @param string $strControlId optional ControlId to use
+		 * @return QDateTimePicker
+		 */
+		public function calDateModified_Create($strControlId = null) {
+			$this->calDateModified = new QDateTimePicker($this->objParentObject, $strControlId);
+			$this->calDateModified->Name = QApplication::Translate('Date Modified');
+			$this->calDateModified->DateTime = $this->objGroupAssessmentList->DateModified;
+			$this->calDateModified->DateTimePickerType = QDateTimePickerType::Date;
+			return $this->calDateModified;
+		}
+
+		/**
+		 * Create and setup QLabel lblDateModified
+		 * @param string $strControlId optional ControlId to use
+		 * @param string $strDateTimeFormat optional DateTimeFormat to use
+		 * @return QLabel
+		 */
+		public function lblDateModified_Create($strControlId = null, $strDateTimeFormat = null) {
+			$this->lblDateModified = new QLabel($this->objParentObject, $strControlId);
+			$this->lblDateModified->Name = QApplication::Translate('Date Modified');
+			$this->strDateModifiedDateTimeFormat = $strDateTimeFormat;
+			$this->lblDateModified->Text = sprintf($this->objGroupAssessmentList->DateModified) ? $this->objGroupAssessmentList->DateModified->__toString($this->strDateModifiedDateTimeFormat) : null;
+			return $this->lblDateModified;
+		}
+
+		protected $strDateModifiedDateTimeFormat;
+
+		/**
 		 * Create and setup QListBox lstUsersAsAssessmentManager
 		 * @param string $strControlId optional ControlId to use
 		 * @param QQCondition $objConditions override the default condition of QQ::All() to the query, itself
@@ -477,6 +524,9 @@
 			if ($this->txtDescription) $this->txtDescription->Text = $this->objGroupAssessmentList->Description;
 			if ($this->lblDescription) $this->lblDescription->Text = $this->objGroupAssessmentList->Description;
 
+			if ($this->calDateModified) $this->calDateModified->DateTime = $this->objGroupAssessmentList->DateModified;
+			if ($this->lblDateModified) $this->lblDateModified->Text = sprintf($this->objGroupAssessmentList->DateModified) ? $this->objGroupAssessmentList->__toString($this->strDateModifiedDateTimeFormat) : null;
+
 			if ($this->lstUsersAsAssessmentManager) {
 				$this->lstUsersAsAssessmentManager->RemoveAllItems();
 				$objAssociatedArray = $this->objGroupAssessmentList->GetUserAsAssessmentManagerArray();
@@ -536,6 +586,7 @@
 				if ($this->lstResource) $this->objGroupAssessmentList->ResourceId = $this->lstResource->SelectedValue;
 				if ($this->txtKeyCode) $this->objGroupAssessmentList->KeyCode = $this->txtKeyCode->Text;
 				if ($this->txtDescription) $this->objGroupAssessmentList->Description = $this->txtDescription->Text;
+				if ($this->calDateModified) $this->objGroupAssessmentList->DateModified = $this->calDateModified->DateTime;
 
 				// Update any UniqueReverseReferences (if any) for controls that have been created for it
 
@@ -616,6 +667,12 @@
 				case 'DescriptionLabel':
 					if (!$this->lblDescription) return $this->lblDescription_Create();
 					return $this->lblDescription;
+				case 'DateModifiedControl':
+					if (!$this->calDateModified) return $this->calDateModified_Create();
+					return $this->calDateModified;
+				case 'DateModifiedLabel':
+					if (!$this->lblDateModified) return $this->lblDateModified_Create();
+					return $this->lblDateModified;
 				case 'UserAsAssessmentManagerControl':
 					if (!$this->lstUsersAsAssessmentManager) return $this->lstUsersAsAssessmentManager_Create();
 					return $this->lstUsersAsAssessmentManager;
@@ -656,6 +713,8 @@
 						return ($this->txtKeyCode = QType::Cast($mixValue, 'QControl'));
 					case 'DescriptionControl':
 						return ($this->txtDescription = QType::Cast($mixValue, 'QControl'));
+					case 'DateModifiedControl':
+						return ($this->calDateModified = QType::Cast($mixValue, 'QControl'));
 					case 'UserAsAssessmentManagerControl':
 						return ($this->lstUsersAsAssessmentManager = QType::Cast($mixValue, 'QControl'));
 					default:

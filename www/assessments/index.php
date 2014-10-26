@@ -53,6 +53,9 @@ class AssessmentForm extends InstituteForm {
 							case 'Leadership Readiness Assessment':
 								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnLRAAssessment_Click'));	
 								break;
+							case 'Education 8-P Assessment':
+								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnUpwardAssessment_Click'));	
+								break;
 						}
 											
 					} else {
@@ -107,6 +110,10 @@ class AssessmentForm extends InstituteForm {
 	
 	protected function btnLRAAssessment_Click() {
 		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lra/');
+	}
+	
+	protected function btnUpwardAssessment_Click() {
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/upward/');
 	}
 }
 
