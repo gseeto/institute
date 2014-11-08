@@ -188,6 +188,9 @@ class HomeForm extends InstituteForm {
 						case 'Leadership Readiness Assessment':
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/lra/\'>Leadership Readiness Assessment</a></li>';
 							break;
+						case 'Education 8-P Assessment':
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/upward/\'>Education 8-P Assessment</a></li>';
+							break;
 					}
 					$this->lblAssessments[] = $lblAssessmentLink;						
 				} 
