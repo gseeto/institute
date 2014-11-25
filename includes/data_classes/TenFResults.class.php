@@ -55,7 +55,10 @@
 				$objConditions = QQ::Equal(QQN::TenFResults()->AssessmentId, $intAssessmentId);
 				$objConditions = QQ::AndCondition($objConditions,QQ::Equal(QQN::TenFResults()->QuestionId, $intQuestionId));
 				$objResult = TenFResults::QueryArray($objConditions,null);
-				return $objResult[0]->Importance;
+				if(!empty($objResult))
+					return $objResult[0]->Importance;
+				else 
+					return 1;
 			} catch (QCallerException $objExc) {
 				$objExc->IncrementOffset();
 				throw $objExc;
@@ -67,7 +70,10 @@
 				$objConditions = QQ::Equal(QQN::TenFResults()->AssessmentId, $intAssessmentId);
 				$objConditions = QQ::AndCondition($objConditions,QQ::Equal(QQN::TenFResults()->QuestionId, $intQuestionId));
 				$objResult = TenFResults::QueryArray($objConditions,null);
-				return $objResult[0]->Performance;
+				if(!empty($objResult))
+					return $objResult[0]->Performance;
+				else 
+					return 1;
 			} catch (QCallerException $objExc) {
 				$objExc->IncrementOffset();
 				throw $objExc;

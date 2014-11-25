@@ -44,7 +44,10 @@
 				$objConditions = QQ::Equal(QQN::LemonAssessmentResults()->AssessmentId, $intAssessmentId);
 				$objConditions = QQ::AndCondition($objConditions,QQ::Equal(QQN::LemonAssessmentResults()->QuestionId, $intQuestionId));
 				$objResult = LemonAssessmentResults::QueryArray($objConditions,null);
-				return $objResult[0]->Value;
+				if(!empty($objResult))
+					return $objResult[0]->Value;
+				else 
+					return 1;
 			} catch (QCallerException $objExc) {
 				$objExc->IncrementOffset();
 				throw $objExc;
