@@ -198,7 +198,13 @@ class LemonGroupInfoForm extends InstituteForm {
 			$objAssessment[0]->GroupId = $this->intGroupAssessment; 
 			$objAssessment[0]->DateModified = new QDateTime('Now');
 			$objAssessment[0]->Save();
-			QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/groupQuestions.php/edit');
+			
+			// Additional check to see if there are results. If not then treat it like a first time login.
+			$objResultArray = LemonAssessmentResults::LoadArrayByAssessmentId($objAssessment[0]->Id);
+			if(!empty($objResultArray))			
+				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/groupQuestions.php/edit');
+			else 
+				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/groupQuestions.php');
 		} else {
 	     	$objAssessment = new LemonAssessment();
 	     	$objAssessment->UserId = $objUser->Id;

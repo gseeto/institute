@@ -195,7 +195,14 @@ class PGroupInfoForm extends InstituteForm {
 		// Create a new assessment entry associated with the user if not already associated
 		if ($objUser->IsResourceAssociated(Resource::Load(2))) {
 			QApplication::Login($objLogin);
-			QApplication::Redirect(__SUBDIRECTORY__.'/assessments/tenp/groupQuestions.php/edit');
+			// Additional check to see if there are results. If not then treat it like a first time login.
+			$assessmentArray = TenPAssessment::LoadArrayByUserId($objUser->Id);
+			$objTenPAssessment = $assessmentArray[0];
+			$objResultArray = TenPResults::LoadArrayByAssessmentId($objTenPAssessment->Id);
+			if(!empty($objResultArray))
+				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/tenp/groupQuestions.php/edit');
+			else 
+				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/tenp/groupQuestions.php');
 		} else {
 	     	$objAssessment = new TenPAssessment();
 	     	$objAssessment->UserId = $objUser->Id;
