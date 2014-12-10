@@ -1,7 +1,7 @@
 <?php
 require(dirname(__FILE__) . '/../../../includes/prepend.inc.php');
 
-class ScorecardForm extends InstituteForm {
+class TenPForm extends InstituteForm {
 	protected $arrNavigation;
 	protected $strPageTitle = 'Scorecard';
 	protected $intNavSectionId = InstituteForm::NavSectionScorecard;
@@ -50,6 +50,7 @@ public function writeToLogFile($stringData) {
 		$this->myFile = "logFile.txt";
 		$this->fh = fopen($this->myFile, 'a') or die("can't open file");
 		
+		$this->writeToLogFile("logfile initialized.\n");
 		$this->objScorecard = Scorecard::Load(QApplication::PathInfo(0));
 		$this->intCategoryTypeId = QApplication::PathInfo(1);
 		$this->strCategory = CategoryType::ToString($this->intCategoryTypeId);
@@ -566,9 +567,9 @@ public function writeToLogFile($stringData) {
 	        $btnSave = new QButton($this->dtgActionItems[$objStrategy->Count-1],$strActionSave);
 	        $btnSave->Text = 'Save';
 	        $btnSave->ActionParameter = $objAction->Id;
-	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveAction_Click'));
+	        $btnSave->AddAction(new QClickEvent(), new  QAjaxAction('btnSaveAction_Click')); 
 	        $btnSave->PrimaryButton = true;
-	        $btnSave->CausesValidation = true;
+	        //$btnSave->CausesValidation = true;
 	        $btnSave->CssClass = 'ui-button';
 	        $btnSave->Display = false;
         }
@@ -600,19 +601,19 @@ public function writeToLogFile($stringData) {
         return ($txtActionItem->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblAction->RenderWithName(false));
 	}
 	
-	public function btnSaveAction_Click($strFormId, $strControlId, $strParameter) {
-		//xdebug_start_trace('tmp/trace.xt');
+	protected function btnSaveAction_Click($strFormId, $strControlId, $strParameter) {
 		$ActionId = $strParameter;	
-		$strControlId = 'txtAction' . $ActionId;
-        $txtAction = $this->GetControl($strControlId);
+		$strTxtControlId = 'txtAction' . $ActionId;
+        $txtAction = $this->GetControl($strTxtControlId);
+       
         $objAction = ActionItems::Load($ActionId);
-        if($objAction) {
+        if(($objAction)&&($txtAction)) {
 	        $objAction->Action = $txtAction->Text;
 	        $objAction->ModifiedBy = $this->intUserId;
 	        $objAction->Save();
 	        $txtAction->Display = false;  
         } 
-       
+        
         $strActionSave = 'btnActionSave' . $ActionId;
         $btnSave = $this->GetControl($strActionSave); 
         $btnSave->Display = false;
@@ -622,16 +623,18 @@ public function writeToLogFile($stringData) {
         
         $strLblControlId = 'lblAction' .  $objAction->Id;
         $lblAction = $this->GetControl($strLblControlId); 
-        $lblAction->Text = $txtAction->Text;
-        $lblAction->Display = true;
-       // xdebug_stop_trace();
+        if(($lblAction)&&($txtAction)) {
+        	$lblAction->Text = $txtAction->Text;
+        	$lblAction->Display = true;
+        }  
+        
 	}
 
 	public function RenderPriority($objStrategy) {
 		$intPriority = ($objStrategy->Priority!=null) ? $objStrategy->Priority : 0;
 		$strImgPriorityCtrl = 'imgPriority' .$objStrategy->Id; 
 		$imgPriority = new QImageControl($this->dtgStrategyArray[$objStrategy->Count -1],$strImgPriorityCtrl);
-		$imgPriority->CssClass = 'priority-'.$intPriority;
+		$imgPriority->CssClass = 'priority';
 		$imgPriority->Width = 25;
 		$imgPriority->Height = 25;
 		switch ($intPriority) {
@@ -650,7 +653,8 @@ public function writeToLogFile($stringData) {
 			default:
 				$imgPriority->ImagePath = dirname(__FILE__) .'/../../assets/images/priority-0.png'; 
 				break;				
-		}	
+		}
+		
 		$imgPriority->AddAction(new QClickEvent(), new QAjaxAction('imgPriority_Click'));
 		$strLstPriorityCtrl = 'lstPriority' .$objStrategy->Id; 
 		$imgPriority->ActionParameter = $strLstPriorityCtrl;
@@ -1072,5 +1076,5 @@ public function writeToLogFile($stringData) {
 	}
 }
 
-ScorecardForm::Run('ScorecardForm');
+TenPForm::Run('TenPForm');
 ?>
