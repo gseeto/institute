@@ -7,7 +7,7 @@
 		<?php $this->txtUsername->RenderWithName(); ?>
 		<?php $this->txtPassword->RenderWithName(); ?>	
 		<?php $this->chkRemember->RenderWithName(); ?>	
-		
+		<a style="position:relative; left:20px;" href="<?php _p(__SUBDIRECTORY__)?>/forgot/" title="Forgot Username/Password?">Forgot Username/Password?</a>
 		<div class="buttonBar">
 			<?php $this->btnLogin->Render('CssClass=primary'); ?>
 		</div>
