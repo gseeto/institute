@@ -636,6 +636,9 @@
 	    outline-offset: 0em;
 	    margin-left:10px;
 	}
+	.priority {
+		cursor: pointer;
+	}
 	.societalButton {
 	/*	border: none;
 	    display: inline;
