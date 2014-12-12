@@ -626,7 +626,8 @@
 	}
 	.deleteButton {
 		background-image: url(../images/delete.png);
-		width:16px;
+		width:14px;
+		height:14px;
 		cursor: pointer;
 		border: none;
 	    display: inline;

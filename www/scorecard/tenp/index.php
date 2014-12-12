@@ -821,7 +821,7 @@ public function writeToLogFile($stringData) {
         $objAction = ActionItems::Load($ActionId);
         $strControlId = 'lstActionWho' . $ActionId;
         $lstActionWho = $this->GetControl($strControlId);
-        $objAction->Who = $lstActionWho->SelectedValue;
+        $objAction->Who = ($lstActionWho->SelectedValue !=0)? $lstActionWho->SelectedValue : null;
         $objAction->ModifiedBy = $this->intUserId;
         $objAction->Save();
 	}
