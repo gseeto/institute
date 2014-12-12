@@ -228,7 +228,7 @@
 		text-decoration:none;
 		text-shadow:1px 1px 0px #1570cd;
 		cursor: pointer;
-		margin-left:10px;
+		margin-left:0px;
 		margin-right:10px;
 	}.primary:hover {
 		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6cb9cf), color-stop(1, #0098c3) );
@@ -615,15 +615,17 @@
 		background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
 		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
 		background-color:#ededed;
-		border: 1px solid #aaf;
+		border: 1px solid #ededed;
 	}
-	.summaryTable {margin-top:10px; margin-left:20px; border: 1px solid #aaf;}
+	.summaryTable {margin-top:10px; margin-left:10px; border: 1px solid #0098c3;}
 	.scorecard_table {
 		margin-top:10px;
 		margin-bottom:10px;
 		background: #ffffff;
-		border: 1px solid #aaf;
+		border: 1px solid #0098c3;
+		width:910px;
 	}
+	.ui-button { margin-top:5px; margin-right:5px;}
 	.deleteButton {
 		background-image: url(../images/delete.png);
 		width:14px;
@@ -665,10 +667,10 @@
 		margin:20px;
 		float: right;
 	}
-	.statement { border: 1px solid #aaf; padding:5px; width:800px; display: block; cursor:pointer;}
+	.statement { border: 1px solid #0098c3; padding:20px; width:910px; display: block; cursor:pointer; box-shadow: 5px 5px 2px #888;}
 	.tablecell { padding:5px; display: block;}
 	.link { text-decoration: underline; cursor:pointer; margin-top:10px; margin-bottom:10px; display: block;}
-	.resourceTable {margin-top:10px; margin-left:20px; border: 1px solid #aaf;}
+	.resourceTable {margin-top:10px; margin-left:20px; border: 1px solid #0098c3;}
 	.editIcon {background-image: url('../images/icons/page_edit.png'); background-repeat:no-repeat; background-position:left;};
 	
 	/*

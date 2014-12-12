@@ -82,8 +82,8 @@ public function writeToLogFile($stringData) {
 
 		// Display Statement if Category is Purpose or Positioning		
 		$this->lblStatement = new QLabel($this,'lblStatement');
-		$this->lblStatement->Width = 800;
-		$this->lblStatement->Padding = '10px 25px';
+		$this->lblStatement->Width = 840;
+		$this->lblStatement->Padding = '10px 30px';
 		$this->lblStatement->CssClass = 'statement editIcon';
 		$this->lblStatement->Cursor = 'pointer';
 		$this->lblStatement->HtmlEntities = false;
@@ -106,7 +106,7 @@ public function writeToLogFile($stringData) {
             
 		$this->txtStatement = new QTextBox($this,'txtStatement');
 		$this->txtStatement->CssClass = 'statement';
-		$this->txtStatement->Width = 800;
+		$this->txtStatement->Width = 940;
 		$this->txtStatement->TextMode = QTextMode::MultiLine;
         $this->txtStatement->Height = 50;
 		$this->txtStatement->Columns = 5;
@@ -134,9 +134,10 @@ public function writeToLogFile($stringData) {
 		// Generate a summary of the P Strategys
 		$this->dtgStrategySummary = new StrategyDataGrid($this);
 		$this->dtgStrategySummary->AddColumn(new QDataGridColumn('Count', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=20px' ));
-		$this->dtgStrategySummary->AddColumn(new QDataGridColumn($this->strCategory.' Strategy', '<?= $_ITEM->Strategy ?>', 'HtmlEntities=false', 'Width=700px' ));
-		$this->dtgStrategySummary->AddColumn(new QDataGridColumn('KPI Rating', '<?= $_FORM->RenderKPIAverage($_ITEM->Id) ?>', 'HtmlEntities=false', 'Width=20px' ));
-		$this->dtgStrategySummary->CellPadding = 5;
+		$this->dtgStrategySummary->AddColumn(new QDataGridColumn($this->strCategory.' Strategy', '<?= $_ITEM->Strategy ?>', 'HtmlEntities=false', 'Width=840px' ));
+		$this->dtgStrategySummary->AddColumn(new QDataGridColumn('KPI Rating', '<?= $_FORM->RenderKPIAverage($_ITEM->Id) ?>', 'HtmlEntities=false', 'Width=40px' ));
+		$this->dtgStrategySummary->CssClass = 'scorecard_table';
+		$this->dtgStrategySummary->CellPadding = 7;
 		$this->dtgStrategySummary->GridLines = 'both';	
 		$this->dtgStrategySummary->SetDataBinder('dtgStrategySummary_Bind',$this);		
 		
@@ -165,11 +166,12 @@ public function writeToLogFile($stringData) {
         foreach($strategyArray as $objStrategy) {
         	$dtgStrategy = new StrategyDataGrid($this);
         	$dtgStrategy->AddColumn(new QDataGridColumn('', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=20px' ));
-			$dtgStrategy->AddColumn(new QDataGridColumn('Strategy', '<?= $_FORM->RenderStrategy($_ITEM) ?>', 'HtmlEntities=false', 'Width=750px' ));
-			$dtgStrategy->AddColumn(new QDataGridColumn('Priority', '<?= $_FORM->RenderPriority($_ITEM) ?>', 'HtmlEntities=false', 'Width=20px' ));
+			$dtgStrategy->AddColumn(new QDataGridColumn('Strategy', '<?= $_FORM->RenderStrategy($_ITEM) ?>', 'HtmlEntities=false', 'Width=800px' ));
+			$dtgStrategy->AddColumn(new QDataGridColumn('Priority', '<?= $_FORM->RenderPriority($_ITEM) ?>', 'HtmlEntities=false', 'Width=40px' ));
 			$dtgStrategy->AddColumn(new QDataGridColumn('Delete', '<?= $_FORM->RenderDeleteStrategy($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));			
-			$dtgStrategy->CellPadding = 5;
+			$dtgStrategy->CellPadding = 7;
 			$dtgStrategy->GridLines = 'both';
+			$dtgStrategy->CssClass = 'scorecard_table';
 			$dtgStrategy->DataSource = array($objStrategy);
 			$dtgStrategy->NoDataHtml = '<div style=\'padding:20px;\'><p><b>'.$this->strCategory.' Strategy</b></p>' .'No Strategies.<br></div>';
 			$dtgStrategy->UseAjax = true;
@@ -190,7 +192,7 @@ public function writeToLogFile($stringData) {
 			$dtgActionItem->AddColumn(new QDataGridColumn('Comments', '<?= $_FORM->RenderComments($_ITEM) ?>', 'HtmlEntities=false', 'Width=150px' ));
 			$dtgActionItem->AddColumn(new QDataGridColumn('Delete', '<?= $_FORM->RenderDeleteAction($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));
 			
-			$dtgActionItem->CellPadding = 2;
+			$dtgActionItem->CellPadding = 7;
 			$dtgActionItem->DataSource = ActionItems::LoadArrayByStrategyId($objStrategy->Id);
 			$dtgActionItem->NoDataHtml = '<div style=\'padding:20px;\'><p><b>Action Item Table</b></p>' .'No Actions.<br></div>';
 			$dtgActionItem->UseAjax = true;
@@ -214,12 +216,12 @@ public function writeToLogFile($stringData) {
 	        
 	        $dtgKPI = new KpisDataGrid($this);
 	        $dtgKPI->AddColumn(new QDataGridColumn('', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=10px' ));
-			$dtgKPI->AddColumn(new QDataGridColumn('KPIs', '<?= $_FORM->RenderKPI($_ITEM) ?>', 'HtmlEntities=false', 'Width=450px' ));
+			$dtgKPI->AddColumn(new QDataGridColumn('KPIs', '<?= $_FORM->RenderKPI($_ITEM) ?>', 'HtmlEntities=false', 'Width=550px' ));
 			$dtgKPI->AddColumn(new QDataGridColumn('Rating', '<?= $_FORM->RenderRating($_ITEM) ?>', 'HtmlEntities=false', 'Width=40px' ));
-			$dtgKPI->AddColumn(new QDataGridColumn('Comments', '<?= $_FORM->RenderKPIComments($_ITEM) ?>', 'HtmlEntities=false', 'Width=150px' ));
+			$dtgKPI->AddColumn(new QDataGridColumn('Comments', '<?= $_FORM->RenderKPIComments($_ITEM) ?>', 'HtmlEntities=false', 'Width=260px' ));
 			$dtgKPI->AddColumn(new QDataGridColumn('Delete', '<?= $_FORM->RenderDeleteKpi($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));
 			
-			$dtgKPI->CellPadding = 2;
+			$dtgKPI->CellPadding = 7;
 			$dtgKPI->DataSource = Kpis::LoadArrayByStrategyId($objStrategy->Id);
 			$dtgKPI->NoDataHtml = '<div style=\'padding:20px;\'><p><b>KPI Table</b></p>' .'No KPIs.<br></div>';
 			$dtgKPI->UseAjax = true;
@@ -388,7 +390,7 @@ public function writeToLogFile($stringData) {
         	$lblKpi->Width = 450;
         	$lblKpi->Cursor = 'pointer';
         	$lblKpi->HtmlEntities = false;
-        	$lblKpi->Padding = '10px 20px';
+        	$lblKpi->Padding = '10px 30px';
         	$lblKpi->CssClass = 'editIcon'; 
    			$lblKpi->AddAction(new QClickEvent(), new QJavaScriptAction('lblKpi_Clicked(this)'));
         }
@@ -594,7 +596,7 @@ public function writeToLogFile($stringData) {
         	$lblAction->Cursor = 'pointer';
         	$lblAction->Width = 400;
         	$lblAction->HtmlEntities = false;
-        	$lblAction->Padding = '5px 15px';
+        	$lblAction->Padding = '10px 30px';
         	$lblAction->CssClass = 'editIcon';        	
   			$lblAction->AddAction(new QClickEvent(), new QJavaScriptAction('lblAction_Clicked(this)'));	
         }
@@ -755,7 +757,7 @@ public function writeToLogFile($stringData) {
         	$lblStrategy->Width = 700;
         	$lblStrategy->CssClass = 'tablecell';
         	$lblStrategy->Cursor = 'pointer';
-        	$lblStrategy->Padding = '10px 25px';
+        	$lblStrategy->Padding = '10px 30px';
         	$lblStrategy->HtmlEntities = false;
         	$lblStrategy->CssClass = 'editIcon'; 
 			$lblStrategy->AddAction(new QClickEvent(), new QJavaScriptAction('lblStrategy_Clicked(this)'));	
