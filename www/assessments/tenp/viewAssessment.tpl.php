@@ -25,19 +25,23 @@
             valueAxis.minimum = 0;
             valueAxis.dashLength = 3;
             valueAxis.axisTitleOffset = 20;
-            valueAxis.gridCount = 5;
+            valueAxis.autoGridCount = false;
+            valueAxis.gridCount = 7;
+            valueAxis.maximum = 7;
             chart.addValueAxis(valueAxis);
 
             // GRAPH
             var graph = new AmCharts.AmGraph();
             graph.valueField = "importance";
             graph.bullet = "round";
+            graph.bulletAlpha = 0.7;
             graph.balloonText = "[[category]] Importance: [[value]]"
             chart.addGraph(graph);
 
             var graph2 = new AmCharts.AmGraph();
             graph2.valueField = "performance";
             graph2.bullet = "round";
+            graph2.bulletAlpha = 0.7;
             graph2.balloonText = "[[category]] Performance: [[value]]"
             chart.addGraph(graph2);
             
