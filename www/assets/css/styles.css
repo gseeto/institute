@@ -230,6 +230,7 @@
 		cursor: pointer;
 		margin-left:0px;
 		margin-right:10px;
+		margin-top:10px;
 	}.primary:hover {
 		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #6cb9cf), color-stop(1, #0098c3) );
 		background:-moz-linear-gradient( center top, #6cb9cf 5%, #0098c3 100% );

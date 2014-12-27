@@ -6,6 +6,7 @@
 <?php $this->lblIntroduction->Render();?>
 </p>
 <?php  $this->btnReturn->Render(); ?>
+<?php  $this->btnGeneratePdf->Render(); ?>
 <script type="text/javascript">
 
        	function DisplayChart(chartData) {
@@ -121,4 +122,7 @@ Sustainable impact is best achieved in concert with sustainable economics.
 	?>
 <br>
 </div>
-<?php require('/../..'.__INCLUDES__ . '/footer.inc.php'); ?>
+<div style="visibility:hidden;">
+<img src='<?php _p(__SUBDIRECTORY__);?>/assessments/tenp/tenpAssessmentImg.php/<?php _p($this->objTenPAssessment->Id);?>'>
+</div>
+	<?php require('/../..'.__INCLUDES__ . '/footer.inc.php'); ?>

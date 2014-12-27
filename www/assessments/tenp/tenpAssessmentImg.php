@@ -33,7 +33,6 @@ $categoriesArray = array();
 $intAssessmentId = QApplication::PathInfo(0);
 foreach(CategoryType::$NameArray as $key=>$value) {
 	$categoriesArray[] = $value;
-	//$resultArray = KingdomBusinessResults::LoadArrayByAssessmentIdAndCategory($intAssessmentId,$key);
 	$resultArray = TenPResults::LoadArrayByAssessmentIdAndCategory($intAssessmentId,$key);
 	$ptotal = $itotal = 0;
 	foreach( $resultArray as $objResult) {
@@ -43,6 +42,19 @@ foreach(CategoryType::$NameArray as $key=>$value) {
 	$performanceArray[] = $ptotal/count($resultArray);	
 	$importanceArray[] = $itotal/count($resultArray);
 }
+$performanceArray = array_reverse($performanceArray);
+$temp = array_pop($performanceArray);
+array_unshift($performanceArray,$temp);
+
+//array_pop($performanceArray, array_shift($performanceArray));
+$importanceArray = array_reverse($importanceArray);
+$temp = array_pop($importanceArray);
+array_unshift($importanceArray,$temp);
+//array_pop($importanceArray, array_shift($importanceArray));
+$categoriesArray = array_reverse($categoriesArray);
+$temp = array_pop($categoriesArray);
+array_unshift($categoriesArray,$temp);
+//array_pop($categoriesArray, array_shift($categoriesArray));
 $graph->SetTitles($categoriesArray);
 
 // Create the first radar plot		
@@ -64,6 +76,17 @@ $graph->Add($plot2);
 $graph->Add($plot);
 
 // And output the graph
-$graph->Stroke();
+//$graph->Stroke();
+
+// Get the handler to prevent the library from sending the
+// image to the browser
+$gdImgHandler = $graph->Stroke(_IMG_HANDLER);
+
+// Stroke image to a file
+
+// Default is PNG so use ".png" as suffix
+$fileName =  __UPLOAD_DIR__.'/tenp' . $intAssessmentId. '.png';
+$graph->img->Stream($fileName);
+
 
 ?>
