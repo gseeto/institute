@@ -407,8 +407,39 @@ class ToolslForm extends InstituteForm {
         $lstActionWho = $this->GetControl($strControlId);
         $objAction->Who = $lstActionWho->SelectedValue;
         $objAction->Save();
+		if(($this->intUserId != $lstActionWho->SelectedValue) && ($lstActionWho->SelectedValue !=0)) {
+        	// notify someone if they have something assigned to them by somebody else
+        	$this->NotifyUser($lstActionWho->SelectedValue,$ActionId);
+        }
 	}
 
+	function NotifyUser($userId, $actionId) {
+		$objUser = User::Load($userId);
+		$objAction = ActionItems::Load($actionId);
+		if(($objUser)&&($objUser->Email != null)) {
+			$strategy = $objAction->Strategy->Strategy;
+			$action = $objAction->Action;
+			$due = ($objAction->When!=null)?$objAction->When->__toString() : '';
+			$objMessage = new QEmailMessage();
+			QEmailServer::$TestMode = true;
+			QEmailServer::$TestModeDirectory = '/tmp/';
+			QEmailServer::$SmtpServer = MAIL_SERVER;
+			QEmailServer::$AuthLogin = false;
+			//QEmailServer::$SmtpPassword = 'lASgZ357lk';
+			//QEmailServer::$SmtpPort = 2525;
+			QEmailServer::$SmtpUsername = 'scorecard@inst.net';
+			
+	    	$objMessage->From = 'Scorecard Administrator <scorecard@inst.net>';
+		    $objMessage->To = $objUser->Email;
+		    $objMessage->Subject = 'Action Item assigned ';
+		    $objMessage->HtmlBody = sprintf("<br>The following has been assigned to you:<br><br>Under Strategy: %s<br>Action Item: %s<br>Due:%s<br>",$strategy, $action,$due);
+		    $objMessage->Body = sprintf("\nThe following has been assigned to you:\n\nUnder Strategy: %s\nAction Item: %s\nDue:%s\n",$strategy, $action,$due);
+		    if (QEmailServer::IsEmailValid($objUser->Email)) {
+		    	QEmailServer::Send($objMessage);
+		    }
+		}
+	}
+	
 	public function RenderLatestKpiComments($objKpi) {
 		$strControlId = 'txtLatestKpiComment' . $objKpi->Id;
         $txtLatestComment = $this->GetControl($strControlId);     

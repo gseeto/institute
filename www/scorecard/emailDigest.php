@@ -94,9 +94,9 @@ foreach($objUserArray as $objUser) {
 		//QEmailServer::$TestMode = true;
 		//QEmailServer::$TestModeDirectory = '/tmp/';
 		QEmailServer::$SmtpServer = MAIL_SERVER;
-		QEmailServer::$AuthLogin = true;
-		QEmailServer::$SmtpPassword = 'lASgZ357lk';
-		QEmailServer::$SmtpPort = 2525;
+		QEmailServer::$AuthLogin = false;
+		//QEmailServer::$SmtpPassword = 'lASgZ357lk';
+		//QEmailServer::$SmtpPort = 2525;
 		QEmailServer::$SmtpUsername = 'scorecard@inst.net';
 		
     	$objMessage->From = 'Scorecard Administrator <scorecard@inst.net>';
