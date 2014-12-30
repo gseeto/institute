@@ -840,8 +840,8 @@ public function writeToLogFile($stringData) {
 			$action = $objAction->Action;
 			$due = ($objAction->When!=null)?$objAction->When->__toString() : '';
 			$objMessage = new QEmailMessage();
-			QEmailServer::$TestMode = true;
-			QEmailServer::$TestModeDirectory = '/tmp/';
+			//QEmailServer::$TestMode = true;
+			//QEmailServer::$TestModeDirectory = '/tmp/';
 			QEmailServer::$SmtpServer = MAIL_SERVER;
 			QEmailServer::$AuthLogin = false;
 			//QEmailServer::$SmtpPassword = 'lASgZ357lk';
