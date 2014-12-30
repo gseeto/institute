@@ -851,7 +851,7 @@ public function writeToLogFile($stringData) {
 	    	$objMessage->From = 'Scorecard Administrator <scorecard@inst.net>';
 		    $objMessage->To = $objUser->Email;
 		    $objMessage->Subject = 'Action Item assigned ';
-		    $objMessage->HtmlBody = sprintf("<br>The following has been assigned to you:<br><br>Under Strategy: %s<br>Action Item: %s<br>Due:%s<br>",$strategy, $action,$due);
+		    $objMessage->HtmlBody = sprintf("<br>The following has been assigned to you:<br><br><b>Under Strategy:</b><br>%s<br><br><b>Action Item:</b><br>%s<br><br><b>Due:</b><br>%s<br>",$strategy, $action,$due);
 		    $objMessage->Body = sprintf("\nThe following has been assigned to you:\n\nUnder Strategy: %s\nAction Item: %s\nDue:%s\n",$strategy, $action,$due);
 		    if (QEmailServer::IsEmailValid($objUser->Email)) {
 		    	QEmailServer::Send($objMessage);
