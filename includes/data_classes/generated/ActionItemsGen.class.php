@@ -27,6 +27,7 @@
 	 * @property integer $Count the value for intCount 
 	 * @property integer $ModifiedBy the value for intModifiedBy 
 	 * @property string $Modified the value for strModified (Read-Only Timestamp)
+	 * @property boolean $Rank the value for blnRank 
 	 * @property Strategy $Strategy the value for the Strategy object referenced by intStrategyId 
 	 * @property Scorecard $Scorecard the value for the Scorecard object referenced by intScorecardId 
 	 * @property User $WhoObject the value for the User object referenced by intWho 
@@ -133,6 +134,14 @@
 		 */
 		protected $strModified;
 		const ModifiedDefault = null;
+
+
+		/**
+		 * Protected member variable that maps to the database column action_items.rank
+		 * @var boolean blnRank
+		 */
+		protected $blnRank;
+		const RankDefault = null;
 
 
 		/**
@@ -519,6 +528,7 @@
 			$objBuilder->AddSelectItem($strTableName, 'count', $strAliasPrefix . 'count');
 			$objBuilder->AddSelectItem($strTableName, 'modified_by', $strAliasPrefix . 'modified_by');
 			$objBuilder->AddSelectItem($strTableName, 'modified', $strAliasPrefix . 'modified');
+			$objBuilder->AddSelectItem($strTableName, 'rank', $strAliasPrefix . 'rank');
 		}
 
 
@@ -574,6 +584,8 @@
 			$objToReturn->intModifiedBy = $objDbRow->GetColumn($strAliasName, 'Integer');
 			$strAliasName = array_key_exists($strAliasPrefix . 'modified', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'modified'] : $strAliasPrefix . 'modified';
 			$objToReturn->strModified = $objDbRow->GetColumn($strAliasName, 'VarChar');
+			$strAliasName = array_key_exists($strAliasPrefix . 'rank', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'rank'] : $strAliasPrefix . 'rank';
+			$objToReturn->blnRank = $objDbRow->GetColumn($strAliasName, 'Bit');
 
 			// Instantiate Virtual Attributes
 			foreach ($objDbRow->GetColumnNameArray() as $strColumnName => $mixValue) {
@@ -941,7 +953,8 @@
 							`comments`,
 							`category_id`,
 							`count`,
-							`modified_by`
+							`modified_by`,
+							`rank`
 						) VALUES (
 							' . $objDatabase->SqlVariable($this->strAction) . ',
 							' . $objDatabase->SqlVariable($this->intStrategyId) . ',
@@ -952,7 +965,8 @@
 							' . $objDatabase->SqlVariable($this->strComments) . ',
 							' . $objDatabase->SqlVariable($this->intCategoryId) . ',
 							' . $objDatabase->SqlVariable($this->intCount) . ',
-							' . $objDatabase->SqlVariable($this->intModifiedBy) . '
+							' . $objDatabase->SqlVariable($this->intModifiedBy) . ',
+							' . $objDatabase->SqlVariable($this->blnRank) . '
 						)
 					');
 
@@ -996,7 +1010,8 @@
 							`comments` = ' . $objDatabase->SqlVariable($this->strComments) . ',
 							`category_id` = ' . $objDatabase->SqlVariable($this->intCategoryId) . ',
 							`count` = ' . $objDatabase->SqlVariable($this->intCount) . ',
-							`modified_by` = ' . $objDatabase->SqlVariable($this->intModifiedBy) . '
+							`modified_by` = ' . $objDatabase->SqlVariable($this->intModifiedBy) . ',
+							`rank` = ' . $objDatabase->SqlVariable($this->blnRank) . '
 						WHERE
 							`id` = ' . $objDatabase->SqlVariable($this->intId) . '
 					');
@@ -1104,6 +1119,7 @@
 			$this->intCount = $objReloaded->intCount;
 			$this->ModifiedBy = $objReloaded->ModifiedBy;
 			$this->strModified = $objReloaded->strModified;
+			$this->blnRank = $objReloaded->blnRank;
 		}
 
 		/**
@@ -1127,6 +1143,7 @@
 					`category_id`,
 					`count`,
 					`modified_by`,
+					`rank`,
 					__sys_login_id,
 					__sys_action,
 					__sys_date
@@ -1142,6 +1159,7 @@
 					' . $objDatabase->SqlVariable($this->intCategoryId) . ',
 					' . $objDatabase->SqlVariable($this->intCount) . ',
 					' . $objDatabase->SqlVariable($this->intModifiedBy) . ',
+					' . $objDatabase->SqlVariable($this->blnRank) . ',
 					' . (($objDatabase->JournaledById) ? $objDatabase->JournaledById : 'NULL') . ',
 					' . $objDatabase->SqlVariable($strJournalCommand) . ',
 					NOW()
@@ -1251,6 +1269,11 @@
 					// Gets the value for strModified (Read-Only Timestamp)
 					// @return string
 					return $this->strModified;
+
+				case 'Rank':
+					// Gets the value for blnRank 
+					// @return boolean
+					return $this->blnRank;
 
 
 				///////////////////
@@ -1451,6 +1474,17 @@
 						throw $objExc;
 					}
 
+				case 'Rank':
+					// Sets the value for blnRank 
+					// @param boolean $mixValue
+					// @return boolean
+					try {
+						return ($this->blnRank = QType::Cast($mixValue, QType::Boolean));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
 
 				///////////////////
 				// Member Objects
@@ -1624,6 +1658,7 @@
 			$strToReturn .= '<element name="Count" type="xsd:int"/>';
 			$strToReturn .= '<element name="ModifiedByObject" type="xsd1:User"/>';
 			$strToReturn .= '<element name="Modified" type="xsd:string"/>';
+			$strToReturn .= '<element name="Rank" type="xsd:boolean"/>';
 			$strToReturn .= '<element name="__blnRestored" type="xsd:boolean"/>';
 			$strToReturn .= '</sequence></complexType>';
 			return $strToReturn;
@@ -1678,6 +1713,8 @@
 				$objToReturn->ModifiedByObject = User::GetObjectFromSoapObject($objSoapObject->ModifiedByObject);
 			if (property_exists($objSoapObject, 'Modified'))
 				$objToReturn->strModified = $objSoapObject->Modified;
+			if (property_exists($objSoapObject, 'Rank'))
+				$objToReturn->blnRank = $objSoapObject->Rank;
 			if (property_exists($objSoapObject, '__blnRestored'))
 				$objToReturn->__blnRestored = $objSoapObject->__blnRestored;
 			return $objToReturn;
@@ -1745,6 +1782,7 @@
 	 * @property-read QQNode $ModifiedBy
 	 * @property-read QQNodeUser $ModifiedByObject
 	 * @property-read QQNode $Modified
+	 * @property-read QQNode $Rank
 	 */
 	class QQNodeActionItems extends QQNode {
 		protected $strTableName = 'action_items';
@@ -1784,6 +1822,8 @@
 					return new QQNodeUser('modified_by', 'ModifiedByObject', 'integer', $this);
 				case 'Modified':
 					return new QQNode('modified', 'Modified', 'string', $this);
+				case 'Rank':
+					return new QQNode('rank', 'Rank', 'boolean', $this);
 
 				case '_PrimaryKeyNode':
 					return new QQNode('id', 'Id', 'integer', $this);
@@ -1815,6 +1855,7 @@
 	 * @property-read QQNode $ModifiedBy
 	 * @property-read QQNodeUser $ModifiedByObject
 	 * @property-read QQNode $Modified
+	 * @property-read QQNode $Rank
 	 * @property-read QQNode $_PrimaryKeyNode
 	 */
 	class QQReverseReferenceNodeActionItems extends QQReverseReferenceNode {
@@ -1855,6 +1896,8 @@
 					return new QQNodeUser('modified_by', 'ModifiedByObject', 'integer', $this);
 				case 'Modified':
 					return new QQNode('modified', 'Modified', 'string', $this);
+				case 'Rank':
+					return new QQNode('rank', 'Rank', 'boolean', $this);
 
 				case '_PrimaryKeyNode':
 					return new QQNode('id', 'Id', 'integer', $this);

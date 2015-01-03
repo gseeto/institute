@@ -24,7 +24,11 @@
 <div class='section' style='width:960px;'>
 <h2>My Top Action Items For The Week</h2>
 <p>Action items have been ordered based on the priority specified in the associated Strategy.</p>
+<p>However, you can override this by explicitly selecting the Action Items you wish to prioritize by clicking on the 'Add an Action Item to my list' button.</p>
 <?php $this->dtgTopActions->Render();?>
+<?php $this->btnAddAction->Render(); $this->btnRemoveAction->Render(); ?><br><br>
+<?php $this->dtgAddAction->Render(); $this->dtgRemoveAction->Render(); ?>
+<?php $this->btnSubmit->Render();?>
 </div>
 
 <div class='section' style='width:960px;'>
