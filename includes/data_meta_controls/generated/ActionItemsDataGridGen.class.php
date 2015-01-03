@@ -309,6 +309,7 @@
 				case 'ModifiedBy': return QQN::ActionItems()->ModifiedBy;
 				case 'ModifiedByObject': return QQN::ActionItems()->ModifiedByObject;
 				case 'Modified': return QQN::ActionItems()->Modified;
+				case 'Rank': return QQN::ActionItems()->Rank;
 				default: throw new QCallerException('Simple Property not found in ActionItemsDataGrid content: ' . $mixContent);
 			} else if ($mixContent instanceof QQAssociationNode)
 				throw new QCallerException('Content QQNode cannot go through any "To Many" association nodes.');

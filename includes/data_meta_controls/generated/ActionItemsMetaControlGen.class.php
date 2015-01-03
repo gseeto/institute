@@ -40,6 +40,8 @@
 	 * property-read QLabel $ModifiedByLabel
 	 * property QLabel $ModifiedControl
 	 * property-read QLabel $ModifiedLabel
+	 * property QCheckBox $RankControl
+	 * property-read QLabel $RankLabel
 	 * property-read string $TitleVerb a verb indicating whether or not this is being edited or created
 	 * property-read boolean $EditMode a boolean indicating whether or not this is being edited or created
 	 */
@@ -143,6 +145,12 @@
          */
 		protected $lblModified;
 
+        /**
+         * @var QCheckBox chkRank;
+         * @access protected
+         */
+		protected $chkRank;
+
 
 		// Controls that allow the viewing of ActionItems's individual data fields
         /**
@@ -204,6 +212,12 @@
          * @access protected
          */
 		protected $lblModifiedBy;
+
+        /**
+         * @var QLabel lblRank
+         * @access protected
+         */
+		protected $lblRank;
 
 
 		// QListBox Controls (if applicable) to edit Unique ReverseReferences and ManyToMany References
@@ -650,6 +664,30 @@
 			return $this->lblModified;
 		}
 
+		/**
+		 * Create and setup QCheckBox chkRank
+		 * @param string $strControlId optional ControlId to use
+		 * @return QCheckBox
+		 */
+		public function chkRank_Create($strControlId = null) {
+			$this->chkRank = new QCheckBox($this->objParentObject, $strControlId);
+			$this->chkRank->Name = QApplication::Translate('Rank');
+			$this->chkRank->Checked = $this->objActionItems->Rank;
+			return $this->chkRank;
+		}
+
+		/**
+		 * Create and setup QLabel lblRank
+		 * @param string $strControlId optional ControlId to use
+		 * @return QLabel
+		 */
+		public function lblRank_Create($strControlId = null) {
+			$this->lblRank = new QLabel($this->objParentObject, $strControlId);
+			$this->lblRank->Name = QApplication::Translate('Rank');
+			$this->lblRank->Text = ($this->objActionItems->Rank) ? QApplication::Translate('Yes') : QApplication::Translate('No');
+			return $this->lblRank;
+		}
+
 
 
 		/**
@@ -735,6 +773,9 @@
 
 			if ($this->lblModified) if ($this->blnEditMode) $this->lblModified->Text = $this->objActionItems->Modified;
 
+			if ($this->chkRank) $this->chkRank->Checked = $this->objActionItems->Rank;
+			if ($this->lblRank) $this->lblRank->Text = ($this->objActionItems->Rank) ? QApplication::Translate('Yes') : QApplication::Translate('No');
+
 		}
 
 
@@ -768,6 +809,7 @@
 				if ($this->lstCategory) $this->objActionItems->CategoryId = $this->lstCategory->SelectedValue;
 				if ($this->txtCount) $this->objActionItems->Count = $this->txtCount->Text;
 				if ($this->lstModifiedByObject) $this->objActionItems->ModifiedBy = $this->lstModifiedByObject->SelectedValue;
+				if ($this->chkRank) $this->objActionItems->Rank = $this->chkRank->Checked;
 
 				// Update any UniqueReverseReferences (if any) for controls that have been created for it
 
@@ -882,6 +924,12 @@
 				case 'ModifiedLabel':
 					if (!$this->lblModified) return $this->lblModified_Create();
 					return $this->lblModified;
+				case 'RankControl':
+					if (!$this->chkRank) return $this->chkRank_Create();
+					return $this->chkRank;
+				case 'RankLabel':
+					if (!$this->lblRank) return $this->lblRank_Create();
+					return $this->lblRank;
 				default:
 					try {
 						return parent::__get($strName);
@@ -928,6 +976,8 @@
 						return ($this->lstModifiedByObject = QType::Cast($mixValue, 'QControl'));
 					case 'ModifiedControl':
 						return ($this->lblModified = QType::Cast($mixValue, 'QControl'));
+					case 'RankControl':
+						return ($this->chkRank = QType::Cast($mixValue, 'QControl'));
 					default:
 						return parent::__set($strName, $mixValue);
 				}
