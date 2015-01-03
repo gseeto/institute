@@ -21,7 +21,14 @@
 	}
 ?>
 </ul></div>
-<div style="background-color: #ed9e9e; margin:20px auto; padding:20px; width:400px; border:1px solid black;">
-<p>This page is not yet implemented. Stay tuned for future functionality.</p>
+<div class='section' style='width:960px;'>
+<h2>My Top Action Items For The Week</h2>
+<p>Action items have been ordered based on the priority specified in the associated Strategy.</p>
+<?php $this->dtgTopActions->Render();?>
+</div>
+
+<div class='section' style='width:960px;'>
+<h2>My Recurring Action Items</h2>
+<?php $this->dtgRecurringActions->Render();?>
 </div>
 <?php require('/../..'.__INCLUDES__ . '/footer.inc.php'); ?>
