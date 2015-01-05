@@ -69,7 +69,8 @@ class MyViewForm extends InstituteForm {
 		$this->dtgAddAction->NoDataHtml = '';
 		$this->dtgAddAction->UseAjax = true;
 		$this->dtgAddAction->GridLines = 'both';
-		$this->dtgAddAction->Visible = false;	
+		$this->dtgAddAction->Visible = false;
+		$this->dtgAddAction->HtmlBefore = "<b>Actions to add to my task list:</b>";	
 		
 		$this->dtgRemoveAction = new QDataGrid($this);
 		$this->dtgRemoveAction->AddColumn(new QDataGridColumn('P', '<?= $_FORM->RenderP($_ITEM) ?>', 'HtmlEntities=false', 'Width=10px' ));
@@ -80,7 +81,8 @@ class MyViewForm extends InstituteForm {
 		$this->dtgRemoveAction->NoDataHtml = '';
 		$this->dtgRemoveAction->UseAjax = true;
 		$this->dtgRemoveAction->GridLines = 'both';
-		$this->dtgRemoveAction->Visible = false;	
+		$this->dtgRemoveAction->Visible = false;
+		$this->dtgRemoveAction->HtmlBefore = "<b>Actions to remove from my task list:</b>";
 		
 		$this->btnSubmit = new QButton($this);
 		$this->btnSubmit->Name = 'Submit';
@@ -174,7 +176,8 @@ class MyViewForm extends InstituteForm {
 		$objActionItemArray = $this->objScorecard->GetActionItemsArray($objOptionalClauses);
 		$objMyActions = array();
 		foreach($objActionItemArray as $objActionItem) {
-				if(($objActionItem->Who == $this->objUser->Id)&&($objActionItem->Rank != true)) {
+				if(($objActionItem->Who == $this->objUser->Id)&&($objActionItem->Rank != true)&&
+					($objActionItem->StatusType != StatusType::_100)) {
 					// Populate Actions Array
 					$objMyActions[] = $objActionItem;
 				}
@@ -186,6 +189,7 @@ class MyViewForm extends InstituteForm {
 		// Display selection dialog
 		$this->dtgAddAction->Visible = true;
 		$this->btnSubmit->Visible = true;
+		$this->dtgRemoveAction->Visible = false;
 		unset($this->selectedActionArray);
 		$this->bSelectAdd = true;
     }
@@ -194,6 +198,7 @@ class MyViewForm extends InstituteForm {
 		// Display selection dialog
 		$this->dtgRemoveAction->Visible = true;
 		$this->btnSubmit->Visible = true;
+		$this->dtgAddAction->Visible = false;
 		unset($this->selectedActionArray);
 		$this->bSelectAdd = false;
     }
@@ -246,6 +251,7 @@ class MyViewForm extends InstituteForm {
 		$objTopFive = array();
 		$objCondition = QQ::Equal(QQN::ActionItems()->ScorecardId, $this->objScorecard->Id);
 		$objCondition = QQ::AndCondition($objCondition,QQ::IsNotNull(QQN::ActionItems()->Rank));
+		$objCondition = QQ::AndCondition($objCondition,QQ::NotEqual(QQN::ActionItems()->StatusType,StatusType::_100));
 		$objActionRankedArray = ActionItems::QueryArray($objCondition);
 		foreach($objActionRankedArray as $objActionItem) {
 			if(($objActionItem->Who == $this->objUser->Id)&& ($objActionItem->Rank == true)) {
@@ -268,14 +274,14 @@ class MyViewForm extends InstituteForm {
 						// Populate remaining top 5 Actions Array
 						//	$objScorecard->Name,$objActionItem->Strategy->Strategy,$objActionItem->Action);
 						if(($objActionItem->StatusType != StatusType::_100)&& ($objActionItem->StatusType != StatusType::Recurring)&& 
-							($objActionItem->Strategy->Priority != null) && ($objActionItem->Rank != false) && ($objActionItem->Rank != true)) {
-							$objTopFive[] = sprintf("<b>Strategy: </b> %s<br><br><b>Action: </b><a href='%s/scorecard/tenp/index.php/%d/%d/%d' >%s</a>",
-								$objActionItem->Strategy->Strategy,
-								__SUBDIRECTORY__,
-								$objActionItem->ScorecardId, $objActionItem->CategoryId,$objActionItem->Id,
-								$objActionItem->Action
-								);
-							$count++;
+							($objActionItem->Strategy->Priority != null) && ($objActionItem->Rank != true)) {
+									$objTopFive[] = sprintf("<b>Strategy: </b> %s<br><br><b>Action: </b><a href='%s/scorecard/tenp/index.php/%d/%d/%d' >%s</a>",
+										$objActionItem->Strategy->Strategy,
+										__SUBDIRECTORY__,
+										$objActionItem->ScorecardId, $objActionItem->CategoryId,$objActionItem->Id,
+										$objActionItem->Action
+										);
+									$count++;
 							if($count >4) break;
 						}
 					}
