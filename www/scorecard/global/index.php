@@ -306,7 +306,7 @@ class GlobalForm extends InstituteForm {
 			$objItem->giant = $key;
 			$objItem->StrategyCount = $value;
 			$objItem->KPIAverage = ($value != 0)? round(($giantKpi[$key]/$value),2) : 0;
-			if($i>10) $i=0; //rotate around if we exceed 10
+			if($i>=10) $i=0; //rotate around if we exceed 10
 			$objItem->kpicolor = $KPIcolorArray[$i];
 			$objItem->strategycolor = $StrategycolorArray[$i];
 			$associatedArray[] = $objItem;
