@@ -32,8 +32,8 @@ foreach($objUserArray as $objUser) {
 				if($objActionItem->Who == $objUser->Id) {
 					// Populate top 5 Actions Array
 					// Populate Overdue Actions array
-					print sprintf("Scorecard: %s  \nStrategy: %s\n Action Item: %s\n\n",
-						$objScorecard->Name,$objActionItem->Strategy->Strategy,$objActionItem->Action);
+					//print sprintf("Scorecard: %s  \nStrategy: %s\n Action Item: %s\n\n",
+					//	$objScorecard->Name,$objActionItem->Strategy->Strategy,$objActionItem->Action);
 					if($objActionItem->StatusType != StatusType::_100) {
 						$objTopFive[] = sprintf("%d,%s,%s,%s,%s",
 							$objActionItem->Strategy->Priority,
