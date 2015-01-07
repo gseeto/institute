@@ -36,10 +36,10 @@ foreach($objUserArray as $objUser) {
 					//	$objScorecard->Name,$objActionItem->Strategy->Strategy,$objActionItem->Action);
 					if($objActionItem->StatusType != StatusType::_100) {
 						$objTopFive[] = sprintf("%d,%s,%s,%s,%s",
-							($objActionItem->Strategy->Priority)?$objActionItem->Strategy->Priority:' ',
+							($objActionItem->Strategy)?$objActionItem->Strategy->Priority:'4',
 							($objActionItem->When)?$objActionItem->When : ' ',
 							($objActionItem->Action)?$objActionItem->Action : ' ', 
-							($objActionItem->Strategy->Strategy)?$objActionItem->Strategy->Strategy : ' ',
+							($objActionItem->Strategy)?$objActionItem->Strategy->Strategy : ' ',
 							CategoryType::ToString($objActionItem->CategoryId));
 						if($objActionItem->When){
 							$sGMTToday = new QDateTime(time()); //gmdate("Y-m-d H:i:s", time());
