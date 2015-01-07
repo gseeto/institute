@@ -46,7 +46,7 @@ foreach($objUserArray as $objUser) {
 							if($objActionItem->When->IsEarlierThan($sGMTToday)) {
 								$objOverdue[] = sprintf("<tr><td style='border: 1px solid black; padding: 4px;'>%s</td><td style='border: 1px solid black; padding: 4px;'>%s</td><td style='border: 1px solid black; padding: 4px;'>%s</td><td style='border: 1px solid black; padding: 4px;'>%s</td></tr>",
 									CategoryType::ToString($objActionItem->CategoryId),
-									($objActionItem->Strategy->Strategy)?$objActionItem->Strategy->Strategy: ' ',
+									($objActionItem->Strategy)?$objActionItem->Strategy->Strategy: ' ',
 									($objActionItem->Action)?$objActionItem->Action:' ',
 									($objActionItem->When)?$objActionItem->When: ' ');
 								$objTextOverdue[] = sprintf("P: %s  Strategy: %s  Action Item: %s  When: %s\n",
