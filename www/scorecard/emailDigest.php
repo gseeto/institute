@@ -36,24 +36,24 @@ foreach($objUserArray as $objUser) {
 					//	$objScorecard->Name,$objActionItem->Strategy->Strategy,$objActionItem->Action);
 					if($objActionItem->StatusType != StatusType::_100) {
 						$objTopFive[] = sprintf("%d,%s,%s,%s,%s",
-							$objActionItem->Strategy->Priority,
-							$objActionItem->When,
-							$objActionItem->Action, 
-							$objActionItem->Strategy->Strategy,
+							($objActionItem->Strategy->Priority)?$objActionItem->Strategy->Priority:' ',
+							($objActionItem->When)?$objActionItem->When : ' ',
+							($objActionItem->Action)?$objActionItem->Action : ' ', 
+							($objActionItem->Strategy->Strategy)?$objActionItem->Strategy->Strategy : ' ',
 							CategoryType::ToString($objActionItem->CategoryId));
 						if($objActionItem->When){
 							$sGMTToday = new QDateTime(time()); //gmdate("Y-m-d H:i:s", time());
 							if($objActionItem->When->IsEarlierThan($sGMTToday)) {
 								$objOverdue[] = sprintf("<tr><td style='border: 1px solid black; padding: 4px;'>%s</td><td style='border: 1px solid black; padding: 4px;'>%s</td><td style='border: 1px solid black; padding: 4px;'>%s</td><td style='border: 1px solid black; padding: 4px;'>%s</td></tr>",
 									CategoryType::ToString($objActionItem->CategoryId),
-									$objActionItem->Strategy->Strategy,
-									$objActionItem->Action,
-									$objActionItem->When);
+									($objActionItem->Strategy->Strategy)?$objActionItem->Strategy->Strategy: ' ',
+									($objActionItem->Action)?$objActionItem->Action:' ',
+									($objActionItem->When)?$objActionItem->When: ' ');
 								$objTextOverdue[] = sprintf("P: %s  Strategy: %s  Action Item: %s  When: %s\n",
 									CategoryType::ToString($objActionItem->CategoryId),
-									$objActionItem->Strategy->Strategy,
-									$objActionItem->Action,
-									$objActionItem->When);
+									($objActionItem->Strategy->Strategy)?$objActionItem->Strategy->Strategy: ' ',
+									($objActionItem->Action)?$objActionItem->Action:' ',
+									($objActionItem->When)?$objActionItem->When:' ');
 							}
 						}
 					}
@@ -64,7 +64,7 @@ foreach($objUserArray as $objUser) {
 			$strTextOutput = 'Top 5 Action Items for the Week\n\n';
 			
 			// Order the top 5 and construct the arrays.
-			print sprintf("About to order the top 5 and construct arrays.<br>");
+			print sprintf("<br>About to order the top 5 and construct arrays.<br>");
 			sort($objTopFive);
 			$fivecount = count($objTopFive);
 			for($i=0; $i<$fivecount; $i++) {
@@ -93,8 +93,8 @@ foreach($objUserArray as $objUser) {
 		print sprintf("About to send email to: %s<br>",$objUser->Email);
 		print sprintf("<br>%s %s<br><br>",$strIntro, $strTotalOutput);
 		$objMessage = new QEmailMessage();
-		QEmailServer::$TestMode = true;
-		QEmailServer::$TestModeDirectory = '/tmp/';
+		//QEmailServer::$TestMode = true;
+		//QEmailServer::$TestModeDirectory = '/tmp/';
 		QEmailServer::$SmtpServer = MAIL_SERVER;
 		QEmailServer::$AuthLogin = false;
 		//QEmailServer::$SmtpPassword = 'lASgZ357lk';
