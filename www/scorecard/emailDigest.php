@@ -51,7 +51,7 @@ foreach($objUserArray as $objUser) {
 									($objActionItem->When)?$objActionItem->When: ' ');
 								$objTextOverdue[] = sprintf("P: %s  Strategy: %s  Action Item: %s  When: %s\n",
 									CategoryType::ToString($objActionItem->CategoryId),
-									($objActionItem->Strategy->Strategy)?$objActionItem->Strategy->Strategy: ' ',
+									($objActionItem->Strategy)?$objActionItem->Strategy->Strategy: ' ',
 									($objActionItem->Action)?$objActionItem->Action:' ',
 									($objActionItem->When)?$objActionItem->When:' ');
 							}
