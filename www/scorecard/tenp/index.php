@@ -1,6 +1,5 @@
 <?php
 require(dirname(__FILE__) . '/../../../includes/prepend.inc.php');
-
 class TenPForm extends InstituteForm {
 	protected $arrNavigation;
 	protected $strPageTitle = 'Scorecard';
@@ -28,17 +27,14 @@ class TenPForm extends InstituteForm {
 	protected $intStatementId;
 	protected $intUserId;
 	protected $lblDebug;
-
 protected $mydebug;
 protected $myFile;
 protected $fh;
-
 public function writeToLogFile($stringData) {
 	if($this->mydebug) {
 		fwrite($this->fh, $stringData);
 	}
 }
-
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
 		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
@@ -56,7 +52,6 @@ public function writeToLogFile($stringData) {
 		$this->strCategory = CategoryType::ToString($this->intCategoryTypeId);
 		$userArray = QApplication::$Login->GetUserArray();
 		$this->intUserId = $userArray[0]->Id;
-
 		// Create a specific button for Summary and by default start there
 		$btnCategory = new QButton($this);
 		$btnCategory->Name = 'Summary';
@@ -79,7 +74,6 @@ public function writeToLogFile($stringData) {
 			$btnCategory->AddAction(new QClickEvent(), new QAjaxAction('btnCategory_Clicked'));
 			$this->btnCategoryArray[] = $btnCategory;
 		}
-
 		// Display Statement if Category is Purpose or Positioning		
 		$this->lblStatement = new QLabel($this,'lblStatement');
 		$this->lblStatement->Width = 840;
@@ -95,7 +89,6 @@ public function writeToLogFile($stringData) {
         $this->btnSaveStatement->CausesValidation = true;
         $this->btnSaveStatement->CssClass = 'ui-button';
         $this->btnSaveStatement->Display = false;
-
         // Make sure we turn off validation on the Cancel button
         $this->btnCancelStatement = new QButton($this,'btnCancelStatement');
         $this->btnCancelStatement->Text = 'Cancel';
@@ -149,7 +142,6 @@ public function writeToLogFile($stringData) {
         $objStyle = $this->dtgStrategySummary->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
         $objStyle->BackColor = '#0098c3'; 	
-
         $this->btnAddStrategy = new QButton($this);
         $this->btnAddStrategy->Name = 'Add Strategy';
         $this->btnAddStrategy->Text = 'Add Strategy';
@@ -246,7 +238,6 @@ public function writeToLogFile($stringData) {
 	        $i++;
         }
 	}
-
 	public function btnSaveStatement_Click($strFormId, $strControlId, $strParameter) {
 		$objStatement = Statement::Load($this->intStatementId);
 		if (null == $objStatement) {
@@ -341,7 +332,6 @@ public function writeToLogFile($stringData) {
 		$objStrategy->Save();
 		QApplication::Redirect('/scorecard/tenp/index.php/'. $this->objScorecard->Id . '/' .$this->intCategoryTypeId );
 	}
-
 	public function RenderKPI($objKPI) {
 		$strControlId = 'txtKpi' . $objKPI->Id;
 		$objStrategy = Strategy::Load($objKPI->StrategyId);
@@ -419,7 +409,6 @@ public function writeToLogFile($stringData) {
         $lblKpi->Text = $txtKpi->Text;
         $lblKpi->Display = true;
 	}
-
 	public function btnCancelKpi_Click($strFormId, $strControlId, $strParameter) {
 		$KpiId = $strParameter;	
 		$strControlId = 'txtKpi' . $KpiId;
@@ -437,7 +426,6 @@ public function writeToLogFile($stringData) {
         $lblKpi = $this->GetControl($strLblControlId); 
         $lblKpi->Display = true;
 	}
-
 	public function RenderRating($objKPI) {
 		$strControlId = 'lstKPIRating' . $objKPI->Id;
         $lstKpiRating = $this->GetControl($strControlId);     
@@ -525,7 +513,6 @@ public function writeToLogFile($stringData) {
         return ($txtComment->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblComment->RenderWithName(false));
         
 	}
-
 	public function btnSaveKpiComment_Click($strFormId, $strControlId, $strParameter) {
 		$KpiId = $strParameter;	
 		$strControlId = 'txtKPIComment' . $KpiId;
@@ -548,7 +535,6 @@ public function writeToLogFile($stringData) {
         $lblComment->Text = $txtComment->Text;
         $lblComment->Display = true;
 	}
-
 	public function RenderAction($objAction) {
 		$strControlId = 'txtAction' . $objAction->Id;
 		$objStrategy = Strategy::Load($objAction->StrategyId);
@@ -631,7 +617,6 @@ public function writeToLogFile($stringData) {
         }  
         
 	}
-
 	public function RenderPriority($objStrategy) {
 		$intPriority = ($objStrategy->Priority!=null) ? $objStrategy->Priority : 0;
 		$strImgPriorityCtrl = 'imgPriority' .$objStrategy->Id; 
@@ -836,16 +821,16 @@ public function writeToLogFile($stringData) {
 		$objUser = User::Load($userId);
 		$objAction = ActionItems::Load($actionId);
 		if(($objUser)&&($objUser->Email != null)) {
-			$strategy = $objAction->Strategy->Strategy;
+			$strategy = ($objAction->Strategy)? $objAction->Strategy->Strategy:'No Straegy';
 			$action = $objAction->Action;
 			$due = ($objAction->When!=null)?$objAction->When->__toString() : '';
 			$objMessage = new QEmailMessage();
-			//QEmailServer::$TestMode = true;
-			//QEmailServer::$TestModeDirectory = '/tmp/';
-			QEmailServer::$SmtpServer = MAIL_SERVER;
-			QEmailServer::$AuthLogin = false;
+			QEmailServer::$TestMode = true;
+			QEmailServer::$TestModeDirectory = '/tmp/';
 			//QEmailServer::$SmtpPassword = 'lASgZ357lk';
 			//QEmailServer::$SmtpPort = 2525;
+			QEmailServer::$SmtpServer = MAIL_SERVER;
+			QEmailServer::$AuthLogin = false;			
 			QEmailServer::$SmtpUsername = 'scorecard@inst.net';
 			
 	    	$objMessage->From = 'Scorecard Administrator <scorecard@inst.net>';
@@ -936,7 +921,6 @@ public function writeToLogFile($stringData) {
         $lblComment->Text = $txtComment->Text;
         $lblComment->Display = true;
 	}
-
 	public function btnCancelComment_Click($strFormId, $strControlId, $strParameter) {
 		$ActionId = $strParameter;	
 		$strControlId = 'txtComment' . $ActionId;
@@ -1036,7 +1020,6 @@ public function writeToLogFile($stringData) {
 			
 		foreach(Kpis::LoadArrayByStrategyId($objStrategy->Id) as $objKpi) 
 			$objKpi->Delete();
-
 		$objStrategy->Delete();
 		
 		$strategyArray = Strategy::LoadArrayByScorecardIdAndCategoryTypeId($this->objScorecard->Id,$this->intCategoryTypeId);        
@@ -1059,7 +1042,6 @@ public function writeToLogFile($stringData) {
 		$btnDelete->AddAction(new QClickEvent(), new QAjaxAction('btnDeleteAction_Clicked'));
 		return $btnDelete->Render(false);		
 	}
-
 	public function btnDeleteAction_Clicked($strFormId, $strControlId, $strParameter) {
 		$ActionId = $strParameter;
         $objAction = ActionItems::Load($ActionId);
@@ -1108,6 +1090,5 @@ public function writeToLogFile($stringData) {
 		$this->dtgKPIs[$intIndex]->Refresh();
 	}
 }
-
 TenPForm::Run('TenPForm');
 ?>

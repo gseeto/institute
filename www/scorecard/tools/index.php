@@ -413,11 +413,11 @@ class ToolslForm extends InstituteForm {
         }
 	}
 
-	function NotifyUser($userId, $actionId) {
+	public function NotifyUser($userId, $actionId) {
 		$objUser = User::Load($userId);
 		$objAction = ActionItems::Load($actionId);
 		if(($objUser)&&($objUser->Email != null)) {
-			$strategy = $objAction->Strategy->Strategy;
+			$strategy = ($objAction->Strategy)? $objAction->Strategy->Strategy:'No Straegy';
 			$action = $objAction->Action;
 			$due = ($objAction->When!=null)?$objAction->When->__toString() : '';
 			$objMessage = new QEmailMessage();
