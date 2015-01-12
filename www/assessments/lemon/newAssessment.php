@@ -32,6 +32,7 @@ class NewLemonAssessmentForm extends InstituteForm {
 		else {
 			$this->objLemonAssessment = new LemonAssessment();
 			$this->objLemonAssessment->ResourceStatusId = 1;
+			$this->objLemonAssessment->UserId = $intUserId;
 		}
 		
 		$this->arrayValue = array();
