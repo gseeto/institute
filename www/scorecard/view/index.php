@@ -160,10 +160,12 @@ class MyViewForm extends InstituteForm {
 				if($count >4) break;
 				if($objActionItem->Who == $this->objUser->Id) {
 					// Populate top 5 Actions Array
-					if(($objActionItem->StatusType != StatusType::_100)&& ($objActionItem->StatusType != StatusType::Recurring)&& 
-						($objActionItem->Strategy->Priority != null) && ($objActionItem->Rank != false) && ($objActionItem->Rank != true)) {
-						$objMyActions[] = $objActionItem;
-						$count++;
+					if($objActionItem->Strategy) {
+						if(($objActionItem->StatusType != StatusType::_100)&& ($objActionItem->StatusType != StatusType::Recurring)&& 
+							($objActionItem->Strategy->Priority != null) && ($objActionItem->Rank != false) && ($objActionItem->Rank != true)) {
+							$objMyActions[] = $objActionItem;
+							$count++;
+						}
 					}
 				}
 			}
@@ -273,16 +275,18 @@ class MyViewForm extends InstituteForm {
 					if($objActionItem->Who == $this->objUser->Id) {
 						// Populate remaining top 5 Actions Array
 						//	$objScorecard->Name,$objActionItem->Strategy->Strategy,$objActionItem->Action);
-						if(($objActionItem->StatusType != StatusType::_100)&& ($objActionItem->StatusType != StatusType::Recurring)&& 
-							($objActionItem->Strategy->Priority != null) && ($objActionItem->Rank != true)) {
-									$objTopFive[] = sprintf("<b>Strategy: </b> %s<br><br><b>Action: </b><a href='%s/scorecard/tenp/index.php/%d/%d/%d' >%s</a>",
-										$objActionItem->Strategy->Strategy,
-										__SUBDIRECTORY__,
-										$objActionItem->ScorecardId, $objActionItem->CategoryId,$objActionItem->Id,
-										$objActionItem->Action
-										);
-									$count++;
-							if($count >4) break;
+						if($objActionItem->Strategy) {
+							if(($objActionItem->StatusType != StatusType::_100)&& ($objActionItem->StatusType != StatusType::Recurring)&& 
+								($objActionItem->Strategy->Priority != null) && ($objActionItem->Rank != true)) {
+										$objTopFive[] = sprintf("<b>Strategy: </b> %s<br><br><b>Action: </b><a href='%s/scorecard/tenp/index.php/%d/%d/%d' >%s</a>",
+											$objActionItem->Strategy->Strategy,
+											__SUBDIRECTORY__,
+											$objActionItem->ScorecardId, $objActionItem->CategoryId,$objActionItem->Id,
+											$objActionItem->Action
+											);
+										$count++;
+								if($count >4) break;
+							}
 						}
 					}
 				}
