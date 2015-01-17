@@ -14,6 +14,7 @@ print sprintf("User Count = %d<br><br>",count($objUserArray));
 foreach($objUserArray as $objUser) {
 	$strTotalOutput = '';
 	$strTextTotalOutput = '';
+	$shouldEmail = false;
 	$strIntro = sprintf("Hello %s,<br>The following is a digest of your top 5 action items for the week and a list of any Overdue items for each Scorecard you are assigned to.<br><br>Regards,<br>The Scorecard Administrator<br><br>",
 		$objUser->FirstName);
 	$strTextIntro = sprintf("Hello %s,\nThe following is a digest of your top 5 action items for the week and a list of any Overdue items for each Scorecard you are assigned to.\n\nRegards,
@@ -59,56 +60,71 @@ foreach($objUserArray as $objUser) {
 					}
 				}
 			}
-			$strOutput = '<h1>Top 5 Action Items for the Week</h1>';
-			$strOutput .= '<table style="border-collapse:collapse;" ><tr><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">Rank</td><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">P</td><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">Strategy/Action</td></tr>';
-			$strTextOutput = 'Top 5 Action Items for the Week\n\n';
-			
-			// Order the top 5 and construct the arrays.
-			print sprintf("<br>About to order the top 5 and construct arrays.<br>");
-			sort($objTopFive);
 			$fivecount = count($objTopFive);
-			for($i=0; $i<$fivecount; $i++) {
-				$topFiveArray = explode(",",$objTopFive[$i]);
-				$strOutput .= sprintf("<tr><td style='border: 1px solid black; padding: 4px;'>%s</td><td style='border: 1px solid black; padding: 4px;'>%s</td><td style='border: 1px solid black; padding: 4px;'><b>Strategy:</b> %s<br><br><b>Action:</b>%s</td></tr>",$i+1,$topFiveArray[4],$topFiveArray[3],$topFiveArray[2]);
-				$strTextOutput .= sprintf("Rank: %s P %s  Strategy: %s  Action:%s\n",$i+1,$topFiveArray[4],$topFiveArray[3],$topFiveArray[2]);;
-				if($i>=4) break;
+			$strOutput ='';
+			$strTextOutput='';
+			if($fivecount >0) {
+				$shouldEmail = true;
+				$strOutput .= '<h1>Top 5 Action Items for the Week</h1>';
+				$strOutput .= '<table style="border-collapse:collapse;" ><tr><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">Rank</td><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">P</td><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">Strategy/Action</td></tr>';
+				$strTextOutput .= 'Top 5 Action Items for the Week\n\n';
+				
+				// Order the top 5 and construct the arrays.
+				print sprintf("<br>About to order the top 5 and construct arrays.<br>");
+				sort($objTopFive);
+				for($i=0; $i<$fivecount; $i++) {
+					$topFiveArray = explode(",",$objTopFive[$i]);
+					$strOutput .= sprintf("<tr><td style='border: 1px solid black; padding: 4px;'>%s</td><td style='border: 1px solid black; padding: 4px;'>%s</td><td style='border: 1px solid black; padding: 4px;'><b>Strategy:</b> %s<br><br><b>Action:</b>%s</td></tr>",$i+1,$topFiveArray[4],$topFiveArray[3],$topFiveArray[2]);
+					$strTextOutput .= sprintf("Rank: %s P %s  Strategy: %s  Action:%s\n",$i+1,$topFiveArray[4],$topFiveArray[3],$topFiveArray[2]);;
+					if($i>=4) break;
+				}
+				$strOutput .= '</table>';
 			}
-			$strOutput .= '</table>';
-			$strOutput .= '<br><h1>Overdue Action Items</h1>';
-			$strOutput .= '<table style="border-collapse:collapse;"><tr><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">P</td><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">Strategy</td><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">Action</td><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">Due By</td></tr>';
-			$strTextOutput .= 'Overdue Action Items';
-			foreach($objOverdue as $item) {
-				$strOutput .= $item;
-			}
-			$strOutput .= '</table>';
-			$strTotalOutput .= sprintf("<h1>%s</h1>",$objScorecard->Name);
-			$strTotalOutput .= $strOutput;
 			
-			foreach($objTextOverdue as $item) {
-				$strTextOutput .= $item;
+			if(count($objTextOverdue)>0) {
+				$shouldEmail = true;
+				$strOutput .= '<br><h1>Overdue Action Items</h1>';
+				$strOutput .= '<table style="border-collapse:collapse;"><tr><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">P</td><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">Strategy</td><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">Action</td><td style="border: 1px solid black; padding: 4px; background-color:#58B3CD; color:white;">Due By</td></tr>';
+				$strTextOutput .= 'Overdue Action Items';
+				foreach($objOverdue as $item) {
+					$strOutput .= $item;
+				}
+				$strOutput .= '</table>';
+				
+				foreach($objTextOverdue as $item) {
+					$strTextOutput .= $item;
+				}
 			}
+			
+			$strTotalOutput .= sprintf("<h1>%s</h1>",$objScorecard->Name);
+			$strTotalOutput .= $strOutput;		
+			
+			
 			$strTextTotalOutput .= sprintf("%s",$objScorecard->Name);
 			$strTextTotalOutput .= $strTextOutput;
 		}
-		print sprintf("About to send email to: %s<br>",$objUser->Email);
-		print sprintf("<br>%s %s<br><br>",$strIntro, $strTotalOutput);
-		$objMessage = new QEmailMessage();
-		//QEmailServer::$TestMode = true;
-		//QEmailServer::$TestModeDirectory = '/tmp/';
-		QEmailServer::$SmtpServer = MAIL_SERVER;
-		QEmailServer::$AuthLogin = false;
-		//QEmailServer::$SmtpPassword = 'lASgZ357lk';
-		//QEmailServer::$SmtpPort = 2525;
-		QEmailServer::$SmtpUsername = 'scorecard@inst.net';
-		
-    	$objMessage->From = 'Scorecard Administrator <scorecard@inst.net>';
-	    $objMessage->To = $objUser->Email;
-	    $objMessage->Subject = 'Scorecard Action Item Digest for ' . QDateTime::NowToString(QDateTime::FormatDisplayDate);
-	    $objMessage->HtmlBody = sprintf("<br>%s %s<br><br>",$strIntro, $strTotalOutput);
-	    $objMessage->Body = sprintf("\n%s %s\n\n",$strTextIntro, $strTextTotalOutput);
-	    if (QEmailServer::IsEmailValid($objUser->Email)) {
-	    	QEmailServer::Send($objMessage);
-	    }
+		print("About to try see if we should email..<br>");
+		if($shouldEmail) {
+			print sprintf("About to send email to: %s<br>",$objUser->Email);
+			print sprintf("<br>%s %s<br><br>",$strIntro, $strTotalOutput);
+			$objMessage = new QEmailMessage();
+			//QEmailServer::$TestMode = true;
+			//QEmailServer::$TestModeDirectory = '/tmp/';
+			QEmailServer::$SmtpServer = MAIL_SERVER;
+			QEmailServer::$AuthLogin = false;
+			//QEmailServer::$SmtpPassword = 'lASgZ357lk';
+			//QEmailServer::$SmtpPort = 2525;
+			QEmailServer::$SmtpUsername = 'scorecard@inst.net';
+			
+	    	$objMessage->From = 'Scorecard Administrator <scorecard@inst.net>';
+		    $objMessage->To = $objUser->Email;
+		    $objMessage->Subject = 'Scorecard Action Item Digest for ' . QDateTime::NowToString(QDateTime::FormatDisplayDate);
+		    $objMessage->HtmlBody = sprintf("<br>%s %s<br><br>",$strIntro, $strTotalOutput);
+		    $objMessage->Body = sprintf("\n%s %s\n\n",$strTextIntro, $strTextTotalOutput);
+		    if (QEmailServer::IsEmailValid($objUser->Email)) {
+		    	QEmailServer::Send($objMessage);
+		    }
+		}
 	}
 }
 ?>
