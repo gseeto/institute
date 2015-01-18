@@ -59,7 +59,7 @@
 	$intWidth = floor(550 / count(InstituteForm::$NavSectionArray));
 	foreach (InstituteForm::$NavSectionArray as $intNavSectionId => $strNavSectionArray) {
 		$strClassInfo = ($intNavSectionId == $this->intNavSectionId) ? 'class="selected"' : null;
-		if ($intNavSectionId == InstituteForm::NavSectionAdministration) {
+		if (($intNavSectionId == InstituteForm::NavSectionAdministration)||($intNavSectionId == InstituteForm::NavSectionAnalytics)) {
 			if (QApplication::$Login->IsAdmin())
 				printf('<li style="width: %spx;"><a href="%s%s" %s title="%s">%s</a></li>',
 					$intWidth, __SUBDIRECTORY__,$strNavSectionArray[1], $strClassInfo, $strNavSectionArray[0], $strNavSectionArray[0]

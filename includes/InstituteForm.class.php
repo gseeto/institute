@@ -7,6 +7,7 @@ class InstituteForm extends QForm {
 	const NavSectionAssessments = 2;
 	const NavSectionScorecard = 3;
 	const NavSectionAdministration = 4;
+	const NavSectionAnalytics = 5;
 	const DirCompany = '/company/';
 	const DirUser = '/user/';
 	const DirAssessments = '/assessments/';
@@ -22,7 +23,8 @@ class InstituteForm extends QForm {
 	InstituteForm::NavSectionHome => array('Home', '/home/'),
 	InstituteForm::NavSectionAssessments => array('Assessments', '/assessments/'),
 	InstituteForm::NavSectionScorecard => array('Scorecard', '/scorecard/'),
-	InstituteForm::NavSectionAdministration => array('Admin', '/admin/')
+	InstituteForm::NavSectionAdministration => array('Admin', '/admin/'),
+	InstituteForm::NavSectionAnalytics => array('Analytics', '/analytics/')
 	);
 	
 	public static $NavScorecardArray = array(
