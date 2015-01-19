@@ -35,7 +35,8 @@ class AnalyticsForm extends InstituteForm {
 		$this->dtgLemonEmails->AddColumn(new QDataGridColumn('Name', '<?= $_FORM->RenderLemonName($_ITEM) ?>', 'HtmlEntities=false', 'Width=400px' ));
 		$this->dtgLemonEmails->AddColumn(new QDataGridColumn('Email', '<?= $_FORM->RenderLemonEmail($_ITEM) ?>', 'HtmlEntities=false', 'Width=200px' ));
 		$this->dtgLemonEmails->AddColumn(new QDataGridColumn('When Last Taken', '<?= $_ITEM->DateModified ?>', 'HtmlEntities=false', 'Width=200px' ));
-        $this->dtgLemonEmails->SetDataBinder('dtgLemonEmails_Bind');	
+        $this->dtgLemonEmails->AddColumn(new QDataGridColumn('LEMON Type', '<?= $_FORM->RenderType($_ITEM) ?>', 'HtmlEntities=false', 'Width=200px' ));
+		$this->dtgLemonEmails->SetDataBinder('dtgLemonEmails_Bind');	
         $this->dtgLemonEmails->CellPadding = 4;
 		$this->dtgLemonEmails->NoDataHtml = '';
 		$this->dtgLemonEmails->UseAjax = true;
@@ -45,6 +46,7 @@ class AnalyticsForm extends InstituteForm {
 		$this->dtgLemonKeyCodes->AddColumn(new QDataGridColumn('#', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>', 'HtmlEntities=false', 'Width=10px' ));
 		$this->dtgLemonKeyCodes->AddColumn(new QDataGridColumn('Keycode', '<?= $_ITEM->KeyCode ?>', 'HtmlEntities=false', 'Width=400px' ));
 		$this->dtgLemonKeyCodes->AddColumn(new QDataGridColumn('Description', '<?= $_ITEM->Description ?>', 'HtmlEntities=false', 'Width=400px' ));
+        $this->dtgLemonKeyCodes->AddColumn(new QDataGridColumn('# People in Group', '<?= $_ITEM->TotalKeys - $_ITEM->KeysLeft ?>', 'HtmlEntities=false', 'Width=400px' ));
         $this->dtgLemonKeyCodes->SetDataBinder('dtgLemonKeyCodes_Bind');	
         $this->dtgLemonKeyCodes->CellPadding = 4;
 		$this->dtgLemonKeyCodes->NoDataHtml = '';
@@ -75,6 +77,32 @@ class AnalyticsForm extends InstituteForm {
 		return ($user != null)? $user->Email : '';
 	}
 	
+	public function RenderType(LemonAssessment $row) {
+		if(!$row->L) {
+			$lemonValues = array(0,0,0,0,0);
+			$resultArray = LemonAssessmentResults::LoadArrayByAssessmentId($row->Id);
+			foreach($resultArray as $objResult) {
+				$intIndex = $objResult->Question->LemonTypeId - 1;
+				$lemonValues[$intIndex] += $objResult->Value;
+			}
+			$row->L = $lemonValues[0];
+			$row->E = $lemonValues[1];
+			$row->M = $lemonValues[2];
+			$row->O = $lemonValues[3];
+			$row->N = $lemonValues[4];
+		}
+		$lemonValues = array('L'=>$row->L, 'E'=>$row->E,'M'=>$row->M,'O'=>$row->O,'N'=>$row->N);
+		arsort($lemonValues);
+		$i=1;
+		$type = '';
+		foreach($lemonValues as $key=>$value) {
+			$type .= $key;
+			$i++;
+			if ($i>2)
+				break;
+		}
+		return $type;
+	}
 	public function dtgScorecard_Bind() {
 		$tableArray = array();
 		$objConditions = QQ::All();
