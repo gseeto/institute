@@ -46,7 +46,7 @@ class AnalyticsForm extends InstituteForm {
 		$this->dtgLemonKeyCodes->AddColumn(new QDataGridColumn('#', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>', 'HtmlEntities=false', 'Width=10px' ));
 		$this->dtgLemonKeyCodes->AddColumn(new QDataGridColumn('Keycode', '<?= $_ITEM->KeyCode ?>', 'HtmlEntities=false', 'Width=400px' ));
 		$this->dtgLemonKeyCodes->AddColumn(new QDataGridColumn('Description', '<?= $_ITEM->Description ?>', 'HtmlEntities=false', 'Width=400px' ));
-        $this->dtgLemonKeyCodes->AddColumn(new QDataGridColumn('# People in Group', '<?= $_ITEM->TotalKeys - $_ITEM->KeysLeft ?>', 'HtmlEntities=false', 'Width=400px' ));
+        $this->dtgLemonKeyCodes->AddColumn(new QDataGridColumn('# People in Group', '<?= $_FORM->RenderKeycodeNumber($_ITEM) ?>', 'HtmlEntities=false', 'Width=400px' ));
         $this->dtgLemonKeyCodes->SetDataBinder('dtgLemonKeyCodes_Bind');	
         $this->dtgLemonKeyCodes->CellPadding = 4;
 		$this->dtgLemonKeyCodes->NoDataHtml = '';
@@ -67,6 +67,9 @@ class AnalyticsForm extends InstituteForm {
 		$this->dtgLemonEmails->DataSource = $LemonArray; 
 	}
 	
+	public function RenderKeycodeNumber(GroupAssessmentList $row) {
+		return LemonAssessment::CountByGroupId($row->Id);	
+	}
 	public function RenderLemonName(LemonAssessment $row) {
 		$user = User::LoadById($row->UserId);
 		return ($user != null)? $user->FirstName .' '.$user->LastName : '';
