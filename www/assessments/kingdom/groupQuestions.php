@@ -118,7 +118,7 @@ class KingdomGroupQuestions extends InstituteForm {
             $lstImportance->Width = 100;
             $lstImportance->ForeColor = '#F90949';
         	// Initialize values from previous assessment
-            if($this->bEditing) {
+            if(($this->bEditing) && ($this->objKingdomAssessment->ResourceStatusId == 2)) {
             	$value = KingdomBusinessResults::GetImportanceByAssessmentIdAndQuestionId($this->objKingdomAssessment->Id, $objQuestions->Id);
 	            for ($i=1; $i<8; $i++) {
 	            	if ($value == $i) 
@@ -160,7 +160,7 @@ class KingdomGroupQuestions extends InstituteForm {
             $lstPerformance->ForeColor = '#131BF9';
             
         	// Initialize values from previous assessment
-            if($this->bEditing) {
+            if(($this->bEditing)&& ($this->objKingdomAssessment->ResourceStatusId == 2)) {
             	$value = KingdomBusinessResults::GetPerformanceByAssessmentIdAndQuestionId($this->objKingdomAssessment->Id, $objQuestions->Id);
 	            for ($i=1; $i<8; $i++) {
 	            	if ($value == $i) 
