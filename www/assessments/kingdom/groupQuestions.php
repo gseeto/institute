@@ -82,7 +82,7 @@ class KingdomGroupQuestions extends InstituteForm {
 	
 	protected function btnSubmit_Click() {	
         for($i=0;$i<count($this->arrayPerformance); $i++) {
-	        if($this->bEditing) {
+	        if(($this->bEditing)&& ($this->objKingdomAssessment->ResourceStatusId == 2)) {
 	        	$objResults = KingdomBusinessResults::LoadResultByAssessmentIdAndQuestionId($this->objKingdomAssessment->Id, $i+1);
 	        } else {
         		$objResults = new KingdomBusinessResults();
