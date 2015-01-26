@@ -46,6 +46,10 @@ class HomeForm extends InstituteForm {
 	
 	protected $lblAssessments;
 	protected $lblScorecards;
+	protected $frontWheelArray;
+	protected $backWheelArray;
+	protected $missingFrontWheelArray;
+	protected $missingBackWheelArray;
 	
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
@@ -153,7 +157,12 @@ class HomeForm extends InstituteForm {
 			$this->lblCompanyAddress[] = $txtAddress;	
 		}
 		
+		$this->frontWheelArray = array();
+		$this->backWheelArray = array();
+		$this->missingFrontWheelArray = array();
+		$this->missingBackWheelArray = array();
 		$this->lblAssessments = array();
+		$bKBA = $bTenP = $bTenF = $bLemon = $bIntegration = $bSeasonal = $bTime = $bScorecard = false;
 		$objResourceArray = Resource::LoadAll();
 		foreach($objResourceArray as $objResource) {
 			if ($objResource->Name != 'Scorecard') {
@@ -165,25 +174,60 @@ class HomeForm extends InstituteForm {
 				if($objUser->IsResourceAssociated($objResource)) {
 					switch ($objResource->Name) {
 						case 'Kingdom Business Assessment':
-							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/kingdom/\'>Kingdom Business Assessment</a></li>';	
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/kingdom/\'>Kingdom Business Assessment</a></li>';
+							$tmpLabel = new QLabel($this);
+							$tmpLabel->HtmlEntities = false;
+							$tmpLabel->Text = 'Kingdom Business Assessment<br>';
+							$this->backWheelArray[] = $tmpLabel;
+							$bKBA = true;
 							break;
 						case '10-P Assessment':
-							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/tenp/\'>10-P Assessment</a></li>';	
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/tenp/\'>10-P Assessment</a></li>';
+							$tmpLabel = new QLabel($this);	
+							$tmpLabel->HtmlEntities = false;
+							$tmpLabel->Text = '10-P Assessment<br>';
+							$this->backWheelArray[] = $tmpLabel;
+							$bTenP = true;
 							break;
 						case '10-F Assessment':
-							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/tenf/\'>10-F Assessment</a></li>';	
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/tenf/\'>10-F Assessment</a></li>';
+							$tmpLabel = new QLabel($this);	
+							$tmpLabel->HtmlEntities = false;
+							$tmpLabel->Text = '10-F Assessment<br>';
+							$this->frontWheelArray[] = $tmpLabel;
+							$bTenF = true;	
 							break;
 						case 'LEMON Assessment':
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/lemon/\'>LEMON Assessment</a></li>';	
+							$tmpLabel = new QLabel($this);	
+							$tmpLabel->HtmlEntities = false;
+							$tmpLabel->Text = 'LEMON Assessment<br>';
+							$this->frontWheelArray[] = $tmpLabel;
+							$bLemon = true;
 							break;
 						case 'Integration Assessment':
-								$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/integration/\'>Integration Assessment</a></li>';
-								break;
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/integration/\'>Integration Assessment</a></li>';
+							$tmpLabel = new QLabel($this);	
+							$tmpLabel->HtmlEntities = false;
+							$tmpLabel->Text = 'Integration Assessment<br>';
+							$this->frontWheelArray[] = $tmpLabel;
+							$bIntegration = true;
+							break;
 						case 'Seasonal Assessment':
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/seasonal/\'>Seasonal Assessment</a></li>';	
+							$tmpLabel = new QLabel($this);	
+							$tmpLabel->HtmlEntities = false;
+							$tmpLabel->Text = 'Seasonal Assessment<br>';
+							$this->frontWheelArray[] = $tmpLabel;
+							$bSeasonal = true;
 							break;
 						case 'Where Does The Time Go Assessment':
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/time/\'>Where Does The Time Go Assessment</a></li>';
+							$tmpLabel = new QLabel($this);	
+							$tmpLabel->HtmlEntities = false;
+							$tmpLabel->Text = 'Where Does The Time Go Assessment<br>';
+							$this->frontWheelArray[] = $tmpLabel;
+							$bTime = true;
 							break;
 						case 'Leadership Readiness Assessment':
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/lra/\'>Leadership Readiness Assessment</a></li>';
@@ -206,6 +250,94 @@ class HomeForm extends InstituteForm {
 			$lblScorecardLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/scorecard/scorecard.php/'.$objScorecard->Id. '\'>'.$objScorecard->Name.'</a></li>';
 			$this->lblScorecards[] = $lblScorecardLink;
 		}
+		if(count($this->lblScorecards)>0) {
+			$tmpLabel = new QLabel($this);	
+			$tmpLabel->HtmlEntities = false;
+			$tmpLabel->Text = 'Scorecard<br>';
+			$this->backWheelArray[] = $tmpLabel;
+			$bScorecard = true;
+		}
+		
+		// Construct missing assessment lists
+		if(!$bKBA) {
+			$tmpLabel = new QLabel($this);
+			$tmpLabel->HtmlEntities = false;
+			$tmpLabel->Text = 'Kingdom Business Assessment<br>';
+			$this->missingBackWheelArray[] = $tmpLabel;
+		}
+		if(!$bTenP) {
+			$tmpLabel = new QLabel($this);
+			$tmpLabel->HtmlEntities = false;
+			$tmpLabel->Text = '10-P Assessment<br>';
+			$this->missingBackWheelArray[] = $tmpLabel;
+		}
+		if(!$bTenF) {
+			$tmpLabel = new QLabel($this);
+			$tmpLabel->HtmlEntities = false;
+			$tmpLabel->Text = '10-F Assessment<br>';
+			$this->missingFrontWheelArray[] = $tmpLabel;
+		}
+		if(!$bLemon) {
+			$tmpLabel = new QLabel($this);
+			$tmpLabel->HtmlEntities = false;
+			$tmpLabel->Text = 'LEMON Assessment<br>';
+			$this->missingFrontWheelArray[] = $tmpLabel;
+		}
+		if(!$bIntegration) {
+			$tmpLabel = new QLabel($this);
+			$tmpLabel->HtmlEntities = false;
+			$tmpLabel->Text = 'Integration Assessment<br>';
+			$this->missingFrontWheelArray[] = $tmpLabel;
+		}
+		if(!$bSeasonal) {
+			$tmpLabel = new QLabel($this);
+			$tmpLabel->HtmlEntities = false;
+			$tmpLabel->Text = 'Seasonal Assessment<br>';
+			$this->missingFrontWheelArray[] = $tmpLabel;
+		}
+		if(!$bTime) {
+			$tmpLabel = new QLabel($this);
+			$tmpLabel->HtmlEntities = false;
+			$tmpLabel->Text = 'Where Does The Time Go Assessment<br>';
+			$this->missingFrontWheelArray[] = $tmpLabel;
+		}
+		if(!$bScorecard) {
+			$tmpLabel = new QLabel($this);
+			$tmpLabel->HtmlEntities = false;
+			$tmpLabel->Text = 'Scorecard<br>';
+			$this->missingBackWheelArray[] = $tmpLabel;
+		}
+							
+		// Generate data for image
+		$this->initializeCharts();
+	}
+	
+	protected function initializeCharts() {
+		$wheelArray = array();
+		$objItem = new involvementArray();
+		$objItem->key = 'Assessments Completed';
+		$objItem->value = count($this->frontWheelArray);			
+		$wheelArray[] = $objItem;
+			
+		$objItem = new involvementArray();
+		$objItem->key = 'Assessments Uncompleted';
+		$objItem->value = 5 - count($this->frontWheelArray); // number of items on front wheel = 5
+		$wheelArray[] = $objItem;
+		
+		QApplication::ExecuteJavaScript('DisplayWheel("front",'.json_encode($wheelArray).');');
+		
+		$backwheelArray = array();
+		$objItem = new involvementArray();
+		$objItem->key = 'Assessments Completed';
+		$objItem->value = count($this->backWheelArray);			
+		$backwheelArray[] = $objItem;
+			
+		$objItem = new involvementArray();
+		$objItem->key = 'Assessments Uncompleted';
+		$objItem->value = 3 - count($this->backWheelArray); //Number of items on back wheel = 3
+		$backwheelArray[] = $objItem;
+		
+		QApplication::ExecuteJavaScript('DisplayWheel("back",'.json_encode($backwheelArray).');');
 	}
 	
 	public function btnLoginUpdate_Clicked($strFormId, $strControlId, $strParameter) {
@@ -321,4 +453,9 @@ class HomeForm extends InstituteForm {
 }
 
 HomeForm::Run('HomeForm');
+
+class involvementArray {
+	public $key;
+	public $value;
+} 
 ?>
