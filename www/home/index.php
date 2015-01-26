@@ -214,7 +214,7 @@ class HomeForm extends InstituteForm {
 							$bIntegration = true;
 							break;
 						case 'Seasonal Assessment':
-							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/seasonal/\'>Seasonal Assessment</a></li>';	
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/seasons/\'>Seasonal Assessment</a></li>';	
 							$tmpLabel = new QLabel($this);	
 							$tmpLabel->HtmlEntities = false;
 							$tmpLabel->Text = 'Seasonal Assessment<br>';
