@@ -51,6 +51,11 @@ class HomeForm extends InstituteForm {
 	protected $missingFrontWheelArray;
 	protected $missingBackWheelArray;
 	
+	protected $lblAd_LemonBook;
+	protected $lblAd_ConvergenceBook;
+	protected $lblAd_LemonAssessment;
+	protected $lblAd_ConvergenceAssessment;
+	
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
 		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
@@ -157,6 +162,20 @@ class HomeForm extends InstituteForm {
 			$this->lblCompanyAddress[] = $txtAddress;	
 		}
 		
+		// Initialize Advertisements to display
+		$this->lblAd_LemonBook = new QLabel($this);
+		$this->lblAd_LemonBook->HtmlEntities = false;
+		$this->lblAd_LemonBook->Text = '';
+		$this->lblAd_ConvergenceBook = new QLabel($this);
+		$this->lblAd_ConvergenceBook->HtmlEntities = false;
+		$this->lblAd_ConvergenceBook->Text = '';
+		$this->lblAd_LemonAssessment = new QLabel($this);
+		$this->lblAd_LemonAssessment->HtmlEntities = false;
+		$this->lblAd_LemonAssessment->Text = '';
+		$this->lblAd_ConvergenceAssessment = new QLabel($this);
+		$this->lblAd_ConvergenceAssessment->HtmlEntities = false;
+		$this->lblAd_ConvergenceAssessment->Text = '';
+		
 		$this->frontWheelArray = array();
 		$this->backWheelArray = array();
 		$this->missingFrontWheelArray = array();
@@ -177,7 +196,7 @@ class HomeForm extends InstituteForm {
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/kingdom/\'>Kingdom Business Assessment</a></li>';
 							$tmpLabel = new QLabel($this);
 							$tmpLabel->HtmlEntities = false;
-							$tmpLabel->Text = 'Kingdom Business Assessment<br>';
+							$tmpLabel->Text = '<li>Kingdom Business Assessment</li>';
 							$this->backWheelArray[] = $tmpLabel;
 							$bKBA = true;
 							break;
@@ -185,7 +204,7 @@ class HomeForm extends InstituteForm {
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/tenp/\'>10-P Assessment</a></li>';
 							$tmpLabel = new QLabel($this);	
 							$tmpLabel->HtmlEntities = false;
-							$tmpLabel->Text = '10-P Assessment<br>';
+							$tmpLabel->Text = '<li>10-P Assessment</li>';
 							$this->backWheelArray[] = $tmpLabel;
 							$bTenP = true;
 							break;
@@ -193,40 +212,45 @@ class HomeForm extends InstituteForm {
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/tenf/\'>10-F Assessment</a></li>';
 							$tmpLabel = new QLabel($this);	
 							$tmpLabel->HtmlEntities = false;
-							$tmpLabel->Text = '10-F Assessment<br>';
+							$tmpLabel->Text = '<li>10-F Assessment</li>';
 							$this->frontWheelArray[] = $tmpLabel;
+							$this->lblAd_ConvergenceBook->Text = '<a href="http://inst.net/publications/convergence.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergencebook.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
 							$bTenF = true;	
 							break;
 						case 'LEMON Assessment':
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/lemon/\'>LEMON Assessment</a></li>';	
 							$tmpLabel = new QLabel($this);	
 							$tmpLabel->HtmlEntities = false;
-							$tmpLabel->Text = 'LEMON Assessment<br>';
+							$tmpLabel->Text = '<li>LEMON Assessment</li>';
 							$this->frontWheelArray[] = $tmpLabel;
+							$this->lblAd_LemonBook->Text = '<a href="http://inst.net/publications/lemonLeadership.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/lemonbook1.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
 							$bLemon = true;
 							break;
 						case 'Integration Assessment':
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/integration/\'>Integration Assessment</a></li>';
 							$tmpLabel = new QLabel($this);	
 							$tmpLabel->HtmlEntities = false;
-							$tmpLabel->Text = 'Integration Assessment<br>';
+							$tmpLabel->Text = '<li>Integration Assessment</li>';
 							$this->frontWheelArray[] = $tmpLabel;
+							$this->lblAd_ConvergenceBook->Text = '<a href="http://inst.net/publications/convergence.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergencebook.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
 							$bIntegration = true;
 							break;
 						case 'Seasonal Assessment':
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/seasons/\'>Seasonal Assessment</a></li>';	
 							$tmpLabel = new QLabel($this);	
 							$tmpLabel->HtmlEntities = false;
-							$tmpLabel->Text = 'Seasonal Assessment<br>';
+							$tmpLabel->Text = '<li>Seasonal Assessment</li>';
 							$this->frontWheelArray[] = $tmpLabel;
+							$this->lblAd_ConvergenceBook->Text = '<a href="http://inst.net/publications/convergence.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergencebook.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
 							$bSeasonal = true;
 							break;
 						case 'Where Does The Time Go Assessment':
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/time/\'>Where Does The Time Go Assessment</a></li>';
 							$tmpLabel = new QLabel($this);	
 							$tmpLabel->HtmlEntities = false;
-							$tmpLabel->Text = 'Where Does The Time Go Assessment<br>';
+							$tmpLabel->Text = '<li>Where Does The Time Go Assessment</li>';
 							$this->frontWheelArray[] = $tmpLabel;
+							$this->lblAd_ConvergenceBook->Text = '<a href="http://inst.net/publications/convergence.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergencebook.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
 							$bTime = true;
 							break;
 						case 'Leadership Readiness Assessment':
@@ -253,7 +277,7 @@ class HomeForm extends InstituteForm {
 		if(count($this->lblScorecards)>0) {
 			$tmpLabel = new QLabel($this);	
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = 'Scorecard<br>';
+			$tmpLabel->Text = '<li>Scorecard</li>';
 			$this->backWheelArray[] = $tmpLabel;
 			$bScorecard = true;
 		}
@@ -262,52 +286,56 @@ class HomeForm extends InstituteForm {
 		if(!$bKBA) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = 'Kingdom Business Assessment<br>';
+			$tmpLabel->Text = '<li>Kingdom Business Assessment</li>';
 			$this->missingBackWheelArray[] = $tmpLabel;
 		}
 		if(!$bTenP) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = '10-P Assessment<br>';
+			$tmpLabel->Text = '<li>10-P Assessment</li>';
 			$this->missingBackWheelArray[] = $tmpLabel;
 		}
 		if(!$bTenF) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = '10-F Assessment<br>';
+			$tmpLabel->Text = '<li>10-F Assessment</li>';
 			$this->missingFrontWheelArray[] = $tmpLabel;
 		}
 		if(!$bLemon) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = 'LEMON Assessment<br>';
+			$tmpLabel->Text = '<li>LEMON Assessment</li>';
 			$this->missingFrontWheelArray[] = $tmpLabel;
+			$this->lblAd_LemonAssessment->Text = '<a href="http://inst.net/services/leadership.html?tab=t3" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/lemonassessment.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
 		}
 		if(!$bIntegration) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = 'Integration Assessment<br>';
+			$tmpLabel->Text = '<li>Integration Assessment</li>';
 			$this->missingFrontWheelArray[] = $tmpLabel;
 		}
 		if(!$bSeasonal) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = 'Seasonal Assessment<br>';
+			$tmpLabel->Text = '<li>Seasonal Assessment</li>';
 			$this->missingFrontWheelArray[] = $tmpLabel;
 		}
 		if(!$bTime) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = 'Where Does The Time Go Assessment<br>';
+			$tmpLabel->Text = '<li>Where Does The Time Go Assessment</li>';
 			$this->missingFrontWheelArray[] = $tmpLabel;
 		}
 		if(!$bScorecard) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = 'Scorecard<br>';
+			$tmpLabel->Text = '<li>Scorecard</li>';
 			$this->missingBackWheelArray[] = $tmpLabel;
 		}
-							
+		if((!$bTime)&&(!$bSeasonal) && (!$bIntegration)&&(!$bTenF)){
+			$this->lblAd_ConvergenceAssessment->Text = '<a href="http://inst.net/services/convergence.html?tab=t3" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergenceassessments.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
+		}
+		
 		// Generate data for image
 		$this->initializeCharts();
 	}

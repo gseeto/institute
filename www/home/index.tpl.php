@@ -17,8 +17,8 @@
                 chart.radius = 90;
 
                 // the following two lines makes the chart 3D
-                chart.depth3D = 10;
-                chart.angle = 15;
+               // chart.depth3D = 10;
+               // chart.angle = 15;
 
                 // WRITE  
                 if(whichWheel == 'front')                               
@@ -39,14 +39,16 @@
 		<li><a href="#tabs-4">My Associated Companies</a></li>
 	</ul>
 
-<div id="tabs-1" style="height:500px;">
+<div id="tabs-1" style="height:900px;">
 	<div style="position:relative; float:right; width:600px; margin-left:20px;">
-		<img src="<?php _p(__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__); ?>/frame.png" style="width:340px; position:absolute; left:130px; top:30px;" />
-		<div style="height:150px;"></div>
-		<div id="frontWheel" style="position:relative; width:300px; height:200px; float:right;"></div>
-		<div id="backWheel" style="position:relative; width:300px; height:200px; float:right;"></div>
-		<div style="width:280px; float:left; padding-left:20px;">
+		<img src="<?php _p(__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__); ?>/frame.png" style="z-index:2000; width:350px; height:300px; position:absolute; left:140px; top:15px;" />
+		<div style="height:100px;"></div>
+		<div id="frontWheel" style="position:relative; width:250px; height:250px; float:right;"></div>
+		<div id="backWheel" style="position:relative; width:250px; height:250px; float:right; left:-70px;"></div>
+		<div style="width:240px; float:left; margin-left:60px;">
+		<span style="font:14px; font-weight:bold;">Competence</span><br>
 		<span style="color:green;">
+		<ul>
 		<?php 
 			foreach($this->backWheelArray as $lblBackWheel) {
 				$lblBackWheel->Render();
@@ -59,9 +61,12 @@
 				$lblBackWheel->Render();
 			}
 		?>
+		</ul>
 		</span>
 		</div>
-		<div style="width:230px; float:left; padding-left:70px;">
+		<div style="width:200px; float:left; margin-left:90px;">
+		<span style="font:14px; font-weight:bold;">Character</span><br>
+		<ul>
 		<span style="color:green;">
 		<?php 
 			foreach($this->frontWheelArray as $lblFrontWheel) {
@@ -76,7 +81,16 @@
 			}
 		?>
 		</span>
+		</ul>
 		</div>
+		<div style=""> 
+		<?php $this->lblAd_LemonBook->Render(); ?>
+		<?php $this->lblAd_ConvergenceBook->Render(); ?>
+		<?php $this->lblAd_LemonAssessment->Render(); ?>
+		<?php $this->lblAd_ConvergenceAssessment->Render(); ?>
+		
+		</div>
+		
 	</div>
 	<div style="both:clear"></div>
 	<p>List of Assessments I am associated with</p>
