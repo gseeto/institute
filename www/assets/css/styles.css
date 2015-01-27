@@ -799,4 +799,24 @@ table.lemonSummary th { border: 1px solid #808080; padding:5px; margin: 0px 10px
 .redtext {color:red;}
 .italics { font-style:italic;}
 #hourCounter { margin:20px; background-color:#CCCCCC; padding:5px; border:1px solid black;}
-.left {float:left; margin:0px 10px 10px 10px;
+.left {float:left; margin:0px 10px 10px 10px;}
+.shadowed {
+	border: 1px #0098c3 solid;
+	-o-box-shadow: 5px 5px 2px #888;
+	-icab-box-shadow: 5px 5px 2px #888;
+	-khtml-box-shadow: 5px 5px 2px #888;
+	-moz-box-shadow: 5px 5px 2px #888;
+	-webkit-box-shadow: 5px 5px 2px #888;
+	box-shadow: 5px 5px 2px #888;	
+}
+
+.infographic {
+	border: 1px #0098c3 solid;
+	-o-box-shadow: 5px 5px 2px #888;
+	-icab-box-shadow: 5px 5px 2px #888;
+	-khtml-box-shadow: 5px 5px 2px #888;
+	-moz-box-shadow: 5px 5px 2px #888;
+	-webkit-box-shadow: 5px 5px 2px #888;
+	box-shadow: 5px 5px 2px #888;
+  	position:relative; padding:10px; margin-bottom:10px; overflow: auto;
+	}

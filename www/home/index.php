@@ -214,7 +214,7 @@ class HomeForm extends InstituteForm {
 							$tmpLabel->HtmlEntities = false;
 							$tmpLabel->Text = '<li>10-F Assessment</li>';
 							$this->frontWheelArray[] = $tmpLabel;
-							$this->lblAd_ConvergenceBook->Text = '<a href="http://inst.net/publications/convergence.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergencebook.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
+							$this->lblAd_ConvergenceBook->Text = '<a href="http://inst.net/publications/convergence.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergencebook.jpg" style="width:290px; height:180px; margin:8px; float:left;" /></a>';
 							$bTenF = true;	
 							break;
 						case 'LEMON Assessment':
@@ -223,7 +223,7 @@ class HomeForm extends InstituteForm {
 							$tmpLabel->HtmlEntities = false;
 							$tmpLabel->Text = '<li>LEMON Assessment</li>';
 							$this->frontWheelArray[] = $tmpLabel;
-							$this->lblAd_LemonBook->Text = '<a href="http://inst.net/publications/lemonLeadership.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/lemonbook1.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
+							$this->lblAd_LemonBook->Text = '<a href="http://inst.net/publications/lemonLeadership.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/lemonbook1.jpg" style="width:290px; height:180px; margin:8px; float:left;" /></a>';
 							$bLemon = true;
 							break;
 						case 'Integration Assessment':
@@ -232,7 +232,7 @@ class HomeForm extends InstituteForm {
 							$tmpLabel->HtmlEntities = false;
 							$tmpLabel->Text = '<li>Integration Assessment</li>';
 							$this->frontWheelArray[] = $tmpLabel;
-							$this->lblAd_ConvergenceBook->Text = '<a href="http://inst.net/publications/convergence.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergencebook.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
+							$this->lblAd_ConvergenceBook->Text = '<a href="http://inst.net/publications/convergence.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergencebook.jpg" style="width:290px; height:180px; margin:8px; float:left;" /></a>';
 							$bIntegration = true;
 							break;
 						case 'Seasonal Assessment':
@@ -241,7 +241,7 @@ class HomeForm extends InstituteForm {
 							$tmpLabel->HtmlEntities = false;
 							$tmpLabel->Text = '<li>Seasonal Assessment</li>';
 							$this->frontWheelArray[] = $tmpLabel;
-							$this->lblAd_ConvergenceBook->Text = '<a href="http://inst.net/publications/convergence.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergencebook.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
+							$this->lblAd_ConvergenceBook->Text = '<a href="http://inst.net/publications/convergence.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergencebook.jpg" style="width:290px; height:180px; margin:8px; float:left;" /></a>';
 							$bSeasonal = true;
 							break;
 						case 'Where Does The Time Go Assessment':
@@ -250,7 +250,7 @@ class HomeForm extends InstituteForm {
 							$tmpLabel->HtmlEntities = false;
 							$tmpLabel->Text = '<li>Where Does The Time Go Assessment</li>';
 							$this->frontWheelArray[] = $tmpLabel;
-							$this->lblAd_ConvergenceBook->Text = '<a href="http://inst.net/publications/convergence.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergencebook.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
+							$this->lblAd_ConvergenceBook->Text = '<a href="http://inst.net/publications/convergence.html?tab=t1" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/convergencebook.jpg" style="width:290px; height:180px; margin:8px; float:left;" /></a>';
 							$bTime = true;
 							break;
 						case 'Leadership Readiness Assessment':
@@ -298,32 +298,32 @@ class HomeForm extends InstituteForm {
 		if(!$bTenF) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = '<li>10-F Assessment</li>';
+			$tmpLabel->Text = '<li><a style="color:red; text-decoration:none;" href="http://inst.net/services/convergence.html?tab=t3" target="_blank">10-F Assessment</a></li>';
 			$this->missingFrontWheelArray[] = $tmpLabel;
 		}
 		if(!$bLemon) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = '<li>LEMON Assessment</li>';
+			$tmpLabel->Text = '<li><a style="color:red; text-decoration:none;" href="http://inst.net/services/leadership.html?tab=t3" target="_blank">LEMON Assessment</a></li>';
 			$this->missingFrontWheelArray[] = $tmpLabel;
 			$this->lblAd_LemonAssessment->Text = '<a href="http://inst.net/services/leadership.html?tab=t3" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/lemonassessment.jpg" style="width:290px; height:180px; margin:5px; float:left;" /></a>';
 		}
 		if(!$bIntegration) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = '<li>Integration Assessment</li>';
+			$tmpLabel->Text = '<li><a style="color:red; text-decoration:none;" href="http://inst.net/services/convergence.html?tab=t3" target="_blank">Integration Assessment</a></li>';
 			$this->missingFrontWheelArray[] = $tmpLabel;
 		}
 		if(!$bSeasonal) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = '<li>Seasonal Assessment</li>';
+			$tmpLabel->Text = '<li><a style="color:red; text-decoration:none;" href="http://inst.net/services/convergence.html?tab=t3" target="_blank">Seasonal Assessment</a></li>';
 			$this->missingFrontWheelArray[] = $tmpLabel;
 		}
 		if(!$bTime) {
 			$tmpLabel = new QLabel($this);
 			$tmpLabel->HtmlEntities = false;
-			$tmpLabel->Text = '<li>Where Does The Time Go Assessment</li>';
+			$tmpLabel->Text = '<li><a style="color:red; text-decoration:none;" href="http://inst.net/services/convergence.html?tab=t3" target="_blank">Where Does The Time Go Assessment</a></li>';
 			$this->missingFrontWheelArray[] = $tmpLabel;
 		}
 		if(!$bScorecard) {

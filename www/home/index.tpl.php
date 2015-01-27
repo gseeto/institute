@@ -40,9 +40,11 @@
 	</ul>
 
 <div id="tabs-1" style="height:900px;">
-	<div style="position:relative; float:right; width:600px; margin-left:20px;">
-		<img src="<?php _p(__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__); ?>/frame.png" style="z-index:2000; width:350px; height:300px; position:absolute; left:140px; top:15px;" />
-		<div style="height:100px;"></div>
+	<div style="position:relative; float:right; width:620px; margin-left:20px;">
+		<div class='infographic'>
+		<h2 style="text-align:center;">What leadership shape are you in?</h2>
+		<img src="<?php _p(__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__); ?>/frame.png" style="z-index:2000; width:350px; height:300px; position:absolute; left:145px; top:70px;" />
+		<div style="height:75px;"></div>
 		<div id="frontWheel" style="position:relative; width:250px; height:250px; float:right;"></div>
 		<div id="backWheel" style="position:relative; width:250px; height:250px; float:right; left:-70px;"></div>
 		<div style="width:240px; float:left; margin-left:60px;">
@@ -64,7 +66,7 @@
 		</ul>
 		</span>
 		</div>
-		<div style="width:200px; float:left; margin-left:90px;">
+		<div style="width:220px; float:left; margin-left:60px;">
 		<span style="font:14px; font-weight:bold;">Character</span><br>
 		<ul>
 		<span style="color:green;">
@@ -82,6 +84,7 @@
 		?>
 		</span>
 		</ul>
+		</div>
 		</div>
 		<div style=""> 
 		<?php $this->lblAd_LemonBook->Render(); ?>
