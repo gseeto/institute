@@ -10,6 +10,7 @@
 <?php } ?>
 		<style type="text/css">@import url("<?php _p(__VIRTUAL_DIRECTORY__ . __CSS_ASSETS__); ?>/styles.css");</style>
 		<script src="<?php _p(__VIRTUAL_DIRECTORY__ . __JS_ASSETS__); ?>/amcharts.js" type="text/javascript"></script>
+		<script src="<?php _p(__VIRTUAL_DIRECTORY__ . __JS_ASSETS__); ?>/radar.js" type="text/javascript"></script>
 	</head><body>
 	<div class="externPContainer">
 <?php $this->RenderBegin(); ?>
