@@ -22,20 +22,22 @@
 
             // VALUE AXIS
             var valueAxis = new AmCharts.ValueAxis();
-            valueAxis.axisAlpha = 0.15;
+            valueAxis.gridType = "circles";
+            valueAxis.fillAlpha = 0.05;
+            valueAxis.fillColor = "#000000";
+            valueAxis.axisAlpha = 0.2;
+            valueAxis.gridAlpha = 0;
+            valueAxis.fontWeight = "bold";
             valueAxis.minimum = 0;
-            valueAxis.dashLength = 3;
-            valueAxis.axisTitleOffset = 20;
-            valueAxis.autoGridCount = false;
             valueAxis.gridCount = 7;
             valueAxis.maximum = 7;
-            chart.addValueAxis(valueAxis);
 
             // GRAPH
             var graph = new AmCharts.AmGraph();
             graph.valueField = "importance";
             graph.bullet = "round";
             graph.bulletAlpha = 0.7;
+            graph.fillAlphas = 0.4;
             graph.balloonText = "[[category]] Importance: [[value]]"
             chart.addGraph(graph);
 
@@ -43,6 +45,7 @@
             graph2.valueField = "performance";
             graph2.bullet = "round";
             graph2.bulletAlpha = 0.7;
+            graph2.fillAlphas = 0.4;
             graph2.balloonText = "[[category]] Performance: [[value]]"
             chart.addGraph(graph2);
             
