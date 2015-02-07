@@ -28,6 +28,7 @@ class FreeForm extends InstituteForm {
 	protected $btnPage3Next;
 	protected $btnPage4Prev;
 	protected $imgFrame;
+	protected $imgSummary;
 	
 	protected function Form_Run() {
 	}
@@ -167,16 +168,24 @@ class FreeForm extends InstituteForm {
 		$this->txtFDefinitions->HtmlEntities = false;
 		
 		$this->txtSummary = new QLabel($this);
+		$this->txtSummary->CssClass = 'freeassessmentSummary';
 		$this->txtSummary->Text = "<h2>Summary</h2>";
 		$this->txtSummary->Text .= "<p>Congratulations on completing the abbreviated 10-P and 10-F Assessments!</p>";
-		$this->txtSummary->Text .= "<p>You'll no doubt be wondering what it means and how it relates to The Institute's Bicycle Model.</p>";
-		$this->txtSummary->Text .= "<p>Imagine a bicycle with two wheels. The back wheel represents Competence (The 10-P Model) and the front wheel represents Character (The 10-F Model).";
-		$this->txtSummary->Text .= "We need both Character AND Competence in order to have impact and successfully traverse the road towards Transforming Society. ";
-		$this->txtSummary->Text .= "How well rounded and inflated your tires are will determine how bumpy the ride might be.</p>";
-		$this->txtSummary->Text .= "The assessments will hopefully have identified areas to focus on in order to ensure you're fully equipped for the road.";
-		$this->txtSummary->Text .= "your results are summarized below.</p>";
+		$this->txtSummary->Text .= "<p>You'll no doubt be wondering what it means and how it relates to your future training.";
+		$this->txtSummary->Text .= "You want to make an Impact? To do this you will need a leader's bicycle with a good front and back wheel. The back wheel represents Competence (The 10-P Model) and the front wheel represents Character (The 10-F Model).</p>";
+		$this->txtSummary->Text .= "<p>In the Repurposing Business training classes that lie ahead you will have the opportunity to inspect each spoke of the wheel through a biblical lens. Just how does God develop product, market and recruit? How does one plan in faith and use one's brain?</p>"; 
+		$this->txtSummary->Text .= "<p>101 dives right into Purpose and Profit, giving you a chance to develop a clear purpose statement, and comparing and contrasting God's economy with what happens out there today.</p>";
+		$this->txtSummary->Text .= "<p>102 Gets into Product, Presence and Positioning: did you know a company's positioning can be determined by how God sees them? And that God markets through miracles?</p>";
+		$this->txtSummary->Text .= "<p>103 couples People and Partnering, with a fresh understanding of Households... this powerful trio has changed many a business leader's life.</p>";
+		$this->txtSummary->Text .= "<p>104 gets to the nitty gritty of Operating Models. Here you have a deeper dive into 'wineskins' with a focus on Process and Planning.</p>";
+		$this->txtSummary->Text .= "<p>105 showcases Place which, when coupled with Hospitality, can cause God's presence to come in business. Did you know God uses Place as a megaphone for his message?</p>";					
 		$this->txtSummary->HtmlEntities = false;
 		$this->txtSummary->Visible = false;
+		
+		$this->imgSummary = new QImageButton($this);
+		$this->imgSummary->ImageUrl = __VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/classHierarchy.png';
+		$this->imgSummary->CssClass = 'hierarchymodel';
+		$this->imgSummary->Visible = false;
 		
 		$this->arrayPerformance = array();
 		$this->arrayImportance = array();
@@ -302,6 +311,7 @@ class FreeForm extends InstituteForm {
 		$this->txtPAssessmentIntro->Visible = false;
 		$this->txtFAssessmentIntro->Visible = false;
 		$this->txtSummary->Visible = false;
+		$this->imgSummary->Visible = false;
 		$this->btnPage1Next->Visible = true;
 		$this->btnPage2Next->Visible = false;
 		$this->btnPage2Prev->Visible = false;
@@ -326,6 +336,7 @@ class FreeForm extends InstituteForm {
 		$this->txtFAssessmentIntro->Visible = false;
 		$this->dtgFAssessment->Visible = false;
 		$this->txtSummary->Visible = false;
+		$this->imgSummary->Visible = false;
 		$this->updateChart();
 		$this->btnPage1Next->Visible = false;
 		$this->btnPage2Next->Visible = true;
@@ -351,6 +362,7 @@ class FreeForm extends InstituteForm {
 		$this->updateFChart();
 		$this->dtgFAssessment->Visible = true;
 		$this->txtSummary->Visible = false;
+		$this->imgSummary->Visible = false;
 		$this->btnPage1Next->Visible = false;
 		$this->btnPage2Next->Visible = false;
 		$this->btnPage2Prev->Visible = false;
@@ -375,6 +387,7 @@ class FreeForm extends InstituteForm {
 		QApplication::ExecuteJavaScript('HideChart();');
 		$this->dtgFAssessment->Visible = false;
 		$this->txtSummary->Visible = true;
+		$this->imgSummary->Visible = true;
 		$this->btnPage1Next->Visible = false;
 		$this->btnPage2Next->Visible = false;
 		$this->btnPage2Prev->Visible = false;

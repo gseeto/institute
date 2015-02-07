@@ -205,7 +205,8 @@
         <?php $this->page1->Render(); ?><?php $this->page2->Render(); ?><?php $this->page3->Render(); ?><?php $this->page4->Render(); ?>
         </div>
         <div style="padding:20px;">
-        <?php $this->txtSummary->render();?>
+        <?php $this->txtSummary->Render(); ?>
+        <?php $this->imgSummary->Render(); ?>
         </div>
         <div style="width:500px; position:relative; float:left; padding-left:20px; padding-bottom:20px;">
         <?php $this->txtIntro->Render(); $this->btnPage1Next->Render();?>
@@ -218,6 +219,7 @@
 <div id="chartdiv" style="width:400px; height:400px;"></div>
 <?php $this->txtPDefinitions->Render(); $this->txtFDefinitions->Render();?>
 </div>
+<div style="clear:both;"></div>
 <div style="position:relative; overflow:auto; padding-left:20px; padding-right:20px; width:900px;">
 	<div style="height:100px;"></div>
 	<?php $this->imgFrame->Render();?>
