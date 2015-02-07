@@ -218,7 +218,7 @@
 <div id="chartdiv" style="width:400px; height:400px;"></div>
 <?php $this->txtPDefinitions->Render(); $this->txtFDefinitions->Render();?>
 </div>
-<div style="overflow:auto; padding-left:20px; padding-right:20px; width:900px;">
+<div style="position:relative; overflow:auto; padding-left:20px; padding-right:20px; width:900px;">
 	<div style="height:100px;"></div>
 	<?php $this->imgFrame->Render();?>
 	<div id="backdiv" style="width:400px; height:400px; overflow:auto; float:left;"></div>
