@@ -824,5 +824,5 @@ table.lemonSummary th { border: 1px solid #808080; padding:5px; margin: 0px 10px
 .bicycleFrame {
 	z-index:-2; width:860px; position:absolute; left:35px; top:-10px;
 }
-.freeassessmentSummary { width:700px; display:block; float:left; padding-right:50px; }
-.hierarchymodel { float:left; padding-top:100px;}
+.freeassessmentSummary { width:500px; display:block; float:left; padding-right:50px; }
+.hierarchymodel { float:left; padding-top:100px;  width: 500px;}

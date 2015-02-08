@@ -32,7 +32,7 @@
 			    graph.fillAlphas = 0.4;
 			    graph.bullet = "round";
 			    graph.valueField = "importance";
-			    graph.balloonText = "Importance: [[importance]]";
+			    graph.balloonText = "[[category]] Importance: [[importance]]";
 			    chart.addGraph(graph);
 			
 			    var graph2 = new AmCharts.AmGraph();
@@ -40,7 +40,7 @@
 			    graph2.fillAlphas = 0.4;
 			    graph2.bullet = "round";
 			    graph2.valueField = "performance";
-			    graph2.balloonText = "Performance: [[performance]]";
+			    graph2.balloonText = "[[category]] Performance: [[performance]]";
 			    chart.addGraph(graph2);
 			 
 			
@@ -78,7 +78,7 @@
                 graphf.fillAlphas = 0.4;
                 graphf.bullet = "round";
                 graphf.valueField = "importance";
-                graphf.balloonText = "Importance: [[importance]]";
+                graphf.balloonText = "[[category]] Importance: [[importance]]";
                 chart2.addGraph(graphf);
 
                 var graphf2 = new AmCharts.AmGraph();
@@ -86,7 +86,7 @@
                 graphf2.fillAlphas = 0.4;
                 graphf2.bullet = "round";
                 graphf2.valueField = "performance";
-                graphf2.balloonText = "Performance: [[performance]]";
+                graphf2.balloonText = "[[category]] Performance: [[performance]]";
                 chart2.addGraph(graphf2);
              
 
@@ -131,7 +131,7 @@
                 graph.fillAlphas = 0.4;
                 graph.bullet = "round";
                 graph.valueField = "importance";
-                graph.balloonText = "Importance: [[importance]]";
+                graph.balloonText = "[[category]] Importance: [[importance]]";
                 chart.addGraph(graph);
 
                 var graph2 = new AmCharts.AmGraph();
@@ -139,7 +139,7 @@
                 graph2.fillAlphas = 0.4;
                 graph2.bullet = "round";
                 graph2.valueField = "performance";
-                graph2.balloonText = "Performance: [[performance]]";
+                graph2.balloonText = "[[category]] Performance: [[performance]]";
                 chart.addGraph(graph2);
              
 
@@ -180,7 +180,7 @@
                 graph.fillAlphas = 0.4;
                 graph.bullet = "round";
                 graph.valueField = "importance";
-                graph.balloonText = "Importance: [[importance]]";
+                graph.balloonText = "[[category]] Importance: [[importance]]";
                 chart.addGraph(graph);
 
                 var graph2 = new AmCharts.AmGraph();
@@ -188,7 +188,7 @@
                 graph2.fillAlphas = 0.4;
                 graph2.bullet = "round";
                 graph2.valueField = "performance";
-                graph2.balloonText = "Performance: [[performance]]";
+                graph2.balloonText = "[[category]] Performance: [[performance]]";
                 chart.addGraph(graph2);
              
 
