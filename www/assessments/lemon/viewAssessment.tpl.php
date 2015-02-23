@@ -4,7 +4,7 @@
 <div class="section">
 <?php  $this->btnReturn->Render(); ?>
 <?php  $this->btnGeneratePdf->Render(); ?>
-<h1>LEMON Leadership Assessment Report</h1>
+<h1 style="text-align:center;">LEMON Leadership Assessment Report</h1>
 <img src='<?php _p(__IMAGE_ASSETS__);?>/LemonReportSplashPage.PNG' class='centerImg'/>
 <div style="position:relative; top:-150px; left:150px;"> <?php $this->lblIntroduction->Render();?> </div>
 <p><!-- pagebreak --> </p>
