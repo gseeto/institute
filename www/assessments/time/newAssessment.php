@@ -44,14 +44,9 @@ class NewTimeAssessmentForm extends InstituteForm {
 		$this->dtgAssessmentQuestion->CellPadding = 5;
 		$this->dtgAssessmentQuestion->UseAjax = true;
 
-		$activityList = TimeResults::LoadArrayByAssessmentId($this->objTimeAssessment->Id);
-		$this->dtgAssessmentQuestion->DataSource = $activityList; 
-		$this->hourCount = 168;
+		$this->dtgAssessmentQuestion->SetDataBinder('dtgAssessmentQuestions_Bind',$this);
+				
 		$this->lblHours = new QLabel($this);
-		foreach($activityList as $activity) {
-			$this->hourCount = $this->hourCount - $activity->Time;
-		}
-		$this->lblHours->Text = $this->hourCount;
 		
 		$objStyle = $this->dtgAssessmentQuestion->RowStyle;
         $objStyle->BackColor = '#ffffff';
@@ -82,6 +77,16 @@ class NewTimeAssessmentForm extends InstituteForm {
         $this->btnAddActivity->Text = 'Add Additional Activities';
 	 	$this->btnAddActivity->CssClass = 'primary';
 	 	$this->btnAddActivity->AddAction(new QClickEvent(), new QAjaxAction('btnAddActivity_Click'));
+	}
+	
+	public function dtgAssessmentQuestions_Bind() {		
+		$activityList = TimeResults::LoadArrayByAssessmentId($this->objTimeAssessment->Id);
+		$this->dtgAssessmentQuestion->DataSource = $activityList; 
+		$this->hourCount = 168;
+		foreach($activityList as $activity) {
+			$this->hourCount = $this->hourCount - $activity->Time;
+		}
+		$this->lblHours->Text = $this->hourCount;
 	}
 	
 	protected function btnCancel_Click() {
@@ -122,7 +127,7 @@ class NewTimeAssessmentForm extends InstituteForm {
         if ($txtTime) {
         	$objResult = TimeResults::Load($strParameter);
         	if($objResult) {
-        		$objResult->Time = $txtTime->Text;
+        		$objResult->Time = (int)$txtTime->Text;
         		$objResult->Save();
         		$activityList = TimeResults::LoadArrayByAssessmentId($this->objTimeAssessment->Id);
 				// Update the hour count
