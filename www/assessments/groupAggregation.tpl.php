@@ -2,9 +2,9 @@
 <h1>Group Assessment Management</</h1>
 <h2>LEMON Assessments</h2>
 <h4>Search for Assessments by:</h4>
-		<div class="filterBy filterByFirst">KeyCode <?php $this->strKeycode->Render(); ?></div>		
-		<div class="cleaner">&nbsp;<br><br></div>
-<?php $this->btnViewGlobalLemonResults->Render();?>
+		<div class="filterBy filterByFirst">KeyCode <?php $this->strKeycode->Render(); ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->btnLemon->Render(); ?></div>		
+		<div class="right"><?php $this->btnViewGlobalLemonResults->Render();?></div>
+<div class="cleaner">&nbsp;<br><br></div>
 <?php $this->dtgGroupLemonAssessments->Render(); ?>
 <?php $this->btnAggregateGroups->Render();?>
 <br>

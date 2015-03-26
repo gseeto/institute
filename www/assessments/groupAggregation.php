@@ -15,6 +15,7 @@ class GroupAggregationForm extends InstituteForm {
 	protected $btnAggregateGroups;
 	protected $selectedLemonGroups;
 	public $strKeycode;
+	protected $btnLemon;
 
 
 	protected function Form_Run() {
@@ -38,11 +39,14 @@ class GroupAggregationForm extends InstituteForm {
 		
 		$this->strKeycode = new QTextBox($this);
 		$this->strKeycode->Name = 'KeyCode';
-		$this->strKeycode->AddAction(new QChangeEvent(), new QAjaxAction('dtgGroupLemonAssessments_Refresh'));
-		$this->strKeycode->AddAction(new QEnterKeyEvent(), new QAjaxAction('dtgGroupLemonAssessments_Refresh'));
-		$this->strKeycode->AddAction(new QEnterKeyEvent(), new QTerminateAction());
 		$this->strKeycode->Focus();
 	
+		$this->btnLemon = new QButton($this);
+		$this->btnLemon->Text = 'Submit';
+		$this->btnLemon->HtmlEntities = false;
+		$this->btnLemon->CssClass = 'primary';
+		$this->btnLemon->AddAction(new QClickEvent(), new QAjaxAction('dtgGroupLemonAssessments_Refresh'));
+		
 		$this->selectedLemonGroups = array();
 		$this->dtgGroupLemonAssessments = new GroupAssessmentListDataGrid($this);
         $this->dtgGroupLemonAssessments->Paginator = new QPaginator($this->dtgGroupLemonAssessments);

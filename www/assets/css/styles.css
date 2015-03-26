@@ -826,3 +826,5 @@ table.lemonSummary th { border: 1px solid #808080; padding:5px; margin: 0px 10px
 }
 .freeassessmentSummary { width:500px; display:block; float:left; padding-right:50px; }
 .hierarchymodel { float:left; padding-top:100px;  width: 500px;}
+
+.cleaner { clear:both;}
