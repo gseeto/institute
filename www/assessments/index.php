@@ -56,6 +56,9 @@ class AssessmentForm extends InstituteForm {
 							case 'Education 8-P Assessment':
 								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnUpwardAssessment_Click'));	
 								break;
+							case 'Post Venture Assessment':
+								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnPostVentureAssessment_Click'));	
+								break;
 						}
 											
 					} else {
@@ -115,6 +118,11 @@ class AssessmentForm extends InstituteForm {
 	protected function btnUpwardAssessment_Click() {
 		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/upward/');
 	}
+	
+	protected function btnPostVentureAssessment_Click() {
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/postventure/');
+	}
+	
 }
 
 AssessmentForm::Run('AssessmentForm');

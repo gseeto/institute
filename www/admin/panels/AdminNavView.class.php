@@ -7,6 +7,7 @@
         public $btnCompany;
         public $btnScorecards;
         public $btnAssessments;
+        public $btnVenture;
         
         // The Reference to the Main Form's "Main Content Panel" so that this panel
         // can make changes to the content panel on the page
@@ -53,6 +54,12 @@
             $this->btnAssessments->CssClass = 'SideNavButton';
             $this->btnAssessments->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnAssessments_Click'));            
             
+            $this->btnVenture = new QButton($this);
+            $this->btnVenture->Name = 'Venture ';
+            $this->btnVenture->Text = 'Venture';
+            $this->btnVenture->CssClass = 'SideNavButton';
+            $this->btnVenture->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnVenture_Click'));            
+            
             // Initialize main content panel
             $pnlMain = $this->objForm->GetControl($this->strPanelMainControlId);
 
@@ -75,6 +82,10 @@
             		new AdminScorecardsView($pnlMain);
             		$this->btnScorecards->CssClass = 'SideNavButtonSelected';
             		break;
+            	case 'venture':
+            		new AdminScorecardsView($pnlMain);
+            		$this->btnScorecards->CssClass = 'SideNavButtonSelected';
+            		break;
             	default:
             		new AdminUsersView($pnlMain);
             		$this->btnUsers->CssClass = 'SideNavButtonSelected';
@@ -93,6 +104,7 @@
             $this->btnCompany->CssClass = 'SideNavButton';
             $this->btnScorecards->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnVenture->CssClass = 'SideNavButton';
         }
         
     	public function btnCompany_Click($strFormId, $strControlId, $strParameter) {
@@ -104,6 +116,7 @@
             $this->btnCompany->CssClass = 'SideNavButtonSelected';
             $this->btnScorecards->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnVenture->CssClass = 'SideNavButton';
         }
         
     	public function btnScorecards_Click($strFormId, $strControlId, $strParameter) {
@@ -115,6 +128,7 @@
             $this->btnUsers->CssClass = 'SideNavButton';
             $this->btnCompany->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnVenture->CssClass = 'SideNavButton';
         }
         
     	public function btnAssessments_Click($strFormId, $strControlId, $strParameter) {
@@ -126,6 +140,19 @@
             $this->btnUsers->CssClass = 'SideNavButton';
             $this->btnCompany->CssClass = 'SideNavButton';
             $this->btnScorecards->CssClass = 'SideNavButton';
+            $this->btnVenture->CssClass = 'SideNavButton';
+        }
+        
+    	public function btnVenture_Click($strFormId, $strControlId, $strParameter) {
+            $pnlMain = $this->objForm->GetControl($this->strPanelMainControlId);
+            // First, remove all children panels from pnlMain. Then populate it
+            $pnlMain->RemoveChildControls(true);
+            new AdminVentureView($pnlMain);
+            $this->btnVenture->CssClass = 'SideNavButtonSelected';
+            $this->btnCompany->CssClass = 'SideNavButton';
+            $this->btnScorecards->CssClass = 'SideNavButton';
+            $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnUsers->CssClass = 'SideNavButton';
         }
         
     }

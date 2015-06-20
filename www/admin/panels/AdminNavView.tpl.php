@@ -4,5 +4,6 @@
 		<li><?php $_CONTROL->btnCompany->Render(); ?> </li>
 		<li><?php $_CONTROL->btnScorecards->Render(); ?> </li>
 		<li><?php $_CONTROL->btnAssessments->Render(); ?> </li>
+		<li><?php $_CONTROL->btnVenture->Render(); ?> </li>
 	</ul>
 </div>
