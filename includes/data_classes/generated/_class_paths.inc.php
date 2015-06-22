@@ -167,6 +167,27 @@
 		QApplicationBase::$ClassFile['lraresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/LraResultsMetaControl.class.php';
 		QApplicationBase::$ClassFile['lraresultsdatagrid'] = __DATA_META_CONTROLS__ . '/LraResultsDataGrid.class.php';
 
+	// ClassPaths for the PostventureAssessment class
+		QApplicationBase::$ClassFile['postventureassessment'] = __DATA_CLASSES__ . '/PostventureAssessment.class.php';
+		QApplicationBase::$ClassFile['qqnodepostventureassessment'] = __DATA_CLASSES__ . '/PostventureAssessment.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodepostventureassessment'] = __DATA_CLASSES__ . '/PostventureAssessment.class.php';
+		QApplicationBase::$ClassFile['postventureassessmentmetacontrol'] = __DATA_META_CONTROLS__ . '/PostventureAssessmentMetaControl.class.php';
+		QApplicationBase::$ClassFile['postventureassessmentdatagrid'] = __DATA_META_CONTROLS__ . '/PostventureAssessmentDataGrid.class.php';
+
+	// ClassPaths for the PostventureQuestions class
+		QApplicationBase::$ClassFile['postventurequestions'] = __DATA_CLASSES__ . '/PostventureQuestions.class.php';
+		QApplicationBase::$ClassFile['qqnodepostventurequestions'] = __DATA_CLASSES__ . '/PostventureQuestions.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodepostventurequestions'] = __DATA_CLASSES__ . '/PostventureQuestions.class.php';
+		QApplicationBase::$ClassFile['postventurequestionsmetacontrol'] = __DATA_META_CONTROLS__ . '/PostventureQuestionsMetaControl.class.php';
+		QApplicationBase::$ClassFile['postventurequestionsdatagrid'] = __DATA_META_CONTROLS__ . '/PostventureQuestionsDataGrid.class.php';
+
+	// ClassPaths for the PostventureResults class
+		QApplicationBase::$ClassFile['postventureresults'] = __DATA_CLASSES__ . '/PostventureResults.class.php';
+		QApplicationBase::$ClassFile['qqnodepostventureresults'] = __DATA_CLASSES__ . '/PostventureResults.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodepostventureresults'] = __DATA_CLASSES__ . '/PostventureResults.class.php';
+		QApplicationBase::$ClassFile['postventureresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/PostventureResultsMetaControl.class.php';
+		QApplicationBase::$ClassFile['postventureresultsdatagrid'] = __DATA_META_CONTROLS__ . '/PostventureResultsDataGrid.class.php';
+
 	// ClassPaths for the Resource class
 		QApplicationBase::$ClassFile['resource'] = __DATA_CLASSES__ . '/Resource.class.php';
 		QApplicationBase::$ClassFile['qqnoderesource'] = __DATA_CLASSES__ . '/Resource.class.php';
