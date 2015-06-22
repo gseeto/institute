@@ -145,6 +145,24 @@
 			return new QQNodeLraResults('lra_results', null, null);
 		}
 		/**
+		 * @return QQNodePostventureAssessment
+		 */
+		static public function PostventureAssessment() {
+			return new QQNodePostventureAssessment('postventure_assessment', null, null);
+		}
+		/**
+		 * @return QQNodePostventureQuestions
+		 */
+		static public function PostventureQuestions() {
+			return new QQNodePostventureQuestions('postventure_questions', null, null);
+		}
+		/**
+		 * @return QQNodePostventureResults
+		 */
+		static public function PostventureResults() {
+			return new QQNodePostventureResults('postventure_results', null, null);
+		}
+		/**
 		 * @return QQNodeResource
 		 */
 		static public function Resource() {
