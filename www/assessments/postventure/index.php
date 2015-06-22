@@ -1,7 +1,7 @@
 <?php
 require(dirname(__FILE__) . '/../../../includes/prepend.inc.php');
 
-class PostVentureAssessmentForm extends InstituteForm {
+class VentureAssessmentForm extends InstituteForm {
 	protected $arrNavigation;
 	protected $strPageTitle = 'Post Venture Assessment';
 	protected $intNavSectionId = InstituteForm::NavSectionAssessments;
@@ -64,5 +64,5 @@ class PostVentureAssessmentForm extends InstituteForm {
 	}
 }
 
-PostVentureAssessmentForm::Run('PostVentureAssessmentForm');
+VentureAssessmentForm::Run('VentureAssessmentForm');
 ?>
