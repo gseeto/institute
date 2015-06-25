@@ -31,6 +31,7 @@
             valueAxis.minimum = 0;
             valueAxis.gridCount = 7;
             valueAxis.maximum = 7;
+            chart.addValueAxis(valueAxis);
 
             // GRAPH
             var graph = new AmCharts.AmGraph();

@@ -53,9 +53,9 @@ class TenPAssessmentForm extends InstituteForm {
 	
 	protected function btnEdit_Click() {	
 		if ($this->objTenPAssessment->ResourceStatusId == 1) {
-			QApplication::Redirect('newAssessment.php/create');
+			QApplication::Redirect('editAndView.php/create');
 		} else {
-			QApplication::Redirect('newAssessment.php/edit');
+			QApplication::Redirect('editAndView.php/edit');
 		}
 	}
 	
