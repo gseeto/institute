@@ -266,18 +266,23 @@ class EditViewTenPAssessmentForm extends InstituteForm {
 	
 	protected function saveResults() {
 		for($i=0;$i<count($this->arrayPerformance); $i++) {
-			if($this->bEditing) {
+			$objResults = TenPResults::LoadResultByAssessmentIdAndQuestionId($this->objTenPAssessment->Id, $i+1);
+			if($objResults == null){
+				$objResults = new TenPResults();
+			}
+		/*	if($this->bEditing) {
 	        	$objResults = TenPResults::LoadResultByAssessmentIdAndQuestionId($this->objTenPAssessment->Id, $i+1);
 	        } else {
         		$objResults = new TenPResults();
 	        }
-        		
+        */		
 	        $objResults->AssessmentId = $this->objTenPAssessment->Id;  
 	        $objResults->Importance =  $this->arrayImportance[$i]->SelectedValue;
 	        $objResults->Performance =  $this->arrayPerformance[$i]->SelectedValue;
 	        $objResults->QuestionId = $this->arrayPerformance[$i]->ActionParameter;
 	        $objResults->Save(); 
-        }        
+        } 
+        $this->objTenPAssessment->ResourceStatusId = 2;       
 	    $this->objTenPAssessment->Save();
 	}
 	

@@ -44,7 +44,8 @@
 				$objConditions = QQ::Equal(QQN::TenPResults()->AssessmentId, $intAssessmentId);
 				$objConditions = QQ::AndCondition($objConditions,QQ::Equal(QQN::TenPResults()->QuestionId, $intQuestionId));
 				$objResult = TenPResults::QueryArray($objConditions,null);
-				return $objResult[0];
+				if(empty($objResult)) return null;
+				else return $objResult[0];
 			} catch (QCallerException $objExc) {
 				$objExc->IncrementOffset();
 				throw $objExc;
