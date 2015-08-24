@@ -241,6 +241,9 @@ class EditViewTenPAssessmentForm extends InstituteForm {
 				$this->iCounter = 9;
 				$this->displayProfit();
 				break;
+			case 9:
+				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/tenp/viewAssessment.php');
+				break;
 		}
 	}
 	
@@ -540,6 +543,7 @@ public function lstPerformance_Render(TenPQuestions $objQuestions) {
 		$this->iCounter = 8;
 		$this->btnPrev->Enabled = true;
 		$this->btnNext->Enabled = true;	
+		$this->btnNext->Text = 'Next';
 		$this->saveResults();
 		$this->updateChart();
 	}
@@ -559,6 +563,7 @@ public function lstPerformance_Render(TenPQuestions $objQuestions) {
 		$this->iCounter = 9;
 		$this->btnPrev->Enabled = true;
 		$this->btnNext->Enabled = true;	
+		$this->btnNext->Text = 'Finish';
 		$this->saveResults();
 		$this->updateChart();
 	}
