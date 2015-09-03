@@ -7,6 +7,7 @@ class AssessmentForm extends InstituteForm {
 	protected $intNavSectionId = InstituteForm::NavSectionAssessments;
 	protected $btnAssessments;
 	protected $btnGroupAssessments;
+	protected $btnChecklists;
 
 
 	protected function Form_Run() {
@@ -81,8 +82,18 @@ class AssessmentForm extends InstituteForm {
 			$this->btnGroupAssessments->CssClass = 'assessmentButtonDisabled';
 		}
 		$this->btnGroupAssessments->AddAction(new QClickEvent(), new QAjaxAction('btnGroupAssessments_Click'));
+		
+		$this->btnChecklists = new QButton($this);
+		$this->btnChecklists->Name = 'Business Checklists';
+		$this->btnChecklists->Text = 'Business Checklists';
+		$this->btnChecklists->CssClass = 'assessmentButton';	
+		$this->btnChecklists->AddAction(new QClickEvent(), new QAjaxAction('btnChecklists_Click'));
 	}
 
+	protected function btnChecklists_Click() {	
+		QApplication::Redirect(__SUBDIRECTORY__.'/checklist/i4center/index.php');
+	}
+	
 	protected function btnGroupAssessments_Click() {	
 		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/groupAggregation.php');
 	}
