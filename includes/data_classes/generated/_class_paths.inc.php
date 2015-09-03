@@ -13,6 +13,27 @@
 		QApplicationBase::$ClassFile['addressmetacontrol'] = __DATA_META_CONTROLS__ . '/AddressMetaControl.class.php';
 		QApplicationBase::$ClassFile['addressdatagrid'] = __DATA_META_CONTROLS__ . '/AddressDataGrid.class.php';
 
+	// ClassPaths for the BusinessChecklist class
+		QApplicationBase::$ClassFile['businesschecklist'] = __DATA_CLASSES__ . '/BusinessChecklist.class.php';
+		QApplicationBase::$ClassFile['qqnodebusinesschecklist'] = __DATA_CLASSES__ . '/BusinessChecklist.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodebusinesschecklist'] = __DATA_CLASSES__ . '/BusinessChecklist.class.php';
+		QApplicationBase::$ClassFile['businesschecklistmetacontrol'] = __DATA_META_CONTROLS__ . '/BusinessChecklistMetaControl.class.php';
+		QApplicationBase::$ClassFile['businesschecklistdatagrid'] = __DATA_META_CONTROLS__ . '/BusinessChecklistDataGrid.class.php';
+
+	// ClassPaths for the BusinessChecklistQuestions class
+		QApplicationBase::$ClassFile['businesschecklistquestions'] = __DATA_CLASSES__ . '/BusinessChecklistQuestions.class.php';
+		QApplicationBase::$ClassFile['qqnodebusinesschecklistquestions'] = __DATA_CLASSES__ . '/BusinessChecklistQuestions.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodebusinesschecklistquestions'] = __DATA_CLASSES__ . '/BusinessChecklistQuestions.class.php';
+		QApplicationBase::$ClassFile['businesschecklistquestionsmetacontrol'] = __DATA_META_CONTROLS__ . '/BusinessChecklistQuestionsMetaControl.class.php';
+		QApplicationBase::$ClassFile['businesschecklistquestionsdatagrid'] = __DATA_META_CONTROLS__ . '/BusinessChecklistQuestionsDataGrid.class.php';
+
+	// ClassPaths for the BusinessChecklistResults class
+		QApplicationBase::$ClassFile['businesschecklistresults'] = __DATA_CLASSES__ . '/BusinessChecklistResults.class.php';
+		QApplicationBase::$ClassFile['qqnodebusinesschecklistresults'] = __DATA_CLASSES__ . '/BusinessChecklistResults.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodebusinesschecklistresults'] = __DATA_CLASSES__ . '/BusinessChecklistResults.class.php';
+		QApplicationBase::$ClassFile['businesschecklistresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/BusinessChecklistResultsMetaControl.class.php';
+		QApplicationBase::$ClassFile['businesschecklistresultsdatagrid'] = __DATA_META_CONTROLS__ . '/BusinessChecklistResultsDataGrid.class.php';
+
 	// ClassPaths for the CannedActionItem class
 		QApplicationBase::$ClassFile['cannedactionitem'] = __DATA_CLASSES__ . '/CannedActionItem.class.php';
 		QApplicationBase::$ClassFile['qqnodecannedactionitem'] = __DATA_CLASSES__ . '/CannedActionItem.class.php';
@@ -33,6 +54,13 @@
 		QApplicationBase::$ClassFile['qqreversereferencenodecannedstrategy'] = __DATA_CLASSES__ . '/CannedStrategy.class.php';
 		QApplicationBase::$ClassFile['cannedstrategymetacontrol'] = __DATA_META_CONTROLS__ . '/CannedStrategyMetaControl.class.php';
 		QApplicationBase::$ClassFile['cannedstrategydatagrid'] = __DATA_META_CONTROLS__ . '/CannedStrategyDataGrid.class.php';
+
+	// ClassPaths for the ChecklistCategories class
+		QApplicationBase::$ClassFile['checklistcategories'] = __DATA_CLASSES__ . '/ChecklistCategories.class.php';
+		QApplicationBase::$ClassFile['qqnodechecklistcategories'] = __DATA_CLASSES__ . '/ChecklistCategories.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodechecklistcategories'] = __DATA_CLASSES__ . '/ChecklistCategories.class.php';
+		QApplicationBase::$ClassFile['checklistcategoriesmetacontrol'] = __DATA_META_CONTROLS__ . '/ChecklistCategoriesMetaControl.class.php';
+		QApplicationBase::$ClassFile['checklistcategoriesdatagrid'] = __DATA_META_CONTROLS__ . '/ChecklistCategoriesDataGrid.class.php';
 
 	// ClassPaths for the Company class
 		QApplicationBase::$ClassFile['company'] = __DATA_CLASSES__ . '/Company.class.php';
