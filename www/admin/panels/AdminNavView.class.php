@@ -8,6 +8,7 @@
         public $btnScorecards;
         public $btnAssessments;
         public $btnVenture;
+        public $btnChecklist;
         
         // The Reference to the Main Form's "Main Content Panel" so that this panel
         // can make changes to the content panel on the page
@@ -60,6 +61,12 @@
             $this->btnVenture->CssClass = 'SideNavButton';
             $this->btnVenture->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnVenture_Click'));            
             
+            $this->btnChecklist = new QButton($this);
+            $this->btnChecklist->Name = 'Checklist ';
+            $this->btnChecklist->Text = 'Checklist';
+            $this->btnChecklist->CssClass = 'SideNavButton';
+            $this->btnChecklist->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnChecklist_Click')); 
+            
             // Initialize main content panel
             $pnlMain = $this->objForm->GetControl($this->strPanelMainControlId);
 
@@ -105,6 +112,7 @@
             $this->btnScorecards->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
             $this->btnVenture->CssClass = 'SideNavButton';
+            $this->btnChecklist->CssClass = 'SideNavButton';         
         }
         
     	public function btnCompany_Click($strFormId, $strControlId, $strParameter) {
@@ -117,6 +125,7 @@
             $this->btnScorecards->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
             $this->btnVenture->CssClass = 'SideNavButton';
+            $this->btnChecklist->CssClass = 'SideNavButton';
         }
         
     	public function btnScorecards_Click($strFormId, $strControlId, $strParameter) {
@@ -129,6 +138,7 @@
             $this->btnCompany->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
             $this->btnVenture->CssClass = 'SideNavButton';
+            $this->btnChecklist->CssClass = 'SideNavButton';
         }
         
     	public function btnAssessments_Click($strFormId, $strControlId, $strParameter) {
@@ -141,6 +151,7 @@
             $this->btnCompany->CssClass = 'SideNavButton';
             $this->btnScorecards->CssClass = 'SideNavButton';
             $this->btnVenture->CssClass = 'SideNavButton';
+            $this->btnChecklist->CssClass = 'SideNavButton';
         }
         
     	public function btnVenture_Click($strFormId, $strControlId, $strParameter) {
@@ -153,6 +164,20 @@
             $this->btnScorecards->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
             $this->btnUsers->CssClass = 'SideNavButton';
+            $this->btnChecklist->CssClass = 'SideNavButton';
+        }
+        
+    	public function btnChecklist_Click($strFormId, $strControlId, $strParameter) {
+            $pnlMain = $this->objForm->GetControl($this->strPanelMainControlId);
+            // First, remove all children panels from pnlMain. Then populate it
+            $pnlMain->RemoveChildControls(true);
+            new AdminChecklistView($pnlMain);
+            $this->btnChecklist->CssClass = 'SideNavButtonSelected';
+            $this->btnVenture->CssClass = 'SideNavButton';
+            $this->btnCompany->CssClass = 'SideNavButton';
+            $this->btnScorecards->CssClass = 'SideNavButton';
+            $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnUsers->CssClass = 'SideNavButton';         
         }
         
     }
