@@ -13,6 +13,24 @@
 			return new QQNodeAddress('address', null, null);
 		}
 		/**
+		 * @return QQNodeBusinessChecklist
+		 */
+		static public function BusinessChecklist() {
+			return new QQNodeBusinessChecklist('business_checklist', null, null);
+		}
+		/**
+		 * @return QQNodeBusinessChecklistQuestions
+		 */
+		static public function BusinessChecklistQuestions() {
+			return new QQNodeBusinessChecklistQuestions('business_checklist_questions', null, null);
+		}
+		/**
+		 * @return QQNodeBusinessChecklistResults
+		 */
+		static public function BusinessChecklistResults() {
+			return new QQNodeBusinessChecklistResults('business_checklist_results', null, null);
+		}
+		/**
 		 * @return QQNodeCannedActionItem
 		 */
 		static public function CannedActionItem() {
@@ -29,6 +47,12 @@
 		 */
 		static public function CannedStrategy() {
 			return new QQNodeCannedStrategy('canned_strategy', null, null);
+		}
+		/**
+		 * @return QQNodeChecklistCategories
+		 */
+		static public function ChecklistCategories() {
+			return new QQNodeChecklistCategories('checklist_categories', null, null);
 		}
 		/**
 		 * @return QQNodeCompany

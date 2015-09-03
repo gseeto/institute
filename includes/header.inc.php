@@ -9,7 +9,6 @@
 		<title><?php _p($strPageTitle); ?></title>
 <?php } ?>
 		<style type="text/css">@import url("<?php _p(__VIRTUAL_DIRECTORY__ . __CSS_ASSETS__); ?>/styles.css");</style>
-		<style type="text/css">@import url("<?php _p(__VIRTUAL_DIRECTORY__ . __CSS_ASSETS__); ?>/ui-lightness/jquery-ui-1.10.0.custom.css");</style>
 		<link href="<?php _p(__VIRTUAL_DIRECTORY__ . __CSS_ASSETS__); ?>/ui-lightness/jquery-ui-1.10.1.custom.css" rel="stylesheet">
 		<script src="<?php _p(__VIRTUAL_DIRECTORY__ . __JS_ASSETS__); ?>/jquery-1.9.0.js"></script>
 		<script src="<?php _p(__VIRTUAL_DIRECTORY__ . __JS_ASSETS__); ?>/jquery-ui-1.10.0.custom.js"></script>
