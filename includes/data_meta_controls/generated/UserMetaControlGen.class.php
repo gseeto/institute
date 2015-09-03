@@ -40,6 +40,8 @@
 	 * property-read QLabel $CareerLengthLabel
 	 * property QListBox $GroupAssessmentListAsAssessmentManagerControl
 	 * property-read QLabel $GroupAssessmentListAsAssessmentManagerLabel
+	 * property QListBox $BusinessChecklistAsManagerControl
+	 * property-read QLabel $BusinessChecklistAsManagerLabel
 	 * property QListBox $CompanyControl
 	 * property-read QLabel $CompanyLabel
 	 * property QListBox $ResourceControl
@@ -209,6 +211,8 @@
 		// QListBox Controls (if applicable) to edit Unique ReverseReferences and ManyToMany References
 		protected $lstGroupAssessmentListsAsAssessmentManager;
 
+		protected $lstBusinessChecklistsAsManager;
+
 		protected $lstCompanies;
 
 		protected $lstResources;
@@ -218,6 +222,8 @@
 
 		// QLabel Controls (if applicable) to view Unique ReverseReferences and ManyToMany References
 		protected $lblGroupAssessmentListsAsAssessmentManager;
+
+		protected $lblBusinessChecklistsAsManager;
 
 		protected $lblCompanies;
 
@@ -696,6 +702,57 @@
 		}
 
 		/**
+		 * Create and setup QListBox lstBusinessChecklistsAsManager
+		 * @param string $strControlId optional ControlId to use
+		 * @param QQCondition $objConditions override the default condition of QQ::All() to the query, itself
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause object or array of QQClause objects for the query
+		 * @return QListBox
+		 */
+		public function lstBusinessChecklistsAsManager_Create($strControlId = null, QQCondition $objCondition = null, $objOptionalClauses = null) {
+			$this->lstBusinessChecklistsAsManager = new QListBox($this->objParentObject, $strControlId);
+			$this->lstBusinessChecklistsAsManager->Name = QApplication::Translate('Business Checklists As Manager');
+			$this->lstBusinessChecklistsAsManager->SelectionMode = QSelectionMode::Multiple;
+
+			// We need to know which items to "Pre-Select"
+			$objAssociatedArray = $this->objUser->GetBusinessChecklistAsManagerArray();
+
+			// Setup and perform the Query
+			if (is_null($objCondition)) $objCondition = QQ::All();
+			$objBusinessChecklistCursor = BusinessChecklist::QueryCursor($objCondition, $objOptionalClauses);
+
+			// Iterate through the Cursor
+			while ($objBusinessChecklist = BusinessChecklist::InstantiateCursor($objBusinessChecklistCursor)) {
+				$objListItem = new QListItem($objBusinessChecklist->__toString(), $objBusinessChecklist->Id);
+				foreach ($objAssociatedArray as $objAssociated) {
+					if ($objAssociated->Id == $objBusinessChecklist->Id)
+						$objListItem->Selected = true;
+				}
+				$this->lstBusinessChecklistsAsManager->AddItem($objListItem);
+			}
+
+			// Return the QListControl
+			return $this->lstBusinessChecklistsAsManager;
+		}
+
+		/**
+		 * Create and setup QLabel lblBusinessChecklistsAsManager
+		 * @param string $strControlId optional ControlId to use
+		 * @param string $strGlue glue to display in between each associated object
+		 * @return QLabel
+		 */
+		public function lblBusinessChecklistsAsManager_Create($strControlId = null, $strGlue = ', ') {
+			$this->lblBusinessChecklistsAsManager = new QLabel($this->objParentObject, $strControlId);
+			$this->lstBusinessChecklistsAsManager->Name = QApplication::Translate('Business Checklists As Manager');
+			
+			$objAssociatedArray = $this->objUser->GetBusinessChecklistAsManagerArray();
+			$strItems = array();
+			foreach ($objAssociatedArray as $objAssociated)
+				$strItems[] = $objAssociated->__toString();
+			$this->lblBusinessChecklistsAsManager->Text = implode($strGlue, $strItems);
+			return $this->lblBusinessChecklistsAsManager;
+		}
+
+		/**
 		 * Create and setup QListBox lstCompanies
 		 * @param string $strControlId optional ControlId to use
 		 * @param QQCondition $objConditions override the default condition of QQ::All() to the query, itself
@@ -952,6 +1009,27 @@
 				$this->lblGroupAssessmentListsAsAssessmentManager->Text = implode($strGlue, $strItems);
 			}
 
+			if ($this->lstBusinessChecklistsAsManager) {
+				$this->lstBusinessChecklistsAsManager->RemoveAllItems();
+				$objAssociatedArray = $this->objUser->GetBusinessChecklistAsManagerArray();
+				$objBusinessChecklistArray = BusinessChecklist::LoadAll();
+				if ($objBusinessChecklistArray) foreach ($objBusinessChecklistArray as $objBusinessChecklist) {
+					$objListItem = new QListItem($objBusinessChecklist->__toString(), $objBusinessChecklist->Id);
+					foreach ($objAssociatedArray as $objAssociated) {
+						if ($objAssociated->Id == $objBusinessChecklist->Id)
+							$objListItem->Selected = true;
+					}
+					$this->lstBusinessChecklistsAsManager->AddItem($objListItem);
+				}
+			}
+			if ($this->lblBusinessChecklistsAsManager) {
+				$objAssociatedArray = $this->objUser->GetBusinessChecklistAsManagerArray();
+				$strItems = array();
+				foreach ($objAssociatedArray as $objAssociated)
+					$strItems[] = $objAssociated->__toString();
+				$this->lblBusinessChecklistsAsManager->Text = implode($strGlue, $strItems);
+			}
+
 			if ($this->lstCompanies) {
 				$this->lstCompanies->RemoveAllItems();
 				$objAssociatedArray = $this->objUser->GetCompanyArray();
@@ -1033,6 +1111,16 @@
 			}
 		}
 
+		protected function lstBusinessChecklistsAsManager_Update() {
+			if ($this->lstBusinessChecklistsAsManager) {
+				$this->objUser->UnassociateAllBusinessChecklistsAsManager();
+				$objSelectedListItems = $this->lstBusinessChecklistsAsManager->SelectedItems;
+				if ($objSelectedListItems) foreach ($objSelectedListItems as $objListItem) {
+					$this->objUser->AssociateBusinessChecklistAsManager(BusinessChecklist::Load($objListItem->Value));
+				}
+			}
+		}
+
 		protected function lstCompanies_Update() {
 			if ($this->lstCompanies) {
 				$this->objUser->UnassociateAllCompanies();
@@ -1096,6 +1184,7 @@
 
 				// Finally, update any ManyToManyReferences (if any)
 				$this->lstGroupAssessmentListsAsAssessmentManager_Update();
+				$this->lstBusinessChecklistsAsManager_Update();
 				$this->lstCompanies_Update();
 				$this->lstResources_Update();
 				$this->lstScorecards_Update();
@@ -1111,6 +1200,7 @@
 		 */
 		public function DeleteUser() {
 			$this->objUser->UnassociateAllGroupAssessmentListsAsAssessmentManager();
+			$this->objUser->UnassociateAllBusinessChecklistsAsManager();
 			$this->objUser->UnassociateAllCompanies();
 			$this->objUser->UnassociateAllResources();
 			$this->objUser->UnassociateAllScorecards();
@@ -1210,6 +1300,12 @@
 				case 'GroupAssessmentListAsAssessmentManagerLabel':
 					if (!$this->lblGroupAssessmentListsAsAssessmentManager) return $this->lblGroupAssessmentListsAsAssessmentManager_Create();
 					return $this->lblGroupAssessmentListsAsAssessmentManager;
+				case 'BusinessChecklistAsManagerControl':
+					if (!$this->lstBusinessChecklistsAsManager) return $this->lstBusinessChecklistsAsManager_Create();
+					return $this->lstBusinessChecklistsAsManager;
+				case 'BusinessChecklistAsManagerLabel':
+					if (!$this->lblBusinessChecklistsAsManager) return $this->lblBusinessChecklistsAsManager_Create();
+					return $this->lblBusinessChecklistsAsManager;
 				case 'CompanyControl':
 					if (!$this->lstCompanies) return $this->lstCompanies_Create();
 					return $this->lstCompanies;
@@ -1274,6 +1370,8 @@
 						return ($this->txtCareerLength = QType::Cast($mixValue, 'QControl'));
 					case 'GroupAssessmentListAsAssessmentManagerControl':
 						return ($this->lstGroupAssessmentListsAsAssessmentManager = QType::Cast($mixValue, 'QControl'));
+					case 'BusinessChecklistAsManagerControl':
+						return ($this->lstBusinessChecklistsAsManager = QType::Cast($mixValue, 'QControl'));
 					case 'CompanyControl':
 						return ($this->lstCompanies = QType::Cast($mixValue, 'QControl'));
 					case 'ResourceControl':

@@ -32,16 +32,20 @@
 	 * @property TenureList $Tenure the value for the TenureList object referenced by intTenureId 
 	 * @property GroupAssessmentList $_GroupAssessmentListAsAssessmentManager the value for the private _objGroupAssessmentListAsAssessmentManager (Read-Only) if set due to an expansion on the assessment_manager_assn association table
 	 * @property GroupAssessmentList[] $_GroupAssessmentListAsAssessmentManagerArray the value for the private _objGroupAssessmentListAsAssessmentManagerArray (Read-Only) if set due to an ExpandAsArray on the assessment_manager_assn association table
+	 * @property BusinessChecklist $_BusinessChecklistAsManager the value for the private _objBusinessChecklistAsManager (Read-Only) if set due to an expansion on the businesschecklist_manager_assn association table
+	 * @property BusinessChecklist[] $_BusinessChecklistAsManagerArray the value for the private _objBusinessChecklistAsManagerArray (Read-Only) if set due to an ExpandAsArray on the businesschecklist_manager_assn association table
 	 * @property Company $_Company the value for the private _objCompany (Read-Only) if set due to an expansion on the company_user_assn association table
 	 * @property Company[] $_CompanyArray the value for the private _objCompanyArray (Read-Only) if set due to an ExpandAsArray on the company_user_assn association table
 	 * @property Resource $_Resource the value for the private _objResource (Read-Only) if set due to an expansion on the resource_user_assn association table
 	 * @property Resource[] $_ResourceArray the value for the private _objResourceArray (Read-Only) if set due to an ExpandAsArray on the resource_user_assn association table
 	 * @property Scorecard $_Scorecard the value for the private _objScorecard (Read-Only) if set due to an expansion on the scorecard_user_assn association table
 	 * @property Scorecard[] $_ScorecardArray the value for the private _objScorecardArray (Read-Only) if set due to an ExpandAsArray on the scorecard_user_assn association table
-	 * @property ActionItems $_ActionItemsAsWho the value for the private _objActionItemsAsWho (Read-Only) if set due to an expansion on the action_items.who reverse relationship
-	 * @property ActionItems[] $_ActionItemsAsWhoArray the value for the private _objActionItemsAsWhoArray (Read-Only) if set due to an ExpandAsArray on the action_items.who reverse relationship
 	 * @property ActionItems $_ActionItemsAsModifiedBy the value for the private _objActionItemsAsModifiedBy (Read-Only) if set due to an expansion on the action_items.modified_by reverse relationship
 	 * @property ActionItems[] $_ActionItemsAsModifiedByArray the value for the private _objActionItemsAsModifiedByArray (Read-Only) if set due to an ExpandAsArray on the action_items.modified_by reverse relationship
+	 * @property ActionItems $_ActionItemsAsWho the value for the private _objActionItemsAsWho (Read-Only) if set due to an expansion on the action_items.who reverse relationship
+	 * @property ActionItems[] $_ActionItemsAsWhoArray the value for the private _objActionItemsAsWhoArray (Read-Only) if set due to an ExpandAsArray on the action_items.who reverse relationship
+	 * @property BusinessChecklistResults $_BusinessChecklistResults the value for the private _objBusinessChecklistResults (Read-Only) if set due to an expansion on the business_checklist_results.user_id reverse relationship
+	 * @property BusinessChecklistResults[] $_BusinessChecklistResultsArray the value for the private _objBusinessChecklistResultsArray (Read-Only) if set due to an ExpandAsArray on the business_checklist_results.user_id reverse relationship
 	 * @property IntegrationAssessment $_IntegrationAssessment the value for the private _objIntegrationAssessment (Read-Only) if set due to an expansion on the integration_assessment.user_id reverse relationship
 	 * @property IntegrationAssessment[] $_IntegrationAssessmentArray the value for the private _objIntegrationAssessmentArray (Read-Only) if set due to an ExpandAsArray on the integration_assessment.user_id reverse relationship
 	 * @property KingdomBusinessAssessment $_KingdomBusinessAssessment the value for the private _objKingdomBusinessAssessment (Read-Only) if set due to an expansion on the kingdom_business_assessment.user_id reverse relationship
@@ -52,6 +56,8 @@
 	 * @property LemonAssessment[] $_LemonAssessmentArray the value for the private _objLemonAssessmentArray (Read-Only) if set due to an ExpandAsArray on the lemon_assessment.user_id reverse relationship
 	 * @property LraAssessment $_LraAssessment the value for the private _objLraAssessment (Read-Only) if set due to an expansion on the lra_assessment.user_id reverse relationship
 	 * @property LraAssessment[] $_LraAssessmentArray the value for the private _objLraAssessmentArray (Read-Only) if set due to an ExpandAsArray on the lra_assessment.user_id reverse relationship
+	 * @property PostventureAssessment $_PostventureAssessment the value for the private _objPostventureAssessment (Read-Only) if set due to an expansion on the postventure_assessment.user_id reverse relationship
+	 * @property PostventureAssessment[] $_PostventureAssessmentArray the value for the private _objPostventureAssessmentArray (Read-Only) if set due to an ExpandAsArray on the postventure_assessment.user_id reverse relationship
 	 * @property SeasonalAssessment $_SeasonalAssessment the value for the private _objSeasonalAssessment (Read-Only) if set due to an expansion on the seasonal_assessment.user_id reverse relationship
 	 * @property SeasonalAssessment[] $_SeasonalAssessmentArray the value for the private _objSeasonalAssessmentArray (Read-Only) if set due to an ExpandAsArray on the seasonal_assessment.user_id reverse relationship
 	 * @property Statement $_StatementAsModifiedBy the value for the private _objStatementAsModifiedBy (Read-Only) if set due to an expansion on the statement.modified_by reverse relationship
@@ -180,6 +186,22 @@
 		private $_objGroupAssessmentListAsAssessmentManagerArray = array();
 
 		/**
+		 * Private member variable that stores a reference to a single BusinessChecklistAsManager object
+		 * (of type BusinessChecklist), if this User object was restored with
+		 * an expansion on the businesschecklist_manager_assn association table.
+		 * @var BusinessChecklist _objBusinessChecklistAsManager;
+		 */
+		private $_objBusinessChecklistAsManager;
+
+		/**
+		 * Private member variable that stores a reference to an array of BusinessChecklistAsManager objects
+		 * (of type BusinessChecklist[]), if this User object was restored with
+		 * an ExpandAsArray on the businesschecklist_manager_assn association table.
+		 * @var BusinessChecklist[] _objBusinessChecklistAsManagerArray;
+		 */
+		private $_objBusinessChecklistAsManagerArray = array();
+
+		/**
 		 * Private member variable that stores a reference to a single Company object
 		 * (of type Company), if this User object was restored with
 		 * an expansion on the company_user_assn association table.
@@ -228,6 +250,22 @@
 		private $_objScorecardArray = array();
 
 		/**
+		 * Private member variable that stores a reference to a single ActionItemsAsModifiedBy object
+		 * (of type ActionItems), if this User object was restored with
+		 * an expansion on the action_items association table.
+		 * @var ActionItems _objActionItemsAsModifiedBy;
+		 */
+		private $_objActionItemsAsModifiedBy;
+
+		/**
+		 * Private member variable that stores a reference to an array of ActionItemsAsModifiedBy objects
+		 * (of type ActionItems[]), if this User object was restored with
+		 * an ExpandAsArray on the action_items association table.
+		 * @var ActionItems[] _objActionItemsAsModifiedByArray;
+		 */
+		private $_objActionItemsAsModifiedByArray = array();
+
+		/**
 		 * Private member variable that stores a reference to a single ActionItemsAsWho object
 		 * (of type ActionItems), if this User object was restored with
 		 * an expansion on the action_items association table.
@@ -244,20 +282,20 @@
 		private $_objActionItemsAsWhoArray = array();
 
 		/**
-		 * Private member variable that stores a reference to a single ActionItemsAsModifiedBy object
-		 * (of type ActionItems), if this User object was restored with
-		 * an expansion on the action_items association table.
-		 * @var ActionItems _objActionItemsAsModifiedBy;
+		 * Private member variable that stores a reference to a single BusinessChecklistResults object
+		 * (of type BusinessChecklistResults), if this User object was restored with
+		 * an expansion on the business_checklist_results association table.
+		 * @var BusinessChecklistResults _objBusinessChecklistResults;
 		 */
-		private $_objActionItemsAsModifiedBy;
+		private $_objBusinessChecklistResults;
 
 		/**
-		 * Private member variable that stores a reference to an array of ActionItemsAsModifiedBy objects
-		 * (of type ActionItems[]), if this User object was restored with
-		 * an ExpandAsArray on the action_items association table.
-		 * @var ActionItems[] _objActionItemsAsModifiedByArray;
+		 * Private member variable that stores a reference to an array of BusinessChecklistResults objects
+		 * (of type BusinessChecklistResults[]), if this User object was restored with
+		 * an ExpandAsArray on the business_checklist_results association table.
+		 * @var BusinessChecklistResults[] _objBusinessChecklistResultsArray;
 		 */
-		private $_objActionItemsAsModifiedByArray = array();
+		private $_objBusinessChecklistResultsArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single IntegrationAssessment object
@@ -338,6 +376,22 @@
 		 * @var LraAssessment[] _objLraAssessmentArray;
 		 */
 		private $_objLraAssessmentArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single PostventureAssessment object
+		 * (of type PostventureAssessment), if this User object was restored with
+		 * an expansion on the postventure_assessment association table.
+		 * @var PostventureAssessment _objPostventureAssessment;
+		 */
+		private $_objPostventureAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of PostventureAssessment objects
+		 * (of type PostventureAssessment[]), if this User object was restored with
+		 * an ExpandAsArray on the postventure_assessment association table.
+		 * @var PostventureAssessment[] _objPostventureAssessmentArray;
+		 */
+		private $_objPostventureAssessmentArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single SeasonalAssessment object
@@ -885,6 +939,20 @@
 					$blnExpandedViaArray = true;
 				}
 
+				$strAlias = $strAliasPrefix . 'businesschecklistasmanager__business_checklist_id__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objBusinessChecklistAsManagerArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objBusinessChecklistAsManagerArray[$intPreviousChildItemCount - 1];
+						$objChildItem = BusinessChecklist::InstantiateDbRow($objDbRow, $strAliasPrefix . 'businesschecklistasmanager__business_checklist_id__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objBusinessChecklistAsManagerArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objBusinessChecklistAsManagerArray[] = BusinessChecklist::InstantiateDbRow($objDbRow, $strAliasPrefix . 'businesschecklistasmanager__business_checklist_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'company__company_id__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -928,6 +996,20 @@
 				}
 
 
+				$strAlias = $strAliasPrefix . 'actionitemsasmodifiedby__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objActionItemsAsModifiedByArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objActionItemsAsModifiedByArray[$intPreviousChildItemCount - 1];
+						$objChildItem = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsasmodifiedby__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objActionItemsAsModifiedByArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objActionItemsAsModifiedByArray[] = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsasmodifiedby__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'actionitemsaswho__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -942,17 +1024,17 @@
 					$blnExpandedViaArray = true;
 				}
 
-				$strAlias = $strAliasPrefix . 'actionitemsasmodifiedby__id';
+				$strAlias = $strAliasPrefix . 'businesschecklistresults__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
 					(!is_null($objDbRow->GetColumn($strAliasName)))) {
-					if ($intPreviousChildItemCount = count($objPreviousItem->_objActionItemsAsModifiedByArray)) {
-						$objPreviousChildItem = $objPreviousItem->_objActionItemsAsModifiedByArray[$intPreviousChildItemCount - 1];
-						$objChildItem = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsasmodifiedby__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objBusinessChecklistResultsArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objBusinessChecklistResultsArray[$intPreviousChildItemCount - 1];
+						$objChildItem = BusinessChecklistResults::InstantiateDbRow($objDbRow, $strAliasPrefix . 'businesschecklistresults__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
 						if ($objChildItem)
-							$objPreviousItem->_objActionItemsAsModifiedByArray[] = $objChildItem;
+							$objPreviousItem->_objBusinessChecklistResultsArray[] = $objChildItem;
 					} else
-						$objPreviousItem->_objActionItemsAsModifiedByArray[] = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsasmodifiedby__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+						$objPreviousItem->_objBusinessChecklistResultsArray[] = BusinessChecklistResults::InstantiateDbRow($objDbRow, $strAliasPrefix . 'businesschecklistresults__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 					$blnExpandedViaArray = true;
 				}
 
@@ -1023,6 +1105,20 @@
 							$objPreviousItem->_objLraAssessmentArray[] = $objChildItem;
 					} else
 						$objPreviousItem->_objLraAssessmentArray[] = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
+				$strAlias = $strAliasPrefix . 'postventureassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objPostventureAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objPostventureAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = PostventureAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'postventureassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objPostventureAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objPostventureAssessmentArray[] = PostventureAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'postventureassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 					$blnExpandedViaArray = true;
 				}
 
@@ -1206,6 +1302,16 @@
 					$objToReturn->_objGroupAssessmentListAsAssessmentManager = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlistasassessmentmanager__group_assessment_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
+			// Check for BusinessChecklistAsManager Virtual Binding
+			$strAlias = $strAliasPrefix . 'businesschecklistasmanager__business_checklist_id__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objBusinessChecklistAsManagerArray[] = BusinessChecklist::InstantiateDbRow($objDbRow, $strAliasPrefix . 'businesschecklistasmanager__business_checklist_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objBusinessChecklistAsManager = BusinessChecklist::InstantiateDbRow($objDbRow, $strAliasPrefix . 'businesschecklistasmanager__business_checklist_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
 			// Check for Company Virtual Binding
 			$strAlias = $strAliasPrefix . 'company__company_id__id';
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
@@ -1237,6 +1343,16 @@
 			}
 
 
+			// Check for ActionItemsAsModifiedBy Virtual Binding
+			$strAlias = $strAliasPrefix . 'actionitemsasmodifiedby__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objActionItemsAsModifiedByArray[] = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsasmodifiedby__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objActionItemsAsModifiedBy = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsasmodifiedby__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
 			// Check for ActionItemsAsWho Virtual Binding
 			$strAlias = $strAliasPrefix . 'actionitemsaswho__id';
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
@@ -1247,14 +1363,14 @@
 					$objToReturn->_objActionItemsAsWho = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsaswho__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
-			// Check for ActionItemsAsModifiedBy Virtual Binding
-			$strAlias = $strAliasPrefix . 'actionitemsasmodifiedby__id';
+			// Check for BusinessChecklistResults Virtual Binding
+			$strAlias = $strAliasPrefix . 'businesschecklistresults__id';
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 			if (!is_null($objDbRow->GetColumn($strAliasName))) {
 				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
-					$objToReturn->_objActionItemsAsModifiedByArray[] = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsasmodifiedby__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$objToReturn->_objBusinessChecklistResultsArray[] = BusinessChecklistResults::InstantiateDbRow($objDbRow, $strAliasPrefix . 'businesschecklistresults__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
-					$objToReturn->_objActionItemsAsModifiedBy = ActionItems::InstantiateDbRow($objDbRow, $strAliasPrefix . 'actionitemsasmodifiedby__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$objToReturn->_objBusinessChecklistResults = BusinessChecklistResults::InstantiateDbRow($objDbRow, $strAliasPrefix . 'businesschecklistresults__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			// Check for IntegrationAssessment Virtual Binding
@@ -1305,6 +1421,16 @@
 					$objToReturn->_objLraAssessmentArray[] = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objLraAssessment = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for PostventureAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'postventureassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objPostventureAssessmentArray[] = PostventureAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'postventureassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objPostventureAssessment = PostventureAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'postventureassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			// Check for SeasonalAssessment Virtual Binding
@@ -1497,6 +1623,40 @@
 			
 		/**
 		 * Load an array of User objects,
+		 * by CountryId Index(es)
+		 * @param integer $intCountryId
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return User[]
+		*/
+		public static function LoadArrayByCountryId($intCountryId, $objOptionalClauses = null) {
+			// Call User::QueryArray to perform the LoadArrayByCountryId query
+			try {
+				return User::QueryArray(
+					QQ::Equal(QQN::User()->CountryId, $intCountryId),
+					$objOptionalClauses
+					);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Count Users
+		 * by CountryId Index(es)
+		 * @param integer $intCountryId
+		 * @return int
+		*/
+		public static function CountByCountryId($intCountryId, $objOptionalClauses = null) {
+			// Call User::QueryCount to perform the CountByCountryId query
+			return User::QueryCount(
+				QQ::Equal(QQN::User()->CountryId, $intCountryId)
+			, $objOptionalClauses
+			);
+		}
+			
+		/**
+		 * Load an array of User objects,
 		 * by TitleId Index(es)
 		 * @param integer $intTitleId
 		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
@@ -1562,40 +1722,6 @@
 			, $objOptionalClauses
 			);
 		}
-			
-		/**
-		 * Load an array of User objects,
-		 * by CountryId Index(es)
-		 * @param integer $intCountryId
-		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
-		 * @return User[]
-		*/
-		public static function LoadArrayByCountryId($intCountryId, $objOptionalClauses = null) {
-			// Call User::QueryArray to perform the LoadArrayByCountryId query
-			try {
-				return User::QueryArray(
-					QQ::Equal(QQN::User()->CountryId, $intCountryId),
-					$objOptionalClauses
-					);
-			} catch (QCallerException $objExc) {
-				$objExc->IncrementOffset();
-				throw $objExc;
-			}
-		}
-
-		/**
-		 * Count Users
-		 * by CountryId Index(es)
-		 * @param integer $intCountryId
-		 * @return int
-		*/
-		public static function CountByCountryId($intCountryId, $objOptionalClauses = null) {
-			// Call User::QueryCount to perform the CountByCountryId query
-			return User::QueryCount(
-				QQ::Equal(QQN::User()->CountryId, $intCountryId)
-			, $objOptionalClauses
-			);
-		}
 
 
 
@@ -1631,6 +1757,38 @@
 		public static function CountByGroupAssessmentListAsAssessmentManager($intGroupAssessmentId, $objOptionalClauses = null) {
 			return User::QueryCount(
 				QQ::Equal(QQN::User()->GroupAssessmentListAsAssessmentManager->GroupAssessmentId, $intGroupAssessmentId),
+				$objOptionalClauses
+			);
+		}
+			/**
+		 * Load an array of BusinessChecklist objects for a given BusinessChecklistAsManager
+		 * via the businesschecklist_manager_assn table
+		 * @param integer $intBusinessChecklistId
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return User[]
+		*/
+		public static function LoadArrayByBusinessChecklistAsManager($intBusinessChecklistId, $objOptionalClauses = null) {
+			// Call User::QueryArray to perform the LoadArrayByBusinessChecklistAsManager query
+			try {
+				return User::QueryArray(
+					QQ::Equal(QQN::User()->BusinessChecklistAsManager->BusinessChecklistId, $intBusinessChecklistId),
+					$objOptionalClauses
+				);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Count Users for a given BusinessChecklistAsManager
+		 * via the businesschecklist_manager_assn table
+		 * @param integer $intBusinessChecklistId
+		 * @return int
+		*/
+		public static function CountByBusinessChecklistAsManager($intBusinessChecklistId, $objOptionalClauses = null) {
+			return User::QueryCount(
+				QQ::Equal(QQN::User()->BusinessChecklistAsManager->BusinessChecklistId, $intBusinessChecklistId),
 				$objOptionalClauses
 			);
 		}
@@ -2112,6 +2270,18 @@
 					// @return GroupAssessmentList[]
 					return (array) $this->_objGroupAssessmentListAsAssessmentManagerArray;
 
+				case '_BusinessChecklistAsManager':
+					// Gets the value for the private _objBusinessChecklistAsManager (Read-Only)
+					// if set due to an expansion on the businesschecklist_manager_assn association table
+					// @return BusinessChecklist
+					return $this->_objBusinessChecklistAsManager;
+
+				case '_BusinessChecklistAsManagerArray':
+					// Gets the value for the private _objBusinessChecklistAsManagerArray (Read-Only)
+					// if set due to an ExpandAsArray on the businesschecklist_manager_assn association table
+					// @return BusinessChecklist[]
+					return (array) $this->_objBusinessChecklistAsManagerArray;
+
 				case '_Company':
 					// Gets the value for the private _objCompany (Read-Only)
 					// if set due to an expansion on the company_user_assn association table
@@ -2148,6 +2318,18 @@
 					// @return Scorecard[]
 					return (array) $this->_objScorecardArray;
 
+				case '_ActionItemsAsModifiedBy':
+					// Gets the value for the private _objActionItemsAsModifiedBy (Read-Only)
+					// if set due to an expansion on the action_items.modified_by reverse relationship
+					// @return ActionItems
+					return $this->_objActionItemsAsModifiedBy;
+
+				case '_ActionItemsAsModifiedByArray':
+					// Gets the value for the private _objActionItemsAsModifiedByArray (Read-Only)
+					// if set due to an ExpandAsArray on the action_items.modified_by reverse relationship
+					// @return ActionItems[]
+					return (array) $this->_objActionItemsAsModifiedByArray;
+
 				case '_ActionItemsAsWho':
 					// Gets the value for the private _objActionItemsAsWho (Read-Only)
 					// if set due to an expansion on the action_items.who reverse relationship
@@ -2160,17 +2342,17 @@
 					// @return ActionItems[]
 					return (array) $this->_objActionItemsAsWhoArray;
 
-				case '_ActionItemsAsModifiedBy':
-					// Gets the value for the private _objActionItemsAsModifiedBy (Read-Only)
-					// if set due to an expansion on the action_items.modified_by reverse relationship
-					// @return ActionItems
-					return $this->_objActionItemsAsModifiedBy;
+				case '_BusinessChecklistResults':
+					// Gets the value for the private _objBusinessChecklistResults (Read-Only)
+					// if set due to an expansion on the business_checklist_results.user_id reverse relationship
+					// @return BusinessChecklistResults
+					return $this->_objBusinessChecklistResults;
 
-				case '_ActionItemsAsModifiedByArray':
-					// Gets the value for the private _objActionItemsAsModifiedByArray (Read-Only)
-					// if set due to an ExpandAsArray on the action_items.modified_by reverse relationship
-					// @return ActionItems[]
-					return (array) $this->_objActionItemsAsModifiedByArray;
+				case '_BusinessChecklistResultsArray':
+					// Gets the value for the private _objBusinessChecklistResultsArray (Read-Only)
+					// if set due to an ExpandAsArray on the business_checklist_results.user_id reverse relationship
+					// @return BusinessChecklistResults[]
+					return (array) $this->_objBusinessChecklistResultsArray;
 
 				case '_IntegrationAssessment':
 					// Gets the value for the private _objIntegrationAssessment (Read-Only)
@@ -2231,6 +2413,18 @@
 					// if set due to an ExpandAsArray on the lra_assessment.user_id reverse relationship
 					// @return LraAssessment[]
 					return (array) $this->_objLraAssessmentArray;
+
+				case '_PostventureAssessment':
+					// Gets the value for the private _objPostventureAssessment (Read-Only)
+					// if set due to an expansion on the postventure_assessment.user_id reverse relationship
+					// @return PostventureAssessment
+					return $this->_objPostventureAssessment;
+
+				case '_PostventureAssessmentArray':
+					// Gets the value for the private _objPostventureAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the postventure_assessment.user_id reverse relationship
+					// @return PostventureAssessment[]
+					return (array) $this->_objPostventureAssessmentArray;
 
 				case '_SeasonalAssessment':
 					// Gets the value for the private _objSeasonalAssessment (Read-Only)
@@ -2610,6 +2804,188 @@
 
 			
 		
+		// Related Objects' Methods for ActionItemsAsModifiedBy
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated ActionItemsesAsModifiedBy as an array of ActionItems objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return ActionItems[]
+		*/ 
+		public function GetActionItemsAsModifiedByArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return ActionItems::LoadArrayByModifiedBy($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated ActionItemsesAsModifiedBy
+		 * @return int
+		*/ 
+		public function CountActionItemsesAsModifiedBy() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return ActionItems::CountByModifiedBy($this->intId);
+		}
+
+		/**
+		 * Associates a ActionItemsAsModifiedBy
+		 * @param ActionItems $objActionItems
+		 * @return void
+		*/ 
+		public function AssociateActionItemsAsModifiedBy(ActionItems $objActionItems) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateActionItemsAsModifiedBy on this unsaved User.');
+			if ((is_null($objActionItems->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateActionItemsAsModifiedBy on this User with an unsaved ActionItems.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`action_items`
+				SET
+					`modified_by` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objActionItems->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objActionItems->ModifiedBy = $this->intId;
+				$objActionItems->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a ActionItemsAsModifiedBy
+		 * @param ActionItems $objActionItems
+		 * @return void
+		*/ 
+		public function UnassociateActionItemsAsModifiedBy(ActionItems $objActionItems) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsModifiedBy on this unsaved User.');
+			if ((is_null($objActionItems->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsModifiedBy on this User with an unsaved ActionItems.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`action_items`
+				SET
+					`modified_by` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objActionItems->Id) . ' AND
+					`modified_by` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objActionItems->ModifiedBy = null;
+				$objActionItems->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all ActionItemsesAsModifiedBy
+		 * @return void
+		*/ 
+		public function UnassociateAllActionItemsesAsModifiedBy() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsModifiedBy on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (ActionItems::LoadArrayByModifiedBy($this->intId) as $objActionItems) {
+					$objActionItems->ModifiedBy = null;
+					$objActionItems->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`action_items`
+				SET
+					`modified_by` = null
+				WHERE
+					`modified_by` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated ActionItemsAsModifiedBy
+		 * @param ActionItems $objActionItems
+		 * @return void
+		*/ 
+		public function DeleteAssociatedActionItemsAsModifiedBy(ActionItems $objActionItems) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsModifiedBy on this unsaved User.');
+			if ((is_null($objActionItems->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsModifiedBy on this User with an unsaved ActionItems.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`action_items`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objActionItems->Id) . ' AND
+					`modified_by` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objActionItems->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated ActionItemsesAsModifiedBy
+		 * @return void
+		*/ 
+		public function DeleteAllActionItemsesAsModifiedBy() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsModifiedBy on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (ActionItems::LoadArrayByModifiedBy($this->intId) as $objActionItems) {
+					$objActionItems->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`action_items`
+				WHERE
+					`modified_by` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
 		// Related Objects' Methods for ActionItemsAsWho
 		//-------------------------------------------------------------------
 
@@ -2792,20 +3168,20 @@
 
 			
 		
-		// Related Objects' Methods for ActionItemsAsModifiedBy
+		// Related Objects' Methods for BusinessChecklistResults
 		//-------------------------------------------------------------------
 
 		/**
-		 * Gets all associated ActionItemsesAsModifiedBy as an array of ActionItems objects
+		 * Gets all associated BusinessChecklistResultses as an array of BusinessChecklistResults objects
 		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
-		 * @return ActionItems[]
+		 * @return BusinessChecklistResults[]
 		*/ 
-		public function GetActionItemsAsModifiedByArray($objOptionalClauses = null) {
+		public function GetBusinessChecklistResultsArray($objOptionalClauses = null) {
 			if ((is_null($this->intId)))
 				return array();
 
 			try {
-				return ActionItems::LoadArrayByModifiedBy($this->intId, $objOptionalClauses);
+				return BusinessChecklistResults::LoadArrayByUserId($this->intId, $objOptionalClauses);
 			} catch (QCallerException $objExc) {
 				$objExc->IncrementOffset();
 				throw $objExc;
@@ -2813,26 +3189,26 @@
 		}
 
 		/**
-		 * Counts all associated ActionItemsesAsModifiedBy
+		 * Counts all associated BusinessChecklistResultses
 		 * @return int
 		*/ 
-		public function CountActionItemsesAsModifiedBy() {
+		public function CountBusinessChecklistResultses() {
 			if ((is_null($this->intId)))
 				return 0;
 
-			return ActionItems::CountByModifiedBy($this->intId);
+			return BusinessChecklistResults::CountByUserId($this->intId);
 		}
 
 		/**
-		 * Associates a ActionItemsAsModifiedBy
-		 * @param ActionItems $objActionItems
+		 * Associates a BusinessChecklistResults
+		 * @param BusinessChecklistResults $objBusinessChecklistResults
 		 * @return void
 		*/ 
-		public function AssociateActionItemsAsModifiedBy(ActionItems $objActionItems) {
+		public function AssociateBusinessChecklistResults(BusinessChecklistResults $objBusinessChecklistResults) {
 			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call AssociateActionItemsAsModifiedBy on this unsaved User.');
-			if ((is_null($objActionItems->Id)))
-				throw new QUndefinedPrimaryKeyException('Unable to call AssociateActionItemsAsModifiedBy on this User with an unsaved ActionItems.');
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateBusinessChecklistResults on this unsaved User.');
+			if ((is_null($objBusinessChecklistResults->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateBusinessChecklistResults on this User with an unsaved BusinessChecklistResults.');
 
 			// Get the Database Object for this Class
 			$objDatabase = User::GetDatabase();
@@ -2840,30 +3216,30 @@
 			// Perform the SQL Query
 			$objDatabase->NonQuery('
 				UPDATE
-					`action_items`
+					`business_checklist_results`
 				SET
-					`modified_by` = ' . $objDatabase->SqlVariable($this->intId) . '
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 				WHERE
-					`id` = ' . $objDatabase->SqlVariable($objActionItems->Id) . '
+					`id` = ' . $objDatabase->SqlVariable($objBusinessChecklistResults->Id) . '
 			');
 
 			// Journaling (if applicable)
 			if ($objDatabase->JournalingDatabase) {
-				$objActionItems->ModifiedBy = $this->intId;
-				$objActionItems->Journal('UPDATE');
+				$objBusinessChecklistResults->UserId = $this->intId;
+				$objBusinessChecklistResults->Journal('UPDATE');
 			}
 		}
 
 		/**
-		 * Unassociates a ActionItemsAsModifiedBy
-		 * @param ActionItems $objActionItems
+		 * Unassociates a BusinessChecklistResults
+		 * @param BusinessChecklistResults $objBusinessChecklistResults
 		 * @return void
 		*/ 
-		public function UnassociateActionItemsAsModifiedBy(ActionItems $objActionItems) {
+		public function UnassociateBusinessChecklistResults(BusinessChecklistResults $objBusinessChecklistResults) {
 			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsModifiedBy on this unsaved User.');
-			if ((is_null($objActionItems->Id)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsModifiedBy on this User with an unsaved ActionItems.');
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklistResults on this unsaved User.');
+			if ((is_null($objBusinessChecklistResults->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklistResults on this User with an unsaved BusinessChecklistResults.');
 
 			// Get the Database Object for this Class
 			$objDatabase = User::GetDatabase();
@@ -2871,61 +3247,61 @@
 			// Perform the SQL Query
 			$objDatabase->NonQuery('
 				UPDATE
-					`action_items`
+					`business_checklist_results`
 				SET
-					`modified_by` = null
+					`user_id` = null
 				WHERE
-					`id` = ' . $objDatabase->SqlVariable($objActionItems->Id) . ' AND
-					`modified_by` = ' . $objDatabase->SqlVariable($this->intId) . '
+					`id` = ' . $objDatabase->SqlVariable($objBusinessChecklistResults->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
 
 			// Journaling
 			if ($objDatabase->JournalingDatabase) {
-				$objActionItems->ModifiedBy = null;
-				$objActionItems->Journal('UPDATE');
+				$objBusinessChecklistResults->UserId = null;
+				$objBusinessChecklistResults->Journal('UPDATE');
 			}
 		}
 
 		/**
-		 * Unassociates all ActionItemsesAsModifiedBy
+		 * Unassociates all BusinessChecklistResultses
 		 * @return void
 		*/ 
-		public function UnassociateAllActionItemsesAsModifiedBy() {
+		public function UnassociateAllBusinessChecklistResultses() {
 			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsModifiedBy on this unsaved User.');
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklistResults on this unsaved User.');
 
 			// Get the Database Object for this Class
 			$objDatabase = User::GetDatabase();
 
 			// Journaling
 			if ($objDatabase->JournalingDatabase) {
-				foreach (ActionItems::LoadArrayByModifiedBy($this->intId) as $objActionItems) {
-					$objActionItems->ModifiedBy = null;
-					$objActionItems->Journal('UPDATE');
+				foreach (BusinessChecklistResults::LoadArrayByUserId($this->intId) as $objBusinessChecklistResults) {
+					$objBusinessChecklistResults->UserId = null;
+					$objBusinessChecklistResults->Journal('UPDATE');
 				}
 			}
 
 			// Perform the SQL Query
 			$objDatabase->NonQuery('
 				UPDATE
-					`action_items`
+					`business_checklist_results`
 				SET
-					`modified_by` = null
+					`user_id` = null
 				WHERE
-					`modified_by` = ' . $objDatabase->SqlVariable($this->intId) . '
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
 		}
 
 		/**
-		 * Deletes an associated ActionItemsAsModifiedBy
-		 * @param ActionItems $objActionItems
+		 * Deletes an associated BusinessChecklistResults
+		 * @param BusinessChecklistResults $objBusinessChecklistResults
 		 * @return void
 		*/ 
-		public function DeleteAssociatedActionItemsAsModifiedBy(ActionItems $objActionItems) {
+		public function DeleteAssociatedBusinessChecklistResults(BusinessChecklistResults $objBusinessChecklistResults) {
 			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsModifiedBy on this unsaved User.');
-			if ((is_null($objActionItems->Id)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsModifiedBy on this User with an unsaved ActionItems.');
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklistResults on this unsaved User.');
+			if ((is_null($objBusinessChecklistResults->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklistResults on this User with an unsaved BusinessChecklistResults.');
 
 			// Get the Database Object for this Class
 			$objDatabase = User::GetDatabase();
@@ -2933,42 +3309,42 @@
 			// Perform the SQL Query
 			$objDatabase->NonQuery('
 				DELETE FROM
-					`action_items`
+					`business_checklist_results`
 				WHERE
-					`id` = ' . $objDatabase->SqlVariable($objActionItems->Id) . ' AND
-					`modified_by` = ' . $objDatabase->SqlVariable($this->intId) . '
+					`id` = ' . $objDatabase->SqlVariable($objBusinessChecklistResults->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
 
 			// Journaling
 			if ($objDatabase->JournalingDatabase) {
-				$objActionItems->Journal('DELETE');
+				$objBusinessChecklistResults->Journal('DELETE');
 			}
 		}
 
 		/**
-		 * Deletes all associated ActionItemsesAsModifiedBy
+		 * Deletes all associated BusinessChecklistResultses
 		 * @return void
 		*/ 
-		public function DeleteAllActionItemsesAsModifiedBy() {
+		public function DeleteAllBusinessChecklistResultses() {
 			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateActionItemsAsModifiedBy on this unsaved User.');
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklistResults on this unsaved User.');
 
 			// Get the Database Object for this Class
 			$objDatabase = User::GetDatabase();
 
 			// Journaling
 			if ($objDatabase->JournalingDatabase) {
-				foreach (ActionItems::LoadArrayByModifiedBy($this->intId) as $objActionItems) {
-					$objActionItems->Journal('DELETE');
+				foreach (BusinessChecklistResults::LoadArrayByUserId($this->intId) as $objBusinessChecklistResults) {
+					$objBusinessChecklistResults->Journal('DELETE');
 				}
 			}
 
 			// Perform the SQL Query
 			$objDatabase->NonQuery('
 				DELETE FROM
-					`action_items`
+					`business_checklist_results`
 				WHERE
-					`modified_by` = ' . $objDatabase->SqlVariable($this->intId) . '
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
 		}
 
@@ -3877,6 +4253,188 @@
 			$objDatabase->NonQuery('
 				DELETE FROM
 					`lra_assessment`
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for PostventureAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated PostventureAssessments as an array of PostventureAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return PostventureAssessment[]
+		*/ 
+		public function GetPostventureAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return PostventureAssessment::LoadArrayByUserId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated PostventureAssessments
+		 * @return int
+		*/ 
+		public function CountPostventureAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return PostventureAssessment::CountByUserId($this->intId);
+		}
+
+		/**
+		 * Associates a PostventureAssessment
+		 * @param PostventureAssessment $objPostventureAssessment
+		 * @return void
+		*/ 
+		public function AssociatePostventureAssessment(PostventureAssessment $objPostventureAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociatePostventureAssessment on this unsaved User.');
+			if ((is_null($objPostventureAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociatePostventureAssessment on this User with an unsaved PostventureAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`postventure_assessment`
+				SET
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objPostventureAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objPostventureAssessment->UserId = $this->intId;
+				$objPostventureAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a PostventureAssessment
+		 * @param PostventureAssessment $objPostventureAssessment
+		 * @return void
+		*/ 
+		public function UnassociatePostventureAssessment(PostventureAssessment $objPostventureAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this unsaved User.');
+			if ((is_null($objPostventureAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this User with an unsaved PostventureAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`postventure_assessment`
+				SET
+					`user_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objPostventureAssessment->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objPostventureAssessment->UserId = null;
+				$objPostventureAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all PostventureAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllPostventureAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (PostventureAssessment::LoadArrayByUserId($this->intId) as $objPostventureAssessment) {
+					$objPostventureAssessment->UserId = null;
+					$objPostventureAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`postventure_assessment`
+				SET
+					`user_id` = null
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated PostventureAssessment
+		 * @param PostventureAssessment $objPostventureAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedPostventureAssessment(PostventureAssessment $objPostventureAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this unsaved User.');
+			if ((is_null($objPostventureAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this User with an unsaved PostventureAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`postventure_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objPostventureAssessment->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objPostventureAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated PostventureAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllPostventureAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (PostventureAssessment::LoadArrayByUserId($this->intId) as $objPostventureAssessment) {
+					$objPostventureAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`postventure_assessment`
 				WHERE
 					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
@@ -5340,6 +5898,189 @@
 			');
 		}
 			
+		// Related Many-to-Many Objects' Methods for BusinessChecklistAsManager
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all many-to-many associated BusinessChecklistsAsManager as an array of BusinessChecklist objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return BusinessChecklist[]
+		*/ 
+		public function GetBusinessChecklistAsManagerArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return BusinessChecklist::LoadArrayByUserAsManager($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all many-to-many associated BusinessChecklistsAsManager
+		 * @return int
+		*/ 
+		public function CountBusinessChecklistsAsManager() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return BusinessChecklist::CountByUserAsManager($this->intId);
+		}
+
+		/**
+		 * Checks to see if an association exists with a specific BusinessChecklistAsManager
+		 * @param BusinessChecklist $objBusinessChecklist
+		 * @return bool
+		*/
+		public function IsBusinessChecklistAsManagerAssociated(BusinessChecklist $objBusinessChecklist) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call IsBusinessChecklistAsManagerAssociated on this unsaved User.');
+			if ((is_null($objBusinessChecklist->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call IsBusinessChecklistAsManagerAssociated on this User with an unsaved BusinessChecklist.');
+
+			$intRowCount = User::QueryCount(
+				QQ::AndCondition(
+					QQ::Equal(QQN::User()->Id, $this->intId),
+					QQ::Equal(QQN::User()->BusinessChecklistAsManager->BusinessChecklistId, $objBusinessChecklist->Id)
+				)
+			);
+
+			return ($intRowCount > 0);
+		}
+
+		/**
+		 * Journals the BusinessChecklistAsManager relationship into the Log database.
+		 * Used internally as a helper method.
+		 * @param string $strJournalCommand
+		 */
+		public function JournalBusinessChecklistAsManagerAssociation($intAssociatedId, $strJournalCommand) {
+			$objDatabase = User::GetDatabase()->JournalingDatabase;
+
+			$objDatabase->NonQuery('
+				INSERT INTO `businesschecklist_manager_assn` (
+					`user_id`,
+					`business_checklist_id`,
+					__sys_login_id,
+					__sys_action,
+					__sys_date
+				) VALUES (
+					' . $objDatabase->SqlVariable($this->intId) . ',
+					' . $objDatabase->SqlVariable($intAssociatedId) . ',
+					' . (($objDatabase->JournaledById) ? $objDatabase->JournaledById : 'NULL') . ',
+					' . $objDatabase->SqlVariable($strJournalCommand) . ',
+					NOW()
+				);
+			');
+		}
+
+		/**
+		 * Gets the historical journal for an object's BusinessChecklistAsManager relationship from the log database.
+		 * @param integer intId
+		 * @return QDatabaseResult $objResult
+		 */
+		public static function GetJournalBusinessChecklistAsManagerAssociationForId($intId) {
+			$objDatabase = User::GetDatabase()->JournalingDatabase;
+
+			return $objDatabase->Query('SELECT * FROM businesschecklist_manager_assn WHERE user_id = ' .
+				$objDatabase->SqlVariable($intId) . ' ORDER BY __sys_date');
+		}
+
+		/**
+		 * Gets the historical journal for this object's BusinessChecklistAsManager relationship from the log database.
+		 * @return QDatabaseResult $objResult
+		 */
+		public function GetJournalBusinessChecklistAsManagerAssociation() {
+			return User::GetJournalBusinessChecklistAsManagerAssociationForId($this->intId);
+		}
+
+		/**
+		 * Associates a BusinessChecklistAsManager
+		 * @param BusinessChecklist $objBusinessChecklist
+		 * @return void
+		*/ 
+		public function AssociateBusinessChecklistAsManager(BusinessChecklist $objBusinessChecklist) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateBusinessChecklistAsManager on this unsaved User.');
+			if ((is_null($objBusinessChecklist->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateBusinessChecklistAsManager on this User with an unsaved BusinessChecklist.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				INSERT INTO `businesschecklist_manager_assn` (
+					`user_id`,
+					`business_checklist_id`
+				) VALUES (
+					' . $objDatabase->SqlVariable($this->intId) . ',
+					' . $objDatabase->SqlVariable($objBusinessChecklist->Id) . '
+				)
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase)
+				$this->JournalBusinessChecklistAsManagerAssociation($objBusinessChecklist->Id, 'INSERT');
+		}
+
+		/**
+		 * Unassociates a BusinessChecklistAsManager
+		 * @param BusinessChecklist $objBusinessChecklist
+		 * @return void
+		*/ 
+		public function UnassociateBusinessChecklistAsManager(BusinessChecklist $objBusinessChecklist) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklistAsManager on this unsaved User.');
+			if ((is_null($objBusinessChecklist->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklistAsManager on this User with an unsaved BusinessChecklist.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`businesschecklist_manager_assn`
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . ' AND
+					`business_checklist_id` = ' . $objDatabase->SqlVariable($objBusinessChecklist->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase)
+				$this->JournalBusinessChecklistAsManagerAssociation($objBusinessChecklist->Id, 'DELETE');
+		}
+
+		/**
+		 * Unassociates all BusinessChecklistsAsManager
+		 * @return void
+		*/ 
+		public function UnassociateAllBusinessChecklistsAsManager() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateAllBusinessChecklistAsManagerArray on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objResult = $objDatabase->Query('SELECT `business_checklist_id` AS associated_id FROM `businesschecklist_manager_assn` WHERE `user_id` = ' . $objDatabase->SqlVariable($this->intId));
+				while ($objRow = $objResult->GetNextRow()) {
+					$this->JournalBusinessChecklistAsManagerAssociation($objRow->GetColumn('associated_id'), 'DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`businesschecklist_manager_assn`
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+			
 		// Related Many-to-Many Objects' Methods for Company
 		//-------------------------------------------------------------------
 
@@ -6042,6 +6783,38 @@
 	}
 
 	/**
+	 * @property-read QQNode $BusinessChecklistId
+	 * @property-read QQNodeBusinessChecklist $BusinessChecklist
+	 * @property-read QQNodeBusinessChecklist $_ChildTableNode
+	 */
+	class QQNodeUserBusinessChecklistAsManager extends QQAssociationNode {
+		protected $strType = 'association';
+		protected $strName = 'businesschecklistasmanager';
+
+		protected $strTableName = 'businesschecklist_manager_assn';
+		protected $strPrimaryKey = 'user_id';
+		protected $strClassName = 'BusinessChecklist';
+
+		public function __get($strName) {
+			switch ($strName) {
+				case 'BusinessChecklistId':
+					return new QQNode('business_checklist_id', 'BusinessChecklistId', 'integer', $this);
+				case 'BusinessChecklist':
+					return new QQNodeBusinessChecklist('business_checklist_id', 'BusinessChecklistId', 'integer', $this);
+				case '_ChildTableNode':
+					return new QQNodeBusinessChecklist('business_checklist_id', 'BusinessChecklistId', 'integer', $this);
+				default:
+					try {
+						return parent::__get($strName);
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+			}
+		}
+	}
+
+	/**
 	 * @property-read QQNode $CompanyId
 	 * @property-read QQNodeCompany $Company
 	 * @property-read QQNodeCompany $_ChildTableNode
@@ -6154,16 +6927,19 @@
 	 * @property-read QQNodeTenureList $Tenure
 	 * @property-read QQNode $CareerLength
 	 * @property-read QQNodeUserGroupAssessmentListAsAssessmentManager $GroupAssessmentListAsAssessmentManager
+	 * @property-read QQNodeUserBusinessChecklistAsManager $BusinessChecklistAsManager
 	 * @property-read QQNodeUserCompany $Company
 	 * @property-read QQNodeUserResource $Resource
 	 * @property-read QQNodeUserScorecard $Scorecard
-	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsWho
 	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsModifiedBy
+	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsWho
+	 * @property-read QQReverseReferenceNodeBusinessChecklistResults $BusinessChecklistResults
 	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessment
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeKpis $KpisAsModifiedBy
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
 	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessment
+	 * @property-read QQReverseReferenceNodePostventureAssessment $PostventureAssessment
 	 * @property-read QQReverseReferenceNodeSeasonalAssessment $SeasonalAssessment
 	 * @property-read QQReverseReferenceNodeStatement $StatementAsModifiedBy
 	 * @property-read QQReverseReferenceNodeStrategy $StrategyAsModifiedBy
@@ -6210,16 +6986,20 @@
 					return new QQNode('career_length', 'CareerLength', 'integer', $this);
 				case 'GroupAssessmentListAsAssessmentManager':
 					return new QQNodeUserGroupAssessmentListAsAssessmentManager($this);
+				case 'BusinessChecklistAsManager':
+					return new QQNodeUserBusinessChecklistAsManager($this);
 				case 'Company':
 					return new QQNodeUserCompany($this);
 				case 'Resource':
 					return new QQNodeUserResource($this);
 				case 'Scorecard':
 					return new QQNodeUserScorecard($this);
-				case 'ActionItemsAsWho':
-					return new QQReverseReferenceNodeActionItems($this, 'actionitemsaswho', 'reverse_reference', 'who');
 				case 'ActionItemsAsModifiedBy':
 					return new QQReverseReferenceNodeActionItems($this, 'actionitemsasmodifiedby', 'reverse_reference', 'modified_by');
+				case 'ActionItemsAsWho':
+					return new QQReverseReferenceNodeActionItems($this, 'actionitemsaswho', 'reverse_reference', 'who');
+				case 'BusinessChecklistResults':
+					return new QQReverseReferenceNodeBusinessChecklistResults($this, 'businesschecklistresults', 'reverse_reference', 'user_id');
 				case 'IntegrationAssessment':
 					return new QQReverseReferenceNodeIntegrationAssessment($this, 'integrationassessment', 'reverse_reference', 'user_id');
 				case 'KingdomBusinessAssessment':
@@ -6230,6 +7010,8 @@
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessment', 'reverse_reference', 'user_id');
 				case 'LraAssessment':
 					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessment', 'reverse_reference', 'user_id');
+				case 'PostventureAssessment':
+					return new QQReverseReferenceNodePostventureAssessment($this, 'postventureassessment', 'reverse_reference', 'user_id');
 				case 'SeasonalAssessment':
 					return new QQReverseReferenceNodeSeasonalAssessment($this, 'seasonalassessment', 'reverse_reference', 'user_id');
 				case 'StatementAsModifiedBy':
@@ -6275,16 +7057,19 @@
 	 * @property-read QQNodeTenureList $Tenure
 	 * @property-read QQNode $CareerLength
 	 * @property-read QQNodeUserGroupAssessmentListAsAssessmentManager $GroupAssessmentListAsAssessmentManager
+	 * @property-read QQNodeUserBusinessChecklistAsManager $BusinessChecklistAsManager
 	 * @property-read QQNodeUserCompany $Company
 	 * @property-read QQNodeUserResource $Resource
 	 * @property-read QQNodeUserScorecard $Scorecard
-	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsWho
 	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsModifiedBy
+	 * @property-read QQReverseReferenceNodeActionItems $ActionItemsAsWho
+	 * @property-read QQReverseReferenceNodeBusinessChecklistResults $BusinessChecklistResults
 	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessment
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeKpis $KpisAsModifiedBy
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
 	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessment
+	 * @property-read QQReverseReferenceNodePostventureAssessment $PostventureAssessment
 	 * @property-read QQReverseReferenceNodeSeasonalAssessment $SeasonalAssessment
 	 * @property-read QQReverseReferenceNodeStatement $StatementAsModifiedBy
 	 * @property-read QQReverseReferenceNodeStrategy $StrategyAsModifiedBy
@@ -6332,16 +7117,20 @@
 					return new QQNode('career_length', 'CareerLength', 'integer', $this);
 				case 'GroupAssessmentListAsAssessmentManager':
 					return new QQNodeUserGroupAssessmentListAsAssessmentManager($this);
+				case 'BusinessChecklistAsManager':
+					return new QQNodeUserBusinessChecklistAsManager($this);
 				case 'Company':
 					return new QQNodeUserCompany($this);
 				case 'Resource':
 					return new QQNodeUserResource($this);
 				case 'Scorecard':
 					return new QQNodeUserScorecard($this);
-				case 'ActionItemsAsWho':
-					return new QQReverseReferenceNodeActionItems($this, 'actionitemsaswho', 'reverse_reference', 'who');
 				case 'ActionItemsAsModifiedBy':
 					return new QQReverseReferenceNodeActionItems($this, 'actionitemsasmodifiedby', 'reverse_reference', 'modified_by');
+				case 'ActionItemsAsWho':
+					return new QQReverseReferenceNodeActionItems($this, 'actionitemsaswho', 'reverse_reference', 'who');
+				case 'BusinessChecklistResults':
+					return new QQReverseReferenceNodeBusinessChecklistResults($this, 'businesschecklistresults', 'reverse_reference', 'user_id');
 				case 'IntegrationAssessment':
 					return new QQReverseReferenceNodeIntegrationAssessment($this, 'integrationassessment', 'reverse_reference', 'user_id');
 				case 'KingdomBusinessAssessment':
@@ -6352,6 +7141,8 @@
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessment', 'reverse_reference', 'user_id');
 				case 'LraAssessment':
 					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessment', 'reverse_reference', 'user_id');
+				case 'PostventureAssessment':
+					return new QQReverseReferenceNodePostventureAssessment($this, 'postventureassessment', 'reverse_reference', 'user_id');
 				case 'SeasonalAssessment':
 					return new QQReverseReferenceNodeSeasonalAssessment($this, 'seasonalassessment', 'reverse_reference', 'user_id');
 				case 'StatementAsModifiedBy':

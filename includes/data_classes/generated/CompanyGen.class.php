@@ -23,6 +23,8 @@
 	 * @property Industry[] $_IndustryArray the value for the private _objIndustryArray (Read-Only) if set due to an ExpandAsArray on the company_industry_assn association table
 	 * @property User $_User the value for the private _objUser (Read-Only) if set due to an expansion on the company_user_assn association table
 	 * @property User[] $_UserArray the value for the private _objUserArray (Read-Only) if set due to an ExpandAsArray on the company_user_assn association table
+	 * @property BusinessChecklist $_BusinessChecklist the value for the private _objBusinessChecklist (Read-Only) if set due to an expansion on the business_checklist.company_id reverse relationship
+	 * @property BusinessChecklist[] $_BusinessChecklistArray the value for the private _objBusinessChecklistArray (Read-Only) if set due to an ExpandAsArray on the business_checklist.company_id reverse relationship
 	 * @property KingdomBusinessAssessment $_KingdomBusinessAssessment the value for the private _objKingdomBusinessAssessment (Read-Only) if set due to an expansion on the kingdom_business_assessment.company_id reverse relationship
 	 * @property KingdomBusinessAssessment[] $_KingdomBusinessAssessmentArray the value for the private _objKingdomBusinessAssessmentArray (Read-Only) if set due to an ExpandAsArray on the kingdom_business_assessment.company_id reverse relationship
 	 * @property LemonAssessment $_LemonAssessment the value for the private _objLemonAssessment (Read-Only) if set due to an expansion on the lemon_assessment.company_id reverse relationship
@@ -94,6 +96,22 @@
 		 * @var User[] _objUserArray;
 		 */
 		private $_objUserArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single BusinessChecklist object
+		 * (of type BusinessChecklist), if this Company object was restored with
+		 * an expansion on the business_checklist association table.
+		 * @var BusinessChecklist _objBusinessChecklist;
+		 */
+		private $_objBusinessChecklist;
+
+		/**
+		 * Private member variable that stores a reference to an array of BusinessChecklist objects
+		 * (of type BusinessChecklist[]), if this Company object was restored with
+		 * an ExpandAsArray on the business_checklist association table.
+		 * @var BusinessChecklist[] _objBusinessChecklistArray;
+		 */
+		private $_objBusinessChecklistArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single KingdomBusinessAssessment object
@@ -570,6 +588,20 @@
 				}
 
 
+				$strAlias = $strAliasPrefix . 'businesschecklist__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objBusinessChecklistArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objBusinessChecklistArray[$intPreviousChildItemCount - 1];
+						$objChildItem = BusinessChecklist::InstantiateDbRow($objDbRow, $strAliasPrefix . 'businesschecklist__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objBusinessChecklistArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objBusinessChecklistArray[] = BusinessChecklist::InstantiateDbRow($objDbRow, $strAliasPrefix . 'businesschecklist__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'kingdombusinessassessment__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -684,6 +716,16 @@
 					$objToReturn->_objUser = User::InstantiateDbRow($objDbRow, $strAliasPrefix . 'user__user_id__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
+
+			// Check for BusinessChecklist Virtual Binding
+			$strAlias = $strAliasPrefix . 'businesschecklist__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objBusinessChecklistArray[] = BusinessChecklist::InstantiateDbRow($objDbRow, $strAliasPrefix . 'businesschecklist__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objBusinessChecklist = BusinessChecklist::InstantiateDbRow($objDbRow, $strAliasPrefix . 'businesschecklist__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
 
 			// Check for KingdomBusinessAssessment Virtual Binding
 			$strAlias = $strAliasPrefix . 'kingdombusinessassessment__id';
@@ -1182,6 +1224,18 @@
 					// @return User[]
 					return (array) $this->_objUserArray;
 
+				case '_BusinessChecklist':
+					// Gets the value for the private _objBusinessChecklist (Read-Only)
+					// if set due to an expansion on the business_checklist.company_id reverse relationship
+					// @return BusinessChecklist
+					return $this->_objBusinessChecklist;
+
+				case '_BusinessChecklistArray':
+					// Gets the value for the private _objBusinessChecklistArray (Read-Only)
+					// if set due to an ExpandAsArray on the business_checklist.company_id reverse relationship
+					// @return BusinessChecklist[]
+					return (array) $this->_objBusinessChecklistArray;
+
 				case '_KingdomBusinessAssessment':
 					// Gets the value for the private _objKingdomBusinessAssessment (Read-Only)
 					// if set due to an expansion on the kingdom_business_assessment.company_id reverse relationship
@@ -1340,6 +1394,188 @@
 		///////////////////////////////
 		// ASSOCIATED OBJECTS' METHODS
 		///////////////////////////////
+
+			
+		
+		// Related Objects' Methods for BusinessChecklist
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated BusinessChecklists as an array of BusinessChecklist objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return BusinessChecklist[]
+		*/ 
+		public function GetBusinessChecklistArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return BusinessChecklist::LoadArrayByCompanyId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated BusinessChecklists
+		 * @return int
+		*/ 
+		public function CountBusinessChecklists() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return BusinessChecklist::CountByCompanyId($this->intId);
+		}
+
+		/**
+		 * Associates a BusinessChecklist
+		 * @param BusinessChecklist $objBusinessChecklist
+		 * @return void
+		*/ 
+		public function AssociateBusinessChecklist(BusinessChecklist $objBusinessChecklist) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateBusinessChecklist on this unsaved Company.');
+			if ((is_null($objBusinessChecklist->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateBusinessChecklist on this Company with an unsaved BusinessChecklist.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Company::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`business_checklist`
+				SET
+					`company_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objBusinessChecklist->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objBusinessChecklist->CompanyId = $this->intId;
+				$objBusinessChecklist->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a BusinessChecklist
+		 * @param BusinessChecklist $objBusinessChecklist
+		 * @return void
+		*/ 
+		public function UnassociateBusinessChecklist(BusinessChecklist $objBusinessChecklist) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklist on this unsaved Company.');
+			if ((is_null($objBusinessChecklist->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklist on this Company with an unsaved BusinessChecklist.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Company::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`business_checklist`
+				SET
+					`company_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objBusinessChecklist->Id) . ' AND
+					`company_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objBusinessChecklist->CompanyId = null;
+				$objBusinessChecklist->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all BusinessChecklists
+		 * @return void
+		*/ 
+		public function UnassociateAllBusinessChecklists() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklist on this unsaved Company.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Company::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (BusinessChecklist::LoadArrayByCompanyId($this->intId) as $objBusinessChecklist) {
+					$objBusinessChecklist->CompanyId = null;
+					$objBusinessChecklist->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`business_checklist`
+				SET
+					`company_id` = null
+				WHERE
+					`company_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated BusinessChecklist
+		 * @param BusinessChecklist $objBusinessChecklist
+		 * @return void
+		*/ 
+		public function DeleteAssociatedBusinessChecklist(BusinessChecklist $objBusinessChecklist) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklist on this unsaved Company.');
+			if ((is_null($objBusinessChecklist->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklist on this Company with an unsaved BusinessChecklist.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Company::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`business_checklist`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objBusinessChecklist->Id) . ' AND
+					`company_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objBusinessChecklist->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated BusinessChecklists
+		 * @return void
+		*/ 
+		public function DeleteAllBusinessChecklists() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateBusinessChecklist on this unsaved Company.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Company::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (BusinessChecklist::LoadArrayByCompanyId($this->intId) as $objBusinessChecklist) {
+					$objBusinessChecklist->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`business_checklist`
+				WHERE
+					`company_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
 
 			
 		
@@ -2585,6 +2821,7 @@
 	 * @property-read QQNodeAddress $Address
 	 * @property-read QQNodeCompanyIndustry $Industry
 	 * @property-read QQNodeCompanyUser $User
+	 * @property-read QQReverseReferenceNodeBusinessChecklist $BusinessChecklist
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
 	 * @property-read QQReverseReferenceNodeScorecard $Scorecard
@@ -2608,6 +2845,8 @@
 					return new QQNodeCompanyIndustry($this);
 				case 'User':
 					return new QQNodeCompanyUser($this);
+				case 'BusinessChecklist':
+					return new QQReverseReferenceNodeBusinessChecklist($this, 'businesschecklist', 'reverse_reference', 'company_id');
 				case 'KingdomBusinessAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'company_id');
 				case 'LemonAssessment':
@@ -2637,6 +2876,7 @@
 	 * @property-read QQNodeAddress $Address
 	 * @property-read QQNodeCompanyIndustry $Industry
 	 * @property-read QQNodeCompanyUser $User
+	 * @property-read QQReverseReferenceNodeBusinessChecklist $BusinessChecklist
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
 	 * @property-read QQReverseReferenceNodeScorecard $Scorecard
@@ -2661,6 +2901,8 @@
 					return new QQNodeCompanyIndustry($this);
 				case 'User':
 					return new QQNodeCompanyUser($this);
+				case 'BusinessChecklist':
+					return new QQReverseReferenceNodeBusinessChecklist($this, 'businesschecklist', 'reverse_reference', 'company_id');
 				case 'KingdomBusinessAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'company_id');
 				case 'LemonAssessment':
