@@ -133,6 +133,12 @@
 			return new QQNodeLemonAssessment('lemon_assessment', null, null);
 		}
 		/**
+		 * @return QQNodeLemonAssessmentFrenchQuestions
+		 */
+		static public function LemonAssessmentFrenchQuestions() {
+			return new QQNodeLemonAssessmentFrenchQuestions('lemon_assessment_french_questions', null, null);
+		}
+		/**
 		 * @return QQNodeLemonAssessmentQuestions
 		 */
 		static public function LemonAssessmentQuestions() {
