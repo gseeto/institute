@@ -153,6 +153,13 @@
 		QApplicationBase::$ClassFile['lemonassessmentmetacontrol'] = __DATA_META_CONTROLS__ . '/LemonAssessmentMetaControl.class.php';
 		QApplicationBase::$ClassFile['lemonassessmentdatagrid'] = __DATA_META_CONTROLS__ . '/LemonAssessmentDataGrid.class.php';
 
+	// ClassPaths for the LemonAssessmentFrenchQuestions class
+		QApplicationBase::$ClassFile['lemonassessmentfrenchquestions'] = __DATA_CLASSES__ . '/LemonAssessmentFrenchQuestions.class.php';
+		QApplicationBase::$ClassFile['qqnodelemonassessmentfrenchquestions'] = __DATA_CLASSES__ . '/LemonAssessmentFrenchQuestions.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodelemonassessmentfrenchquestions'] = __DATA_CLASSES__ . '/LemonAssessmentFrenchQuestions.class.php';
+		QApplicationBase::$ClassFile['lemonassessmentfrenchquestionsmetacontrol'] = __DATA_META_CONTROLS__ . '/LemonAssessmentFrenchQuestionsMetaControl.class.php';
+		QApplicationBase::$ClassFile['lemonassessmentfrenchquestionsdatagrid'] = __DATA_META_CONTROLS__ . '/LemonAssessmentFrenchQuestionsDataGrid.class.php';
+
 	// ClassPaths for the LemonAssessmentQuestions class
 		QApplicationBase::$ClassFile['lemonassessmentquestions'] = __DATA_CLASSES__ . '/LemonAssessmentQuestions.class.php';
 		QApplicationBase::$ClassFile['qqnodelemonassessmentquestions'] = __DATA_CLASSES__ . '/LemonAssessmentQuestions.class.php';
