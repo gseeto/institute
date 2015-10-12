@@ -11,7 +11,7 @@
 </div>
 
 <div class="externSection">
-	<h3>New User</h3>
+	<h3>nouvel utilisateur</h3>
 	<p>Si vous êtes un nouvel utilisateur, s'il vous plaît nous fournir des informations afin que nous puissions créer votre compte avant de commencer l'évaluation.</p>
 	<p>NOTE: L'utilisateur et mot de passe que vous spécifiez peut être utilisé à l'avenir pour accéder et revoir vos résultats de l'évaluation au <a href='../../index.php'>The Institute Portal</a></p> 
 	<?php $this->txtFirstName->RenderWithName(); ?>

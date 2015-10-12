@@ -16,7 +16,7 @@ class LemonGroupLoginForm extends InstituteForm {
 		$this->txtKeyCode->Width = 200;
 		
 		$this->btnSubmit = new QButton($this);
-		$this->btnSubmit->Text = "Submit";
+		$this->btnSubmit->Text = "soumettre";
 		$this->btnSubmit->CssClass = "externButton";
 		$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 		

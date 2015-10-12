@@ -59,12 +59,12 @@ class LemonGroupQuestionsForm extends InstituteForm {
         $objStyle->BackColor = '#0098c3'; 
         
         $this->btnSubmit = new QButton($this);
-        $this->btnSubmit->Text = 'Submit';
+        $this->btnSubmit->Text = 'soumettre';
 	 	$this->btnSubmit->CssClass = 'externButton';
 	 	$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 
 	 	$this->btnCancel = new QButton($this);
-        $this->btnCancel->Text = 'Cancel';
+        $this->btnCancel->Text = 'annuler';
 	 	$this->btnCancel->CssClass = 'externButton';
 	 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));	
 	}
