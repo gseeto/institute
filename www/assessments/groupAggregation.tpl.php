@@ -22,4 +22,8 @@
 
 <h2>Leadership Readiness Assessments</h2>
 <?php $this->dtgGroupLRAAssessments->Render(); ?>
+
+<h2>Post Venture Assessments</h2>
+<?php $this->dtgPostVentureAssessments->Render(); ?>
+
 <?php require(__INCLUDES__ . '/footer.inc.php'); ?>

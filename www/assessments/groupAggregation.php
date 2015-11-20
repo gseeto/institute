@@ -11,6 +11,7 @@ class GroupAggregationForm extends InstituteForm {
 	protected $dtgGroupIntegrationAssessments;
 	protected $dtgGroupKingdomAssessments;
 	protected $dtgGroupLRAAssessments;
+	protected $dtgPostVentureAssessments;
 	protected $btnViewGlobalLemonResults;
 	protected $btnAggregateGroups;
 	protected $selectedLemonGroups;
@@ -222,7 +223,39 @@ class GroupAggregationForm extends InstituteForm {
         $objStyle = $this->dtgGroupKingdomAssessments->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
         $objStyle->BackColor = '#0098c3'; 
+        /*************************************************************************/	
         
+        $this->dtgPostVentureAssessments = new GroupAssessmentListDataGrid($this);
+        $this->dtgPostVentureAssessments->Paginator = new QPaginator($this->dtgPostVentureAssessments);
+        $this->dtgPostVentureAssessments->AddColumn(new QDataGridColumn('Key Code', '<?= $_ITEM->KeyCode ?>', 'HtmlEntities=false', 'Width=200px' ));
+        $this->dtgPostVentureAssessments->AddColumn(new QDataGridColumn('Description', '<?= $_ITEM->Description ?>', 'HtmlEntities=false', 'Width=300px' ));
+        $this->dtgPostVentureAssessments->AddColumn(new QDataGridColumn('Total Keys', '<?= $_ITEM->TotalKeys ?>', 'HtmlEntities=false', 'Width=50px' ));
+        $this->dtgPostVentureAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_ITEM->KeysLeft ?>', 'HtmlEntities=false', 'Width=50px' ));   
+        $this->dtgPostVentureAssessments->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__ .InstituteForm::DirAssessments. "postventure/groupAggregationResult.php/". $_ITEM->Id ?>','Result','Results');
+			
+        $this->dtgPostVentureAssessments->CellPadding = 5;
+		$this->dtgPostVentureAssessments->SetDataBinder('dtgPostVentureAssessments_Bind',$this);
+		$this->dtgPostVentureAssessments->NoDataHtml = 'No Post Venture Assessments have been assigned.';
+		$this->dtgPostVentureAssessments->UseAjax = true;
+		
+		$this->dtgPostVentureAssessments->SortColumnIndex = 1;
+		$this->dtgPostVentureAssessments->ItemsPerPage = 20;
+		
+		$this->dtgPostVentureAssessments->GridLines = QGridLines::Both;
+		$objStyle = $this->dtgPostVentureAssessments->RowStyle;
+        $objStyle->BackColor = '#ffffff';
+        $objStyle->FontSize = 12;
+
+        $objStyle = $this->dtgPostVentureAssessments->AlternateRowStyle;
+        $objStyle->BackColor = '#ffffff';
+
+        $objStyle = $this->dtgPostVentureAssessments->HeaderRowStyle;
+        $objStyle->ForeColor = '#ffffff';
+        $objStyle->BackColor = '#0098c3'; 
+        
+        $objStyle = $this->dtgPostVentureAssessments->HeaderLinkStyle;
+        $objStyle->ForeColor = '#ffffff';
+        $objStyle->BackColor = '#0098c3'; 
          /*************************************************************************/	
         
         $this->dtgGroupLRAAssessments = new GroupAssessmentListDataGrid($this);
@@ -374,12 +407,12 @@ class GroupAggregationForm extends InstituteForm {
     
     public function dtgGroupLRAAssessments_Bind() {
 		$objConditions = QQ::All();
-		$objConditions = QQ::AndCondition($objConditions,QQ::Equal( QQN::GroupAssessmentList()->Resource->Name,'Kingdom Business Assessment')); 
+		$objConditions = QQ::AndCondition($objConditions,QQ::Equal( QQN::GroupAssessmentList()->Resource->Name,'Leadership Readiness Assessment')); 
 		$objClauses = array();
 		$filteredGroupArray = array();
 		$groupArray = GroupAssessmentList::QueryArray($objConditions,$objClauses);	
 		if (QApplication::$Login->Role->Name == 'Administrator') {
-			$this->dtgGroupKingdomAssessments->DataSource = $groupArray;
+			$this->dtgGroupLRAAssessments->DataSource = $groupArray;
 		} else {
 			$objUserArray = QApplication::$Login->GetUserArray();
 			foreach ($groupArray as $objGroupAssessment) {
@@ -387,7 +420,7 @@ class GroupAggregationForm extends InstituteForm {
 					$filteredGroupArray[] = $objGroupAssessment;
 				}					
 			}	
-			$this->dtgGroupKingdomAssessments->DataSource = $filteredGroupArray; 
+			$this->dtgGroupLRAAssessments->DataSource = $filteredGroupArray; 
 		}
 	}
 	
@@ -410,6 +443,24 @@ class GroupAggregationForm extends InstituteForm {
 		}
 	}
 		
+	public function dtgPostVentureAssessments_Bind() {
+		$objConditions = QQ::All();
+		$objConditions = QQ::AndCondition($objConditions,QQ::Equal( QQN::GroupAssessmentList()->Resource->Name,'Post Venture Assessment')); 
+		$objClauses = array();
+		$filteredGroupArray = array();
+		$groupArray = GroupAssessmentList::QueryArray($objConditions,$objClauses);	
+		if (QApplication::$Login->Role->Name == 'Administrator') {
+			$this->dtgPostVentureAssessments->DataSource = $groupArray;
+		} else {
+			$objUserArray = QApplication::$Login->GetUserArray();
+			foreach ($groupArray as $objGroupAssessment) {
+				if($objGroupAssessment->IsUserAsAssessmentManagerAssociated($objUserArray[0])){
+					$filteredGroupArray[] = $objGroupAssessment;
+				}					
+			}	
+			$this->dtgPostVentureAssessments->DataSource = $filteredGroupArray; 
+		}
+	}
 	public function RenderAssessmentType($objGroupAssessment) {
 		$intResourceId = $objGroupAssessment->ResourceId;
 			foreach(Resource::LoadAll() as $objResource) {
