@@ -51,8 +51,8 @@ foreach(CategoryType::$NameArray as $key=>$value) {
 		}
 		$count += count($resultArray);
 	}
-	$performanceArray[] = $ptotal/$count;	
-	$importanceArray[] = $itotal/$count;
+	$performanceArray[] = ($count)? ($ptotal/$count) : 0;	
+	$importanceArray[] = ($count)? ($itotal/$count): 0;
 }
 
 // Create the first radar plot		

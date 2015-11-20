@@ -1,5 +1,5 @@
 <?php require('/../..'.__INCLUDES__ . '/header.inc.php'); ?>
-<h2>Pst Venture Group Aggregation Results for <?php _p($this->objGroupAssessment->KeyCode)?></h2>
+<h2>Post Venture Group Aggregation Results for <?php _p($this->objGroupAssessment->KeyCode)?></h2>
 <h3>List of Users within this Post Venture Group:</h3>
 <?php $this->dtgUsers->Render(); ?>
 <br>
