@@ -26,10 +26,12 @@ class LemonGlobalForm extends InstituteForm {
 		$countryList = array();
 		$objAssessmentCursor = LemonAssessment::QueryCursor(QQ::All());
  		while ($objLemon = LemonAssessment::InstantiateCursor($objAssessmentCursor)) {
- 			if(array_key_exists($objLemon->User->CountryId, $countryList))
- 				$countryList[$objLemon->User->CountryId] +=1;
- 			else 
- 				$countryList[$objLemon->User->CountryId] = 1;
+ 			if($objLemon->User != null) {
+	 			if(array_key_exists($objLemon->User->CountryId, $countryList))
+	 				$countryList[$objLemon->User->CountryId] +=1;
+	 			else 
+	 				$countryList[$objLemon->User->CountryId] = 1;
+ 			}
  		}
  		arsort($countryList);
  		$i = 1;
