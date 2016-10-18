@@ -91,7 +91,7 @@
         }
 
 
-        function DisplayPieChart(chartData,title,div,size) {
+        function DisplayPieChart(chartData,mytitle,div,size) {
         	var chart;
         	var legend;
 
@@ -103,7 +103,7 @@
             chart.outlineColor = "#FFFFFF";
             chart.outlineAlpha = 0.8;
             chart.outlineThickness = 1;
-            chart.marginTop = 20;
+            chart.marginTop = 10;
             chart.marginLeft = 5;
             //chart.borderAlpha = 0.8;
             //chart.borderColor = "#CCCCCC";
@@ -117,7 +117,7 @@
             chart.addTitle("");
             chart.addTitle("");
             chart.addTitle("");
-            chart.addTitle(title, 20, '#000000', 0, true);
+            chart.addTitle(mytitle, 20, '#000000', 0.8, true);
 
             // WRITE
             chart.write(div);
@@ -142,6 +142,7 @@ This graph should indicate areas where greater integration would be beneficial.<
 <div id="Communitychartdiv" style="width: 400px; height: 400px; float:left;"></div>
 <div id="Creativitychartdiv" style="width: 400px; height: 400px; float:left;"></div>
 <div id="Callingchartdiv" style="width: 400px; height: 400px; float:left;"></div>
+<div style="clear:both;"></div>
 <br>
 <p>This is a visual representation of both the time spent and the level of integration found in each of the 4 C's.
 The size of the pie indicates the time spent in each of the C's. The larger the pie, the more time spent in that C.</p>
