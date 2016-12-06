@@ -53,6 +53,10 @@ function DisplayChart(userData) {
 
 <div class="section">
 <div id="chartdiv" style="width:800px; height:400px; margin: 0 auto; position: relative;"></div>
+<div style="display:none;">
+   <img src='<?php _p(__SUBDIRECTORY__);?>/checklist/i4center/checklistImg.php/<?php _p($this->objChecklist->Id);?>'> 
+</div>
+<?php  $this->btnGeneratePdf->Render(); ?>
 <p>
 Please rate each statement below using the scale from 1 to 7 in the drop-down box to the right of the statement.<br>
 <div style="padding-left:20px; margin-bottom:10px;">

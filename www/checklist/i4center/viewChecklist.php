@@ -1,5 +1,9 @@
 <?php
 require(dirname(__FILE__) . '/../../../includes/prepend.inc.php');
+// Setup Zend Framework load
+set_include_path(get_include_path() . ':' . __INCLUDES__);
+require_once(dirname(__FILE__) .'/../../../includes/Zend/Loader.php');
+Zend_Loader::loadClass('Zend_Pdf');
 
 class ViewChecklistForm extends InstituteForm {
 	protected $arrNavigation;
@@ -39,6 +43,7 @@ class ViewChecklistForm extends InstituteForm {
 	protected $iCounter;
 	protected $iSaveCategory;
 	protected $intQuestionCount;
+	protected $btnGeneratePdf;
 	protected $lblDebug;
 
 	protected function Form_Run() {
@@ -161,6 +166,11 @@ class ViewChecklistForm extends InstituteForm {
 		$intChecklistId = QApplication::PathInfo(0);		
 		$this->objChecklist = BusinessChecklist::Load($intChecklistId);
 		
+		$this->btnGeneratePdf =  new QButton($this);
+	 	$this->btnGeneratePdf->Text = 'Generate PDF of Report';
+	 	$this->btnGeneratePdf->CssClass = 'primary';
+	 	$this->btnGeneratePdf->AddAction(new QClickEvent(), new QAjaxAction('btnGeneratePdf_Click'));
+	 	
 		$this->arrayRating = array();
 		$this->arrayDri = array();
 	 	$this->dtgChecklistQuestionArray = array();
@@ -1145,7 +1155,281 @@ public function displayeleven() {
 		}
 		QApplication::ExecuteJavaScript('DisplayChart('.json_encode($associatedArray).');');	
 	}
-}
+	
+	protected function btnGeneratePdf_Click() { 
+		// Create the PDF Object for the PDF
+		$objChecklistPdf = new Zend_Pdf();		
+		// Create PDF
+		$PageHeight = 750;
+		$objPage1 = $objChecklistPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
+		$objPage2 = $objPage3 = $objPage4 = $objPage5 = $objPage6 = null;
+		$objChecklistPdf->pages[] = $objPage1;
+		$objPage1->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 24);
+		$objPage1->drawText("Checklist Report for ".$this->objChecklist->Company->Name, 50, $PageHeight, 'UTF-8');
+		$lineHeight = 13;
+		$pagecount = 1;
+		$yPos = $PageHeight-$lineHeight - 50;
+		$ZendImage = Zend_Pdf_Image::imageWithPath( __UPLOAD_DIR__.'/Checklist' . $this->objChecklist->Id. '.png');		
+		$objPage1->drawImage($ZendImage, 10, $yPos-400, 600, $yPos);
+		$yPos -= 400;
+		for($i=0; $i< ChecklistCategories::CountAll();$i++) {
+			$categoryTitle = ChecklistCategories::Load($i+1)->Value;
+			switch($pagecount) {
+				case 1:
+					$objPage1->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
+					$objPage1->setFillColor(Zend_Pdf_Color_Html::color('#9e005d'));
+					$objPage1->drawText($categoryTitle , 10, $yPos, 'UTF-8');	
+					$objPage1->setFillColor(Zend_Pdf_Color_Html::color('#000000'));				
+					break;
+				case 2:
+					if(null == $objPage2) {
+						$objPage2 = $objChecklistPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
+						$objChecklistPdf->pages[] = $objPage2;
+						$yPos = $PageHeight-$lineHeight;
+					}					
+					$objPage2->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
+					$objPage2->setFillColor(Zend_Pdf_Color_Html::color('#9e005d'));
+					$objPage2->drawText($categoryTitle , 10, $yPos, 'UTF-8');
+					$objPage2->setFillColor(Zend_Pdf_Color_Html::color('#000000'));
+					break;
+				case 3:
+					if(null == $objPage3) {
+						$objPage3 = $objChecklistPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
+						$objChecklistPdf->pages[] = $objPage3;
+						$yPos = $PageHeight-$lineHeight;
+					}					
+					$objPage3->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
+					$objPage3->setFillColor(Zend_Pdf_Color_Html::color('#9e005d'));
+					$objPage3->drawText($categoryTitle , 10, $yPos, 'UTF-8');
+					$objPage3->setFillColor(Zend_Pdf_Color_Html::color('#000000'));
+					break;
+				case 4:
+					if(null == $objPage4) {
+						$objPage4 = $objChecklistPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
+						$objChecklistPdf->pages[] = $objPage4;
+						$yPos = $PageHeight-$lineHeight;
+					}					
+					$objPage4->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
+					$objPage4->setFillColor(Zend_Pdf_Color_Html::color('#9e005d'));
+					$objPage4->drawText($categoryTitle , 50, $yPos, 'UTF-8');
+					$objPage4->setFillColor(Zend_Pdf_Color_Html::color('#000000'));
+					break;
+				case 5:
+					if(null == $objPage5) {
+						$objPage5 = $objChecklistPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
+						$objChecklistPdf->pages[] = $objPage5;
+						$yPos = $PageHeight-$lineHeight;
+					}					
+					$objPage5->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
+					$objPage5->setFillColor(Zend_Pdf_Color_Html::color('#9e005d'));
+					$objPage5->drawText($categoryTitle , 50, $yPos, 'UTF-8');
+					$objPage5->setFillColor(Zend_Pdf_Color_Html::color('#000000'));
+					break;
+				case 6:
+					if(null == $objPage6) {
+						$objPage6 = $objChecklistPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
+						$objChecklistPdf->pages[] = $objPage6;
+						$yPos = $PageHeight-$lineHeight;
+					}					
+					$objPage6->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
+					$objPage6->setFillColor(Zend_Pdf_Color_Html::color('#9e005d'));
+					$objPage6->drawText($categoryTitle , 50, $yPos, 'UTF-8');
+					$objPage6->setFillColor(Zend_Pdf_Color_Html::color('#000000'));
+					break;
+			}
+			$yPos -= $lineHeight +10;
+			$questionArray = BusinessChecklistQuestions::LoadArrayByCategoryId($i+1);
+			$column1 = 20;
+			$column2 = 450;
+			$column3 = 510;
+			$maxColLength = 74;
+			switch($pagecount) {
+				case 1:
+					$objPage1->drawText("Question", $column1, $yPos, 'UTF-8');
+					$objPage1->drawText("Rating", $column2, $yPos, 'UTF-8');
+					$objPage1->drawText("DRI", $column3, $yPos, 'UTF-8');
+					$objPage1->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 10);
+					break;
+				case 2:
+					$objPage2->drawText("Question", $column1, $yPos, 'UTF-8');
+					$objPage2->drawText("Rating", $column2, $yPos, 'UTF-8');
+					$objPage2->drawText("DRI", $column3, $yPos, 'UTF-8');
+					$objPage2->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 10);
+					break;
+				case 3:
+					$objPage3->drawText("Question", $column1, $yPos, 'UTF-8');
+					$objPage3->drawText("Rating", $column2, $yPos, 'UTF-8');
+					$objPage3->drawText("DRI", $column3, $yPos, 'UTF-8');
+					$objPage3->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 10);
+					break;
+				case 4:
+					$objPage4->drawText("Question", $column1, $yPos, 'UTF-8');
+					$objPage4->drawText("Rating", $column2, $yPos, 'UTF-8');
+					$objPage4->drawText("DRI", $column3, $yPos, 'UTF-8');
+					$objPage4->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 10);
+					break;
+				case 5:
+					$objPage5->drawText("Question", $column1, $yPos, 'UTF-8');
+					$objPage5->drawText("Rating", $column2, $yPos, 'UTF-8');
+					$objPage5->drawText("DRI", $column3, $yPos, 'UTF-8');
+					$objPage5->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 10);
+					break;
+				case 6:
+					$objPage6->drawText("Question", $column1, $yPos, 'UTF-8');
+					$objPage6->drawText("Rating", $column2, $yPos, 'UTF-8');
+					$objPage6->drawText("DRI", $column3, $yPos, 'UTF-8');
+					$objPage6->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 10);
+					break;
+			}			
+			foreach($questionArray as $objQuestion) {
+				$rating = BusinessChecklistResults::GetValueByChecklistIdAndQuestionId($this->objChecklist->Id, $objQuestion->Id);
+				$iUserId = BusinessChecklistResults::GetDriByChecklistIdAndQuestionId($this->objChecklist->Id, $objQuestion->Id);
+	            $objUser = User::Load($iUserId);
+	            $dri = '';
+	            if($objUser) {
+	            	$dri = $objUser->FirstName.' '. $objUser->LastName;
+	            } else {
+	            	$dri = 'Unassigned';
+	            }								
+				$yPos -= $lineHeight;
+				switch($pagecount) {
+				case 1:
+					if(strlen($objQuestion->Text) < $maxColLength) {
+						$objPage1->drawText($objQuestion->Text, $column1, $yPos, 'UTF-8');
+						$objPage1->drawText($rating, $column2+8, $yPos, 'UTF-8');
+						$objPage1->drawText($dri, $column3, $yPos, 'UTF-8');
+					} else {
+						$firstString = $this->explodeByStringLength($objQuestion->Text,$maxColLength);
+						$secondString = substr($objQuestion->Text,strlen($firstString));
+						$objPage1->drawText($firstString, $column1, $yPos, 'UTF-8');
+						$objPage1->drawText($rating, $column2+8, $yPos, 'UTF-8');
+						$objPage1->drawText($dri, $column3, $yPos, 'UTF-8');
+						$yPos -= $lineHeight;
+						$objPage1->drawText($secondString, $column1, $yPos, 'UTF-8');						
+					}
+					break;
+				case 2:
+					if(strlen($objQuestion->Text) < $maxColLength) {
+						$objPage2->drawText($objQuestion->Text, $column1, $yPos, 'UTF-8');
+						$objPage2->drawText($rating, $column2+8, $yPos, 'UTF-8');
+						$objPage2->drawText($dri, $column3, $yPos, 'UTF-8');
+					} else {
+						$firstString = $this->explodeByStringLength($objQuestion->Text,$maxColLength);
+						$secondString = substr($objQuestion->Text,strlen($firstString));
+						$objPage2->drawText($firstString, $column1, $yPos, 'UTF-8');
+						$objPage2->drawText($rating, $column2+8, $yPos, 'UTF-8');
+						$objPage2->drawText($dri, $column3, $yPos, 'UTF-8');
+						$yPos -= $lineHeight;
+						$objPage2->drawText($secondString, $column1, $yPos, 'UTF-8');
+						
+					}
+					break;
+				case 3:
+					if(strlen($objQuestion->Text) < $maxColLength) {
+						$objPage3->drawText($objQuestion->Text, $column1, $yPos, 'UTF-8');
+						$objPage3->drawText($rating, $column2+8, $yPos, 'UTF-8');
+						$objPage3->drawText($dri, $column3, $yPos, 'UTF-8');
+					} else {
+						$firstString = $this->explodeByStringLength($objQuestion->Text,$maxColLength);
+						$secondString = substr($objQuestion->Text,strlen($firstString));
+						$objPage3->drawText($firstString, $column1, $yPos, 'UTF-8');
+						$objPage3->drawText($rating, $column2+8, $yPos, 'UTF-8');
+						$objPage3->drawText($dri, $column3, $yPos, 'UTF-8');
+						$yPos -= $lineHeight;
+						$objPage3->drawText($secondString, $column1, $yPos, 'UTF-8');
+						
+					}
+					break;
+				case 4:
+					if(strlen($objQuestion->Text) < $maxColLength) {
+						$objPage4->drawText($objQuestion->Text, $column1, $yPos, 'UTF-8');
+						$objPage4->drawText($rating, $column2+8, $yPos, 'UTF-8');
+						$objPage4->drawText($dri, $column3, $yPos, 'UTF-8');
+					} else {
+						$firstString = $this->explodeByStringLength($objQuestion->Text,$maxColLength);
+						$secondString = substr($objQuestion->Text,strlen($firstString));
+						$objPage4->drawText($firstString, $column1, $yPos, 'UTF-8');
+						$objPage4->drawText($rating, $column2+8, $yPos, 'UTF-8');
+						$objPage4->drawText($dri, $column3, $yPos, 'UTF-8');
+						$yPos -= $lineHeight;
+						$objPage4->drawText($secondString, $column1, $yPos, 'UTF-8');
+						
+					}
+					break;
+				case 5:
+					if(strlen($objQuestion->Text) < $maxColLength) {
+						$objPage5->drawText($objQuestion->Text, $column1, $yPos, 'UTF-8');
+						$objPage5->drawText($rating, $column2+8, $yPos, 'UTF-8');
+						$objPage5->drawText($dri, $column3, $yPos, 'UTF-8');
+					} else {
+						$firstString = $this->explodeByStringLength($objQuestion->Text,$maxColLength);
+						$secondString = substr($objQuestion->Text,strlen($firstString));
+						$objPage5->drawText($firstString, $column1, $yPos, 'UTF-8');
+						$objPage5->drawText($rating, $column2+8, $yPos, 'UTF-8');
+						$objPage5->drawText($dri, $column3, $yPos, 'UTF-8');
+						$yPos -= $lineHeight;
+						$objPage5->drawText($secondString, $column1, $yPos, 'UTF-8');
+						
+					}
+					break;
+				case 6:
+					if(strlen($objQuestion->Text) < $maxColLength) {
+						$objPage6->drawText($objQuestion->Text, $column1, $yPos, 'UTF-8');
+						$objPage6->drawText($rating, $column2+8, $yPos, 'UTF-8');
+						$objPage6->drawText($dri, $column3, $yPos, 'UTF-8');
+					} else {
+						$firstString = $this->explodeByStringLength($objQuestion->Text,$maxColLength);
+						$secondString = substr($objQuestion->Text,strlen($firstString));
+						$objPage6->drawText($firstString, $column1, $yPos, 'UTF-8');
+						$objPage6->drawText($rating, $column2+8, $yPos, 'UTF-8');
+						$objPage6->drawText($dri, $column3, $yPos, 'UTF-8');
+						$yPos -= $lineHeight;
+						$objPage6->drawText($secondString, $column1, $yPos, 'UTF-8');
+						
+					}
+					break;
+				}
+			}
+			$yPos -= 30;
+			// Check and increment page 
+			if ($i == 1) $pagecount = 2;
+			if ($i == 4) $pagecount = 3;
+			if ($i == 7) $pagecount = 4;
+			if ($i == 11) $pagecount = 5;
+			if ($i == 16) $pagecount = 6;
+			
+		}
+		$pdfFile = '/Checklist' . $this->objChecklist->Id .rand(0,50). '.pdf';
+		$objChecklistPdf->save(__UPLOAD_DIR__ . $pdfFile);
+		chmod(__UPLOAD_DIR__ . $pdfFile, 0777);
+		QApplication::Redirect(__SUBDIRECTORY__.'/assets/uploads'.$pdfFile);
+	}
+	
+	protected function explodeByStringLength($string,$maxLineLength){
+	    if(!empty($string)) {
+	        $arrayWords = explode(" ",$string);	
+	        if(count($arrayWords) > 1){
+	            $currentLength = 0;	
+	            foreach($arrayWords as $word){
+	                $wordLength = strlen($word);
+	                if( ( $currentLength + $wordLength ) <= $maxLineLength ){
+	                    $currentLength += $wordLength;
+	                    $arrayOutput[] = $word;
+	                } else {
+	                    break;
+	                }
+	            }	
+	            return implode(" ",$arrayOutput);
+	        }
+	        else
+	        {
+	            return $string;
+	        }       
+	    }
+	    else return $string;
+	}
+	
+	}
 
 ViewChecklistForm::Run('ViewChecklistForm');
 
