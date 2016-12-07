@@ -94,7 +94,7 @@
                 $objExc->IncrementOffset();
                 throw $objExc;
             }
-            
+            ini_set('memory_limit', '1024M'); 
             $this->lblErrorMessage = new QLabel($this);
             $this->lblErrorMessage->CssClass = 'errorMsg';
             $this->lblDBErrorMessage = new QLabel($this);
