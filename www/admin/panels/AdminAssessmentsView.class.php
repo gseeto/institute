@@ -39,7 +39,6 @@
 		public $strGroupLemon;
 		public $strCompanyLemon;
 		
-		public $dtgGroupAssessments;
 		public $btnAddGroupAssessment;
 		public $pnlAddGroupAssessment;
 		public $strKeycode;
@@ -540,69 +539,6 @@
 	        $this->pnlAddUpwardAssessment->Visible = false;
 	        $this->pnlAddUpwardAssessment->AutoRenderChildren = true;
 	        /***************************************************************/
-	        
-	        $this->strKeycode = new QTextBox($this);
-			$this->strKeycode->Name = 'KeyCode';
-		//	$this->strKeycode->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgGroupAssessments_Refresh'));
-		//	$this->strKeycode->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgGroupAssessments_Refresh'));
-			$this->strKeycode->AddAction(new QEnterKeyEvent(), new QTerminateAction());
-			$this->strKeycode->Focus();
-			
-			$this->lstSearchAssessmentType = new QListBox($this);
-			foreach(Resource::LoadAll() as $objResource) {
-				if($objResource->Name != 'Scorecard') {
-						$this->lstSearchAssessmentType->AddItem($objResource->Name, $objResource->Id);
-				}
-			}
-			//$this->lstSearchAssessmentType->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgGroupAssessments_Refresh'));	
-			//$this->lstSearchAssessmentType->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgGroupAssessments_Refresh'));		
-	        $this->lstSearchAssessmentType->AddAction(new QEnterKeyEvent(), new QTerminateAction());
-	        
-			$this->btnSearch = new QButton($this);
-			$this->btnSearch->Text = 'Search';
-			$this->btnSearch->AddAction(new QClickEvent(), new QAjaxControlAction($this,'dtgGroupAssessments_Refresh'));
-	        $this->btnSearch->PrimaryButton = true;
-			
-	        $this->dtgGroupAssessments = new GroupAssessmentListDataGrid($this);
-            $this->dtgGroupAssessments->Paginator = new QPaginator($this->dtgGroupAssessments);
-            $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Key Code', '<?= $_CONTROL->ParentControl->RenderKeyCode($_ITEM) ?>', 'HtmlEntities=false', 'Width=350px',
-            	array('OrderByClause' => QQ::OrderBy(QQN::GroupAssessmentList()->KeyCode), 'ReverseOrderByClause' => QQ::OrderBy(QQN::GroupAssessmentList()->KeyCode, false))));
-            $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Description', '<?= $_CONTROL->ParentControl->RenderDescription($_ITEM) ?>', 'HtmlEntities=false', 'Width=350px' ));
-            $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Total Keys', '<?= $_CONTROL->ParentControl->RenderTotalKeys($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));
-            $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_CONTROL->ParentControl->RenderKeysLeft($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));   
-            $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Assessment Type', '<?= $_CONTROL->ParentControl->RenderAssessmentType($_ITEM) ?>', 'HtmlEntities=false' )); 
-            $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Assessment Manager', '<?= $_CONTROL->ParentControl->RenderAssessmentManager($_ITEM) ?>', 'HtmlEntities=false' )); 
-            $this->dtgGroupAssessments->CellPadding = 5;
-			$this->dtgGroupAssessments->SetDataBinder('dtgGroupAssessments_Bind',$this);
-			$this->dtgGroupAssessments->NoDataHtml = 'No Group Assessments have been assigned.';
-			$this->dtgGroupAssessments->UseAjax = true;
-			
-			$this->dtgGroupAssessments->SortColumnIndex = 1;
-			$this->dtgGroupAssessments->ItemsPerPage = 20;
-			
-			$objStyle = $this->dtgGroupAssessments->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 12;
-	
-	        $objStyle = $this->dtgGroupAssessments->AlternateRowStyle;
-	        $objStyle->BackColor = '#CCCCCC';
-	
-	        $objStyle = $this->dtgGroupAssessments->HeaderRowStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        
-	        $objStyle = $this->dtgGroupAssessments->HeaderLinkStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        
-	        $this->btnAddGroupAssessment = new QButton($this);
-	        $this->btnAddGroupAssessment->Text = 'Add Group Assessment';
-	        $this->btnAddGroupAssessment->CssClass = 'primary';
-	        $this->btnAddGroupAssessment->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnAddGroupAssessment_Click'));
-	        $this->pnlAddGroupAssessment = new QPanel($this);
-	        $this->pnlAddGroupAssessment->Position = QPosition::Relative;
-	        $this->pnlAddGroupAssessment->Visible = false;
-	        $this->pnlAddGroupAssessment->AutoRenderChildren = true;
         }
         
         public function btnUploadOnlineAssessmentDB_Click() {
@@ -930,338 +866,6 @@
 			    $objResults->Save(); 
 		    }      		
         }
-        
-    public function RenderKeyCode($objGroupAssessment) {
-        $txtKeyCode = $this->objForm->GetControl('txtKeyCode' . $objGroupAssessment->Id);     
-        if (!$txtKeyCode) {
-        	$txtKeyCode = new QTextBox($this->dtgGroupAssessments,'txtKeyCode' . $objGroupAssessment->Id);
-			$txtKeyCode->Name = 'Key Code';
-            $txtKeyCode->Text = $objGroupAssessment->KeyCode;
-            $txtKeyCode->ActionParameter = $objGroupAssessment->Id;
-            $txtKeyCode->Width = 100;
-            $txtKeyCode->Display = false;
-           
-        }
-        $btnSave = $this->objForm->GetControl('btnKeyCodeSave' . $objGroupAssessment->Id); 
-        if(!$btnSave) {
-	        $btnSave = new QButton($this->dtgGroupAssessments,'btnKeyCodeSave' . $objGroupAssessment->Id);
-	        $btnSave->Text = 'Save';
-	        $btnSave->ActionParameter = $objGroupAssessment->Id;
-	        $btnSave->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnSaveKeyCode_Click'));
-	        $btnSave->PrimaryButton = true;
-	        $btnSave->CausesValidation = true;
-	        //$btnSave->CssClass = 'ui-button';
-	        $btnSave->Display = false;
-        }
-        
-        $btnCancel = $this->objForm->GetControl('btnKeyCodeCancel' . $objGroupAssessment->Id); 
-        if(!$btnCancel) {
-	        $btnCancel = new QButton($this->dtgGroupAssessments,'btnKeyCodeCancel' . $objGroupAssessment->Id);
-	        $btnCancel->Text = 'Cancel';
-	        $btnCancel->ActionParameter = $objGroupAssessment->Id;
-	     	$btnCancel->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnCancelKeyCode_Click'));        
-	       	$btnCancel->CausesValidation = false;
-	       	//$btnCancel->CssClass = 'ui-button';
-	       	$btnCancel->Display = false;
-        }
-        $lblKeyCode = $this->objForm->GetControl('lblKeyCode' . $objGroupAssessment->Id);     
-        if (!$lblKeyCode) {
-        	$lblKeyCode = new QLabel($this->dtgGroupAssessments,'lblKeyCode' . $objGroupAssessment->Id);
-        	$lblKeyCode->Text = $objGroupAssessment->KeyCode;
-        	$lblKeyCode->ActionParameter = $objGroupAssessment->Id;
-        	$lblKeyCode->Cursor = 'pointer';
-        	$lblKeyCode->AddAction(new QClickEvent(), new QAjaxControlAction($this,'lblKeyCode_Clicked'));
-        }
-        return ($txtKeyCode->Render(false) . $btnSave->Render(false). $btnCancel->Render(false) . $lblKeyCode->Render(false));
-	}
-	
-	public function lblKeyCode_Clicked($strFormId, $strControlId, $strParameter) {
-        $lblKeyCode = $this->objForm->GetControl('lblKeyCode'.$strParameter); 
-        $lblKeyCode->Display = false;
-		
-        $txtKeyCode = $this->objForm->GetControl('txtKeyCode' . $strParameter); 
-        $txtKeyCode->Display = true;
-        
-        $btnSave = $this->objForm->GetControl('btnKeyCodeSave' . $strParameter); 
-        $btnSave->Display = true;
-        
-        $btnCancel = $this->objForm->GetControl('btnKeyCodeCancel' . $strParameter); 
-        $btnCancel->Display = true;
-	}
-	
-	public function btnCancelKeyCode_Click($strFormId, $strControlId, $strParameter) {
-        $lblKeyCode = $this->objForm->GetControl('lblKeyCode' . $strParameter); 
-        $lblKeyCode->Display = true;
-		
-        $txtKeyCode = $this->objForm->GetControl('txtKeyCode' . $strParameter); 
-        $txtKeyCode->Display = false;
-        $txtKeyCode->Text = $lblKeyCode->Text;
-        
-        $btnSave = $this->objForm->GetControl('btnKeyCodeSave' . $strParameter); 
-        $btnSave->Display = false;
-        
-        $btnCancel = $this->objForm->GetControl('btnKeyCodeCancel' . $strParameter); 
-        $btnCancel->Display = false;
-	}
-	
-    public function btnSaveKeyCode_Click($strFormId, $strControlId, $strParameter) {
-        $objGroupAssessment = GroupAssessmentList::Load($strParameter);
-        $txtKeyCode = $this->objForm->GetControl('txtKeyCode' . $strParameter);
-        $objGroupAssessment->KeyCode = $txtKeyCode->Text;
-        $objGroupAssessment->Save();
-        $txtKeyCode->Display = false;
-        
-        $btnSave = $this->objForm->GetControl('btnKeyCodeSave' . $strParameter); 
-        $btnSave->Display = false;
-        $btnCancel = $this->objForm->GetControl('btnKeyCodeCancel' . $strParameter); 
-        $btnCancel->Display = false;
-        
-        $lblAction = $this->objForm->GetControl('lblKeyCode' .  $strParameter); 
-        $lblAction->Text = $txtKeyCode->Text;
-        $lblAction->Display = true;
-	}
-  
-    public function RenderDescription($objGroupAssessment) {
-        $txtDescription = $this->objForm->GetControl('txtDescription' . $objGroupAssessment->Id);     
-        if (!$txtDescription) {
-        	$txtDescription = new QTextBox($this->dtgGroupAssessments,'txtDescription' . $objGroupAssessment->Id);
-			$txtDescription->Name = 'Description';
-            $txtDescription->Text = $objGroupAssessment->Description;
-            $txtDescription->ActionParameter = $objGroupAssessment->Id;
-            $txtDescription->Width = 200;
-            $txtDescription->Display = false;
-        }
- 
-        $btnSave = $this->objForm->GetControl('btnDescriptionSave' . $objGroupAssessment->Id); 
-        if(!$btnSave) {
-	        $btnSave = new QButton($this->dtgGroupAssessments,'btnDescriptionSave' . $objGroupAssessment->Id);
-	        $btnSave->Text = 'Save';
-	        $btnSave->ActionParameter = $objGroupAssessment->Id;
-	        $btnSave->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnSaveDescription_Click'));
-	        $btnSave->PrimaryButton = true;
-	        $btnSave->CausesValidation = true;
-	        //$btnSave->CssClass = 'ui-button';
-	        $btnSave->Display = false;
-        }
-        
-        $btnCancel = $this->objForm->GetControl('btnDescriptionCancel' . $objGroupAssessment->Id); 
-        if(!$btnCancel) {
-	        $btnCancel = new QButton($this->dtgGroupAssessments,'btnDescriptionCancel' . $objGroupAssessment->Id);
-	        $btnCancel->Text = 'Cancel';
-	        $btnCancel->ActionParameter = $objGroupAssessment->Id;
-	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelDescription_Click(this)'));        
-	       	$btnCancel->CausesValidation = false;
-	       	//$btnCancel->CssClass = 'ui-button';
-	       	$btnCancel->Display = false;
-        }
-
-        $lblDescription = $this->objForm->GetControl('lblDescription' . $objGroupAssessment->Id);     
-        if (!$lblDescription) {
-        	$lblDescription = new QLabel($this->dtgGroupAssessments,'lblDescription' . $objGroupAssessment->Id);
-        	$lblDescription->Text = (strlen($objGroupAssessment->Description) != 0)? $objGroupAssessment->Description : 'Enter a Description';
-        	$lblDescription->ActionParameter = $objGroupAssessment->Id;
-        	$lblDescription->Cursor = 'pointer';
-        	$lblDescription->AddAction(new QClickEvent(), new QJavaScriptAction('lblDescription_Clicked(this)'));
-        }
-        return ($txtDescription->Render(false) . $btnSave->Render(false). $btnCancel->Render(false). $lblDescription->Render(false));
-	}
-    public function btnSaveDescription_Click($strFormId, $strControlId, $strParameter) {
-		$GroupAssessmentId = $strParameter;	
-        $objGroupAssessment = GroupAssessmentList::Load($strParameter);
-        $txtDescription = $this->objForm->GetControl('txtDescription' . $strParameter);
-        $objGroupAssessment->Description = $txtDescription->Text;
-        $objGroupAssessment->Save();
-        $txtDescription->Display = false;
-        
-        $btnSave = $this->objForm->GetControl('btnDescriptionSave' . $strParameter); 
-        $btnSave->Display = false;
-        $btnCancel = $this->objForm->GetControl('btnDescriptionCancel' . $strParameter); 
-        $btnCancel->Display = false;
-
-        $lblAction = $this->objForm->GetControl('lblDescription' .  $strParameter); 
-        $lblAction->Text = $txtDescription->Text;
-        $lblAction->Display = true;
-	}
-	
-     public function RenderTotalKeys($objGroupAssessment) {
-        $txtTotalKeys = $this->objForm->GetControl('txtTotalKeys' . $objGroupAssessment->Id);     
-        if (!$txtTotalKeys) {
-        	$txtTotalKeys = new QIntegerTextBox($this->dtgGroupAssessments,'txtTotalKeys' . $objGroupAssessment->Id);
-			$txtTotalKeys->Name = 'Total Keys';
-            $txtTotalKeys->Text = $objGroupAssessment->TotalKeys;
-            $txtTotalKeys->ActionParameter = $objGroupAssessment->Id;
-            $txtTotalKeys->Width = 50;
-            $txtTotalKeys->Display = false;
-        }
- 
-        $btnSave = $this->objForm->GetControl('btnTotalKeysSave' . $objGroupAssessment->Id); 
-        if(!$btnSave) {
-	        $btnSave = new QButton($this->dtgGroupAssessments,'btnTotalKeysSave' . $objGroupAssessment->Id);
-	        $btnSave->Text = 'Save';
-	        $btnSave->ActionParameter = $objGroupAssessment->Id;
-	        $btnSave->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnSaveTotalKeys_Click'));
-	        $btnSave->PrimaryButton = true;
-	        $btnSave->CausesValidation = true;
-	        //$btnSave->CssClass = 'ui-button';
-	        $btnSave->Display = false;
-        }
-        
-        $btnCancel = $this->objForm->GetControl('btnTotalKeysCancel' . $objGroupAssessment->Id); 
-        if(!$btnCancel) {
-	        $btnCancel = new QButton($this->dtgGroupAssessments,'btnTotalKeysCancel' . $objGroupAssessment->Id);
-	        $btnCancel->Text = 'Cancel';
-	        $btnCancel->ActionParameter = $objGroupAssessment->Id;
-	     	$btnCancel->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnCancelTotalKeys_Click'));        
-	       	$btnCancel->CausesValidation = false;
-	       	//$btnCancel->CssClass = 'ui-button';
-	       	$btnCancel->Display = false;
-        }
-
-        $lblTtotalKeys = $this->objForm->GetControl('lblTotalKeys' . $objGroupAssessment->Id);     
-        if (!$lblTtotalKeys) {
-        	$lblTtotalKeys = new QLabel($this->dtgGroupAssessments,'lblTotalKeys' . $objGroupAssessment->Id);
-        	$lblTtotalKeys->Text = $objGroupAssessment->TotalKeys;
-        	$lblTtotalKeys->ActionParameter = $objGroupAssessment->Id;
-			$lblTtotalKeys->Cursor = 'pointer';
-        	$lblTtotalKeys->AddAction(new QClickEvent(), new QAjaxControlAction($this,'lblTotalKeys_Clicked'));
-        }
-        return ($txtTotalKeys->Render(false) . $btnSave->Render(false). $btnCancel->Render(false). $lblTtotalKeys->Render(false));
-	}
-	
-    public function lblTotalKeys_Clicked($strFormId, $strControlId, $strParameter) {
-        $lblKeyCode = $this->objForm->GetControl('lblTotalKeys' . $strParameter); 
-        $lblKeyCode->Display = false;
-
-        $txtTotalKeys = $this->objForm->GetControl('txtTotalKeys' . $strParameter); 
-        $txtTotalKeys->Display = true;
-
-        $btnSave = $this->objForm->GetControl('btnTotalKeysSave' . $strParameter); 
-        $btnSave->Display = true;
- 
-        $btnCancel = $this->objForm->GetControl('btnTotalKeysCancel' . $strParameter); 
-        $btnCancel->Display = true;
-	}
-	
-    public function btnCancelTotalKeys_Click($strFormId, $strControlId, $strParameter) {
-        $lblKeyCode = $this->objForm->GetControl('lblTotalKeys' . $strParameter); 
-        $lblKeyCode->Display = true;
-		
-        $txtTotalKeys = $this->objForm->GetControl('txtTotalKeys' . $strParameter); 
-        $txtTotalKeys->Display = false;
-        $txtTotalKeys->Text = $lblKeyCode->Text;
-
-        $btnSave = $this->objForm->GetControl('btnTotalKeysSave' . $strParameter); 
-        $btnSave->Display = false;
-        
-        $btnCancel = $this->objForm->GetControl('btnTotalKeysCancel' . $strParameter); 
-        $btnCancel->Display = false;
-	}
-	
-    public function btnSaveTotalKeys_Click($strFormId, $strControlId, $strParameter) {
-        $objGroupAssessment = GroupAssessmentList::Load($strParameter);
-        $txtTotalKeys = $this->objForm->GetControl('txtTotalKeys' . $strParameter);
-        $objGroupAssessment->TotalKeys = $txtTotalKeys->Text;
-        $objGroupAssessment->Save();
-        $txtTotalKeys->Display = false;
-        
-        $btnSave = $this->objForm->GetControl('btnTotalKeysSave' . $strParameter); 
-        $btnSave->Display = false;
-        $btnCancel = $this->objForm->GetControl('btnTotalKeysCancel' . $strParameter); 
-        $btnCancel->Display = false;
-        
-        $lblAction = $this->objForm->GetControl('lblTotalKeys' .  $strParameter); 
-        $lblAction->Text = $txtTotalKeys->Text;
-        $lblAction->Display = true;
-	}
-	
-    public function RenderKeysLeft($objGroupAssessment) {
-        $txtKeysLeft = $this->objForm->GetControl('txtKeysLeft' . $objGroupAssessment->Id);     
-        if (!$txtKeysLeft) {
-        	$txtKeysLeft = new QIntegerTextBox($this->dtgGroupAssessments,'txtKeysLeft' . $objGroupAssessment->Id);
-			$txtKeysLeft->Name = 'Keys Left';
-            $txtKeysLeft->Text = $objGroupAssessment->KeysLeft;
-            $txtKeysLeft->ActionParameter = $objGroupAssessment->Id;
-            $txtKeysLeft->Width = 50;
-            $txtKeysLeft->Display = false;
-        }
-        $btnSave = $this->objForm->GetControl('btnKeysLeftSave' . $objGroupAssessment->Id); 
-        if(!$btnSave) {
-	        $btnSave = new QButton($this->dtgGroupAssessments,'btnKeysLeftSave' . $objGroupAssessment->Id);
-	        $btnSave->Text = 'Save';
-	        $btnSave->ActionParameter = $objGroupAssessment->Id;
-	        $btnSave->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnSaveKeysLeft_Click'));
-	        $btnSave->PrimaryButton = true;
-	        $btnSave->CausesValidation = true;
-	       // $btnSave->CssClass = 'ui-button';
-	        $btnSave->Display = false;
-        }
-        $btnCancel = $this->objForm->GetControl('btnKeysLeftCancel' . $objGroupAssessment->Id); 
-        if(!$btnCancel) {
-	        $btnCancel = new QButton($this->dtgGroupAssessments,'btnKeysLeftCancel' . $objGroupAssessment->Id);
-	        $btnCancel->Text = 'Cancel';
-	        $btnCancel->ActionParameter = $objGroupAssessment->Id;
-	     	$btnCancel->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnCancelKeysLeft_Click'));        
-	       	$btnCancel->CausesValidation = false;
-	       	//$btnCancel->CssClass = 'ui-button';
-	       	$btnCancel->Display = false;
-        }
-        $lblKeysLeft = $this->objForm->GetControl('lblKeysLeft' . $objGroupAssessment->Id);     
-        if (!$lblKeysLeft) {
-        	$lblKeysLeft = new QLabel($this->dtgGroupAssessments,'lblKeysLeft' . $objGroupAssessment->Id);
-        	$lblKeysLeft->Text = $objGroupAssessment->KeysLeft;
-        	$lblKeysLeft->ActionParameter = $objGroupAssessment->Id;
-			$lblKeysLeft->Cursor = 'pointer';
-        	$lblKeysLeft->AddAction(new QClickEvent(), new QAjaxControlAction($this,'lblKeysLeft_Clicked'));
-        }
-        return ($txtKeysLeft->Render(false) . $btnSave->Render(false). $btnCancel->Render(false). $lblKeysLeft->Render(false));
-	}
-	
-	public function lblKeysLeft_Clicked($strFormId, $strControlId, $strParameter) {
-        $lblKeysLeft = $this->objForm->GetControl('lblKeysLeft' . $strParameter); 
-        $lblKeysLeft->Display = false;
-
-        $txtKeysLeft = $this->objForm->GetControl('txtKeysLeft' . $strParameter); 
-        $txtKeysLeft->Display = true;
-        
-        $btnSave = $this->objForm->GetControl('btnKeysLeftSave' . $strParameter); 
-        $btnSave->Display = true;
-        
-        $btnCancel = $this->objForm->GetControl('btnKeysLeftCancel' . $strParameter); 
-        $btnCancel->Display = true;
-	}
-	
-    public function btnCancelKeysLeft_Click($strFormId, $strControlId, $strParameter) {
-        $lblKeysLeft = $this->objForm->GetControl('lblKeysLeft' . $strParameter); 
-        $lblKeysLeft->Display = true;
-		
-        $txtKeysLeft = $this->objForm->GetControl('txtKeysLeft' . $strParameter); 
-        $txtKeysLeft->Display = false;
-        $txtKeysLeft->Text = $lblKeysLeft->Text;
-
-        $btnSave = $this->objForm->GetControl('btnKeysLeftSave' . $strParameter); 
-        $btnSave->Display = false;
-        
-        $btnCancel = $this->objForm->GetControl('btnKeysLeftCancel' . $strParameter); 
-        $btnCancel->Display = false;
-	}
-	
-    public function btnSaveKeysLeft_Click($strFormId, $strControlId, $strParameter) {
-        $objGroupAssessment = GroupAssessmentList::Load($strParameter);
-        $txtKeysLeft = $this->objForm->GetControl('txtKeysLeft' . $strParameter);
-        $objGroupAssessment->KeysLeft = $txtKeysLeft->Text;
-        $objGroupAssessment->Save();
-        $txtKeysLeft->Display = false;
-
-        $btnSave = $this->objForm->GetControl('btnKeysLeftSave' . $strParameter); 
-        $btnSave->Display = false;
-        $btnCancel = $this->objForm->GetControl('btnKeysLeftCancel' . $strParameter); 
-        $btnCancel->Display = false;
-
-        $lblKeysLeft = $this->objForm->GetControl('lblKeysLeft' .  $strParameter); 
-        $lblKeysLeft->Text = $txtKeysLeft->Text;
-        $lblKeysLeft->Display = true;
-	}
-	
 
     	public function dtgKingdomBizAssessments_Bind() {
 			$this->dtgKingdomBizAssessments->TotalItemCount = KingdomBusinessAssessment::CountAll();
@@ -1357,7 +961,7 @@
 
 			$this->dtgLemonAssessments->DataSource = LemonAssessment::QueryArray($objConditions, $objClauses);
 		}
-		
+/*		
     	public function dtgGroupAssessments_Refresh($strFormId, $strControlId, $strParameter) {
 			$this->dtgGroupAssessments->PageNumber = 1;
 			$this->dtgGroupAssessments->Refresh();
@@ -1382,7 +986,7 @@
 			$groupArray = GroupAssessmentList::QueryArray($objConditions,$objClauses);		
 			$this->dtgGroupAssessments->DataSource = $groupArray; 
 		}
-		
+*/	
 		public function RenderCompany($intCompanyId) {
 			$objCompany = Company::Load($intCompanyId);
 			if (null != $objCompany)
@@ -1524,7 +1128,7 @@
 			}
 			$this->dtgTenPAssessments->Refresh();
 		}
-		
+	/*
 		public function RenderAssessmentType($objGroupAssessment) {
 			$intResourceId = $objGroupAssessment->ResourceId;
 			$strControlId = 'lstAssessmentType' . $objGroupAssessment->Id;
@@ -1588,7 +1192,7 @@
 			}
 			$this->dtgGroupAssessments->Refresh();
 		}
-		
+	*/	
     	public function RenderUserLinkTenF($objAssessment) {
     		$intUserId = $objAssessment->UserId;
     		$objUser = User::Load($intUserId);
@@ -1828,12 +1432,7 @@
 	        $pnlAddGroupView = new AddGroupAssessment($this->pnlAddGroupAssessment,'UpdateGroupAssessmentList',$this);	
 		}
 		
-	    // Method Call back for the  panels 
-	    public function UpdateGroupAssessmentList($blnUpdatesMade) {
-	    	$this->dtgGroupAssessments->PageNumber = 1;
-			$this->dtgGroupAssessments->Refresh();
-	    }
-	    
+
     	// For any JavaScript calls that need to be made whenever this control is rendered or re-rendered
     	// Need to initialize the jquery tab here.
 		public function GetEndScript() {
