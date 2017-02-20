@@ -440,8 +440,9 @@
 	height: 35px;
 	color: #ffffff; 
 	border:none; 
-	width:100px;
+	width:80px;
 	cursor: pointer;
+	font-size: 10px;
 }
 .SideNavButton:hover {
 	background: #FFFFFF; color: #4a3f5d;
@@ -460,7 +461,8 @@
 	height: 35px;
 	color: #ffffff; 
 	border:none; 
-	width:100px;
+	width:80px;
+	font-size: 10px;
 }
 .SideNavButtonSelected:hover {
 	/*background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b73280), color-stop(1, #9e005d) );

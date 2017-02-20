@@ -7,6 +7,8 @@
         public $btnCompany;
         public $btnScorecards;
         public $btnAssessments;
+        public $btnTenAssessments;
+        public $btnLemon;
         public $btnVenture;
         public $btnChecklist;
         public $btnPartnering;
@@ -55,7 +57,19 @@
             $this->btnAssessments->Name = 'Assessments';
             $this->btnAssessments->Text = 'Assessments';
             $this->btnAssessments->CssClass = 'SideNavButton';
-            $this->btnAssessments->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnAssessments_Click'));            
+            $this->btnAssessments->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnAssessments_Click'));  
+
+            $this->btnTenAssessments = new QButton($this);
+            $this->btnTenAssessments->Name = '10-P & 10-F';
+            $this->btnTenAssessments->Text = '10-P & 10-F';
+            $this->btnTenAssessments->CssClass = 'SideNavButton';
+            $this->btnTenAssessments->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnTenAssessments_Click'));  
+            
+            $this->btnLemon = new QButton($this);
+            $this->btnLemon->Name = 'Lemon';
+            $this->btnLemon->Text = 'Lemon';
+            $this->btnLemon->CssClass = 'SideNavButton';
+            $this->btnLemon->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnLemon_Click'));  
             
             $this->btnGroup = new QButton($this);
             $this->btnGroup->Name = 'Group';
@@ -99,6 +113,14 @@
             		new AdminAssessmentsView($pnlMain);
             		$this->btnAssessments->CssClass = 'SideNavButtonSelected';
             		break;
+            	case '10-P & 10-F':
+            		new AdminTenAssessmentsView($pnlMain);
+            		$this->btnTenAssessments->CssClass = 'SideNavButtonSelected';
+            		break;
+            	case 'Lemon':
+            		new AdminLemonView($pnlMain);
+            		$this->btnLemon->CssClass = 'SideNavButtonSelected';
+            		break;
             	case 'group':
             		new AdminGroupView($pnlMain);
             		$this->btnGroup->CssClass = 'SideNavButtonSelected';
@@ -133,6 +155,8 @@
             $this->btnCompany->CssClass = 'SideNavButton';
             $this->btnScorecards->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnTenAssessments->CssClass = 'SideNavButton';
+            $this->btnLemon->CssClass = 'SideNavButton';
             $this->btnGroup->CssClass = 'SideNavButton';
             $this->btnVenture->CssClass = 'SideNavButton';
             $this->btnChecklist->CssClass = 'SideNavButton';
@@ -148,6 +172,8 @@
             $this->btnCompany->CssClass = 'SideNavButtonSelected';
             $this->btnScorecards->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnTenAssessments->CssClass = 'SideNavButton';
+            $this->btnLemon->CssClass = 'SideNavButton';
             $this->btnGroup->CssClass = 'SideNavButton';
             $this->btnVenture->CssClass = 'SideNavButton';
             $this->btnChecklist->CssClass = 'SideNavButton';
@@ -163,6 +189,8 @@
             $this->btnUsers->CssClass = 'SideNavButton';
             $this->btnCompany->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnTenAssessments->CssClass = 'SideNavButton';
+            $this->btnLemon->CssClass = 'SideNavButton';
             $this->btnGroup->CssClass = 'SideNavButton';
             $this->btnVenture->CssClass = 'SideNavButton';
             $this->btnChecklist->CssClass = 'SideNavButton';
@@ -175,6 +203,8 @@
             $pnlMain->RemoveChildControls(true);
             new AdminAssessmentsView($pnlMain);
             $this->btnAssessments->CssClass = 'SideNavButtonSelected';
+            $this->btnTenAssessments->CssClass = 'SideNavButton';
+            $this->btnLemon->CssClass = 'SideNavButton';
             $this->btnGroup->CssClass = 'SideNavButton';
             $this->btnUsers->CssClass = 'SideNavButton';
             $this->btnCompany->CssClass = 'SideNavButton';
@@ -184,6 +214,38 @@
             $this->btnPartnering->CssClass = 'SideNavButton'; 
         }
         
+    	public function btnTenAssessments_Click($strFormId, $strControlId, $strParameter) {
+            $pnlMain = $this->objForm->GetControl($this->strPanelMainControlId);
+            // First, remove all children panels from pnlMain. Then populate it          
+            $pnlMain->RemoveChildControls(true);
+            new AdminTenAssessmentsView($pnlMain);
+            $this->btnTenAssessments->CssClass = 'SideNavButtonSelected';
+            $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnGroup->CssClass = 'SideNavButton';
+            $this->btnUsers->CssClass = 'SideNavButton';
+            $this->btnCompany->CssClass = 'SideNavButton';
+            $this->btnScorecards->CssClass = 'SideNavButton';
+            $this->btnVenture->CssClass = 'SideNavButton';
+            $this->btnChecklist->CssClass = 'SideNavButton';
+            $this->btnPartnering->CssClass = 'SideNavButton'; 
+        }
+        
+    	public function btnLemon_Click($strFormId, $strControlId, $strParameter) {
+            $pnlMain = $this->objForm->GetControl($this->strPanelMainControlId);
+            // First, remove all children panels from pnlMain. Then populate it          
+            $pnlMain->RemoveChildControls(true);
+            new AdminLemonView($pnlMain);
+            $this->btnLemon->CssClass = 'SideNavButtonSelected';
+            $this->btnTenAssessments->CssClass = 'SideNavButton';
+            $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnGroup->CssClass = 'SideNavButton';
+            $this->btnUsers->CssClass = 'SideNavButton';
+            $this->btnCompany->CssClass = 'SideNavButton';
+            $this->btnScorecards->CssClass = 'SideNavButton';
+            $this->btnVenture->CssClass = 'SideNavButton';
+            $this->btnChecklist->CssClass = 'SideNavButton';
+            $this->btnPartnering->CssClass = 'SideNavButton'; 
+        }
     	public function btnGroup_Click($strFormId, $strControlId, $strParameter) {
             $pnlMain = $this->objForm->GetControl($this->strPanelMainControlId);
             // First, remove all children panels from pnlMain. Then populate it          
@@ -191,6 +253,8 @@
             new AdminGroupView($pnlMain);
             $this->btnGroup->CssClass = 'SideNavButtonSelected';
             $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnTenAssessments->CssClass = 'SideNavButton';
+            $this->btnLemon->CssClass = 'SideNavButton';
             $this->btnUsers->CssClass = 'SideNavButton';
             $this->btnCompany->CssClass = 'SideNavButton';
             $this->btnScorecards->CssClass = 'SideNavButton';
@@ -208,6 +272,8 @@
             $this->btnCompany->CssClass = 'SideNavButton';
             $this->btnScorecards->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnTenAssessments->CssClass = 'SideNavButton';
+            $this->btnLemon->CssClass = 'SideNavButton';
             $this->btnGroup->CssClass = 'SideNavButton';
             $this->btnUsers->CssClass = 'SideNavButton';
             $this->btnChecklist->CssClass = 'SideNavButton';
@@ -224,6 +290,8 @@
             $this->btnCompany->CssClass = 'SideNavButton';
             $this->btnScorecards->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnTenAssessments->CssClass = 'SideNavButton';
+            $this->btnLemon->CssClass = 'SideNavButton';
             $this->btnGroup->CssClass = 'SideNavButton';
             $this->btnUsers->CssClass = 'SideNavButton'; 
             $this->btnPartnering->CssClass = 'SideNavButton';         
@@ -239,6 +307,8 @@
             $this->btnCompany->CssClass = 'SideNavButton';
             $this->btnScorecards->CssClass = 'SideNavButton';
             $this->btnAssessments->CssClass = 'SideNavButton';
+            $this->btnTenAssessments->CssClass = 'SideNavButton';
+            $this->btnLemon->CssClass = 'SideNavButton';
             $this->btnGroup->CssClass = 'SideNavButton';
             $this->btnUsers->CssClass = 'SideNavButton'; 
             $this->btnPartnering->CssClass = 'SideNavButtonSelected';         

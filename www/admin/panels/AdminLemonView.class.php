@@ -3,39 +3,23 @@
 	require_once __INCLUDES__.'/Classes/PHPExcel.php';
 	require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 		
-    class AdminAssessmentsView extends QPanel {
+    class AdminLemonView extends QPanel {
         // Child Controls must be Publically Accessible so that they can be rendered in the template
         // Typically, you would want to do this by having public __getters for each control
-        // But for simplicity of this demo, we'll simply make the child controls public, themselves.
-        public $dtgKingdomBizAssessments;
-        public $btnAddKingdomBizAssessment;
-        public $pnlAddKingdomAssessment;
-              		
-		public $dtgIntegrationAssessments;
-		public $btnAddIntegrationAssessment;
-		public $pnlAddIntegrationAssessment;
-		
-		public $dtgSeasonalAssessments;
-		public $btnAddSeasonalAssessment;
-		public $pnlAddSeasonalAssessment;
-		
-		public $dtgTimeAssessments;
-		public $btnAddTimeAssessment;
-		public $pnlAddTimeAssessment;
+        // But for simplicity of this demo, we'll simply make the child controls public, themselves.		
+		public $dtgLemonAssessments;
+		public $btnAddLemonAssessment;
+		public $pnlAddLemonAssessment;
+		public $strFirstNameLemon;
+		public $strLastNameLemon;
+		public $strGroupLemon;
+		public $strCompanyLemon;
 		
 		public $btnAddGroupAssessment;
 		public $pnlAddGroupAssessment;
 		public $strKeycode;
 		public $lstSearchAssessmentType;
 		public $btnSearch;
-		
-		public $dtgLRAAssessments;
-		public $btnAddLRAAssessment;
-		public $pnlAddLRAAssessment;
-		
-		public $dtgUpwardAssessments;
-		public $btnAddUpwardAssessment;
-		public $pnlAddUpwardAssessment;
 		
 		public $txtKeyCode;
 		public $lblKeyCode;
@@ -64,7 +48,7 @@
 		
 		
         // Specify the Template File for this custom QPanel
-        protected $strTemplate = 'panels/AdminAssessmentsView.tpl.php';
+        protected $strTemplate = 'panels/AdminLemonView.tpl.php';
 
  
         // We Create a new __constructor that takes in the Project we are "viewing"
@@ -138,241 +122,77 @@
             //$this->flaSingleUpload->CssClass = 'file_asset';
             //$this->flaSingleUpload->imgFileIcon->CssClass = 'file_asset_icon';
             
-            $this->dtgKingdomBizAssessments = new KingdomBusinessAssessmentDataGrid($this);
-            $this->dtgKingdomBizAssessments->Paginator = new QPaginator($this->dtgKingdomBizAssessments);
-            $this->dtgKingdomBizAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkKingdom($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
-            $this->dtgKingdomBizAssessments->AddColumn(new QDataGridColumn('Company', '<?= $_CONTROL->ParentControl->RenderCompany($_ITEM->CompanyId) ?>', 'HtmlEntities=false', 'Width=300px' ));
-            $this->dtgKingdomBizAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px' ));
-                      
-            $this->dtgKingdomBizAssessments->CellPadding = 5;
-			$this->dtgKingdomBizAssessments->SetDataBinder('dtgKingdomBizAssessments_Bind',$this);
-			$this->dtgKingdomBizAssessments->NoDataHtml = 'No Kingdom Business Assessments have been assigned.';
-			$this->dtgKingdomBizAssessments->UseAjax = true;
+	        /********************************************/
+			$this->strFirstNameLemon = new QTextBox($this);
+			$this->strFirstNameLemon->Name = 'First Name';
+			$this->strFirstNameLemon->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			$this->strFirstNameLemon->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			$this->strFirstNameLemon->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			$this->strFirstNameLemon->Focus();
 			
-			$this->dtgKingdomBizAssessments->SortColumnIndex = 1;
-			$this->dtgKingdomBizAssessments->ItemsPerPage = 20;
+			$this->strLastNameLemon = new QTextBox($this);
+			$this->strLastNameLemon->Name = 'Last Name';
+			$this->strLastNameLemon->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			$this->strLastNameLemon->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			$this->strLastNameLemon->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			$this->strLastNameLemon->Focus();
 			
-			$objStyle = $this->dtgKingdomBizAssessments->RowStyle;
+			$this->strGroupLemon = new QTextBox($this);
+			$this->strGroupLemon->Name = 'Group KeyCode';
+			$this->strGroupLemon->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			$this->strGroupLemon->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			$this->strGroupLemon->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+	        
+			$this->strCompanyLemon = new QTextBox($this);
+			$this->strCompanyLemon->Name = 'Company';
+			$this->strCompanyLemon->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			$this->strCompanyLemon->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			$this->strCompanyLemon->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			
+	        $this->dtgLemonAssessments = new LemonAssessmentDataGrid($this);
+            $this->dtgLemonAssessments->Paginator = new QPaginator($this->dtgLemonAssessments);
+            $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkLemon($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px',
+            	array('OrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->User->LastName), 'ReverseOrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->User->LastName, false))));
+            $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('Company', '<?= $_CONTROL->ParentControl->RenderCompany($_ITEM->CompanyId) ?>', 'HtmlEntities=false', 'Width=300px',
+            	array('OrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->Company->Name), 'ReverseOrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->Company->Name, false))));
+            $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('Group KeyCode', '<?= $_CONTROL->ParentControl->RenderGroupKeyCode($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px',
+            	array('OrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->Group->KeyCode), 'ReverseOrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->Group->KeyCode, false))));
+            $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px',
+            	array('OrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->ResourceStatusId), 'ReverseOrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->ResourceStatusId, false))));
+            
+            $this->dtgLemonAssessments->CellPadding = 5;
+            $this->dtgLemonAssessments->SortColumnIndex = 1;
+			$this->dtgLemonAssessments->ItemsPerPage = 20;
+			$this->dtgLemonAssessments->SetDataBinder('dtgLemonAssessments_Bind',$this);
+			$this->dtgLemonAssessments->NoDataHtml = 'No Lemon Assessments have been assigned.';
+			$this->dtgLemonAssessments->UseAjax = true;
+			
+			
+			$objStyle = $this->dtgLemonAssessments->RowStyle;
 	        $objStyle->BackColor = '#ffffff';
 	        $objStyle->FontSize = 12;
 	
-	        $objStyle = $this->dtgKingdomBizAssessments->AlternateRowStyle;
+	        $objStyle = $this->dtgLemonAssessments->AlternateRowStyle;
 	        $objStyle->BackColor = '#CCCCCC';
 	
-	        $objStyle = $this->dtgKingdomBizAssessments->HeaderRowStyle;
+	        $objStyle = $this->dtgLemonAssessments->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
 	        $objStyle->BackColor = '#0098c3'; 
 	        
-	        $objStyle = $this->dtgKingdomBizAssessments->HeaderLinkStyle;
+	        $objStyle = $this->dtgLemonAssessments->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
 	        $objStyle->BackColor = '#0098c3'; 
 	        
-	        $this->btnAddKingdomBizAssessment = new QButton($this);
-	        $this->btnAddKingdomBizAssessment->Text = 'Add A User';
-	        $this->btnAddKingdomBizAssessment->CssClass = 'primary';
-	        $this->btnAddKingdomBizAssessment->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnAddKingdomBizAssessment_Click'));
+	        $this->btnAddLemonAssessment = new QButton($this);
+	        $this->btnAddLemonAssessment->Text = 'Add A User';
+	        $this->btnAddLemonAssessment->CssClass = 'primary';
+	        $this->btnAddLemonAssessment->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnAddLemonAssessment_Click'));
           
-	        $this->pnlAddKingdomAssessment = new QPanel($this);
-	        $this->pnlAddKingdomAssessment->Position = QPosition::Relative;
-	        $this->pnlAddKingdomAssessment->Visible = false;
-	        $this->pnlAddKingdomAssessment->AutoRenderChildren = true;
-      		/***************************************************************/
-	     
-	        $this->dtgIntegrationAssessments = new IntegrationAssessmentDataGrid($this);
-            $this->dtgIntegrationAssessments->Paginator = new QPaginator($this->dtgIntegrationAssessments);
-            $this->dtgIntegrationAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkIntegration($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
-            $this->dtgIntegrationAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px' ));
-                      
-            $this->dtgIntegrationAssessments->CellPadding = 5;
-			$this->dtgIntegrationAssessments->SetDataBinder('dtgIntegrationAssessments_Bind',$this);
-			$this->dtgIntegrationAssessments->NoDataHtml = 'No Integration Assessments have been assigned.';
-			$this->dtgIntegrationAssessments->UseAjax = true;
-			
-			$this->dtgIntegrationAssessments->SortColumnIndex = 1;
-			$this->dtgIntegrationAssessments->ItemsPerPage = 20;
-			
-			$objStyle = $this->dtgIntegrationAssessments->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 12;
-	
-	        $objStyle = $this->dtgIntegrationAssessments->AlternateRowStyle;
-	        $objStyle->BackColor = '#CCCCCC';
-	
-	        $objStyle = $this->dtgIntegrationAssessments->HeaderRowStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        
-	        $objStyle = $this->dtgIntegrationAssessments->HeaderLinkStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        
-	        $this->btnAddIntegrationAssessment = new QButton($this);
-	        $this->btnAddIntegrationAssessment->Text = 'Add A User';
-	        $this->btnAddIntegrationAssessment->CssClass = 'primary';
-	        $this->btnAddIntegrationAssessment->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnAddIntegrationAssessment_Click'));
-          
-	        $this->pnlAddIntegrationAssessment = new QPanel($this);
-	        $this->pnlAddIntegrationAssessment->Position = QPosition::Relative;
-	        $this->pnlAddIntegrationAssessment->Visible = false;
-	        $this->pnlAddIntegrationAssessment->AutoRenderChildren = true;
-	        
-	        /***************************************************************/
-	     
-	        $this->dtgSeasonalAssessments = new SeasonalAssessmentDataGrid($this);
-            $this->dtgSeasonalAssessments->Paginator = new QPaginator($this->dtgSeasonalAssessments);
-            $this->dtgSeasonalAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkIntegration($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
-            $this->dtgSeasonalAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px' ));
-                      
-            $this->dtgSeasonalAssessments->CellPadding = 5;
-			$this->dtgSeasonalAssessments->SetDataBinder('dtgSeasonalAssessments_Bind',$this);
-			$this->dtgSeasonalAssessments->NoDataHtml = 'No Seasonal Assessments have been assigned.';
-			$this->dtgSeasonalAssessments->UseAjax = true;
-			
-			$this->dtgSeasonalAssessments->SortColumnIndex = 1;
-			$this->dtgSeasonalAssessments->ItemsPerPage = 20;
-			
-			$objStyle = $this->dtgSeasonalAssessments->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 12;
-	
-	        $objStyle = $this->dtgSeasonalAssessments->AlternateRowStyle;
-	        $objStyle->BackColor = '#CCCCCC';
-	
-	        $objStyle = $this->dtgSeasonalAssessments->HeaderRowStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        
-	        $objStyle = $this->dtgSeasonalAssessments->HeaderLinkStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        
-	        $this->btnAddSeasonalAssessment = new QButton($this);
-	        $this->btnAddSeasonalAssessment->Text = 'Add A User';
-	        $this->btnAddSeasonalAssessment->CssClass = 'primary';
-	        $this->btnAddSeasonalAssessment->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnAddSeasonalAssessment_Click'));
-          
-	        $this->pnlAddSeasonalAssessment = new QPanel($this);
-	        $this->pnlAddSeasonalAssessment->Position = QPosition::Relative;
-	        $this->pnlAddSeasonalAssessment->Visible = false;
-	        $this->pnlAddSeasonalAssessment->AutoRenderChildren = true;
-	        
-	         /***************************************************************/
-	     
-	        $this->dtgTimeAssessments = new TimeAssessmentDataGrid($this);
-            $this->dtgTimeAssessments->Paginator = new QPaginator($this->dtgTimeAssessments);
-            $this->dtgTimeAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkIntegration($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
-            $this->dtgTimeAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px' ));
-                      
-            $this->dtgTimeAssessments->CellPadding = 5;
-			$this->dtgTimeAssessments->SetDataBinder('dtgTimeAssessments_Bind',$this);
-			$this->dtgTimeAssessments->NoDataHtml = 'No Where Does The Time Go Assessments have been assigned.';
-			$this->dtgTimeAssessments->UseAjax = true;
-			
-			$this->dtgTimeAssessments->SortColumnIndex = 1;
-			$this->dtgTimeAssessments->ItemsPerPage = 20;
-			
-			$objStyle = $this->dtgTimeAssessments->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 12;
-	
-	        $objStyle = $this->dtgTimeAssessments->AlternateRowStyle;
-	        $objStyle->BackColor = '#CCCCCC';
-	
-	        $objStyle = $this->dtgTimeAssessments->HeaderRowStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        
-	        $objStyle = $this->dtgTimeAssessments->HeaderLinkStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        
-	        $this->btnAddTimeAssessment = new QButton($this);
-	        $this->btnAddTimeAssessment->Text = 'Add A User';
-	        $this->btnAddTimeAssessment->CssClass = 'primary';
-	        $this->btnAddTimeAssessment->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnAddTimeAssessment_Click'));
-          
-	        $this->pnlAddTimeAssessment = new QPanel($this);
-	        $this->pnlAddTimeAssessment->Position = QPosition::Relative;
-	        $this->pnlAddTimeAssessment->Visible = false;
-	        $this->pnlAddTimeAssessment->AutoRenderChildren = true;
-	        
-	        /***************************************************************/
-	        $this->dtgLRAAssessments = new LRAAssessmentDataGrid($this);
-            $this->dtgLRAAssessments->Paginator = new QPaginator($this->dtgLRAAssessments);
-            $this->dtgLRAAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkLRA($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
-            $this->dtgLRAAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px' ));
-                      
-            $this->dtgLRAAssessments->CellPadding = 5;
-			$this->dtgLRAAssessments->SetDataBinder('dtgLRAAssessments_Bind',$this);
-			$this->dtgLRAAssessments->NoDataHtml = 'No Leadership Readiness Assessments have been assigned.';
-			$this->dtgLRAAssessments->UseAjax = true;
-			
-			$this->dtgLRAAssessments->SortColumnIndex = 1;
-			$this->dtgLRAAssessments->ItemsPerPage = 20;
-			
-			$objStyle = $this->dtgLRAAssessments->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 12;
-	
-	        $objStyle = $this->dtgLRAAssessments->AlternateRowStyle;
-	        $objStyle->BackColor = '#CCCCCC';
-	
-	        $objStyle = $this->dtgLRAAssessments->HeaderRowStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        
-	        $objStyle = $this->dtgLRAAssessments->HeaderLinkStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        
-	        $this->btnAddLRAAssessment = new QButton($this);
-	        $this->btnAddLRAAssessment->Text = 'Add A User';
-	        $this->btnAddLRAAssessment->CssClass = 'primary';
-	        $this->btnAddLRAAssessment->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnAddLRAAssessment_Click'));
-          
-	        $this->pnlAddLRAAssessment = new QPanel($this);
-	        $this->pnlAddLRAAssessment->Position = QPosition::Relative;
-	        $this->pnlAddLRAAssessment->Visible = false;
-	        $this->pnlAddLRAAssessment->AutoRenderChildren = true;
-	        
-	        /***************************************************************/
-	        $this->dtgUpwardAssessments = new UpwardAssessmentDataGrid($this);
-            $this->dtgUpwardAssessments->Paginator = new QPaginator($this->dtgUpwardAssessments);
-            $this->dtgUpwardAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkUpward($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' ));
-            $this->dtgUpwardAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_CONTROL->ParentControl->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px' ));
-                      
-            $this->dtgUpwardAssessments->CellPadding = 5;
-			$this->dtgUpwardAssessments->SetDataBinder('dtgUpwardAssessments_Bind',$this);
-			$this->dtgUpwardAssessments->NoDataHtml = 'No Education 8-P Assessments have been assigned.';
-			$this->dtgUpwardAssessments->UseAjax = true;
-			
-			$this->dtgUpwardAssessments->SortColumnIndex = 1;
-			$this->dtgUpwardAssessments->ItemsPerPage = 20;
-			
-			$objStyle = $this->dtgUpwardAssessments->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 12;
-	
-	        $objStyle = $this->dtgUpwardAssessments->AlternateRowStyle;
-	        $objStyle->BackColor = '#CCCCCC';
-	
-	        $objStyle = $this->dtgUpwardAssessments->HeaderRowStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        
-	        $objStyle = $this->dtgUpwardAssessments->HeaderLinkStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        
-	        $this->btnAddUpwardAssessment = new QButton($this);
-	        $this->btnAddUpwardAssessment->Text = 'Add A User';
-	        $this->btnAddUpwardAssessment->CssClass = 'primary';
-	        $this->btnAddUpwardAssessment->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnAddUpwardAssessment_Click'));
-          
-	        $this->pnlAddUpwardAssessment = new QPanel($this);
-	        $this->pnlAddUpwardAssessment->Position = QPosition::Relative;
-	        $this->pnlAddUpwardAssessment->Visible = false;
-	        $this->pnlAddUpwardAssessment->AutoRenderChildren = true;
+	        $this->pnlAddLemonAssessment = new QPanel($this);
+	        $this->pnlAddLemonAssessment->Position = QPosition::Relative;
+	        $this->pnlAddLemonAssessment->Visible = false;
+	        $this->pnlAddLemonAssessment->AutoRenderChildren = true;
+
 	        /***************************************************************/
         }
         
@@ -701,49 +521,43 @@
 			    $objResults->Save(); 
 		    }      		
         }
+	
+    	public function dtgLemonAssessments_Refresh($strFormId, $strControlId, $strParameter) {
+			$this->dtgLemonAssessments->PageNumber = 1;
+			$this->dtgLemonAssessments->Refresh();
+		}
+		public function dtgLemonAssessments_Bind() {
+			$this->dtgLemonAssessments->TotalItemCount = LemonAssessment::CountAll();
+            $objConditions = QQ::All(); 
+			if ($strName = trim($this->strFirstNameLemon->Text)) {
+				$objConditions = QQ::AndCondition($objConditions,
+					QQ::Like( QQN::LemonAssessment()->User->FirstName, $strName . '%')
+				);
+			}
+		
+			if ($strName = trim($this->strLastNameLemon->Text)) {
+				$objConditions = QQ::AndCondition($objConditions,
+					QQ::Like( QQN::LemonAssessment()->User->LastName, $strName . '%')
+				);
+			}
+				
+			if ($strName = trim($this->strGroupLemon->Text)) {
+				$objConditions = QQ::AndCondition($objConditions,
+					QQ::Like( QQN::LemonAssessment()->Group->KeyCode, $strName . '%')
+				);
+			} 
+			if ($strName = trim($this->strCompanyLemon->Text)) {
+				$objConditions = QQ::AndCondition($objConditions,
+					QQ::Like( QQN::LemonAssessment()->Company->Name, $strName . '%')
+				);
+			} 
+			  
+            $objClauses = array(QQ::Distinct());
+			if ($objClause = $this->dtgLemonAssessments->LimitClause) $objClauses[] = $objClause;
+			if ($objClause = $this->dtgLemonAssessments->OrderByClause) $objClauses[] = $objClause;
 
-    	public function dtgKingdomBizAssessments_Bind() {
-			$this->dtgKingdomBizAssessments->TotalItemCount = KingdomBusinessAssessment::CountAll();
-			$objConditions = QQ::All();
-			$objClauses = array();
-			$KingdomBizArray = KingdomBusinessAssessment::QueryArray($objConditions,$objClauses);		
-			$this->dtgKingdomBizAssessments->DataSource = $KingdomBizArray; 
+			$this->dtgLemonAssessments->DataSource = LemonAssessment::QueryArray($objConditions, $objClauses);
 		}
-		
-		public function dtgLRAAssessments_Bind() {
-			$this->dtgLRAAssessments->TotalItemCount = LraAssessment::CountAll();
-    		$objConditions = QQ::All();
-			$objClauses = array();
-			$lraArray = LraAssessment::QueryArray($objConditions,$objClauses);		
-			$this->dtgLRAAssessments->DataSource = $lraArray; 
-		}
-		
-    	public function dtgUpwardAssessments_Bind() {
-			$this->dtgUpwardAssessments->TotalItemCount = UpwardAssessment::CountAll();
-    		$objConditions = QQ::All();
-			$objClauses = array();
-			$UpwardArray = UpwardAssessment::QueryArray($objConditions,$objClauses);		
-			$this->dtgUpwardAssessments->DataSource = $UpwardArray; 
-		}
-		
-    	public function dtgIntegrationAssessments_Bind() {
-			$this->dtgIntegrationAssessments->TotalItemCount = IntegrationAssessment::CountAll();
-    		$objConditions = QQ::All();	
-			$this->dtgIntegrationAssessments->DataSource = IntegrationAssessment::QueryArray($objConditions); 
-		}
-		
-		public function dtgSeasonalAssessments_Bind() {
-			$this->dtgSeasonalAssessments->TotalItemCount = SeasonalAssessment::CountAll();
-    		$objConditions = QQ::All();	
-			$this->dtgSeasonalAssessments->DataSource = SeasonalAssessment::QueryArray($objConditions); 
-		}
-		
-    	public function dtgTimeAssessments_Bind() {
-			$this->dtgTimeAssessments->TotalItemCount = TimeAssessment::CountAll();
-    		$objConditions = QQ::All();	
-			$this->dtgTimeAssessments->DataSource = TimeAssessment::QueryArray($objConditions); 
-		}
-		
 /*		
     	public function dtgGroupAssessments_Refresh($strFormId, $strControlId, $strParameter) {
 			$this->dtgGroupAssessments->PageNumber = 1;
@@ -793,6 +607,60 @@
     			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
     		}
 		}
+		public function RenderGroupKeyCode(LemonAssessment $objAssessment) {
+			$strControlId = 'lstLemonGroup' . $objAssessment->Id;
+			$lstGroupType = $this->objForm->GetControl($strControlId);
+			if(!$lstGroupType) {
+				$lstGroupType = new QListBox($this->dtgLemonAssessments,$strControlId);
+				$lstGroupType->Name = 'AssessmentGroup';
+				$lstGroupType->AddItem('-- No Group KeyCode --', 0,true);
+				foreach(GroupAssessmentList::LoadArrayByResourceId(5) as $objGroup) {					
+						if($objAssessment->GroupId == $objGroup->Id)
+							$lstGroupType->AddItem($objGroup->KeyCode, $objGroup->Id,true);
+						else 
+							$lstGroupType->AddItem($objGroup->KeyCode, $objGroup->Id);
+					}
+							
+				$lstGroupType->ActionParameter = $objAssessment->Id;
+				$lstGroupType->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'lstLemonGroup_Change'));
+			}
+			return $lstGroupType->Render(false);
+		}
+		
+    	public function lstLemonGroup_Change($strFormId, $strControlId, $strParameter) {
+			$lstGroupType = $this->objForm->GetControl($strControlId);
+			if ($lstGroupType != null){
+				$objLemonAssessment = LemonAssessment::Load($strParameter);
+				if($lstGroupType->SelectedValue == 0)
+					$objLemonAssessment->GroupId = null;
+				else
+					$objLemonAssessment->GroupId = $lstGroupType->SelectedValue;
+				$objLemonAssessment->Save();
+			}
+			$this->dtgLemonAssessments->Refresh();
+		}
+		
+    	public function RenderUserLinkLemon($objAssessment) {
+    		$intUserId = $objAssessment->UserId;
+    		$objUser = User::Load($intUserId);
+    		// Only display link if there is an assessment to display
+    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
+				return sprintf("<a href='%s/assessments/lemon/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
+    		} else {
+    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
+    		}
+		}
+    	public function RenderUserLinkTenP($objAssessment) {
+    		$intUserId = $objAssessment->UserId;
+    		$objUser = User::Load($intUserId);
+    		// Only display link if there is an assessment to display
+    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
+				return sprintf("<a href='%s/assessments/tenp/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
+    		} else {
+    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
+    		}
+		}		
+		
 	/*
 		public function RenderAssessmentType($objGroupAssessment) {
 			$intResourceId = $objGroupAssessment->ResourceId;
@@ -905,116 +773,25 @@
     	public function RenderStatus($intResourceStatusId) {
 			return ResourceStatus::Load($intResourceStatusId)->Value;
 		}
-		
-    	public function btnAddKingdomBizAssessment_Click($strFormId, $strControlId, $strParameter) {
-			// Open up the panel and allow the adding of members to the company
-	        $this->pnlAddKingdomAssessment->Visible = true;
-	        $this->pnlAddGroupAssessment->RemoveChildControls(true);
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
-	        $this->pnlAddSeasonalAssessment->RemoveChildControls(true);
-	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
-	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
-	        $this->pnlAddLRAAssessment->RemoveChildControls(true);
-	        $this->pnlAddUpwardAssessment->RemoveChildControls(true);
-	        $pnlAddKingdomView = new AddKingdomAssessment($this->pnlAddKingdomAssessment,'UpdateAssessmentList',$this);
-		
+			
+    	public function btnAddLemonAssessment_Click($strFormId, $strControlId, $strParameter) {
+			// Open up the panel and allow the adding of members to Lemon Assessments
+	        $this->pnlAddLemonAssessment->Visible = true;
+	        $this->pnlAddLemonAssessment->RemoveChildControls(true);
+	        $pnlAddLemonView = new AddLemonAssessment($this->pnlAddLemonAssessment,'UpdateLemonAssessmentList',$this);	
 		}
 		
 	    // Method Call back for the  panels 
-	    public function UpdateAssessmentList($blnUpdatesMade) {
-	    	$this->dtgKingdomBizAssessments->PageNumber = 1;
-			$this->dtgKingdomBizAssessments->Refresh();
+	    public function UpdateLemonAssessmentList($blnUpdatesMade) {
+	    	$this->dtgLemonAssessments->PageNumber = 1;
+			$this->dtgLemonAssessments->Refresh();
 	    }
-	      	
-		public function btnAddLRAAssessment_Click($strFormId, $strControlId, $strParameter) {
-			// Open up the panel and allow the adding of members to the company
-	        $this->pnlAddLRAAssessment->Visible = true;
-	        $this->pnlAddLRAAssessment->RemoveChildControls(true);
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
-	        $this->pnlAddSeasonalAssessment->RemoveChildControls(true);
-	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
-	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
-	        $this->pnlAddUpwardAssessment->RemoveChildControls(true);
-	        $pnlAddLRAView = new AddLRAAssessment($this->pnlAddLRAAssessment,'UpdateLRAAssessmentList',$this);
-		
-		}
-		
-    	public function btnAddUpwardAssessment_Click($strFormId, $strControlId, $strParameter) {
-			// Open up the panel and allow the adding of members to the company
-	        $this->pnlAddUpwardAssessment->Visible = true;
-	        $this->pnlAddLRAAssessment->RemoveChildControls(true);
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
-	        $this->pnlAddSeasonalAssessment->RemoveChildControls(true);
-	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
-	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
-	        $this->pnlAddUpwardAssessment->RemoveChildControls(true);
-	        $pnlAddUpwardView = new AddUpwardAssessment($this->pnlAddUpwardAssessment,'UpdateUpwardAssessmentList',$this);
-		
-		}
-   	 // Method Call back for the  panels 
-	    public function UpdateLRAAssessmentList($blnUpdatesMade) {
-	    	$this->dtgLRAAssessments->PageNumber = 1;
-			$this->dtgLRAAssessments->Refresh();
-	    }
-	    
-    	public function UpdateUpwardAssessmentList($blnUpdatesMade) {
-	    	$this->dtgUpwardAssessments->PageNumber = 1;
-			$this->dtgUpwardAssessments->Refresh();
-	    }
-	        
-    	public function btnAddIntegrationAssessment_Click($strFormId, $strControlId, $strParameter) {
-			// Open up the panel and allow the adding of members to the company
-	        $this->pnlAddIntegrationAssessment->Visible = true;
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
-	        $this->pnlAddSeasonalAssessment->RemoveChildControls(true);
-	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
-	        $pnlAddIntegrationView = new AddIntegrationAssessment($this->pnlAddIntegrationAssessment,'UpdateIntegrationAssessmentList',$this);
-		
-		}
-		
-	    // Method Call back for the  panels 
-	    public function UpdateIntegrationAssessmentList($blnUpdatesMade) {
-	    	$this->dtgIntegrationAssessments->PageNumber = 1;
-			$this->dtgIntegrationAssessments->Refresh();
-	    }
-	    
-    	public function btnAddSeasonalAssessment_Click($strFormId, $strControlId, $strParameter) {
-			// Open up the panel and allow the adding of members to the company
-	        $this->pnlAddSeasonalAssessment->Visible = true;
-	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
-	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
-	        $pnlAddSeasonalView = new AddSeasonalAssessment($this->pnlAddSeasonalAssessment,'UpdateSeasonalAssessmentList',$this);
-		
-		}
-		
-	    // Method Call back for the  panels 
-	    public function UpdateSeasonalAssessmentList($blnUpdatesMade) {
-	    	$this->dtgSeasonalAssessments->PageNumber = 1;
-			$this->dtgSeasonalAssessments->Refresh();
-	    }
-	    
-    	public function btnAddTimeAssessment_Click($strFormId, $strControlId, $strParameter) {
-			// Open up the panel and allow the adding of members to the company
-	        $this->pnlAddTimeAssessment->Visible = true;
-	        $this->pnlAddSeasonalAssessment->RemoveChildControls(true);
-	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
-	        $pnlAddTimeView = new AddTimeAssessment($this->pnlAddTimeAssessment,'UpdateTimeAssessmentList',$this);
-		
-		}
-		
-	    // Method Call back for the  panels 
-	    public function UpdateTimeAssessmentList($blnUpdatesMade) {
-	    	$this->dtgTimeAssessments->PageNumber = 1;
-			$this->dtgTimeAssessments->Refresh();
-	    }
-		
+
     	public function btnAddGroupAssessment_Click($strFormId, $strControlId, $strParameter) {
 			// Open up the panel and allow the adding of members to Group Assessments
 	        $this->pnlAddGroupAssessment->Visible = true;
 	        $this->pnlAddGroupAssessment->RemoveChildControls(true);
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
+	        $this->pnlAddLemonAssessment->RemoveChildControls(true);
 	        $pnlAddGroupView = new AddGroupAssessment($this->pnlAddGroupAssessment,'UpdateGroupAssessmentList',$this);	
 		}
 		
