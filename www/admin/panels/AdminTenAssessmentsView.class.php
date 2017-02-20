@@ -774,34 +774,11 @@
     	public function btnAddTenFAssessment_Click($strFormId, $strControlId, $strParameter) {
 			// Open up the panel and allow the adding of members to the company
 	        $this->pnlAddTenFAssessment->Visible = true;
-	        $this->pnlAddTenFAssessment->RemoveChildControls(true);
-	        $this->pnlAddLemonAssessment->RemoveChildControls(true);
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
-	        $this->pnlAddTenPAssessment->RemoveChildControls(true);
-	        $this->pnlAddSeasonalAssessment->RemoveChildControls(true);
-	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
-	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
-	        $this->pnlAddLRAAssessment->RemoveChildControls(true);
-	        $this->pnlAddUpwardAssessment->RemoveChildControls(true);
+	        $this->pnlAddTenFAssessment->RemoveChildControls(true);	        
+	        $this->pnlAddTenPAssessment->RemoveChildControls(true);	        
 	        $pnlAddTenFView = new AddTenFAssessment($this->pnlAddTenFAssessment,'UpdateTenFAssessmentList',$this);		
 		}
-				
-    	public function btnAddUpwardAssessment_Click($strFormId, $strControlId, $strParameter) {
-			// Open up the panel and allow the adding of members to the company
-	        $this->pnlAddUpwardAssessment->Visible = true;
-	        $this->pnlAddLRAAssessment->RemoveChildControls(true);
-	        $this->pnlAddTenFAssessment->RemoveChildControls(true);
-	        $this->pnlAddLemonAssessment->RemoveChildControls(true);
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
-	        $this->pnlAddTenPAssessment->RemoveChildControls(true);
-	        $this->pnlAddSeasonalAssessment->RemoveChildControls(true);
-	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
-	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
-	        $this->pnlAddUpwardAssessment->RemoveChildControls(true);
-	        $pnlAddUpwardView = new AddUpwardAssessment($this->pnlAddUpwardAssessment,'UpdateUpwardAssessmentList',$this);
-		
-		}
-			    
+						    
 	    
 	    // Method Call back for the  panels 
 	    public function UpdateTenFAssessmentList($blnUpdatesMade) {
@@ -809,56 +786,6 @@
 			$this->dtgTenFAssessments->Refresh();
 	    }
 	    
-    	public function btnAddIntegrationAssessment_Click($strFormId, $strControlId, $strParameter) {
-			// Open up the panel and allow the adding of members to the company
-	        $this->pnlAddIntegrationAssessment->Visible = true;
-	        $this->pnlAddTenFAssessment->RemoveChildControls(true);
-	        $this->pnlAddLemonAssessment->RemoveChildControls(true);
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
-	        $this->pnlAddTenPAssessment->RemoveChildControls(true);
-	        $this->pnlAddSeasonalAssessment->RemoveChildControls(true);
-	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
-	        $pnlAddIntegrationView = new AddIntegrationAssessment($this->pnlAddIntegrationAssessment,'UpdateIntegrationAssessmentList',$this);
-		
-		}
-			    
-    	public function btnAddSeasonalAssessment_Click($strFormId, $strControlId, $strParameter) {
-			// Open up the panel and allow the adding of members to the company
-	        $this->pnlAddSeasonalAssessment->Visible = true;
-	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
-	        $this->pnlAddTenFAssessment->RemoveChildControls(true);
-	        $this->pnlAddLemonAssessment->RemoveChildControls(true);
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
-	        $this->pnlAddTenPAssessment->RemoveChildControls(true);
-	        $this->pnlAddTimeAssessment->RemoveChildControls(true);
-	        $pnlAddSeasonalView = new AddSeasonalAssessment($this->pnlAddSeasonalAssessment,'UpdateSeasonalAssessmentList',$this);
-		
-		}
-			    
-    	public function btnAddTimeAssessment_Click($strFormId, $strControlId, $strParameter) {
-			// Open up the panel and allow the adding of members to the company
-	        $this->pnlAddTimeAssessment->Visible = true;
-	        $this->pnlAddSeasonalAssessment->RemoveChildControls(true);
-	        $this->pnlAddIntegrationAssessment->RemoveChildControls(true);
-	        $this->pnlAddTenFAssessment->RemoveChildControls(true);
-	        $this->pnlAddLemonAssessment->RemoveChildControls(true);
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
-	        $this->pnlAddTenPAssessment->RemoveChildControls(true);
-	        $pnlAddTimeView = new AddTimeAssessment($this->pnlAddTimeAssessment,'UpdateTimeAssessmentList',$this);
-		
-		}
-		
-    	public function btnAddLemonAssessment_Click($strFormId, $strControlId, $strParameter) {
-			// Open up the panel and allow the adding of members to Lemon Assessments
-	        $this->pnlAddLemonAssessment->Visible = true;
-	        $this->pnlAddLemonAssessment->RemoveChildControls(true);
-	        $this->pnlAddKingdomAssessment->RemoveChildControls(true);
-	        $this->pnlAddTenPAssessment->RemoveChildControls(true);
-	        $this->pnlAddTenFAssessment->RemoveChildControls(true);
-	        $pnlAddLemonView = new AddLemonAssessment($this->pnlAddLemonAssessment,'UpdateLemonAssessmentList',$this);	
-		}
-				
-
     	// For any JavaScript calls that need to be made whenever this control is rendered or re-rendered
     	// Need to initialize the jquery tab here.
 		public function GetEndScript() {
