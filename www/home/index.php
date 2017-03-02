@@ -223,7 +223,7 @@ class HomeForm extends InstituteForm {
 							$tmpLabel->HtmlEntities = false;
 							$tmpLabel->Text = '<li>LEMON Assessment</li>';
 							$this->frontWheelArray[] = $tmpLabel;
-							$this->lblAd_LemonBook->Text = '<a href="http://http://inst.net/product/lemon-leadership-electronic/" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/lemonbook1.jpg" style="width:290px; height:180px; margin:8px; float:left;" /></a>';
+							$this->lblAd_LemonBook->Text = '<a href="http://inst.net/product/lemon-leadership-electronic/" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/lemonbook1.jpg" style="width:290px; height:180px; margin:8px; float:left;" /></a>';
 							$bLemon = true;
 							break;
 						case 'Integration Assessment':
