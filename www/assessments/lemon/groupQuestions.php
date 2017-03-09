@@ -60,7 +60,7 @@ class LemonGroupQuestionsForm extends InstituteForm {
         
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = 'Submit';
-	 	$this->btnSubmit->CssClass = 'externButton';
+	 	$this->btnSubmit->CssClass = 'externButton submit';
 	 	$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 
 	 	$this->btnCancel = new QButton($this);
@@ -74,6 +74,7 @@ class LemonGroupQuestionsForm extends InstituteForm {
 	}
 	
 	protected function btnSubmit_Click() {	
+		QApplication::ExecuteJavaScript("document.getElementsByClassName('externButton submit')[0].setAttribute('disabled', 'true');");
         for($i=0;$i<count($this->arrayValue); $i++) {
         	if($this->bEditing && ($this->objLemonAssessment->ResourceStatusId == 2)) {
 	        	$objResults = LemonAssessmentResults::LoadResultByAssessmentIdAndQuestionId($this->objLemonAssessment->Id, $i+1);
