@@ -11,6 +11,7 @@ Please rate each statement below using the scale from 1 to 7 in the drop-down bo
 </div>
 </p>
 <?php  $this->dtgAssessmentQuestions->Render(); ?>
+<p style="color:red;">NOTE: Please only click the Submit button once.</p>
 <?php  $this->btnSubmit->Render(); ?>
 <?php  $this->btnCancel->Render(); ?>
 </div>
