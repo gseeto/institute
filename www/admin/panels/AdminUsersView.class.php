@@ -7,6 +7,7 @@
 		public $strLastName;
 		protected $selectedUserArray;
 		public $btnMerge;
+		public $btnSearch;
         
         // Specify the Template File for this custom QPanel
         protected $strTemplate = 'panels/AdminUsersView.tpl.php';
@@ -67,24 +68,29 @@
 	        
 	        $this->strFirstName = new QTextBox($this);
 			$this->strFirstName->Name = 'First Name';
-			$this->strFirstName->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
-			$this->strFirstName->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
-			$this->strFirstName->AddAction(new QEnterKeyEvent(), new QTerminateAction());
-			$this->strFirstName->Focus();
+			//$this->strFirstName->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
+			//$this->strFirstName->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
+			//$this->strFirstName->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			//$this->strFirstName->Focus();
 			
 			$this->strLastName = new QTextBox($this);
 			$this->strLastName->Name = 'Last Name';
-			$this->strLastName->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
-			$this->strLastName->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
-			$this->strLastName->AddAction(new QEnterKeyEvent(), new QTerminateAction());
-			$this->strLastName->Focus();
+			//$this->strLastName->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
+			//$this->strLastName->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
+			//$this->strLastName->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			//$this->strLastName->Focus();
 			
 			$this->strUsername = new QTextBox($this);
 			$this->strUsername->Name = 'Username';
 			//$this->strUsername->Width = 50;
-			$this->strUsername->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
-			$this->strUsername->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
-			$this->strUsername->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			//$this->strUsername->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
+			//$this->strUsername->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
+			//$this->strUsername->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			
+			$this->btnSearch = new QButton($this);
+	        $this->btnSearch->Text = 'Search';
+	        $this->btnSearch->CssClass = 'primary';
+	        $this->btnSearch->AddAction(new QClickEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
           
         }
         
@@ -123,8 +129,8 @@
 				} 
 			}
 			
-			$this->dtgUsers->TotalItemCount = User::CountAll();
 			$userArray = User::QueryArray($objConditions,$objClauses);		
+			$this->dtgUsers->TotalItemCount = User::CountAll();
 			$this->dtgUsers->DataSource = $userArray; 
 		}
 	

@@ -18,6 +18,8 @@ function DisplayChart(userData) {
         categoryAxis.labelRotation = 90;
         categoryAxis.dashLength = 5;
         categoryAxis.gridPosition = "start";
+        categoryAxis.autoGridCount = false;
+        categoryAxis.gridCount = 21;
 
         // value
         var valueAxis = new AmCharts.ValueAxis();

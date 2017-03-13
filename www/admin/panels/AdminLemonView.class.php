@@ -125,30 +125,35 @@
 	        /********************************************/
 			$this->strFirstNameLemon = new QTextBox($this);
 			$this->strFirstNameLemon->Name = 'First Name';
-			$this->strFirstNameLemon->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
-			$this->strFirstNameLemon->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
-			$this->strFirstNameLemon->AddAction(new QEnterKeyEvent(), new QTerminateAction());
-			$this->strFirstNameLemon->Focus();
+			//$this->strFirstNameLemon->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			//$this->strFirstNameLemon->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			//$this->strFirstNameLemon->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			//$this->strFirstNameLemon->Focus();
 			
 			$this->strLastNameLemon = new QTextBox($this);
 			$this->strLastNameLemon->Name = 'Last Name';
-			$this->strLastNameLemon->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
-			$this->strLastNameLemon->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
-			$this->strLastNameLemon->AddAction(new QEnterKeyEvent(), new QTerminateAction());
-			$this->strLastNameLemon->Focus();
+			//$this->strLastNameLemon->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			//$this->strLastNameLemon->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			//$this->strLastNameLemon->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			//$this->strLastNameLemon->Focus();
 			
 			$this->strGroupLemon = new QTextBox($this);
 			$this->strGroupLemon->Name = 'Group KeyCode';
-			$this->strGroupLemon->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
-			$this->strGroupLemon->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
-			$this->strGroupLemon->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			//$this->strGroupLemon->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			//$this->strGroupLemon->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			//$this->strGroupLemon->AddAction(new QEnterKeyEvent(), new QTerminateAction());
 	        
 			$this->strCompanyLemon = new QTextBox($this);
 			$this->strCompanyLemon->Name = 'Company';
-			$this->strCompanyLemon->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
-			$this->strCompanyLemon->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
-			$this->strCompanyLemon->AddAction(new QEnterKeyEvent(), new QTerminateAction());
+			//$this->strCompanyLemon->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			//$this->strCompanyLemon->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+			//$this->strCompanyLemon->AddAction(new QEnterKeyEvent(), new QTerminateAction());
 			
+			$this->btnSearch = new QButton($this);
+	        $this->btnSearch->Text = 'Search';
+	        $this->btnSearch->CssClass = 'primary';
+	        $this->btnSearch->AddAction(new QClickEvent(), new QAjaxControlAction($this,'dtgLemonAssessments_Refresh'));
+          
 	        $this->dtgLemonAssessments = new LemonAssessmentDataGrid($this);
             $this->dtgLemonAssessments->Paginator = new QPaginator($this->dtgLemonAssessments);
             $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('User', '<?= $_CONTROL->ParentControl->RenderUserLinkLemon($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px',

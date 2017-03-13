@@ -12,6 +12,8 @@
 		<div class="filterBy">Group Name <?php $_CONTROL->strGroupLemon->Render(); ?></div>
 		<div class="filterBy">Company <?php $_CONTROL->strCompanyLemon->Render(); ?></div>
 		<div class="cleaner">&nbsp;<br><br></div>
+		<?php $_CONTROL->btnSearch->Render(); ?>
+		<br>
 	<?php $_CONTROL->dtgLemonAssessments->Render(); ?> 
 	<br>
 	<?php $_CONTROL->btnAddLemonAssessment->Render(); ?> 
