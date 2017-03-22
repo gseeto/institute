@@ -378,7 +378,7 @@ class ViewChecklistForm extends InstituteForm {
 				$this->displaytwentyone();
 				break;
 			default:
-				QApplication::Redirect(__SUBDIRECTORY__.'/checklist/i4center/viewAssessment.php');
+				$this->displayone();
 				break;
 		}
 	}
