@@ -21,7 +21,7 @@ class AdminForm extends InstituteForm {
 	protected function Form_Create() {
 		$this->pnlSideNav = new QPanel($this);
         $this->pnlSideNav->Position = QPosition::Relative;
-        $this->pnlSideNav->CssClass = 'panelSideNavigation';
+        $this->pnlSideNav->CssClass = '';
         $this->pnlSideNav->AutoRenderChildren = true;
                
         $this->pnlMainContent = new QPanel($this);

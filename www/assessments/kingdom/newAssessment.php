@@ -45,30 +45,22 @@ class NewKingdomAssessmentForm extends InstituteForm {
 		$this->dtgAssessmentQuestions->CellPadding = 5;
 		$this->dtgAssessmentQuestions->SetDataBinder('dtgAssessmentQuestions_Bind',$this);
 		$this->dtgAssessmentQuestions->UseAjax = true;
-		
-		$objStyle = $this->dtgAssessmentQuestions->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgAssessmentQuestions->AlternateRowStyle;
-        $objStyle->BackColor = '#CCCCCC';
+		$this->dtgAssessmentQuestions->CssClass = 'table table-striped table-hover';		
 
         $objStyle = $this->dtgAssessmentQuestions->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgAssessmentQuestions->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = 'Submit';
-	 	$this->btnSubmit->CssClass = 'primary';
 	 	$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 
 	 	$this->btnCancel = new QButton($this);
         $this->btnCancel->Text = 'Cancel';
-	 	$this->btnCancel->CssClass = 'primary';
 	 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));	
 	}
 	
@@ -117,7 +109,7 @@ class NewKingdomAssessmentForm extends InstituteForm {
             // explicitly specify the control ID
             $lstImportance = new QListBox($this->dtgAssessmentQuestions, $strControlId);
             $lstImportance->Width = 100;
-            $lstImportance->ForeColor = '#F90949';
+            $lstImportance->CssClass = 'form-control';
         	// Initialize values from previous assessment
             if($this->bEditing) {
             	$value = KingdomBusinessResults::GetImportanceByAssessmentIdAndQuestionId($this->objKingdomAssessment->Id, $objQuestions->Id);
@@ -157,7 +149,7 @@ class NewKingdomAssessmentForm extends InstituteForm {
             // explicitly specify the control ID
             $lstPerformance = new QListBox($this->dtgAssessmentQuestions, $strControlId);
             $lstPerformance->Width = 100;
-            $lstPerformance->ForeColor = '#131BF9';
+            $lstPerformance->CssClass = 'form-control';
             
         	// Initialize values from previous assessment
             if($this->bEditing) {

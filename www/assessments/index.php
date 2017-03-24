@@ -60,6 +60,12 @@ class AssessmentForm extends InstituteForm {
 							case 'Post Venture Assessment':
 								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnPostVentureAssessment_Click'));	
 								break;
+							case 'Partnering Awareness Assessment':
+								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnPartneringAwarenessAssessment_Click'));	
+								break;
+							case 'Partnering Readiness Assessment':
+								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnPartneringReadinessAssessment_Click'));	
+								break;
 						}
 											
 					} else {
@@ -132,6 +138,12 @@ class AssessmentForm extends InstituteForm {
 	
 	protected function btnPostVentureAssessment_Click() {
 		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/postventure/');
+	}
+	protected function btnPartneringAwarenessAssessment_Click() {
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/partneraware/');
+	}
+	protected function btnPartneringReadinessAssessment_Click() {
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/partnerready/');
 	}
 	
 }

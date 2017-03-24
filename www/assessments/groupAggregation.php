@@ -17,6 +17,8 @@ class GroupAggregationForm extends InstituteForm {
 	protected $selectedLemonGroups;
 	public $strKeycode;
 	protected $btnLemon;
+	protected $dtgPartneringAwarenessAssessments;
+	protected $dtgPartneringReadinessAssessments;
 
 
 	protected function Form_Run() {
@@ -32,7 +34,7 @@ class GroupAggregationForm extends InstituteForm {
 		$this->btnViewGlobalLemonResults = new QButton($this);
 		$this->btnViewGlobalLemonResults->Name = 'View Global LEMON Statistics';
 		$this->btnViewGlobalLemonResults->Text = 'View Global LEMON Statistics';
-		$this->btnViewGlobalLemonResults->CssClass = 'primary';
+		$this->btnViewGlobalLemonResults->CssClass = 'btn btn-default';
 		if(QApplication::$Login->Role->Name != 'Administrator') {
 			$this->btnViewGlobalLemonResults->Visible = false;
 		}
@@ -45,7 +47,7 @@ class GroupAggregationForm extends InstituteForm {
 		$this->btnLemon = new QButton($this);
 		$this->btnLemon->Text = 'Submit';
 		$this->btnLemon->HtmlEntities = false;
-		$this->btnLemon->CssClass = 'primary';
+		$this->btnLemon->CssClass = 'btn btn-default';
 		$this->btnLemon->AddAction(new QClickEvent(), new QAjaxAction('dtgGroupLemonAssessments_Refresh'));
 		
 		$this->selectedLemonGroups = array();
@@ -66,27 +68,20 @@ class GroupAggregationForm extends InstituteForm {
 		$this->dtgGroupLemonAssessments->SetDataBinder('dtgGroupLemonAssessments_Bind',$this);
 		$this->dtgGroupLemonAssessments->NoDataHtml = 'No LEMON Assessments have been assigned.';
 		$this->dtgGroupLemonAssessments->UseAjax = true;
-		
-		$this->dtgGroupLemonAssessments->GridLines = QGridLines::Both;
-		$objStyle = $this->dtgGroupLemonAssessments->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgGroupLemonAssessments->AlternateRowStyle;
-        $objStyle->BackColor = '#ffffff';
+		$this->dtgGroupLemonAssessments->CssClass = 'table table-striped table-hover';
 
         $objStyle = $this->dtgGroupLemonAssessments->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgGroupLemonAssessments->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $this->btnAggregateGroups = new QButton($this);
 		$this->btnAggregateGroups->Name = 'Aggregate Selected Groups';
 		$this->btnAggregateGroups->Text = 'Aggregate Selected Groups';
-		$this->btnAggregateGroups->CssClass = 'primary';
+		$this->btnAggregateGroups->CssClass = 'btn btn-default';
 		if(QApplication::$Login->Role->Name != 'Administrator') {
 			$this->btnAggregateGroups->Visible = false;
 		}
@@ -110,21 +105,14 @@ class GroupAggregationForm extends InstituteForm {
 		$this->dtgGroupTenPAssessments->SortColumnIndex = 1;
 		$this->dtgGroupTenPAssessments->ItemsPerPage = 20;
 		
-		$this->dtgGroupTenPAssessments->GridLines = QGridLines::Both;
-		$objStyle = $this->dtgGroupTenPAssessments->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgGroupTenPAssessments->AlternateRowStyle;
-        $objStyle->BackColor = '#ffffff';
-
+		$this->dtgGroupTenPAssessments->CssClass = 'table table-striped table-hover';
         $objStyle = $this->dtgGroupTenPAssessments->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgGroupTenPAssessments->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         /*************************************************************************/	
         $this->dtgGroupTenFAssessments = new GroupAssessmentListDataGrid($this);
         $this->dtgGroupTenFAssessments->Paginator = new QPaginator($this->dtgGroupTenFAssessments);
@@ -142,21 +130,15 @@ class GroupAggregationForm extends InstituteForm {
 		$this->dtgGroupTenFAssessments->SortColumnIndex = 1;
 		$this->dtgGroupTenFAssessments->ItemsPerPage = 20;
 		
-		$this->dtgGroupTenFAssessments->GridLines = QGridLines::Both;
-		$objStyle = $this->dtgGroupTenFAssessments->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgGroupTenFAssessments->AlternateRowStyle;
-        $objStyle->BackColor = '#ffffff';
+		$this->dtgGroupTenFAssessments->CssClass = 'table table-striped table-hover';
 
         $objStyle = $this->dtgGroupTenFAssessments->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgGroupTenFAssessments->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         /*************************************************************************/	
         $this->dtgGroupIntegrationAssessments = new GroupAssessmentListDataGrid($this);
         $this->dtgGroupIntegrationAssessments->Paginator = new QPaginator($this->dtgGroupIntegrationAssessments);
@@ -174,21 +156,15 @@ class GroupAggregationForm extends InstituteForm {
 		$this->dtgGroupIntegrationAssessments->SortColumnIndex = 1;
 		$this->dtgGroupIntegrationAssessments->ItemsPerPage = 20;
 		
-		$this->dtgGroupIntegrationAssessments->GridLines = QGridLines::Both;
-		$objStyle = $this->dtgGroupIntegrationAssessments->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgGroupIntegrationAssessments->AlternateRowStyle;
-        $objStyle->BackColor = '#ffffff';
+		$this->dtgGroupIntegrationAssessments->CssClass = 'table table-striped table-hover';
 
         $objStyle = $this->dtgGroupIntegrationAssessments->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgGroupIntegrationAssessments->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         /*************************************************************************/	
         
         $this->dtgGroupKingdomAssessments = new GroupAssessmentListDataGrid($this);
@@ -208,21 +184,15 @@ class GroupAggregationForm extends InstituteForm {
 		$this->dtgGroupKingdomAssessments->SortColumnIndex = 1;
 		$this->dtgGroupKingdomAssessments->ItemsPerPage = 20;
 		
-		$this->dtgGroupKingdomAssessments->GridLines = QGridLines::Both;
-		$objStyle = $this->dtgGroupKingdomAssessments->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgGroupKingdomAssessments->AlternateRowStyle;
-        $objStyle->BackColor = '#ffffff';
+		$this->dtgGroupKingdomAssessments->CssClass = 'table table-striped table-hover';
 
         $objStyle = $this->dtgGroupKingdomAssessments->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgGroupKingdomAssessments->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         /*************************************************************************/	
         
         $this->dtgPostVentureAssessments = new GroupAssessmentListDataGrid($this);
@@ -241,21 +211,15 @@ class GroupAggregationForm extends InstituteForm {
 		$this->dtgPostVentureAssessments->SortColumnIndex = 1;
 		$this->dtgPostVentureAssessments->ItemsPerPage = 20;
 		
-		$this->dtgPostVentureAssessments->GridLines = QGridLines::Both;
-		$objStyle = $this->dtgPostVentureAssessments->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgPostVentureAssessments->AlternateRowStyle;
-        $objStyle->BackColor = '#ffffff';
-
+		$this->dtgPostVentureAssessments->CssClass = 'table table-striped table-hover';
+		
         $objStyle = $this->dtgPostVentureAssessments->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgPostVentureAssessments->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
          /*************************************************************************/	
         
         $this->dtgGroupLRAAssessments = new GroupAssessmentListDataGrid($this);
@@ -274,21 +238,66 @@ class GroupAggregationForm extends InstituteForm {
 		$this->dtgGroupLRAAssessments->SortColumnIndex = 1;
 		$this->dtgGroupLRAAssessments->ItemsPerPage = 20;
 		
-		$this->dtgGroupLRAAssessments->GridLines = QGridLines::Both;
-		$objStyle = $this->dtgGroupLRAAssessments->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgGroupLRAAssessments->AlternateRowStyle;
-        $objStyle->BackColor = '#ffffff';
-
+		$this->dtgGroupLRAAssessments->CssClass = 'table table-striped table-hover';
         $objStyle = $this->dtgGroupLRAAssessments->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgGroupLRAAssessments->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
+        /****************************************************************************************************/
+        $this->dtgPartneringReadinessAssessments = new GroupAssessmentListDataGrid($this);
+        $this->dtgPartneringReadinessAssessments->Paginator = new QPaginator($this->dtgPartneringReadinessAssessments);
+        $this->dtgPartneringReadinessAssessments->AddColumn(new QDataGridColumn('Key Code', '<?= $_ITEM->KeyCode ?>', 'HtmlEntities=false', 'Width=200px' ));
+        $this->dtgPartneringReadinessAssessments->AddColumn(new QDataGridColumn('Description', '<?= $_ITEM->Description ?>', 'HtmlEntities=false', 'Width=300px' ));
+        $this->dtgPartneringReadinessAssessments->AddColumn(new QDataGridColumn('Total Keys', '<?= $_ITEM->TotalKeys ?>', 'HtmlEntities=false', 'Width=50px' ));
+        $this->dtgPartneringReadinessAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_ITEM->KeysLeft ?>', 'HtmlEntities=false', 'Width=50px' ));   
+        $this->dtgPartneringReadinessAssessments->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__ .InstituteForm::DirAssessments. "partnerready/groupAggregationResult.php/". $_ITEM->Id ?>','Result','Results');
+			
+        $this->dtgPartneringReadinessAssessments->CellPadding = 5;
+		$this->dtgPartneringReadinessAssessments->SetDataBinder('dtgPartneringReadinessAssessments_Bind',$this);
+		$this->dtgPartneringReadinessAssessments->NoDataHtml = 'No Partner Readiness Assessments have been assigned.';
+		$this->dtgPartneringReadinessAssessments->UseAjax = true;
+		
+		$this->dtgPartneringReadinessAssessments->SortColumnIndex = 1;
+		$this->dtgPartneringReadinessAssessments->ItemsPerPage = 20;
+		
+		$this->dtgPartneringReadinessAssessments->CssClass = 'table table-striped table-hover';
+
+        $objStyle = $this->dtgPartneringReadinessAssessments->HeaderRowStyle;
+        $objStyle->ForeColor = '#ffffff';
+        $objStyle->BackColor = '#337ab7'; 
+        
+        $objStyle = $this->dtgPartneringReadinessAssessments->HeaderLinkStyle;
+        $objStyle->ForeColor = '#ffffff';
+        $objStyle->BackColor = '#337ab7'; 
+        /****************************************************************************************************/
+        $this->dtgPartneringAwarenessAssessments = new GroupAssessmentListDataGrid($this);
+        $this->dtgPartneringAwarenessAssessments->Paginator = new QPaginator($this->dtgPartneringAwarenessAssessments);
+        $this->dtgPartneringAwarenessAssessments->AddColumn(new QDataGridColumn('Key Code', '<?= $_ITEM->KeyCode ?>', 'HtmlEntities=false', 'Width=200px' ));
+        $this->dtgPartneringAwarenessAssessments->AddColumn(new QDataGridColumn('Description', '<?= $_ITEM->Description ?>', 'HtmlEntities=false', 'Width=300px' ));
+        $this->dtgPartneringAwarenessAssessments->AddColumn(new QDataGridColumn('Total Keys', '<?= $_ITEM->TotalKeys ?>', 'HtmlEntities=false', 'Width=50px' ));
+        $this->dtgPartneringAwarenessAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_ITEM->KeysLeft ?>', 'HtmlEntities=false', 'Width=50px' ));   
+        $this->dtgPartneringAwarenessAssessments->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__ .InstituteForm::DirAssessments. "partneraware/groupAggregationResult.php/". $_ITEM->Id ?>','Result','Results');
+			
+        $this->dtgPartneringAwarenessAssessments->CellPadding = 5;
+		$this->dtgPartneringAwarenessAssessments->SetDataBinder('dtgPartneringAwarenessAssessments_Bind',$this);
+		$this->dtgPartneringAwarenessAssessments->NoDataHtml = 'No Partner Awareness Assessments have been assigned.';
+		$this->dtgPartneringAwarenessAssessments->UseAjax = true;
+		
+		$this->dtgPartneringAwarenessAssessments->SortColumnIndex = 1;
+		$this->dtgPartneringAwarenessAssessments->ItemsPerPage = 20;
+		
+		$this->dtgPartneringAwarenessAssessments->CssClass = 'table table-striped table-hover';
+
+        $objStyle = $this->dtgPartneringAwarenessAssessments->HeaderRowStyle;
+        $objStyle->ForeColor = '#ffffff';
+        $objStyle->BackColor = '#337ab7'; 
+        
+        $objStyle = $this->dtgPartneringAwarenessAssessments->HeaderLinkStyle;
+        $objStyle->ForeColor = '#ffffff';
+        $objStyle->BackColor = '#337ab7'; 
 	}
 
 	public function dtgGroupLemonAssessments_Refresh($strFormId, $strControlId, $strParameter) {
@@ -333,6 +342,7 @@ class GroupAggregationForm extends InstituteForm {
             $chkSelected = new QCheckBox($this->dtgGroupLemonAssessments, $strControlId);
             $chkSelected->Text = 'Select';
             $chkSelected->ActionParameter = $objGroup->Id;
+            $chkSelected->CssClass = 'form-control';
             $chkSelected->AddAction(new QClickEvent(), new QAjaxAction('chkSelected_Click'));
         }
         return $chkSelected->Render(false);
@@ -383,6 +393,44 @@ class GroupAggregationForm extends InstituteForm {
 				}					
 			}	
 			$this->dtgGroupTenPAssessments->DataSource = $filteredGroupArray; 
+		}
+	}
+	
+	public function dtgPartneringReadinessAssessments_Bind() {
+		$objConditions = QQ::All();
+		$objConditions = QQ::AndCondition($objConditions,QQ::Equal( QQN::GroupAssessmentList()->Resource->Name,'Partnering Readiness Assessment')); 
+		$objClauses = array();
+		$filteredGroupArray = array();
+		$groupArray = GroupAssessmentList::QueryArray($objConditions,$objClauses);	
+		if (QApplication::$Login->Role->Name == 'Administrator') {
+			$this->dtgPartneringReadinessAssessments->DataSource = $groupArray;
+		} else {
+			$objUserArray = QApplication::$Login->GetUserArray();
+			foreach ($groupArray as $objGroupAssessment) {
+				if($objGroupAssessment->IsUserAsAssessmentManagerAssociated($objUserArray[0])){
+					$filteredGroupArray[] = $objGroupAssessment;
+				}					
+			}	
+			$this->dtgPartneringReadinessAssessments->DataSource = $filteredGroupArray; 
+		}
+	}
+	
+	public function dtgPartneringAwarenessAssessments_Bind() {
+		$objConditions = QQ::All();
+		$objConditions = QQ::AndCondition($objConditions,QQ::Equal( QQN::GroupAssessmentList()->Resource->Name,'Partnering Awareness Assessment')); 
+		$objClauses = array();
+		$filteredGroupArray = array();
+		$groupArray = GroupAssessmentList::QueryArray($objConditions,$objClauses);	
+		if (QApplication::$Login->Role->Name == 'Administrator') {
+			$this->dtgPartneringAwarenessAssessments->DataSource = $groupArray;
+		} else {
+			$objUserArray = QApplication::$Login->GetUserArray();
+			foreach ($groupArray as $objGroupAssessment) {
+				if($objGroupAssessment->IsUserAsAssessmentManagerAssociated($objUserArray[0])){
+					$filteredGroupArray[] = $objGroupAssessment;
+				}					
+			}	
+			$this->dtgPartneringAwarenessAssessments->DataSource = $filteredGroupArray; 
 		}
 	}
 	
