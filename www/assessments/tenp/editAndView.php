@@ -106,24 +106,25 @@ class EditViewTenPAssessmentForm extends InstituteForm {
 			$this->dtgAssessmentQuestionArray[$i]->AddColumn(new QDataGridColumn('Performance', '<?= $_FORM->lstPerformance_Render($_ITEM) ?>','HtmlEntities=false'));
 			$this->dtgAssessmentQuestionArray[$i]->CellPadding = 5;
 			$this->dtgAssessmentQuestionArray[$i]->UseAjax = true;
+			$this->dtgAssessmentQuestionArray[$i]->CssClass = 'table table-striped table-hover';
 	
 			$assessmentArray = TenPQuestions::LoadArrayByCategoryId($i+1);					
 			$this->dtgAssessmentQuestionArray[$i]->DataSource = $assessmentArray; 
 			
-			$objStyle = $this->dtgAssessmentQuestionArray[$i]->RowStyle;
+			/*$objStyle = $this->dtgAssessmentQuestionArray[$i]->RowStyle;
 	        $objStyle->BackColor = '#ffffff';
 	        $objStyle->FontSize = 12;
 	
 	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->AlternateRowStyle;
 	        $objStyle->BackColor = '#CCCCCC';
-	
+		*/
 	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	        
 	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	 		
 	 	}
 		       
@@ -302,7 +303,7 @@ public function lstImportance_Render(TenPQuestions $objQuestions) {
             // explicitly specify the control ID
             $lstImportance = new QListBox($this->dtgAssessmentQuestionArray[$index], $strControlId);
             $lstImportance->Width = 100;
-            $lstImportance->ForeColor = '#F90949';
+            $lstImportance->CssClass = 'form-control';
         	// Initialize values from previous assessment
             if($this->bEditing) {
             	$value = TenPResults::GetImportanceByAssessmentIdAndQuestionId($this->objTenPAssessment->Id, $objQuestions->Id);
@@ -343,7 +344,7 @@ public function lstPerformance_Render(TenPQuestions $objQuestions) {
             // explicitly specify the control ID
             $lstPerformance = new QListBox($this->dtgAssessmentQuestionArray[$index], $strControlId);
             $lstPerformance->Width = 100;
-            $lstPerformance->ForeColor = '#131BF9';
+            $lstPerformance->CssClass = 'form-control';
             
         	// Initialize values from previous assessment
             if($this->bEditing) {

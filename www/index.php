@@ -26,17 +26,20 @@ class LoginForm extends InstituteForm {
 
 		$this->txtUsername = new QTextBox($this);
 		$this->txtUsername->Name = 'User Name';
+		$this->txtUsername->CssClass = 'form-control';
 		$this->txtUsername->Required = true;
 
 		$this->txtPassword = new QTextBox($this);
 		$this->txtPassword->Name = 'Password';
 		$this->txtPassword->TextMode = QTextMode::Password;
 		$this->txtPassword->Required = true;
+		$this->txtPassword->CssClass = 'form-control';
 		$this->txtPassword->CausesValidation = true;
 			
 		$this->chkRemember = new QCheckBox($this);
 		$this->chkRemember->Name = '';
 		$this->chkRemember->Text = 'Remember Me';
+		$this->chkRemember->CssClass = 'checkbox';
 
 		$this->btnLogin = new QButton($this);
 		$this->btnLogin->Text = 'Login';

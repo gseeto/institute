@@ -116,7 +116,7 @@ class GlobalForm extends InstituteForm {
         $this->dtgByCountry->CellPadding = 4;
 		$this->dtgByCountry->NoDataHtml = '';
 		$this->dtgByCountry->UseAjax = true;
-		$this->dtgByCountry->GridLines = 'both';
+		$this->dtgByCountry->CssClass = 'table table-bordered';
 		
 		$this->dtgByIndustry = new QDataGrid($this);
  		$this->dtgByIndustry->AddColumn(new QDataGridColumn('Industry', '<?= $_ITEM->mykey ?>', 'HtmlEntities=false', 'Width=100px' ));
@@ -125,7 +125,7 @@ class GlobalForm extends InstituteForm {
         $this->dtgByIndustry->CellPadding = 4;
 		$this->dtgByIndustry->NoDataHtml = '';
 		$this->dtgByIndustry->UseAjax = true;
-		$this->dtgByIndustry->GridLines = 'both';
+		$this->dtgByIndustry->CssClass = 'table table-bordered';
 		
 		$this->dtgKPIByCountry = new QDataGrid($this);
  		$this->dtgKPIByCountry->AddColumn(new QDataGridColumn('Country', '<?= $_ITEM->mykey ?>', 'HtmlEntities=false', 'Width=100px' ));
@@ -134,7 +134,7 @@ class GlobalForm extends InstituteForm {
         $this->dtgKPIByCountry->CellPadding = 4;
 		$this->dtgKPIByCountry->NoDataHtml = '';
 		$this->dtgKPIByCountry->UseAjax = true;
-		$this->dtgKPIByCountry->GridLines = 'both';
+		$this->dtgKPIByCountry->CssClass = 'table table-bordered';
 		
 		$this->dtgKPIByIndustry = new QDataGrid($this);
  		$this->dtgKPIByIndustry->AddColumn(new QDataGridColumn('Industry', '<?= $_ITEM->mykey ?>', 'HtmlEntities=false', 'Width=100px' ));
@@ -143,11 +143,12 @@ class GlobalForm extends InstituteForm {
         $this->dtgKPIByIndustry->CellPadding = 4;
 		$this->dtgKPIByIndustry->NoDataHtml = '';
 		$this->dtgKPIByIndustry->UseAjax = true;
-		$this->dtgKPIByIndustry->GridLines = 'both';
+		$this->dtgKPIByIndustry->CssClass = 'table table-bordered';
 		
 		$this->lstSphereSelect = new QListBox($this);
 		$this->lstSphereSelect->Name = "View Spheres of Society: ";
 		$this->lstSphereSelect->Width = 200;
+		$this->lstSphereSelect->CssClass = 'form-control';
 		$this->lstSphereSelect->AddItem("Globally","Globally");
 		foreach($countryList as $strCountry) {
 			$this->lstSphereSelect->AddItem($strCountry,$strCountry);
@@ -156,13 +157,13 @@ class GlobalForm extends InstituteForm {
 		$this->btnSelectSphere = new QButton($this);
 		$this->btnSelectSphere->Name = "Submit";
 		$this->btnSelectSphere->Text = "Submit";
-		$this->btnSelectSphere->CssClass = "primary";
+		$this->btnSelectSphere->CssClass = "btn btn-default";
 		$this->btnSelectSphere->AddAction(new QClickEvent(), new QAjaxAction('btnSphere_Click'));
 		
 		$this->btnCancelQuery = new QButton($this);
 		$this->btnCancelQuery->Name = "Cancel Query";
 		$this->btnCancelQuery->Text = "Cancel Query";
-		$this->btnCancelQuery->CssClass = "primary";
+		$this->btnCancelQuery->CssClass = "btn btn-default";
 		$this->btnCancelQuery->AddAction(new QClickEvent(), new QAjaxAction('btnCancelQuery_Click'));
 	}
 

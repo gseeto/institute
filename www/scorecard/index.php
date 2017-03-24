@@ -17,6 +17,7 @@ class ScorecardSelectForm extends InstituteForm {
 	protected function Form_Create() {
 		
 		$this->rbnScorecards = new QRadioButtonList($this);
+		$this->rbnScorecards->CssClass = 'checkbox';
 		$objUser = User::LoadArrayByLoginId(QApplication::$LoginId);
 		$objScorecardArray = $objUser[0]->GetScorecardArray();
 		foreach($objScorecardArray as $objScorecard) {
@@ -24,7 +25,6 @@ class ScorecardSelectForm extends InstituteForm {
 		}
 		$this->btnSubmit = new QButton($this);
 		$this->btnSubmit->Text = "Review Selected Scorecard";
-		$this->btnSubmit->CssClass = 'primary';
 		$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 	}
 	

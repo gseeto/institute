@@ -55,7 +55,7 @@ foreach($assessmentArray as $intAssessmentId) {
 $height = 250 + count($assessmentArray)*45;
 $graph = new Graph($height, $height);	
 //$graph = new Graph(710, 710);
-$graph->SetScale("textlin");
+$graph->SetScale("textlin",100,0);
 //$graph->yaxis->scale->ticks->Set(1.0);
 
 $graph->SetShadow();

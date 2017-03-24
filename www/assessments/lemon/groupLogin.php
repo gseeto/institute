@@ -13,16 +13,17 @@ class LemonGroupLoginForm extends InstituteForm {
 	protected function Form_Create() {		
 		$this->txtKeyCode = new QTextBox($this);
 		$this->txtKeyCode->Name = "KeyCode";
-		$this->txtKeyCode->Width = 200;
+		$this->txtKeyCode->CssClass = 'form-control';
+		$this->txtKeyCode->HtmlBefore = 'If you have a code, please enter it here: &nbsp;';
 		
 		$this->btnSubmit = new QButton($this);
 		$this->btnSubmit->Text = "Submit";
-		$this->btnSubmit->CssClass = "externButton";
+		$this->btnSubmit->CssClass = "btn btn-default";
 		$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 		
 		$this->lblErrorMsg = new QLabel($this);
 		$this->lblErrorMsg->Visible = false;
-		$this->lblErrorMsg->CssClass = "errorMsg";
+		$this->lblErrorMsg->CssClass = "text-danger";
 	}
 	
 	protected function btnSubmit_Click() {

@@ -42,35 +42,21 @@ class NewLemonAssessmentForm extends InstituteForm {
 		//$this->objLemonAssessment->ResourceStatusId
 		$this->dtgAssessmentQuestions = new LemonAssessmentDataGrid($this);
 		$this->dtgAssessmentQuestions->AddColumn(new QDataGridColumn('', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=30px' ));
-		$this->dtgAssessmentQuestions->AddColumn(new QDataGridColumn('Question', '<?= $_ITEM->Text ?>', 'HtmlEntities=false', 'Width=450px' ));			
+		$this->dtgAssessmentQuestions->AddColumn(new QDataGridColumn('Question', '<?= $_ITEM->Text ?>', 'HtmlEntities=false' ));			
 		$this->dtgAssessmentQuestions->AddColumn(new QDataGridColumn('Answer', '<?= $_FORM->lstAnswer_Render($_ITEM) ?>','HtmlEntities=false'));
 		$this->dtgAssessmentQuestions->CellPadding = 5;
 		$this->dtgAssessmentQuestions->SetDataBinder('dtgAssessmentQuestions_Bind',$this);
 		$this->dtgAssessmentQuestions->UseAjax = true;
-		
-		$objStyle = $this->dtgAssessmentQuestions->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgAssessmentQuestions->AlternateRowStyle;
-        $objStyle->BackColor = '#CCCCCC';
-
-        $objStyle = $this->dtgAssessmentQuestions->HeaderRowStyle;
-        $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
-        
-        $objStyle = $this->dtgAssessmentQuestions->HeaderLinkStyle;
-        $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
-        
+		$this->dtgAssessmentQuestions->CssClass = 'table table-striped table-hover';
+		        
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = 'Submit';
-	 	$this->btnSubmit->CssClass = 'primary submit';
+	 	$this->btnSubmit->CssClass = 'btn btn-primary';
 	 	$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 
 	 	$this->btnCancel = new QButton($this);
         $this->btnCancel->Text = 'Cancel';
-	 	$this->btnCancel->CssClass = 'primary';
+	 	$this->btnCancel->CssClass = 'btn btn-primary';
 	 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));	
 	}
 	
@@ -135,7 +121,7 @@ class NewLemonAssessmentForm extends InstituteForm {
             // explicitly specify the control ID
             $lstValue = new QListBox($this->dtgAssessmentQuestions, $strControlId);
             $lstValue->Width = 100;
-            $lstValue->ForeColor = '#F90949';
+            $lstValue->CssClass = 'form-control center-block';
         	// Initialize values from previous assessment
             if($this->bEditing) {
             	$value = LemonAssessmentResults::GetValueByAssessmentIdAndQuestionId($this->objLemonAssessment->Id, $objQuestions->Id);

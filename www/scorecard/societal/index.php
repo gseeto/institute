@@ -37,7 +37,7 @@ class SocietalForm extends InstituteForm {
 			$dtgP->AddColumn(new QDataGridColumn('Societal Ills Being Addressed', '<?= $_FORM->RenderGiants($_ITEM, $_CONTROL) ?>', 'HtmlEntities=false', 'Width=100px' ));
 			$dtgP->AddColumn(new QDataGridColumn('Spheres Or Sectors', '<?= $_FORM->RenderSpheres($_ITEM, $_CONTROL) ?>', 'HtmlEntities=false', 'Width=100px' ));
 			$dtgP->CellPadding = 5;
-			$dtgP->GridLines = QGridLines::Both;
+			$dtgP->CssClass = 'table table-bordered';
 
 			$objConditions = QQ::All();
 			$objClauses = array();					
@@ -53,10 +53,10 @@ class SocietalForm extends InstituteForm {
 			$dtgP->UseAjax = true;
 			$objStyle = $dtgP->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 	        
+	        $objStyle->BackColor = '#337ab7'; 	        
 	        $objStyle = $dtgP->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 	      
+	        $objStyle->BackColor = '#337ab7'; 	      
 			
 			$this->dtgPArray[] = $dtgP;
 		}
@@ -215,7 +215,7 @@ class SocietalForm extends InstituteForm {
     	$lblAssociatedGiants->Text = $strGiants;
     	$btnAssociateGiant = new QButton($dtgP);
     	$btnAssociateGiant->Text = 'Edit';
-    	$btnAssociateGiant->CssClass = 'societalButton';
+    	$btnAssociateGiant->CssClass = 'btn btn-default';
     	$btnAssociateGiant->ActionParameter = $objStrategy->Id.",".$strGiants;
     	$btnAssociateGiant->AddAction(new QClickEvent(), new QAjaxAction('btnAssociateGiant_Clicked'));
     	return $lblAssociatedGiants->Render(false).'<br>'.$btnAssociateGiant->Render(false);
@@ -274,7 +274,7 @@ class SocietalForm extends InstituteForm {
     	$lblSpheres->Text = $strSpheres;
     	$btnAssociateSphere = new QButton($dtgP);
     	$btnAssociateSphere->Text = 'Edit';
-    	$btnAssociateSphere->CssClass = 'societalButton';
+    	$btnAssociateSphere->CssClass = 'btn btn-default';
     	$btnAssociateSphere->ActionParameter = $objStrategy->Id.",".$strSpheres;
     	$btnAssociateSphere->AddAction(new QClickEvent(), new QAjaxAction('btnAssociateSphere_Clicked'));
     	return $lblSpheres->Render(false).'<br>' . $btnAssociateSphere->Render(false);

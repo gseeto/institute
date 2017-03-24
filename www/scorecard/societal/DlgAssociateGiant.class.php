@@ -37,15 +37,16 @@
         	$this->lstSelectedGiants = new QListBox($this);
         	$this->lstSelectedGiants->Height = 80;
         	$this->lstSelectedGiants->SelectionMode = QSelectionMode::Multiple;
+        	$this->lstSelectedGiants->CssClass = 'form-control';
         	
         	$this->btnSelect = new QButton($this);
         	$this->btnSelect->Text = ' >> ';
-        	$this->btnSelect->CssClass = 'primary';
+        	$this->btnSelect->CssClass = 'btn btn-default';
         	$this->btnSelect->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnSelect_Click'));            
         	
         	$this->btnDeselect = new QButton($this);
         	$this->btnDeselect->Text = ' << ';
-        	$this->btnDeselect->CssClass = 'primary';
+        	$this->btnDeselect->CssClass = 'btn btn-default';
         	$this->btnDeselect->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnDeselect_Click')); 	
         	
         	$this->btnAddGiant = new QButton($this);
@@ -59,12 +60,12 @@
         	        	        	
             $this->btnUpdate = new QButton($this);
             $this->btnUpdate->Text = 'Save/Update';
-            $this->btnUpdate->CssClass = 'primary';
+            $this->btnUpdate->CssClass = 'btn btn-default';
             $this->btnUpdate->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnUpdate_Click'));
             
             $this->btnCancel = new QButton($this);
             $this->btnCancel->Text = 'Cancel';
-            $this->btnCancel->CssClass = 'primary';
+            $this->btnCancel->CssClass = 'btn btn-default';
             $this->btnCancel->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnCancel_Click'));
         }
       

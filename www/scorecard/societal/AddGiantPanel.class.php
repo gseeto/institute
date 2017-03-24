@@ -35,16 +35,18 @@
             // Let's set up some other local child control
             $this->txtGiant = new QTextBox($this);
             $this->txtGiant->Name = 'Add a Societal Ill:';
+            $this->txtGiant->CssClass = 'form-control';
         	$this->txtCountry = new QTextBox($this);
         	$this->txtCountry->Name = 'Specify the Country where this issue is being addressed:';
+        	$this->txtCountry->CssClass = 'form-control';
      		$this->btnAddNewGiant = new QButton($this);
      		$this->btnAddNewGiant->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnAddNewGiant_Click')); 
      		$this->btnAddNewGiant->Text = 'Add Societal Ill';  
-     		$this->btnAddNewGiant->CssClass = 'primary';  		
+     		$this->btnAddNewGiant->CssClass = 'btn btn-default';  		
      		$this->btnCancelGiant = new QButton($this);
      		$this->btnCancelGiant->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnCancelGiant_Click'));
      		$this->btnCancelGiant->Text = 'Cancel';
-     		$this->btnCancelGiant->CssClass = 'primary';
+     		$this->btnCancelGiant->CssClass = 'btn btn-default';
         }
         
         public function btnAddNewGiant_Click() {

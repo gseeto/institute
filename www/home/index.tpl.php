@@ -30,17 +30,17 @@
             
         </script>       
 <?php // $this->lblDebug->Render(); ?>
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#tab1">My Assessments and Scorecards</a></li>
+  <li><a data-toggle="tab" href="#tab2">My Details</a></li>
+  <li><a data-toggle="tab" href="#tab3">My Login Details</a></li>
+  <li><a data-toggle="tab" href="#tab4">My Associated Companies</a></li>
+</ul>
 
-<div id="tabs">
-	<ul>
-		<li><a href="#tabs-1">My Assessments and Scorecards</a></li>
-		<li><a href="#tabs-2">My Details</a></li>
-		<li><a href="#tabs-3">My Login Details</a></li>
-		<li><a href="#tabs-4">My Associated Companies</a></li>
-	</ul>
-
-<div id="tabs-1" style="height:900px;">
-	<div style="position:relative; float:right; width:620px; margin-left:20px;">
+<div class="tab-content">
+  <div id="tab1" class="tab-pane fade in active">
+  	<div class="mt-5">&nbsp;</div>
+    <div style="position:relative; float:right; width:620px; margin-left:20px;">
 		<div class='infographic'>
 		<h2 style="text-align:center;">What leadership shape are you in?</h2>
 		<img src="<?php _p(__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__); ?>/frame.png" style="z-index:2000; width:350px; height:300px; position:absolute; left:145px; top:70px;" />
@@ -120,10 +120,10 @@
 		}
 	?>
 	</ul>
-</div>
-
-<div id="tabs-2">
-	<?php 
+  </div>
+  <div id="tab2" class="tab-pane fade">
+  	<div class="mt-5">&nbsp;</div>
+    <?php 
 		$this->txtFirstName->RenderWithName();
 		$this->lblFirstName->RenderWithName();
 		$this->txtLastName->RenderWithName();
@@ -148,34 +148,29 @@
 		$this->btnUpdate->Render();
 		$this->btnCancel->Render();
 	?>
-</div>
-<div id="tabs-3">
-	<?php 
+  </div>
+  <div id="tab3" class="tab-pane fade">
+  	<div class="mt-5">&nbsp;</div>
+    <?php 
 		$this->lblUsername->RenderWithName();
-		$this->txtUsername->RenderWithName();
+		$this->txtUsername->RenderWithName('CssClass="form-control"');
 		$this->lblRole->RenderWithName();
-		$this->txtPassword->RenderWithName();
+		$this->txtPassword->RenderWithName('CssClass="form-control"');
 		
 		$this->btnLoginUpdate->Render();
 		$this->btnLoginCancel->Render();
 	?>
-</div>
-
-<div id="tabs-4">
-	<p>These are the companies I am currently associated with</p>
+  </div>
+  <div id="tab4" class="tab-pane fade">
+  	<div class="mt-5">&nbsp;</div>
+    <p>These are the companies I am currently associated with</p>
 	<?php 
 		for($i=0; $i<count($this->lblCompanyName); $i++) {
 			$this->lblCompanyName[$i]->RenderWithName();
 			$this->lblCompanyAddress[$i]->RenderWithName();
 		}
 	?>
+  </div>
 </div>
 
-</div>
-
-<script type="text/javascript">
-<!--
-	$( "#tabs" ).tabs();
-//-->
-</script>
 <?php require(__INCLUDES__ . '/footer.inc.php'); ?>

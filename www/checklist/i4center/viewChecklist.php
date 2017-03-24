@@ -168,7 +168,7 @@ class ViewChecklistForm extends InstituteForm {
 		
 		$this->btnGeneratePdf =  new QButton($this);
 	 	$this->btnGeneratePdf->Text = 'Generate PDF of Report';
-	 	$this->btnGeneratePdf->CssClass = 'primary';
+	 	$this->btnGeneratePdf->CssClass = 'btn btn-default';
 	 	$this->btnGeneratePdf->AddAction(new QClickEvent(), new QAjaxAction('btnGeneratePdf_Click'));
 	 	
 		$this->arrayRating = array();
@@ -183,50 +183,44 @@ class ViewChecklistForm extends InstituteForm {
 			$this->dtgChecklistQuestionArray[$i]->AddColumn(new QDataGridColumn('Person Responsible', '<?= $_FORM->lstDRI_Render($_ITEM) ?>','HtmlEntities=false', 'Width=200px'));
 			$this->dtgChecklistQuestionArray[$i]->CellPadding = 5;
 			$this->dtgChecklistQuestionArray[$i]->UseAjax = true;
+			$this->dtgChecklistQuestionArray[$i]->CssClass = 'table table-striped table-hover';
 	
 			$checklistArray = BusinessChecklistQuestions::LoadArrayByCategoryId($i+1);					
 			$this->dtgChecklistQuestionArray[$i]->DataSource = $checklistArray; 
 			
 			$this->dtgChecklistQuestionArray[$i]->NoDataHtml = 'No Checklist Questions under this P.';
-			
-			$objStyle = $this->dtgChecklistQuestionArray[$i]->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 12;
-	
-	        $objStyle = $this->dtgChecklistQuestionArray[$i]->AlternateRowStyle;
-	        $objStyle->BackColor = '#CCCCCC';
-	
+						
 	        $objStyle = $this->dtgChecklistQuestionArray[$i]->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	        
 	        $objStyle = $this->dtgChecklistQuestionArray[$i]->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	 		
 	 	}
 		       
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = 'Submit';
-	 	$this->btnSubmit->CssClass = 'primary';
+	 	$this->btnSubmit->CssClass = 'btn btn-default';
 	 	$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 
 	 	$this->btnCancel = new QButton($this);
         $this->btnCancel->Text = 'Cancel';
-	 	$this->btnCancel->CssClass = 'primary';
+	 	$this->btnCancel->CssClass = 'btn btn-default';
 	 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));	
 	 	
 	 	$this->iCounter = 0;
 	 	$this->iSaveCategory = 1;
 	 	$this->btnPrev = new QButton($this);
         $this->btnPrev->Text = 'Previous';
-	 	$this->btnPrev->CssClass = 'primary';
+	 	$this->btnPrev->CssClass = 'btn btn-default';
 	 	$this->btnPrev->AddAction(new QClickEvent(), new QAjaxAction('btnPrev_Click'));
 	 	$this->btnPrev->Enabled = false;
 	 	
 	 	$this->btnNext = new QButton($this);
         $this->btnNext->Text = 'Next';
-	 	$this->btnNext->CssClass = 'primary';
+	 	$this->btnNext->CssClass = 'btn btn-default';
 	 	$this->btnNext->AddAction(new QClickEvent(), new QAjaxAction('btnNext_Click'));
 	 	
 	 	// initialize grid chart
@@ -419,6 +413,8 @@ public function lstDRI_Render(BusinessChecklistQuestions $objQuestions) {
             // explicitly specify the control ID
             $lstDri = new QListBox($this->dtgChecklistQuestionArray[$index], $strControlId);
             $lstDri->Width = 150;
+            $lstDri->CssClass = 'form-control';
+            
             //$lstDri->ForeColor = '#F90949';
         	// Initialize values from previous assessment
             $iUserId = BusinessChecklistResults::GetDriByChecklistIdAndQuestionId($this->objChecklist->Id, $objQuestions->Id);
@@ -455,7 +451,9 @@ public function lstRating_Render(BusinessChecklistQuestions $objQuestions) {
             // this method which is responsible for rendering the listbox.  Also, we must
             // explicitly specify the control ID
             $lstRating = new QListBox($this->dtgChecklistQuestionArray[$index], $strControlId);
-            $lstRating->Width = 50;
+            $lstRating->Width = 80;
+            $lstRating->CssClass = 'form-control';
+            
             //$lstRating->ForeColor = '#F90949';
         	// Initialize values from previous assessment
             $value = BusinessChecklistResults::GetValueByChecklistIdAndQuestionId($this->objChecklist->Id, $objQuestions->Id);

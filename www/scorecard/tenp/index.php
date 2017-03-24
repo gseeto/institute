@@ -76,7 +76,7 @@ public function writeToLogFile($stringData) {
 		}
 		// Display Statement if Category is Purpose or Positioning		
 		$this->lblStatement = new QLabel($this,'lblStatement');
-		$this->lblStatement->Width = 840;
+		//$this->lblStatement->Width = 840;
 		$this->lblStatement->Padding = '10px 30px';
 		$this->lblStatement->CssClass = 'statement editIcon';
 		$this->lblStatement->Cursor = 'pointer';
@@ -87,22 +87,22 @@ public function writeToLogFile($stringData) {
         $this->btnSaveStatement->AddAction(new QClickEvent(), new QAjaxAction('btnSaveStatement_Click'));
         $this->btnSaveStatement->PrimaryButton = true;
         $this->btnSaveStatement->CausesValidation = true;
-        $this->btnSaveStatement->CssClass = 'ui-button';
+        $this->btnSaveStatement->CssClass = 'btn btn-default';
         $this->btnSaveStatement->Display = false;
         // Make sure we turn off validation on the Cancel button
         $this->btnCancelStatement = new QButton($this,'btnCancelStatement');
         $this->btnCancelStatement->Text = 'Cancel';
      	$this->btnCancelStatement->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelStatement_Click(this)'));        
        	$this->btnCancelStatement->CausesValidation = false;
-       	$this->btnCancelStatement->CssClass = 'ui-button';
+       	$this->btnCancelStatement->CssClass = 'btn btn-default';
         $this->btnCancelStatement->Display = false;
             
 		$this->txtStatement = new QTextBox($this,'txtStatement');
 		$this->txtStatement->CssClass = 'statement';
-		$this->txtStatement->Width = 940;
+		//$this->txtStatement->Width = 940;
 		$this->txtStatement->TextMode = QTextMode::MultiLine;
-        $this->txtStatement->Height = 50;
-		$this->txtStatement->Columns = 5;
+        //$this->txtStatement->Height = 50;
+		//$this->txtStatement->Columns = 5;
 		$this->txtStatement->Display = false;
  		if(($this->intCategoryTypeId == CategoryType::Purpose) ||($this->intCategoryTypeId == CategoryType::Positioning)) {
  			$objStatementArray = Statement::LoadArrayByScorecardId($this->objScorecard->Id);
@@ -126,26 +126,25 @@ public function writeToLogFile($stringData) {
  		}
 		// Generate a summary of the P Strategys
 		$this->dtgStrategySummary = new StrategyDataGrid($this);
-		$this->dtgStrategySummary->AddColumn(new QDataGridColumn('Count', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=20px' ));
-		$this->dtgStrategySummary->AddColumn(new QDataGridColumn($this->strCategory.' Strategy', '<?= $_ITEM->Strategy ?>', 'HtmlEntities=false', 'Width=840px' ));
-		$this->dtgStrategySummary->AddColumn(new QDataGridColumn('KPI Rating', '<?= $_FORM->RenderKPIAverage($_ITEM->Id) ?>', 'HtmlEntities=false', 'Width=40px' ));
-		$this->dtgStrategySummary->CssClass = 'scorecard_table';
+		$this->dtgStrategySummary->AddColumn(new QDataGridColumn('Count', '<?= $_ITEM->Count ?>', 'HtmlEntities=false' ));
+		$this->dtgStrategySummary->AddColumn(new QDataGridColumn($this->strCategory.' Strategy', '<?= $_ITEM->Strategy ?>', 'HtmlEntities=false' ));
+		$this->dtgStrategySummary->AddColumn(new QDataGridColumn('KPI Rating', '<?= $_FORM->RenderKPIAverage($_ITEM->Id) ?>', 'HtmlEntities=false' ));
+		$this->dtgStrategySummary->CssClass = 'table table-bordered  scorecard_table';
 		$this->dtgStrategySummary->CellPadding = 7;
-		$this->dtgStrategySummary->GridLines = 'both';	
 		$this->dtgStrategySummary->SetDataBinder('dtgStrategySummary_Bind',$this);		
 		
 		$this->dtgStrategySummary->NoDataHtml = '<div style=\'padding:20px;\'><p><b>'.$this->strCategory.' Strategy</b></p>' .'No Strategies.<br></div>';
 		$this->dtgStrategySummary->UseAjax = true;
 		$objStyle = $this->dtgStrategySummary->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 	        
+        $objStyle->BackColor = '#337ab7'; 	        
         $objStyle = $this->dtgStrategySummary->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 	
+        $objStyle->BackColor = '#337ab7'; 	
         $this->btnAddStrategy = new QButton($this);
         $this->btnAddStrategy->Name = 'Add Strategy';
         $this->btnAddStrategy->Text = 'Add Strategy';
-        $this->btnAddStrategy->CssClass = 'primary';
+        $this->btnAddStrategy->CssClass = 'btn btn-default';
         $this->btnAddStrategy->AddAction(new QClickEvent(), new QAjaxAction('btnAddStrategy_Clicked'));
         
         // Initialize the arrays
@@ -157,51 +156,51 @@ public function writeToLogFile($stringData) {
         $i = 0;
         foreach($strategyArray as $objStrategy) {
         	$dtgStrategy = new StrategyDataGrid($this);
-        	$dtgStrategy->AddColumn(new QDataGridColumn('', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=20px' ));
-			$dtgStrategy->AddColumn(new QDataGridColumn('Strategy', '<?= $_FORM->RenderStrategy($_ITEM) ?>', 'HtmlEntities=false', 'Width=800px' ));
-			$dtgStrategy->AddColumn(new QDataGridColumn('Priority', '<?= $_FORM->RenderPriority($_ITEM) ?>', 'HtmlEntities=false', 'Width=40px' ));
-			$dtgStrategy->AddColumn(new QDataGridColumn('Delete', '<?= $_FORM->RenderDeleteStrategy($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));			
+        	$dtgStrategy->AddColumn(new QDataGridColumn('', '<?= $_ITEM->Count ?>', 'HtmlEntities=false'));
+			$dtgStrategy->AddColumn(new QDataGridColumn('Strategy', '<?= $_FORM->RenderStrategy($_ITEM) ?>', 'HtmlEntities=false' ));
+			$dtgStrategy->AddColumn(new QDataGridColumn('Priority', '<?= $_FORM->RenderPriority($_ITEM) ?>', 'HtmlEntities=false'));
+			$dtgStrategy->AddColumn(new QDataGridColumn('Delete', '<?= $_FORM->RenderDeleteStrategy($_ITEM) ?>', 'HtmlEntities=false' ));			
 			$dtgStrategy->CellPadding = 7;
 			$dtgStrategy->GridLines = 'both';
-			$dtgStrategy->CssClass = 'scorecard_table';
+			$dtgStrategy->CssClass = 'table table-bordered  scorecard_table';
 			$dtgStrategy->DataSource = array($objStrategy);
 			$dtgStrategy->NoDataHtml = '<div style=\'padding:20px;\'><p><b>'.$this->strCategory.' Strategy</b></p>' .'No Strategies.<br></div>';
 			$dtgStrategy->UseAjax = true;
 			$objStyle = $dtgStrategy->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 	        
+	        $objStyle->BackColor = '#337ab7'; 	        
 	        $objStyle = $dtgStrategy->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	        $this->dtgStrategyArray[] = $dtgStrategy;	        
 	        
 	        $dtgActionItem = new ActionItemsDataGrid($this);
-	        $dtgActionItem->AddColumn(new QDataGridColumn('', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=10px' ));
-			$dtgActionItem->AddColumn(new QDataGridColumn('Action Items', '<?= $_FORM->RenderAction($_ITEM) ?>', 'HtmlEntities=false', 'Width=450px' ));
-			$dtgActionItem->AddColumn(new QDataGridColumn('Who', '<?= $_FORM->RenderWho($_ITEM) ?>', 'HtmlEntities=false', 'Width=110px' ));
-			$dtgActionItem->AddColumn(new QDataGridColumn('When', '<?= $_FORM->RenderWhen($_ITEM) ?>', 'HtmlEntities=false', 'Width=80px' ));
-			$dtgActionItem->AddColumn(new QDataGridColumn('Status', '<?= $_FORM->RenderStatus($_ITEM) ?>', 'HtmlEntities=false', 'Width=60px' ));
-			$dtgActionItem->AddColumn(new QDataGridColumn('Comments', '<?= $_FORM->RenderComments($_ITEM) ?>', 'HtmlEntities=false', 'Width=150px' ));
-			$dtgActionItem->AddColumn(new QDataGridColumn('Delete', '<?= $_FORM->RenderDeleteAction($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));
+	        $dtgActionItem->AddColumn(new QDataGridColumn('', '<?= $_ITEM->Count ?>', 'HtmlEntities=false'));
+			$dtgActionItem->AddColumn(new QDataGridColumn('Action Items', '<?= $_FORM->RenderAction($_ITEM) ?>', 'HtmlEntities=false'));
+			$dtgActionItem->AddColumn(new QDataGridColumn('Who', '<?= $_FORM->RenderWho($_ITEM) ?>', 'HtmlEntities=false' ));
+			$dtgActionItem->AddColumn(new QDataGridColumn('When', '<?= $_FORM->RenderWhen($_ITEM) ?>', 'HtmlEntities=false'));
+			$dtgActionItem->AddColumn(new QDataGridColumn('Status', '<?= $_FORM->RenderStatus($_ITEM) ?>', 'HtmlEntities=false'));
+			$dtgActionItem->AddColumn(new QDataGridColumn('Comments', '<?= $_FORM->RenderComments($_ITEM) ?>', 'HtmlEntities=false'));
+			$dtgActionItem->AddColumn(new QDataGridColumn('Delete', '<?= $_FORM->RenderDeleteAction($_ITEM) ?>', 'HtmlEntities=false'));
 			
 			$dtgActionItem->CellPadding = 7;
 			$dtgActionItem->DataSource = ActionItems::LoadArrayByStrategyId($objStrategy->Id);
 			$dtgActionItem->NoDataHtml = '<div style=\'padding:20px;\'><p><b>Action Item Table</b></p>' .'No Actions.<br></div>';
 			$dtgActionItem->UseAjax = true;
 			$dtgActionItem->GridLines = 'both';
-			$dtgActionItem->CssClass = 'scorecard_table';
+			$dtgActionItem->CssClass = 'table table-bordered  scorecard_table';
 			$objStyle = $dtgActionItem->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 	        
+	        $objStyle->BackColor = '#337ab7'; 	        
 	        $objStyle = $dtgActionItem->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	        $this->dtgActionItems[] = $dtgActionItem;
 			
 	        $btnAddAction = new QButton($this);
 	        $btnAddAction->Name = 'Add Action Item';
 	        $btnAddAction->Text = 'Add Action Item';
-	        $btnAddAction->CssClass = 'primary';
+	        $btnAddAction->CssClass = 'btn btn-default';
 	        $btnAddAction->ActionParameter = $objStrategy->Id;
 	        $btnAddAction->AddAction(new QClickEvent(), new QAjaxAction('btnAddAction_Clicked'));	        
 	        $this->btnAddAction[] = $btnAddAction;
@@ -218,19 +217,19 @@ public function writeToLogFile($stringData) {
 			$dtgKPI->NoDataHtml = '<div style=\'padding:20px;\'><p><b>KPI Table</b></p>' .'No KPIs.<br></div>';
 			$dtgKPI->UseAjax = true;
 			$dtgKPI->GridLines = 'both';
-			$dtgKPI->CssClass = 'scorecard_table';
+			$dtgKPI->CssClass = 'table table-bordered  scorecard_table';
 			$objStyle = $dtgKPI->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 	        
+	        $objStyle->BackColor = '#337ab7'; 	        
 	        $objStyle = $dtgKPI->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	        $this->dtgKPIs[] = $dtgKPI;
 	        
 	        $btnAddKpi = new QButton($this);
 	        $btnAddKpi->Name = 'Add KPI';
 	        $btnAddKpi->Text = 'Add KPI';
-	        $btnAddKpi->CssClass = 'primary';
+	        $btnAddKpi->CssClass = 'btn btn-default';
 	        $btnAddKpi->ActionParameter = $objStrategy->Id;
 	        $btnAddKpi->AddAction(new QClickEvent(), new QAjaxAction('btnAddKPI_Clicked'));	        
 	        $this->btnAddKPIs[] = $btnAddKpi;
@@ -341,7 +340,7 @@ public function writeToLogFile($stringData) {
             $txtKPI = new QTextBox($this->dtgKPIs[$objStrategy->Count-1], $strControlId);
             $txtKPI->Text = $objKPI->Kpi;
             $txtKPI->ActionParameter = $objKPI->Id;
-            $txtKPI->Width = 450;
+            $txtKPI->CssClass = 'form-control';
             $txtKPI->TextMode = QTextMode::MultiLine;
             $txtKPI->Height = 50;
             $txtKPI->Display = false;          
@@ -355,7 +354,7 @@ public function writeToLogFile($stringData) {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveKpi_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->CssClass = 'btn btn-default';
 	        $btnSave->Display = false;
         }
         
@@ -367,7 +366,7 @@ public function writeToLogFile($stringData) {
 	        $btnCancel->ActionParameter = $objKPI->Id;
 	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelKpi_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->CssClass = 'btn btn-default';
 	       	$btnCancel->Display = false;
         }
         $strLblControlId = 'lblKpi' .  $objKPI->Id;
@@ -375,13 +374,11 @@ public function writeToLogFile($stringData) {
         if (!$lblKpi) {
         	$lblKpi = new QLabel($this->dtgKPIs[$objStrategy->Count-1],$strLblControlId);
         	$lblKpi->Text = $objKPI->Kpi;
-        	$lblKpi->ActionParameter = $objKPI->Id;
-        	$lblKpi->CssClass = 'tablecell';
-        	$lblKpi->Width = 450;
+        	$lblKpi->ActionParameter = $objKPI->Id;        	
         	$lblKpi->Cursor = 'pointer';
         	$lblKpi->HtmlEntities = false;
         	$lblKpi->Padding = '10px 30px';
-        	$lblKpi->CssClass = 'editIcon'; 
+        	$lblKpi->CssClass = 'editIcon tablecell'; 
    			$lblKpi->AddAction(new QClickEvent(), new QJavaScriptAction('lblKpi_Clicked(this)'));
         }
         return ($txtKPI->Render(false) .$btnSave->Render(false). $btnCancel->Render(false). $lblKpi->RenderWithName(false));
@@ -441,6 +438,7 @@ public function writeToLogFile($stringData) {
             }           
             $lstKpiRating->ActionParameter = $objKPI->Id;
             $lstKpiRating->Width = 40;
+            $lstKpiRating->CssClass = 'form-control';
             $lstKpiRating->AddAction(new QChangeEvent(), new QAjaxAction('lstKpiRating_KeyPressed'));
         }
         return $lstKpiRating->Render(false);
@@ -465,8 +463,7 @@ public function writeToLogFile($stringData) {
             $txtComment = new QTextBox($this->dtgKPIs[$intIndex], $strControlId);
             $txtComment->Text = $objKpi->Comments;
             $txtComment->ActionParameter = $objKpi->Id;
-            $txtComment->Width = 200;
-            $txtComment->Height = 50;
+            $txtComment->CssClass = 'form-control';
             $txtComment->TextMode = QTextMode::MultiLine;
             $txtComment->Display = false;
         }
@@ -479,7 +476,7 @@ public function writeToLogFile($stringData) {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveKpiComment_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->CssClass = 'btn btn-default';
 	        $btnSave->Display = false;
         }
         
@@ -491,7 +488,7 @@ public function writeToLogFile($stringData) {
 	        $btnCancel->ActionParameter = $objKpi->Id;
 	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelKpiComment_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->CssClass = 'btn btn-default';
 	       	$btnCancel->Display = false;
         }
 		$strImgEdit = 'imgEditKPIComment' . $objKpi->Id;
@@ -502,7 +499,7 @@ public function writeToLogFile($stringData) {
         	$lblComment->Text = $objKpi->Comments;
         	$lblComment->ActionParameter = $objKpi->Id;
         	$lblComment->CssClass = 'tablecell';
-        	$lblComment->Width = 150;
+        	//$lblComment->Width = 150;
         	//$lblComment->Height = 20;
         	$lblComment->Cursor = 'pointer';
         	$lblComment->HtmlEntities = false;
@@ -544,7 +541,7 @@ public function writeToLogFile($stringData) {
             $txtActionItem = new QTextBox($this->dtgActionItems[$objStrategy->Count-1], $strControlId);
             $txtActionItem->Text = $objAction->Action;
             $txtActionItem->ActionParameter = $objAction->Id;
-            $txtActionItem->Width = 400;
+            $txtActionItem->CssClass = 'form-control';
             $txtActionItem->TextMode = QTextMode::MultiLine;
             $txtActionItem->Height = 50;
             $txtActionItem->Display = false;
@@ -558,7 +555,7 @@ public function writeToLogFile($stringData) {
 	        $btnSave->AddAction(new QClickEvent(), new  QAjaxAction('btnSaveAction_Click')); 
 	        $btnSave->PrimaryButton = true;
 	        //$btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->CssClass = 'btn btn-default';
 	        $btnSave->Display = false;
         }
         
@@ -570,7 +567,7 @@ public function writeToLogFile($stringData) {
 	        $btnCancel->ActionParameter = $objAction->Id;
 	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelAction_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->CssClass = 'btn btn-default';
 	       	$btnCancel->Display = false;
         }
         $strLblControlId = 'lblAction' .  $objAction->Id;
@@ -580,7 +577,6 @@ public function writeToLogFile($stringData) {
         	$lblAction->Text = $objAction->Action;
         	$lblAction->ActionParameter = $objAction->Id;
         	$lblAction->Cursor = 'pointer';
-        	$lblAction->Width = 400;
         	$lblAction->HtmlEntities = false;
         	$lblAction->Padding = '10px 30px';
         	$lblAction->CssClass = 'editIcon';        	
@@ -649,6 +645,7 @@ public function writeToLogFile($stringData) {
 		$lstPriority = new QListBox($this->dtgStrategyArray[$objStrategy->Count -1],$strLstPriorityCtrl);
 		$lstPriority->ActionParameter = $objStrategy->Id;
 		$lstPriority->Width = 50;
+		$lstPriority->CssClass = 'form-control';
 		$lstPriority->AddItem('-None-',0);
 		$lstPriority->AddItem('Top',1);
 		$lstPriority->AddItem('Medium',2);
@@ -706,6 +703,7 @@ public function writeToLogFile($stringData) {
             $txtStrategy->ActionParameter = $objStrategy->Id;
             $txtStrategy->Width = 700;
             $txtStrategy->Height = 50;
+            $txtStrategy->CssClass = 'form-control';
             $txtStrategy->TextMode = QTextMode::MultiLine;
             $txtStrategy->Display = false;
         }
@@ -718,7 +716,7 @@ public function writeToLogFile($stringData) {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveStrategy_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->CssClass = 'btn btn-default';
 	        $btnSave->Display = false;
         }
         
@@ -730,7 +728,7 @@ public function writeToLogFile($stringData) {
 	        $btnCancel->ActionParameter = $objStrategy->Id;
 	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelStrategy_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->CssClass = 'btn btn-default';
 	       	$btnCancel->Display = false;
         }
         $strLblControlId = 'lblStrategy' . $objStrategy->Id;
@@ -739,12 +737,10 @@ public function writeToLogFile($stringData) {
         	$lblStrategy = new QLabel($this->dtgStrategyArray[$objStrategy->Count -1],$strLblControlId);
         	$lblStrategy->Text = $objStrategy->Strategy;
         	$lblStrategy->ActionParameter = $objStrategy->Id;
-        	$lblStrategy->Width = 700;
-        	$lblStrategy->CssClass = 'tablecell';
         	$lblStrategy->Cursor = 'pointer';
         	$lblStrategy->Padding = '10px 30px';
         	$lblStrategy->HtmlEntities = false;
-        	$lblStrategy->CssClass = 'editIcon'; 
+        	$lblStrategy->CssClass = 'editIcon tablecell'; 
 			$lblStrategy->AddAction(new QClickEvent(), new QJavaScriptAction('lblStrategy_Clicked(this)'));	
         }
         
@@ -796,8 +792,8 @@ public function writeToLogFile($stringData) {
             }
             
             $lstActionWho->ActionParameter = $objAction->Id;
-            $lstActionWho->Width = 110;
-            $lstActionWho->CssClass = 'paddedControl';
+            $lstActionWho->Width = 180;
+            $lstActionWho->CssClass = 'form-control paddedControl';
             $lstActionWho->AddAction(new QChangeEvent(), new QAjaxAction('lstActionWho_KeyPressed'));
         }
         return $lstActionWho->Render(false);
@@ -852,7 +848,7 @@ public function writeToLogFile($stringData) {
             $txtComment = new QTextBox($this->dtgActionItems[$intIndex], $strControlId);
             $txtComment->Text = ($objAction->Comments != null)? $objAction->Comments : ' ';
             $txtComment->ActionParameter = $objAction->Id;
-            $txtComment->Width = 200;
+            $txtComment->CssClass = 'form-control';
             $txtComment->Display = false;
             $txtComment->Height = 50;
             $txtComment->TextMode = QTextMode::MultiLine;
@@ -866,7 +862,7 @@ public function writeToLogFile($stringData) {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveComment_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->CssClass = 'btn btn-default';
 	        $btnSave->Display = false;
         }
         
@@ -878,7 +874,7 @@ public function writeToLogFile($stringData) {
 	        $btnCancel->ActionParameter = $objAction->Id;
 	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelComment_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->CssClass = 'btn btn-default';
 	       	$btnCancel->Display = false;
         }
 	 
@@ -887,13 +883,11 @@ public function writeToLogFile($stringData) {
         if (!$lblComment) {
         	$lblComment = new QLabel($this->dtgActionItems[$intIndex],$strLblControlId);
         	$lblComment->Text = ($objAction->Comments != null)? $objAction->Comments : ' ';
-        	$lblComment->ActionParameter = $objAction->Id;
-        	$lblComment->Width = 150;
-        	$lblComment->CssClass = 'tablecell';
+        	$lblComment->ActionParameter = $objAction->Id;  
         	$lblComment->Cursor = 'pointer';
         	$lblComment->HtmlEntities = false;
         	$lblComment->Padding = '10px 30px';
-        	$lblComment->CssClass = 'editIcon';        	
+        	$lblComment->CssClass = 'editIcon tablecell';        	
          	$lblComment->AddAction(new QClickEvent(), new QJavaScriptAction('lblComment_Clicked(this)'));
         }
         return ($txtComment->Render(false). $btnSave->Render(false). $btnCancel->Render(false) . $lblComment->RenderWithName(false));
@@ -953,8 +947,8 @@ public function writeToLogFile($stringData) {
             	}	
             }           
             $lstActionStatus->ActionParameter = $objAction->Id;
-            $lstActionStatus->CssClass = 'paddedControl';
-            $lstActionStatus->Width = 60;
+            $lstActionStatus->CssClass = 'form-control';
+            $lstActionStatus->Width = 80;
             $lstActionStatus->AddAction(new QChangeEvent(), new QAjaxAction('lstActionStatus_Changed'));
         }
         return $lstActionStatus->Render(false);
@@ -978,8 +972,8 @@ public function writeToLogFile($stringData) {
         	$dtxActionWhen = new QDateTimeTextBox($this->dtgActionItems[$intIndex]);
         	$dtxActionWhen->ActionParameter = $objAction->Id;
 			$dtxActionWhen->Name = 'When';
-			$dtxActionWhen->Width = 80;
-			$dtxActionWhen->CssClass = 'paddedControl tweak';
+			$dtxActionWhen->Width = 110;
+			$dtxActionWhen->CssClass = 'form-control paddedControl tweak';
 			$dtxActionWhen->Text = ($objAction->When) ? $objAction->When->__toString() : null;
 			$calActionWhen = new QCalendar($this->dtgActionItems[$intIndex], $dtxActionWhen);			
             $dtxActionWhen->AddAction(new QChangeEvent(), new QAjaxAction('dtxActionWhen_KeyPressed'));

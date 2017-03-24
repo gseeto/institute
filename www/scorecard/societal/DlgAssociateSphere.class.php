@@ -35,12 +35,12 @@
            }
             $this->btnUpdate = new QButton($this);
             $this->btnUpdate->Text = 'Save/Update';
-            $this->btnUpdate->CssClass = 'primary';
+            $this->btnUpdate->CssClass = 'btn btn-default';
             $this->btnUpdate->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnUpdate_Click'));
             
             $this->btnCancel = new QButton($this);
             $this->btnCancel->Text = 'Cancel';
-            $this->btnCancel->CssClass = 'primary';
+            $this->btnCancel->CssClass = 'btn btn-default';
             $this->btnCancel->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnCancel_Click'));
         }
       

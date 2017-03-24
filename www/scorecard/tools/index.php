@@ -53,13 +53,13 @@ class ToolslForm extends InstituteForm {
 		$this->dtgUnassigned->ItemsPerPage = 20;
 		$this->dtgUnassigned->UseAjax = true;
 		$this->dtgUnassigned->GridLines = 'both';
-		$this->dtgUnassigned->CssClass = 'scorecard_table';
+		$this->dtgUnassigned->CssClass = 'table table-bordered scorecard_table ';
 		$objStyle = $this->dtgUnassigned->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 	        
+        $objStyle->BackColor = '#337ab7'; 	        
         $objStyle = $this->dtgUnassigned->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
 		
         $this->lstUser = new QListBox($this);
         $this->lstUser->Name = 'UserList';
@@ -88,13 +88,13 @@ class ToolslForm extends InstituteForm {
 		$this->dtgUserActions->ItemsPerPage = 20;
 		$this->dtgUserActions->UseAjax = true;
 		$this->dtgUserActions->GridLines = 'both';
-		$this->dtgUserActions->CssClass = 'scorecard_table';
+		$this->dtgUserActions->CssClass = 'table table-bordered scorecard_table ';
 		$objStyle = $this->dtgUserActions->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 	        
+        $objStyle->BackColor = '#337ab7'; 	        
         $objStyle = $this->dtgUserActions->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $this->lstLatest = new QListBox($this);
         $this->lstLatest->Name = 'LatestList';
@@ -121,13 +121,13 @@ class ToolslForm extends InstituteForm {
 		$this->dtgLatestStrategy->ItemsPerPage = 20;
 		$this->dtgLatestStrategy->UseAjax = true;
 		$this->dtgLatestStrategy->GridLines = 'both';
-		$this->dtgLatestStrategy->CssClass = 'scorecard_table';
+		$this->dtgLatestStrategy->CssClass = 'table table-bordered scorecard_table';
 		$objStyle = $this->dtgLatestStrategy->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 	        
+        $objStyle->BackColor = '#337ab7'; 	        
         $objStyle = $this->dtgLatestStrategy->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
 		$this->dtgLatestAction = new ActionItemsDataGrid($this);
 		$this->dtgLatestAction->Paginator = new QPaginator($this->dtgLatestAction);
@@ -149,13 +149,13 @@ class ToolslForm extends InstituteForm {
 		$this->dtgLatestAction->ItemsPerPage = 20;
 		$this->dtgLatestAction->UseAjax = true;
 		$this->dtgLatestAction->GridLines = 'both';
-		$this->dtgLatestAction->CssClass = 'scorecard_table';
+		$this->dtgLatestAction->CssClass = 'table table-bordered scorecard_table';
 		$objStyle = $this->dtgLatestAction->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 	        
+        $objStyle->BackColor = '#337ab7'; 	        
         $objStyle = $this->dtgLatestAction->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
 		$this->dtgLatestKpi = new KpisDataGrid($this);
 		$this->dtgLatestKpi->Paginator = new QPaginator($this->dtgLatestKpi);	
@@ -173,13 +173,13 @@ class ToolslForm extends InstituteForm {
 		$this->dtgLatestKpi->ItemsPerPage = 20;
 		$this->dtgLatestKpi->UseAjax = true;
 		$this->dtgLatestKpi->GridLines = 'both';
-		$this->dtgLatestKpi->CssClass = 'scorecard_table';
+		$this->dtgLatestKpi->CssClass = 'table table-bordered scorecard_table ';
 		$objStyle = $this->dtgLatestKpi->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 	        
+        $objStyle->BackColor = '#337ab7'; 	        
         $objStyle = $this->dtgLatestKpi->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
 	}
 
 	public function dtgLatestKpi_Bind() {
@@ -396,6 +396,7 @@ class ToolslForm extends InstituteForm {
             
             $lstActionWho->ActionParameter = $objAction->Id;
             $lstActionWho->Width = 110;
+            $lstActionWho->CssClass = 'form-control';
             $lstActionWho->AddAction(new QChangeEvent(), new QAjaxAction('lstActionWho_KeyPressed'));
         }
         return $lstActionWho->Render(false);
@@ -529,6 +530,7 @@ class ToolslForm extends InstituteForm {
             $txtLatestComment->TextMode = QTextMode::MultiLine;
             $txtLatestComment->Height = 50;
             $txtLatestComment->Display = false;
+            $txtLatestComment->CssClass = 'form-control';
         }
         $strActionSave = 'btnLatestCommentSave' . $objAction->Id;
         $btnSave = $this->GetControl($strActionSave); 
@@ -539,7 +541,7 @@ class ToolslForm extends InstituteForm {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveLatestComment_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->CssClass = 'btn btn-default';
 	        $btnSave->Display = false;
         }
         
@@ -551,7 +553,7 @@ class ToolslForm extends InstituteForm {
 	        $btnCancel->ActionParameter = $objAction->Id;
 	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelLatestComment_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->CssClass = 'btn btn-default';
 	       	$btnCancel->Display = false;
         }
 		$strImgEdit = 'imgEditLatestComment' . $objAction->Id;
@@ -606,6 +608,7 @@ class ToolslForm extends InstituteForm {
             $txtUserComment->TextMode = QTextMode::MultiLine;
             $txtUserComment->Height = 50;
             $txtUserComment->Display = false;
+            $txtUserComment->CssClass = 'form-control';
         }
         $strActionSave = 'btnUserCommentSave' . $objAction->Id;
         $btnSave = $this->GetControl($strActionSave); 
@@ -616,7 +619,7 @@ class ToolslForm extends InstituteForm {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveUserComment_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->CssClass = 'btn btn-default';
 	        $btnSave->Display = false;
         }
         
@@ -628,7 +631,7 @@ class ToolslForm extends InstituteForm {
 	        $btnCancel->ActionParameter = $objAction->Id;
 	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelUserComment_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->CssClass = 'btn btn-default';
 	       	$btnCancel->Display = false;
         }
 		$strImgEdit = 'imgEditUserComment' . $objAction->Id;
@@ -687,6 +690,7 @@ class ToolslForm extends InstituteForm {
             }           
             $lstActionStatus->ActionParameter = $objAction->Id;
             $lstActionStatus->Width = 60;
+            $lstActionStatus->CssClass = 'form-control';
             $lstActionStatus->AddAction(new QChangeEvent(), new QAjaxAction('lstActionStatus_KeyPressed'));
         }
         return $lstActionStatus->Render(false);
@@ -706,6 +710,7 @@ class ToolslForm extends InstituteForm {
             }           
             $lstKpiRating->ActionParameter = $objKpi->Id;
             $lstKpiRating->Width = 60;
+            $lstKpiRating->CssClass = 'form-control';
             $lstKpiRating->AddAction(new QChangeEvent(), new QAjaxAction('lstKpiRating_Change'));
         }
         return $lstKpiRating->Render(false);
@@ -732,6 +737,7 @@ class ToolslForm extends InstituteForm {
             }           
             $lstActionStatus->ActionParameter = $objAction->Id;
             $lstActionStatus->Width = 60;
+            $lstActionStatus->CssClass = 'form-control';
             $lstActionStatus->AddAction(new QChangeEvent(), new QAjaxAction('lstActionStatus_Change'));
         }
         return $lstActionStatus->Render(false);
@@ -769,6 +775,7 @@ class ToolslForm extends InstituteForm {
         	$dtxActionWhen->ActionParameter = $objAction->Id;
 			$dtxActionWhen->Name = 'When';
 			$dtxActionWhen->Width = 80;
+			$dtxActionWhen->CssClass = 'form-control';
 			$dtxActionWhen->Text = ($objAction->When) ? $objAction->When->__toString() : null;
 			$calActionWhen = new QCalendar($this->dtgUnassigned, $dtxActionWhen);			
             $dtxActionWhen->AddAction(new QChangeEvent(), new QAjaxAction('dtxActionWhen_KeyPressed'));
@@ -813,6 +820,7 @@ class ToolslForm extends InstituteForm {
             $txtKpiItem->TextMode = QTextMode::MultiLine;
             $txtKpiItem->Height = 50;
             $txtKpiItem->Display = false;
+            $txtKpiItem->CssClass = 'from-control';
         }
         $strActionSave = 'btnLatestKpiSave' . $objKpi->Id;
         $btnSave = $this->GetControl($strActionSave); 
@@ -823,7 +831,7 @@ class ToolslForm extends InstituteForm {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveLatestKpi_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->CssClass = 'btn btn-default';
 	        $btnSave->Display = false;
         }
         
@@ -835,7 +843,7 @@ class ToolslForm extends InstituteForm {
 	        $btnCancel->ActionParameter = $objKpi->Id;
 	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelLatestKpi_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->CssClass = 'btn btn-default';
 	       	$btnCancel->Display = false;
         }
 		$strImgEdit = 'imgEditLatestKpi' . $objKpi->Id;
@@ -891,6 +899,7 @@ class ToolslForm extends InstituteForm {
             $txtActionItem->TextMode = QTextMode::MultiLine;
             $txtActionItem->Height = 50;
             $txtActionItem->Display = false;
+            $txtActionItem->CssClass = 'form-control';
         }
         $strActionSave = 'btnLatestActionSave' . $objAction->Id;
         $btnSave = $this->GetControl($strActionSave); 
@@ -901,7 +910,7 @@ class ToolslForm extends InstituteForm {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveLatestAction_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->CssClass = 'btn btn-default';
 	        $btnSave->Display = false;
         }
         
@@ -913,7 +922,7 @@ class ToolslForm extends InstituteForm {
 	        $btnCancel->ActionParameter = $objAction->Id;
 	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelLatestAction_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->CssClass = 'btn btn-default';
 	       	$btnCancel->Display = false;
         }
 		$strImgEdit = 'imgEditLatestAction' . $objAction->Id;
@@ -969,6 +978,7 @@ class ToolslForm extends InstituteForm {
             $txtActionItem->TextMode = QTextMode::MultiLine;
             $txtActionItem->Height = 50;
             $txtActionItem->Display = false;
+            $txtActionItem->CssClass = 'form-control';
         }
         $strActionSave = 'btnActionSave' . $objAction->Id;
         $btnSave = $this->GetControl($strActionSave); 
@@ -979,7 +989,7 @@ class ToolslForm extends InstituteForm {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveAction_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->CssClass = 'btn btn-default';
 	        $btnSave->Display = false;
         }
         
@@ -991,7 +1001,7 @@ class ToolslForm extends InstituteForm {
 	        $btnCancel->ActionParameter = $objAction->Id;
 	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelAction_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->CssClass = 'btn btn-default';
 	       	$btnCancel->Display = false;
         }
 		$strImgEdit = 'imgEditAction' . $objAction->Id;
@@ -1047,6 +1057,7 @@ class ToolslForm extends InstituteForm {
             $txtActionItem->TextMode = QTextMode::MultiLine;
             $txtActionItem->Height = 50;
             $txtActionItem->Display = false;
+            $txtActionItem->CssClass = 'form-control';
         }
         $strActionSave = 'btnUserActionSave' . $objAction->Id;
         $btnSave = $this->GetControl($strActionSave); 
@@ -1057,7 +1068,7 @@ class ToolslForm extends InstituteForm {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveUserAction_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->CssClass = 'btn btn-default';
 	        $btnSave->Display = false;
         }
         
@@ -1069,7 +1080,7 @@ class ToolslForm extends InstituteForm {
 	        $btnCancel->ActionParameter = $objAction->Id;
 	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelUserAction_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->CssClass = 'btn btn-default';
 	       	$btnCancel->Display = false;
         }
 		$strImgEdit = 'imgEditUserAction' . $objAction->Id;
@@ -1160,6 +1171,7 @@ class ToolslForm extends InstituteForm {
             $txtLatestStrategy->Height = 100;
             $txtLatestStrategy->TextMode = QTextMode::MultiLine;
             $txtLatestStrategy->Display = false;
+            $txtLatestStrategy->CssClass = 'form-control';
         }
         $strActionSave = 'btnLatestStrategySave' . $objStrategy->Id;
         $btnSave = $this->GetControl($strActionSave); 
@@ -1170,7 +1182,7 @@ class ToolslForm extends InstituteForm {
 	        $btnSave->AddAction(new QClickEvent(), new QAjaxAction('btnSaveLatestStrategy_Click'));
 	        $btnSave->PrimaryButton = true;
 	        $btnSave->CausesValidation = true;
-	        $btnSave->CssClass = 'ui-button';
+	        $btnSave->CssClass = 'btn btn-default';
 	        $btnSave->Display = false;
         }
         
@@ -1182,7 +1194,7 @@ class ToolslForm extends InstituteForm {
 	        $btnCancel->ActionParameter = $objStrategy->Id;
 	     	$btnCancel->AddAction(new QClickEvent(), new QJavaScriptAction('btnCancelLatestStrategy_Click(this)'));        
 	       	$btnCancel->CausesValidation = false;
-	       	$btnCancel->CssClass = 'ui-button';
+	       	$btnCancel->CssClass = 'btn btn-default';
 	       	$btnCancel->Display = false;
         }
 		$strImgEdit = 'imgEditLatestStrategy' . $objStrategy->Id;
@@ -1242,6 +1254,7 @@ class ToolslForm extends InstituteForm {
 			$lstPriority->ActionParameter = $objStrategy->Id;
 			$lstPriority->SelectedValue = $intPriority;
 			$lstPriority->Width = 60;
+			$lstPriority->CssClass = 'form-control';
 		}		
 		$strImgPriorityCtrl = 'imgLatestPriority' .$objStrategy->Id; 
 		$imgPriority = $this->GetControl($strImgPriorityCtrl);    

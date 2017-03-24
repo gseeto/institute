@@ -90,6 +90,7 @@ class ResourceForm extends InstituteForm {
 			$this->lstIndividuals->AddItem($objUser->FirstName.' '.$objUser->LastName, $objUser->Id);
 		}
 		$this->lstIndividuals->AddAction(new QChangeEvent(), new QAjaxAction('lstIndividuals_Clicked'));
+		$this->lstIndividuals->CssClass = 'form-control';
 		
 		$this->lblTitle = new QLabel($this);
 		$this->lblTitle->HtmlEntities = false;
@@ -265,7 +266,7 @@ class ResourceForm extends InstituteForm {
 		$this->dtgPriorityHigh->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__."/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgPriorityHigh->MetaAddTypeColumn('StatusType', 'StatusType');
 		$this->dtgPriorityHigh->CellPadding = 5;
-		$this->dtgPriorityHigh->CssClass = 'resourceTable';
+		$this->dtgPriorityHigh->CssClass = 'table table-bordered resourceTable ';
 		$this->dtgPriorityHigh->UseAjax = true;
 		$this->dtgPriorityHigh->NoDataHtml = 'No Actions found.';		
 		$this->dtgPriorityHigh->GridLines = QGridLines::Both;
@@ -274,10 +275,10 @@ class ResourceForm extends InstituteForm {
         $objStyle->FontSize = 12;	
         $objStyle = $this->dtgPriorityHigh->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';         
+        $objStyle->BackColor = '#337ab7';         
         $objStyle = $this->dtgPriorityHigh->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';
+        $objStyle->BackColor = '#337ab7';
         
 		$this->dtgPriorityMedium->Width = 750;
 		$this->dtgPriorityMedium->AddColumn(new QDataGridColumn('Count', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>'));
@@ -287,7 +288,7 @@ class ResourceForm extends InstituteForm {
 		$this->dtgPriorityMedium->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__."/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgPriorityMedium->MetaAddTypeColumn('StatusType', 'StatusType');		
 		$this->dtgPriorityMedium->CellPadding = 5;
-		$this->dtgPriorityMedium->CssClass = 'resourceTable';
+		$this->dtgPriorityMedium->CssClass = 'table table-bordered resourceTable ';
 		$this->dtgPriorityMedium->DataSource = null;
 		$this->dtgPriorityMedium->UseAjax = true;
 		$this->dtgPriorityMedium->NoDataHtml = 'No Actions found.';		
@@ -297,10 +298,10 @@ class ResourceForm extends InstituteForm {
         $objStyle->FontSize = 12;	
         $objStyle = $this->dtgPriorityMedium->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';         
+        $objStyle->BackColor = '#337ab7';         
         $objStyle = $this->dtgPriorityMedium->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';
+        $objStyle->BackColor = '#337ab7';
         
 		$this->dtgPriorityLow->Width = 750;
 		$this->dtgPriorityLow->AddColumn(new QDataGridColumn('Count', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>'));
@@ -310,7 +311,7 @@ class ResourceForm extends InstituteForm {
 		$this->dtgPriorityLow->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__."/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgPriorityLow->MetaAddTypeColumn('StatusType', 'StatusType');
 		$this->dtgPriorityLow->CellPadding = 5;
-		$this->dtgPriorityLow->CssClass = 'resourceTable';
+		$this->dtgPriorityLow->CssClass = 'table table-bordered resourceTable ';
 		$this->dtgPriorityLow->UseAjax = true;
 		$this->dtgPriorityLow->NoDataHtml = 'No Actions found.';		
 		$this->dtgPriorityLow->GridLines = QGridLines::Both;
@@ -319,10 +320,10 @@ class ResourceForm extends InstituteForm {
         $objStyle->FontSize = 12;	
         $objStyle = $this->dtgPriorityLow->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';         
+        $objStyle->BackColor = '#337ab7';         
         $objStyle = $this->dtgPriorityLow->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';
+        $objStyle->BackColor = '#337ab7';
         
 		$this->dtgPriorityNone->Width = 750;
 		$this->dtgPriorityNone->AddColumn(new QDataGridColumn('Count', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>'));
@@ -332,7 +333,7 @@ class ResourceForm extends InstituteForm {
 		$this->dtgPriorityNone->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__."/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 		$this->dtgPriorityNone->MetaAddTypeColumn('StatusType', 'StatusType');		
 		$this->dtgPriorityNone->CellPadding = 5;
-		$this->dtgPriorityNone->CssClass = 'resourceTable';
+		$this->dtgPriorityNone->CssClass = 'table table-bordered resourceTable ';
 		$this->dtgPriorityNone->UseAjax = true;
 		$this->dtgPriorityNone->DataSource = null;
 		$this->dtgPriorityNone->NoDataHtml = 'No Actions found.';		
@@ -342,10 +343,10 @@ class ResourceForm extends InstituteForm {
         $objStyle->FontSize = 12;	
         $objStyle = $this->dtgPriorityNone->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';         
+        $objStyle->BackColor = '#337ab7';         
         $objStyle = $this->dtgPriorityNone->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';
+        $objStyle->BackColor = '#337ab7';
 	}
 	protected function setupForecastTable() {
 		$this->dtgForecastTenDay->Width = 750;
@@ -358,7 +359,7 @@ class ResourceForm extends InstituteForm {
 		$this->dtgForecastTenDay->AddColumn(new QDataGridColumn('When', '<?= $_FORM->RenderTenDayWhen($_ITEM) ?>', 'HtmlEntities=false', 'Width=80px',array('OrderByClause' => QQ::OrderBy(QQN::ActionItems()->When), 'ReverseOrderByClause' => QQ::OrderBy(QQN::ActionItems()->When, false))  ));		
 		$this->dtgForecastTenDay->Visible = false;
 		$this->dtgForecastTenDay->CellPadding = 5;
-		$this->dtgForecastTenDay->CssClass = 'resourceTable';
+		$this->dtgForecastTenDay->CssClass = 'table table-bordered resourceTable ';
 		$this->dtgForecastTenDay->UseAjax = true;
 		$this->dtgForecastTenDay->NoDataHtml = 'No Actions found.';		
 		$this->dtgForecastTenDay->GridLines = QGridLines::Both;
@@ -368,10 +369,10 @@ class ResourceForm extends InstituteForm {
 
         $objStyle = $this->dtgForecastTenDay->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';         
+        $objStyle->BackColor = '#337ab7';         
         $objStyle = $this->dtgForecastTenDay->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';
+        $objStyle->BackColor = '#337ab7';
 	
 		$this->dtgForecastThirtyDay->Width = 750;
 		$this->dtgForecastThirtyDay->AddColumn(new QDataGridColumn('Count', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>'));
@@ -383,7 +384,7 @@ class ResourceForm extends InstituteForm {
 		$this->dtgForecastThirtyDay->AddColumn(new QDataGridColumn('When', '<?= $_FORM->RenderThirtyDayWhen($_ITEM) ?>', 'HtmlEntities=false', 'Width=80px',array('OrderByClause' => QQ::OrderBy(QQN::ActionItems()->When), 'ReverseOrderByClause' => QQ::OrderBy(QQN::ActionItems()->When, false))  ));		
 		$this->dtgForecastThirtyDay->Visible = false;
 		$this->dtgForecastThirtyDay->CellPadding = 5;
-		$this->dtgForecastThirtyDay->CssClass = 'resourceTable';
+		$this->dtgForecastThirtyDay->CssClass = 'table table-bordered resourceTable ';
 		$this->dtgForecastThirtyDay->UseAjax = true;
 		$this->dtgForecastThirtyDay->DataSource = null;
 		$this->dtgForecastThirtyDay->NoDataHtml = 'No Actions found.';		
@@ -393,10 +394,10 @@ class ResourceForm extends InstituteForm {
         $objStyle->FontSize = 12;	
         $objStyle = $this->dtgForecastThirtyDay->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';         
+        $objStyle->BackColor = '#337ab7';         
         $objStyle = $this->dtgForecastThirtyDay->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';
+        $objStyle->BackColor = '#337ab7';
 	}
 	public function RenderWhen($objAction) {
 		$strControlId = 'OverdueWhen' . $objAction->Id;
@@ -664,7 +665,7 @@ class ResourceForm extends InstituteForm {
 			$this->dtgStrategies->MetaAddColumn('Count', 'Html=<?=$_ITEM->Count; ?>','Width=20px');		
 			$this->dtgStrategies->MetaAddColumn('Strategy', 'Html=<?=$_ITEM->Strategy; ?>','Width=600px');
 			$this->dtgStrategies->CellPadding = 5;
-			$this->dtgStrategies->CssClass = 'resourceTable';
+			$this->dtgStrategies->CssClass = 'table table-bordered resourceTable ';
 			$this->dtgStrategies->UseAjax = true;
 			$this->dtgStrategies->NoDataHtml = 'No Strategies found.';		
 			$this->dtgStrategies->GridLines = QGridLines::Both;
@@ -673,10 +674,10 @@ class ResourceForm extends InstituteForm {
 	        $objStyle->FontSize = 12;	
 	        $objStyle = $this->dtgStrategies->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';         
+	        $objStyle->BackColor = '#337ab7';         
 	        $objStyle = $this->dtgStrategies->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';
+	        $objStyle->BackColor = '#337ab7';
 		}
 	}
 	
@@ -692,7 +693,7 @@ class ResourceForm extends InstituteForm {
 			$this->dtgZeroPct->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));		
 			$this->dtgZeroPct->MetaAddEditLinkColumn('<?= __SUBDIRECTORY__."/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?= $_ITEM->Action?>','Action');       	        
 			$this->dtgZeroPct->CellPadding = 5;
-			$this->dtgZeroPct->CssClass = 'resourceTable';
+			$this->dtgZeroPct->CssClass = 'table table-bordered resourceTable ';
 			$this->dtgZeroPct->UseAjax = true;
 			$this->dtgZeroPct->NoDataHtml = 'No Actions found.';		
 			$this->dtgZeroPct->GridLines = QGridLines::Both;
@@ -701,10 +702,10 @@ class ResourceForm extends InstituteForm {
 	        $objStyle->FontSize = 12;	
 	        $objStyle = $this->dtgZeroPct->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';         
+	        $objStyle->BackColor = '#337ab7';         
 	        $objStyle = $this->dtgZeroPct->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';
+	        $objStyle->BackColor = '#337ab7';
 			}
 	}
 	
@@ -720,7 +721,7 @@ class ResourceForm extends InstituteForm {
 			$this->dtgTwentyFivePct->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
 			$this->dtgTwentyFivePct->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__."/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?= $_ITEM->Action?>','Action');
 			$this->dtgTwentyFivePct->CellPadding = 5;
-			$this->dtgTwentyFivePct->CssClass = 'resourceTable';
+			$this->dtgTwentyFivePct->CssClass = 'table table-bordered resourceTable ';
 			$this->dtgTwentyFivePct->UseAjax = true;
 			$this->dtgTwentyFivePct->NoDataHtml = 'No Actions found.';		
 			$this->dtgTwentyFivePct->GridLines = QGridLines::Both;
@@ -729,10 +730,10 @@ class ResourceForm extends InstituteForm {
 	        $objStyle->FontSize = 12;	
 	        $objStyle = $this->dtgTwentyFivePct->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';         
+	        $objStyle->BackColor = '#337ab7';         
 	        $objStyle = $this->dtgTwentyFivePct->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';
+	        $objStyle->BackColor = '#337ab7';
 		}
 	}
 
@@ -748,7 +749,7 @@ class ResourceForm extends InstituteForm {
 			$this->dtgFiftyPct->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
 			$this->dtgFiftyPct->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__."/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 			$this->dtgFiftyPct->CellPadding = 5;
-			$this->dtgFiftyPct->CssClass = 'resourceTable';
+			$this->dtgFiftyPct->CssClass = 'table table-bordered resourceTable ';
 			$this->dtgFiftyPct->UseAjax = true;
 			$this->dtgFiftyPct->NoDataHtml = 'No Actions found.';		
 			$this->dtgFiftyPct->GridLines = QGridLines::Both;
@@ -757,10 +758,10 @@ class ResourceForm extends InstituteForm {
 	        $objStyle->FontSize = 12;	
 	        $objStyle = $this->dtgFiftyPct->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';         
+	        $objStyle->BackColor = '#337ab7';         
 	        $objStyle = $this->dtgFiftyPct->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';
+	        $objStyle->BackColor = '#337ab7';
 		}
 	}
 
@@ -776,7 +777,7 @@ class ResourceForm extends InstituteForm {
 			$this->dtgSeventyFivePct->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
 			$this->dtgSeventyFivePct->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__."/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 			$this->dtgSeventyFivePct->CellPadding = 5;
-			$this->dtgSeventyFivePct->CssClass = 'resourceTable';
+			$this->dtgSeventyFivePct->CssClass = 'table table-bordered resourceTable ';
 			$this->dtgSeventyFivePct->UseAjax = true;
 			$this->dtgSeventyFivePct->NoDataHtml = 'No Actions found.';		
 			$this->dtgSeventyFivePct->GridLines = QGridLines::Both;
@@ -785,10 +786,10 @@ class ResourceForm extends InstituteForm {
 	        $objStyle->FontSize = 12;	
 	        $objStyle = $this->dtgSeventyFivePct->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';         
+	        $objStyle->BackColor = '#337ab7';         
 	        $objStyle = $this->dtgSeventyFivePct->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';
+	        $objStyle->BackColor = '#337ab7';
 		}
 	}
 
@@ -804,7 +805,7 @@ class ResourceForm extends InstituteForm {
 			$this->dtgHundredPct->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
 			$this->dtgHundredPct->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__."/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 			$this->dtgHundredPct->CellPadding = 5;
-			$this->dtgHundredPct->CssClass = 'resourceTable';
+			$this->dtgHundredPct->CssClass = 'table table-bordered resourceTable ';
 			$this->dtgHundredPct->UseAjax = true;
 			$this->dtgHundredPct->NoDataHtml = 'No Actions found.';		
 			$this->dtgHundredPct->GridLines = QGridLines::Both;
@@ -813,10 +814,10 @@ class ResourceForm extends InstituteForm {
 	        $objStyle->FontSize = 12;	
 	        $objStyle = $this->dtgHundredPct->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';         
+	        $objStyle->BackColor = '#337ab7';         
 	        $objStyle = $this->dtgHundredPct->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';
+	        $objStyle->BackColor = '#337ab7';
 		}
 	}
 	protected function lblRecurringPct_Clicked() {
@@ -831,7 +832,7 @@ class ResourceForm extends InstituteForm {
 			$this->dtgRecurringPct->AddColumn(new QDataGridColumn('Action Index', '<?=$_ITEM->Count; ?>','Width=20px'));
 			$this->dtgRecurringPct->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__."/scorecard/tenp/index.php/".$_ITEM->ScorecardId."/".$_ITEM->CategoryId?>', '<?=$_ITEM->Action?>','Action');
 			$this->dtgRecurringPct->CellPadding = 5;
-			$this->dtgRecurringPct->CssClass = 'resourceTable';
+			$this->dtgRecurringPct->CssClass = 'table table-bordered resourceTable ';
 			$this->dtgRecurringPct->UseAjax = true;			
 			$this->dtgRecurringPct->NoDataHtml = 'No Actions found.';		
 			$this->dtgRecurringPct->GridLines = QGridLines::Both;
@@ -840,10 +841,10 @@ class ResourceForm extends InstituteForm {
 	        $objStyle->FontSize = 12;	
 	        $objStyle = $this->dtgRecurringPct->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';         
+	        $objStyle->BackColor = '#337ab7';         
 	        $objStyle = $this->dtgRecurringPct->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';
+	        $objStyle->BackColor = '#337ab7';
 		}
 	}
 	protected function lblPriorityHigh_Clicked() {
@@ -889,7 +890,7 @@ class ResourceForm extends InstituteForm {
 			$this->dtgOverdue->MetaAddTypeColumn('StatusType', 'StatusType');		
 			$this->dtgOverdue->AddColumn(new QDataGridColumn('When', '<?= $_FORM->RenderWhen($_ITEM) ?>', 'HtmlEntities=false', 'Width=80px',array('OrderByClause' => QQ::OrderBy(QQN::ActionItems()->When), 'ReverseOrderByClause' => QQ::OrderBy(QQN::ActionItems()->When, false))  ));		
 			$this->dtgOverdue->CellPadding = 5;
-			$this->dtgOverdue->CssClass = 'resourceTable';
+			$this->dtgOverdue->CssClass = 'table table-bordered resourceTable ';
 			$this->dtgOverdue->UseAjax = true;
 			$this->dtgOverdue->NoDataHtml = 'No Actions found.';		
 			$this->dtgOverdue->GridLines = QGridLines::Both;
@@ -898,10 +899,10 @@ class ResourceForm extends InstituteForm {
 	        $objStyle->FontSize = 12;	
 	        $objStyle = $this->dtgOverdue->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';         
+	        $objStyle->BackColor = '#337ab7';         
 	        $objStyle = $this->dtgOverdue->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';
+	        $objStyle->BackColor = '#337ab7';
 		}
 	}
 	

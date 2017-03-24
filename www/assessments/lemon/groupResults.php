@@ -87,7 +87,6 @@ class LemonGroupResultsForm extends InstituteForm {
 	 	
 	 	$this->btnGeneratePdf =  new QButton($this);
 	 	$this->btnGeneratePdf->Text = 'Generate PDF of Report';
-	 	$this->btnGeneratePdf->CssClass = 'primary';
 	 	$this->btnGeneratePdf->AddAction(new QClickEvent(), new QAjaxAction('btnGeneratePdf_Click'));
 	}
 	

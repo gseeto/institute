@@ -56,7 +56,7 @@ class ViewLemonAssessmentForm extends InstituteForm {
 		$date_modified = $this->objLemonAssessment->DateModified; 
 		$this->lblIntroduction->Text = sprintf('<b>Name:</b> %s %s<br><b>Date Of Self-Assessment: </b>%s<br><b>Organization:</b> %s<br><b>Title/Designation:</b> %s',
 			$this->objUser->FirstName,$this->objUser->LastName,$date_modified,$txtCompany,$this->objUser->Title ? $this->objUser->Title->Name : ' None Specified');	
-		
+		$this->lblIntroduction->CssClass = 'center-block';
 		/*		
 		$this->dtgAssessmentResults = new LemonAssessmentResultsDataGrid($this);
 		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('', '<?= $_ITEM->QuestionId ?>', 'HtmlEntities=false', 'Width=30px' ));
@@ -84,7 +84,6 @@ class ViewLemonAssessmentForm extends InstituteForm {
        */ 
         $this->btnReturn = new QButton($this);
         $this->btnReturn->Text = 'Return';
-	 	$this->btnReturn->CssClass = 'right primary';
 	 	$this->btnReturn->AddAction(new QClickEvent(), new QAjaxAction('btnReturn_Click'));
 		if(QApplication::PathInfo(0)) {
 	 		$this->btnReturn->Visible = false;

@@ -35,7 +35,8 @@ class MyViewForm extends InstituteForm {
         $this->dtgTopActions->CellPadding = 4;
 		$this->dtgTopActions->NoDataHtml = '';
 		$this->dtgTopActions->UseAjax = true;
-		$this->dtgTopActions->GridLines = 'both';	
+		$this->dtgTopActions->GridLines = 'both';
+		$this->dtgTopActions->CssClass = 'table table-bordered';
 		
 		$this->dtgRecurringActions = new QDataGrid($this);
 		$this->dtgRecurringActions->AddColumn(new QDataGridColumn('Rank', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>', 'HtmlEntities=false', 'Width=10px' ));
@@ -45,19 +46,20 @@ class MyViewForm extends InstituteForm {
 		$this->dtgRecurringActions->NoDataHtml = '';
 		$this->dtgRecurringActions->UseAjax = true;
 		$this->dtgRecurringActions->GridLines = 'both';	
+		$this->dtgRecurringActions->CssClass = 'table table-bordered';
 		
 		$this->selectedActionArray = array();
 		$this->bSelectAdd = true;
 		$this->btnAddAction = new QButton($this);
 		$this->btnAddAction->Name = 'Add an Action Item to my list';
 		$this->btnAddAction->Text = 'Add an Action Item to my list';
-		$this->btnAddAction->CssClass = 'primary';
+		$this->btnAddAction->CssClass = 'btn btn-default';
 		$this->btnAddAction->AddAction(new QClickEvent(), new QAjaxAction('btnAddAction_Clicked'));
 		
 		$this->btnRemoveAction = new QButton($this);
 		$this->btnRemoveAction->Name = 'Remove an Action Item to my list';
 		$this->btnRemoveAction->Text = 'Remove an Action Item to my list';
-		$this->btnRemoveAction->CssClass = 'primary';
+		$this->btnRemoveAction->CssClass = 'btn btn-default';
 		$this->btnRemoveAction->AddAction(new QClickEvent(), new QAjaxAction('btnRemoveAction_Clicked'));
 		
 		$this->dtgAddAction = new QDataGrid($this);
@@ -71,6 +73,7 @@ class MyViewForm extends InstituteForm {
 		$this->dtgAddAction->GridLines = 'both';
 		$this->dtgAddAction->Visible = false;
 		$this->dtgAddAction->HtmlBefore = "<b>Actions to add to my task list:</b>";	
+		$this->dtgAddAction->CssClass = 'table table-bordered';
 		
 		$this->dtgRemoveAction = new QDataGrid($this);
 		$this->dtgRemoveAction->AddColumn(new QDataGridColumn('P', '<?= $_FORM->RenderP($_ITEM) ?>', 'HtmlEntities=false', 'Width=10px' ));
@@ -83,11 +86,12 @@ class MyViewForm extends InstituteForm {
 		$this->dtgRemoveAction->GridLines = 'both';
 		$this->dtgRemoveAction->Visible = false;
 		$this->dtgRemoveAction->HtmlBefore = "<b>Actions to remove from my task list:</b>";
+		$this->dtgRemoveAction->CssClass = 'table table-bordered';
 		
 		$this->btnSubmit = new QButton($this);
 		$this->btnSubmit->Name = 'Submit';
 		$this->btnSubmit->Text = 'Submit';
-		$this->btnSubmit->CssClass = 'primary';
+		$this->btnSubmit->CssClass = 'btn btn-default';
 		$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Clicked'));
 		$this->btnSubmit->Visible = false;
 	}
@@ -109,6 +113,7 @@ class MyViewForm extends InstituteForm {
             $chkSelected = new QCheckBox($this->dtgAddAction, $strControlId);
             $chkSelected->Text = 'Select';
             $chkSelected->ActionParameter = $objItem->Id;
+            $chkSelected->CssClass = 'checkbox';
             $chkSelected->AddAction(new QClickEvent(), new QAjaxAction('chkSelected_Click'));
         }
         return $chkSelected->Render(false);	            	    
@@ -123,6 +128,7 @@ class MyViewForm extends InstituteForm {
             $chkSelected = new QCheckBox($this->dtgRemoveAction, $strControlId);
             $chkSelected->Text = 'Select';
             $chkSelected->ActionParameter = $objItem->Id;
+            $chkSelected->CssClass = 'checkbox';
             $chkSelected->AddAction(new QClickEvent(), new QAjaxAction('chkSelected_Click'));
         }
         return $chkSelected->Render(false);	            	    

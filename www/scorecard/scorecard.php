@@ -44,9 +44,9 @@ class ScorecardForm extends InstituteForm {
 		// Generate a summary of the P Strategys
 		foreach(CategoryType::$NameArray as $key=>$value) {
 			$dtgP = new QDataGrid($this);
-			$dtgP->AddColumn(new QDataGridColumn('', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=20px' ));
-			$dtgP->AddColumn(new QDataGridColumn($value.' Strategy Summary', '<?= $_ITEM->Strategy ?>', 'HtmlEntities=false', 'Width=700px' ));
-			$dtgP->AddColumn(new QDataGridColumn('Average KPI', '<?= $_FORM->RenderKPI($_ITEM->Id) ?>', 'HtmlEntities=false', 'Width=20px' ));
+			$dtgP->AddColumn(new QDataGridColumn('', '<?= $_ITEM->Count ?>', 'HtmlEntities=false'));
+			$dtgP->AddColumn(new QDataGridColumn($value.' Strategy Summary', '<?= $_ITEM->Strategy ?>', 'HtmlEntities=false'));
+			$dtgP->AddColumn(new QDataGridColumn('Average KPI', '<?= $_FORM->RenderKPI($_ITEM->Id) ?>', 'HtmlEntities=false'));
 			$dtgP->CellPadding = 5;
 
 			$objConditions = QQ::All();
@@ -61,19 +61,11 @@ class ScorecardForm extends InstituteForm {
 			
 			$dtgP->NoDataHtml = '<div style=\'padding:20px;\'><p><b>'.$value.' Strategy Summary</b></p>' .'No Strategies.<br></div>';
 			$dtgP->UseAjax = true;
-			$dtgP->CssClass = 'summaryTable';
-			$dtgP->GridLines = QGridLines::Both;
+			$dtgP->CssClass = 'table table-bordered scorecard_table';	
 			$objStyle = $dtgP->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 	        
-	        $objStyle = $dtgP->HeaderLinkStyle;
-	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
-	        	
-	        $objStyle = $dtgP->RowStyle; 
-	        $objStyle->ForeColor = '#888888';
-	        $objStyle->BackColor = '#ffffff';      
-			
+	        $objStyle->BackColor = '#337ab7'; 	
+        		     			
 			$this->dtgPArray[] = $dtgP;
 		}	
 	}

@@ -42,21 +42,8 @@ class LemonGroupQuestionsForm extends InstituteForm {
 		$this->dtgAssessmentQuestions->CellPadding = 5;
 		$this->dtgAssessmentQuestions->SetDataBinder('dtgAssessmentQuestions_Bind',$this);
 		$this->dtgAssessmentQuestions->UseAjax = true;
+		$this->dtgAssessmentQuestions->CssClass = 'table table-striped';
 		
-		$objStyle = $this->dtgAssessmentQuestions->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgAssessmentQuestions->AlternateRowStyle;
-        $objStyle->BackColor = '#CCCCCC';
-
-        $objStyle = $this->dtgAssessmentQuestions->HeaderRowStyle;
-        $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
-        
-        $objStyle = $this->dtgAssessmentQuestions->HeaderLinkStyle;
-        $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
         
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = 'Submit';
@@ -135,8 +122,7 @@ class LemonGroupQuestionsForm extends InstituteForm {
             // this method which is responsible for rendering the listbox.  Also, we must
             // explicitly specify the control ID
             $lstValue = new QListBox($this->dtgAssessmentQuestions, $strControlId);
-            $lstValue->Width = 100;
-            $lstValue->ForeColor = '#F90949';
+            $lstValue->CssClass = 'form-control';
             if($this->bEditing && ($this->objLemonAssessment->ResourceStatusId == 2) ) {
             	$value = LemonAssessmentResults::GetValueByAssessmentIdAndQuestionId($this->objLemonAssessment->Id, $objQuestions->Id);
 	            for ($i=1; $i<8; $i++) {

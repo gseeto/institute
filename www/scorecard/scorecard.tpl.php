@@ -2,31 +2,34 @@
 
 <h1>The <?php _p($this->objScorecard->Name);?> Scorecard</h1>
 <br>
-<div class="scorecardnavbar"><ul class="scorecardnavbar">
-<?php 
-	// Display the Scorecard Navigation Menu
-	$intWidth = floor(550 / count(InstituteForm::$NavScorecardArray));
-	foreach (InstituteForm::$NavScorecardArray as $NavScorecardId => $strNavScorecardArray) {
-		$strClassInfo = ($NavScorecardId == $this->intNavScorecardId) ? 'class="selected"' : null;
-		if ($NavScorecardId == InstituteForm::NavScorecardGlobal) {
-			if (QApplication::$Login->IsAdmin())
-				printf('<li style="width: %spx;"><a href="%s%s/%s" %s title="%s">%s</a></li>',
-				$intWidth, __SUBDIRECTORY__,$strNavScorecardArray[1],$this->objScorecard->Id, $strClassInfo, $strNavScorecardArray[0], $strNavScorecardArray[0]
-				);
-		} else {
-			printf('<li style="width: %spx;"><a href="%s%s/%s" %s title="%s">%s</a></li>',
-				$intWidth, __SUBDIRECTORY__,$strNavScorecardArray[1],$this->objScorecard->Id, $strClassInfo, $strNavScorecardArray[0], $strNavScorecardArray[0]
-			);
-		}
-	}
-?>
-</ul></div>
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<ul class="nav navbar-nav">
+			<?php 
+				// Display the Scorecard Navigation Menu
+				foreach (InstituteForm::$NavScorecardArray as $NavScorecardId => $strNavScorecardArray) {
+					$strClassInfo = ($NavScorecardId == $this->intNavScorecardId) ? 'class="active"' : null;
+					if ($NavScorecardId == InstituteForm::NavScorecardGlobal) {
+						if (QApplication::$Login->IsAdmin())
+							printf('<li %s><a href="%s%s/%s" title="%s">%s</a></li>',
+							$strClassInfo, __SUBDIRECTORY__,$strNavScorecardArray[1],$this->objScorecard->Id, $strNavScorecardArray[0], $strNavScorecardArray[0]
+							);
+					} else {
+						printf('<li %s><a href="%s%s/%s" title="%s">%s</a></li>',
+							$strClassInfo, __SUBDIRECTORY__,$strNavScorecardArray[1],$this->objScorecard->Id, $strNavScorecardArray[0], $strNavScorecardArray[0]
+						);
+					}
+				}
+			?>
+		</ul>
+	</div>
+</nav>
 <?php 
 	foreach($this->btnCategoryArray as $btnCategory) {
 		$btnCategory->Render();		
 	}
 ?>
-<div class='pcontent'>
+<div>
 <script type="text/javascript">
 
        function DisplayChart(userData) {
@@ -69,12 +72,13 @@
         }
 </script>
 
-<div id="chartContainer" style="width: 800px; height: 400px; margin-top:20px;"></div>
-
+<div id="chartContainer" style="width: 800px; height: 400px;"></div>
+<div class="table-responsive">
 <?php 
 	foreach($this->dtgPArray as $dtgP) {
 		$dtgP->Render();
 	}
 ?>
+</div>
 </div>
 <?php require(__INCLUDES__ . '/footer.inc.php'); ?>
