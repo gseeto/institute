@@ -146,6 +146,27 @@
 		QApplicationBase::$ClassFile['kpismetacontrol'] = __DATA_META_CONTROLS__ . '/KpisMetaControl.class.php';
 		QApplicationBase::$ClassFile['kpisdatagrid'] = __DATA_META_CONTROLS__ . '/KpisDataGrid.class.php';
 
+	// ClassPaths for the Lemon50Assessment class
+		QApplicationBase::$ClassFile['lemon50assessment'] = __DATA_CLASSES__ . '/Lemon50Assessment.class.php';
+		QApplicationBase::$ClassFile['qqnodelemon50assessment'] = __DATA_CLASSES__ . '/Lemon50Assessment.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodelemon50assessment'] = __DATA_CLASSES__ . '/Lemon50Assessment.class.php';
+		QApplicationBase::$ClassFile['lemon50assessmentmetacontrol'] = __DATA_META_CONTROLS__ . '/Lemon50AssessmentMetaControl.class.php';
+		QApplicationBase::$ClassFile['lemon50assessmentdatagrid'] = __DATA_META_CONTROLS__ . '/Lemon50AssessmentDataGrid.class.php';
+
+	// ClassPaths for the Lemon50AssessmentQuestions class
+		QApplicationBase::$ClassFile['lemon50assessmentquestions'] = __DATA_CLASSES__ . '/Lemon50AssessmentQuestions.class.php';
+		QApplicationBase::$ClassFile['qqnodelemon50assessmentquestions'] = __DATA_CLASSES__ . '/Lemon50AssessmentQuestions.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodelemon50assessmentquestions'] = __DATA_CLASSES__ . '/Lemon50AssessmentQuestions.class.php';
+		QApplicationBase::$ClassFile['lemon50assessmentquestionsmetacontrol'] = __DATA_META_CONTROLS__ . '/Lemon50AssessmentQuestionsMetaControl.class.php';
+		QApplicationBase::$ClassFile['lemon50assessmentquestionsdatagrid'] = __DATA_META_CONTROLS__ . '/Lemon50AssessmentQuestionsDataGrid.class.php';
+
+	// ClassPaths for the Lemon50AssessmentResults class
+		QApplicationBase::$ClassFile['lemon50assessmentresults'] = __DATA_CLASSES__ . '/Lemon50AssessmentResults.class.php';
+		QApplicationBase::$ClassFile['qqnodelemon50assessmentresults'] = __DATA_CLASSES__ . '/Lemon50AssessmentResults.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodelemon50assessmentresults'] = __DATA_CLASSES__ . '/Lemon50AssessmentResults.class.php';
+		QApplicationBase::$ClassFile['lemon50assessmentresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/Lemon50AssessmentResultsMetaControl.class.php';
+		QApplicationBase::$ClassFile['lemon50assessmentresultsdatagrid'] = __DATA_META_CONTROLS__ . '/Lemon50AssessmentResultsDataGrid.class.php';
+
 	// ClassPaths for the LemonAssessment class
 		QApplicationBase::$ClassFile['lemonassessment'] = __DATA_CLASSES__ . '/LemonAssessment.class.php';
 		QApplicationBase::$ClassFile['qqnodelemonassessment'] = __DATA_CLASSES__ . '/LemonAssessment.class.php';
@@ -201,6 +222,48 @@
 		QApplicationBase::$ClassFile['qqreversereferencenodelraresults'] = __DATA_CLASSES__ . '/LraResults.class.php';
 		QApplicationBase::$ClassFile['lraresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/LraResultsMetaControl.class.php';
 		QApplicationBase::$ClassFile['lraresultsdatagrid'] = __DATA_META_CONTROLS__ . '/LraResultsDataGrid.class.php';
+
+	// ClassPaths for the PartneringAwarenessAssessment class
+		QApplicationBase::$ClassFile['partneringawarenessassessment'] = __DATA_CLASSES__ . '/PartneringAwarenessAssessment.class.php';
+		QApplicationBase::$ClassFile['qqnodepartneringawarenessassessment'] = __DATA_CLASSES__ . '/PartneringAwarenessAssessment.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodepartneringawarenessassessment'] = __DATA_CLASSES__ . '/PartneringAwarenessAssessment.class.php';
+		QApplicationBase::$ClassFile['partneringawarenessassessmentmetacontrol'] = __DATA_META_CONTROLS__ . '/PartneringAwarenessAssessmentMetaControl.class.php';
+		QApplicationBase::$ClassFile['partneringawarenessassessmentdatagrid'] = __DATA_META_CONTROLS__ . '/PartneringAwarenessAssessmentDataGrid.class.php';
+
+	// ClassPaths for the PartneringAwarenessQuestions class
+		QApplicationBase::$ClassFile['partneringawarenessquestions'] = __DATA_CLASSES__ . '/PartneringAwarenessQuestions.class.php';
+		QApplicationBase::$ClassFile['qqnodepartneringawarenessquestions'] = __DATA_CLASSES__ . '/PartneringAwarenessQuestions.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodepartneringawarenessquestions'] = __DATA_CLASSES__ . '/PartneringAwarenessQuestions.class.php';
+		QApplicationBase::$ClassFile['partneringawarenessquestionsmetacontrol'] = __DATA_META_CONTROLS__ . '/PartneringAwarenessQuestionsMetaControl.class.php';
+		QApplicationBase::$ClassFile['partneringawarenessquestionsdatagrid'] = __DATA_META_CONTROLS__ . '/PartneringAwarenessQuestionsDataGrid.class.php';
+
+	// ClassPaths for the PartneringAwarenessResults class
+		QApplicationBase::$ClassFile['partneringawarenessresults'] = __DATA_CLASSES__ . '/PartneringAwarenessResults.class.php';
+		QApplicationBase::$ClassFile['qqnodepartneringawarenessresults'] = __DATA_CLASSES__ . '/PartneringAwarenessResults.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodepartneringawarenessresults'] = __DATA_CLASSES__ . '/PartneringAwarenessResults.class.php';
+		QApplicationBase::$ClassFile['partneringawarenessresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/PartneringAwarenessResultsMetaControl.class.php';
+		QApplicationBase::$ClassFile['partneringawarenessresultsdatagrid'] = __DATA_META_CONTROLS__ . '/PartneringAwarenessResultsDataGrid.class.php';
+
+	// ClassPaths for the PartneringReadinessAssessment class
+		QApplicationBase::$ClassFile['partneringreadinessassessment'] = __DATA_CLASSES__ . '/PartneringReadinessAssessment.class.php';
+		QApplicationBase::$ClassFile['qqnodepartneringreadinessassessment'] = __DATA_CLASSES__ . '/PartneringReadinessAssessment.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodepartneringreadinessassessment'] = __DATA_CLASSES__ . '/PartneringReadinessAssessment.class.php';
+		QApplicationBase::$ClassFile['partneringreadinessassessmentmetacontrol'] = __DATA_META_CONTROLS__ . '/PartneringReadinessAssessmentMetaControl.class.php';
+		QApplicationBase::$ClassFile['partneringreadinessassessmentdatagrid'] = __DATA_META_CONTROLS__ . '/PartneringReadinessAssessmentDataGrid.class.php';
+
+	// ClassPaths for the PartneringReadinessQuestions class
+		QApplicationBase::$ClassFile['partneringreadinessquestions'] = __DATA_CLASSES__ . '/PartneringReadinessQuestions.class.php';
+		QApplicationBase::$ClassFile['qqnodepartneringreadinessquestions'] = __DATA_CLASSES__ . '/PartneringReadinessQuestions.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodepartneringreadinessquestions'] = __DATA_CLASSES__ . '/PartneringReadinessQuestions.class.php';
+		QApplicationBase::$ClassFile['partneringreadinessquestionsmetacontrol'] = __DATA_META_CONTROLS__ . '/PartneringReadinessQuestionsMetaControl.class.php';
+		QApplicationBase::$ClassFile['partneringreadinessquestionsdatagrid'] = __DATA_META_CONTROLS__ . '/PartneringReadinessQuestionsDataGrid.class.php';
+
+	// ClassPaths for the PartneringReadinessResults class
+		QApplicationBase::$ClassFile['partneringreadinessresults'] = __DATA_CLASSES__ . '/PartneringReadinessResults.class.php';
+		QApplicationBase::$ClassFile['qqnodepartneringreadinessresults'] = __DATA_CLASSES__ . '/PartneringReadinessResults.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodepartneringreadinessresults'] = __DATA_CLASSES__ . '/PartneringReadinessResults.class.php';
+		QApplicationBase::$ClassFile['partneringreadinessresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/PartneringReadinessResultsMetaControl.class.php';
+		QApplicationBase::$ClassFile['partneringreadinessresultsdatagrid'] = __DATA_META_CONTROLS__ . '/PartneringReadinessResultsDataGrid.class.php';
 
 	// ClassPaths for the PostventureAssessment class
 		QApplicationBase::$ClassFile['postventureassessment'] = __DATA_CLASSES__ . '/PostventureAssessment.class.php';

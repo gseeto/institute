@@ -127,6 +127,24 @@
 			return new QQNodeKpis('kpis', null, null);
 		}
 		/**
+		 * @return QQNodeLemon50Assessment
+		 */
+		static public function Lemon50Assessment() {
+			return new QQNodeLemon50Assessment('lemon50_assessment', null, null);
+		}
+		/**
+		 * @return QQNodeLemon50AssessmentQuestions
+		 */
+		static public function Lemon50AssessmentQuestions() {
+			return new QQNodeLemon50AssessmentQuestions('lemon50_assessment_questions', null, null);
+		}
+		/**
+		 * @return QQNodeLemon50AssessmentResults
+		 */
+		static public function Lemon50AssessmentResults() {
+			return new QQNodeLemon50AssessmentResults('lemon50_assessment_results', null, null);
+		}
+		/**
 		 * @return QQNodeLemonAssessment
 		 */
 		static public function LemonAssessment() {
@@ -173,6 +191,42 @@
 		 */
 		static public function LraResults() {
 			return new QQNodeLraResults('lra_results', null, null);
+		}
+		/**
+		 * @return QQNodePartneringAwarenessAssessment
+		 */
+		static public function PartneringAwarenessAssessment() {
+			return new QQNodePartneringAwarenessAssessment('partnering_awareness_assessment', null, null);
+		}
+		/**
+		 * @return QQNodePartneringAwarenessQuestions
+		 */
+		static public function PartneringAwarenessQuestions() {
+			return new QQNodePartneringAwarenessQuestions('partnering_awareness_questions', null, null);
+		}
+		/**
+		 * @return QQNodePartneringAwarenessResults
+		 */
+		static public function PartneringAwarenessResults() {
+			return new QQNodePartneringAwarenessResults('partnering_awareness_results', null, null);
+		}
+		/**
+		 * @return QQNodePartneringReadinessAssessment
+		 */
+		static public function PartneringReadinessAssessment() {
+			return new QQNodePartneringReadinessAssessment('partnering_readiness_assessment', null, null);
+		}
+		/**
+		 * @return QQNodePartneringReadinessQuestions
+		 */
+		static public function PartneringReadinessQuestions() {
+			return new QQNodePartneringReadinessQuestions('partnering_readiness_questions', null, null);
+		}
+		/**
+		 * @return QQNodePartneringReadinessResults
+		 */
+		static public function PartneringReadinessResults() {
+			return new QQNodePartneringReadinessResults('partnering_readiness_results', null, null);
 		}
 		/**
 		 * @return QQNodePostventureAssessment
