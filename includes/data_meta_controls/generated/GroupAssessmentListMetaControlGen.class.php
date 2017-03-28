@@ -269,7 +269,6 @@
 			$this->txtTotalKeys = new QIntegerTextBox($this->objParentObject, $strControlId);
 			$this->txtTotalKeys->Name = QApplication::Translate('Total Keys');
 			$this->txtTotalKeys->Text = $this->objGroupAssessmentList->TotalKeys;
-			$this->txtTotalKeys->Required = true;
 			return $this->txtTotalKeys;
 		}
 
@@ -283,7 +282,6 @@
 			$this->lblTotalKeys = new QLabel($this->objParentObject, $strControlId);
 			$this->lblTotalKeys->Name = QApplication::Translate('Total Keys');
 			$this->lblTotalKeys->Text = $this->objGroupAssessmentList->TotalKeys;
-			$this->lblTotalKeys->Required = true;
 			$this->lblTotalKeys->Format = $strFormat;
 			return $this->lblTotalKeys;
 		}
@@ -297,7 +295,6 @@
 			$this->txtKeysLeft = new QIntegerTextBox($this->objParentObject, $strControlId);
 			$this->txtKeysLeft->Name = QApplication::Translate('Keys Left');
 			$this->txtKeysLeft->Text = $this->objGroupAssessmentList->KeysLeft;
-			$this->txtKeysLeft->Required = true;
 			return $this->txtKeysLeft;
 		}
 
@@ -311,7 +308,6 @@
 			$this->lblKeysLeft = new QLabel($this->objParentObject, $strControlId);
 			$this->lblKeysLeft->Name = QApplication::Translate('Keys Left');
 			$this->lblKeysLeft->Text = $this->objGroupAssessmentList->KeysLeft;
-			$this->lblKeysLeft->Required = true;
 			$this->lblKeysLeft->Format = $strFormat;
 			return $this->lblKeysLeft;
 		}

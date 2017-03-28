@@ -11,6 +11,7 @@ class LoadInfoForm extends InstituteForm {
 	protected $txtFirstName;
 	protected $txtLastName;
 	protected $txtEmail;	
+	protected $chkOptIn;
 	protected $btnSubmit;
 	protected $lblWarningMsg;
 	
@@ -54,7 +55,10 @@ class LoadInfoForm extends InstituteForm {
 		$this->txtEmail = new QTextBox($this);
 		$this->txtEmail->Name = "Email: ";
 		$this->txtEmail->Width = 200;
-				
+		
+		$this->chkOptIn = new QCheckBox($this);
+		$this->chkOptIn->Text = 'The Institute have permission to email me regarding this assessment. (Your email will not be shared with 3rd parties)';
+		
 		$this->btnSubmit = new QButton($this);
 		$this->btnSubmit->Text = "Submit";
 		$this->btnSubmit->CssClass = "externButton";
@@ -98,13 +102,14 @@ class LoadInfoForm extends InstituteForm {
 		$objLogin = new Login();
 		$objLogin->Username = $username;
 		$objLogin->Password = $password;
-		$objLogin->RoleId = $intRoleId;
+		$objLogin->RoleId = $intRoleId;	
 		$intLoginId = $objLogin->Save();
 		
 		$objUser = new User();
 		$objUser->FirstName = trim($this->txtFirstName->Text);
 		$objUser->LastName = trim($this->txtLastName->Text);
-		$objUser->Email = trim($this->txtEmail->Text);			
+		$objUser->Email = trim($this->txtEmail->Text);	
+		$objUser->OptIn = $this->chkOptIn->Checked;		
 		$objUser->LoginId = $intLoginId;
 		$objUser->Save();
 		

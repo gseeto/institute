@@ -38,6 +38,8 @@
 	 * property-read QLabel $TenureIdLabel
 	 * property QIntegerTextBox $CareerLengthControl
 	 * property-read QLabel $CareerLengthLabel
+	 * property QCheckBox $OptInControl
+	 * property-read QLabel $OptInLabel
 	 * property QListBox $GroupAssessmentListAsAssessmentManagerControl
 	 * property-read QLabel $GroupAssessmentListAsAssessmentManagerLabel
 	 * property QListBox $BusinessChecklistAsManagerControl
@@ -145,6 +147,12 @@
          */
 		protected $txtCareerLength;
 
+        /**
+         * @var QCheckBox chkOptIn;
+         * @access protected
+         */
+		protected $chkOptIn;
+
 
 		// Controls that allow the viewing of User's individual data fields
         /**
@@ -206,6 +214,12 @@
          * @access protected
          */
 		protected $lblCareerLength;
+
+        /**
+         * @var QLabel lblOptIn
+         * @access protected
+         */
+		protected $lblOptIn;
 
 
 		// QListBox Controls (if applicable) to edit Unique ReverseReferences and ManyToMany References
@@ -651,6 +665,30 @@
 		}
 
 		/**
+		 * Create and setup QCheckBox chkOptIn
+		 * @param string $strControlId optional ControlId to use
+		 * @return QCheckBox
+		 */
+		public function chkOptIn_Create($strControlId = null) {
+			$this->chkOptIn = new QCheckBox($this->objParentObject, $strControlId);
+			$this->chkOptIn->Name = QApplication::Translate('Opt In');
+			$this->chkOptIn->Checked = $this->objUser->OptIn;
+			return $this->chkOptIn;
+		}
+
+		/**
+		 * Create and setup QLabel lblOptIn
+		 * @param string $strControlId optional ControlId to use
+		 * @return QLabel
+		 */
+		public function lblOptIn_Create($strControlId = null) {
+			$this->lblOptIn = new QLabel($this->objParentObject, $strControlId);
+			$this->lblOptIn->Name = QApplication::Translate('Opt In');
+			$this->lblOptIn->Text = ($this->objUser->OptIn) ? QApplication::Translate('Yes') : QApplication::Translate('No');
+			return $this->lblOptIn;
+		}
+
+		/**
 		 * Create and setup QListBox lstGroupAssessmentListsAsAssessmentManager
 		 * @param string $strControlId optional ControlId to use
 		 * @param QQCondition $objConditions override the default condition of QQ::All() to the query, itself
@@ -988,6 +1026,9 @@
 			if ($this->txtCareerLength) $this->txtCareerLength->Text = $this->objUser->CareerLength;
 			if ($this->lblCareerLength) $this->lblCareerLength->Text = $this->objUser->CareerLength;
 
+			if ($this->chkOptIn) $this->chkOptIn->Checked = $this->objUser->OptIn;
+			if ($this->lblOptIn) $this->lblOptIn->Text = ($this->objUser->OptIn) ? QApplication::Translate('Yes') : QApplication::Translate('No');
+
 			if ($this->lstGroupAssessmentListsAsAssessmentManager) {
 				$this->lstGroupAssessmentListsAsAssessmentManager->RemoveAllItems();
 				$objAssociatedArray = $this->objUser->GetGroupAssessmentListAsAssessmentManagerArray();
@@ -1176,6 +1217,7 @@
 				if ($this->lstTitle) $this->objUser->TitleId = $this->lstTitle->SelectedValue;
 				if ($this->lstTenure) $this->objUser->TenureId = $this->lstTenure->SelectedValue;
 				if ($this->txtCareerLength) $this->objUser->CareerLength = $this->txtCareerLength->Text;
+				if ($this->chkOptIn) $this->objUser->OptIn = $this->chkOptIn->Checked;
 
 				// Update any UniqueReverseReferences (if any) for controls that have been created for it
 
@@ -1294,6 +1336,12 @@
 				case 'CareerLengthLabel':
 					if (!$this->lblCareerLength) return $this->lblCareerLength_Create();
 					return $this->lblCareerLength;
+				case 'OptInControl':
+					if (!$this->chkOptIn) return $this->chkOptIn_Create();
+					return $this->chkOptIn;
+				case 'OptInLabel':
+					if (!$this->lblOptIn) return $this->lblOptIn_Create();
+					return $this->lblOptIn;
 				case 'GroupAssessmentListAsAssessmentManagerControl':
 					if (!$this->lstGroupAssessmentListsAsAssessmentManager) return $this->lstGroupAssessmentListsAsAssessmentManager_Create();
 					return $this->lstGroupAssessmentListsAsAssessmentManager;
@@ -1368,6 +1416,8 @@
 						return ($this->lstTenure = QType::Cast($mixValue, 'QControl'));
 					case 'CareerLengthControl':
 						return ($this->txtCareerLength = QType::Cast($mixValue, 'QControl'));
+					case 'OptInControl':
+						return ($this->chkOptIn = QType::Cast($mixValue, 'QControl'));
 					case 'GroupAssessmentListAsAssessmentManagerControl':
 						return ($this->lstGroupAssessmentListsAsAssessmentManager = QType::Cast($mixValue, 'QControl'));
 					case 'BusinessChecklistAsManagerControl':

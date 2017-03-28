@@ -22,6 +22,7 @@
 		<?php $this->txtFirstName->RenderWithName('CssClass="form-control"'); ?>
 		<?php $this->txtLastName->RenderWithName('CssClass="form-control"'); ?>
 		<?php $this->txtEmail->RenderWithName('CssClass="form-control"'); ?>
+		<?php $this->chkOptIn->Render('CssClass="checkbox"'); ?>
 		&nbsp;&nbsp;
 		<?php $this->btnSubmit->Render('CssClass="btn btn-default"'); ?>
 		<br><br>

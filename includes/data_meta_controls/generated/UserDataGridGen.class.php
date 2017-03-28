@@ -308,6 +308,7 @@
 				case 'TenureId': return QQN::User()->TenureId;
 				case 'Tenure': return QQN::User()->Tenure;
 				case 'CareerLength': return QQN::User()->CareerLength;
+				case 'OptIn': return QQN::User()->OptIn;
 				default: throw new QCallerException('Simple Property not found in UserDataGrid content: ' . $mixContent);
 			} else if ($mixContent instanceof QQAssociationNode)
 				throw new QCallerException('Content QQNode cannot go through any "To Many" association nodes.');

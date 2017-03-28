@@ -21,14 +21,24 @@
 	 * @property User[] $_UserArray the value for the private _objUserArray (Read-Only) if set due to an ExpandAsArray on the resource_user_assn association table
 	 * @property GroupAssessmentList $_GroupAssessmentList the value for the private _objGroupAssessmentList (Read-Only) if set due to an expansion on the group_assessment_list.resource_id reverse relationship
 	 * @property GroupAssessmentList[] $_GroupAssessmentListArray the value for the private _objGroupAssessmentListArray (Read-Only) if set due to an ExpandAsArray on the group_assessment_list.resource_id reverse relationship
+	 * @property GroupAssessmentList $_GroupAssessmentList the value for the private _objGroupAssessmentList (Read-Only) if set due to an expansion on the group_assessment_list.resource_id reverse relationship
+	 * @property GroupAssessmentList[] $_GroupAssessmentListArray the value for the private _objGroupAssessmentListArray (Read-Only) if set due to an ExpandAsArray on the group_assessment_list.resource_id reverse relationship
 	 * @property IntegrationAssessment $_IntegrationAssessment the value for the private _objIntegrationAssessment (Read-Only) if set due to an expansion on the integration_assessment.resource_id reverse relationship
 	 * @property IntegrationAssessment[] $_IntegrationAssessmentArray the value for the private _objIntegrationAssessmentArray (Read-Only) if set due to an ExpandAsArray on the integration_assessment.resource_id reverse relationship
 	 * @property KingdomBusinessAssessment $_KingdomBusinessAssessment the value for the private _objKingdomBusinessAssessment (Read-Only) if set due to an expansion on the kingdom_business_assessment.resource_id reverse relationship
 	 * @property KingdomBusinessAssessment[] $_KingdomBusinessAssessmentArray the value for the private _objKingdomBusinessAssessmentArray (Read-Only) if set due to an ExpandAsArray on the kingdom_business_assessment.resource_id reverse relationship
+	 * @property Lemon50Assessment $_Lemon50Assessment the value for the private _objLemon50Assessment (Read-Only) if set due to an expansion on the lemon50_assessment.resource_id reverse relationship
+	 * @property Lemon50Assessment[] $_Lemon50AssessmentArray the value for the private _objLemon50AssessmentArray (Read-Only) if set due to an ExpandAsArray on the lemon50_assessment.resource_id reverse relationship
 	 * @property LemonAssessment $_LemonAssessment the value for the private _objLemonAssessment (Read-Only) if set due to an expansion on the lemon_assessment.resource_id reverse relationship
 	 * @property LemonAssessment[] $_LemonAssessmentArray the value for the private _objLemonAssessmentArray (Read-Only) if set due to an ExpandAsArray on the lemon_assessment.resource_id reverse relationship
 	 * @property LraAssessment $_LraAssessment the value for the private _objLraAssessment (Read-Only) if set due to an expansion on the lra_assessment.resource_id reverse relationship
 	 * @property LraAssessment[] $_LraAssessmentArray the value for the private _objLraAssessmentArray (Read-Only) if set due to an ExpandAsArray on the lra_assessment.resource_id reverse relationship
+	 * @property PartneringAwarenessAssessment $_PartneringAwarenessAssessment the value for the private _objPartneringAwarenessAssessment (Read-Only) if set due to an expansion on the partnering_awareness_assessment.resource_id reverse relationship
+	 * @property PartneringAwarenessAssessment[] $_PartneringAwarenessAssessmentArray the value for the private _objPartneringAwarenessAssessmentArray (Read-Only) if set due to an ExpandAsArray on the partnering_awareness_assessment.resource_id reverse relationship
+	 * @property PartneringReadinessAssessment $_PartneringReadinessAssessment the value for the private _objPartneringReadinessAssessment (Read-Only) if set due to an expansion on the partnering_readiness_assessment.resource_id reverse relationship
+	 * @property PartneringReadinessAssessment[] $_PartneringReadinessAssessmentArray the value for the private _objPartneringReadinessAssessmentArray (Read-Only) if set due to an ExpandAsArray on the partnering_readiness_assessment.resource_id reverse relationship
+	 * @property PostventureAssessment $_PostventureAssessment the value for the private _objPostventureAssessment (Read-Only) if set due to an expansion on the postventure_assessment.resource_id reverse relationship
+	 * @property PostventureAssessment[] $_PostventureAssessmentArray the value for the private _objPostventureAssessmentArray (Read-Only) if set due to an ExpandAsArray on the postventure_assessment.resource_id reverse relationship
 	 * @property Scorecard $_Scorecard the value for the private _objScorecard (Read-Only) if set due to an expansion on the scorecard.resource_id reverse relationship
 	 * @property Scorecard[] $_ScorecardArray the value for the private _objScorecardArray (Read-Only) if set due to an ExpandAsArray on the scorecard.resource_id reverse relationship
 	 * @property SeasonalAssessment $_SeasonalAssessment the value for the private _objSeasonalAssessment (Read-Only) if set due to an expansion on the seasonal_assessment.resource_id reverse relationship
@@ -96,6 +106,7 @@
 		 */
 		private $_objGroupAssessmentListArray = array();
 
+
 		/**
 		 * Private member variable that stores a reference to a single IntegrationAssessment object
 		 * (of type IntegrationAssessment), if this Resource object was restored with
@@ -129,6 +140,22 @@
 		private $_objKingdomBusinessAssessmentArray = array();
 
 		/**
+		 * Private member variable that stores a reference to a single Lemon50Assessment object
+		 * (of type Lemon50Assessment), if this Resource object was restored with
+		 * an expansion on the lemon50_assessment association table.
+		 * @var Lemon50Assessment _objLemon50Assessment;
+		 */
+		private $_objLemon50Assessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of Lemon50Assessment objects
+		 * (of type Lemon50Assessment[]), if this Resource object was restored with
+		 * an ExpandAsArray on the lemon50_assessment association table.
+		 * @var Lemon50Assessment[] _objLemon50AssessmentArray;
+		 */
+		private $_objLemon50AssessmentArray = array();
+
+		/**
 		 * Private member variable that stores a reference to a single LemonAssessment object
 		 * (of type LemonAssessment), if this Resource object was restored with
 		 * an expansion on the lemon_assessment association table.
@@ -159,6 +186,54 @@
 		 * @var LraAssessment[] _objLraAssessmentArray;
 		 */
 		private $_objLraAssessmentArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single PartneringAwarenessAssessment object
+		 * (of type PartneringAwarenessAssessment), if this Resource object was restored with
+		 * an expansion on the partnering_awareness_assessment association table.
+		 * @var PartneringAwarenessAssessment _objPartneringAwarenessAssessment;
+		 */
+		private $_objPartneringAwarenessAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of PartneringAwarenessAssessment objects
+		 * (of type PartneringAwarenessAssessment[]), if this Resource object was restored with
+		 * an ExpandAsArray on the partnering_awareness_assessment association table.
+		 * @var PartneringAwarenessAssessment[] _objPartneringAwarenessAssessmentArray;
+		 */
+		private $_objPartneringAwarenessAssessmentArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single PartneringReadinessAssessment object
+		 * (of type PartneringReadinessAssessment), if this Resource object was restored with
+		 * an expansion on the partnering_readiness_assessment association table.
+		 * @var PartneringReadinessAssessment _objPartneringReadinessAssessment;
+		 */
+		private $_objPartneringReadinessAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of PartneringReadinessAssessment objects
+		 * (of type PartneringReadinessAssessment[]), if this Resource object was restored with
+		 * an ExpandAsArray on the partnering_readiness_assessment association table.
+		 * @var PartneringReadinessAssessment[] _objPartneringReadinessAssessmentArray;
+		 */
+		private $_objPartneringReadinessAssessmentArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single PostventureAssessment object
+		 * (of type PostventureAssessment), if this Resource object was restored with
+		 * an expansion on the postventure_assessment association table.
+		 * @var PostventureAssessment _objPostventureAssessment;
+		 */
+		private $_objPostventureAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of PostventureAssessment objects
+		 * (of type PostventureAssessment[]), if this Resource object was restored with
+		 * an ExpandAsArray on the postventure_assessment association table.
+		 * @var PostventureAssessment[] _objPostventureAssessmentArray;
+		 */
+		private $_objPostventureAssessmentArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single Scorecard object
@@ -640,6 +715,20 @@
 					$blnExpandedViaArray = true;
 				}
 
+				$strAlias = $strAliasPrefix . 'groupassessmentlist__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objGroupAssessmentListArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objGroupAssessmentListArray[$intPreviousChildItemCount - 1];
+						$objChildItem = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlist__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objGroupAssessmentListArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objGroupAssessmentListArray[] = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlist__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'integrationassessment__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -668,6 +757,20 @@
 					$blnExpandedViaArray = true;
 				}
 
+				$strAlias = $strAliasPrefix . 'lemon50assessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objLemon50AssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objLemon50AssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = Lemon50Assessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemon50assessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objLemon50AssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objLemon50AssessmentArray[] = Lemon50Assessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemon50assessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'lemonassessment__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -693,6 +796,48 @@
 							$objPreviousItem->_objLraAssessmentArray[] = $objChildItem;
 					} else
 						$objPreviousItem->_objLraAssessmentArray[] = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
+				$strAlias = $strAliasPrefix . 'partneringawarenessassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objPartneringAwarenessAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objPartneringAwarenessAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = PartneringAwarenessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'partneringawarenessassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objPartneringAwarenessAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objPartneringAwarenessAssessmentArray[] = PartneringAwarenessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'partneringawarenessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
+				$strAlias = $strAliasPrefix . 'partneringreadinessassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objPartneringReadinessAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objPartneringReadinessAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = PartneringReadinessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'partneringreadinessassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objPartneringReadinessAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objPartneringReadinessAssessmentArray[] = PartneringReadinessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'partneringreadinessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
+				$strAlias = $strAliasPrefix . 'postventureassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objPostventureAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objPostventureAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = PostventureAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'postventureassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objPostventureAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objPostventureAssessmentArray[] = PostventureAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'postventureassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 					$blnExpandedViaArray = true;
 				}
 
@@ -817,6 +962,16 @@
 					$objToReturn->_objGroupAssessmentList = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlist__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
+			// Check for GroupAssessmentList Virtual Binding
+			$strAlias = $strAliasPrefix . 'groupassessmentlist__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objGroupAssessmentListArray[] = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlist__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objGroupAssessmentList = GroupAssessmentList::InstantiateDbRow($objDbRow, $strAliasPrefix . 'groupassessmentlist__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
 			// Check for IntegrationAssessment Virtual Binding
 			$strAlias = $strAliasPrefix . 'integrationassessment__id';
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
@@ -837,6 +992,16 @@
 					$objToReturn->_objKingdomBusinessAssessment = KingdomBusinessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'kingdombusinessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
+			// Check for Lemon50Assessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'lemon50assessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objLemon50AssessmentArray[] = Lemon50Assessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemon50assessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objLemon50Assessment = Lemon50Assessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemon50assessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
 			// Check for LemonAssessment Virtual Binding
 			$strAlias = $strAliasPrefix . 'lemonassessment__id';
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
@@ -855,6 +1020,36 @@
 					$objToReturn->_objLraAssessmentArray[] = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objLraAssessment = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for PartneringAwarenessAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'partneringawarenessassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objPartneringAwarenessAssessmentArray[] = PartneringAwarenessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'partneringawarenessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objPartneringAwarenessAssessment = PartneringAwarenessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'partneringawarenessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for PartneringReadinessAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'partneringreadinessassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objPartneringReadinessAssessmentArray[] = PartneringReadinessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'partneringreadinessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objPartneringReadinessAssessment = PartneringReadinessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'partneringreadinessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for PostventureAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'postventureassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objPostventureAssessmentArray[] = PostventureAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'postventureassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objPostventureAssessment = PostventureAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'postventureassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			// Check for Scorecard Virtual Binding
@@ -1275,6 +1470,18 @@
 					// @return GroupAssessmentList[]
 					return (array) $this->_objGroupAssessmentListArray;
 
+				case '_GroupAssessmentList':
+					// Gets the value for the private _objGroupAssessmentList (Read-Only)
+					// if set due to an expansion on the group_assessment_list.resource_id reverse relationship
+					// @return GroupAssessmentList
+					return $this->_objGroupAssessmentList;
+
+				case '_GroupAssessmentListArray':
+					// Gets the value for the private _objGroupAssessmentListArray (Read-Only)
+					// if set due to an ExpandAsArray on the group_assessment_list.resource_id reverse relationship
+					// @return GroupAssessmentList[]
+					return (array) $this->_objGroupAssessmentListArray;
+
 				case '_IntegrationAssessment':
 					// Gets the value for the private _objIntegrationAssessment (Read-Only)
 					// if set due to an expansion on the integration_assessment.resource_id reverse relationship
@@ -1299,6 +1506,18 @@
 					// @return KingdomBusinessAssessment[]
 					return (array) $this->_objKingdomBusinessAssessmentArray;
 
+				case '_Lemon50Assessment':
+					// Gets the value for the private _objLemon50Assessment (Read-Only)
+					// if set due to an expansion on the lemon50_assessment.resource_id reverse relationship
+					// @return Lemon50Assessment
+					return $this->_objLemon50Assessment;
+
+				case '_Lemon50AssessmentArray':
+					// Gets the value for the private _objLemon50AssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the lemon50_assessment.resource_id reverse relationship
+					// @return Lemon50Assessment[]
+					return (array) $this->_objLemon50AssessmentArray;
+
 				case '_LemonAssessment':
 					// Gets the value for the private _objLemonAssessment (Read-Only)
 					// if set due to an expansion on the lemon_assessment.resource_id reverse relationship
@@ -1322,6 +1541,42 @@
 					// if set due to an ExpandAsArray on the lra_assessment.resource_id reverse relationship
 					// @return LraAssessment[]
 					return (array) $this->_objLraAssessmentArray;
+
+				case '_PartneringAwarenessAssessment':
+					// Gets the value for the private _objPartneringAwarenessAssessment (Read-Only)
+					// if set due to an expansion on the partnering_awareness_assessment.resource_id reverse relationship
+					// @return PartneringAwarenessAssessment
+					return $this->_objPartneringAwarenessAssessment;
+
+				case '_PartneringAwarenessAssessmentArray':
+					// Gets the value for the private _objPartneringAwarenessAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the partnering_awareness_assessment.resource_id reverse relationship
+					// @return PartneringAwarenessAssessment[]
+					return (array) $this->_objPartneringAwarenessAssessmentArray;
+
+				case '_PartneringReadinessAssessment':
+					// Gets the value for the private _objPartneringReadinessAssessment (Read-Only)
+					// if set due to an expansion on the partnering_readiness_assessment.resource_id reverse relationship
+					// @return PartneringReadinessAssessment
+					return $this->_objPartneringReadinessAssessment;
+
+				case '_PartneringReadinessAssessmentArray':
+					// Gets the value for the private _objPartneringReadinessAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the partnering_readiness_assessment.resource_id reverse relationship
+					// @return PartneringReadinessAssessment[]
+					return (array) $this->_objPartneringReadinessAssessmentArray;
+
+				case '_PostventureAssessment':
+					// Gets the value for the private _objPostventureAssessment (Read-Only)
+					// if set due to an expansion on the postventure_assessment.resource_id reverse relationship
+					// @return PostventureAssessment
+					return $this->_objPostventureAssessment;
+
+				case '_PostventureAssessmentArray':
+					// Gets the value for the private _objPostventureAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the postventure_assessment.resource_id reverse relationship
+					// @return PostventureAssessment[]
+					return (array) $this->_objPostventureAssessmentArray;
 
 				case '_Scorecard':
 					// Gets the value for the private _objScorecard (Read-Only)
@@ -1635,6 +1890,8 @@
 		}
 
 			
+		
+
 		
 		// Related Objects' Methods for IntegrationAssessment
 		//-------------------------------------------------------------------
@@ -2000,6 +2257,188 @@
 
 			
 		
+		// Related Objects' Methods for Lemon50Assessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated Lemon50Assessments as an array of Lemon50Assessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return Lemon50Assessment[]
+		*/ 
+		public function GetLemon50AssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return Lemon50Assessment::LoadArrayByResourceId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated Lemon50Assessments
+		 * @return int
+		*/ 
+		public function CountLemon50Assessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return Lemon50Assessment::CountByResourceId($this->intId);
+		}
+
+		/**
+		 * Associates a Lemon50Assessment
+		 * @param Lemon50Assessment $objLemon50Assessment
+		 * @return void
+		*/ 
+		public function AssociateLemon50Assessment(Lemon50Assessment $objLemon50Assessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateLemon50Assessment on this unsaved Resource.');
+			if ((is_null($objLemon50Assessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateLemon50Assessment on this Resource with an unsaved Lemon50Assessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lemon50_assessment`
+				SET
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLemon50Assessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objLemon50Assessment->ResourceId = $this->intId;
+				$objLemon50Assessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a Lemon50Assessment
+		 * @param Lemon50Assessment $objLemon50Assessment
+		 * @return void
+		*/ 
+		public function UnassociateLemon50Assessment(Lemon50Assessment $objLemon50Assessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemon50Assessment on this unsaved Resource.');
+			if ((is_null($objLemon50Assessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemon50Assessment on this Resource with an unsaved Lemon50Assessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lemon50_assessment`
+				SET
+					`resource_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLemon50Assessment->Id) . ' AND
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objLemon50Assessment->ResourceId = null;
+				$objLemon50Assessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all Lemon50Assessments
+		 * @return void
+		*/ 
+		public function UnassociateAllLemon50Assessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemon50Assessment on this unsaved Resource.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (Lemon50Assessment::LoadArrayByResourceId($this->intId) as $objLemon50Assessment) {
+					$objLemon50Assessment->ResourceId = null;
+					$objLemon50Assessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lemon50_assessment`
+				SET
+					`resource_id` = null
+				WHERE
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated Lemon50Assessment
+		 * @param Lemon50Assessment $objLemon50Assessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedLemon50Assessment(Lemon50Assessment $objLemon50Assessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemon50Assessment on this unsaved Resource.');
+			if ((is_null($objLemon50Assessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemon50Assessment on this Resource with an unsaved Lemon50Assessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`lemon50_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLemon50Assessment->Id) . ' AND
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objLemon50Assessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated Lemon50Assessments
+		 * @return void
+		*/ 
+		public function DeleteAllLemon50Assessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemon50Assessment on this unsaved Resource.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (Lemon50Assessment::LoadArrayByResourceId($this->intId) as $objLemon50Assessment) {
+					$objLemon50Assessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`lemon50_assessment`
+				WHERE
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
 		// Related Objects' Methods for LemonAssessment
 		//-------------------------------------------------------------------
 
@@ -2357,6 +2796,552 @@
 			$objDatabase->NonQuery('
 				DELETE FROM
 					`lra_assessment`
+				WHERE
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for PartneringAwarenessAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated PartneringAwarenessAssessments as an array of PartneringAwarenessAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return PartneringAwarenessAssessment[]
+		*/ 
+		public function GetPartneringAwarenessAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return PartneringAwarenessAssessment::LoadArrayByResourceId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated PartneringAwarenessAssessments
+		 * @return int
+		*/ 
+		public function CountPartneringAwarenessAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return PartneringAwarenessAssessment::CountByResourceId($this->intId);
+		}
+
+		/**
+		 * Associates a PartneringAwarenessAssessment
+		 * @param PartneringAwarenessAssessment $objPartneringAwarenessAssessment
+		 * @return void
+		*/ 
+		public function AssociatePartneringAwarenessAssessment(PartneringAwarenessAssessment $objPartneringAwarenessAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociatePartneringAwarenessAssessment on this unsaved Resource.');
+			if ((is_null($objPartneringAwarenessAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociatePartneringAwarenessAssessment on this Resource with an unsaved PartneringAwarenessAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`partnering_awareness_assessment`
+				SET
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objPartneringAwarenessAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objPartneringAwarenessAssessment->ResourceId = $this->intId;
+				$objPartneringAwarenessAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a PartneringAwarenessAssessment
+		 * @param PartneringAwarenessAssessment $objPartneringAwarenessAssessment
+		 * @return void
+		*/ 
+		public function UnassociatePartneringAwarenessAssessment(PartneringAwarenessAssessment $objPartneringAwarenessAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringAwarenessAssessment on this unsaved Resource.');
+			if ((is_null($objPartneringAwarenessAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringAwarenessAssessment on this Resource with an unsaved PartneringAwarenessAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`partnering_awareness_assessment`
+				SET
+					`resource_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objPartneringAwarenessAssessment->Id) . ' AND
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objPartneringAwarenessAssessment->ResourceId = null;
+				$objPartneringAwarenessAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all PartneringAwarenessAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllPartneringAwarenessAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringAwarenessAssessment on this unsaved Resource.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (PartneringAwarenessAssessment::LoadArrayByResourceId($this->intId) as $objPartneringAwarenessAssessment) {
+					$objPartneringAwarenessAssessment->ResourceId = null;
+					$objPartneringAwarenessAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`partnering_awareness_assessment`
+				SET
+					`resource_id` = null
+				WHERE
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated PartneringAwarenessAssessment
+		 * @param PartneringAwarenessAssessment $objPartneringAwarenessAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedPartneringAwarenessAssessment(PartneringAwarenessAssessment $objPartneringAwarenessAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringAwarenessAssessment on this unsaved Resource.');
+			if ((is_null($objPartneringAwarenessAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringAwarenessAssessment on this Resource with an unsaved PartneringAwarenessAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`partnering_awareness_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objPartneringAwarenessAssessment->Id) . ' AND
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objPartneringAwarenessAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated PartneringAwarenessAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllPartneringAwarenessAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringAwarenessAssessment on this unsaved Resource.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (PartneringAwarenessAssessment::LoadArrayByResourceId($this->intId) as $objPartneringAwarenessAssessment) {
+					$objPartneringAwarenessAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`partnering_awareness_assessment`
+				WHERE
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for PartneringReadinessAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated PartneringReadinessAssessments as an array of PartneringReadinessAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return PartneringReadinessAssessment[]
+		*/ 
+		public function GetPartneringReadinessAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return PartneringReadinessAssessment::LoadArrayByResourceId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated PartneringReadinessAssessments
+		 * @return int
+		*/ 
+		public function CountPartneringReadinessAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return PartneringReadinessAssessment::CountByResourceId($this->intId);
+		}
+
+		/**
+		 * Associates a PartneringReadinessAssessment
+		 * @param PartneringReadinessAssessment $objPartneringReadinessAssessment
+		 * @return void
+		*/ 
+		public function AssociatePartneringReadinessAssessment(PartneringReadinessAssessment $objPartneringReadinessAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociatePartneringReadinessAssessment on this unsaved Resource.');
+			if ((is_null($objPartneringReadinessAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociatePartneringReadinessAssessment on this Resource with an unsaved PartneringReadinessAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`partnering_readiness_assessment`
+				SET
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objPartneringReadinessAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objPartneringReadinessAssessment->ResourceId = $this->intId;
+				$objPartneringReadinessAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a PartneringReadinessAssessment
+		 * @param PartneringReadinessAssessment $objPartneringReadinessAssessment
+		 * @return void
+		*/ 
+		public function UnassociatePartneringReadinessAssessment(PartneringReadinessAssessment $objPartneringReadinessAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringReadinessAssessment on this unsaved Resource.');
+			if ((is_null($objPartneringReadinessAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringReadinessAssessment on this Resource with an unsaved PartneringReadinessAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`partnering_readiness_assessment`
+				SET
+					`resource_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objPartneringReadinessAssessment->Id) . ' AND
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objPartneringReadinessAssessment->ResourceId = null;
+				$objPartneringReadinessAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all PartneringReadinessAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllPartneringReadinessAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringReadinessAssessment on this unsaved Resource.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (PartneringReadinessAssessment::LoadArrayByResourceId($this->intId) as $objPartneringReadinessAssessment) {
+					$objPartneringReadinessAssessment->ResourceId = null;
+					$objPartneringReadinessAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`partnering_readiness_assessment`
+				SET
+					`resource_id` = null
+				WHERE
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated PartneringReadinessAssessment
+		 * @param PartneringReadinessAssessment $objPartneringReadinessAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedPartneringReadinessAssessment(PartneringReadinessAssessment $objPartneringReadinessAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringReadinessAssessment on this unsaved Resource.');
+			if ((is_null($objPartneringReadinessAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringReadinessAssessment on this Resource with an unsaved PartneringReadinessAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`partnering_readiness_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objPartneringReadinessAssessment->Id) . ' AND
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objPartneringReadinessAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated PartneringReadinessAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllPartneringReadinessAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringReadinessAssessment on this unsaved Resource.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (PartneringReadinessAssessment::LoadArrayByResourceId($this->intId) as $objPartneringReadinessAssessment) {
+					$objPartneringReadinessAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`partnering_readiness_assessment`
+				WHERE
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for PostventureAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated PostventureAssessments as an array of PostventureAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return PostventureAssessment[]
+		*/ 
+		public function GetPostventureAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return PostventureAssessment::LoadArrayByResourceId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated PostventureAssessments
+		 * @return int
+		*/ 
+		public function CountPostventureAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return PostventureAssessment::CountByResourceId($this->intId);
+		}
+
+		/**
+		 * Associates a PostventureAssessment
+		 * @param PostventureAssessment $objPostventureAssessment
+		 * @return void
+		*/ 
+		public function AssociatePostventureAssessment(PostventureAssessment $objPostventureAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociatePostventureAssessment on this unsaved Resource.');
+			if ((is_null($objPostventureAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociatePostventureAssessment on this Resource with an unsaved PostventureAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`postventure_assessment`
+				SET
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objPostventureAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objPostventureAssessment->ResourceId = $this->intId;
+				$objPostventureAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a PostventureAssessment
+		 * @param PostventureAssessment $objPostventureAssessment
+		 * @return void
+		*/ 
+		public function UnassociatePostventureAssessment(PostventureAssessment $objPostventureAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this unsaved Resource.');
+			if ((is_null($objPostventureAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this Resource with an unsaved PostventureAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`postventure_assessment`
+				SET
+					`resource_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objPostventureAssessment->Id) . ' AND
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objPostventureAssessment->ResourceId = null;
+				$objPostventureAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all PostventureAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllPostventureAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this unsaved Resource.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (PostventureAssessment::LoadArrayByResourceId($this->intId) as $objPostventureAssessment) {
+					$objPostventureAssessment->ResourceId = null;
+					$objPostventureAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`postventure_assessment`
+				SET
+					`resource_id` = null
+				WHERE
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated PostventureAssessment
+		 * @param PostventureAssessment $objPostventureAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedPostventureAssessment(PostventureAssessment $objPostventureAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this unsaved Resource.');
+			if ((is_null($objPostventureAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this Resource with an unsaved PostventureAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`postventure_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objPostventureAssessment->Id) . ' AND
+					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objPostventureAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated PostventureAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllPostventureAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this unsaved Resource.');
+
+			// Get the Database Object for this Class
+			$objDatabase = Resource::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (PostventureAssessment::LoadArrayByResourceId($this->intId) as $objPostventureAssessment) {
+					$objPostventureAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`postventure_assessment`
 				WHERE
 					`resource_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
@@ -3562,10 +4547,15 @@
 	 * @property-read QQNode $Name
 	 * @property-read QQNodeResourceUser $User
 	 * @property-read QQReverseReferenceNodeGroupAssessmentList $GroupAssessmentList
+	 * @property-read QQReverseReferenceNodeGroupAssessmentList $GroupAssessmentList
 	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessment
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
+	 * @property-read QQReverseReferenceNodeLemon50Assessment $Lemon50Assessment
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
 	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessment
+	 * @property-read QQReverseReferenceNodePartneringAwarenessAssessment $PartneringAwarenessAssessment
+	 * @property-read QQReverseReferenceNodePartneringReadinessAssessment $PartneringReadinessAssessment
+	 * @property-read QQReverseReferenceNodePostventureAssessment $PostventureAssessment
 	 * @property-read QQReverseReferenceNodeScorecard $Scorecard
 	 * @property-read QQReverseReferenceNodeSeasonalAssessment $SeasonalAssessment
 	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessment
@@ -3586,14 +4576,24 @@
 					return new QQNodeResourceUser($this);
 				case 'GroupAssessmentList':
 					return new QQReverseReferenceNodeGroupAssessmentList($this, 'groupassessmentlist', 'reverse_reference', 'resource_id');
+				case 'GroupAssessmentList':
+					return new QQReverseReferenceNodeGroupAssessmentList($this, 'groupassessmentlist', 'reverse_reference', 'resource_id');
 				case 'IntegrationAssessment':
 					return new QQReverseReferenceNodeIntegrationAssessment($this, 'integrationassessment', 'reverse_reference', 'resource_id');
 				case 'KingdomBusinessAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'resource_id');
+				case 'Lemon50Assessment':
+					return new QQReverseReferenceNodeLemon50Assessment($this, 'lemon50assessment', 'reverse_reference', 'resource_id');
 				case 'LemonAssessment':
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessment', 'reverse_reference', 'resource_id');
 				case 'LraAssessment':
 					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessment', 'reverse_reference', 'resource_id');
+				case 'PartneringAwarenessAssessment':
+					return new QQReverseReferenceNodePartneringAwarenessAssessment($this, 'partneringawarenessassessment', 'reverse_reference', 'resource_id');
+				case 'PartneringReadinessAssessment':
+					return new QQReverseReferenceNodePartneringReadinessAssessment($this, 'partneringreadinessassessment', 'reverse_reference', 'resource_id');
+				case 'PostventureAssessment':
+					return new QQReverseReferenceNodePostventureAssessment($this, 'postventureassessment', 'reverse_reference', 'resource_id');
 				case 'Scorecard':
 					return new QQReverseReferenceNodeScorecard($this, 'scorecard', 'reverse_reference', 'resource_id');
 				case 'SeasonalAssessment':
@@ -3623,10 +4623,15 @@
 	 * @property-read QQNode $Name
 	 * @property-read QQNodeResourceUser $User
 	 * @property-read QQReverseReferenceNodeGroupAssessmentList $GroupAssessmentList
+	 * @property-read QQReverseReferenceNodeGroupAssessmentList $GroupAssessmentList
 	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessment
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
+	 * @property-read QQReverseReferenceNodeLemon50Assessment $Lemon50Assessment
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
 	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessment
+	 * @property-read QQReverseReferenceNodePartneringAwarenessAssessment $PartneringAwarenessAssessment
+	 * @property-read QQReverseReferenceNodePartneringReadinessAssessment $PartneringReadinessAssessment
+	 * @property-read QQReverseReferenceNodePostventureAssessment $PostventureAssessment
 	 * @property-read QQReverseReferenceNodeScorecard $Scorecard
 	 * @property-read QQReverseReferenceNodeSeasonalAssessment $SeasonalAssessment
 	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessment
@@ -3648,14 +4653,24 @@
 					return new QQNodeResourceUser($this);
 				case 'GroupAssessmentList':
 					return new QQReverseReferenceNodeGroupAssessmentList($this, 'groupassessmentlist', 'reverse_reference', 'resource_id');
+				case 'GroupAssessmentList':
+					return new QQReverseReferenceNodeGroupAssessmentList($this, 'groupassessmentlist', 'reverse_reference', 'resource_id');
 				case 'IntegrationAssessment':
 					return new QQReverseReferenceNodeIntegrationAssessment($this, 'integrationassessment', 'reverse_reference', 'resource_id');
 				case 'KingdomBusinessAssessment':
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'resource_id');
+				case 'Lemon50Assessment':
+					return new QQReverseReferenceNodeLemon50Assessment($this, 'lemon50assessment', 'reverse_reference', 'resource_id');
 				case 'LemonAssessment':
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessment', 'reverse_reference', 'resource_id');
 				case 'LraAssessment':
 					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessment', 'reverse_reference', 'resource_id');
+				case 'PartneringAwarenessAssessment':
+					return new QQReverseReferenceNodePartneringAwarenessAssessment($this, 'partneringawarenessassessment', 'reverse_reference', 'resource_id');
+				case 'PartneringReadinessAssessment':
+					return new QQReverseReferenceNodePartneringReadinessAssessment($this, 'partneringreadinessassessment', 'reverse_reference', 'resource_id');
+				case 'PostventureAssessment':
+					return new QQReverseReferenceNodePostventureAssessment($this, 'postventureassessment', 'reverse_reference', 'resource_id');
 				case 'Scorecard':
 					return new QQReverseReferenceNodeScorecard($this, 'scorecard', 'reverse_reference', 'resource_id');
 				case 'SeasonalAssessment':
