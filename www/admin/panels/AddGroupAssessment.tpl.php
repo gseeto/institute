@@ -1,4 +1,4 @@
-<div class='subsection'>
+<div class='bordered-section'>
 	<h3>Add A Group Assessment</h3>
 	<div> <?php $_CONTROL->txtKeyCode->RenderWithName(); ?> </div>
 	<div> <?php $_CONTROL->txtDescription->RenderWithName(); ?> </div>

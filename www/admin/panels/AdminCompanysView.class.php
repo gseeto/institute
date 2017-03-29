@@ -63,7 +63,8 @@
 					QQ::Like( QQN::Recipe()->Name, $strName . '%')
 				);
 			}	*/	
-			$companyArray = Company::QueryArray($objConditions,$objClauses);		
+			$companyArray = Company::QueryArray($objConditions,$objClauses);
+			$this->dtgCompanys->TotalItemCount = Company::CountAll();		
 			$this->dtgCompanys->DataSource = $companyArray; 
 		}
 	

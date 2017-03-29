@@ -89,7 +89,27 @@
 				);
 			}
 		}
+		// Add a new Admin section with subdirectories here	
+		if (QApplication::$Login->IsAdmin()) {			
 		?>
+			<li id='administration' class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administration
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li id='admin-users'><a href="<?php _p(__SUBDIRECTORY__)?>/administration/users/">Manage Users</a></li>
+	          <li id='admin-companies'><a href="<?php _p(__SUBDIRECTORY__)?>/administration/companies/">Manage Companies</a></li>
+	          <li id='admin-scorecards'><a href="<?php _p(__SUBDIRECTORY__)?>/administration/scorecards/">Manage Scorecards</a></li>
+	          <li id='admin-integration'><a href="<?php _p(__SUBDIRECTORY__)?>/administration/integration-assessments/">Integration Assessments</a></li>
+	          <li id='admin-ten'><a href="<?php _p(__SUBDIRECTORY__)?>/administration/ten-assessments/">10-P and 10-F Assessments</a></li>
+	          <li id='admin-lemon'><a href="<?php _p(__SUBDIRECTORY__)?>/administration/lemon-assessments/">LEMON Assessments</a></li>
+	          <li id='admin-group'><a href="<?php _p(__SUBDIRECTORY__)?>/administration/group-assessments/">Group Assessments</a></li>
+	          <li id='admin-venture'><a href="<?php _p(__SUBDIRECTORY__)?>/administration/venture/">Venture</a></li>
+	          <li id=admin-partnering'><a href="<?php _p(__SUBDIRECTORY__)?>/administration/partnering/">Partnering</a></li>
+	          <li id=admin-checklist'><a href="<?php _p(__SUBDIRECTORY__)?>/administration/checklist/">Checklist</a></li>
+	        </ul>
+	      </li>
+	    <?php  }?>
+		
 		</ul>
 	</div>
 	</nav>

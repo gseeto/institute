@@ -3,9 +3,7 @@ require(dirname(__FILE__) . '/../../includes/prepend.inc.php');
 
 class MergeUsersForm extends InstituteForm {
 	protected $arrNavigation;
-	protected $strPageTitle = 'Administration';
-	protected $intNavSectionId = InstituteForm::NavSectionAdministration;
-	
+	protected $strPageTitle = 'Administration';	
 	protected $rbnFirstName;  
 	protected $rbnLastName; 
 	protected $rbnEmail;
@@ -32,135 +30,153 @@ class MergeUsersForm extends InstituteForm {
 		if(QApplication::$Login->Role->Name != 'Administrator') {			
 			QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
 		}
+		QApplication::ExecuteJavaScript("document.getElementById('administration').className = 'dropdown active';");
+    	QApplication::ExecuteJavaScript("document.getElementById('admin-users').className = 'active';"); 
 	}
 	
 	protected function Form_Create() {
 		// Get the UserIds from the pathinfo
 		$strArgs = substr(QApplication::$PathInfo, 1 );
-		$this->userArray = explode('/',$strArgs);
-		$this->intUserCount = count($this->userArray);
+		if($strArgs != null) {
+			$this->userArray = explode('/',$strArgs);
+			$this->intUserCount = count($this->userArray);		 
 		
-		$this->rbnFirstName = new QRadioButtonList($this);  
-		$this->rbnFirstName->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnFirstName->RepeatColumns = $this->intUserCount;
-		$this->rbnFirstName->Name = 'First Name: ';
-		
-		$this->rbnLastName = new QRadioButtonList($this);  
-		$this->rbnLastName->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnLastName->RepeatColumns = $this->intUserCount;
-		$this->rbnLastName->Name = 'Last Name: ';
-		 
-	 	$this->rbnEmail = new QRadioButtonList($this); 
-	 	$this->rbnEmail->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnEmail->RepeatColumns = $this->intUserCount;
-		$this->rbnEmail->Name = 'Email: ';
-		
-	 	$this->rbnGender = new QRadioButtonList($this); 
-	 	$this->rbnGender->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnGender->RepeatColumns = $this->intUserCount;
-		$this->rbnGender->Name = 'Gender: ';
-		
-	 	$this->rbnCountry = new QRadioButtonList($this); 
-	 	$this->rbnCountry->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnCountry->RepeatColumns = $this->intUserCount;
-		$this->rbnCountry->Name = 'Country: ';
-		 
-		$this->rbnLevel = new QRadioButtonList($this);  
-		$this->rbnLevel->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnLevel->RepeatColumns = $this->intUserCount;
-		$this->rbnLevel->Name = 'Level: ';
-		
-	 	$this->rbnTenure = new QRadioButtonList($this);  
-	 	$this->rbnTenure->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnTenure->RepeatColumns = $this->intUserCount;
-		$this->rbnTenure->Name = 'Tenure: ';
-		
-	 	$this->rbnUserName = new QRadioButtonList($this);  
-	 	$this->rbnUserName->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnUserName->RepeatColumns = $this->intUserCount;
-		$this->rbnUserName->Name = 'Username: ';
-		
-	 	$this->rbnPassword = new QRadioButtonList($this);  
-	 	$this->rbnPassword->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnPassword->RepeatColumns = $this->intUserCount;
-		$this->rbnPassword->Name = 'Password: ';
-		
-	 	$this->rbnRole = new QRadioButtonList($this); 
-	 	$this->rbnRole->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnRole->RepeatColumns = $this->intUserCount;
-		$this->rbnRole->Name = 'Role: ';
-		 
-	 	$this->rbnLemonAssessment = new QRadioButtonList($this); 
-	 	$this->rbnLemonAssessment->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnLemonAssessment->RepeatColumns = $this->intUserCount;
-		$this->rbnLemonAssessment->Name = 'LEMON Assessment: ';
-		
-	 	$this->rbnTenPAssessment = new QRadioButtonList($this); 
-	 	$this->rbnTenPAssessment->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnTenPAssessment->RepeatColumns = $this->intUserCount;
-		$this->rbnTenPAssessment->Name = '10-P Assessment: ';
-		
-	 	$this->rbnTenFAssessment  = new QRadioButtonList($this); 
-	 	$this->rbnTenFAssessment->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnTenFAssessment->RepeatColumns = $this->intUserCount;
-		$this->rbnTenFAssessment->Name = '10-F Assessment: ';
-		
-		$this->rbnKingdomAssessment  = new QRadioButtonList($this); 
-	 	$this->rbnKingdomAssessment->RepeatDirection = QRepeatDirection::Horizontal;
-		$this->rbnKingdomAssessment->RepeatColumns = $this->intUserCount;
-		$this->rbnKingdomAssessment->Name = 'Kingdom Assessment: ';
-	 	
-	 	for($i=0; $i<$this->intUserCount; $i++) {
-	 		$objUser = User::Load($this->userArray[$i]); 
-	 		$this->rbnFirstName->AddItem($objUser->FirstName, $objUser->Id,($i==0)?true:false);	 		
-			$this->rbnLastName->AddItem($objUser->LastName, $objUser->Id,($i==0)?true:false); 
-		 	$strEmail = ($objUser->Email) ? 'Email: '.$objUser->Email : 'Email: Not specified';
-		 	$this->rbnEmail->AddItem($strEmail, $objUser->Id,($i==0)?true:false);
-			$strGender = ($objUser->Gender)? 'Gender: Male' : 'Gender: Female';
-		 	$this->rbnGender->AddItem($strGender, $objUser->Id,($i==0)?true:false); 		 	 
-		 	$this->rbnCountry->AddItem($objUser->Country?$objUser->Country->Name:'Not Specified', $objUser->Id,($i==0)?true:false);			  
-			$strTitle = ($objUser->TitleId)? 'Title: '.TitleList::LoadById($objUser->TitleId)->Name : 'Title: Not Specified';
-			$this->rbnLevel->AddItem($strTitle, $objUser->Id,($i==0)?true:false);
-		 	$strTenure = ($objUser->TenureId)? 'Tenure: '.$objUser->Tenure->Range : 'Tenure: Not Specified';
-		 	$this->rbnTenure->AddItem($strTenure, $objUser->Id,($i==0)?true:false);  
-		 	$this->rbnUserName->AddItem($objUser->Login->Username, $objUser->Id,($i==0)?true:false);
-		 	$this->rbnPassword->AddItem($objUser->Login->Password, $objUser->Id,($i==0)?true:false); 
-		 	$this->rbnRole->AddItem($objUser->Login->Role->Name, $objUser->Id,($i==0)?true:false); 
-		 	 
-		 	if ($objUser->IsResourceAssociated(Resource::LoadById(5))) {
-		 		$this->rbnLemonAssessment->AddItem('Available', $objUser->Id,($i==0)?true:false);
-		 	} else {
-		 		$this->rbnLemonAssessment->AddItem('None', $objUser->Id,($i==0)?true:false);
-		 	}
- 
-		 	if ($objUser->IsResourceAssociated(Resource::LoadById(2))) {
-		 		$this->rbnTenPAssessment->AddItem('Available', $objUser->Id,($i==0)?true:false);
-		 	} else {
-		 		$this->rbnTenPAssessment->AddItem('None', $objUser->Id,($i==0)?true:false);
-		 	}
+			$this->rbnFirstName = new QRadioButtonList($this);  
+			$this->rbnFirstName->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnFirstName->RepeatColumns = $this->intUserCount;			
+			$this->rbnFirstName->Name = 'First Name: ';
+			$this->rbnFirstName->CssClass = 'radio-inline';
+			
+			$this->rbnLastName = new QRadioButtonList($this);  
+			$this->rbnLastName->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnLastName->RepeatColumns = $this->intUserCount;
+			$this->rbnLastName->Name = 'Last Name: ';
+			$this->rbnLastName->CssClass = 'radio-inline';
+			 
+		 	$this->rbnEmail = new QRadioButtonList($this); 
+		 	$this->rbnEmail->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnEmail->RepeatColumns = $this->intUserCount;
+			$this->rbnEmail->Name = 'Email: ';
+			$this->rbnEmail->CssClass = 'radio-inline';
+			
+		 	$this->rbnGender = new QRadioButtonList($this); 
+		 	$this->rbnGender->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnGender->RepeatColumns = $this->intUserCount;
+			$this->rbnGender->Name = 'Gender: ';
+			$this->rbnGender->CssClass = 'radio-inline';
+			
+		 	$this->rbnCountry = new QRadioButtonList($this); 
+		 	$this->rbnCountry->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnCountry->RepeatColumns = $this->intUserCount;
+			$this->rbnCountry->Name = 'Country: ';
+			$this->rbnCountry->CssClass = 'radio-inline';
+			 
+			$this->rbnLevel = new QRadioButtonList($this);  
+			$this->rbnLevel->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnLevel->RepeatColumns = $this->intUserCount;
+			$this->rbnLevel->Name = 'Level: ';
+			$this->rbnLevel->CssClass = 'radio-inline';
+			
+		 	$this->rbnTenure = new QRadioButtonList($this);  
+		 	$this->rbnTenure->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnTenure->RepeatColumns = $this->intUserCount;
+			$this->rbnTenure->Name = 'Tenure: ';
+			$this->rbnTenure->CssClass = 'radio-inline';
+			
+		 	$this->rbnUserName = new QRadioButtonList($this);  
+		 	$this->rbnUserName->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnUserName->RepeatColumns = $this->intUserCount;
+			$this->rbnUserName->Name = 'Username: ';
+			$this->rbnUserName->CssClass = 'radio-inline';
+			
+		 	$this->rbnPassword = new QRadioButtonList($this);  
+		 	$this->rbnPassword->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnPassword->RepeatColumns = $this->intUserCount;
+			$this->rbnPassword->Name = 'Password: ';
+			$this->rbnPassword->CssClass = 'radio-inline';
+			
+		 	$this->rbnRole = new QRadioButtonList($this); 
+		 	$this->rbnRole->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnRole->RepeatColumns = $this->intUserCount;
+			$this->rbnRole->Name = 'Role: ';
+			$this->rbnRole->CssClass = 'radio-inline';
+			 
+		 	$this->rbnLemonAssessment = new QRadioButtonList($this); 
+		 	$this->rbnLemonAssessment->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnLemonAssessment->RepeatColumns = $this->intUserCount;
+			$this->rbnLemonAssessment->Name = 'LEMON Assessment: ';
+			$this->rbnLemonAssessment->CssClass = 'radio-inline';
+			
+		 	$this->rbnTenPAssessment = new QRadioButtonList($this); 
+		 	$this->rbnTenPAssessment->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnTenPAssessment->RepeatColumns = $this->intUserCount;
+			$this->rbnTenPAssessment->Name = '10-P Assessment: ';
+			$this->rbnTenPAssessment->CssClass = 'radio-inline';
+			
+		 	$this->rbnTenFAssessment  = new QRadioButtonList($this); 
+		 	$this->rbnTenFAssessment->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnTenFAssessment->RepeatColumns = $this->intUserCount;
+			$this->rbnTenFAssessment->Name = '10-F Assessment: ';
+			$this->rbnTenFAssessment->CssClass = 'radio-inline';
+			
+			$this->rbnKingdomAssessment  = new QRadioButtonList($this); 
+		 	$this->rbnKingdomAssessment->RepeatDirection = QRepeatDirection::Horizontal;
+			$this->rbnKingdomAssessment->RepeatColumns = $this->intUserCount;
+			$this->rbnKingdomAssessment->Name = 'Kingdom Assessment: ';
+			$this->rbnKingdomAssessment->CssClass = 'radio-inline';
 		 	
-	 		if ($objUser->IsResourceAssociated(Resource::LoadById(3))) {
-		 		$this->rbnTenFAssessment->AddItem('Available', $objUser->Id,($i==0)?true:false);
-		 	} else {
-		 		$this->rbnTenFAssessment->AddItem('None', $objUser->Id,($i==0)?true:false);
+		 	for($i=0; $i<$this->intUserCount; $i++) {
+		 		$objUser = User::Load($this->userArray[$i]); 
+		 		$this->rbnFirstName->AddItem($objUser->FirstName, $objUser->Id,($i==0)?true:false,null,'Width="200px"');	 		
+				$this->rbnLastName->AddItem($objUser->LastName, $objUser->Id,($i==0)?true:false,null,'Width="200px"'); 
+			 	$strEmail = ($objUser->Email) ? 'Email: '.$objUser->Email : 'Email: Not specified';
+			 	$this->rbnEmail->AddItem($strEmail, $objUser->Id,($i==0)?true:false,null,'Width="200px"');
+				$strGender = ($objUser->Gender)? 'Gender: Male' : 'Gender: Female';
+			 	$this->rbnGender->AddItem($strGender, $objUser->Id,($i==0)?true:false,null,'Width="200px"'); 		 	 
+			 	$this->rbnCountry->AddItem($objUser->Country?$objUser->Country->Name:'Not Specified', $objUser->Id,($i==0)?true:false,null,'Width="200px"');			  
+				$strTitle = ($objUser->TitleId)? 'Title: '.TitleList::LoadById($objUser->TitleId)->Name : 'Title: Not Specified';
+				$this->rbnLevel->AddItem($strTitle, $objUser->Id,($i==0)?true:false,null,'Width="200px"');
+			 	$strTenure = ($objUser->TenureId)? 'Tenure: '.$objUser->Tenure->Range : 'Tenure: Not Specified';
+			 	$this->rbnTenure->AddItem($strTenure, $objUser->Id,($i==0)?true:false,null,'Width="200px"');  
+			 	$this->rbnUserName->AddItem($objUser->Login->Username, $objUser->Id,($i==0)?true:false,null,'Width="200px"');
+			 	$this->rbnPassword->AddItem($objUser->Login->Password, $objUser->Id,($i==0)?true:false,null,'Width="200px"'); 
+			 	$this->rbnRole->AddItem($objUser->Login->Role->Name, $objUser->Id,($i==0)?true:false,null,'Width="200px"'); 
+			 	 
+			 	if ($objUser->IsResourceAssociated(Resource::LoadById(5))) {
+			 		$this->rbnLemonAssessment->AddItem('Available', $objUser->Id,($i==0)?true:false,null,'Width="200px"');
+			 	} else {
+			 		$this->rbnLemonAssessment->AddItem('None', $objUser->Id,($i==0)?true:false,null,'Width="200px"');
+			 	}
+	 
+			 	if ($objUser->IsResourceAssociated(Resource::LoadById(2))) {
+			 		$this->rbnTenPAssessment->AddItem('Available', $objUser->Id,($i==0)?true:false,null,'Width="200px"');
+			 	} else {
+			 		$this->rbnTenPAssessment->AddItem('None', $objUser->Id,($i==0)?true:false,null,'Width="200px"');
+			 	}
+			 	
+		 		if ($objUser->IsResourceAssociated(Resource::LoadById(3))) {
+			 		$this->rbnTenFAssessment->AddItem('Available', $objUser->Id,($i==0)?true:false,null,'Width="200px"');
+			 	} else {
+			 		$this->rbnTenFAssessment->AddItem('None', $objUser->Id,($i==0)?true:false,null,'Width="200px"');
+			 	}
+			 	
+		 		if ($objUser->IsResourceAssociated(Resource::LoadById(4))) {
+			 		$this->rbnKingdomAssessment->AddItem('Available', $objUser->Id,($i==0)?true:false,null,'Width="200px"');
+			 	} else {
+			 		$this->rbnKingdomAssessment->AddItem('None', $objUser->Id,($i==0)?true:false,null,'Width="200px"');
+			 	}
 		 	}
+	 	     	    
+		 	$this->btnMerge = new QButton($this);
+		 	$this->btnMerge->Text = 'Merge';
+		 	$this->btnMerge->CssClass = 'btn btn-default';
+		 	$this->btnMerge->AddAction(new QClickEvent(), new QAjaxAction('btnMerge_Click'));
 		 	
-	 		if ($objUser->IsResourceAssociated(Resource::LoadById(4))) {
-		 		$this->rbnKingdomAssessment->AddItem('Available', $objUser->Id,($i==0)?true:false);
-		 	} else {
-		 		$this->rbnKingdomAssessment->AddItem('None', $objUser->Id,($i==0)?true:false);
-		 	}
-	 	}
- 	     	    
-	 	$this->btnMerge = new QButton($this);
-	 	$this->btnMerge->Text = 'Merge';
-	 	$this->btnMerge->CssClass = 'primary';
-	 	$this->btnMerge->AddAction(new QClickEvent(), new QAjaxAction('btnMerge_Click'));
-	 	
-	 	$this->btnCancel = new QButton($this);
-	 	$this->btnCancel->Text = 'Cancel';
-	 	$this->btnCancel->CssClass = 'primary';
-	 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));
+		 	$this->btnCancel = new QButton($this);
+		 	$this->btnCancel->Text = 'Cancel';
+		 	$this->btnCancel->CssClass = 'btn btn-default';
+		 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));
+		}
  	 
 	}
 
@@ -284,11 +300,11 @@ class MergeUsersForm extends InstituteForm {
 	 		$objLogin->Delete();	 		
 		}
 	
-		QApplication::Redirect(__SUBDIRECTORY__.'/admin/index.php/users');
+		QApplication::Redirect(__SUBDIRECTORY__.'/administration/users/');
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect(__SUBDIRECTORY__.'/admin/index.php/users');
+		QApplication::Redirect(__SUBDIRECTORY__.'/administration/users/');
 	}
 }
 

@@ -45,6 +45,7 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
             $this->lblDebug = new QLabel($this);
             $this->lblDebug->DisplayStyle = QDisplayStyle::Block;
             $this->lblDebug->HtmlEntities = false;
+            $this->lblDebug->Text ='test<br>';
                 
             $this->dtgScorecards = new ScorecardDataGrid($this);
             $this->dtgScorecards->Paginator = new QPaginator($this->dtgScorecards);
@@ -371,6 +372,7 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
         }
         
         public function ExtractInformation($strFormId, $strControlId, $strParameter) {
+        	$this->lblDebug->Text .= 'Entered ExtractInformation()<br>';
         	$objFile = $this->objForm->GetControl($strControlId);
         	if($objFile) {
         		// Now open the file and parse it.
@@ -389,7 +391,7 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 				    $nrColumns = ord($highestColumn) - 64;
 				    $highestRow         = $worksheet->getHighestRow();
 				    
-				   // $this->lblDebug->Text .= '<br> <b>Wrksheet Title = '.$worksheetTitle . '</b><br>';
+				    $this->lblDebug->Text .= '<br> <b>Wrksheet Title = '.$worksheetTitle . '</b><br>';
 				    $categoryId = 0;
 				    switch ($worksheetTitle) {
 				    	case 'Purpose':
@@ -440,10 +442,10 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 					$strategyindex = 1;
 					while($val !=''){
 						// Get strategy + priority
-						//$this->lblDebug->Text .= '<br>Strategy '.$strategyindex. ' = ' .$val;
+						$this->lblDebug->Text .= '<br>Strategy '.$strategyindex. ' = ' .$val;
 						$cell = $worksheet->getCellByColumnAndRow($col+1, $i);
 						$priority = $cell->getValue();
-						//$this->lblDebug->Text .= '<br>Priority = ' . $priority;
+						$this->lblDebug->Text .= '<br>Priority = ' . $priority;
 						// set the strategy
 						$objStrategy = new Strategy();
 						$objStrategy->ScorecardId = $strParameter;
@@ -457,18 +459,18 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 						// Get actions
 						$index = 1;
 						while ($val != '') {
-							//$this->lblDebug->Text .= '<br>Action '.$index.' = ' .$val;
+							$this->lblDebug->Text .= '<br>Action '.$index.' = ' .$val;
 							$cell = $worksheet->getCellByColumnAndRow($col+1, $i);
 							$when = $cell->getValue();
 							$sGMTMySqlString = gmdate("Y-m-d", strtotime($when));
 							
 							$cell = $worksheet->getCellByColumnAndRow($col+3, $i);
 							$comments = $cell->getValue();
-							//$this->lblDebug->Text .= '<br>Comments = '.$comments;
+							$this->lblDebug->Text .= '<br>Comments = '.$comments;
 							$objAction = new ActionItems();
 							$objAction->Action = $val;
 							if((trim($when) != '') && ($when != '0000-00-00')){
-								//$this->lblDebug->Text .= '<br>When = '.$sGMTMySqlString;
+								$this->lblDebug->Text .= '<br>When = '.$sGMTMySqlString;
 								$dtxActionWhen = new QDateTimeTextBox($this);
 								$dtxActionWhen->Text = ($when) ? $when : null;
 								$objAction->When = $dtxActionWhen->DateTime; //$sGMTMySqlString;
@@ -490,13 +492,13 @@ require_once __INCLUDES__.'/Classes/PHPExcel/IOFactory.php';
 						// Get KPIs
 						$index = 1;
 						while ($val != '') {
-							//$this->lblDebug->Text .= '<br>KPI '.$index.' = ' .$val;
+							$this->lblDebug->Text .= '<br>KPI '.$index.' = ' .$val;
 							$cell = $worksheet->getCellByColumnAndRow($col+1, $i);
 							$comments = $cell->getValue();
-							//$this->lblDebug->Text .= '<br>Comments = '.$comments;
+							$this->lblDebug->Text .= '<br>Comments = '.$comments;
 							$cell = $worksheet->getCellByColumnAndRow($col+2, $i);
 							$rating = $cell->getValue();
-							//$this->lblDebug->Text .= '<br>Rating = '.$rating;
+							$this->lblDebug->Text .= '<br>Rating = '.$rating;
 							$objKpi = new Kpis();
 							$objKpi->Kpi = $val;
 							$objKpi->Comments = $comments;

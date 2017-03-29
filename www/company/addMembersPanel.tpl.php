@@ -1,4 +1,4 @@
-<div class='subsection'>
+<div class='bordered-section'>
 		<h3>Search for Users by:</h3>
 		<div class="filterBy filterByFirst">First Name <?php $_CONTROL->strFirstName->Render('Width=300px'); ?></div>
 		<div class="filterBy">Last Name <?php $_CONTROL->strLastName->Render(); ?> </div>

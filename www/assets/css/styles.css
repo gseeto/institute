@@ -352,6 +352,17 @@
 		padding: 10px;
 	}
 	
+	.bordered-section {
+		text-align: justify;
+		border: 1px #337ab7 solid;
+		padding: 10px;
+		-o-box-shadow: 5px 5px 2px #888;
+		-icab-box-shadow: 5px 5px 2px #888;
+		-khtml-box-shadow: 5px 5px 2px #888;
+		-moz-box-shadow: 5px 5px 2px #888;
+		-webkit-box-shadow: 5px 5px 2px #888;
+		box-shadow: 5px 5px 2px #888;
+	}
 	.mr-5 { margin-right:10px; position: relative; top:5px;}	
 	.transparent {
 		background-color:inherit;

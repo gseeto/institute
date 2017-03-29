@@ -1,4 +1,4 @@
-<div class='subsection'>
+<div class='section'>
 <h3>Add managers to Business Checklist</h3>
 <?php $_CONTROL->lstChecklist->Render(); ?> 
 <br>

@@ -50,48 +50,55 @@ class NewUserForm extends InstituteForm {
 	protected function Form_Create() {
 		$this->txtFirstName = new QTextBox($this);
 		$this->txtFirstName->Name = 'First Name : ';
+		$this->txtFirstName->CssClass = 'form-control';
 		
 	 	$this->txtLastName  = new QTextBox($this);
 	 	$this->txtLastName->Name = 'Last Name : ';
+	 	$this->txtLastName->CssClass = 'form-control';
 	 	
 	 	$this->txtEmail= new QTextBox($this);
 	 	$this->txtEmail->Name = 'Email : ';
+	 	$this->txtEmail->CssClass = 'form-control';
 	 	
 	 	$this->lstGender = new QListBox($this);
 	 	$this->lstGender->Name = 'Gender : ';
 	 	$this->lstGender->AddItem('Male',1);
 	 	$this->lstGender->AddItem('Female',0);
+	 	$this->lstGender->CssClass = 'form-control';
 	 	
 		$this->lstCountry = new QListBox($this);
 		$this->lstCountry->Name = "Country: ";
-		$this->lstCountry->Width = 200;
 		foreach(CountryList::LoadAll() as $objCountry) {
 			$this->lstCountry->AddItem($objCountry->Name,$objCountry->Id);
 		}
+		$this->lstCountry->CssClass = 'form-control';
 	 	
 		$this->lstLevel = new QListBox($this);
 		$this->lstLevel->Name = "Level: ";
-		$this->lstLevel->Width = 200;
+		$this->lstLevel->CssClass = 'form-control';
 		foreach(TitleList::LoadAll() as $objLevel) {
 			$this->lstLevel->AddItem($objLevel->Name,$objLevel->Id);	
 		}	
 		
 		$this->lstTenure = new QListBox($this);
 		$this->lstTenure->Name = "Tenure: ";
-		$this->lstTenure->Width = 200;
+		$this->lstTenure->CssClass = 'form-control';
 		foreach(TenureList::LoadAll() as $objTenure) {
 			$this->lstTenure->AddItem($objTenure->Range,$objTenure->Id);
 		}
 		
 	 	$this->txtUserName = new QTextBox($this);
 	 	$this->txtUserName->Name = 'UserName : ';
+	 	$this->txtUserName->CssClass = 'form-control';
 	 	
 	 	$this->txtPassword = new QTextBox($this);
 	 	$this->txtPassword->Name = 'Password : ';
 	 	$this->txtPassword->TextMode = QTextMode::Password;
+	 	$this->txtPassword->CssClass = 'form-control';
 	 	
 	 	$this->lstRole = new QListBox($this);
 	 	$this->lstRole->Name = 'Role';
+	 	$this->lstRole->CssClass = 'form-control';
 	 	$roleArray = Role::LoadAll();
 	 	foreach ($roleArray as $objRole) {
 	 		$this->lstRole->AddItem($objRole->Name, $objRole->Id);
@@ -99,77 +106,93 @@ class NewUserForm extends InstituteForm {
  	 
 	 	$this->btnSubmit = new QButton($this);
 	 	$this->btnSubmit->Text = 'Submit';
-	 	$this->btnSubmit->CssClass = 'primary';
+	 	$this->btnSubmit->CssClass = 'btn btn-default';
 	 	$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 	 	
 	 	$this->btnCancel = new QButton($this);
 	 	$this->btnCancel->Text = 'Cancel';
-	 	$this->btnCancel->CssClass = 'primary';
+	 	$this->btnCancel->CssClass = 'btn btn-default';
 	 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));
 	 	
 	 	$this->chkLemon = new QCheckBox($this);
 	 	$this->chkLemon->Text = 'Add access to LEMON Assessment';
 	 	$this->chkLemon->AddAction(new QClickEvent(), new QAjaxAction('chkLemon_Click'));
+	 	$this->chkLemon->CssClass = 'checkbox';
 	 	
  		$this->chkTenP = new QCheckBox($this);
  		$this->chkTenP->Text = 'Add access to 10-P Assessment';
  		$this->chkTenP->AddAction(new QClickEvent(), new QAjaxAction('chkTenP_Click'));
+ 		$this->chkTenP->CssClass = 'checkbox';
  		
  		$this->chkTenF = new QCheckBox($this);
  		$this->chkTenF->Text  = 'Add access to 10-F Assessment';
  		$this->chkTenF->AddAction(new QClickEvent(), new QAjaxAction('chkTenF_Click'));
+ 		$this->chkTenF->CssClass = 'checkbox';
  		
  		$this->chkKingdom = new QCheckBox($this);
  		$this->chkKingdom->Text  = 'Add access to Kingdom Business Assessment';
  		$this->chkKingdom->AddAction(new QClickEvent(), new QAjaxAction('chkKingdom_Click'));
+ 		$this->chkKingdom->CssClass = 'checkbox';
  		
  		$this->chkIntegration = new QCheckBox($this);
  		$this->chkIntegration->Text = 'Add access to Integration Assessment';
  		$this->chkIntegration->AddAction(new QClickEvent(), new QAjaxAction('chkIntegration_Click'));
+ 		$this->chkIntegration->CssClass = 'checkbox';
  		
  		$this->chkSeasonal = new QCheckBox($this);
  		$this->chkSeasonal->Text = 'Add access to Seasonal Assessment';
  		$this->chkSeasonal->AddAction(new QClickEvent(), new QAjaxAction('chkSeasonal_Click'));
+ 		$this->chkSeasonal->CssClass = 'checkbox';
  		
  		$this->chkTime  = new QCheckBox($this);
  		$this->chkTime->Text = 'Add access to Time Assessment';
  		$this->chkTime->AddAction(new QClickEvent(), new QAjaxAction('chkTime_Click'));
+ 		$this->chkTime->CssClass = 'checkbox';
  	
  		$this->chkLRA = new QCheckBox($this);
  		$this->chkLRA->Text = 'Add access to Leadership Readiness Assessment';
  		$this->chkLRA->AddAction(new QClickEvent(), new QAjaxAction('chkLRA_Click'));
+ 		$this->chkLRA->CssClass = 'checkbox';
  		
  		$this->txtLemonKeycode = new QTextBox($this);
  		$this->txtLemonKeycode->Name = 'LEMON Keycode:';
  		$this->txtLemonKeycode->Enabled = false;
+ 		$this->txtLemonKeycode->CssClass = 'form-control';
  		
  		$this->txtTenPKeycode = new QTextBox($this);
  		$this->txtTenPKeycode->Name = '10-P Keycode:';
  		$this->txtTenPKeycode->Enabled = false;
+ 		$this->txtTenPKeycode->CssClass = 'form-control';
  		
  		$this->txtTenFKeycode  = new QTextBox($this);
  		$this->txtTenFKeycode->Name = '10-F Keycode:';
  		$this->txtTenFKeycode->Enabled = false;
+ 		$this->txtTenFKeycode->CssClass = 'form-control';
  		
  		$this->txtKingdomKeycode = new QTextBox($this);
  		$this->txtKingdomKeycode->Name = 'Kingdom Assessment Keycode:';
  		$this->txtKingdomKeycode->Enabled = false;
+ 		$this->txtKingdomKeycode->CssClass = 'form-control';
  		
  		$this->txtIntegrationKeycode = new QTextBox($this);
  		$this->txtIntegrationKeycode->Name = 'Integration Keycode:';
  		$this->txtIntegrationKeycode->Enabled = false;
+ 		$this->txtIntegrationKeycode->CssClass = 'form-control';
  		
  		$this->txtSeasonalKeycode = new QTextBox($this);
  		$this->txtSeasonalKeycode->Name = 'Seasonal Keycode:';
  		$this->txtSeasonalKeycode->Enabled = false;
+ 		$this->txtSeasonalKeycode->CssClass = 'form-control';
  		
  		$this->txtTimeKeycode  = new QTextBox($this);
  		$this->txtTimeKeycode->Name = 'Time Keycode: ';
  		$this->txtTimeKeycode->Enabled = false;
+ 		$this->txtTimeKeycode->CssClass = 'form-control';
  		
  		$this->txtLRAKeycode = new QTextBox($this);
  		$this->txtLRAKeycode->Name = 'Leadership Readiness Assessment Keycode:';
- 		$this->txtLRAKeycode->Enabled = false;	 
+ 		$this->txtLRAKeycode->Enabled = false;	
+ 		$this->txtLRAKeycode->CssClass = 'form-control'; 
 	}
 
 	public function chkLemon_Click($strFormId, $strControlId, $strParameter) {
@@ -417,11 +440,11 @@ class NewUserForm extends InstituteForm {
 	     	$objUser->AssociateResource(Resource::Load(9));
 			$objAssessment->Save();
 		}
-		QApplication::Redirect(__SUBDIRECTORY__.'/admin/index.php/users');
+		QApplication::Redirect(__SUBDIRECTORY__.'/administration/users/');
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect(__SUBDIRECTORY__.'/admin/index.php/users');
+		QApplication::Redirect(__SUBDIRECTORY__.'/administration/users/');
 	}
 }
 

@@ -17,7 +17,7 @@
         protected $objParent;
     
         // Specify the Template File for this custom QPanel
-        protected $strTemplate = 'panels/AddGroupAssessment.tpl.php';
+        protected $strTemplate = '../../admin/panels/AddGroupAssessment.tpl.php';
 
         // Customize the Look/Feel
         protected $strPadding = '10px';
@@ -42,32 +42,38 @@
 	
 			$this->txtKeyCode = new QTextBox($this);
 			$this->txtKeyCode->Name = 'Key Code';
+			$this->txtKeyCode->CssClass = 'form-control';
 			$this->txtKeyCode->Focus();
 
 			$this->txtDescription = new QTextBox($this);
 			$this->txtDescription->Name = 'Description';
+			$this->txtDescription->CssClass = 'form-control';
 			
 			$this->txtTotalKeys = new QIntegerTextBox($this);
 			$this->txtTotalKeys->Name = 'Total Keys';
 			$this->txtTotalKeys->Width = 50;
+			$this->txtTotalKeys->CssClass = 'form-control';
 
 			$this->txtKeysLeft = new QIntegerTextBox($this);
 			$this->txtKeysLeft->Name = 'Keys Left';
 			$this->txtKeysLeft->Width = 50;
+			$this->txtKeysLeft->CssClass = 'form-control';
+			
 			$this->lstAssessmentType = new QListBox($this);
 			$this->lstAssessmentType->Name = 'AssessmentType';
+			$this->lstAssessmentType->CssClass = 'form-control';
 			foreach(Resource::LoadAll() as $objResource) {
 				if($objResource->Name != 'Scorecard')
 					$this->lstAssessmentType->AddItem($objResource->Name, $objResource->Id);
 			}
 			$this->btnSubmit = new QButton($this);
 			$this->btnSubmit->Text = "Add Group Assessment";
-			$this->btnSubmit->CssClass = 'primary';
+			$this->btnSubmit->CssClass = 'btn btn-default';
 			$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnSubmit_Click'));
 			
 			$this->btnCancel = new QButton($this);
 			$this->btnCancel->Text = "Cancel";
-			$this->btnCancel->CssClass = 'primary';
+			$this->btnCancel->CssClass = 'btn btn-default';
 			$this->btnCancel->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnCancel_Click'));
 			
         }
@@ -77,8 +83,9 @@
 	}
 	
      public function btnSubmit_Click($strFormId, $strControlId, $strParameter) {
-     	if(GroupAssessmentList::LoadByKeyCode($this->txtKeyCode->Text)) {
-     		$this->txtKeyCode->HtmlAfter = '<br><span style="color:red;">Duplicate Keycode. Please select another.</span>';
+     	$returnList = GroupAssessmentList::LoadByKeyCode($this->txtKeyCode->Text);
+     	if((!empty($returnList))|| ($returnList!=null)) {
+     		$this->txtKeyCode->HtmlAfter = '<br><span class="text-danger">Duplicate Keycode. Please select another.</span>';
      	} else {
      		$this->txtKeyCode->HtmlAfter = '';
 			$objAssessment = new GroupAssessmentList();

@@ -4,9 +4,7 @@ require('addMembersPanel.php');
 
 class ViewCompanyForm extends InstituteForm {
 	protected $arrNavigation;
-	protected $strPageTitle = 'Administration';
-	protected $intNavSectionId = InstituteForm::NavSectionAdministration;
-	
+	protected $strPageTitle = 'Manage Companies';
 	protected $txtName;
 	protected $txtAddress;
 	protected $txtCity;
@@ -29,6 +27,11 @@ class ViewCompanyForm extends InstituteForm {
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
 		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
+		if(QApplication::$Login->Role->Name != 'Administrator') {			
+			QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
+		}
+		QApplication::ExecuteJavaScript("document.getElementById('administration').className = 'dropdown active';");
+    	QApplication::ExecuteJavaScript("document.getElementById('admin-companies').className = 'active';"); 
 	}
 	
 	protected function Form_Create() {
@@ -38,27 +41,33 @@ class ViewCompanyForm extends InstituteForm {
 		$this->txtName = new QTextBox($this);
 		$this->txtName->Name = 'Company Name : ';
 		$this->txtName->Text = $this->objCompany->Name;
+		$this->txtName->CssClass = 'form-control';
 		
 		$this->mctAddress = new AddressMetaControl($this,$this->objAddress);
 
 		$this->txtAddress  = $this->mctAddress->txtAddress1_Create(); 
 	 	$this->txtAddress->Name = 'Address';
+	 	$this->txtAddress->CssClass = 'form-control';
 	 	
 	 	$this->txtCity= $this->mctAddress->txtCity_Create();
 	 	$this->txtCity->Name = 'City : ';
 	 	$this->txtCity->TextMode = 'SingleLine';
+	 	$this->txtCity->CssClass = 'form-control';
 	 	
 	 	$this->txtState = $this->mctAddress->txtState_Create(); 
 	 	$this->txtState->Name = 'State : ';
 	 	$this->txtState->TextMode = 'SingleLine';
+	 	$this->txtState->CssClass = 'form-control';
 	 	
 	 	$this->txtZipCode = $this->mctAddress->txtZipCode_Create(); 
 	 	$this->txtZipCode->Name = 'ZipCode : ';
 	 	$this->txtZipCode->TextMode = 'SingleLine';
+	 	$this->txtZipCode->CssClass = 'form-control';
 	 	
 	 	$this->txtCountry = $this->mctAddress->txtCountry_Create();
 	 	$this->txtCountry->Name = 'Country : ';
 	 	$this->txtCountry->TextMode = 'SingleLine';
+	 	$this->txtCountry->CssClass = 'form-control';
 	 	
 	 	$industryArray = Industry::LoadAll();
 	 	$this->chkIndustryArray = array();
@@ -66,6 +75,7 @@ class ViewCompanyForm extends InstituteForm {
 	 		$chkIndustry = new QCheckBox($this);
 	 		$chkIndustry->Name = $objIndustry->Id;
 	 		$chkIndustry->Text = $objIndustry->Value;
+	 		$chkIndustry->CssClass = 'checkbox';
 	 		if ($this->objCompany->IsIndustryAssociated($objIndustry))
 	 			$chkIndustry->Checked = true;
 	 		$this->chkIndustryArray[] = $chkIndustry;
@@ -73,17 +83,17 @@ class ViewCompanyForm extends InstituteForm {
  	 
 	 	$this->btnSubmit = new QButton($this);
 	 	$this->btnSubmit->Text = 'Update';
-	 	$this->btnSubmit->CssClass = 'primary';
+	 	$this->btnSubmit->CssClass = 'btn btn-default';
 	 	$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 	 	
 	 	$this->btnCancel = new QButton($this);
 	 	$this->btnCancel->Text = 'Cancel';
-	 	$this->btnCancel->CssClass = 'primary';
+	 	$this->btnCancel->CssClass = 'btn btn-default';
 	 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));
 	 	
 	 	$this->btnAddMember = new QButton($this);
 	 	$this->btnAddMember->Text = 'Add a Member To  Company';
-	 	$this->btnAddMember->CssClass = 'primary';
+	 	$this->btnAddMember->CssClass = 'btn btn-default';
 	 	$this->btnAddMember->AddAction(new QClickEvent(), new QAjaxAction('btnAddMember_Click'));
 	 	
 	 	$this->dtgMembers = new UserDataGrid($this);
@@ -96,28 +106,21 @@ class ViewCompanyForm extends InstituteForm {
 		$this->dtgMembers->SetDataBinder('dtgMembers_Bind',$this);
 		$this->dtgMembers->NoDataHtml = 'No Users.';
 		$this->dtgMembers->UseAjax = true;
+		$this->dtgMembers->CssClass = 'table table-hover table-striped';
 		
 		$this->dtgMembers->SortColumnIndex = 1;
-		$this->dtgMembers->ItemsPerPage = 20;
-	
-		$objStyle = $this->dtgMembers->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgMembers->AlternateRowStyle;
-        $objStyle->BackColor = '#CCCCCC';
-
+		$this->dtgMembers->ItemsPerPage = 20;	
+		
         $objStyle = $this->dtgMembers->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgMembers->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
  	 
         $this->pnlAddMember = new QPanel($this);
         $this->pnlAddMember->Position = QPosition::Relative;
-        //$this->pnlAddMember->CssClass = 'panelDefault panelRight';
         $this->pnlAddMember->Visible = false;
         $this->pnlAddMember->AutoRenderChildren = true;
 	}
@@ -171,11 +174,11 @@ class ViewCompanyForm extends InstituteForm {
 			}
 		}
 
-		QApplication::Redirect(__SUBDIRECTORY__.'/admin/index.php/companies');
+		QApplication::Redirect(__SUBDIRECTORY__.'/administration/companies/');
 	}
 	
 	protected function btnCancel_Click() {
-		QApplication::Redirect(__SUBDIRECTORY__.'/admin/index.php/companies');
+		QApplication::Redirect(__SUBDIRECTORY__.'/administration/companies/');
 	}
 }
 

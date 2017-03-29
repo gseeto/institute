@@ -12,7 +12,7 @@
         protected $objParent;
     
         // Specify the Template File for this custom QPanel
-        protected $strTemplate = 'panels/AddBusinesschecklist.tpl.php';
+        protected $strTemplate = '../../admin/panels/AddBusinesschecklist.tpl.php';
 
         // Customize the Look/Feel
         protected $strPadding = '10px';
@@ -33,6 +33,7 @@
 
             $this->lstCompanys = new QListBox($this);
 	        $this->lstCompanys->HtmlBefore = 'Select from existing Companies: ';
+	        $this->lstCompanys->CssClass = 'form-control';
 			$companyArray = Company::LoadAll();
 			$this->lstCompanys->AddItem('-None Selected-',0);
 			foreach($companyArray as $objCompany) {
@@ -41,12 +42,12 @@
             
 			$this->btnSubmit = new QButton($this);
 			$this->btnSubmit->Text = "Add Company to Business Checklist";
-			$this->btnSubmit->CssClass = 'primary';
+			$this->btnSubmit->CssClass = 'btn btn-default';
 			$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnSubmit_Click'));
 			
 			$this->btnCancel = new QButton($this);
 			$this->btnCancel->Text = "Cancel";
-			$this->btnCancel->CssClass = 'primary';
+			$this->btnCancel->CssClass = 'btn btn-default';
 			$this->btnCancel->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnCancel_Click'));
 			
         }          
