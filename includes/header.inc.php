@@ -54,6 +54,11 @@
   </script>
   
 	</head><body>
+	<?php 
+	// start profiling/logging the database queries
+	// replace '1' in the following line with the database connection you are using
+	//QApplication::$Database[1]->EnableProfiling();
+	?>
 	<div class="container-fluid">
 <?php $this->RenderBegin(); ?>
 <?php if (QApplication::$Login) { ?>

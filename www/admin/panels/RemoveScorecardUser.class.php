@@ -16,7 +16,7 @@
         protected $objParent;
     
         // Specify the Template File for this custom QPanel
-        protected $strTemplate = 'panels/RemoveScorecardUser.tpl.php';
+        protected $strTemplate = '../../admin/panels/RemoveScorecardUser.tpl.php';
 
         // Customize the Look/Feel
         protected $strPadding = '10px';
@@ -39,8 +39,8 @@
             
             $this->dtgUsers = new UserDataGrid($this);    
 			$this->dtgUsers->Paginator = new QPaginator($this->dtgUsers);
-			$this->dtgUsers->MetaAddColumn('FirstName','Html=<?=$_ITEM->FirstName; ?>', 'HtmlEntities=False', 'Width=200px');
-			$this->dtgUsers->MetaAddColumn('LastName', 'Html=<?=$_ITEM->LastName; ?>','Width=100px', 'Width=200px');
+			$this->dtgUsers->MetaAddColumn('FirstName','Html=<?=$_ITEM->FirstName; ?>', 'HtmlEntities=False');
+			$this->dtgUsers->MetaAddColumn('LastName', 'Html=<?=$_ITEM->LastName; ?>');
 			$this->dtgUsers->AddColumn(new QDataGridColumn('Username', '<?= $_CONTROL->ParentControl->RenderUsername($_ITEM) ?>', 'HtmlEntities=false' ));          
             $this->dtgUsers->AddColumn(new QDataGridColumn('Select User', '<?= $_CONTROL->ParentControl->chkSelected_Render($_ITEM) ?>', 'HtmlEntities=false' ));
             
@@ -48,23 +48,20 @@
 			$this->dtgUsers->SetDataBinder('dtgUsers_Bind',$this);
 			$this->dtgUsers->NoDataHtml = 'No Users To add';
 			$this->dtgUsers->UseAjax = true;
+			$this->dtgUsers->CssClass = 'table table-striped table-hover';
 			
 			$this->dtgUsers->SortColumnIndex = 1;
 			$this->dtgUsers->ItemsPerPage = 20;
-			$this->dtgUsers->GridLines = QGridLines::Horizontal;
 			
-			$objStyle = $this->dtgUsers->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 12;
-		
 	        $objStyle = $this->dtgUsers->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	        
 	        $objStyle = $this->dtgUsers->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 			$this->lstScorecard = new QListBox($this);
+			$this->lstScorecard->CssClass = 'form-control';
 			$this->lstScorecard->Name = 'Scorecard';
 			$objScorecardArray = Scorecard::LoadAll();
 			$isFirst = true;
@@ -80,6 +77,7 @@
 			
 			$this->strFirstName = new QTextBox($this);
 			$this->strFirstName->Name = 'First Name';
+			$this->strFirstName->CssClass = 'form-control';
 			$this->strFirstName->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strFirstName->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strFirstName->AddAction(new QEnterKeyEvent(), new QTerminateAction());
@@ -87,6 +85,7 @@
 			
 			$this->strLastName = new QTextBox($this);
 			$this->strLastName->Name = 'Last Name';
+			$this->strLastName->CssClass = 'form-control';
 			$this->strLastName->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strLastName->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strLastName->AddAction(new QEnterKeyEvent(), new QTerminateAction());
@@ -94,19 +93,19 @@
 			
 			$this->strUsername = new QTextBox($this);
 			$this->strUsername->Name = 'Username';
-			$this->strUsername->Width = 50;
+			$this->strUsername->CssClass = 'form-control';
 			$this->strUsername->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strUsername->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strUsername->AddAction(new QEnterKeyEvent(), new QTerminateAction());
 			
 			$this->btnSubmit = new QButton($this);
 			$this->btnSubmit->Text = "Remove Users From Scorecard";
-			$this->btnSubmit->CssClass = 'primary';
+			$this->btnSubmit->CssClass = 'btn btn-default';
 			$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnSubmit_Click'));
 			
 			$this->btnCancel = new QButton($this);
 			$this->btnCancel->Text = "Cancel";
-			$this->btnCancel->CssClass = 'primary';
+			$this->btnCancel->CssClass = 'btn btn-default';
 			$this->btnCancel->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnCancel_Click'));
 			
         }       
@@ -141,9 +140,9 @@
 	        $chkSelected = $this->objForm->GetControl($strControlId);     
 	        if (!$chkSelected) {
 	            $chkSelected = new QCheckBox($this->dtgUsers, $strControlId);
+	            $chkSelected->CssClass = 'checkbox';
 	            $chkSelected->Text = 'Select';
 	            $chkSelected->ActionParameter = $objUser->Id;
-	            $chkSelected->CssClass = 'transparent';
 	            $chkSelected->AddAction(new QClickEvent(), new QAjaxControlAction($this,'chkSelected_Click'));
 	        }
 	        return $chkSelected->Render(false);

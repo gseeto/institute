@@ -20,6 +20,11 @@
 		
 		<style type="text/css">@import url("<?php _p(__VIRTUAL_DIRECTORY__ . __CSS_ASSETS__); ?>/styles.css");</style>
 	</head><body>
+	<?php 
+	// start profiling/logging the database queries
+	// replace '1' in the following line with the database connection you are using
+	//QApplication::$Database[1]->EnableProfiling();
+	?>
 	<div class="container-fluid">
 <?php $this->RenderBegin(); ?>
 

@@ -12,6 +12,15 @@ class AdminTenPandFForm extends InstituteForm {
 	protected $btnAddTenFAssessment;
 	protected $pnlAddTenFAssessment;
 	
+	protected function Form_Run() {
+    	if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
+		if(QApplication::$Login->Role->Name != 'Administrator') {			
+			QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
+		}
+    	QApplication::ExecuteJavaScript("document.getElementById('administration').className = 'dropdown active';");
+    	QApplication::ExecuteJavaScript("document.getElementById('admin-ten').className = 'active';");    	
+    }
+    
 	protected function Form_Create() {			
 		$this->dtgTenPAssessments = new TenPAssessmentDataGrid($this);
         $this->dtgTenPAssessments->Paginator = new QPaginator($this->dtgTenPAssessments);

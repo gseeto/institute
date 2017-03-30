@@ -18,25 +18,31 @@ class EditCannedStrategy extends InstituteForm {
         public $btnSubmit;
    
 	protected function Form_Run() {
-		// If not  logged in, go to login page.
-		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
-	}
+    	if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
+		if(QApplication::$Login->Role->Name != 'Administrator') {			
+			QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
+		}
+    	QApplication::ExecuteJavaScript("document.getElementById('administration').className = 'dropdown active';");
+    	QApplication::ExecuteJavaScript("document.getElementById('admin-scorecards').className = 'active';");    	
+    }
 	
 	protected function Form_Create() {
-            $this->intStrategyId = QApplication::PathInfo(0);
-            $this->objStrategy = CannedStrategy::Load($this->intStrategyId);
+        $this->intStrategyId = QApplication::PathInfo(0);
+        $this->objStrategy = CannedStrategy::Load($this->intStrategyId);
                       
 		$this->strStrategy = new QTextBox($this);
 		$this->strStrategy->Name = 'Strategy';
-		$this->strStrategy->Width = 600;
+		$this->strStrategy->CssClass = 'form-control';
 		$this->strStrategy->TextMode = QTextMode::MultiLine;
-		$this->strStrategy->Height = 30;
+		$this->strStrategy->Height = 80;
+		$this->strStrategy->Width = 600;
 		$this->strStrategy->Text = $this->objStrategy->Strategy;
 		$this->strStrategy->AddAction(new QKeyPressEvent(500), new QAjaxAction('strStrategy_KeyPress'));
 		$this->strStrategy->Focus();
 
 		$this->lstCategory = new QListBox($this);
 		$this->lstCategory->Name = 'Category';
+		$this->lstCategory->CssClass = 'form-control';
 		$this->lstCategory->AddItem('None');
 		foreach( CategoryType::$NameArray as $key=>$value) {
 			if ($this->objStrategy->CategoryTypeId == $key) {
@@ -48,38 +54,38 @@ class EditCannedStrategy extends InstituteForm {
 		$this->lstCategory->AddAction(new QChangeEvent(), new QAjaxAction('lstCategory_Change'));
 		$this->actionArray = array();
 		$this->dtgActions = new QDataGrid($this);
-		$this->dtgActions->AddColumn(new QDataGridColumn('Index', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>'));
-		$this->dtgActions->AddColumn(new QDataGridColumn('Action', '<?= $_FORM->RenderActions($_ITEM,$_CONTROL->CurrentRowIndex) ?>', 'HtmlEntities=false', 'Width=500px' ));
+		$this->dtgActions->AddColumn(new QDataGridColumn('Index', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>', 'Width=100px'));
+		$this->dtgActions->AddColumn(new QDataGridColumn('Action', '<?= $_FORM->RenderActions($_ITEM,$_CONTROL->CurrentRowIndex) ?>', 'HtmlEntities=false' ));
 		$this->dtgActions->SetDataBinder('dtgActions_Bind',$this);
 		$this->dtgActions->CellPadding = 5;
 		$this->dtgActions->NoDataHtml = 'No Actions';
 		$this->dtgActions->GridLines = 'both';
-		$this->dtgActions->CssClass = 'scorecard_table';
+		$this->dtgActions->CssClass = 'table table-striped table-hover table-bordered';
 		
 		$this->btnActionAdd= new QButton($this);
 		$this->btnActionAdd->Text = "Add an Action";
-		$this->btnActionAdd->CssClass = 'primary';
+		$this->btnActionAdd->CssClass = 'btn btn-default';
 		$this->btnActionAdd->AddAction(new QClickEvent(), new QAjaxAction('btnActionAdd_Click'));
 		
 		/**************/
 		$this->kpiArray = array();
 		$this->dtgKpis = new QDataGrid($this);
-		$this->dtgKpis->AddColumn(new QDataGridColumn('Index', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>'));
-		$this->dtgKpis->AddColumn(new QDataGridColumn('KPI', '<?= $_FORM->RenderKpis($_ITEM,$_CONTROL->CurrentRowIndex) ?>', 'HtmlEntities=false', 'Width=500px' ));
+		$this->dtgKpis->AddColumn(new QDataGridColumn('Index', '<?= ($_CONTROL->CurrentRowIndex + 1) ?>', 'Width=100px'));
+		$this->dtgKpis->AddColumn(new QDataGridColumn('KPI', '<?= $_FORM->RenderKpis($_ITEM,$_CONTROL->CurrentRowIndex) ?>', 'HtmlEntities=false'));
 		$this->dtgKpis->SetDataBinder('dtgKpis_Bind',$this);
 		$this->dtgKpis->CellPadding = 5;
 		$this->dtgKpis->NoDataHtml = 'No KPIs';
 		$this->dtgKpis->GridLines = 'both';
-		$this->dtgKpis->CssClass = 'scorecard_table';
+		$this->dtgKpis->CssClass = 'table table-striped table-hover table-bordered';
 		
 		$this->btnKpiAdd= new QButton($this);
 		$this->btnKpiAdd->Text = "Add a KPI";
-		$this->btnKpiAdd->CssClass = 'primary';
+		$this->btnKpiAdd->CssClass = 'btn btn-default';
 		$this->btnKpiAdd->AddAction(new QClickEvent(), new QAjaxAction('btnKpiAdd_Click'));
 		
 		$this->btnSubmit = new QButton($this);
 		$this->btnSubmit->Text = "Return";
-		$this->btnSubmit->CssClass = 'primary';
+		$this->btnSubmit->CssClass = 'btn btn-default';
 		$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
     }       
 
@@ -96,7 +102,7 @@ class EditCannedStrategy extends InstituteForm {
         	$this->objStrategy->Strategy = $this->strStrategy->Text;
         	$this->objStrategy->CategoryTypeId = $this->lstCategory->SelectedValue;
         	$this->objStrategy->Save();
-        	QApplication::Redirect(__SUBDIRECTORY__.'/admin/index.php/scorecards');
+        	QApplication::Redirect(__SUBDIRECTORY__.'/administration/scorecards/');
 		}
 		 
         public function btnActionAdd_Click($strFormId, $strControlId, $strParameter) {
@@ -128,9 +134,9 @@ class EditCannedStrategy extends InstituteForm {
 				$txtAction->ActionParameter = $strControlLabelId;
 				$txtAction->Text = $objAction->Action;
 				$txtAction->TextMode = QTextMode::MultiLine;
-				$txtAction->Width = 500;
-				$txtAction->Height = 30;
-				$txtAction->CssClass = 'scorecard_table';
+				//$txtAction->Width = 500;
+				//$txtAction->Height = 30;
+				$txtAction->CssClass = 'form-control';
 			}
 			$txtAction->Text = $objAction->Action;
 			$lblAction = $this->GetControl($strControlLabelId);
@@ -180,9 +186,9 @@ class EditCannedStrategy extends InstituteForm {
 				$txtKpi->ActionParameter = $strControlLabelId;
 				$txtKpi->Text = $objKpi->Kpi;
 				$txtKpi->TextMode = QTextMode::MultiLine;
-				$txtKpi->Width = 500;
-				$txtKpi->Height = 30;
-				$txtKpi->CssClass = 'scorecard_table';
+				//$txtKpi->Width = 500;
+				//$txtKpi->Height = 30;
+				$txtKpi->CssClass = 'form-control';
 			}
 			$txtKpi->Text = $objKpi->Kpi;
 			$lblKpi = $this->GetControl($strControlLabelId);

@@ -12,7 +12,7 @@
         protected $objParent;
     
         // Specify the Template File for this custom QPanel
-        protected $strTemplate = 'panels/AddScorecard.tpl.php';
+        protected $strTemplate = '../../admin/panels/AddScorecard.tpl.php';
 
         // Customize the Look/Feel
         protected $strPadding = '10px';
@@ -34,10 +34,12 @@
                       	
 			$this->strName = new QTextBox($this);
 			$this->strName->Name = 'Scorecard Name';
+			$this->strName->CssClass = 'form-control';
 			$this->strName->Focus();
 
 			$this->lstCompany = new QListBox($this);
 			$this->lstCompany->Name = 'Company';
+			$this->lstCompany->CssClass = 'form-control';
 			$this->lstCompany->AddItem('None');
 			$objCompanyArray = Company::LoadAll();
 			foreach( $objCompanyArray as $objCompany) {
@@ -46,12 +48,12 @@
 			
 			$this->btnSubmit = new QButton($this);
 			$this->btnSubmit->Text = "Add Scorecard";
-			$this->btnSubmit->CssClass = 'primary';
+			$this->btnSubmit->CssClass = 'btn btn-default';
 			$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnSubmit_Click'));
 			
 			$this->btnCancel = new QButton($this);
 			$this->btnCancel->Text = "Cancel";
-			$this->btnCancel->CssClass = 'primary';
+			$this->btnCancel->CssClass = 'btn btn-default';
 			$this->btnCancel->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnCancel_Click'));
 			
         }       

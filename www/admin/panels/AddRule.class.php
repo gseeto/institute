@@ -15,12 +15,11 @@
         protected $objParent;
     
         // Specify the Template File for this custom QPanel
-        protected $strTemplate = 'panels/AddRule.tpl.php';
+        protected $strTemplate = '../../admin/panels/AddRule.tpl.php';
 
         // Customize the Look/Feel
         protected $strPadding = '10px';
-      //  protected $strBackColor = '#fefece';
-
+ 
         // We Create a new __constructor that takes in the Project we are "viewing"
         // The functionality of __construct in a custom QPanel is similar to the QForm's Form_Create() functionality
         public function __construct($objParentObject, $strMethodCallBack, $objParent, $strControlId = null) {
@@ -37,33 +36,35 @@
                       	
 			$this->lstStrategy = new QListBox($this);
 			$this->lstStrategy->Name = 'Strategy';
-			$this->lstStrategy->Width = 600;
+			$this->lstStrategy->CssClass = 'form-control';
 			foreach( CannedStrategy::LoadAll() as $objCannedStrategy) {
         		$this->lstStrategy->AddItem($objCannedStrategy->Strategy,$objCannedStrategy->Id);
         	}
         	
 			$this->lstConditional= new QListBox($this);
 			$this->lstConditional->Name = 'Conditional';
+			$this->lstConditional->CssClass = 'form-control';
         	foreach( ConditionalType::$NameArray as $key=>$value) {
         		$this->lstConditional->AddItem($value,$key);	
         	}
-        	$this->lstConditional->Width = 200;
+        	//$this->lstConditional->Width = 200;
  		
         	$this->lstQuestion = new QListBox($this);
 			$this->lstQuestion->Name = 'Question';
+			$this->lstQuestion->CssClass = 'form-control';
 	        foreach(TenPQuestions::LoadAll() as $objQuestion) {
         		$this->lstQuestion->AddItem($objQuestion->Text,$objQuestion->Id);	
         	}
-        	$this->lstQuestion->Width = 600;
+        	//$this->lstQuestion->Width = 600;
 			
 			$this->btnSubmit = new QButton($this);
 			$this->btnSubmit->Text = "Submit";
-			$this->btnSubmit->CssClass = 'primary';
+			$this->btnSubmit->CssClass = 'btn btn-default';
 			$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnSubmit_Click'));
 			
 			$this->btnCancel = new QButton($this);
 			$this->btnCancel->Text = "Cancel";
-			$this->btnCancel->CssClass = 'primary';
+			$this->btnCancel->CssClass = 'btn btn-default';
 			$this->btnCancel->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnCancel_Click'));
 			
         }       
