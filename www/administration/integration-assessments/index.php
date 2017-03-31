@@ -161,23 +161,27 @@ class AdminIntegrationAssessmentsForm extends InstituteForm {
 		public function RenderUserLinkSeasonal($objAssessment) {
     		$intUserId = $objAssessment->UserId;
     		$objUser = User::Load($intUserId);
-    		// Only display link if there is an assessment to display
-    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
-				return sprintf("<a href='%s/assessments/seasons/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
-    		} else {
-    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
-    		}
+    		if($objUser) {
+	    		// Only display link if there is an assessment to display
+	    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
+					return sprintf("<a href='%s/assessments/seasons/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
+	    		} else {
+	    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
+	    		}
+    		} else return sprintf("No User. UserId = %d",$intUserId);
 		}
 		
 		public function RenderUserLinkTime($objAssessment) {
     		$intUserId = $objAssessment->UserId;
     		$objUser = User::Load($intUserId);
-    		// Only display link if there is an assessment to display
-    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
-				return sprintf("<a href='%s/assessments/time/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
-    		} else {
-    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
-    		}
+    		if($objUser) {
+	    		// Only display link if there is an assessment to display
+	    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
+					return sprintf("<a href='%s/assessments/time/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
+	    		} else {
+	    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
+	    		}
+	    	} else return sprintf("No User. UserId = %d",$intUserId);
 		}
 		
     	public function RenderStatus($intResourceStatusId) {
