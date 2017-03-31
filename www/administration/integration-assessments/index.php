@@ -148,12 +148,14 @@ class AdminIntegrationAssessmentsForm extends InstituteForm {
 		public function RenderUserLinkIntegration($objAssessment) {
     		$intUserId = $objAssessment->UserId;
     		$objUser = User::Load($intUserId);
-    		// Only display link if there is an assessment to display
-    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
-				return sprintf("<a href='%s/assessments/integration/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
-    		} else {
-    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
-    		}
+    		if($objUser) {
+	    		// Only display link if there is an assessment to display
+	    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
+					return sprintf("<a href='%s/assessments/integration/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
+	    		} else {
+	    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
+	    		}
+    		} else return sprintf("No User. UserId = %d",$intUserId);
 		}
 		
 		public function RenderUserLinkSeasonal($objAssessment) {
