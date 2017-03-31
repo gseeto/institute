@@ -123,35 +123,44 @@
             chart.write(div);
         }
     </script>
-<h2>Time Spent</h2>
-<div id="chartdiv" style="width:700px; height:500px;"></div>
-<br>
-<p>This table indicates how your time is allocated across all 4 C's.
-While Convergence is not about balance, uneven time allocation across the 4 C's may indicate that some reprioritization is necessary, or some paradigm shifts are required.
-The amount of margin available can also be a good indicator of the degree of tension or stress in your life.</p>
-<?php $this->txtCRecommendation->Render();?>
-<br>
-<h2>Intersection of the C's</h2>
-<div id="intersectchartdiv" style="width:700px; height:500px;"></div>
-<p>Greater amounts of time spent at the intersection of the C's is an indicator of the degree of convergence you have in your life.
-This graph should indicate areas where greater integration would be beneficial.</p>
-<p>As the percentage of time spent at the intersections increases, the opportunity for more margin should also arise.</p>
-<br>
-<h2>Combined Convergence Chart</h2>
-<div id="Careerchartdiv" style="width: 400px; height: 400px; float:left;"></div>
-<div id="Communitychartdiv" style="width: 400px; height: 400px; float:left;"></div>
-<div id="Creativitychartdiv" style="width: 400px; height: 400px; float:left;"></div>
-<div id="Callingchartdiv" style="width: 400px; height: 400px; float:left;"></div>
-<div style="clear:both;"></div>
-<br>
-<p>This is a visual representation of both the time spent and the level of integration found in each of the 4 C's.
-The size of the pie indicates the time spent in each of the C's. The larger the pie, the more time spent in that C.</p>
-<p>The respective pie ratio indicates the degree to which that particular C is integrated with the remaining C's.
-As the level of convergence and integration increases for each C, the respective ratios within the respective pies should increase in terms of percentage.
-</p>
-<br>
-<?php 
-	$this->dtgAssessmentResults->Render();
-?>
+<div class="row">
+	<div class="col-md-2">&nbsp;</div>
+	<div class="col-md-8">
+		<h2>Time Spent</h2>
+		<div id="chartdiv" style="width:700px; height:500px;"></div>
+		<br>
+		<p>This table indicates how your time is allocated across all 4 C's.
+		While Convergence is not about balance, uneven time allocation across the 4 C's may indicate that some reprioritization is necessary, or some paradigm shifts are required.
+		The amount of margin available can also be a good indicator of the degree of tension or stress in your life.</p>
+		<?php $this->txtCRecommendation->Render();?>
+		<br>
+		<h2>Intersection of the C's</h2>
+		<div id="intersectchartdiv" style="width:700px; height:500px;"></div>
+		<p>Greater amounts of time spent at the intersection of the C's is an indicator of the degree of convergence you have in your life.
+		This graph should indicate areas where greater integration would be beneficial.</p>
+		<p>As the percentage of time spent at the intersections increases, the opportunity for more margin should also arise.</p>
+		<br>
+		<h2>Combined Convergence Chart</h2>
+		<div class="row">
+			<div id="Careerchartdiv" class="col-md-6" style="width: 50%; height: 400px;"></div>
+			<div id="Communitychartdiv" class="col-md-6" style="width: 50%; height: 400px;"></div>
+		</div>
+		<div class="row">
+			<div id="Creativitychartdiv" class="col-md-6" style="width: 50%; height: 400px;"></div>
+			<div id="Callingchartdiv" class="col-md-6" style="width: 50%; height: 400px;"></div>
+		</div>
+		<br>
+		<p>This is a visual representation of both the time spent and the level of integration found in each of the 4 C's.
+		The size of the pie indicates the time spent in each of the C's. The larger the pie, the more time spent in that C.</p>
+		<p>The respective pie ratio indicates the degree to which that particular C is integrated with the remaining C's.
+		As the level of convergence and integration increases for each C, the respective ratios within the respective pies should increase in terms of percentage.
+		</p>
+		<br>
+		<?php 
+			$this->dtgAssessmentResults->Render();
+		?>
+	</div>
+	<div class="col-md-2">&nbsp;</div>
+</div>
 </div>
 <?php require('/../..'.__INCLUDES__ . '/footer.inc.php'); ?>

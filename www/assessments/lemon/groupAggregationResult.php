@@ -156,27 +156,22 @@ class GroupAggregationResultForm extends InstituteForm {
 		$this->dtgUsers->SetDataBinder('dtgUsers_Bind',$this);
 		$this->dtgUsers->NoDataHtml = 'No Users have taken the Assessment.';
 		$this->dtgUsers->UseAjax = true;
-		$this->dtgUsers->Width = 700;
+		$this->dtgUsers->CssClass = 'table table-striped table-hover';
 		
 		$this->dtgUsers->SortColumnIndex = 1;
 		$this->dtgUsers->ItemsPerPage = 20;
-		$this->dtgUsers->GridLines = QGridLines::Both;
 		
-		$objStyle = $this->dtgUsers->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
         $objStyle = $this->dtgUsers->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgUsers->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = "Apply Group Analysis to selected Users";
-		$this->btnSubmit->CssClass = 'primary';
+		$this->btnSubmit->CssClass = 'btn btn-default';
 		$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
         
 	}
@@ -223,6 +218,7 @@ class GroupAggregationResultForm extends InstituteForm {
         if (!$chkSelected) {
             $chkSelected = new QCheckBox($this->dtgUsers, $strControlId);
             $chkSelected->Text = 'Select';
+            $chkSelected->CssClass = 'checkbox';
             $chkSelected->ActionParameter = $lemonArray[0]->Id;
             $chkSelected->AddAction(new QClickEvent(), new QAjaxAction('chkSelected_Click'));
         }

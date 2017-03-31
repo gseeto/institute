@@ -4,38 +4,38 @@ require(dirname(__FILE__) . '/../../../includes/prepend.inc.php');
 class ViewTimeAssessmentForm extends InstituteForm {
 	protected $arrNavigation;
 	protected $strPageTitle = 'Where Does The Time Go Assessment';
-	protected $intNavSectionId = InstituteForm::NavSectionAssessments;
 	protected $objTimeAssessment;
 	protected $btnReturn;
 	protected $lblIntroduction;
 	protected $dtgAssessmentResults;
 	protected $txtCRecommendation;
+	protected $intNavSectionId = InstituteForm::NavSectionAssessments;
 	
 	protected function Form_Run() {
 		// If not  logged in, go to login page.
 		if (!QApplication::$Login) QApplication::Redirect(__SUBDIRECTORY__.'/index.php');
+		QApplication::ExecuteJavaScript("document.getElementById('admin-ten').className = 'active';"); 
 	}
 	
 	protected function Form_Create() {	
 		$this->lblIntroduction = new QLabel($this);	
+		$this->lblIntroduction->HtmlEntities = false;
 		$this->txtCRecommendation = new QLabel($this);
 	 	$this->txtCRecommendation->HtmlEntities = false;
 	 		
 		$intUserId = QApplication::PathInfo(0);
 		if($intUserId) { //show the assessment specified
 			$assessmentArray = TimeAssessment::LoadArrayByUserId($intUserId);
-			$this->objTimeAssessment = $assessmentArray[0];
-			$objUser = User::Load($intUserId);
-			$this->lblIntroduction->Text = 'Where Does The Time Go Assessment for '.$objUser->FirstName. ' '.$objUser->LastName;
-		} else { // show the user's assessment	
-			$this->lblIntroduction->Text = 'Thank you for taking the Where Does The Time Go Assessment.
-Your results are provided below.';
+			$this->objTimeAssessment = $assessmentArray[0];					
+		} else { // show the user's assessment				
 			$userArray = User::LoadArrayByLoginId(QApplication::$LoginId);
 			$intUserId = $userArray[0]->Id;
 			
 			$assessmentArray = TimeAssessment::LoadArrayByUserId($intUserId);
 			$this->objTimeAssessment = $assessmentArray[0];
 		}
+		$objUser = User::Load($intUserId);
+		$this->lblIntroduction->Text = '<h1>Where Does The Time Go Assessment for '.$objUser->FirstName. ' '.$objUser->LastName.'</h1>';
 		$this->initializeChart();		
 		$this->dtgAssessmentResults = new TimeResultsDataGrid($this);
 		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('Activity', '<?= $_ITEM->Activity ?>', 'HtmlEntities=false', 'Width=410px' ));
@@ -51,25 +51,19 @@ Your results are provided below.';
 		$this->dtgAssessmentResults->DataSource = $assessmentArray; 
 		
 		$this->dtgAssessmentResults->UseAjax = true;
+		$this->dtgAssessmentResults->CssClass = 'table table-striped table-hover';
 		
-		$objStyle = $this->dtgAssessmentResults->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 14;
-
-        $objStyle = $this->dtgAssessmentResults->AlternateRowStyle;
-        $objStyle->BackColor = '#CCCCCC';
-
         $objStyle = $this->dtgAssessmentResults->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgAssessmentResults->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';  		
+        $objStyle->BackColor = '#337ab7';  		
 	 	
         $this->btnReturn = new QButton($this);
         $this->btnReturn->Text = 'Return';
-	 	$this->btnReturn->CssClass = 'right primary';
+	 	$this->btnReturn->CssClass = 'btn btn-default';
 	 	$this->btnReturn->AddAction(new QClickEvent(), new QAjaxAction('btnReturn_Click'));
 		if(QApplication::PathInfo(0)) {
 	 		$this->btnReturn->Visible = false;
@@ -86,7 +80,8 @@ Your results are provided below.';
         $chkCalling = $this->GetControl($strControlId);           
         if (!$chkCalling) {
             $chkCalling = new QCheckBox($this->dtgAssessmentResults, $strControlId);
-            $chkCalling->Width = 30;
+            $chkCalling->Width = 60;
+            $chkCalling->CssClass = 'checkbox';
             $chkCalling->Checked = $objResult->Calling;	                    
             $chkCalling->Enabled = false;
         }
@@ -98,7 +93,8 @@ Your results are provided below.';
         $chkCareer = $this->GetControl($strControlId);           
         if (!$chkCareer) {
             $chkCareer = new QCheckBox($this->dtgAssessmentResults, $strControlId);
-            $chkCareer->Width = 30;
+            $chkCareer->Width = 60;
+            $chkCareer->CssClass = 'checkbox';
             $chkCareer->Checked = $objResult->Career;	                    
             $chkCareer->Enabled = false;
         }
@@ -110,7 +106,8 @@ Your results are provided below.';
         $chkCommunity = $this->GetControl($strControlId);           
         if (!$chkCommunity) {
             $chkCommunity = new QCheckBox($this->dtgAssessmentResults, $strControlId);
-            $chkCommunity->Width = 30;
+            $chkCommunity->Width = 60;
+            $chkCommunity->CssClass = 'checkbox';
             $chkCommunity->Checked = $objResult->Community;	                    
             $chkCommunity->Enabled = false;
         }
@@ -122,7 +119,8 @@ Your results are provided below.';
         $chkCreativity = $this->GetControl($strControlId);           
         if (!$chkCreativity) {
             $chkCreativity = new QCheckBox($this->dtgAssessmentResults, $strControlId);
-            $chkCreativity->Width = 30;
+            $chkCreativity->Width = 60;
+            $chkCreativity->CssClass = 'checkbox';
             $chkCreativity->Checked = $objResult->Community;	                    
             $chkCreativity->Enabled = false;
         }
@@ -134,7 +132,8 @@ Your results are provided below.';
         $chkMargin = $this->GetControl($strControlId);           
         if (!$chkMargin) {
             $chkMargin = new QCheckBox($this->dtgAssessmentResults, $strControlId);
-            $chkMargin->Width = 30;
+            $chkMargin->Width = 60;
+            $chkMargin->CssClass = 'checkbox';
             $chkMargin->Checked = $objResult->Margin;	                   
             $chkMargin->Enabled = false;
         }
@@ -143,7 +142,7 @@ Your results are provided below.';
      
 	protected function initializeChart() {
 		$associatedArray = array(); 
-		$colorArray = array('#1E375C','#605032','#B69D70','#2F578F','#FFFFFF','#000000','#1E375C');
+		$colorArray = array('#1E375C','#605032','#B69D70','#2F578F','#888888','#000000','#1E375C');
 		$categoryArray = array("Career"=>0, "Community"=>0,"Creativity"=>0,"Calling"=>0, "Margin"=>0);
 		$intersectArray = array("Career-Calling"=>0, "Career-Community"=>0,"Career-Creativity"=>0,"Calling-Community"=>0, "Calling-Creativity"=>0,"Community-Creativity"=>0);
 				

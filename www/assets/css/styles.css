@@ -733,9 +733,9 @@ table.lemonSummary th { border: 1px solid #808080; padding:5px; margin: 0px 10px
 /*
  * Where Does the time go styles
  */
-.definitions { width:650px; float:right; padding:10px; position:relative; top:0px; }
+.definitions { float:right; padding:10px; position:relative; top:0px; }
 .def { color:blue; cursor:pointer; line-height:180%; margin:20px; padding:5px;}
-.categories { width:800px; text-align:center; }
+.categories {text-align:center; }
 .bluetext {color:blue;}
 .redtext {color:red;}
 .italics { font-style:italic;}

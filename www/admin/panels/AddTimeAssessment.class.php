@@ -15,7 +15,7 @@
         protected $objParent;
     
         // Specify the Template File for this custom QPanel
-        protected $strTemplate = 'panels/AddTimeAssessment.tpl.php';
+        protected $strTemplate = '../../admin/panels/AddTimeAssessment.tpl.php';
 
         // Customize the Look/Feel
         protected $strPadding = '10px';
@@ -47,28 +47,22 @@
 			$this->dtgUsers->SetDataBinder('dtgUsers_Bind',$this);
 			$this->dtgUsers->NoDataHtml = 'No results found.  Please use a less-restrictive filter.';
 			$this->dtgUsers->UseAjax = true;
+			$this->dtgUsers->CssClass = 'table table-striped table-hover';
 			
 			$this->dtgUsers->SortColumnIndex = 1;
 			$this->dtgUsers->ItemsPerPage = 20;
-			$this->dtgUsers->GridLines = QGridLines::Horizontal;
-			
-			$objStyle = $this->dtgUsers->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 12;
-	
-	        //$objStyle = $this->dtgUsers->AlternateRowStyle;
-	        //$objStyle->BackColor = '#CCCCCC';
-	
-	        $objStyle = $this->dtgUsers->HeaderRowStyle;
+
+			$objStyle = $this->dtgUsers->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	        
 	        $objStyle = $this->dtgUsers->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	
 			$this->strFirstName = new QTextBox($this);
 			$this->strFirstName->Name = 'First Name';
+			$this->strFirstName->CssClass = 'form-control';
 			$this->strFirstName->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strFirstName->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strFirstName->AddAction(new QEnterKeyEvent(), new QTerminateAction());
@@ -76,6 +70,7 @@
 			
 			$this->strLastName = new QTextBox($this);
 			$this->strLastName->Name = 'Last Name';
+			$this->strLastName->CssClass = 'form-control';
 			$this->strLastName->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strLastName->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strLastName->AddAction(new QEnterKeyEvent(), new QTerminateAction());
@@ -83,19 +78,19 @@
 			
 			$this->strUsername = new QTextBox($this);
 			$this->strUsername->Name = 'Username';
-			$this->strUsername->Width = 50;
+			$this->strUsername->CssClass = 'form-control';
 			$this->strUsername->AddAction(new QChangeEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strUsername->AddAction(new QEnterKeyEvent(), new QAjaxControlAction($this,'dtgUsers_Refresh'));
 			$this->strUsername->AddAction(new QEnterKeyEvent(), new QTerminateAction());
 									
 			$this->btnSubmit = new QButton($this);
 			$this->btnSubmit->Text = "Add Users to Time Assessment";
-			$this->btnSubmit->CssClass = 'primary';
+			$this->btnSubmit->CssClass = 'btn btn-default';
 			$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnSubmit_Click'));
 			
 			$this->btnCancel = new QButton($this);
 			$this->btnCancel->Text = "Cancel";
-			$this->btnCancel->CssClass = 'primary';
+			$this->btnCancel->CssClass = 'btn btn-default';
 			$this->btnCancel->AddAction(new QClickEvent(), new QAjaxControlAction($this,'btnCancel_Click'));
 			
         }
@@ -136,6 +131,7 @@
         if (!$chkSelected) {
             $chkSelected = new QCheckBox($this->dtgUsers, $strControlId);
             $chkSelected->Text = 'Select';
+            $chkSelected->CssClass = 'checkbox';
             $chkSelected->ActionParameter = $objUser->Id;
             $chkSelected->CssClass = 'transparent';
             $chkSelected->AddAction(new QClickEvent(), new QAjaxControlAction($this,'chkSelected_Click'));

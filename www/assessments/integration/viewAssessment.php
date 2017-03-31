@@ -4,7 +4,6 @@ require(dirname(__FILE__) . '/../../../includes/prepend.inc.php');
 class ViewIntegrationAssessmentForm extends InstituteForm {
 	protected $arrNavigation;
 	protected $strPageTitle = 'Integration Assessment';
-	protected $intNavSectionId = InstituteForm::NavSectionAssessments;
 	protected $objIntegrationAssessment;
 	protected $btnReturn;
 	protected $lblIntroduction;
@@ -17,52 +16,44 @@ class ViewIntegrationAssessmentForm extends InstituteForm {
 	
 	protected function Form_Create() {			
 		$this->lblIntroduction = new QLabel($this);
+		$this->lblIntroduction->HtmlEntities = false;		
 		$intUserId = QApplication::PathInfo(0);
 		if($intUserId) { //show the assessment specified
 			$assessmentArray = IntegrationAssessment::LoadArrayByUserId($intUserId);
-			$this->objIntegrationAssessment = $assessmentArray[0];
-			$objUser = User::Load($intUserId);
-			$this->lblIntroduction->Text = 'Integration Assessment for '.$objUser->FirstName. ' '.$objUser->LastName;
-		} else { // show the user's assessment	
-			$this->lblIntroduction->Text = 'Thank you for taking the Integration Assessment.
-Your results are provided below.';
+			$this->objIntegrationAssessment = $assessmentArray[0];			
+		} else { // show the user's assessment				
 			$userArray = User::LoadArrayByLoginId(QApplication::$LoginId);
-			$intUserId = $userArray[0]->Id;
-			
+			$intUserId = $userArray[0]->Id;		
 			$assessmentArray = IntegrationAssessment::LoadArrayByUserId($intUserId);
 			$this->objIntegrationAssessment = $assessmentArray[0];
 		}
+		$objUser = User::Load($intUserId);
+		$this->lblIntroduction->Text = '<h1>Integration Assessment for '.$objUser->FirstName. ' '.$objUser->LastName.'</h1>';
 		$this->initializeChart();		
 
  		$this->dtgAssessmentResults = new IntegrationAssessmentDataGrid($this);
 		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('', '<?= $_FORM->RenderQuestionId($_ITEM->QuestionId) ?>', 'HtmlEntities=false', 'Width=30px' ));
-		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('Question', '<?= $_FORM->RenderQuestion($_ITEM->QuestionId) ?>', 'HtmlEntities=false', 'Width=450px' ));			
+		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('Question', '<?= $_FORM->RenderQuestion($_ITEM->QuestionId) ?>', 'HtmlEntities=false'));			
 		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('Rating', '<?= $_ITEM->Result ?>','HtmlEntities=false'));
-		$this->dtgAssessmentResults->CellPadding = 5;
+		$this->dtgAssessmentResults->CellPadding = 5;		
 
 		$assessmentArray = IntegrationResults::LoadArrayByAssessmentId($this->objIntegrationAssessment->Id);					
 		$this->dtgAssessmentResults->DataSource = $assessmentArray; 
 		
 		$this->dtgAssessmentResults->UseAjax = true;
-		
-		$objStyle = $this->dtgAssessmentResults->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 14;
-
-        $objStyle = $this->dtgAssessmentResults->AlternateRowStyle;
-        $objStyle->BackColor = '#CCCCCC';
-
+		$this->dtgAssessmentResults->CssClass = 'table table-striped table-hover';
+				
         $objStyle = $this->dtgAssessmentResults->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgAssessmentResults->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3';  		
+        $objStyle->BackColor = '#337ab7';  		
 	 	
         $this->btnReturn = new QButton($this);
         $this->btnReturn->Text = 'Return';
-	 	$this->btnReturn->CssClass = 'right primary';
+	 	$this->btnReturn->CssClass = 'right btn btn-default';
 	 	$this->btnReturn->AddAction(new QClickEvent(), new QAjaxAction('btnReturn_Click'));
 		if(QApplication::PathInfo(0)) {
 	 		$this->btnReturn->Visible = false;
@@ -87,7 +78,7 @@ Your results are provided below.';
      
 	protected function initializeChart() {
 		$associatedArray = array(); 
-		$colorArray = array('#1E375C','#605032','#B69D70','#2F578F','#FFFFFF','#000000','#1E375C');
+		$colorArray = array('#1E375C','#605032','#B69D70','#2F578F','#888888','#000000','#1E375C');
 		foreach(IntegrationCategoryType::$NameArray as $key=>$value) {			
 			$resultArray = IntegrationResults::LoadArrayByAssessmentIdAndCategory($this->objIntegrationAssessment->Id,$key);
 			$rtotal = 0;

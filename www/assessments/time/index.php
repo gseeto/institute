@@ -24,11 +24,11 @@ class TimeAssessmentForm extends InstituteForm {
 
 		$this->btnView = new QButton($this);
         $this->btnView->Text = 'View Assessment Results';
-	 	$this->btnView->CssClass = 'primary';
+	 	$this->btnView->CssClass = 'btn btn-default';
 	 	$this->btnView->AddAction(new QClickEvent(), new QAjaxAction('btnView_Click'));	
 	 	
 	 	$this->btnEdit = new QButton($this);
-	 	$this->btnEdit->CssClass = 'primary';
+	 	$this->btnEdit->CssClass = 'btn btn-default';
 	 	$this->btnEdit->AddAction(new QClickEvent(), new QAjaxAction('btnEdit_Click'));	
 		
 	 	$this->lblMsg = new QLabel($this);

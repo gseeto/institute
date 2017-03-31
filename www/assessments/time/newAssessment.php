@@ -43,39 +43,33 @@ class NewTimeAssessmentForm extends InstituteForm {
 		$this->dtgAssessmentQuestion->AddColumn(new QDataGridColumn('Margin', '<?= $_FORM->chkMargin_Render($_ITEM) ?>','HtmlEntities=false'));
 		$this->dtgAssessmentQuestion->CellPadding = 5;
 		$this->dtgAssessmentQuestion->UseAjax = true;
+		$this->dtgAssessmentQuestion->CssClass = 'table table-striped table-hover';
 
 		$this->dtgAssessmentQuestion->SetDataBinder('dtgAssessmentQuestions_Bind',$this);
 				
 		$this->lblHours = new QLabel($this);
-		
-		$objStyle = $this->dtgAssessmentQuestion->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgAssessmentQuestion->AlternateRowStyle;
-        $objStyle->BackColor = '#CCCCCC';
 
         $objStyle = $this->dtgAssessmentQuestion->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgAssessmentQuestion->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 		
+        $objStyle->BackColor = '#337ab7'; 		
 
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = 'Submit';
-	 	$this->btnSubmit->CssClass = 'primary';
+	 	$this->btnSubmit->CssClass = 'btn btn-default';
 	 	$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 
 	 	$this->btnCancel = new QButton($this);
         $this->btnCancel->Text = 'Cancel';
-	 	$this->btnCancel->CssClass = 'primary';
+	 	$this->btnCancel->CssClass = 'btn btn-default';
 	 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));
 
 	 	$this->btnAddActivity = new QButton($this);
         $this->btnAddActivity->Text = 'Add Additional Activities';
-	 	$this->btnAddActivity->CssClass = 'primary';
+	 	$this->btnAddActivity->CssClass = 'btn btn-default';
 	 	$this->btnAddActivity->AddAction(new QClickEvent(), new QAjaxAction('btnAddActivity_Click'));
 	}
 	
@@ -198,6 +192,8 @@ class NewTimeAssessmentForm extends InstituteForm {
 	protected function btnSubmit_Click() {	
 		$userArray = User::LoadArrayByLoginId(QApplication::$LoginId);
 		$intUserId = $userArray[0]->Id;
+		$this->objTimeAssessment->ResourceStatusId = 2;
+	    $this->objTimeAssessment->Save();
 		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/time/viewAssessment.php/'.$intUserId);
 	}
 
@@ -212,7 +208,8 @@ class NewTimeAssessmentForm extends InstituteForm {
             // this method which is responsible for rendering the listbox.  Also, we must
             // explicitly specify the control ID
             $chkCareer = new QCheckBox($this->dtgAssessmentQuestion, $strControlId);
-            $chkCareer->Width = 30; 
+            $chkCareer->Width = 60; 
+            $chkCareer->CssClass = 'checkbox';
             $chkCareer->Checked = $objResult->Career;	               
            
             // We'll use Control Parameters to help us identify the Question ID being copied
@@ -231,7 +228,8 @@ class NewTimeAssessmentForm extends InstituteForm {
         $chkCommunity = $this->GetControl($strControlId);           
         if (!$chkCommunity) {
             $chkCommunity = new QCheckBox($this->dtgAssessmentQuestion, $strControlId);
-            $chkCommunity->Width = 30;
+            $chkCommunity->Width = 60;
+            $chkCommunity->CssClass = 'checkbox';
             $chkCommunity->Checked = $objResult->Community;	                    
             $chkCommunity->ActionParameter = $objResult->Id;
             $chkCommunity->AddAction(new QChangeEvent(), new QAjaxAction('chkCommunity_Change'));
@@ -244,7 +242,8 @@ class NewTimeAssessmentForm extends InstituteForm {
         $chkCreativity = $this->GetControl($strControlId);           
         if (!$chkCreativity) {
             $chkCreativity = new QCheckBox($this->dtgAssessmentQuestion, $strControlId);
-            $chkCreativity->Width = 30;
+            $chkCreativity->Width = 60;
+            $chkCreativity->CssClass = 'checkbox';
             $chkCreativity->Checked = $objResult->Creativity;	                  
             $chkCreativity->ActionParameter = $objResult->Id;
             $chkCreativity->AddAction(new QChangeEvent(), new QAjaxAction('chkCreativity_Change'));
@@ -257,7 +256,7 @@ class NewTimeAssessmentForm extends InstituteForm {
         $txtActivity = $this->GetControl($strControlId);           
         if (!$txtActivity) {
             $txtActivity = new QTextBox($this->dtgAssessmentQuestion, $strControlId);
-            $txtActivity->Width = 380;
+            $txtActivity->CssClass = 'form-control';
             $txtActivity->Text = $objResult->Activity;	                    
             $txtActivity->ActionParameter = $objResult->Id;
             $txtActivity->AddAction(new QChangeEvent(5000), new QAjaxAction('txtActivity_Change'));
@@ -270,7 +269,8 @@ class NewTimeAssessmentForm extends InstituteForm {
         $txtTime = $this->GetControl($strControlId);           
         if (!$txtTime) {
             $txtTime = new QTextBox($this->dtgAssessmentQuestion, $strControlId);
-            $txtTime->Width = 30;
+            $txtTime->Width = 60;
+            $txtTime->CssClass = 'form-control';
             $txtTime->Text = $objResult->Time;	                    
             $txtTime->ActionParameter = $objResult->Id;
             $txtTime->AddAction(new QChangeEvent(5000), new QAjaxAction('txtTime_Change'));
@@ -283,7 +283,8 @@ class NewTimeAssessmentForm extends InstituteForm {
         $chkCalling = $this->GetControl($strControlId);           
         if (!$chkCalling) {
             $chkCalling = new QCheckBox($this->dtgAssessmentQuestion, $strControlId);
-            $chkCalling->Width = 30;
+            $chkCalling->Width = 60;
+            $chkCalling->CssClass = 'checkbox';
             $chkCalling->Checked = $objResult->Calling;	                    
             $chkCalling->ActionParameter = $objResult->Id;
             $chkCalling->AddAction(new QChangeEvent(), new QAjaxAction('chkCalling_Change'));
@@ -296,7 +297,8 @@ class NewTimeAssessmentForm extends InstituteForm {
         $chkMargin = $this->GetControl($strControlId);           
         if (!$chkMargin) {
             $chkMargin = new QCheckBox($this->dtgAssessmentQuestion, $strControlId);
-            $chkMargin->Width = 30;
+            $chkMargin->Width = 60;
+            $chkMargin->CssClass = 'checkbox';
             $chkMargin->Checked = $objResult->Margin;	                   
             $chkMargin->ActionParameter = $objResult->Id;
             $chkMargin->AddAction(new QChangeEvent(), new QAjaxAction('chkMargin_Change'));

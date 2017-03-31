@@ -42,6 +42,7 @@ class GroupAggregationForm extends InstituteForm {
 		
 		$this->strKeycode = new QTextBox($this);
 		$this->strKeycode->Name = 'KeyCode';
+		$this->strKeycode->CssClass = 'form-control';
 		$this->strKeycode->Focus();
 	
 		$this->btnLemon = new QButton($this);
@@ -94,7 +95,6 @@ class GroupAggregationForm extends InstituteForm {
         $this->dtgGroupTenPAssessments->AddColumn(new QDataGridColumn('Description', '<?= $_ITEM->Description ?>', 'HtmlEntities=false', 'Width=300px' ));
         $this->dtgGroupTenPAssessments->AddColumn(new QDataGridColumn('Total Keys', '<?= $_ITEM->TotalKeys ?>', 'HtmlEntities=false', 'Width=50px' ));
         $this->dtgGroupTenPAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_ITEM->KeysLeft ?>', 'HtmlEntities=false', 'Width=50px' ));   
-       /* $this->dtgGroupTenPAssessments->AddColumn(new QDataGridColumn('Assessment Type', '<?= $_FORM->RenderAssessmentType($_ITEM) ?>', 'HtmlEntities=false' ));*/ 
         $this->dtgGroupTenPAssessments->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__ .InstituteForm::DirAssessments. "tenp/groupAggregationResult.php/". $_ITEM->Id ?>','Result','Results');
 			
         $this->dtgGroupTenPAssessments->CellPadding = 5;
@@ -173,7 +173,6 @@ class GroupAggregationForm extends InstituteForm {
         $this->dtgGroupKingdomAssessments->AddColumn(new QDataGridColumn('Description', '<?= $_ITEM->Description ?>', 'HtmlEntities=false', 'Width=300px' ));
         $this->dtgGroupKingdomAssessments->AddColumn(new QDataGridColumn('Total Keys', '<?= $_ITEM->TotalKeys ?>', 'HtmlEntities=false', 'Width=50px' ));
         $this->dtgGroupKingdomAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_ITEM->KeysLeft ?>', 'HtmlEntities=false', 'Width=50px' ));   
-       /* $this->dtgGroupKingdomAssessments->AddColumn(new QDataGridColumn('Assessment Type', '<?= $_FORM->RenderAssessmentType($_ITEM) ?>', 'HtmlEntities=false' ));*/ 
         $this->dtgGroupKingdomAssessments->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__ .InstituteForm::DirAssessments. "kingdom/groupAggregationResult.php/". $_ITEM->Id ?>','Result','Results');
 			
         $this->dtgGroupKingdomAssessments->CellPadding = 5;

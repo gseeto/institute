@@ -34,37 +34,31 @@ class NewIntegrationAssessmentForm extends InstituteForm {
 		
  		$this->dtgAssessmentQuestion = new IntegrationQuestionsDataGrid($this);
 		$this->dtgAssessmentQuestion->AddColumn(new QDataGridColumn('', '<?= $_ITEM->Count ?>', 'HtmlEntities=false', 'Width=30px' ));
-		$this->dtgAssessmentQuestion->AddColumn(new QDataGridColumn('Question', '<?= $_ITEM->Text ?>', 'HtmlEntities=false', 'Width=450px' ));			
+		$this->dtgAssessmentQuestion->AddColumn(new QDataGridColumn('Question', '<?= $_ITEM->Text ?>', 'HtmlEntities=false'));			
 		$this->dtgAssessmentQuestion->AddColumn(new QDataGridColumn('Answer', '<?= $_FORM->lstAnswer_Render($_ITEM) ?>','HtmlEntities=false'));
 		$this->dtgAssessmentQuestion->CellPadding = 5;
 		$this->dtgAssessmentQuestion->UseAjax = true;
+		$this->dtgAssessmentQuestion->CssClass = 'table table-striped table-hover';
 
 		$assessmentArray = IntegrationQuestions::LoadAll(QQ::OrderBy(QQN::IntegrationQuestions()->Count));					
 		$this->dtgAssessmentQuestion->DataSource = $assessmentArray; 
 		
-		$objStyle = $this->dtgAssessmentQuestion->RowStyle;
-        $objStyle->BackColor = '#ffffff';
-        $objStyle->FontSize = 12;
-
-        $objStyle = $this->dtgAssessmentQuestion->AlternateRowStyle;
-        $objStyle->BackColor = '#CCCCCC';
-
-        $objStyle = $this->dtgAssessmentQuestion->HeaderRowStyle;
+		$objStyle = $this->dtgAssessmentQuestion->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 
+        $objStyle->BackColor = '#337ab7'; 
         
         $objStyle = $this->dtgAssessmentQuestion->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
-        $objStyle->BackColor = '#0098c3'; 		
+        $objStyle->BackColor = '#337ab7'; 		
 
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = 'Submit';
-	 	$this->btnSubmit->CssClass = 'primary';
+	 	$this->btnSubmit->CssClass = 'btn btn-default';
 	 	$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 
 	 	$this->btnCancel = new QButton($this);
         $this->btnCancel->Text = 'Cancel';
-	 	$this->btnCancel->CssClass = 'primary';
+	 	$this->btnCancel->CssClass = 'btn btn-default';
 	 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));	
 	}
 	
@@ -111,6 +105,7 @@ class NewIntegrationAssessmentForm extends InstituteForm {
             // this method which is responsible for rendering the listbox.  Also, we must
             // explicitly specify the control ID
             $lstAnswer = new QListBox($this->dtgAssessmentQuestion, $strControlId);
+            $lstAnswer->CssClass = 'form-control';
             $lstAnswer->Width = 100;
  
         	// Initialize values from previous assessment
