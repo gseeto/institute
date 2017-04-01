@@ -46,34 +46,28 @@ class NewLRAAssessmentForm extends InstituteForm {
 			$this->dtgAssessmentQuestionArray[$i]->AddColumn(new QDataGridColumn('Heart', '<?= $_FORM->lstHeart_Render($_ITEM) ?>','HtmlEntities=false'));
 			$this->dtgAssessmentQuestionArray[$i]->CellPadding = 5;
 			$this->dtgAssessmentQuestionArray[$i]->UseAjax = true;
+			$this->dtgAssessmentQuestionArray[$i]->CssClass = 'table table-striped table-hover';
 	
 			$assessmentArray = LraQuestions::LoadArrayByCategoryId($i+1);					
 			$this->dtgAssessmentQuestionArray[$i]->DataSource = $assessmentArray; 
-			
-			$objStyle = $this->dtgAssessmentQuestionArray[$i]->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 12;
-	
-	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->AlternateRowStyle;
-	        $objStyle->BackColor = '#CCCCCC';
-	
+						
 	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	        
 	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 		
+	        $objStyle->BackColor = '#337ab7'; 		
 		 }
 
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = 'Submit';
-	 	$this->btnSubmit->CssClass = 'primary';
+	 	$this->btnSubmit->CssClass = 'btn btn-default';
 	 	$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 
 	 	$this->btnCancel = new QButton($this);
         $this->btnCancel->Text = 'Cancel';
-	 	$this->btnCancel->CssClass = 'primary';
+	 	$this->btnCancel->CssClass = 'btn btn-default';
 	 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));	
 	}
 	
@@ -121,6 +115,7 @@ class NewLRAAssessmentForm extends InstituteForm {
             $lstHead = new QListBox($this->dtgAssessmentQuestionArray[$index], $strControlId);
             $lstHead->Width = 100;
             $lstHead->ForeColor = '#F90949';
+            $lstHead->CssClass = 'form-control';
         	// Initialize values from previous assessment
             if($this->bEditing) {
             	$value = LraResults::GetHeadByAssessmentIdAndQuestionId($this->objLRAAssessment->Id, $objQuestions->Id);
@@ -162,6 +157,7 @@ class NewLRAAssessmentForm extends InstituteForm {
             $lstHands = new QListBox($this->dtgAssessmentQuestionArray[$index], $strControlId);
             $lstHands->Width = 100;
             $lstHands->ForeColor = '#131BF9';
+            $lstHands->CssClass = 'form-control';
             
         	// Initialize values from previous assessment
             if($this->bEditing) {
@@ -204,6 +200,7 @@ class NewLRAAssessmentForm extends InstituteForm {
             $lstHeart = new QListBox($this->dtgAssessmentQuestionArray[$index], $strControlId);
             $lstHeart->Width = 100;
             $lstHeart->ForeColor = 'green';
+            $lstHeart->CssClass = 'form-control';
             
         	// Initialize values from previous assessment
             if($this->bEditing) {

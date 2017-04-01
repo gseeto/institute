@@ -36,20 +36,20 @@ class ViewLRAAssessmentForm extends InstituteForm {
 		$this->lblFModerate->HtmlEntities = false;
 		
 		$this->lblIntroduction = new QLabel($this);
+		$this->lblIntroduction->HtmlEntities = false;
 		$intUserId = QApplication::PathInfo(0);
 		if($intUserId) { //show the assessment specified
 			$assessmentArray = LraAssessment::LoadArrayByUserId($intUserId);
-			$this->objLRAAssessment = $assessmentArray[0];
-			$objUser = User::Load($intUserId);
-			$this->lblIntroduction->Text = 'Leadership Readiness Assessment for '.$objUser->FirstName. ' '.$objUser->LastName;
-		} else { // show the user's assessment	
-			$this->lblIntroduction->Text = 'Thank you for taking the Leadership Readiness Assessment.';
+			$this->objLRAAssessment = $assessmentArray[0];			
+		} else { // show the user's assessment				
 			$userArray = User::LoadArrayByLoginId(QApplication::$LoginId);
 			$intUserId = $userArray[0]->Id;
 			
 			$assessmentArray = LraAssessment::LoadArrayByUserId($intUserId);
 			$this->objLRAAssessment = $assessmentArray[0];
 		}
+		$objUser = User::Load($intUserId);
+		$this->lblIntroduction->Text = '<h1>Leadership Readiness Assessment for '.$objUser->FirstName. ' '.$objUser->LastName.'</h1>';
 		$this->initializeChart();		
 		$this->dtgAssessmentResultsArray = array();
 		for($i=0; $i<20;$i++) {
@@ -65,26 +65,20 @@ class ViewLRAAssessmentForm extends InstituteForm {
 			$this->dtgAssessmentResultsArray[$i]->DataSource = $assessmentArray; 
 			
 			$this->dtgAssessmentResultsArray[$i]->UseAjax = true;
-			
-			$objStyle = $this->dtgAssessmentResultsArray[$i]->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 14;
-	
-	        $objStyle = $this->dtgAssessmentResultsArray[$i]->AlternateRowStyle;
-	        $objStyle->BackColor = '#CCCCCC';
-	
-	        $objStyle = $this->dtgAssessmentResultsArray[$i]->HeaderRowStyle;
+			$this->dtgAssessmentResultsArray[$i]->CssClass = 'table table-striped table-hover';
+
+			$objStyle = $this->dtgAssessmentResultsArray[$i]->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	        
 	        $objStyle = $this->dtgAssessmentResultsArray[$i]->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';  		
+	        $objStyle->BackColor = '#337ab7';  		
 	 	}
 	 	
         $this->btnReturn = new QButton($this);
         $this->btnReturn->Text = 'Return';
-	 	$this->btnReturn->CssClass = 'right primary';
+	 	$this->btnReturn->CssClass = 'btn btn-default';
 	 	$this->btnReturn->AddAction(new QClickEvent(), new QAjaxAction('btnReturn_Click'));
 		if(QApplication::PathInfo(0)) {
 	 		$this->btnReturn->Visible = false;

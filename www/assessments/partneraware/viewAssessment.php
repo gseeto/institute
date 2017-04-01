@@ -27,26 +27,25 @@ class ViewPartnerAwarenessAssessmentForm extends InstituteForm {
 		$this->lblDelta = new QLabel($this);
 		$this->lblImportance  = new QLabel($this);
 		$this->lblIntroduction = new QLabel($this);
+		$this->lblIntroduction->HtmlEntities = false;
 		$intUserId = QApplication::PathInfo(0);
 		
 		if($intUserId) { //show the assessment specified
 			$assessmentArray = PartneringAwarenessAssessment::LoadArrayByUserId($intUserId);
-			$this->objPartneringAwarenessAssessment = $assessmentArray[0];
-			$objUser = User::Load($intUserId);
-			$this->lblIntroduction->Text = 'Partnering Awareness Assessment for '.$objUser->FirstName. ' '.$objUser->LastName;
+			$this->objPartneringAwarenessAssessment = $assessmentArray[0];			
 		} else { // show the user's assessment	
-			$this->lblIntroduction->Text = 'Thank you for taking the Partnering Awareness Assessment.
-Your results are provided below.';
 			$userArray = User::LoadArrayByLoginId(QApplication::$LoginId);
 			$intUserId = $userArray[0]->Id;
 			
 			$assessmentArray = PartneringAwarenessAssessment::LoadArrayByUserId($intUserId);
 			$this->objPartneringAwarenessAssessment = $assessmentArray[0];
 		}
+		$objUser = User::Load($intUserId);
+		$this->lblIntroduction->Text = '<h1>Partnering Awareness Assessment for '.$objUser->FirstName. ' '.$objUser->LastName.'</h1>';
 		$this->objUser = User::Load($intUserId);
 		$this->btnGeneratePdf =  new QButton($this);
 	 	$this->btnGeneratePdf->Text = 'Generate PDF of Report';
-	 	$this->btnGeneratePdf->CssClass = 'primary';
+	 	$this->btnGeneratePdf->CssClass = 'btn btn-default';
 	 	$this->btnGeneratePdf->AddAction(new QClickEvent(), new QAjaxAction('btnGeneratePdf_Click'));
 	 	
 		$this->initializeChart();
@@ -63,26 +62,20 @@ Your results are provided below.';
 			$this->dtgAssessmentResultsArray[$i]->DataSource = $assessmentArray; 
 			
 			$this->dtgAssessmentResultsArray[$i]->UseAjax = true;
-			
-			$objStyle = $this->dtgAssessmentResultsArray[$i]->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 14;
-	
-	        $objStyle = $this->dtgAssessmentResultsArray[$i]->AlternateRowStyle;
-	        $objStyle->BackColor = '#CCCCCC';
-	
+			$this->dtgAssessmentResultsArray[$i]->CssClass = 'table table-striped table-hover';
+				
 	        $objStyle = $this->dtgAssessmentResultsArray[$i]->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	        
 	        $objStyle = $this->dtgAssessmentResultsArray[$i]->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3';  		
+	        $objStyle->BackColor = '#337ab7';  		
 	 	}
 	 			        
         $this->btnReturn = new QButton($this);
         $this->btnReturn->Text = 'Return';
-	 	$this->btnReturn->CssClass = 'right primary';
+	 	$this->btnReturn->CssClass = 'right btn btn-default';
 	 	$this->btnReturn->AddAction(new QClickEvent(), new QAjaxAction('btnReturn_Click'));
 		if(QApplication::PathInfo(0)) {
 	 		$this->btnReturn->Visible = false;

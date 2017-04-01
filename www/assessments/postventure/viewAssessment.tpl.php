@@ -5,7 +5,7 @@
 <p>
 <?php $this->lblIntroduction->Render();?>
 </p>
-<?php  $this->btnReturn->Render(); ?>
+<?php  $this->btnReturn->Render(); ?>&nbsp;&nbsp;&nbsp;
 <?php  $this->btnGeneratePdf->Render(); ?>
 <script type="text/javascript">
 

@@ -106,47 +106,41 @@ class EditViewPAwarenessAssessmentForm extends InstituteForm {
 			$this->dtgAssessmentQuestionArray[$i]->AddColumn(new QDataGridColumn('Performance', '<?= $_FORM->lstPerformance_Render($_ITEM) ?>','HtmlEntities=false'));
 			$this->dtgAssessmentQuestionArray[$i]->CellPadding = 5;
 			$this->dtgAssessmentQuestionArray[$i]->UseAjax = true;
+			$this->dtgAssessmentQuestionArray[$i]->CssClass = 'table table-striped table-hover';
 	
 			$assessmentArray = PartneringAwarenessQuestions::LoadArrayByCategoryId($i+1);					
 			$this->dtgAssessmentQuestionArray[$i]->DataSource = $assessmentArray; 
-			
-			$objStyle = $this->dtgAssessmentQuestionArray[$i]->RowStyle;
-	        $objStyle->BackColor = '#ffffff';
-	        $objStyle->FontSize = 12;
-	
-	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->AlternateRowStyle;
-	        $objStyle->BackColor = '#CCCCCC';
-	
+				
 	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->HeaderRowStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	        
 	        $objStyle = $this->dtgAssessmentQuestionArray[$i]->HeaderLinkStyle;
 	        $objStyle->ForeColor = '#ffffff';
-	        $objStyle->BackColor = '#0098c3'; 
+	        $objStyle->BackColor = '#337ab7'; 
 	 		
 	 	}
 		       
         $this->btnSubmit = new QButton($this);
         $this->btnSubmit->Text = 'Submit';
-	 	$this->btnSubmit->CssClass = 'primary';
+	 	$this->btnSubmit->CssClass = 'btn btn-default';
 	 	$this->btnSubmit->AddAction(new QClickEvent(), new QAjaxAction('btnSubmit_Click'));
 
 	 	$this->btnCancel = new QButton($this);
         $this->btnCancel->Text = 'Cancel';
-	 	$this->btnCancel->CssClass = 'primary';
+	 	$this->btnCancel->CssClass = 'btn btn-default';
 	 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));	
 	 	
 	 	$this->iCounter = 0;
 	 	$this->btnPrev = new QButton($this);
         $this->btnPrev->Text = 'Previous';
-	 	$this->btnPrev->CssClass = 'primary';
+	 	$this->btnPrev->CssClass = 'btn btn-default';
 	 	$this->btnPrev->AddAction(new QClickEvent(), new QAjaxAction('btnPrev_Click'));
 	 	$this->btnPrev->Enabled = false;
 	 	
 	 	$this->btnNext = new QButton($this);
         $this->btnNext->Text = 'Next';
-	 	$this->btnNext->CssClass = 'primary';
+	 	$this->btnNext->CssClass = 'btn btn-default';
 	 	$this->btnNext->AddAction(new QClickEvent(), new QAjaxAction('btnNext_Click'));
 	 	
 	 	// initialize grid chart
@@ -292,6 +286,7 @@ public function lstImportance_Render(PartneringAwarenessQuestions $objQuestions)
             // explicitly specify the control ID
             $lstImportance = new QListBox($this->dtgAssessmentQuestionArray[$index], $strControlId);
             $lstImportance->Width = 100;
+            $lstImportance->CssClass = 'form-control';
             $lstImportance->ForeColor = '#F90949';
         	// Initialize values from previous assessment
             if($this->bEditing) {
@@ -333,6 +328,7 @@ public function lstPerformance_Render(PartneringAwarenessQuestions $objQuestions
             // explicitly specify the control ID
             $lstPerformance = new QListBox($this->dtgAssessmentQuestionArray[$index], $strControlId);
             $lstPerformance->Width = 100;
+            $lstPerformance->CssClass = 'form-control';
             $lstPerformance->ForeColor = '#131BF9';
             
         	// Initialize values from previous assessment

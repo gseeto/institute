@@ -17,21 +17,20 @@ class ViewKingdomAssessmentForm extends InstituteForm {
 	
 	protected function Form_Create() {
 		$this->lblIntroduction = new QLabel($this);
+		$this->lblIntroduction->HtmlEntities = false;
 		$intUserId = QApplication::PathInfo(0);
 		if($intUserId) { //show the assessment specified
 			$assessmentArray = KingdomBusinessAssessment::LoadArrayByUserId($intUserId);
-			$this->objKingdomAssessment = $assessmentArray[0];
-			$objUser = User::Load($intUserId);
-			$this->lblIntroduction->Text = 'Kingdom Assessment for '.$objUser->FirstName. ' '.$objUser->LastName;
-		} else { // show the user's assessment	
-			$this->lblIntroduction->Text = 'Thank you for taking the Kingdom Business Assessment.
-Your results are provided below.';
+			$this->objKingdomAssessment = $assessmentArray[0];			
+		} else { // show the user's assessment				
 			$userArray = User::LoadArrayByLoginId(QApplication::$LoginId);
 			$intUserId = $userArray[0]->Id;
 			
 			$assessmentArray = KingdomBusinessAssessment::LoadArrayByUserId($intUserId);
 			$this->objKingdomAssessment = $assessmentArray[0];
 		}
+		$objUser = User::Load($intUserId);
+		$this->lblIntroduction->Text = '<h1>Kingdom Assessment for '.$objUser->FirstName. ' '.$objUser->LastName.'</h1>';
 				
 		$this->dtgAssessmentResultsArray = array();
 		for($i=0; $i<10;$i++) {
