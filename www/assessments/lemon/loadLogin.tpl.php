@@ -5,7 +5,7 @@
 		<img class="img-responsive" src="<?php _p(__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__); ?>/sidelemon.png"/>
 		<p>
 			Find out your LEMON profile by taking the LEMON assessment. 
-			After taking this 75-question assessment, you will find out the profile of your primary and secondary LEMON profile. 
+			After taking this 50-question assessment, you will find out the profile of your primary and secondary LEMON profile. 
 			You will know which type of leader you are.
 		</p>
 		<div class="form-group">
