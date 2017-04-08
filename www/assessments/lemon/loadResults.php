@@ -28,13 +28,18 @@ class LemonLoadResultsForm extends InstituteForm {
 	}
 	
 	protected function Form_Create() {	
-	$this->lblIntroduction = new QLabel($this);
-	$this->lblIntroduction->HtmlEntities = false;
-	$this->lblGoodDay = new QLabel($this);
-	$this->lblGoodDay->HtmlEntities = false;
-	
-	$this->lblBadDay = new QLabel($this);
-	$this->lblBadDay->HtmlEntities = false;
+		// Log if debug is set
+		if (defined('__DEBUG_LOG__') && __DEBUG_LOG__ && defined('DEBUG_LOG_FLAG') && DEBUG_LOG_FLAG) {
+				InstituteForm::$time_start = microtime(true);
+				InstituteForm::$strDebugLog = sprintf("loadResults.Form_Create() Start time: %s\n", InstituteForm::$time_start);
+		}
+		$this->lblIntroduction = new QLabel($this);
+		$this->lblIntroduction->HtmlEntities = false;
+		$this->lblGoodDay = new QLabel($this);
+		$this->lblGoodDay->HtmlEntities = false;
+		
+		$this->lblBadDay = new QLabel($this);
+		$this->lblBadDay->HtmlEntities = false;
 	
 		$intUserId = QApplication::PathInfo(0);
 		if($intUserId) { //show the assessment specified
@@ -88,6 +93,17 @@ class LemonLoadResultsForm extends InstituteForm {
 	 	$this->btnGeneratePdf =  new QButton($this);
 	 	$this->btnGeneratePdf->Text = 'Generate PDF of Report';
 	 	$this->btnGeneratePdf->AddAction(new QClickEvent(), new QAjaxAction('btnGeneratePdf_Click'));
+	 	
+		// Log if debug is set
+		if (defined('__DEBUG_LOG__') && __DEBUG_LOG__ && defined('DEBUG_LOG_FLAG') && DEBUG_LOG_FLAG) {
+				InstituteForm::$time_end = microtime(true);
+				InstituteForm::$strDebugLog .= sprintf("loadResults.Form_Create() End time: %s\n", InstituteForm::$time_start);
+				InstituteForm::$strDebugLog .= sprintf("loadResults.Form_Create() Execution Time: %s\n\n", InstituteForm::$time_end - InstituteForm::$time_start);
+				QApplication::MakeDirectory(__DEBUG_LOG__, 0777);
+				$strFileName = sprintf('%s/loadResults.log', __DEBUG_LOG__);
+				file_put_contents($strFileName, InstituteForm::$strDebugLog,FILE_APPEND);
+				@chmod($strFileName, 0666);
+		}
 	}
 	
 	protected function getLemonDescription() {
@@ -543,7 +559,13 @@ class LemonLoadResultsForm extends InstituteForm {
 		return $strPrimary .'<br>'. $strSecondary;
 	}
 	
-protected function btnGeneratePdf_Click() { 
+	protected function btnGeneratePdf_Click() { 	
+		// Log if debug is set
+		if (defined('__DEBUG_LOG__') && __DEBUG_LOG__ && defined('DEBUG_LOG_FLAG') && DEBUG_LOG_FLAG) {
+				InstituteForm::$time_start = microtime(true);
+				InstituteForm::$strDebugLog = sprintf("loadResults.btnGeneratePdf_Click() Start time: %s\n", InstituteForm::$time_start);
+		}
+		
 		// Create the PDF Object for the PDF
 		$objLemonPdf = new Zend_Pdf();		
 		// Create PDF
@@ -1600,6 +1622,17 @@ protected function btnGeneratePdf_Click() {
 		$pdfFile = '/Lemon' . $this->objLemonAssessment->Id .rand(0,50). '.pdf';
 		$objLemonPdf->save(__UPLOAD_DIR__ . $pdfFile);
 		chmod(__UPLOAD_DIR__ . $pdfFile, 0777);
+		
+		// Log if debug is set
+		if (defined('__DEBUG_LOG__') && __DEBUG_LOG__ && defined('DEBUG_LOG_FLAG') && DEBUG_LOG_FLAG) {
+				InstituteForm::$time_end = microtime(true);
+				InstituteForm::$strDebugLog .= sprintf("loadResults.btnGeneratePdf_Click() End time: %s\n", InstituteForm::$time_start);
+				InstituteForm::$strDebugLog .= sprintf("loadResults.btnGeneratePdf_Click() Execution Time: %s\n\n", InstituteForm::$time_end - InstituteForm::$time_start);
+				QApplication::MakeDirectory(__DEBUG_LOG__, 0777);
+				$strFileName = sprintf('%s/loadResults.log', __DEBUG_LOG__);
+				file_put_contents($strFileName, InstituteForm::$strDebugLog,FILE_APPEND);
+				@chmod($strFileName, 0666);
+		}
 		QApplication::Redirect('../../assets/uploads'.$pdfFile);
 	}
 	

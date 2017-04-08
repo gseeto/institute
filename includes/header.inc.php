@@ -4,6 +4,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 	<head>
+	<?php 
+	// start profiling/logging the database queries
+	// replace '1' in the following line with the database connection you are using
+	//QApplication::$Database[1]->EnableProfiling();
+	?>
 		<meta http-equiv="Content-Type" content="text/html; charset=<?php _p(QApplication::$EncodingType); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 <?php if (isset($strPageTitle)) { ?>
@@ -53,12 +58,7 @@
   	}
   </script>
   
-	</head><body>
-	<?php 
-	// start profiling/logging the database queries
-	// replace '1' in the following line with the database connection you are using
-	//QApplication::$Database[1]->EnableProfiling();
-	?>
+	</head><body>	
 	<div class="container-fluid">
 <?php $this->RenderBegin(); ?>
 <?php if (QApplication::$Login) { ?>

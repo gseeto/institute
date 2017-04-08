@@ -2,6 +2,9 @@
 class InstituteForm extends QForm {
 	protected $strPageTitle;
 	protected $intNavSectionId;
+	public static $strDebugLog;
+	public static $time_start;
+	public static $time_end;
 
 	const NavSectionHome = 1;
 	const NavSectionAssessments = 2;

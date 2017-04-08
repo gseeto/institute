@@ -25,7 +25,7 @@
 				'database' => 'institute',
 				'username' => 'root',
 				'password' => 'test',
-				'profiling' => false)));
+				'profiling' => true)));
 			define ('MAIL_SERVER', 'localhost');
 			break;
 
@@ -86,6 +86,9 @@
 	if (!ini_get('date.timezone'))
 		date_default_timezone_set('America/Los_Angeles');
 
+	define('__DEBUG_LOG__', __DOCROOT__ . '/debug_log');
+	define('DEBUG_LOG_FLAG', true);
+	
 	define('ERROR_LOG_FLAG', false);
 //	define('ERROR_FRIENDLY_PAGE_PATH', '/absolute/path/to/friendly_error_page.html');
 //	define('ERROR_FRIENDLY_AJAX_MESSAGE', 'Oops!  An error has occurred.\r\n\r\nThe error was logged, and we will take a look into this right away.');

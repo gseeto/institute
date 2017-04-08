@@ -19,6 +19,11 @@ class LemonLoadQuestionsForm extends InstituteForm {
 	}
 	
 	protected function Form_Create() {	
+		// Log if debug is set
+		if (defined('__DEBUG_LOG__') && __DEBUG_LOG__ && defined('DEBUG_LOG_FLAG') && DEBUG_LOG_FLAG) {
+				InstituteForm::$time_start = microtime(true);
+				InstituteForm::$strDebugLog = sprintf("loadQuestions.Form_Create() Start time: %s\n", InstituteForm::$time_start);
+		}
 		if(QApplication::PathInfo(0) == 'edit') {
 			$this->bEditing = true;
 		} else {
@@ -54,6 +59,17 @@ class LemonLoadQuestionsForm extends InstituteForm {
         $this->btnCancel->Text = 'Cancel';
 	 	$this->btnCancel->CssClass = 'btn btn-default';
 	 	$this->btnCancel->AddAction(new QClickEvent(), new QAjaxAction('btnCancel_Click'));	
+	 	
+		// Log if debug is set
+		if (defined('__DEBUG_LOG__') && __DEBUG_LOG__ && defined('DEBUG_LOG_FLAG') && DEBUG_LOG_FLAG) {
+				InstituteForm::$time_end = microtime(true);
+				InstituteForm::$strDebugLog .= sprintf("loadQuestions.Form_Create() End time: %s\n", InstituteForm::$time_start);
+				InstituteForm::$strDebugLog .= sprintf("loadQuestions.Form_Create() Execution Time: %s\n\n", InstituteForm::$time_end - InstituteForm::$time_start);
+				QApplication::MakeDirectory(__DEBUG_LOG__, 0777);
+				$strFileName = sprintf('%s/loadQuestions.log', __DEBUG_LOG__);
+				file_put_contents($strFileName, InstituteForm::$strDebugLog,FILE_APPEND);
+				@chmod($strFileName, 0666);
+		}
 	}
 	
 	protected function btnCancel_Click() {
@@ -61,6 +77,11 @@ class LemonLoadQuestionsForm extends InstituteForm {
 	}
 	
 	protected function btnSubmit_Click() {	
+		// Log if debug is set
+		if (defined('__DEBUG_LOG__') && __DEBUG_LOG__ && defined('DEBUG_LOG_FLAG') && DEBUG_LOG_FLAG) {
+				InstituteForm::$time_start = microtime(true);
+				InstituteForm::$strDebugLog = sprintf("loadQuestions.btnSubmit_Click() Start time: %s\n", InstituteForm::$time_start);
+		}
 		QApplication::ExecuteJavaScript("document.getElementsByClassName('submit btn btn-default')[0].setAttribute('disabled', 'true');");
         for($i=0;$i<count($this->arrayValue); $i++) {
         	if($this->bEditing && ($this->objLemonAssessment->ResourceStatusId == 14)) {
@@ -100,6 +121,15 @@ class LemonLoadQuestionsForm extends InstituteForm {
 	        $objGroupAssessment->Save();
         }
         */
+		if (defined('__DEBUG_LOG__') && __DEBUG_LOG__ && defined('DEBUG_LOG_FLAG') && DEBUG_LOG_FLAG) {
+				InstituteForm::$time_end = microtime(true);
+				InstituteForm::$strDebugLog .= sprintf("loadQuestions.btnSubmit_Click() End time: %s\n", InstituteForm::$time_start);
+				InstituteForm::$strDebugLog .= sprintf("loadQuestions.btnSubmit_Click() Execution Time: %s\n\n", InstituteForm::$time_end - InstituteForm::$time_start);
+				QApplication::MakeDirectory(__DEBUG_LOG__, 0777);
+				$strFileName = sprintf('%s/loadQuestions.log', __DEBUG_LOG__);
+				file_put_contents($strFileName, InstituteForm::$strDebugLog,FILE_APPEND);
+				@chmod($strFileName, 0666);
+		}
         QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/loadResults.php');
 	}
 	
