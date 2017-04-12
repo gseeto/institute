@@ -61,7 +61,12 @@ class AdminLemonAssessmentsForm extends InstituteForm {
           
 	        $this->dtgLemonAssessments = new LemonAssessmentDataGrid($this);
             $this->dtgLemonAssessments->Paginator = new QPaginator($this->dtgLemonAssessments);
-            $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('User', '<?= $_FORM->RenderUserLinkLemon($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px',
+            $this->dtgLemonAssessments->MetaAddColumn('User','Html=<?=$_FORM->RenderUserLinkLemon($_ITEM); ?>', 'HtmlEntities=false', 'Width=300px');
+           /* $this->dtgLemonAssessments->MetaAddColumn('CompanyId','Html=<?=$_FORM->RenderCompany($_ITEM->CompanyId); ?>', 'HtmlEntities=false');*/
+            $this->dtgLemonAssessments->MetaAddColumn('GroupId','Html=<?=$_FORM->RenderGroupKeyCode($_ITEM); ?>', 'HtmlEntities=false');
+            $this->dtgLemonAssessments->MetaAddColumn('ResourceStatusId','Html=<?=$_FORM->RenderStatus($_ITEM->ResourceStatusId); ?>', 'HtmlEntities=false');
+            
+        /*    $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('User', '<?= $_FORM->RenderUserLinkLemon($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px',
             	array('OrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->User->LastName), 'ReverseOrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->User->LastName, false))));
             $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('Company', '<?= $_FORM->RenderCompany($_ITEM->CompanyId) ?>', 'HtmlEntities=false', 'Width=300px',
             	array('OrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->Company->Name), 'ReverseOrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->Company->Name, false))));
@@ -69,7 +74,7 @@ class AdminLemonAssessmentsForm extends InstituteForm {
             	array('OrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->Group->KeyCode), 'ReverseOrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->Group->KeyCode, false))));
             $this->dtgLemonAssessments->AddColumn(new QDataGridColumn('Status', '<?= $_FORM->RenderStatus($_ITEM->ResourceStatusId) ?>', 'HtmlEntities=false', 'Width=300px',
             	array('OrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->ResourceStatusId), 'ReverseOrderByClause' => QQ::OrderBy(QQN::LemonAssessment()->ResourceStatusId, false))));
-            
+         */   
             $this->dtgLemonAssessments->CellPadding = 5;
             $this->dtgLemonAssessments->SortColumnIndex = 1;
 			$this->dtgLemonAssessments->ItemsPerPage = 20;
@@ -104,6 +109,7 @@ class AdminLemonAssessmentsForm extends InstituteForm {
 	
 	public function dtgLemonAssessments_Bind() {			
             $objConditions = QQ::All(); 
+            $objClauses = array();
 			if ($strName = trim($this->strFirstNameLemon->Text)) {
 				$objConditions = QQ::AndCondition($objConditions,
 					QQ::Like( QQN::LemonAssessment()->User->FirstName, $strName . '%')
@@ -127,11 +133,13 @@ class AdminLemonAssessmentsForm extends InstituteForm {
 				);
 			} 
 			  
-			$this->dtgLemonAssessments->TotalItemCount = LemonAssessment::CountAll();			
+		/*	$this->dtgLemonAssessments->TotalItemCount = LemonAssessment::CountAll();			
 			$this->dtgLemonAssessments->DataSource = LemonAssessment::QueryArray($objConditions, QQ::Clause(
                 $this->dtgLemonAssessments->OrderByClause,
                 $this->dtgLemonAssessments->LimitClause
-            ));			
+            ));	
+            */
+			$this->dtgLemonAssessments->MetaDataBinder($objConditions,$objClauses);		
 		}
 		
 	public function RenderStatus($intResourceStatusId) {

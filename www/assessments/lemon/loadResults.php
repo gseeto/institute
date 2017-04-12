@@ -41,7 +41,7 @@ class LemonLoadResultsForm extends InstituteForm {
 				InstituteForm::$strDebugLog .= sprintf("loadResults Execution Time: %s\n\n", InstituteForm::$time_end - InstituteForm::$time_start);
 				QApplication::MakeDirectory(__DEBUG_LOG__, 0777);
 				$strFileName = sprintf('%s/loadResults.log', __DEBUG_LOG__);
-				file_put_contents($strFileName, InstituteForm::$strDebugLog,FILE_APPEND);
+				file_put_contents($strFileName, InstituteForm::$strDebugLog, FILE_APPEND|LOCK_EX);
 				@chmod($strFileName, 0666);
 		}
 	}

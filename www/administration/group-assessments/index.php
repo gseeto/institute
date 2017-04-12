@@ -54,21 +54,30 @@ class AdminGroupAssessmentsForm extends InstituteForm {
 			
 	    $this->dtgGroupAssessments = new GroupAssessmentListDataGrid($this);
         $this->dtgGroupAssessments->Paginator = new QPaginator($this->dtgGroupAssessments);
-        $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Key Code', '<?= $_FORM->RenderKeyCode($_ITEM) ?>', 'HtmlEntities=false',
+        $this->dtgGroupAssessments->MetaAddColumn('KeyCode','Html=<?=$_FORM->RenderKeyCode($_ITEM); ?>', 'HtmlEntities=false');
+        $this->dtgGroupAssessments->MetaAddColumn('Description','Html=<?=$_FORM->RenderDescription($_ITEM); ?>', 'HtmlEntities=false');
+        $this->dtgGroupAssessments->MetaAddColumn('TotalKeys','Html=<?=$_FORM->RenderTotalKeys($_ITEM); ?>', 'HtmlEntities=false', 'Width=50px');
+        $this->dtgGroupAssessments->MetaAddColumn('KeysLeft','Html=<?=$_FORM->RenderKeysLeft($_ITEM); ?>', 'HtmlEntities=false', 'Width=50px');
+        $this->dtgGroupAssessments->MetaAddColumn('ResourceId','Html=<?=$_FORM->RenderAssessmentType($_ITEM); ?>', 'HtmlEntities=false', 'Width=300px');
+        $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Assessment Manager', '<?= $_FORM->RenderAssessmentManager($_ITEM) ?>', 'HtmlEntities=false' ));
+        /*$this->dtgGroupAssessments->MetaAddColumn('AssessmentManager','Html=<?=$_FORM->RenderAssessmentManager($_ITEM); ?>', 'HtmlEntities=false');*/
+        
+      /*  $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Key Code', '<?= $_FORM->RenderKeyCode($_ITEM) ?>', 'HtmlEntities=false',
             	array('OrderByClause' => QQ::OrderBy(QQN::GroupAssessmentList()->KeyCode), 'ReverseOrderByClause' => QQ::OrderBy(QQN::GroupAssessmentList()->KeyCode, false))));
         $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Description', '<?= $_FORM->RenderDescription($_ITEM) ?>', 'HtmlEntities=false'));
         $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Total Keys', '<?= $_FORM->RenderTotalKeys($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));
         $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_FORM->RenderKeysLeft($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));   
         $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Assessment Type', '<?= $_FORM->RenderAssessmentType($_ITEM) ?>', 'HtmlEntities=false', 'Width=300px' )); 
         $this->dtgGroupAssessments->AddColumn(new QDataGridColumn('Assessment Manager', '<?= $_FORM->RenderAssessmentManager($_ITEM) ?>', 'HtmlEntities=false' )); 
-        $this->dtgGroupAssessments->CellPadding = 5;
-		$this->dtgGroupAssessments->SetDataBinder('dtgGroupAssessments_Bind',$this);
+      */
+        $this->dtgGroupAssessments->CellPadding = 5;		
 		$this->dtgGroupAssessments->NoDataHtml = 'No Group Assessments have been assigned.';
 		$this->dtgGroupAssessments->UseAjax = true;
 		$this->dtgGroupAssessments->CssClass = 'table table-striped table-hover';
 			
 		$this->dtgGroupAssessments->SortColumnIndex = 1;
 		$this->dtgGroupAssessments->ItemsPerPage = 20;
+		$this->dtgGroupAssessments->SetDataBinder('dtgGroupAssessments_Bind',$this);
 							
         $objStyle = $this->dtgGroupAssessments->HeaderRowStyle;
         $objStyle->ForeColor = '#ffffff';
@@ -452,52 +461,14 @@ public function RenderKeyCode($objGroupAssessment) {
         $lblKeysLeft->Text = $txtKeysLeft->Text;
         $lblKeysLeft->Display = true;
 	}
-    	public function dtgLemonAssessments_Refresh($strFormId, $strControlId, $strParameter) {
-			$this->dtgLemonAssessments->PageNumber = 1;
-			$this->dtgLemonAssessments->Refresh();
-		}
-		public function dtgLemonAssessments_Bind() {
-			$this->dtgLemonAssessments->TotalItemCount = LemonAssessment::CountAll();
-            $objConditions = QQ::All(); 
-			if ($strName = trim($this->strFirstNameLemon->Text)) {
-				$objConditions = QQ::AndCondition($objConditions,
-					QQ::Like( QQN::LemonAssessment()->User->FirstName, $strName . '%')
-				);
-			}
-		
-			if ($strName = trim($this->strLastNameLemon->Text)) {
-				$objConditions = QQ::AndCondition($objConditions,
-					QQ::Like( QQN::LemonAssessment()->User->LastName, $strName . '%')
-				);
-			}
-				
-			if ($strName = trim($this->strGroupLemon->Text)) {
-				$objConditions = QQ::AndCondition($objConditions,
-					QQ::Like( QQN::LemonAssessment()->Group->KeyCode, $strName . '%')
-				);
-			} 
-			if ($strName = trim($this->strCompanyLemon->Text)) {
-				$objConditions = QQ::AndCondition($objConditions,
-					QQ::Like( QQN::LemonAssessment()->Company->Name, $strName . '%')
-				);
-			} 
-			  
-            $objClauses = array(QQ::Distinct());
-			if ($objClause = $this->dtgLemonAssessments->LimitClause) $objClauses[] = $objClause;
-			if ($objClause = $this->dtgLemonAssessments->OrderByClause) $objClauses[] = $objClause;
 
-			$this->dtgLemonAssessments->DataSource = LemonAssessment::QueryArray($objConditions, $objClauses);
-		}
-		
     	public function dtgGroupAssessments_Refresh($strFormId, $strControlId, $strParameter) {
 			$this->dtgGroupAssessments->PageNumber = 1;
 			$this->dtgGroupAssessments->Refresh();
 		}
 		public function dtgGroupAssessments_Bind() {
 			$this->dtgGroupAssessments->TotalItemCount = GroupAssessmentList::CountAll();
-			$objClauses = array(QQ::Distinct());
-			if ($objClause = $this->dtgGroupAssessments->LimitClause) $objClauses[] = $objClause;
-			if ($objClause = $this->dtgGroupAssessments->OrderByClause) $objClauses[] = $objClause;
+			$objClauses = array();
 			
 		    $objConditions = QQ::All(); 
 			if ($strName = trim($this->strKeycode->Text)) {
@@ -510,8 +481,7 @@ public function RenderKeyCode($objGroupAssessment) {
 					QQ::Equal( QQN::GroupAssessmentList()->ResourceId, $this->lstSearchAssessmentType->SelectedValue)
 				);
 			}
-			$groupArray = GroupAssessmentList::QueryArray($objConditions,$objClauses);		
-			$this->dtgGroupAssessments->DataSource = $groupArray; 
+			$this->dtgGroupAssessments->MetaDataBinder($objConditions,$objClauses);
 		}
 		
 		public function RenderGroupKeyCode(LemonAssessment $objAssessment) {
@@ -600,51 +570,7 @@ public function RenderKeyCode($objGroupAssessment) {
 			}
 			$this->dtgGroupAssessments->Refresh();
 		}
-		
-    	public function RenderUserLinkTenF($objAssessment) {
-    		$intUserId = $objAssessment->UserId;
-    		$objUser = User::Load($intUserId);
-    		// Only display link if there is an assessment to display
-    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
-				return sprintf("<a href='%s/assessments/tenf/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
-    		} else {
-    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
-    		}
-		}
-		
-		public function RenderUserLinkLRA($objAssessment) {
-    		$intUserId = $objAssessment->UserId;
-    		$objUser = User::Load($intUserId);
-    		// Only display link if there is an assessment to display
-    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
-				return sprintf("<a href='%s/assessments/lra/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
-    		} else {
-    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
-    		}
-		}
-		
-    	public function RenderUserLinkUpward($objAssessment) {
-    		$intUserId = $objAssessment->UserId;
-    		$objUser = User::Load($intUserId);
-    		// Only display link if there is an assessment to display
-    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
-				return sprintf("<a href='%s/assessments/upward/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
-    		} else {
-    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
-    		}
-		}
-		
-    	public function RenderUserLinkIntegration($objAssessment) {
-    		$intUserId = $objAssessment->UserId;
-    		$objUser = User::Load($intUserId);
-    		// Only display link if there is an assessment to display
-    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
-				return sprintf("<a href='%s/assessments/integration/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
-    		} else {
-    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
-    		}
-		}
-		
+
     	public function RenderStatus($intResourceStatusId) {
 			return ResourceStatus::Load($intResourceStatusId)->Value;
 		}
