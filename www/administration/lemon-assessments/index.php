@@ -206,11 +206,15 @@ class AdminLemonAssessmentsForm extends InstituteForm {
     	public function RenderUserLinkLemon($objAssessment) {
     		$intUserId = $objAssessment->UserId;
     		$objUser = User::Load($intUserId);
-    		// Only display link if there is an assessment to display
-    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
-				return sprintf("<a href='%s/assessments/lemon/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
+    		if(null != $objUser) {
+	    		// Only display link if there is an assessment to display
+	    		if(ResourceStatus::Load($objAssessment->ResourceStatusId)->Id == 2) {
+					return sprintf("<a href='%s/assessments/lemon/viewAssessment.php/%s' target='_blank' >%s %s</a>", __SUBDIRECTORY__,$intUserId, $objUser->FirstName, $objUser->LastName);
+	    		} else {
+	    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
+	    		}
     		} else {
-    			return sprintf("%s %s", $objUser->FirstName, $objUser->LastName);
+    			return "No user associated";
     		}
 		}
 		
