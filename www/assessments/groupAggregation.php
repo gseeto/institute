@@ -15,10 +15,16 @@ class GroupAggregationForm extends InstituteForm {
 	protected $btnViewGlobalLemonResults;
 	protected $btnAggregateGroups;
 	protected $selectedLemonGroups;
-	public $strKeycode;
+	public    $strKeycode;
 	protected $btnLemon;
 	protected $dtgPartneringAwarenessAssessments;
 	protected $dtgPartneringReadinessAssessments;
+	
+	public    $str50Keycode;
+	protected $btn50Lemon;
+	protected $dtg50GroupLemonAssessments;
+	protected $btn50AggregateGroups;
+	protected $selected50LemonGroups;
 
 
 	protected function Form_Run() {
@@ -43,13 +49,13 @@ class GroupAggregationForm extends InstituteForm {
 		$this->strKeycode = new QTextBox($this);
 		$this->strKeycode->Name = 'KeyCode';
 		$this->strKeycode->CssClass = 'form-control';
-		$this->strKeycode->Focus();
+		$this->strKeycode->Focus();		
 	
 		$this->btnLemon = new QButton($this);
 		$this->btnLemon->Text = 'Submit';
 		$this->btnLemon->HtmlEntities = false;
 		$this->btnLemon->CssClass = 'btn btn-default';
-		$this->btnLemon->AddAction(new QClickEvent(), new QAjaxAction('dtgGroupLemonAssessments_Refresh'));
+		$this->btnLemon->AddAction(new QClickEvent(), new QAjaxAction('dtgGroupLemonAssessments_Refresh'));		
 		
 		$this->selectedLemonGroups = array();
 		$this->dtgGroupLemonAssessments = new GroupAssessmentListDataGrid($this);
@@ -89,6 +95,55 @@ class GroupAggregationForm extends InstituteForm {
 		$this->btnAggregateGroups->AddAction(new QClickEvent(), new QAjaxAction('btnAggregateGroups_Click'));
 		
         /***************************************************/
+		/* 50 questions assessment */
+		$this->str50Keycode = new QTextBox($this);
+		$this->str50Keycode->Name = 'KeyCode';
+		$this->str50Keycode->CssClass = 'form-control';
+		$this->str50Keycode->Focus();
+		
+		$this->btn50Lemon = new QButton($this);
+		$this->btn50Lemon->Text = 'Submit';
+		$this->btn50Lemon->HtmlEntities = false;
+		$this->btn50Lemon->CssClass = 'btn btn-default';
+		$this->btn50Lemon->AddAction(new QClickEvent(), new QAjaxAction('dtg50GroupLemonAssessments_Refresh'));
+		
+		$this->selected50LemonGroups = array();
+		$this->dtg50GroupLemonAssessments = new GroupAssessmentListDataGrid($this);
+        $this->dtg50GroupLemonAssessments->Paginator = new QPaginator($this->dtg50GroupLemonAssessments);
+        $this->dtg50GroupLemonAssessments->AddColumn(new QDataGridColumn('Key Code', '<?= $_ITEM->KeyCode ?>', 'HtmlEntities=false', 'Width=200px',
+        	array('OrderByClause' => QQ::OrderBy(QQN::GroupAssessmentList()->KeyCode), 'ReverseOrderByClause' => QQ::OrderBy(QQN::GroupAssessmentList()->KeyCode, false))));
+        $this->dtg50GroupLemonAssessments->AddColumn(new QDataGridColumn('Description', '<?= $_ITEM->Description ?>', 'HtmlEntities=false', 'Width=300px' ));
+        $this->dtg50GroupLemonAssessments->AddColumn(new QDataGridColumn('Total Keys', '<?= $_ITEM->TotalKeys ?>', 'HtmlEntities=false', 'Width=50px' ));
+        $this->dtg50GroupLemonAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_ITEM->KeysLeft ?>', 'HtmlEntities=false', 'Width=50px' ));   
+        $this->dtg50GroupLemonAssessments->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__ .InstituteForm::DirAssessments. "lemon/group50AggregationResult.php/". $_ITEM->Id ?>','Result','Results');
+		if(QApplication::$Login->Role->Name == 'Administrator') {
+			$this->dtg50GroupLemonAssessments->AddColumn(new QDataGridColumn('Select Groups to Aggregate', '<?= $_FORM->chk50Selected_Render($_ITEM, $_CONTROL->CurrentRowIndex) ?>', 'HtmlEntities=false','Width=200px' ));
+		}
+        $this->dtg50GroupLemonAssessments->SortColumnIndex = 1;
+		$this->dtg50GroupLemonAssessments->ItemsPerPage = 20;
+        $this->dtg50GroupLemonAssessments->CellPadding = 5;
+		$this->dtg50GroupLemonAssessments->SetDataBinder('dtg50GroupLemonAssessments_Bind',$this);
+		$this->dtg50GroupLemonAssessments->NoDataHtml = 'No LEMON Assessments have been assigned.';
+		$this->dtg50GroupLemonAssessments->UseAjax = true;
+		$this->dtg50GroupLemonAssessments->CssClass = 'table table-striped table-hover';
+
+        $objStyle = $this->dtg50GroupLemonAssessments->HeaderRowStyle;
+        $objStyle->ForeColor = '#ffffff';
+        $objStyle->BackColor = '#337ab7'; 
+        
+        $objStyle = $this->dtg50GroupLemonAssessments->HeaderLinkStyle;
+        $objStyle->ForeColor = '#ffffff';
+        $objStyle->BackColor = '#337ab7'; 
+        
+        $this->btn50AggregateGroups = new QButton($this);
+		$this->btn50AggregateGroups->Name = 'Aggregate Selected Groups';
+		$this->btn50AggregateGroups->Text = 'Aggregate Selected Groups';
+		$this->btn50AggregateGroups->CssClass = 'btn btn-default';
+		if(QApplication::$Login->Role->Name != 'Administrator') {
+			$this->btn50AggregateGroups->Visible = false;
+		}
+		$this->btn50AggregateGroups->AddAction(new QClickEvent(), new QAjaxAction('btn50AggregateGroups_Click'));
+		/***************************************************/
         $this->dtgGroupTenPAssessments = new GroupAssessmentListDataGrid($this);
         $this->dtgGroupTenPAssessments->Paginator = new QPaginator($this->dtgGroupTenPAssessments);
         $this->dtgGroupTenPAssessments->AddColumn(new QDataGridColumn('Key Code', '<?= $_ITEM->KeyCode ?>', 'HtmlEntities=false', 'Width=200px' ));
@@ -299,6 +354,68 @@ class GroupAggregationForm extends InstituteForm {
         $objStyle->BackColor = '#337ab7'; 
 	}
 
+	public function dtg50GroupLemonAssessments_Refresh($strFormId, $strControlId, $strParameter) {
+			$this->dtg50GroupLemonAssessments->PageNumber = 1;
+			$this->dtg50GroupLemonAssessments->Refresh();
+	}
+	
+	public function dtg50GroupLemonAssessments_Bind() {
+		$objConditions = QQ::All();
+		$objConditions = QQ::AndCondition($objConditions,QQ::Equal( QQN::GroupAssessmentList()->Resource->Name, 'LEMON Assessment (50 Questions)')); 
+		if ($strName = trim($this->str50Keycode->Text)) {
+			$objConditions = QQ::AndCondition($objConditions,
+				QQ::Like( QQN::GroupAssessmentList()->KeyCode, $strName . '%')
+			);
+		}
+		$objClauses = array(QQ::Distinct());
+			if ($objClause = $this->dtg50GroupLemonAssessments->LimitClause) $objClauses[] = $objClause;
+			if ($objClause = $this->dtg50GroupLemonAssessments->OrderByClause) $objClauses[] = $objClause;
+		
+		$filteredGroupArray = array();
+		$groupArray = GroupAssessmentList::QueryArray($objConditions,$objClauses);
+		$this->dtg50GroupLemonAssessments->TotalItemCount =  GroupAssessmentList::CountAll();	
+		
+		if (QApplication::$Login->Role->Name == 'Administrator') {
+			$this->dtg50GroupLemonAssessments->DataSource = $groupArray;
+		} else {
+			$groupArray = GroupAssessmentList::QueryArray($objConditions);
+			$objUserArray = QApplication::$Login->GetUserArray();
+			foreach ($groupArray as $objGroupAssessment) {
+				if($objGroupAssessment->IsUserAsAssessmentManagerAssociated($objUserArray[0])){
+					$filteredGroupArray[] = $objGroupAssessment;
+				}					
+			}
+			$this->dtg50GroupLemonAssessments->DataSource = $filteredGroupArray; 
+		}
+	}
+	
+	public function chk50Selected_Render(GroupAssessmentList $objGroup, $intRow) {
+     	$strControlId = 'chk50Selected' . $objGroup->Id;
+
+        // Let's see if the Checkbox exists already
+        $chkSelected = $this->GetControl($strControlId);     
+        if (!$chkSelected) {
+            $chkSelected = new QCheckBox($this->dtg50GroupLemonAssessments, $strControlId);
+            $chkSelected->Text = 'Select';
+            $chkSelected->ActionParameter = $objGroup->Id;
+            $chkSelected->CssClass = 'form-control';
+            $chkSelected->AddAction(new QClickEvent(), new QAjaxAction('chk50Selected_Click'));
+        }
+        return $chkSelected->Render(false);
+            
+    }
+        
+    public function chk50Selected_Click($strFormId, $strControlId, $strParameter) {
+		$intGroupId = $strParameter;
+		if ($this->GetControl($strControlId)->Checked) {
+			if (!in_array ($intGroupId, $this->selected50LemonGroups))
+				$this->selected50LemonGroups[] = $intGroupId;
+		} else {
+			$key = array_search($intGroupId, $this->selected50LemonGroups);
+			unset($this->selected50LemonGroups[$key]);
+		}
+    }
+	/*******************************************************************/
 	public function dtgGroupLemonAssessments_Refresh($strFormId, $strControlId, $strParameter) {
 			$this->dtgGroupLemonAssessments->PageNumber = 1;
 			$this->dtgGroupLemonAssessments->Refresh();
