@@ -114,7 +114,7 @@ class GroupAggregationForm extends InstituteForm {
         	array('OrderByClause' => QQ::OrderBy(QQN::GroupAssessmentList()->KeyCode), 'ReverseOrderByClause' => QQ::OrderBy(QQN::GroupAssessmentList()->KeyCode, false))));
         $this->dtg50GroupLemonAssessments->AddColumn(new QDataGridColumn('Description', '<?= $_ITEM->Description ?>', 'HtmlEntities=false', 'Width=300px' ));
         $this->dtg50GroupLemonAssessments->AddColumn(new QDataGridColumn('Total Keys', '<?= $_ITEM->TotalKeys ?>', 'HtmlEntities=false', 'Width=50px' ));
-        $this->dtg50GroupLemonAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_ITEM->KeysLeft ?>', 'HtmlEntities=false', 'Width=50px' ));   
+        $this->dtg50GroupLemonAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_FORM->RenderKeysLeft($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));   
         $this->dtg50GroupLemonAssessments->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__ .InstituteForm::DirAssessments. "lemon/group50AggregationResult.php/". $_ITEM->Id ?>','Result','Results');
 		if(QApplication::$Login->Role->Name == 'Administrator') {
 			$this->dtg50GroupLemonAssessments->AddColumn(new QDataGridColumn('Select Groups to Aggregate', '<?= $_FORM->chk50Selected_Render($_ITEM, $_CONTROL->CurrentRowIndex) ?>', 'HtmlEntities=false','Width=200px' ));
@@ -624,6 +624,12 @@ class GroupAggregationForm extends InstituteForm {
 			}	
 			$this->dtgPostVentureAssessments->DataSource = $filteredGroupArray; 
 		}
+	}
+	
+	public function RenderKeysLeft( GroupAssessmentList $objGroup) {
+		$count = Lemon50Assessment::CountByGroupId($objGroup->Id);		
+		$TotalKeys = $objGroup->TotalKeys;
+		return ($TotalKeys - $count);
 	}
 	public function RenderAssessmentType($objGroupAssessment) {
 		$intResourceId = $objGroupAssessment->ResourceId;

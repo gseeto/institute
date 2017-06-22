@@ -162,6 +162,12 @@ class LoadInfoForm extends InstituteForm {
 	     	$objAssessment->DateModified = new QDateTime('Now'); 	
 	     	$objUser->AssociateResource(Resource::Load(14));
 			$objAssessment->Save();
+			
+			// Decrement keys
+			$objGroup = GroupAssessmentList::Load($this->intGroupAssessment);
+			$objGroup->KeysLeft--;
+			$objGroup->Save();
+			
 			QApplication::Login($objLogin);
 			QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/loadQuestions.php');
 		}
