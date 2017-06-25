@@ -293,23 +293,21 @@ class GroupAggregationResultForm extends InstituteForm {
 							   '<p>These charts taken together as a whole can help identify where the groups strengths lie when particular LEMON characteristics or strengths are required in specific circumstances.</p>';
 		
 		$content = array($table. $strResultsSummary,
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupBarImg.php/'.$strArgs.'\' /> <br><br>'.
+						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/group50BarImg.php/'.$strArgs.'\' /> <br><br>'.
 						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/globalAverageImg.php\' width="50%" height="50%" />'.$strAggregateBar,
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupRadarImg.php/'.$strArgs.'\' />'.$strAggregateRadar,
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupFirstSecondImg.php/'.$strArgs.'\' />'.$strFirstSecond,
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupPieImg.php/'.$strArgs.'\' />'.$strGroupAveragePie,
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupNormalizedImg.php/'.$strArgs.'\' />'.$strNormalized,
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupFirstSlicePieImg.php/'.$strArgs.'\' />'.
+						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/group50RadarImg.php/'.$strArgs.'\' />'.$strAggregateRadar,
+						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/group50FirstSecondImg.php/'.$strArgs.'\' />'.$strFirstSecond,
+						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/group50PieImg.php/'.$strArgs.'\' />'.$strGroupAveragePie,
+						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/group50NormalizedImg.php/'.$strArgs.'\' />'.$strNormalized,
+						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/group50FirstSlicePieImg.php/'.$strArgs.'\' />'.
 						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/globalFirstImg.php/global \'>'.
 						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/globalFirstImg.php/gender/0 \'>'.
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/globalFirstImg.php/gender/1 \'>'.$strFirstPie,
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupRadarByTenureImg.php/'.$strArgs.'\' />'.$strTenureRadar,
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupRadarByTitleImg.php/'.$strArgs.'\' />'.$strRadarTitle,
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupByLemonType.php/0/'.$strArgs.'\' />'.
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupByLemonType.php/1/'.$strArgs.'\' />'.
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupByLemonType.php/2/'.$strArgs.'\' />'.
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupByLemonType.php/3/'.$strArgs.'\' />'.
-						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/groupByLemonType.php/4/'.$strArgs.'\' />'.$strGroupByLemonType);
+						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/globalFirstImg.php/gender/1 \'>'.$strFirstPie,						 
+						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/group50ByLemonType.php/0/'.$strArgs.'\' />'.
+						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/group50ByLemonType.php/1/'.$strArgs.'\' />'.
+						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/group50ByLemonType.php/2/'.$strArgs.'\' />'.
+						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/group50ByLemonType.php/3/'.$strArgs.'\' />'.
+						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/group50ByLemonType.php/4/'.$strArgs.'\' />'.$strGroupByLemonType);
 		
 		$this->accordionCharts->Content = $content;
 		$this->accordionCharts->Refresh();
