@@ -82,7 +82,7 @@ class GroupAggregationResultForm extends InstituteForm {
 		$strResultsSummary = '<p>The table provides a summary of results for each person in the group. </p>'.
 							 '<p>You can export this data to an excel spreadsheet if you wish to manipulate in a way that may not be catered for in the charts provided below.</p>'.
 							'<p>If you require the LEMON Results for each group member, simply click on the "View Individual Results" link below.</p>'.
-							'<a target="_blank" href="'.__SUBDIRECTORY__.'/assessments/lemon/groupIndividualImg.php/'.$strArgs.'"/>View Individual Results</a>';
+							'<a target="_blank" href="'.__SUBDIRECTORY__.'/assessments/lemon/group50IndividualImg.php/'.$strArgs.'"/>View Individual Results</a>';
 		$strAggregateBar = '<p>The Group Aggregate Bar chart provides a normalized breakdown of the LEMON assessments as a group.</p>'.
 							'The sum of all the LEMON values should equal 100, and the chart shows the ratio of each LEMON type relative to each other.</p>'.
 							'<p>It may be interesting to compare the group aggregate with the global aggregates to see how they compare, so the global aggregate is also provided.</p>'.
@@ -121,7 +121,7 @@ class GroupAggregationResultForm extends InstituteForm {
 					'<th> Name </th><th> Luminary </th><th> Entrepreneur </th><th> Manager </th><th> Organizer </th><th> Networker </th><th> Primary Secondary Slices</th>'.
 					'</tr>'.$summary.
 					'</table>'.
-					'<a target="_blank" href="'.__SUBDIRECTORY__.'/assessments/lemon/exportToExcel.php/'.$strArgs.'"/>Export to Excel</a>';
+					'<a target="_blank" href="'.__SUBDIRECTORY__.'/assessments/lemon/export50ToExcel.php/'.$strArgs.'"/>Export to Excel</a>';
 		$content = array($table. $strResultsSummary,
 						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/group50BarImg.php/'.$strArgs.'\' /> <br><br>'.
 						  '<img src=\''.__SUBDIRECTORY__.'/assessments/lemon/globalAverageImg.php\' width="50%" height="50%" />'.$strAggregateBar,
