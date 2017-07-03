@@ -181,8 +181,8 @@
 	<p>Phone - +91 9840108887</p>
 	<br>
 	<h4>In South Africa</h4>
-	<p>Email - <a href="mailto:doug@lemonleadership.co.za">doug@lemonleadership.co.za</a></p>
-	<p>Phone - +27 71 353 8850</p>
+	<p>Email - <a href="mailto:assess@lemonleadership.co.za">assess@lemonleadership.co.za</a></p>
+	<p>Phone - +27 11 027 2072</p>
 	<br>
 	<br>
 	

@@ -1612,9 +1612,9 @@ class ViewLemonAssessmentForm extends InstituteForm {
 		$objPage7->drawText("In South Africa", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
 		$objPage7->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 10);
-		$objPage7->drawText("Email - doug@lemonleadership.co.za", 20, $yPos, 'UTF-8');
+		$objPage7->drawText("Email - assess@lemonleadership.co.za", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-		$objPage7->drawText("Phone - +27 71 353 8850", 20, $yPos, 'UTF-8');
+		$objPage7->drawText("Phone - +27 11 027 2072", 20, $yPos, 'UTF-8');
 		
 		$yPos -= ($lineHeight+70);
 
