@@ -228,6 +228,15 @@ class HomeForm extends InstituteForm {
 							$this->lblAd_LemonBook->Text = '<a href="http://inst.net/product/lemon-leadership-electronic/" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/lemonbook1.jpg" style="width:290px; height:180px; margin:8px; float:left;" /></a>';
 							$bLemon = true;
 							break;
+						case 'LEMON Assessment (50 Questions)':
+							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/lemon/50index.php\'>LEMON Assessment (50 Questions)</a></li>';	
+							$tmpLabel = new QLabel($this);	
+							$tmpLabel->HtmlEntities = false;
+							$tmpLabel->Text = '<li>LEMON Assessment (50 Questions)</li>';
+							$this->frontWheelArray[] = $tmpLabel;
+							$this->lblAd_LemonBook->Text = '<a href="http://inst.net/product/lemon-leadership-electronic/" target="_blank"><img class="shadowed" src="'.__VIRTUAL_DIRECTORY__ . __IMAGE_ASSETS__.'/lemonbook1.jpg" style="width:290px; height:180px; margin:8px; float:left;" /></a>';
+							$bLemon = true;
+							break;
 						case 'Integration Assessment':
 							$lblAssessmentLink->Text = '<li><a href=\''.__SUBDIRECTORY__.'/assessments/integration/\'>Integration Assessment</a></li>';
 							$tmpLabel = new QLabel($this);	

@@ -66,6 +66,9 @@ class AssessmentForm extends InstituteForm {
 							case 'Partnering Readiness Assessment':
 								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnPartneringReadinessAssessment_Click'));	
 								break;
+							case 'LEMON Assessment (50 Questions)':
+								$btnResource->AddAction(new QClickEvent(), new QAjaxAction('btnLemon50Assessment_Click'));	
+								break;
 						}
 											
 					} else {
@@ -116,6 +119,9 @@ class AssessmentForm extends InstituteForm {
 	}
 	protected function btnLemonAssessment_Click() {
 		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/');
+	}
+	protected function btnLemon50Assessment_Click() {
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/50index.php');
 	}
 	protected function btnIntegrationAssessment_Click() {
 		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/integration/');
