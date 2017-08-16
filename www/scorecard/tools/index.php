@@ -1324,7 +1324,9 @@ class ToolslForm extends InstituteForm {
 	
 	public function RenderLatestModifiedBy($intUserId) {
 		$objUser = User::Load($intUserId);
-		return $objUser->FirstName . ' ' . $objUser->LastName;
+		if ($objUser != null) {
+			return $objUser->FirstName . ' ' . $objUser->LastName;
+		} else return ' ';
 	}
 }
 
