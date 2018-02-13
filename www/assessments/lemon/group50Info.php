@@ -1,8 +1,8 @@
 <?php
 require(dirname(__FILE__) . '/../../../includes/prepend.inc.php');
 
-class LoadInfoForm extends InstituteForm {
-	protected $strPageTitle = 'LEMON Assessment';
+class LemonGroup50InfoForm extends InstituteForm {
+	protected $strPageTitle = 'LEMON Assessment (50 Questions)';
 	protected $txtUser;
 	protected $txtPassword;
 	protected $btnLogin;
@@ -10,8 +10,13 @@ class LoadInfoForm extends InstituteForm {
 	
 	protected $txtFirstName;
 	protected $txtLastName;
-	protected $txtEmail;	
-	protected $chkOptIn;
+	protected $txtEmail;
+	protected $lstCountry;
+	protected $lstLevel;
+	protected $lstTenure;
+	protected $lstGender;
+	protected $txtNewUser;
+	protected $txtNewPassword;
 	protected $btnSubmit;
 	protected $lblWarningMsg;
 	
@@ -56,9 +61,41 @@ class LoadInfoForm extends InstituteForm {
 		$this->txtEmail->Name = "Email: ";
 		$this->txtEmail->Width = 200;
 		
-		$this->chkOptIn = new QCheckBox($this);
-		$this->chkOptIn->Text = 'The Institute have permission to email me regarding this assessment. (Your email will not be shared with 3rd parties)';
+		$this->lstCountry = new QListBox($this);
+		$this->lstCountry->Name = "Country: ";
+		$this->lstCountry->Width = 200;
+		foreach(CountryList::LoadAll() as $objCountry) {
+			$this->lstCountry->AddItem($objCountry->Name,$objCountry->Id);
+		}
+	 	
+		$this->lstLevel = new QListBox($this);
+		$this->lstLevel->Name = "Level: ";
+		$this->lstLevel->Width = 200;
+		foreach(TitleList::LoadAll() as $objLevel) {
+			$this->lstLevel->AddItem($objLevel->Name,$objLevel->Id);	
+		}	
 		
+		$this->lstTenure = new QListBox($this);
+		$this->lstTenure->Name = "Level: ";
+		$this->lstTenure->Width = 200;
+		foreach(TenureList::LoadAll() as $objTenure) {
+			$this->lstTenure->AddItem($objTenure->Range,$objTenure->Id);
+		}
+		
+		$this->lstGender = new QListBox($this);
+	 	$this->lstGender->Name = 'Gender : ';
+	 	$this->lstGender->AddItem('Male',1);
+	 	$this->lstGender->AddItem('Female',0);
+	 	
+		$this->txtNewUser = new QTextBox($this);
+		$this->txtNewUser->Name = "User: ";
+		$this->txtNewUser->Width = 200;
+		
+		$this->txtNewPassword = new QTextBox($this);
+		$this->txtNewPassword->Name = "Password: ";
+		$this->txtNewPassword->TextMode = QTextMode::Password;
+		$this->txtNewPassword->Width = 200;
+
 		$this->btnSubmit = new QButton($this);
 		$this->btnSubmit->Text = "Submit";
 		$this->btnSubmit->CssClass = "externButton";
@@ -73,58 +110,56 @@ class LoadInfoForm extends InstituteForm {
 	protected function btnSubmit_Click() {
 		$objConditions = QQ::All();
 		$objClauses = array();
-		
-		// auto generate a unique username/password
-		$unique = false;
-		$username = null;
-		$password = null;
-		while(!$unique) {
-			$random = rand();
-			$username = sprintf("load_%s%s%d",trim($this->txtFirstName->Text),trim($this->txtLastName->Text),$random);
-			$password = $username;			
+
+		if ($strName = trim($this->txtNewUser->Text)) {
 			$objConditions = QQ::AndCondition($objConditions,
-				QQ::Equal( QQN::Login()->Username, $username)
-			);			
-			$objLogin = Login::QuerySingle($objConditions);
-			if(!$objLogin) $unique = true;
+				QQ::Equal( QQN::Login()->Username, $strName)
+			);
 		}
-		
-		// Get user role
-		$intRoleId = 0;
-		$roleArray = Role::LoadAll();
-	 	foreach ($roleArray as $objRole) {
-	 		if($objRole->Name == 'User') {
-	 			$intRoleId = $objRole->Id;
-	 			break;
-	 		}
-	 	}
-	 	// Create user and login
-		$objLogin = new Login();
-		$objLogin->Username = $username;
-		$objLogin->Password = $password;
-		$objLogin->RoleId = $intRoleId;	
-		$intLoginId = $objLogin->Save();
-		
-		$objUser = new User();
-		$objUser->FirstName = trim($this->txtFirstName->Text);
-		$objUser->LastName = trim($this->txtLastName->Text);
-		$objUser->Email = trim($this->txtEmail->Text);	
-		$objUser->OptIn = $this->chkOptIn->Checked;		
-		$objUser->LoginId = $intLoginId;
-		$objUser->Save();
-		
-		// Create a new assessment entry associated with the user
-     	$objAssessment = new Lemon50Assessment();
-     	$objAssessment->UserId = $objUser->Id;
-     	$objAssessment->ResourceId = 14; //LemonAssessment - going to have to find a nicer way of doing this
-     	$objAssessment->ResourceStatusId = 1; // initial state is untouched
-     	$objAssessment->GroupId = $this->intGroupAssessment;  
-     	$objAssessment->DateModified = new QDateTime('Now');	
-     	$objUser->AssociateResource(Resource::Load(14));
-		$objAssessment->Save();
-		
-		QApplication::Login($objLogin);
-		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/loadQuestions.php');		
+		$objLogin = Login::QuerySingle($objConditions);
+		if ($objLogin) {
+			$this->lblWarningMsg->Text = 'This user name is already in use. Please select another one.';
+			$this->lblWarningMsg->Visible = true;
+			return;
+		} else {
+			$intRoleId = 0;
+			$roleArray = Role::LoadAll();
+		 	foreach ($roleArray as $objRole) {
+		 		if($objRole->Name == 'User') {
+		 			$intRoleId = $objRole->Id;
+		 			break;
+		 		}
+		 	}
+			$objLogin = new Login();
+			$objLogin->Username = $this->txtNewUser->Text;
+			$objLogin->Password = $this->txtNewPassword->Text;
+			$objLogin->RoleId = $intRoleId;
+			$intLoginId = $objLogin->Save();
+			
+			$objUser = new User();
+			$objUser->FirstName = trim($this->txtFirstName->Text);
+			$objUser->LastName = trim($this->txtLastName->Text);
+			$objUser->Email = trim($this->txtEmail->Text);
+			$objUser->CountryId = trim($this->lstCountry->SelectedValue);
+			$objUser->TenureId = $this->lstTenure->SelectedValue;
+			$objUser->TitleId = $this->lstLevel->SelectedValue;
+			$objUser->Gender = $this->lstGender->SelectedValue;
+			$objUser->LoginId = $intLoginId;
+			$objUser->Save();
+			
+			// Create a new assessment entry associated with the user
+	     	$objAssessment = new Lemon50Assessment();
+	     	$objAssessment->UserId = $objUser->Id;
+	     	$objAssessment->ResourceId = 14; //LemonAssessment - going to have to find a nicer way of doing this
+	     	$objAssessment->ResourceStatusId = 1; // initial state is untouched
+	     	$objAssessment->GroupId = $this->intGroupAssessment;  
+	     	$objAssessment->DateModified = new QDateTime('Now');	
+	     	$objUser->AssociateResource(Resource::Load(14));
+			$objAssessment->Save();
+			
+			QApplication::Login($objLogin);
+			QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/loadQuestions.php');
+		}
 	}
 	
 	protected function btnLogin_Click() {
@@ -142,7 +177,7 @@ class LoadInfoForm extends InstituteForm {
 		// Create a new assessment entry associated with the user if not already associated
 		if ($objUser->IsResourceAssociated(Resource::Load(14))) {
 			QApplication::Login($objLogin);
-			$objAssessment = Lemon50Assessment::LoadArrayByUserId($objUser->Id);
+			$objAssessment = LemonAssessment::LoadArrayByUserId($objUser->Id);
 			$objAssessment[0]->GroupId = $this->intGroupAssessment; 
 			$objAssessment[0]->DateModified = new QDateTime('Now');
 			$objAssessment[0]->Save();
@@ -162,12 +197,6 @@ class LoadInfoForm extends InstituteForm {
 	     	$objAssessment->DateModified = new QDateTime('Now'); 	
 	     	$objUser->AssociateResource(Resource::Load(14));
 			$objAssessment->Save();
-			
-			// Decrement keys
-			$objGroup = GroupAssessmentList::Load($this->intGroupAssessment);
-			$objGroup->KeysLeft--;
-			$objGroup->Save();
-			
 			QApplication::Login($objLogin);
 			QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/loadQuestions.php');
 		}
@@ -175,5 +204,5 @@ class LoadInfoForm extends InstituteForm {
 	
 }
 
-LoadInfoForm::Run('LoadInfoForm');
+LemonGroup50InfoForm::Run('LemonGroup50InfoForm');
 ?>
