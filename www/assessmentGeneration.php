@@ -37,7 +37,7 @@ if(isset($emailAddress))
 /*
  * LEMON
  */
-if($resourceId == 5) {
+if($resourceId == 14) {
 	echo "trying to process LEMON Assessment...\n";
 	$objAssessment = new GroupAssessmentList();
 	$objAssessment->KeyCode = $keycode;
