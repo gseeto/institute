@@ -19,13 +19,14 @@ towards better understanding yourself and others.
 		<br><br>
 		<?php  $this->lblErrorMsg->Render() ?>
 		</div>
-	</div>
-	<div class="col-md-2">&nbsp;</div>
-</div>
-<div class="small">
+		<div class="small">
 <p>Individual assessments: you received your KeyCode via email. 
 Please email us if you have any problems info@lemonleadership.com</p>
 <p>Group assessments: you received your KeyCode from your group facilitator. 
 Please direct any problems you may experience to your group facilitator.</p>
 </div>
+	</div>
+	<div class="col-md-2">&nbsp;</div>
+</div>
+
 <?php require('/../..'.__INCLUDES__ . '/footer.inc.php'); ?>
