@@ -150,11 +150,11 @@ class LemonloversGroupInfoForm extends InstituteForm {
 			// Create a new assessment entry associated with the user
 	     	$objAssessment = new LemonloversAssessment();
 	     	$objAssessment->UserId = $objUser->Id;
-	     	$objAssessment->ResourceId = 14; //LemonAssessment - going to have to find a nicer way of doing this
+	     	$objAssessment->ResourceId = 15; //LemonAssessment - going to have to find a nicer way of doing this
 	     	$objAssessment->ResourceStatusId = 1; // initial state is untouched
 	     	$objAssessment->GroupId = $this->intGroupAssessment;  
 	     	$objAssessment->DateModified = new QDateTime('Now');	
-	     	$objUser->AssociateResource(Resource::Load(14));
+	     	$objUser->AssociateResource(Resource::Load(15));
 			$objAssessment->Save();
 			
 			QApplication::Login($objLogin);
@@ -175,9 +175,9 @@ class LemonloversGroupInfoForm extends InstituteForm {
 		$objUserArray = User::LoadArrayByLoginId($objLogin->Id);
 		$objUser = $objUserArray[0];
 		// Create a new assessment entry associated with the user if not already associated
-		if ($objUser->IsResourceAssociated(Resource::Load(14))) {
+		if ($objUser->IsResourceAssociated(Resource::Load(15))) {
 			QApplication::Login($objLogin);
-			$objAssessment = LemonAssessment::LoadArrayByUserId($objUser->Id);
+			$objAssessment = LemonloversAssessment::LoadArrayByUserId($objUser->Id);
 			$objAssessment[0]->GroupId = $this->intGroupAssessment; 
 			$objAssessment[0]->DateModified = new QDateTime('Now');
 			$objAssessment[0]->Save();
@@ -185,9 +185,9 @@ class LemonloversGroupInfoForm extends InstituteForm {
 			// Additional check to see if there are results. If not then treat it like a first time login.
 			$objResultArray = LemonloversAssessmentResults::LoadArrayByAssessmentId($objAssessment[0]->Id);
 			if(!empty($objResultArray))			
-				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/loadQuestions.php/edit');
+				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemonlovers/loadQuestions.php/edit');
 			else 
-				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/loadQuestions.php');
+				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemonlovers/loadQuestions.php');
 		} else {
 	     	$objAssessment = new LemonloversAssessment();
 	     	$objAssessment->UserId = $objUser->Id;

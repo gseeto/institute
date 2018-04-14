@@ -22,6 +22,15 @@
 		<?php $this->btn50AggregateGroups->Render();?>
 		<br>
 		
+		<h2>LEMON for Lovers Assessments</h2>
+		<h4>Search for Assessments by:</h4>
+				<div class="filterBy filterByFirst">KeyCode <?php $this->strloversKeycode->Render(); ?><br><br><?php $this->btnLemonlovers->Render(); ?></div>		
+		<div class="cleaner">&nbsp;<br><br></div>
+		<div class="table-responsive">
+		<?php $this->dtgGroupLemonloversAssessments->Render(); ?>
+		<?php $this->btnAggregateloversGroups->Render();?>
+		<br>
+		
 		<h2>10-P Assessments</h2>
 		<?php $this->dtgGroupTenPAssessments->Render(); ?>
 		

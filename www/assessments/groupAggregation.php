@@ -25,6 +25,12 @@ class GroupAggregationForm extends InstituteForm {
 	protected $dtg50GroupLemonAssessments;
 	protected $btn50AggregateGroups;
 	protected $selected50LemonGroups;
+	
+	public    $strloversKeycode;
+	protected $btnLemonlovers;
+	protected $dtgGroupLemonloversAssessments;
+	protected $btnAggregateloversGroups;
+	protected $selectedLemonloversGroups;
 
 
 	protected function Form_Run() {
@@ -144,6 +150,58 @@ class GroupAggregationForm extends InstituteForm {
 		}
 		$this->btn50AggregateGroups->AddAction(new QClickEvent(), new QAjaxAction('btn50AggregateGroups_Click'));
 		/***************************************************/
+		
+		/***************************************************/
+		/* Lemon Lovers assessment */
+		$this->strloversKeycode = new QTextBox($this);
+		$this->strloversKeycode->Name = 'KeyCode';
+		$this->strloversKeycode->CssClass = 'form-control';
+		$this->strloversKeycode->Focus();
+		
+		$this->btnLemonlovers = new QButton($this);
+		$this->btnLemonlovers->Text = 'Submit';
+		$this->btnLemonlovers->HtmlEntities = false;
+		$this->btnLemonlovers->CssClass = 'btn btn-default';
+		$this->btnLemonlovers->AddAction(new QClickEvent(), new QAjaxAction('dtgGroupLemonloversAssessments_Refresh'));
+		
+		$this->selectedLemonloversGroups = array();
+		$this->dtgGroupLemonloversAssessments = new GroupAssessmentListDataGrid($this);
+        $this->dtgGroupLemonloversAssessments->Paginator = new QPaginator($this->dtgGroupLemonloversAssessments);
+        $this->dtgGroupLemonloversAssessments->AddColumn(new QDataGridColumn('Key Code', '<?= $_ITEM->KeyCode ?>', 'HtmlEntities=false', 'Width=200px',
+        	array('OrderByClause' => QQ::OrderBy(QQN::GroupAssessmentList()->KeyCode), 'ReverseOrderByClause' => QQ::OrderBy(QQN::GroupAssessmentList()->KeyCode, false))));
+        $this->dtgGroupLemonloversAssessments->AddColumn(new QDataGridColumn('Description', '<?= $_ITEM->Description ?>', 'HtmlEntities=false', 'Width=300px' ));
+        $this->dtgGroupLemonloversAssessments->AddColumn(new QDataGridColumn('Total Keys', '<?= $_ITEM->TotalKeys ?>', 'HtmlEntities=false', 'Width=50px' ));
+        $this->dtgGroupLemonloversAssessments->AddColumn(new QDataGridColumn('Keys Left', '<?= $_FORM->RenderKeysLeft($_ITEM) ?>', 'HtmlEntities=false', 'Width=50px' ));   
+        $this->dtgGroupLemonloversAssessments->MetaAddEditLinkColumn('<?=__SUBDIRECTORY__ .InstituteForm::DirAssessments. "lemonlovers/groupAggregationResult.php/". $_ITEM->Id ?>','Result','Results');
+		if(QApplication::$Login->Role->Name == 'Administrator') {
+			$this->dtgGroupLemonloversAssessments->AddColumn(new QDataGridColumn('Select Groups to Aggregate', '<?= $_FORM->chk50Selected_Render($_ITEM, $_CONTROL->CurrentRowIndex) ?>', 'HtmlEntities=false','Width=200px' ));
+		}
+        $this->dtgGroupLemonloversAssessments->SortColumnIndex = 1;
+		$this->dtgGroupLemonloversAssessments->ItemsPerPage = 20;
+        $this->dtgGroupLemonloversAssessments->CellPadding = 5;
+		$this->dtgGroupLemonloversAssessments->SetDataBinder('dtgGroupLemonloversAssessments_Bind',$this);
+		$this->dtgGroupLemonloversAssessments->NoDataHtml = 'No LEMON for Lovers Assessments have been assigned.';
+		$this->dtgGroupLemonloversAssessments->UseAjax = true;
+		$this->dtgGroupLemonloversAssessments->CssClass = 'table table-striped table-hover';
+
+        $objStyle = $this->dtgGroupLemonloversAssessments->HeaderRowStyle;
+        $objStyle->ForeColor = '#ffffff';
+        $objStyle->BackColor = '#337ab7'; 
+        
+        $objStyle = $this->dtgGroupLemonloversAssessments->HeaderLinkStyle;
+        $objStyle->ForeColor = '#ffffff';
+        $objStyle->BackColor = '#337ab7'; 
+        
+        $this->btnAggregateloversGroups = new QButton($this);
+		$this->btnAggregateloversGroups->Name = 'Aggregate Selected Groups';
+		$this->btnAggregateloversGroups->Text = 'Aggregate Selected Groups';
+		$this->btnAggregateloversGroups->CssClass = 'btn btn-default';
+		if(QApplication::$Login->Role->Name != 'Administrator') {
+			$this->btnAggregateloversGroups->Visible = false;
+		}
+		$this->btnAggregateloversGroups->AddAction(new QClickEvent(), new QAjaxAction('btnAggregateloversGroups_Click'));
+		/***************************************************************/
+		
         $this->dtgGroupTenPAssessments = new GroupAssessmentListDataGrid($this);
         $this->dtgGroupTenPAssessments->Paginator = new QPaginator($this->dtgGroupTenPAssessments);
         $this->dtgGroupTenPAssessments->AddColumn(new QDataGridColumn('Key Code', '<?= $_ITEM->KeyCode ?>', 'HtmlEntities=false', 'Width=200px' ));
@@ -354,6 +412,41 @@ class GroupAggregationForm extends InstituteForm {
         $objStyle->BackColor = '#337ab7'; 
 	}
 
+	public function dtgGroupLemonloversAssessments_Refresh($strFormId, $strControlId, $strParameter) {
+			$this->dtgGroupLemonloversAssessments->PageNumber = 1;
+			$this->dtgGroupLemonloversAssessments->Refresh();
+	}
+	
+	public function dtgGroupLemonloversAssessments_Bind() {
+		$objConditions = QQ::All();
+		$objConditions = QQ::AndCondition($objConditions,QQ::Equal( QQN::GroupAssessmentList()->Resource->Name, 'LEMON for Lovers Assessment')); 
+		if ($strName = trim($this->strloversKeycode->Text)) {
+			$objConditions = QQ::AndCondition($objConditions,
+				QQ::Like( QQN::GroupAssessmentList()->KeyCode, $strName . '%')
+			);
+		}
+		$objClauses = array(QQ::Distinct());
+			if ($objClause = $this->dtgGroupLemonloversAssessments->LimitClause) $objClauses[] = $objClause;
+			if ($objClause = $this->dtgGroupLemonloversAssessments->OrderByClause) $objClauses[] = $objClause;
+		
+		$filteredGroupArray = array();
+		$groupArray = GroupAssessmentList::QueryArray($objConditions,$objClauses);
+		$this->dtgGroupLemonloversAssessments->TotalItemCount =  GroupAssessmentList::CountAll();	
+		
+		if (QApplication::$Login->Role->Name == 'Administrator') {
+			$this->dtgGroupLemonloversAssessments->DataSource = $groupArray;
+		} else {
+			$groupArray = GroupAssessmentList::QueryArray($objConditions);
+			$objUserArray = QApplication::$Login->GetUserArray();
+			foreach ($groupArray as $objGroupAssessment) {
+				if($objGroupAssessment->IsUserAsAssessmentManagerAssociated($objUserArray[0])){
+					$filteredGroupArray[] = $objGroupAssessment;
+				}					
+			}
+			$this->dtgGroupLemonloversAssessments->DataSource = $filteredGroupArray; 
+		}
+	}
+	
 	public function dtg50GroupLemonAssessments_Refresh($strFormId, $strControlId, $strParameter) {
 			$this->dtg50GroupLemonAssessments->PageNumber = 1;
 			$this->dtg50GroupLemonAssessments->Refresh();
@@ -644,6 +737,11 @@ class GroupAggregationForm extends InstituteForm {
 	
 	public function btnViewGlobalLemonResults_Click() {
 		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/global.php');
+	}
+	
+	public function btnAggregateloversGroups_Click() {
+		$strArgs = implode('&',$this->selectedLemonloversGroups);
+		QApplication::Redirect(__SUBDIRECTORY__.InstituteForm::DirAssessments. "lemonlovers/groupAggregationResult.php/".$strArgs);
 	}
 	
 	public function btnAggregateGroups_Click() {
