@@ -143,6 +143,8 @@ class LemonloversResultsForm extends InstituteForm {
 		$strSecondary = '';
 		$strPrimaryKey = '';
 		$strSecondaryKey = '';
+		$strGoodDay = '';
+		$strBadDay = '';
 		foreach($lemonValues as $key=>$value) {
 			if(($i==1) ||($i==2)) { // Get Primary and Secondary descriptions
 				switch($key) {
