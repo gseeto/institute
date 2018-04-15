@@ -169,6 +169,24 @@
 			return new QQNodeLemonAssessmentResults('lemon_assessment_results', null, null);
 		}
 		/**
+		 * @return QQNodeLemonloversAssessment
+		 */
+		static public function LemonloversAssessment() {
+			return new QQNodeLemonloversAssessment('lemonlovers_assessment', null, null);
+		}
+		/**
+		 * @return QQNodeLemonloversAssessmentQuestions
+		 */
+		static public function LemonloversAssessmentQuestions() {
+			return new QQNodeLemonloversAssessmentQuestions('lemonlovers_assessment_questions', null, null);
+		}
+		/**
+		 * @return QQNodeLemonloversAssessmentResults
+		 */
+		static public function LemonloversAssessmentResults() {
+			return new QQNodeLemonloversAssessmentResults('lemonlovers_assessment_results', null, null);
+		}
+		/**
 		 * @return QQNodeLogin
 		 */
 		static public function Login() {

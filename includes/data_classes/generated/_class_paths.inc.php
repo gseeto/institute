@@ -195,6 +195,27 @@
 		QApplicationBase::$ClassFile['lemonassessmentresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/LemonAssessmentResultsMetaControl.class.php';
 		QApplicationBase::$ClassFile['lemonassessmentresultsdatagrid'] = __DATA_META_CONTROLS__ . '/LemonAssessmentResultsDataGrid.class.php';
 
+	// ClassPaths for the LemonloversAssessment class
+		QApplicationBase::$ClassFile['lemonloversassessment'] = __DATA_CLASSES__ . '/LemonloversAssessment.class.php';
+		QApplicationBase::$ClassFile['qqnodelemonloversassessment'] = __DATA_CLASSES__ . '/LemonloversAssessment.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodelemonloversassessment'] = __DATA_CLASSES__ . '/LemonloversAssessment.class.php';
+		QApplicationBase::$ClassFile['lemonloversassessmentmetacontrol'] = __DATA_META_CONTROLS__ . '/LemonloversAssessmentMetaControl.class.php';
+		QApplicationBase::$ClassFile['lemonloversassessmentdatagrid'] = __DATA_META_CONTROLS__ . '/LemonloversAssessmentDataGrid.class.php';
+
+	// ClassPaths for the LemonloversAssessmentQuestions class
+		QApplicationBase::$ClassFile['lemonloversassessmentquestions'] = __DATA_CLASSES__ . '/LemonloversAssessmentQuestions.class.php';
+		QApplicationBase::$ClassFile['qqnodelemonloversassessmentquestions'] = __DATA_CLASSES__ . '/LemonloversAssessmentQuestions.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodelemonloversassessmentquestions'] = __DATA_CLASSES__ . '/LemonloversAssessmentQuestions.class.php';
+		QApplicationBase::$ClassFile['lemonloversassessmentquestionsmetacontrol'] = __DATA_META_CONTROLS__ . '/LemonloversAssessmentQuestionsMetaControl.class.php';
+		QApplicationBase::$ClassFile['lemonloversassessmentquestionsdatagrid'] = __DATA_META_CONTROLS__ . '/LemonloversAssessmentQuestionsDataGrid.class.php';
+
+	// ClassPaths for the LemonloversAssessmentResults class
+		QApplicationBase::$ClassFile['lemonloversassessmentresults'] = __DATA_CLASSES__ . '/LemonloversAssessmentResults.class.php';
+		QApplicationBase::$ClassFile['qqnodelemonloversassessmentresults'] = __DATA_CLASSES__ . '/LemonloversAssessmentResults.class.php';
+		QApplicationBase::$ClassFile['qqreversereferencenodelemonloversassessmentresults'] = __DATA_CLASSES__ . '/LemonloversAssessmentResults.class.php';
+		QApplicationBase::$ClassFile['lemonloversassessmentresultsmetacontrol'] = __DATA_META_CONTROLS__ . '/LemonloversAssessmentResultsMetaControl.class.php';
+		QApplicationBase::$ClassFile['lemonloversassessmentresultsdatagrid'] = __DATA_META_CONTROLS__ . '/LemonloversAssessmentResultsDataGrid.class.php';
+
 	// ClassPaths for the Login class
 		QApplicationBase::$ClassFile['login'] = __DATA_CLASSES__ . '/Login.class.php';
 		QApplicationBase::$ClassFile['qqnodelogin'] = __DATA_CLASSES__ . '/Login.class.php';
