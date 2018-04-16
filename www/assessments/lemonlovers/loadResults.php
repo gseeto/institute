@@ -10,7 +10,7 @@ class LemonloversResultsForm extends InstituteForm {
 	protected $strPageTitle = 'LEMON Lovers Assessment';
 	protected $intNavSectionId = InstituteForm::NavSectionAssessments;
 	protected $objLemonAssessment;
-	//protected $dtgAssessmentResults;
+	protected $dtgAssessmentResults;
 	protected $btnReturn;
 	protected $lblLemonDescription;
 	protected $lblIntroduction;
@@ -73,7 +73,7 @@ class LemonloversResultsForm extends InstituteForm {
 		$date_modified = $this->objLemonAssessment->DateModified; 
 		$this->lblIntroduction->Text = sprintf('<b>Name:</b> %s %s<br><b>Date Of Self-Assessment: </b>%s<br><b>Organization:</b> %s<br><b>Title/Designation:</b> %s',
 			$this->objUser->FirstName,$this->objUser->LastName,$date_modified,$txtCompany,$this->objUser->Title ? $this->objUser->Title->Name : ' None Specified');	
-	/*								
+									
 		$this->dtgAssessmentResults = new LemonloversAssessmentResultsDataGrid($this);
 		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('', '<?= $_ITEM->QuestionId ?>', 'HtmlEntities=false', 'Width=30px' ));
 		$this->dtgAssessmentResults->AddColumn(new QDataGridColumn('Question', '<?= $_FORM->RenderQuestion($_ITEM->QuestionId) ?>', 'HtmlEntities=false', 'Width=450px' ));			
@@ -96,7 +96,7 @@ class LemonloversResultsForm extends InstituteForm {
         $objStyle = $this->dtgAssessmentResults->HeaderLinkStyle;
         $objStyle->ForeColor = '#ffffff';
         $objStyle->BackColor = '#0098c3'; 
-       */ 
+        
 	 	$this->lblLemonDescription = new QLabel($this);
 	 	$this->lblLemonDescription->CssClass = 'tablecell';
 	 	$this->lblLemonDescription->Width = 600;
@@ -1624,7 +1624,7 @@ class LemonloversResultsForm extends InstituteForm {
 		QApplication::Redirect('../../assets/uploads'.$pdfFile);
 	}
 	
-/*	public function dtgAssessmentResults_Bind() {
+	public function dtgAssessmentResults_Bind() {
 		$assessmentArray = LemonloversAssessmentResults::LoadArrayByAssessmentId($this->objLemonAssessment->Id);		
 		$this->dtgAssessmentResults->DataSource = $assessmentArray; 
 	}
@@ -1633,7 +1633,7 @@ class LemonloversResultsForm extends InstituteForm {
     	$objQuestion = LemonloversAssessmentQuestions::Load($intQuestionId);
     	return $objQuestion->Text;
     } 
-   */
+   
 }
 
 LemonloversResultsForm::Run('LemonloversResultsForm');

@@ -185,7 +185,7 @@
 	<p>Wishing you very best in your Leadership Journey!</p>
 	<!--  
 	<h3>Your Assessment Answers</h3>
-	<?php  //$this->dtgAssessmentResults->Render(); ?>
+	<?php  $this->dtgAssessmentResults->Render(); ?>
 	-->
 	</div>
 	<div class="col-md-2">&nbsp;</div>
