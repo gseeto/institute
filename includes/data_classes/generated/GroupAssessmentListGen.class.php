@@ -33,6 +33,8 @@
 	 * @property Lemon50Assessment[] $_Lemon50AssessmentAsGroupArray the value for the private _objLemon50AssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the lemon50_assessment.group_id reverse relationship
 	 * @property LemonAssessment $_LemonAssessmentAsGroup the value for the private _objLemonAssessmentAsGroup (Read-Only) if set due to an expansion on the lemon_assessment.group_id reverse relationship
 	 * @property LemonAssessment[] $_LemonAssessmentAsGroupArray the value for the private _objLemonAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the lemon_assessment.group_id reverse relationship
+	 * @property LemonloversAssessment $_LemonloversAssessmentAsGroup the value for the private _objLemonloversAssessmentAsGroup (Read-Only) if set due to an expansion on the lemonlovers_assessment.group_id reverse relationship
+	 * @property LemonloversAssessment[] $_LemonloversAssessmentAsGroupArray the value for the private _objLemonloversAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the lemonlovers_assessment.group_id reverse relationship
 	 * @property LraAssessment $_LraAssessmentAsGroup the value for the private _objLraAssessmentAsGroup (Read-Only) if set due to an expansion on the lra_assessment.group_id reverse relationship
 	 * @property LraAssessment[] $_LraAssessmentAsGroupArray the value for the private _objLraAssessmentAsGroupArray (Read-Only) if set due to an ExpandAsArray on the lra_assessment.group_id reverse relationship
 	 * @property PartneringAwarenessAssessment $_PartneringAwarenessAssessmentAsGroup the value for the private _objPartneringAwarenessAssessmentAsGroup (Read-Only) if set due to an expansion on the partnering_awareness_assessment.group_id reverse relationship
@@ -196,6 +198,22 @@
 		 * @var LemonAssessment[] _objLemonAssessmentAsGroupArray;
 		 */
 		private $_objLemonAssessmentAsGroupArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single LemonloversAssessmentAsGroup object
+		 * (of type LemonloversAssessment), if this GroupAssessmentList object was restored with
+		 * an expansion on the lemonlovers_assessment association table.
+		 * @var LemonloversAssessment _objLemonloversAssessmentAsGroup;
+		 */
+		private $_objLemonloversAssessmentAsGroup;
+
+		/**
+		 * Private member variable that stores a reference to an array of LemonloversAssessmentAsGroup objects
+		 * (of type LemonloversAssessment[]), if this GroupAssessmentList object was restored with
+		 * an ExpandAsArray on the lemonlovers_assessment association table.
+		 * @var LemonloversAssessment[] _objLemonloversAssessmentAsGroupArray;
+		 */
+		private $_objLemonloversAssessmentAsGroupArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single LraAssessmentAsGroup object
@@ -798,6 +816,20 @@
 					$blnExpandedViaArray = true;
 				}
 
+				$strAlias = $strAliasPrefix . 'lemonloversassessmentasgroup__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objLemonloversAssessmentAsGroupArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objLemonloversAssessmentAsGroupArray[$intPreviousChildItemCount - 1];
+						$objChildItem = LemonloversAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonloversassessmentasgroup__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objLemonloversAssessmentAsGroupArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objLemonloversAssessmentAsGroupArray[] = LemonloversAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonloversassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'lraassessmentasgroup__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -1019,6 +1051,16 @@
 					$objToReturn->_objLemonAssessmentAsGroupArray[] = LemonAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objLemonAssessmentAsGroup = LemonAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for LemonloversAssessmentAsGroup Virtual Binding
+			$strAlias = $strAliasPrefix . 'lemonloversassessmentasgroup__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objLemonloversAssessmentAsGroupArray[] = LemonloversAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonloversassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objLemonloversAssessmentAsGroup = LemonloversAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonloversassessmentasgroup__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			// Check for LraAssessmentAsGroup Virtual Binding
@@ -1628,6 +1670,18 @@
 					// if set due to an ExpandAsArray on the lemon_assessment.group_id reverse relationship
 					// @return LemonAssessment[]
 					return (array) $this->_objLemonAssessmentAsGroupArray;
+
+				case '_LemonloversAssessmentAsGroup':
+					// Gets the value for the private _objLemonloversAssessmentAsGroup (Read-Only)
+					// if set due to an expansion on the lemonlovers_assessment.group_id reverse relationship
+					// @return LemonloversAssessment
+					return $this->_objLemonloversAssessmentAsGroup;
+
+				case '_LemonloversAssessmentAsGroupArray':
+					// Gets the value for the private _objLemonloversAssessmentAsGroupArray (Read-Only)
+					// if set due to an ExpandAsArray on the lemonlovers_assessment.group_id reverse relationship
+					// @return LemonloversAssessment[]
+					return (array) $this->_objLemonloversAssessmentAsGroupArray;
 
 				case '_LraAssessmentAsGroup':
 					// Gets the value for the private _objLraAssessmentAsGroup (Read-Only)
@@ -2615,6 +2669,188 @@
 			$objDatabase->NonQuery('
 				DELETE FROM
 					`lemon_assessment`
+				WHERE
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for LemonloversAssessmentAsGroup
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated LemonloversAssessmentsAsGroup as an array of LemonloversAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return LemonloversAssessment[]
+		*/ 
+		public function GetLemonloversAssessmentAsGroupArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return LemonloversAssessment::LoadArrayByGroupId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated LemonloversAssessmentsAsGroup
+		 * @return int
+		*/ 
+		public function CountLemonloversAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return LemonloversAssessment::CountByGroupId($this->intId);
+		}
+
+		/**
+		 * Associates a LemonloversAssessmentAsGroup
+		 * @param LemonloversAssessment $objLemonloversAssessment
+		 * @return void
+		*/ 
+		public function AssociateLemonloversAssessmentAsGroup(LemonloversAssessment $objLemonloversAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateLemonloversAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objLemonloversAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateLemonloversAssessmentAsGroup on this GroupAssessmentList with an unsaved LemonloversAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lemonlovers_assessment`
+				SET
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLemonloversAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objLemonloversAssessment->GroupId = $this->intId;
+				$objLemonloversAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a LemonloversAssessmentAsGroup
+		 * @param LemonloversAssessment $objLemonloversAssessment
+		 * @return void
+		*/ 
+		public function UnassociateLemonloversAssessmentAsGroup(LemonloversAssessment $objLemonloversAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemonloversAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objLemonloversAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemonloversAssessmentAsGroup on this GroupAssessmentList with an unsaved LemonloversAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lemonlovers_assessment`
+				SET
+					`group_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLemonloversAssessment->Id) . ' AND
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objLemonloversAssessment->GroupId = null;
+				$objLemonloversAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all LemonloversAssessmentsAsGroup
+		 * @return void
+		*/ 
+		public function UnassociateAllLemonloversAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemonloversAssessmentAsGroup on this unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (LemonloversAssessment::LoadArrayByGroupId($this->intId) as $objLemonloversAssessment) {
+					$objLemonloversAssessment->GroupId = null;
+					$objLemonloversAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lemonlovers_assessment`
+				SET
+					`group_id` = null
+				WHERE
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated LemonloversAssessmentAsGroup
+		 * @param LemonloversAssessment $objLemonloversAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedLemonloversAssessmentAsGroup(LemonloversAssessment $objLemonloversAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemonloversAssessmentAsGroup on this unsaved GroupAssessmentList.');
+			if ((is_null($objLemonloversAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemonloversAssessmentAsGroup on this GroupAssessmentList with an unsaved LemonloversAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`lemonlovers_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLemonloversAssessment->Id) . ' AND
+					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objLemonloversAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated LemonloversAssessmentsAsGroup
+		 * @return void
+		*/ 
+		public function DeleteAllLemonloversAssessmentsAsGroup() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemonloversAssessmentAsGroup on this unsaved GroupAssessmentList.');
+
+			// Get the Database Object for this Class
+			$objDatabase = GroupAssessmentList::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (LemonloversAssessment::LoadArrayByGroupId($this->intId) as $objLemonloversAssessment) {
+					$objLemonloversAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`lemonlovers_assessment`
 				WHERE
 					`group_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
@@ -4580,6 +4816,7 @@
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeLemon50Assessment $Lemon50AssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessmentAsGroup
+	 * @property-read QQReverseReferenceNodeLemonloversAssessment $LemonloversAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodePartneringAwarenessAssessment $PartneringAwarenessAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodePartneringReadinessAssessment $PartneringReadinessAssessmentAsGroup
@@ -4622,6 +4859,8 @@
 					return new QQReverseReferenceNodeLemon50Assessment($this, 'lemon50assessmentasgroup', 'reverse_reference', 'group_id');
 				case 'LemonAssessmentAsGroup':
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessmentasgroup', 'reverse_reference', 'group_id');
+				case 'LemonloversAssessmentAsGroup':
+					return new QQReverseReferenceNodeLemonloversAssessment($this, 'lemonloversassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'LraAssessmentAsGroup':
 					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'PartneringAwarenessAssessmentAsGroup':
@@ -4668,6 +4907,7 @@
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeLemon50Assessment $Lemon50AssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessmentAsGroup
+	 * @property-read QQReverseReferenceNodeLemonloversAssessment $LemonloversAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodePartneringAwarenessAssessment $PartneringAwarenessAssessmentAsGroup
 	 * @property-read QQReverseReferenceNodePartneringReadinessAssessment $PartneringReadinessAssessmentAsGroup
@@ -4711,6 +4951,8 @@
 					return new QQReverseReferenceNodeLemon50Assessment($this, 'lemon50assessmentasgroup', 'reverse_reference', 'group_id');
 				case 'LemonAssessmentAsGroup':
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessmentasgroup', 'reverse_reference', 'group_id');
+				case 'LemonloversAssessmentAsGroup':
+					return new QQReverseReferenceNodeLemonloversAssessment($this, 'lemonloversassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'LraAssessmentAsGroup':
 					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessmentasgroup', 'reverse_reference', 'group_id');
 				case 'PartneringAwarenessAssessmentAsGroup':
