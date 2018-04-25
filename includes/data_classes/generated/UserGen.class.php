@@ -57,6 +57,8 @@
 	 * @property Lemon50Assessment[] $_Lemon50AssessmentArray the value for the private _objLemon50AssessmentArray (Read-Only) if set due to an ExpandAsArray on the lemon50_assessment.user_id reverse relationship
 	 * @property LemonAssessment $_LemonAssessment the value for the private _objLemonAssessment (Read-Only) if set due to an expansion on the lemon_assessment.user_id reverse relationship
 	 * @property LemonAssessment[] $_LemonAssessmentArray the value for the private _objLemonAssessmentArray (Read-Only) if set due to an ExpandAsArray on the lemon_assessment.user_id reverse relationship
+	 * @property LemonloversAssessment $_LemonloversAssessment the value for the private _objLemonloversAssessment (Read-Only) if set due to an expansion on the lemonlovers_assessment.user_id reverse relationship
+	 * @property LemonloversAssessment[] $_LemonloversAssessmentArray the value for the private _objLemonloversAssessmentArray (Read-Only) if set due to an ExpandAsArray on the lemonlovers_assessment.user_id reverse relationship
 	 * @property LraAssessment $_LraAssessment the value for the private _objLraAssessment (Read-Only) if set due to an expansion on the lra_assessment.user_id reverse relationship
 	 * @property LraAssessment[] $_LraAssessmentArray the value for the private _objLraAssessmentArray (Read-Only) if set due to an ExpandAsArray on the lra_assessment.user_id reverse relationship
 	 * @property PartneringAwarenessAssessment $_PartneringAwarenessAssessment the value for the private _objPartneringAwarenessAssessment (Read-Only) if set due to an expansion on the partnering_awareness_assessment.user_id reverse relationship
@@ -391,6 +393,22 @@
 		 * @var LemonAssessment[] _objLemonAssessmentArray;
 		 */
 		private $_objLemonAssessmentArray = array();
+
+		/**
+		 * Private member variable that stores a reference to a single LemonloversAssessment object
+		 * (of type LemonloversAssessment), if this User object was restored with
+		 * an expansion on the lemonlovers_assessment association table.
+		 * @var LemonloversAssessment _objLemonloversAssessment;
+		 */
+		private $_objLemonloversAssessment;
+
+		/**
+		 * Private member variable that stores a reference to an array of LemonloversAssessment objects
+		 * (of type LemonloversAssessment[]), if this User object was restored with
+		 * an ExpandAsArray on the lemonlovers_assessment association table.
+		 * @var LemonloversAssessment[] _objLemonloversAssessmentArray;
+		 */
+		private $_objLemonloversAssessmentArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single LraAssessment object
@@ -1172,6 +1190,20 @@
 					$blnExpandedViaArray = true;
 				}
 
+				$strAlias = $strAliasPrefix . 'lemonloversassessment__id';
+				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
+					(!is_null($objDbRow->GetColumn($strAliasName)))) {
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objLemonloversAssessmentArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objLemonloversAssessmentArray[$intPreviousChildItemCount - 1];
+						$objChildItem = LemonloversAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonloversassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+						if ($objChildItem)
+							$objPreviousItem->_objLemonloversAssessmentArray[] = $objChildItem;
+					} else
+						$objPreviousItem->_objLemonloversAssessmentArray[] = LemonloversAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonloversassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$blnExpandedViaArray = true;
+				}
+
 				$strAlias = $strAliasPrefix . 'lraassessment__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -1529,6 +1561,16 @@
 					$objToReturn->_objLemonAssessmentArray[] = LemonAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objLemonAssessment = LemonAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+			}
+
+			// Check for LemonloversAssessment Virtual Binding
+			$strAlias = $strAliasPrefix . 'lemonloversassessment__id';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName))) {
+				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
+					$objToReturn->_objLemonloversAssessmentArray[] = LemonloversAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonloversassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+				else
+					$objToReturn->_objLemonloversAssessment = LemonloversAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lemonloversassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			// Check for LraAssessment Virtual Binding
@@ -2562,6 +2604,18 @@
 					// if set due to an ExpandAsArray on the lemon_assessment.user_id reverse relationship
 					// @return LemonAssessment[]
 					return (array) $this->_objLemonAssessmentArray;
+
+				case '_LemonloversAssessment':
+					// Gets the value for the private _objLemonloversAssessment (Read-Only)
+					// if set due to an expansion on the lemonlovers_assessment.user_id reverse relationship
+					// @return LemonloversAssessment
+					return $this->_objLemonloversAssessment;
+
+				case '_LemonloversAssessmentArray':
+					// Gets the value for the private _objLemonloversAssessmentArray (Read-Only)
+					// if set due to an ExpandAsArray on the lemonlovers_assessment.user_id reverse relationship
+					// @return LemonloversAssessment[]
+					return (array) $this->_objLemonloversAssessmentArray;
 
 				case '_LraAssessment':
 					// Gets the value for the private _objLraAssessment (Read-Only)
@@ -4449,6 +4503,188 @@
 			$objDatabase->NonQuery('
 				DELETE FROM
 					`lemon_assessment`
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+			
+		
+		// Related Objects' Methods for LemonloversAssessment
+		//-------------------------------------------------------------------
+
+		/**
+		 * Gets all associated LemonloversAssessments as an array of LemonloversAssessment objects
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return LemonloversAssessment[]
+		*/ 
+		public function GetLemonloversAssessmentArray($objOptionalClauses = null) {
+			if ((is_null($this->intId)))
+				return array();
+
+			try {
+				return LemonloversAssessment::LoadArrayByUserId($this->intId, $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Counts all associated LemonloversAssessments
+		 * @return int
+		*/ 
+		public function CountLemonloversAssessments() {
+			if ((is_null($this->intId)))
+				return 0;
+
+			return LemonloversAssessment::CountByUserId($this->intId);
+		}
+
+		/**
+		 * Associates a LemonloversAssessment
+		 * @param LemonloversAssessment $objLemonloversAssessment
+		 * @return void
+		*/ 
+		public function AssociateLemonloversAssessment(LemonloversAssessment $objLemonloversAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateLemonloversAssessment on this unsaved User.');
+			if ((is_null($objLemonloversAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateLemonloversAssessment on this User with an unsaved LemonloversAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lemonlovers_assessment`
+				SET
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLemonloversAssessment->Id) . '
+			');
+
+			// Journaling (if applicable)
+			if ($objDatabase->JournalingDatabase) {
+				$objLemonloversAssessment->UserId = $this->intId;
+				$objLemonloversAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates a LemonloversAssessment
+		 * @param LemonloversAssessment $objLemonloversAssessment
+		 * @return void
+		*/ 
+		public function UnassociateLemonloversAssessment(LemonloversAssessment $objLemonloversAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemonloversAssessment on this unsaved User.');
+			if ((is_null($objLemonloversAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemonloversAssessment on this User with an unsaved LemonloversAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lemonlovers_assessment`
+				SET
+					`user_id` = null
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLemonloversAssessment->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objLemonloversAssessment->UserId = null;
+				$objLemonloversAssessment->Journal('UPDATE');
+			}
+		}
+
+		/**
+		 * Unassociates all LemonloversAssessments
+		 * @return void
+		*/ 
+		public function UnassociateAllLemonloversAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemonloversAssessment on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (LemonloversAssessment::LoadArrayByUserId($this->intId) as $objLemonloversAssessment) {
+					$objLemonloversAssessment->UserId = null;
+					$objLemonloversAssessment->Journal('UPDATE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				UPDATE
+					`lemonlovers_assessment`
+				SET
+					`user_id` = null
+				WHERE
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+		}
+
+		/**
+		 * Deletes an associated LemonloversAssessment
+		 * @param LemonloversAssessment $objLemonloversAssessment
+		 * @return void
+		*/ 
+		public function DeleteAssociatedLemonloversAssessment(LemonloversAssessment $objLemonloversAssessment) {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemonloversAssessment on this unsaved User.');
+			if ((is_null($objLemonloversAssessment->Id)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemonloversAssessment on this User with an unsaved LemonloversAssessment.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`lemonlovers_assessment`
+				WHERE
+					`id` = ' . $objDatabase->SqlVariable($objLemonloversAssessment->Id) . ' AND
+					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
+			');
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				$objLemonloversAssessment->Journal('DELETE');
+			}
+		}
+
+		/**
+		 * Deletes all associated LemonloversAssessments
+		 * @return void
+		*/ 
+		public function DeleteAllLemonloversAssessments() {
+			if ((is_null($this->intId)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateLemonloversAssessment on this unsaved User.');
+
+			// Get the Database Object for this Class
+			$objDatabase = User::GetDatabase();
+
+			// Journaling
+			if ($objDatabase->JournalingDatabase) {
+				foreach (LemonloversAssessment::LoadArrayByUserId($this->intId) as $objLemonloversAssessment) {
+					$objLemonloversAssessment->Journal('DELETE');
+				}
+			}
+
+			// Perform the SQL Query
+			$objDatabase->NonQuery('
+				DELETE FROM
+					`lemonlovers_assessment`
 				WHERE
 					`user_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
@@ -7685,6 +7921,7 @@
 	 * @property-read QQReverseReferenceNodeKpis $KpisAsModifiedBy
 	 * @property-read QQReverseReferenceNodeLemon50Assessment $Lemon50Assessment
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
+	 * @property-read QQReverseReferenceNodeLemonloversAssessment $LemonloversAssessment
 	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessment
 	 * @property-read QQReverseReferenceNodePartneringAwarenessAssessment $PartneringAwarenessAssessment
 	 * @property-read QQReverseReferenceNodePartneringReadinessAssessment $PartneringReadinessAssessment
@@ -7761,6 +7998,8 @@
 					return new QQReverseReferenceNodeLemon50Assessment($this, 'lemon50assessment', 'reverse_reference', 'user_id');
 				case 'LemonAssessment':
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessment', 'reverse_reference', 'user_id');
+				case 'LemonloversAssessment':
+					return new QQReverseReferenceNodeLemonloversAssessment($this, 'lemonloversassessment', 'reverse_reference', 'user_id');
 				case 'LraAssessment':
 					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessment', 'reverse_reference', 'user_id');
 				case 'PartneringAwarenessAssessment':
@@ -7827,6 +8066,7 @@
 	 * @property-read QQReverseReferenceNodeKpis $KpisAsModifiedBy
 	 * @property-read QQReverseReferenceNodeLemon50Assessment $Lemon50Assessment
 	 * @property-read QQReverseReferenceNodeLemonAssessment $LemonAssessment
+	 * @property-read QQReverseReferenceNodeLemonloversAssessment $LemonloversAssessment
 	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessment
 	 * @property-read QQReverseReferenceNodePartneringAwarenessAssessment $PartneringAwarenessAssessment
 	 * @property-read QQReverseReferenceNodePartneringReadinessAssessment $PartneringReadinessAssessment
@@ -7904,6 +8144,8 @@
 					return new QQReverseReferenceNodeLemon50Assessment($this, 'lemon50assessment', 'reverse_reference', 'user_id');
 				case 'LemonAssessment':
 					return new QQReverseReferenceNodeLemonAssessment($this, 'lemonassessment', 'reverse_reference', 'user_id');
+				case 'LemonloversAssessment':
+					return new QQReverseReferenceNodeLemonloversAssessment($this, 'lemonloversassessment', 'reverse_reference', 'user_id');
 				case 'LraAssessment':
 					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessment', 'reverse_reference', 'user_id');
 				case 'PartneringAwarenessAssessment':

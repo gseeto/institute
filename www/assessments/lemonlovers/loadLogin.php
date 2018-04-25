@@ -37,7 +37,7 @@ class LoadLoginForm extends InstituteForm {
 				$this->lblErrorMsg->Visible = true;
 			} else {
 				// If you get here, then move to the next page to get user details
-				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/loadInfo.php/'.$objGroupAssessment->Id);
+				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemonlovers/loadInfo.php/'.$objGroupAssessment->Id);
 			}
 		}
 	}

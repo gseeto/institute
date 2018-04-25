@@ -18,43 +18,15 @@
 	 * @subpackage GeneratedDataObjects
 	 */
 	abstract class UpwardCategoryTypeGen extends QBaseClass {
-		const Purpose = 1;
-		const Service = 2;
-		const Positioning = 3;
-		const Presence = 4;
-		const Partnering = 5;
-		const Place = 6;
-		const Planning = 7;
 
-		const MaxId = 7;
+		const MaxId = 0;
 
-		public static $NameArray = array(
-			1 => 'Purpose',
-			2 => 'Service',
-			3 => 'Positioning',
-			4 => 'Presence',
-			5 => 'Partnering',
-			6 => 'Place',
-			7 => 'Planning');
+		public static $NameArray = array();
 
-		public static $TokenArray = array(
-			1 => 'Purpose',
-			2 => 'Service',
-			3 => 'Positioning',
-			4 => 'Presence',
-			5 => 'Partnering',
-			6 => 'Place',
-			7 => 'Planning');
+		public static $TokenArray = array();
 
 		public static function ToString($intUpwardCategoryTypeId) {
 			switch ($intUpwardCategoryTypeId) {
-				case 1: return 'Purpose';
-				case 2: return 'Service';
-				case 3: return 'Positioning';
-				case 4: return 'Presence';
-				case 5: return 'Partnering';
-				case 6: return 'Place';
-				case 7: return 'Planning';
 				default:
 					throw new QCallerException(sprintf('Invalid intUpwardCategoryTypeId: %s', $intUpwardCategoryTypeId));
 			}
@@ -62,13 +34,6 @@
 
 		public static function ToToken($intUpwardCategoryTypeId) {
 			switch ($intUpwardCategoryTypeId) {
-				case 1: return 'Purpose';
-				case 2: return 'Service';
-				case 3: return 'Positioning';
-				case 4: return 'Presence';
-				case 5: return 'Partnering';
-				case 6: return 'Place';
-				case 7: return 'Planning';
 				default:
 					throw new QCallerException(sprintf('Invalid intUpwardCategoryTypeId: %s', $intUpwardCategoryTypeId));
 			}
