@@ -23,10 +23,6 @@
 	 * @property KingdomBusinessAssessment[] $_KingdomBusinessAssessmentArray the value for the private _objKingdomBusinessAssessmentArray (Read-Only) if set due to an ExpandAsArray on the kingdom_business_assessment.resource_status_id reverse relationship
 	 * @property LraAssessment $_LraAssessment the value for the private _objLraAssessment (Read-Only) if set due to an expansion on the lra_assessment.resource_status_id reverse relationship
 	 * @property LraAssessment[] $_LraAssessmentArray the value for the private _objLraAssessmentArray (Read-Only) if set due to an ExpandAsArray on the lra_assessment.resource_status_id reverse relationship
-	 * @property PartneringAwarenessAssessment $_PartneringAwarenessAssessment the value for the private _objPartneringAwarenessAssessment (Read-Only) if set due to an expansion on the partnering_awareness_assessment.resource_status_id reverse relationship
-	 * @property PartneringAwarenessAssessment[] $_PartneringAwarenessAssessmentArray the value for the private _objPartneringAwarenessAssessmentArray (Read-Only) if set due to an ExpandAsArray on the partnering_awareness_assessment.resource_status_id reverse relationship
-	 * @property PostventureAssessment $_PostventureAssessment the value for the private _objPostventureAssessment (Read-Only) if set due to an expansion on the postventure_assessment.resource_status_id reverse relationship
-	 * @property PostventureAssessment[] $_PostventureAssessmentArray the value for the private _objPostventureAssessmentArray (Read-Only) if set due to an ExpandAsArray on the postventure_assessment.resource_status_id reverse relationship
 	 * @property SeasonalAssessment $_SeasonalAssessment the value for the private _objSeasonalAssessment (Read-Only) if set due to an expansion on the seasonal_assessment.resource_status_id reverse relationship
 	 * @property SeasonalAssessment[] $_SeasonalAssessmentArray the value for the private _objSeasonalAssessmentArray (Read-Only) if set due to an ExpandAsArray on the seasonal_assessment.resource_status_id reverse relationship
 	 * @property TenFAssessment $_TenFAssessment the value for the private _objTenFAssessment (Read-Only) if set due to an expansion on the ten_f_assessment.resource_status_id reverse relationship
@@ -107,38 +103,6 @@
 		 * @var LraAssessment[] _objLraAssessmentArray;
 		 */
 		private $_objLraAssessmentArray = array();
-
-		/**
-		 * Private member variable that stores a reference to a single PartneringAwarenessAssessment object
-		 * (of type PartneringAwarenessAssessment), if this ResourceStatus object was restored with
-		 * an expansion on the partnering_awareness_assessment association table.
-		 * @var PartneringAwarenessAssessment _objPartneringAwarenessAssessment;
-		 */
-		private $_objPartneringAwarenessAssessment;
-
-		/**
-		 * Private member variable that stores a reference to an array of PartneringAwarenessAssessment objects
-		 * (of type PartneringAwarenessAssessment[]), if this ResourceStatus object was restored with
-		 * an ExpandAsArray on the partnering_awareness_assessment association table.
-		 * @var PartneringAwarenessAssessment[] _objPartneringAwarenessAssessmentArray;
-		 */
-		private $_objPartneringAwarenessAssessmentArray = array();
-
-		/**
-		 * Private member variable that stores a reference to a single PostventureAssessment object
-		 * (of type PostventureAssessment), if this ResourceStatus object was restored with
-		 * an expansion on the postventure_assessment association table.
-		 * @var PostventureAssessment _objPostventureAssessment;
-		 */
-		private $_objPostventureAssessment;
-
-		/**
-		 * Private member variable that stores a reference to an array of PostventureAssessment objects
-		 * (of type PostventureAssessment[]), if this ResourceStatus object was restored with
-		 * an ExpandAsArray on the postventure_assessment association table.
-		 * @var PostventureAssessment[] _objPostventureAssessmentArray;
-		 */
-		private $_objPostventureAssessmentArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single SeasonalAssessment object
@@ -618,34 +582,6 @@
 					$blnExpandedViaArray = true;
 				}
 
-				$strAlias = $strAliasPrefix . 'partneringawarenessassessment__id';
-				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
-				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
-					(!is_null($objDbRow->GetColumn($strAliasName)))) {
-					if ($intPreviousChildItemCount = count($objPreviousItem->_objPartneringAwarenessAssessmentArray)) {
-						$objPreviousChildItem = $objPreviousItem->_objPartneringAwarenessAssessmentArray[$intPreviousChildItemCount - 1];
-						$objChildItem = PartneringAwarenessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'partneringawarenessassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
-						if ($objChildItem)
-							$objPreviousItem->_objPartneringAwarenessAssessmentArray[] = $objChildItem;
-					} else
-						$objPreviousItem->_objPartneringAwarenessAssessmentArray[] = PartneringAwarenessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'partneringawarenessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
-					$blnExpandedViaArray = true;
-				}
-
-				$strAlias = $strAliasPrefix . 'postventureassessment__id';
-				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
-				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
-					(!is_null($objDbRow->GetColumn($strAliasName)))) {
-					if ($intPreviousChildItemCount = count($objPreviousItem->_objPostventureAssessmentArray)) {
-						$objPreviousChildItem = $objPreviousItem->_objPostventureAssessmentArray[$intPreviousChildItemCount - 1];
-						$objChildItem = PostventureAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'postventureassessment__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
-						if ($objChildItem)
-							$objPreviousItem->_objPostventureAssessmentArray[] = $objChildItem;
-					} else
-						$objPreviousItem->_objPostventureAssessmentArray[] = PostventureAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'postventureassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
-					$blnExpandedViaArray = true;
-				}
-
 				$strAlias = $strAliasPrefix . 'seasonalassessment__id';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
@@ -761,26 +697,6 @@
 					$objToReturn->_objLraAssessmentArray[] = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
 					$objToReturn->_objLraAssessment = LraAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'lraassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
-			}
-
-			// Check for PartneringAwarenessAssessment Virtual Binding
-			$strAlias = $strAliasPrefix . 'partneringawarenessassessment__id';
-			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
-			if (!is_null($objDbRow->GetColumn($strAliasName))) {
-				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
-					$objToReturn->_objPartneringAwarenessAssessmentArray[] = PartneringAwarenessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'partneringawarenessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
-				else
-					$objToReturn->_objPartneringAwarenessAssessment = PartneringAwarenessAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'partneringawarenessassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
-			}
-
-			// Check for PostventureAssessment Virtual Binding
-			$strAlias = $strAliasPrefix . 'postventureassessment__id';
-			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
-			if (!is_null($objDbRow->GetColumn($strAliasName))) {
-				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
-					$objToReturn->_objPostventureAssessmentArray[] = PostventureAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'postventureassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
-				else
-					$objToReturn->_objPostventureAssessment = PostventureAssessment::InstantiateDbRow($objDbRow, $strAliasPrefix . 'postventureassessment__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			// Check for SeasonalAssessment Virtual Binding
@@ -1170,30 +1086,6 @@
 					// if set due to an ExpandAsArray on the lra_assessment.resource_status_id reverse relationship
 					// @return LraAssessment[]
 					return (array) $this->_objLraAssessmentArray;
-
-				case '_PartneringAwarenessAssessment':
-					// Gets the value for the private _objPartneringAwarenessAssessment (Read-Only)
-					// if set due to an expansion on the partnering_awareness_assessment.resource_status_id reverse relationship
-					// @return PartneringAwarenessAssessment
-					return $this->_objPartneringAwarenessAssessment;
-
-				case '_PartneringAwarenessAssessmentArray':
-					// Gets the value for the private _objPartneringAwarenessAssessmentArray (Read-Only)
-					// if set due to an ExpandAsArray on the partnering_awareness_assessment.resource_status_id reverse relationship
-					// @return PartneringAwarenessAssessment[]
-					return (array) $this->_objPartneringAwarenessAssessmentArray;
-
-				case '_PostventureAssessment':
-					// Gets the value for the private _objPostventureAssessment (Read-Only)
-					// if set due to an expansion on the postventure_assessment.resource_status_id reverse relationship
-					// @return PostventureAssessment
-					return $this->_objPostventureAssessment;
-
-				case '_PostventureAssessmentArray':
-					// Gets the value for the private _objPostventureAssessmentArray (Read-Only)
-					// if set due to an ExpandAsArray on the postventure_assessment.resource_status_id reverse relationship
-					// @return PostventureAssessment[]
-					return (array) $this->_objPostventureAssessmentArray;
 
 				case '_SeasonalAssessment':
 					// Gets the value for the private _objSeasonalAssessment (Read-Only)
@@ -1853,370 +1745,6 @@
 			$objDatabase->NonQuery('
 				DELETE FROM
 					`lra_assessment`
-				WHERE
-					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
-			');
-		}
-
-			
-		
-		// Related Objects' Methods for PartneringAwarenessAssessment
-		//-------------------------------------------------------------------
-
-		/**
-		 * Gets all associated PartneringAwarenessAssessments as an array of PartneringAwarenessAssessment objects
-		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
-		 * @return PartneringAwarenessAssessment[]
-		*/ 
-		public function GetPartneringAwarenessAssessmentArray($objOptionalClauses = null) {
-			if ((is_null($this->intId)))
-				return array();
-
-			try {
-				return PartneringAwarenessAssessment::LoadArrayByResourceStatusId($this->intId, $objOptionalClauses);
-			} catch (QCallerException $objExc) {
-				$objExc->IncrementOffset();
-				throw $objExc;
-			}
-		}
-
-		/**
-		 * Counts all associated PartneringAwarenessAssessments
-		 * @return int
-		*/ 
-		public function CountPartneringAwarenessAssessments() {
-			if ((is_null($this->intId)))
-				return 0;
-
-			return PartneringAwarenessAssessment::CountByResourceStatusId($this->intId);
-		}
-
-		/**
-		 * Associates a PartneringAwarenessAssessment
-		 * @param PartneringAwarenessAssessment $objPartneringAwarenessAssessment
-		 * @return void
-		*/ 
-		public function AssociatePartneringAwarenessAssessment(PartneringAwarenessAssessment $objPartneringAwarenessAssessment) {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call AssociatePartneringAwarenessAssessment on this unsaved ResourceStatus.');
-			if ((is_null($objPartneringAwarenessAssessment->Id)))
-				throw new QUndefinedPrimaryKeyException('Unable to call AssociatePartneringAwarenessAssessment on this ResourceStatus with an unsaved PartneringAwarenessAssessment.');
-
-			// Get the Database Object for this Class
-			$objDatabase = ResourceStatus::GetDatabase();
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				UPDATE
-					`partnering_awareness_assessment`
-				SET
-					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
-				WHERE
-					`id` = ' . $objDatabase->SqlVariable($objPartneringAwarenessAssessment->Id) . '
-			');
-
-			// Journaling (if applicable)
-			if ($objDatabase->JournalingDatabase) {
-				$objPartneringAwarenessAssessment->ResourceStatusId = $this->intId;
-				$objPartneringAwarenessAssessment->Journal('UPDATE');
-			}
-		}
-
-		/**
-		 * Unassociates a PartneringAwarenessAssessment
-		 * @param PartneringAwarenessAssessment $objPartneringAwarenessAssessment
-		 * @return void
-		*/ 
-		public function UnassociatePartneringAwarenessAssessment(PartneringAwarenessAssessment $objPartneringAwarenessAssessment) {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringAwarenessAssessment on this unsaved ResourceStatus.');
-			if ((is_null($objPartneringAwarenessAssessment->Id)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringAwarenessAssessment on this ResourceStatus with an unsaved PartneringAwarenessAssessment.');
-
-			// Get the Database Object for this Class
-			$objDatabase = ResourceStatus::GetDatabase();
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				UPDATE
-					`partnering_awareness_assessment`
-				SET
-					`resource_status_id` = null
-				WHERE
-					`id` = ' . $objDatabase->SqlVariable($objPartneringAwarenessAssessment->Id) . ' AND
-					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
-			');
-
-			// Journaling
-			if ($objDatabase->JournalingDatabase) {
-				$objPartneringAwarenessAssessment->ResourceStatusId = null;
-				$objPartneringAwarenessAssessment->Journal('UPDATE');
-			}
-		}
-
-		/**
-		 * Unassociates all PartneringAwarenessAssessments
-		 * @return void
-		*/ 
-		public function UnassociateAllPartneringAwarenessAssessments() {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringAwarenessAssessment on this unsaved ResourceStatus.');
-
-			// Get the Database Object for this Class
-			$objDatabase = ResourceStatus::GetDatabase();
-
-			// Journaling
-			if ($objDatabase->JournalingDatabase) {
-				foreach (PartneringAwarenessAssessment::LoadArrayByResourceStatusId($this->intId) as $objPartneringAwarenessAssessment) {
-					$objPartneringAwarenessAssessment->ResourceStatusId = null;
-					$objPartneringAwarenessAssessment->Journal('UPDATE');
-				}
-			}
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				UPDATE
-					`partnering_awareness_assessment`
-				SET
-					`resource_status_id` = null
-				WHERE
-					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
-			');
-		}
-
-		/**
-		 * Deletes an associated PartneringAwarenessAssessment
-		 * @param PartneringAwarenessAssessment $objPartneringAwarenessAssessment
-		 * @return void
-		*/ 
-		public function DeleteAssociatedPartneringAwarenessAssessment(PartneringAwarenessAssessment $objPartneringAwarenessAssessment) {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringAwarenessAssessment on this unsaved ResourceStatus.');
-			if ((is_null($objPartneringAwarenessAssessment->Id)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringAwarenessAssessment on this ResourceStatus with an unsaved PartneringAwarenessAssessment.');
-
-			// Get the Database Object for this Class
-			$objDatabase = ResourceStatus::GetDatabase();
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				DELETE FROM
-					`partnering_awareness_assessment`
-				WHERE
-					`id` = ' . $objDatabase->SqlVariable($objPartneringAwarenessAssessment->Id) . ' AND
-					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
-			');
-
-			// Journaling
-			if ($objDatabase->JournalingDatabase) {
-				$objPartneringAwarenessAssessment->Journal('DELETE');
-			}
-		}
-
-		/**
-		 * Deletes all associated PartneringAwarenessAssessments
-		 * @return void
-		*/ 
-		public function DeleteAllPartneringAwarenessAssessments() {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePartneringAwarenessAssessment on this unsaved ResourceStatus.');
-
-			// Get the Database Object for this Class
-			$objDatabase = ResourceStatus::GetDatabase();
-
-			// Journaling
-			if ($objDatabase->JournalingDatabase) {
-				foreach (PartneringAwarenessAssessment::LoadArrayByResourceStatusId($this->intId) as $objPartneringAwarenessAssessment) {
-					$objPartneringAwarenessAssessment->Journal('DELETE');
-				}
-			}
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				DELETE FROM
-					`partnering_awareness_assessment`
-				WHERE
-					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
-			');
-		}
-
-			
-		
-		// Related Objects' Methods for PostventureAssessment
-		//-------------------------------------------------------------------
-
-		/**
-		 * Gets all associated PostventureAssessments as an array of PostventureAssessment objects
-		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
-		 * @return PostventureAssessment[]
-		*/ 
-		public function GetPostventureAssessmentArray($objOptionalClauses = null) {
-			if ((is_null($this->intId)))
-				return array();
-
-			try {
-				return PostventureAssessment::LoadArrayByResourceStatusId($this->intId, $objOptionalClauses);
-			} catch (QCallerException $objExc) {
-				$objExc->IncrementOffset();
-				throw $objExc;
-			}
-		}
-
-		/**
-		 * Counts all associated PostventureAssessments
-		 * @return int
-		*/ 
-		public function CountPostventureAssessments() {
-			if ((is_null($this->intId)))
-				return 0;
-
-			return PostventureAssessment::CountByResourceStatusId($this->intId);
-		}
-
-		/**
-		 * Associates a PostventureAssessment
-		 * @param PostventureAssessment $objPostventureAssessment
-		 * @return void
-		*/ 
-		public function AssociatePostventureAssessment(PostventureAssessment $objPostventureAssessment) {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call AssociatePostventureAssessment on this unsaved ResourceStatus.');
-			if ((is_null($objPostventureAssessment->Id)))
-				throw new QUndefinedPrimaryKeyException('Unable to call AssociatePostventureAssessment on this ResourceStatus with an unsaved PostventureAssessment.');
-
-			// Get the Database Object for this Class
-			$objDatabase = ResourceStatus::GetDatabase();
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				UPDATE
-					`postventure_assessment`
-				SET
-					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
-				WHERE
-					`id` = ' . $objDatabase->SqlVariable($objPostventureAssessment->Id) . '
-			');
-
-			// Journaling (if applicable)
-			if ($objDatabase->JournalingDatabase) {
-				$objPostventureAssessment->ResourceStatusId = $this->intId;
-				$objPostventureAssessment->Journal('UPDATE');
-			}
-		}
-
-		/**
-		 * Unassociates a PostventureAssessment
-		 * @param PostventureAssessment $objPostventureAssessment
-		 * @return void
-		*/ 
-		public function UnassociatePostventureAssessment(PostventureAssessment $objPostventureAssessment) {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this unsaved ResourceStatus.');
-			if ((is_null($objPostventureAssessment->Id)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this ResourceStatus with an unsaved PostventureAssessment.');
-
-			// Get the Database Object for this Class
-			$objDatabase = ResourceStatus::GetDatabase();
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				UPDATE
-					`postventure_assessment`
-				SET
-					`resource_status_id` = null
-				WHERE
-					`id` = ' . $objDatabase->SqlVariable($objPostventureAssessment->Id) . ' AND
-					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
-			');
-
-			// Journaling
-			if ($objDatabase->JournalingDatabase) {
-				$objPostventureAssessment->ResourceStatusId = null;
-				$objPostventureAssessment->Journal('UPDATE');
-			}
-		}
-
-		/**
-		 * Unassociates all PostventureAssessments
-		 * @return void
-		*/ 
-		public function UnassociateAllPostventureAssessments() {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this unsaved ResourceStatus.');
-
-			// Get the Database Object for this Class
-			$objDatabase = ResourceStatus::GetDatabase();
-
-			// Journaling
-			if ($objDatabase->JournalingDatabase) {
-				foreach (PostventureAssessment::LoadArrayByResourceStatusId($this->intId) as $objPostventureAssessment) {
-					$objPostventureAssessment->ResourceStatusId = null;
-					$objPostventureAssessment->Journal('UPDATE');
-				}
-			}
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				UPDATE
-					`postventure_assessment`
-				SET
-					`resource_status_id` = null
-				WHERE
-					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
-			');
-		}
-
-		/**
-		 * Deletes an associated PostventureAssessment
-		 * @param PostventureAssessment $objPostventureAssessment
-		 * @return void
-		*/ 
-		public function DeleteAssociatedPostventureAssessment(PostventureAssessment $objPostventureAssessment) {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this unsaved ResourceStatus.');
-			if ((is_null($objPostventureAssessment->Id)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this ResourceStatus with an unsaved PostventureAssessment.');
-
-			// Get the Database Object for this Class
-			$objDatabase = ResourceStatus::GetDatabase();
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				DELETE FROM
-					`postventure_assessment`
-				WHERE
-					`id` = ' . $objDatabase->SqlVariable($objPostventureAssessment->Id) . ' AND
-					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
-			');
-
-			// Journaling
-			if ($objDatabase->JournalingDatabase) {
-				$objPostventureAssessment->Journal('DELETE');
-			}
-		}
-
-		/**
-		 * Deletes all associated PostventureAssessments
-		 * @return void
-		*/ 
-		public function DeleteAllPostventureAssessments() {
-			if ((is_null($this->intId)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociatePostventureAssessment on this unsaved ResourceStatus.');
-
-			// Get the Database Object for this Class
-			$objDatabase = ResourceStatus::GetDatabase();
-
-			// Journaling
-			if ($objDatabase->JournalingDatabase) {
-				foreach (PostventureAssessment::LoadArrayByResourceStatusId($this->intId) as $objPostventureAssessment) {
-					$objPostventureAssessment->Journal('DELETE');
-				}
-			}
-
-			// Perform the SQL Query
-			$objDatabase->NonQuery('
-				DELETE FROM
-					`postventure_assessment`
 				WHERE
 					`resource_status_id` = ' . $objDatabase->SqlVariable($this->intId) . '
 			');
@@ -3026,8 +2554,6 @@
 	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessment
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessment
-	 * @property-read QQReverseReferenceNodePartneringAwarenessAssessment $PartneringAwarenessAssessment
-	 * @property-read QQReverseReferenceNodePostventureAssessment $PostventureAssessment
 	 * @property-read QQReverseReferenceNodeSeasonalAssessment $SeasonalAssessment
 	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessment
 	 * @property-read QQReverseReferenceNodeTenPAssessment $TenPAssessment
@@ -3049,10 +2575,6 @@
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'resource_status_id');
 				case 'LraAssessment':
 					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessment', 'reverse_reference', 'resource_status_id');
-				case 'PartneringAwarenessAssessment':
-					return new QQReverseReferenceNodePartneringAwarenessAssessment($this, 'partneringawarenessassessment', 'reverse_reference', 'resource_status_id');
-				case 'PostventureAssessment':
-					return new QQReverseReferenceNodePostventureAssessment($this, 'postventureassessment', 'reverse_reference', 'resource_status_id');
 				case 'SeasonalAssessment':
 					return new QQReverseReferenceNodeSeasonalAssessment($this, 'seasonalassessment', 'reverse_reference', 'resource_status_id');
 				case 'TenFAssessment':
@@ -3081,8 +2603,6 @@
 	 * @property-read QQReverseReferenceNodeIntegrationAssessment $IntegrationAssessment
 	 * @property-read QQReverseReferenceNodeKingdomBusinessAssessment $KingdomBusinessAssessment
 	 * @property-read QQReverseReferenceNodeLraAssessment $LraAssessment
-	 * @property-read QQReverseReferenceNodePartneringAwarenessAssessment $PartneringAwarenessAssessment
-	 * @property-read QQReverseReferenceNodePostventureAssessment $PostventureAssessment
 	 * @property-read QQReverseReferenceNodeSeasonalAssessment $SeasonalAssessment
 	 * @property-read QQReverseReferenceNodeTenFAssessment $TenFAssessment
 	 * @property-read QQReverseReferenceNodeTenPAssessment $TenPAssessment
@@ -3105,10 +2625,6 @@
 					return new QQReverseReferenceNodeKingdomBusinessAssessment($this, 'kingdombusinessassessment', 'reverse_reference', 'resource_status_id');
 				case 'LraAssessment':
 					return new QQReverseReferenceNodeLraAssessment($this, 'lraassessment', 'reverse_reference', 'resource_status_id');
-				case 'PartneringAwarenessAssessment':
-					return new QQReverseReferenceNodePartneringAwarenessAssessment($this, 'partneringawarenessassessment', 'reverse_reference', 'resource_status_id');
-				case 'PostventureAssessment':
-					return new QQReverseReferenceNodePostventureAssessment($this, 'postventureassessment', 'reverse_reference', 'resource_status_id');
 				case 'SeasonalAssessment':
 					return new QQReverseReferenceNodeSeasonalAssessment($this, 'seasonalassessment', 'reverse_reference', 'resource_status_id');
 				case 'TenFAssessment':
