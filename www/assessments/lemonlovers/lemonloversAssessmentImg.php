@@ -11,18 +11,16 @@ $intAssessmentId = QApplication::PathInfo(0);
 for($i=1; $i<6; $i++) {
 	$labelArray[] = LemonType::ToString($i);
 }
-$strDebug = '';
+
 $objAssessment = LemonloversAssessment::Load($intAssessmentId);
 $title = $objAssessment->User->FirstName.' '.$objAssessment->User->LastName;
 if($objAssessment->L) {
-	$strDebug .= 'Grabbing values from Assessment';
 	$lemonValues[0] = $objAssessment->L;
 	$lemonValues[1] = $objAssessment->E;
 	$lemonValues[2] = $objAssessment->M;
 	$lemonValues[3] = $objAssessment->O;
 	$lemonValues[4] = $objAssessment->N;
 } else {
-	$strDebug .="grabbing values from results";
 	$resultArray = LemonloversAssessmentResults::LoadArrayByAssessmentId($intAssessmentId);
 	foreach($resultArray as $objResult) {
 		$intIndex = $objResult->Question->LemonTypeId - 1;
@@ -57,8 +55,7 @@ $graph->SetScale("textlin");
 $graph->SetMarginColor('white');
 
 // Setup titles and fonts
-//$graph->title->Set('LEMON for Lovers Results for '.$title);
-$graph->title->Set('AssessmentId = '.$intAssessmentId.' '. $strDebug);
+$graph->title->Set('LEMON for Lovers Results for '.$title);
 $graph->SetUserFont('dejavu/DejaVuSans.ttf');
 $graph->title->SetFont(FF_USERFONT,FS_NORMAL,18);
 $graph->title->SetColor('#808080');

@@ -31,7 +31,7 @@
 		try {
 				$objConditions = QQ::Equal(QQN::LemonloversAssessmentResults()->AssessmentId, $intAssessmentId);				
 				$objResult = LemonloversAssessmentResults::QueryArray($objConditions,null);
-				return $objResult[0];
+				return $objResult;
 			} catch (QCallerException $objExc) {
 				$objExc->IncrementOffset();
 				throw $objExc;
