@@ -592,6 +592,7 @@ class ViewLemonloversAssessmentForm extends InstituteForm {
 		$objPage1->drawText($strText, 100, $PageHeight-424, 'UTF-8');
 		$strText = sprintf('Title/Designation: %s', $this->objUser->Title ? $this->objUser->Title->Name : ' None Specified');
 		$objPage1->drawText($strText, 100, $PageHeight-436, 'UTF-8');
+		$lineHeight = 13;
 		/*******************************************/
 /*		$objPage2 = $objLemonPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
 		$objLemonPdf->pages[] = $objPage2;
