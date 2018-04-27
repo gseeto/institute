@@ -563,7 +563,7 @@ class ViewLemonloversAssessmentForm extends InstituteForm {
 		return $strPrimary .'<br>'. $strSecondary;
 	}
 	protected function btnReturn_Click() {
-		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/index.php');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemonlovers/index.php');
 	}
 	
 	protected function btnGeneratePdf_Click() { 
@@ -593,7 +593,7 @@ class ViewLemonloversAssessmentForm extends InstituteForm {
 		$strText = sprintf('Title/Designation: %s', $this->objUser->Title ? $this->objUser->Title->Name : ' None Specified');
 		$objPage1->drawText($strText, 100, $PageHeight-436, 'UTF-8');
 		/*******************************************/
-		$objPage2 = $objLemonPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
+/*		$objPage2 = $objLemonPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
 		$objLemonPdf->pages[] = $objPage2;
 		$objPage2->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
 		$objPage2->drawText("Introduction", 40, $PageHeight, 'UTF-8');
@@ -690,8 +690,9 @@ class ViewLemonloversAssessmentForm extends InstituteForm {
 		$yPos -= $lineHeight;
 		$objPage2->drawText("- Their depth of vision", 40, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
+		*/
 	/*****************************/
-		$yPos = $PageHeight-$lineHeight;
+/*		$yPos = $PageHeight-$lineHeight;
 		$objPage3 = $objLemonPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
 		$objLemonPdf->pages[] = $objPage3;
 		$objPage3->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 10);
@@ -779,7 +780,7 @@ class ViewLemonloversAssessmentForm extends InstituteForm {
 		$objPage3->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_ITALIC), 10);
 		$objPage3->drawText("- Rose Keanly, Managing Director: Old Mutual Service, Technology & Administration, Old Mutual, South Africa", 40, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-
+*/
 		/*****************************/
 		$yPos = $PageHeight-$lineHeight;
 		$objPage4 = $objLemonPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
@@ -787,10 +788,10 @@ class ViewLemonloversAssessmentForm extends InstituteForm {
 		$objPage4->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
 		$objPage4->drawText("Your Personal Profile and Report", 40, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;	
-		$ZendImage = Zend_Pdf_Image::imageWithPath( __UPLOAD_DIR__.'/Lemon' . $this->objLemonAssessment->Id. '.png');		
+		$ZendImage = Zend_Pdf_Image::imageWithPath( __UPLOAD_DIR__.'/Lemonlovers' . $this->objLemonAssessment->Id. '.png');		
 		$objPage4->drawImage($ZendImage, 10, $yPos-200, 400, $yPos);
 		$yPos -= ($lineHeight + 230);
-		
+/*		
 		switch($this->primary) {
 			case 'Luminary':
 				$objPage4->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 12);
@@ -1196,8 +1197,9 @@ class ViewLemonloversAssessmentForm extends InstituteForm {
 				$yPos -= ($lineHeight+10);
 				break;
 		}
+		*/
 		/*****************************/
-		$yPos = $PageHeight-$lineHeight;
+	/*	$yPos = $PageHeight-$lineHeight;
 		$objPage5 = $objLemonPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
 		$objLemonPdf->pages[] = $objPage5;
 		$objPage5->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
@@ -1557,6 +1559,7 @@ class ViewLemonloversAssessmentForm extends InstituteForm {
 		$yPos -= $lineHeight;
 		$objPage5->drawText("  weaknesses. LEMON Leadership will help you identify destructive patterns in your life so that you can manage them better.", 30, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
+		*/
 		/*****************************/
 		$yPos = $PageHeight-$lineHeight;
 		$objPage6 = $objLemonPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
@@ -1620,7 +1623,7 @@ class ViewLemonloversAssessmentForm extends InstituteForm {
 
 		$objPage7->drawText("Wishing you the very best in your Leadership Journey!", 160, $yPos, 'UTF-8');
 		 
-		$pdfFile = '/Lemon' . $this->objLemonAssessment->Id .rand(0,50). '.pdf';
+		$pdfFile = '/Lemonlovers' . $this->objLemonAssessment->Id .rand(0,50). '.pdf';
 		$objLemonPdf->save(__UPLOAD_DIR__ . $pdfFile);
 		chmod(__UPLOAD_DIR__ . $pdfFile, 0777);
 		QApplication::Redirect(__SUBDIRECTORY__.'/assets/uploads'.$pdfFile);

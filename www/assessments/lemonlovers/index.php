@@ -58,9 +58,9 @@ class LemonLoversAssessmentForm extends InstituteForm {
 	
 	protected function btnEdit_Click() {	
 		if ($this->objLemonAssessment->ResourceStatusId == 1) {
-			QApplication::Redirect('loadQuestions.php');
+			QApplication::Redirect('newAssessment.php');
 		} else {
-			QApplication::Redirect('loadQuestions.php/edit');
+			QApplication::Redirect('newAssessment.php/edit');
 		}
 	}
 	
