@@ -603,30 +603,35 @@ class ViewLemonloversAssessmentForm extends InstituteForm {
 		$lineHeight = 13;
 		$yPos = $PageHeight-$lineHeight - 5;
 		
-		$objPage2->drawText("Thank you for taking the LEMON for Lovers Assessment.  Your results here may be different from original LEMON Basics Assessment.", 20, $yPos, 'UTF-8');
+		$objPage2->drawText("Thank you for taking the LEMON for Lovers Assessment.  Your results here may be different from original LEMON Basics", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-		$objPage2->drawText("Why is this? There are several reasons for this, the most significant being that you have adapted how you express affirmation, love and relationship", 20, $yPos, 'UTF-8');
+		$objPage2->drawText("Assessment. Why is this? There are several reasons for this, the most significant being that you have adapted how", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-		$objPage2->drawText("to your spouse or partner. Over time, as one makes conscious choices to serve someone else, this will happen.", 20, $yPos, 'UTF-8');
+		$objPage2->drawText("you express affirmation, love and relationship to your spouse or partner. Over time, as one makes conscious choices", 20, $yPos, 'UTF-8');
+		$yPos -= $lineHeight;	  
+		$objPage2->drawText("to serve someone else, this will happen.", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-	  
+		$yPos -= $lineHeight;
 		$objPage2->drawText("Another possible reason for them being different is the idea that people give and receive love differently.", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
 	 	$objPage2->drawText("In a blogpost, Christin Caliva writes, \"Everyone shows their love differently, and everyone feels loved in different ways.", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-		$objPage2->drawText("This is why I feel there are \"ten\" love languages. Not only do people receive love differently, but they also show love differently.", 20, $yPos, 'UTF-8');
+		$objPage2->drawText("This is why I feel there are \"ten\" love languages. Not only do people receive love differently, but they also show love", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-		$objPage2->drawText("While quality time is my top love language for receiving, it's lower when I'm showing love and care to people. I don't like bothering people too much,", 20, $yPos, 'UTF-8');
+		$objPage2->drawText("differently. While quality time is my top love language for receiving, it's lower when I'm showing love and care to", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-		$objPage2->drawText("so sweet and simple is my favorite. For my \"Giving\" Love Languages, my order switches to Giving Gifts, Acts of Service, Quality Time, Physical Touch,", 20, $yPos, 'UTF-8');
+		$objPage2->drawText("people. I don't like bothering people too much, so sweet and simple is my favorite. For my \"Giving\" Love Languages,", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-		$objPage2->drawText("and then Words of Affirmation. I really like remaining in the background when it comes to voicing opinions or \"publicly\" expressing my love for others.", 20, $yPos, 'UTF-8');
+		$objPage2->drawText("my order switches to Giving Gifts, Acts of Service, Quality Time, Physical Touch, and then Words of Affirmation.", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-		$objPage2->drawText("Words of Affirmation do nothing for me, simply because I'm a big believer in \"actions speak louder than words\".\"", 20, $yPos, 'UTF-8');
+		$objPage2->drawText("I really like remaining in the background when it comes to voicing opinions or \"publicly\" expressing my love for others.", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-	 	$objPage2->drawText("LEMON Leadership is about DNA, wiring... how you are born. LEMON for Lovers is about learning to adapt to your loved ones, giving them what they need,", 20, $yPos, 'UTF-8');
+	 	$objPage2->drawText("Words of Affirmation do nothing for me, simply because I'm a big believer in \"actions speak louder than words\".\" ", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-	 	$objPage2->drawText("not just that which is your natural inclination.", 20, $yPos, 'UTF-8');
+		$yPos -= $lineHeight;
+		$objPage2->drawText("LEMON Leadership is about DNA, wiring... how you are born. LEMON for Lovers is about learning to adapt to your", 20, $yPos, 'UTF-8');
+	 	$yPos -= $lineHeight;
+	 	$objPage2->drawText("loved ones, giving them what they need, not just that which is your natural inclination.", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
 	 
 		/*****************************/
@@ -634,16 +639,17 @@ class ViewLemonloversAssessmentForm extends InstituteForm {
 		$objPage3 = $objLemonPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
 		$objLemonPdf->pages[] = $objPage3;
 		$yPos -= $lineHeight;	
-		$ZendImage = Zend_Pdf_Image::imageWithPath( __UPLOAD_DIR__.'/Lemon' . $this->objLemonAssessment->Id. '.png');		
+		$ZendImage = Zend_Pdf_Image::imageWithPath( __UPLOAD_DIR__.'/Lemonlovers' . $this->objLemonAssessment->Id. '.png');		
 		$objPage3->drawImage($ZendImage, 10, $yPos-200, 400, $yPos);
 		$yPos -= ($lineHeight + 230);
 		
 		$objPage3->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
 		$objPage3->drawText("LEMON FOR Lovers e-book", 40, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-		$objPage3->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 10);
-		$objPage3->drawText("We recommend you read the LEMON for Lovers e-book to get a deeper understanding of this topic. You can purchase it at <a href=\"http://inst.net/publications\">http://inst.net/publications</a>", 20, $yPos, 'UTF-8');
+		$objPage3->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 10);
+		$objPage3->drawText("We recommend you read the LEMON for Lovers e-book to get a deeper understanding of this topic.", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
+		$objPage3->drawText("You can purchase it at http://inst.net/publications", 20, $yPos, 'UTF-8');
 		
 		 
 		$pdfFile = '/Lemonlovers' . $this->objLemonAssessment->Id .rand(0,50). '.pdf';
