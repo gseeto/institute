@@ -36,23 +36,7 @@
 	<p>We recommend you read the LEMON for Lovers e-book to get a deeper understanding of this topic. You can purchase it at <a href="http://inst.net/publications">http://inst.net/publications</a></p>
 	
 	<p><!-- pagebreak --> </p>
-	<h3>Contact Information</h3>
-	<h4>In USA</h4>
-	<p>Email - <a href="mailto:contact@inst.net">contact@inst.net</a>, <a href="mailto:lemon@inst.net">lemon@inst.net</a></p>
-	<p>Phone - +1.650.306.4100 </p>
-	<br>
-	<h4>In India</h4>
-	<p>Email - <a href="mailto:thomass@inst.net">thomass@inst.net</a>, <a href="mailto:lemon@inst.net">lemon@inst.net</a></p>
-	<p>Phone - +91 9840108887</p>
-	<br>
-	<h4>In South Africa</h4>
-	<p>Email - <a href="mailto:assess@lemonleadership.co.za">assess@lemonleadership.co.za</a></p>
-	<p>Phone - +27 11 027 2072</p>
-	<br>
-	<br>
 	
-			
-	<p>Wishing you very best in your Leadership Journey!</p>
 	
 	<!-- 
 	<h3>Your Assessment Answers</h3>
