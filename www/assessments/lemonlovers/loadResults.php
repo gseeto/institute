@@ -628,8 +628,7 @@ class LemonloversResultsForm extends InstituteForm {
 		$yPos = $PageHeight-$lineHeight;
 		$objPage3 = $objLemonPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
 		$objLemonPdf->pages[] = $objPage3;
-		$objPage3->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
-		$objPage3->drawText("Your Personal Profile and Report", 40, $yPos, 'UTF-8');
+		
 		$yPos -= $lineHeight;	
 		$ZendImage = Zend_Pdf_Image::imageWithPath( __UPLOAD_DIR__.'/Lemon' . $this->objLemonAssessment->Id. '.png');		
 		$objPage3->drawImage($ZendImage, 10, $yPos-200, 400, $yPos);
@@ -638,7 +637,8 @@ class LemonloversResultsForm extends InstituteForm {
 		$objPage3->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
 		$objPage3->drawText("LEMON FOR Lovers e-book", 40, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
-		$objPage2->drawText("We recommend you read the LEMON for Lovers e-book to get a deeper understanding of this topic. You can purchase it at <a href=\"http://inst.net/publications\">http://inst.net/publications</a>", 20, $yPos, 'UTF-8');
+		$objPage3->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 10);
+		$objPage3->drawText("We recommend you read the LEMON for Lovers e-book to get a deeper understanding of this topic. You can purchase it at <a href=\"http://inst.net/publications\">http://inst.net/publications</a>", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
 		/*****************************/
 		 
