@@ -629,8 +629,21 @@ class LemonloversResultsForm extends InstituteForm {
 	 	$objPage2->drawText("loved ones, giving them what they need, not just that which is your natural inclination.", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
 	 
+		$ZendImage = Zend_Pdf_Image::imageWithPath( __UPLOAD_DIR__.'/Lemonlovers' . $this->objLemonAssessment->Id. '.png');		
+		$objPage2->drawImage($ZendImage, 10, $yPos-200, 400, $yPos);
+		$yPos -= ($lineHeight + 230);
+		
+		$objPage2->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD), 14);
+		$objPage2->drawText("LEMON FOR Lovers e-book", 40, $yPos, 'UTF-8');
+		$yPos -= $lineHeight;
+		$objPage2->setFont(Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA), 10);
+		$objPage2->drawText("We recommend you read the LEMON for Lovers e-book to get a deeper understanding of this topic.", 20, $yPos, 'UTF-8');
+		$yPos -= $lineHeight;
+		$objPage2->drawText("You can purchase it at http://inst.net/publications", 20, $yPos, 'UTF-8');
+		
 		/*****************************/
-		$yPos = $PageHeight-$lineHeight;
+		/*
+		 $yPos = $PageHeight-$lineHeight;
 		$objPage3 = $objLemonPdf->newPage(Zend_Pdf_Page::SIZE_LETTER);
 		$objLemonPdf->pages[] = $objPage3;
 		
@@ -646,10 +659,10 @@ class LemonloversResultsForm extends InstituteForm {
 		$objPage3->drawText("We recommend you read the LEMON for Lovers e-book to get a deeper understanding of this topic.", 20, $yPos, 'UTF-8');
 		$yPos -= $lineHeight;
 		$objPage3->drawText("You can purchase it at http://inst.net/publications", 20, $yPos, 'UTF-8');
-		
+		*/
 		/*****************************/
 		 
-		$pdfFile = '/Lemon' . $this->objLemonAssessment->Id .rand(0,50). '.pdf';
+		$pdfFile = '/Lemonlovers' . $this->objLemonAssessment->Id .rand(0,50). '.pdf';
 		$objLemonPdf->save(__UPLOAD_DIR__ . $pdfFile);
 		chmod(__UPLOAD_DIR__ . $pdfFile, 0777);
 				
