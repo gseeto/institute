@@ -35,9 +35,9 @@ if(isset($emailAddress))
 	echo "got email = ".$emailAddress."<br>";
 
 /*
- * LEMON
+ * LEMON or LEMON for Lovers
  */
-if($resourceId == 14) {
+if(($resourceId == 14)|| ($resourceId == 15)) {
 	echo "trying to process LEMON Assessment...\n";
 	$objAssessment = new GroupAssessmentList();
 	$objAssessment->KeyCode = $keycode;

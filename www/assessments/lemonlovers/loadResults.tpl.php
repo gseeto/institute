@@ -6,7 +6,7 @@
 	<div class="center-block">
 	<h1>LEMON for Lovers Assessment Report</h1>
 	</div>
-	<img class="img-responsive" src='<?php _p(__IMAGE_ASSETS__);?>/LemonReportSplashPage.PNG' />
+	<img class="img-responsive" src='<?php _p(__IMAGE_ASSETS__);?>/LemonLoversReportSplashPage.jpg' />
 	<br><br>
 	<h2>INTRODUCTION</h2>
 	<p>Thank you for taking the LEMON for Lovers Assessment.  Your results here may be different from original LEMON Basics Assessment.  

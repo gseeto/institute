@@ -8,7 +8,7 @@
 	<div class="center-block">
 	<h1>LEMON for Lovers Leadership Assessment Report</h1>
 	</div>
-	<img class="img-responsive" src='<?php _p(__IMAGE_ASSETS__);?>/LemonReportSplashPage.PNG' class='centerImg'/>
+	<img class="img-responsive" src='<?php _p(__IMAGE_ASSETS__);?>/LemonLoversReportSplashPage.jpg' class='centerImg'/>
 	<div class="center-block"> <?php $this->lblIntroduction->Render();?> </div>
 	
 	<p><!-- pagebreak --> </p>
