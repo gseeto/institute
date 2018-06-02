@@ -177,7 +177,7 @@ class LemonGroup50InfoForm extends InstituteForm {
 		// Create a new assessment entry associated with the user if not already associated
 		if ($objUser->IsResourceAssociated(Resource::Load(14))) {
 			QApplication::Login($objLogin);
-			$objAssessment = LemonAssessment::LoadArrayByUserId($objUser->Id);
+			$objAssessment = Lemon50Assessment::LoadArrayByUserId($objUser->Id);
 			$objAssessment[0]->GroupId = $this->intGroupAssessment; 
 			$objAssessment[0]->DateModified = new QDateTime('Now');
 			$objAssessment[0]->Save();
@@ -191,7 +191,7 @@ class LemonGroup50InfoForm extends InstituteForm {
 		} else {
 	     	$objAssessment = new Lemon50Assessment();
 	     	$objAssessment->UserId = $objUser->Id;
-	     	$objAssessment->ResourceId = 14; //LemonAssessment - going to have to find a nicer way of doing this
+	     	$objAssessment->ResourceId = 14; //Lemon50Assessment - going to have to find a nicer way of doing this
 	     	$objAssessment->ResourceStatusId = 1; // initial state is untouched
 	     	$objAssessment->GroupId = $this->intGroupAssessment; 
 	     	$objAssessment->DateModified = new QDateTime('Now'); 	

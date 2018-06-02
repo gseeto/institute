@@ -82,7 +82,7 @@ class LemonLoadQuestionsForm extends InstituteForm {
 	protected function btnSubmit_Click() {			
 		QApplication::ExecuteJavaScript("document.getElementsByClassName('submit btn btn-default')[0].setAttribute('disabled', 'true');");
         for($i=0;$i<count($this->arrayValue); $i++) {
-        	if($this->bEditing && ($this->objLemonAssessment->ResourceStatusId == 14)) {
+        	if($this->bEditing && ($this->objLemonAssessment->ResourceId == 14)) {
 	        	$objResults = Lemon50AssessmentResults::LoadResultByAssessmentIdAndQuestionId($this->objLemonAssessment->Id, $i+1);
 	        } else {
         		$objResults = new Lemon50AssessmentResults();
@@ -143,7 +143,7 @@ class LemonLoadQuestionsForm extends InstituteForm {
             // explicitly specify the control ID
             $lstValue = new QListBox($this->dtgAssessmentQuestions, $strControlId);
             $lstValue->CssClass = 'form-control';
-            if($this->bEditing && ($this->objLemonAssessment->ResourceStatusId == 14) ) {
+            if($this->bEditing && ($this->objLemonAssessment->ResourceId == 14) ) {
             	$value = Lemon50AssessmentResults::GetValueByAssessmentIdAndQuestionId($this->objLemonAssessment->Id, $objQuestions->Id);
 	            for ($i=1; $i<8; $i++) {
 	            	if ($value == $i) 
