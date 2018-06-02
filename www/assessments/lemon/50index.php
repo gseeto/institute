@@ -60,7 +60,7 @@ class LemonAssessment50Form extends InstituteForm {
 		if ($this->objLemonAssessment->ResourceStatusId == 1) {
 			QApplication::Redirect('loadQuestions.php');
 		} else {
-			QApplication::Redirect('loadQuestions.php');
+			QApplication::Redirect('loadQuestions.php/edit');
 		}
 	}
 	

@@ -563,7 +563,7 @@ class View50LemonAssessmentForm extends InstituteForm {
 		return $strPrimary .'<br>'. $strSecondary;
 	}
 	protected function btnReturn_Click() {
-		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/index.php');
+		QApplication::Redirect(__SUBDIRECTORY__.'/assessments/lemon/50index.php');
 	}
 	
 	protected function btnGeneratePdf_Click() { 
