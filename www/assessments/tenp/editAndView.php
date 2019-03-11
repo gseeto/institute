@@ -243,6 +243,8 @@ class EditViewTenPAssessmentForm extends InstituteForm {
 				$this->displayProfit();
 				break;
 			case 9:
+				$this->saveResults();
+				$this->updateChart();
 				QApplication::Redirect(__SUBDIRECTORY__.'/assessments/tenp/viewAssessment.php');
 				break;
 		}

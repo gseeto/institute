@@ -8,6 +8,7 @@ class AdminScorecardsForm extends InstituteForm {
     protected $btnAddScorecard;
     protected $pnlAddScorecard;
     protected $btnAddUser;
+    protected $btnAddUserWizard;
     protected $pnlAddUser;
     protected $btnRemoveUser;
     protected $pnlRemoveUser;
@@ -78,6 +79,12 @@ class AdminScorecardsForm extends InstituteForm {
         $this->btnAddUser->Text = 'Add Users to A Scorecard';
         $this->btnAddUser->CssClass = 'btn btn-default';
         $this->btnAddUser->AddAction(new QClickEvent(), new QAjaxAction('btnAddUser_Click'));
+        
+        $this->btnAddUserWizard = new QButton($this);
+        $this->btnAddUserWizard->Text = 'Add Users to A Scorecard Wizard';
+        $this->btnAddUserWizard->CssClass = 'btn btn-default';
+        $this->btnAddUserWizard->AddAction(new QClickEvent(), new QAjaxAction('btnAddUserWizard_Click'));
+        
         
         $this->pnlAddUser = new QPanel($this);
         $this->pnlAddUser->Position = QPosition::Relative;
@@ -315,7 +322,10 @@ class AdminScorecardsForm extends InstituteForm {
 		
         public function RenderCompany($intCompanyId) {
         	$objCompany = Company::Load($intCompanyId);
-        	return $objCompany->Name;
+        	if($objCompany != null)
+        		return $objCompany->Name;
+        	else
+        		return "Unknown Company";
         }
         
         public function RenderUsers($objScorecard) {
@@ -820,6 +830,10 @@ class AdminScorecardsForm extends InstituteForm {
 	        $pnlAddUserView = new AddScorecardUser($this->pnlAddUser,'UpdateScorecardList',$this);  		
 		}
     
+		public function btnAddUserWizard_Click($strFormId, $strControlId, $strParameter) {
+			Application::Redirect(__SUBDIRECTORY__."scorecard/wizard.php");
+		}
+		
 		public function btnRemoveUser_Click($strFormId, $strControlId, $strParameter) {
 			// Open up the panel and allow the adding of users to a scorecard
 	        $this->pnlRemoveUser->Visible = true;
